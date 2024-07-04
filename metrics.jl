@@ -1,0 +1,132 @@
+function sum_wealth(iter)
+    next = iterate(iter)
+    soma = 0
+    while next !== nothing
+        (i, state) = next
+        if i == false
+            next = iterate(iter, state)
+            continue
+        end
+        # println(i)
+        soma += i.wealth
+        next = iterate(iter, state)
+    end
+    return soma
+end
+
+function wealth_distribution(iter)
+    next = iterate(iter)
+    distribution = []
+    while next !== nothing
+        (i, state) = next
+        if i == false
+            next = iterate(iter, state)
+            continue
+        end
+        push!(distribution, i.wealth)
+        next = iterate(iter, state)
+    end
+    return sort(distribution)
+end
+
+function size_distribution(iter)
+    next = iterate(iter)
+    distribution = []
+    while next !== nothing
+        (i, state) = next
+        if i == false
+            next = iterate(iter, state)
+            continue
+        end
+        push!(distribution, i.size)
+        next = iterate(iter, state)
+    end
+    return sort(distribution)
+end
+
+function age_distribution(iter)
+    next = iterate(iter)
+    distribution = []
+    while next !== nothing
+        (i, state) = next
+        if i == false
+            next = iterate(iter, state)
+            continue
+        end
+        push!(distribution, i.age)
+        next = iterate(iter, state)
+    end
+    return sort(distribution)
+end
+
+function sum_houses(iter)
+    next = iterate(iter)
+    soma = 0
+    while next !== nothing
+        (i, state) = next
+        if i == false
+            next = iterate(iter, state)
+            continue
+        end
+        # println(i)
+        soma += length(i.houseIds)
+        next = iterate(iter, state)
+    end
+    return soma
+end
+
+function calculate_prices_in_supply(model)
+    soma = 0.0
+    if length(model.houseMarket.supply) == 1
+        return 1500.0
+    end
+    for i in 1:length(model.houseMarket.supply)
+        soma += model.houseMarket.supply[i].price
+    end
+    return soma / length(model.houseMarket.supply)
+end
+
+function calculate_houses_prices_perm2(model)
+    soma = 0.0
+    if length(model.transactions) == 1
+        return 1500.0
+    end
+    for i in 1:length(model.transactions)
+        soma += model.transactions[i].price / model.transactions[i].area
+    end
+    return soma / length(model.transactions)
+end 
+
+
+function household(a)
+    if isHousehold(a)
+        return a
+    end
+    return false
+end
+
+company(a) = kindof(a) == :Company
+
+isHousehold(a) = kindof(a) == :Household
+isHouseholdHomeOwner(a) = isHousehold(a) && length(a.houseIds) > 0
+isHouseholdTenant(a) = isHousehold(a) && a.contractIdAsTenant != 0
+isHouseholdLandlord(a) = isHousehold(a) && length(a.contractsIdsAsLandlord) > 0
+isHouseholdMultipleHomeOwner(a) = isHousehold(a) && length(a.houseIds) > 1
+subsidyRate(model) = model.government.subsidyRate
+irs(model) = model.government.irs
+vat(model) = model.government.vat
+irc(model) = model.government.irc
+salaryRate(model) = model.salary_multiplier
+
+count_supply(model) = length(model.houseMarket.supply)
+gov_wealth(model) = model.government.wealth
+company_wealth(model) = model.company_wealth
+bank_wealth(model) = model.bank.wealth
+construction_wealth(model) = model.construction_sector.wealth
+supply_volume(model) = model.supply_size
+demand_volume(model) = model.demand_size
+
+births(model) = model.births
+breakups(model) = model.breakups
+deaths(model) = model.deaths
+children_leaving_home(model) = model.children_leaving_home
