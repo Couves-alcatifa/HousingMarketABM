@@ -10,17 +10,22 @@ include("plots.jl")
 Random.seed!(1234)
 
 
-
 function calculate_non_housing_consumption(household, income, alpha = 0.5, δ = 0.5, sigma = 0.5)
     wealth = household.wealth
     size = household.size
     # return 500 + income * 0.6 + log(income) + rand(100:300)
-    expenses = 450 * size * (0.50 + rand() * 0.35)
+    expenses = 300 * size * (0.50 + rand() * 0.35)
     if income / size > 300
         expenses += (income / size - 300)  * size * (0.50 + rand() * 0.35)
     end
-    if is_home_owner(household) && wealth > 10000
+    if is_home_owner(household) && wealth > 50000
         expenses += sqrt(wealth)
+    end
+    if is_home_owner(household) && wealth > 1000000
+        expenses += sqrt(wealth)
+    end
+    if is_home_owner(household) && wealth > 5000000
+        expenses += cbrt(wealth) * cbrt(wealth)
     end
     return expenses
     # if (income * 0.6 > 500)
@@ -39,10 +44,10 @@ function wealth_model(;
         irc = 0.2,
         alpha = 0.5,
         sigma = 0.5,
-        gov_wealth = 65000000.0,
-        company_wealth = 60000000.0,
-        bank_wealth = 40000000.0,
-        construction_sector_wealth = 30000000.0,
+        gov_wealth = 120000000.0,
+        company_wealth = 70000000.0,
+        bank_wealth = 80000000.0,
+        construction_sector_wealth = 40000000.0,
         )
 
         households_sizes = rand(1:4, num_households)
@@ -75,7 +80,7 @@ function wealth_model(;
             :company_wealth => company_wealth,
             :alpha => alpha,
             :sigma => sigma,
-            :bank => Bank(bank_wealth, 0.015, 0.8, 0.45), # interestRate, LTV, dsti
+            :bank => Bank(bank_wealth, 0.015, 0.8, 0.35), # interestRate, LTV, dsti 
             :transactions => Transaction[],
             :inheritages => Inheritage[],
             :contracts => Contract[],
@@ -93,11 +98,11 @@ function wealth_model(;
 
     for i in 1:num_households
         houseIds = Int[]
-        if (i < num_households * 0.7)
+        if (rand() < 0.7)
             house = House(houses_sizes[i], Lisbon, NotSocialNeighbourhood, 1, calculate_market_price(houses_sizes[i], 1))
             push!(model.houses, house)
             push!(houseIds, length(model.houses))
-            if (i < num_households * 0.4)
+            if (rand() < 0.4)
                 house = House(houses_sizes[num_households - i], Lisbon, NotSocialNeighbourhood, 1, calculate_market_price(houses_sizes[houses_sizes[num_households - i]], 1))
                 push!(model.houses, house)
                 push!(houseIds, length(model.houses))
@@ -121,6 +126,14 @@ end
 function model_step!(model)
     model.supply_size = length(model.houseMarket.supply)
     model.demand_size = length(model.houseMarket.demand)
+    println("----------------")
+    println("number of households = " * string(nagents(model)))
+    println("----------------")
+    # model_wealth_ratio = model.bank.wealth / 40000000.0
+    # if model.bank.wealth / 40000000.0 < 1
+    #     model.bank.ltv = 0.8 + (1 - model_wealth_ratio) * 0.1
+    #     model.bank.dsti = 0.45 + (1 - model_wealth_ratio) * 0.1
+    # end
     # houses maintenanceLevel decay
     # for i in 1:length(model.houses)
     #     model.houses[i].maintenanceLevel -= 0.001
@@ -268,9 +281,9 @@ function not_home_owner_decisions(household, model)
     # let's say the household always tries to buy a house
     # and in the meantime it rents
     push!(model.houseMarket.demand, HouseDemand(household.id, HouseSupply[], household.size))
-    # if (household.contractIdAsTenant == 0)
-    #     push!(model.rentalMarket.demand, RentalDemand(household.id, RentalSupply[], household.size))
-    # end
+    if (household.contractIdAsTenant == 0)
+        push!(model.rentalMarket.demand, RentalDemand(household.id, RentalSupply[], household.size))
+    end
 end
 
 function home_owner_decisions(household, model)
@@ -383,7 +396,7 @@ mdata = [count_supply, gov_wealth, construction_wealth, company_wealth,
          bank_wealth, calculate_houses_prices_perm2, supply_volume, demand_volume,
          calculate_prices_in_supply, irs, vat, irc, subsidyRate, salaryRate, 
          births, breakups, deaths, children_leaving_home]
-N_of_steps = 400
+N_of_steps = 2000
 # interactive_abm(model, agent_step!, model_step!)
 # for alpha in [0.2, 0.5, 0.7, 1.0]
 alpha = 0.5

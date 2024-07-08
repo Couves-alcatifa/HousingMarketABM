@@ -197,7 +197,11 @@ end
 # - maxMortgageValue(h, b, house, maxSpread = x | maxMonthlyPayment = y) -> maxValue with certain conditions
 function maxMortgageValue(model, household, bank, house; maxSpread=0, maxMonthlyPayment=0)
     salary = calculateLiquidSalary(household, model)
-    startingMaxValue = house.marketPrice * bank.ltv
+    if salary < 0
+        return 0
+    end
+    startingMaxValue = household.wealth * (1 / (1 - bank.ltv))
+    # startingMaxValue = calculate_market_price(house.area, house.maintenanceLevel) * bank.ltv
     maxValue = 0
     while maxValue == 0
         duration = calculateMortgageDuration(startingMaxValue, household.age)
@@ -206,10 +210,13 @@ function maxMortgageValue(model, household, bank, house; maxSpread=0, maxMonthly
             startingMaxValue *= 0.90
         else
             maxValue = startingMaxValue
+            break
         end
     end
+    if maxValue < 0
+        return 0
+    end
     return maxValue 
-    # TODO: this can be more complex
 end
 
 # Baseprice is the market price when the offer was posted
@@ -225,19 +232,20 @@ function calculateCostBasedPrice(model, size, location)
 end
 
 function generateInitialWealth(age, percentile)
-    return age * 800
+    return age * 200 + percentile * 50
+    # return age * 20 + percentile * 5
 end
 
 function calculateSalary(household, model)
     percentile = household.percentile
     if percentile < 25
-        salary = 750 + rand() * 150
+        salary = 750 + 150 * (percentile / 100) * 4
     elseif percentile < 50
-        salary = 900 + rand() * 150
+        salary = 900 + 150 * ((percentile / 100) - 0.25) * 4
     elseif percentile < 75
-        salary = 1000 + rand() * 1000
+        salary = 1000 + 1000 * ((percentile / 100) - 0.50) * 4
     else
-        salary = 2000 + rand() * 2000
+        salary = 2000 + 2000 * ((percentile / 100) - 0.75) * 4
     end
     # age = household.age
     size = household.size
@@ -313,7 +321,7 @@ end
 function handle_births(household, model)
     if (household.age >= 20 && household.age < 40 && household.size >= 2)
         # probability should not be fixed
-        if  (rand() < 0.2 * (7 - household.size))
+        if  (rand() < 0.055 * (7 - household.size) * (1200 / nagents(model))) # TODO: hardcoded number of agents
             # 5% for size == 2
             # 4% for size == 3
             # 3% for size == 4
@@ -329,13 +337,13 @@ end
 
 # returns true if household died
 function handle_deaths(household, model)
-    probability_of_death = 0.005
+    probability_of_death = 0.001
     if (household.age > 90)
-        probability_of_death += 0.002 + 0.02 * (household.age - 80) + 0.05 * (household.age - 90)
+        probability_of_death += 0.05 + 0.015 * (household.age - 80) + 0.05 * (household.age - 90)
     elseif (household.age > 80)
-        probability_of_death += 0.002 + 0.02 * (household.age - 80)
+        probability_of_death += 0.03 + 0.015 * (household.age - 80) + 0.01 * (household.age - 70)
     elseif (household.age > 70)
-        probability_of_death += 0.001 + 0.001 * (household.age - 70)
+        probability_of_death += 0.02 + 0.01 * (household.age - 70)
     end
     if (rand() < probability_of_death)
         if household.size == 1
@@ -356,9 +364,9 @@ end
 # returns true if household died
 function handle_breakups(household, model)
     if (household.size >= 2)
-        probability_of_breakup = 0.005
+        probability_of_breakup = 0.001
         if (household.age < 60)
-            probability_of_breakup += 0.00025 * (60 - household.age)
+            probability_of_breakup += 0.00005 * (60 - household.age)
         end
         if (rand() < probability_of_breakup)
             add_agent!(Household, model, household.wealth / 2, household.age, 1, Int[], household.percentile, Mortgage[], Int[], 0)
@@ -378,16 +386,30 @@ end
 # returns true if household died
 function handle_children_leaving_home(household, model)
     if (household.size > 2 && household.age > 38)
-        probability_of_child_leaving = 0.01 + 0.01 * (household.age - 38)
+        probability_of_child_leaving = 0.1 + rand() * 0.4
         if (rand() < probability_of_child_leaving)
             expected_age = household.age - 20 # TODO: this should have a random factor
             expected_wealth = generateInitialWealth(expected_age, household.percentile) * 0.6
             if (expected_wealth > household.wealth)
                 expected_wealth = household.wealth * 0.2
             end
-            add_agent!(Household, model, expected_wealth, expected_age, rand(1:2), Int[], household.percentile, Mortgage[], Int[], 0)
-            household.wealth -= expected_wealth
-            model.children_leaving_home += 1
+            randomNumber = rand()
+            if randomNumber < 0.45
+                # a couple of young people leave their parents home
+                add_agent!(Household, model, expected_wealth, expected_age, 2, Int[], household.percentile, Mortgage[], Int[], 0)
+                household.wealth -= expected_wealth
+                household.size -= 1
+                model.children_leaving_home += 2
+            elseif randomNumber < 0.9
+                # to simulate the other half of the couple (simplification)
+                household.size -= 1
+            else
+                # single young person leaves their parents home
+                add_agent!(Household, model, expected_wealth, expected_age, 1, Int[], household.percentile, Mortgage[], Int[], 0)
+                household.wealth -= expected_wealth
+                household.size -= 1
+                model.children_leaving_home += 1
+            end
         end
     end
     return false
@@ -457,7 +479,14 @@ function clearHouseMarket(model)
                 continue
             end
             demand = model.houseMarket.demand[j]
+            if model[demand.householdId].wealth < 0
+                continue
+            end
             maxMortgage = maxMortgageValue(model, model[demand.householdId], model.bank, model.houses[supply.houseId])
+            # println("###")
+            # println("maxMortage = " * string(maxMortgage))
+            # println("householdId = " * string(demand.householdId))
+            # println("###")
             demandBid = calculateBid(model[demand.householdId], model.houses[supply.houseId], supply.price, maxMortgage)
             if (has_enough_size(model.houses[supply.houseId], model[demand.householdId].size) && demandBid > supply.price)
                 push!(supply.bids, Bid(demandBid, demand.householdId))
@@ -482,7 +511,6 @@ function clearHouseMarket(model)
         end
         if cheapest_supply !== nothing
             buy_house(model, cheapest_supply)
-            cheapest_supply.valid = false
         end
     end
     empty!(model.houseMarket.demand)
@@ -493,6 +521,7 @@ function clearHouseMarket(model)
         else
             model.houseMarket.supply[i].price *= 0.99 # reduce price
             model.houses[model.houseMarket.supply[i].houseId].marketPrice = model.houseMarket.supply[i].price
+            empty!(model.houseMarket.supply[i].bids)
             i += 1
         end
             # println("model_step")
@@ -587,6 +616,9 @@ function buy_house(model, supply::HouseSupply)
     if (household.wealth < secondHighestBid)
         paidWithOwnMoney = household.wealth * 0.95
         mortgageValue = secondHighestBid - paidWithOwnMoney
+        if mortgageValue > model.bank.wealth * 0.5
+            return
+        end
         mortgageDuration = calculateMortgageDuration(mortgageValue, household.age)
         mortgage = Mortgage(mortgageValue, mortgageValue, 0, mortgageDuration)
         push!(household.mortgages, mortgage)
@@ -595,6 +627,7 @@ function buy_house(model, supply::HouseSupply)
         println("household.wealth = " * string(household.wealth))
         println("raw salary = " * string(calculateSalary(household, model)))
         println("liquid salary = " * string(calculateLiquidSalary(household, model)))
+        println("householdId = " * string(highestBidder))
         println("########")
         model.bank.wealth -= mortgageValue
         household.wealth += mortgageValue
@@ -606,6 +639,7 @@ function buy_house(model, supply::HouseSupply)
     push!(household.houseIds, supply.houseId)
     terminateContractsOnTentantSide(household, model)
     push!(model.transactions, Transaction(model.houses[supply.houseId].area, secondHighestBid))
+    supply.valid = false
     # for i in 1:length(seller.houseIds)
     #     if (seller.houseIds[i] == supply.houseId)
     #         splice!(seller.houseIds, i)
@@ -703,9 +737,7 @@ end
 
 ## TODO: Change this to something with logic
 function generateRandomHouse()
-    randomIndex = rand(1:4)
-    areas = [50, 75, 100, 125]
-    area = areas[randomIndex]
+    area = rand(50:125)
     return House(area, Lisbon, NotSocialNeighbourhood, 1, calculate_market_price(area, 1))
 end
 
