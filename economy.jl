@@ -2,6 +2,8 @@ using Agents
 using Distributions, Random
 using CairoMakie
 using CSV
+using Statistics
+
 include("utilities.jl")
 include("metrics.jl")
 include("plots.jl")
@@ -10,13 +12,13 @@ include("plots.jl")
 Random.seed!(1234)
 
 
-function calculate_non_housing_consumption(household, income, alpha = 0.5, δ = 0.5, sigma = 0.5)
+function calculate_non_housing_consumption(household, income)
     wealth = household.wealth
     size = household.size
     # return 500 + income * 0.6 + log(income) + rand(100:300)
-    expenses = 300 * size * (0.50 + rand() * 0.35)
-    if income / size > 300
-        expenses += (income / size - 300)  * size * (0.50 + rand() * 0.35)
+    expenses = EXPENSES_MINIMUM_VALUE * size * (EXPENSES_EXTRA_MINIMUM + rand() * EXPENSES_EXTRA_OFFSET)
+    if income / size > EXPENSES_MINIMUM_VALUE
+        expenses += (income / size - EXPENSES_MINIMUM_VALUE)  * size * (EXPENSES_EXTRA_MINIMUM + rand() * EXPENSES_EXTRA_OFFSET)
     end
     if is_home_owner(household) && wealth > 50000
         expenses += sqrt(wealth)
@@ -35,85 +37,78 @@ function calculate_non_housing_consumption(household, income, alpha = 0.5, δ = 
     # end
 end
 
-function wealth_model(; 
-        num_households = 1200,
-        num_companies = 2,
-        initwealth = 200.0,
-        irs = 0.3,
-        vat = 0.15,
-        irc = 0.2,
-        alpha = 0.5,
-        sigma = 0.5,
-        gov_wealth = 120000000.0,
-        company_wealth = 70000000.0,
-        bank_wealth = 80000000.0,
-        construction_sector_wealth = 40000000.0,
-        )
+function wealth_model()
 
-        households_sizes = rand(1:4, num_households)
+        households_sizes = rand(1:4, NUMBER_OF_HOUSEHOLDS)
 
-
-
-        houses_sizes = rand(30:60, Int64(num_households/4))
-        houses_sizes = vcat(houses_sizes, rand(60:80, Int64(num_households/4)))
-        houses_sizes = vcat(houses_sizes, rand(80:120, Int64(num_households/4)))
-        houses_sizes = vcat(houses_sizes, rand(120:180, Int64(num_households/4)))
+        houses_sizes = rand(30:60, Int64(NUMBER_OF_HOUSEHOLDS/4))
+        houses_sizes = vcat(houses_sizes, rand(60:80, Int64(NUMBER_OF_HOUSEHOLDS/4)))
+        houses_sizes = vcat(houses_sizes, rand(80:120, Int64(NUMBER_OF_HOUSEHOLDS/4)))
+        houses_sizes = vcat(houses_sizes, rand(120:180, Int64(NUMBER_OF_HOUSEHOLDS/4)))
         
-        households_initial_ages = rand(20:35, Int64(num_households/4))
-        households_initial_ages = vcat(households_initial_ages, rand(36:45, Int64(num_households/4)))
-        households_initial_ages = vcat(households_initial_ages, rand(46:64, Int64(num_households/4)))
-        households_initial_ages = vcat(households_initial_ages, rand(65:100, Int64(num_households/4)))
+        households_initial_ages = rand(20:35, Int64(NUMBER_OF_HOUSEHOLDS/4))
+        households_initial_ages = vcat(households_initial_ages, rand(36:45, Int64(NUMBER_OF_HOUSEHOLDS/4)))
+        households_initial_ages = vcat(households_initial_ages, rand(46:64, Int64(NUMBER_OF_HOUSEHOLDS/4)))
+        households_initial_ages = vcat(households_initial_ages, rand(65:100, Int64(NUMBER_OF_HOUSEHOLDS/4)))
         
         # per quartile
         houses_prices_per_m2 = [1300, 1800, 2500]
         
         properties = Dict(
             :sum_wealth => 0,
-            :num_households => num_households,
             :steps => 0,
             :houses => House[],
             :houseMarket => HouseMarket(HouseSupply[], HouseDemand[]),
             :rentalMarket => RentalMarket(RentalSupply[], RentalDemand[]),
-            :gov_prev_wealth => gov_wealth,
-            :government => Government(gov_wealth, irs, irc, vat, 1.0),
-            :company_prev_wealth => company_wealth,
-            :company_wealth => company_wealth,
-            :alpha => alpha,
-            :sigma => sigma,
-            :bank => Bank(bank_wealth, 0.015, 0.8, 0.35), # interestRate, LTV, dsti 
+            :gov_prev_wealth => STARTING_GOV_WEALTH,
+            :government => Government(STARTING_GOV_WEALTH, IRS, IRC, VAT, 1.0),
+            :company_prev_wealth => STARTING_COMPANY_WEALTH,
+            :company_wealth => STARTING_COMPANY_WEALTH,
+            :bank => Bank(STARTING_BANK_WEALTH, INTEREST_RATE, LTV, DSTI),
             :transactions => Transaction[],
             :inheritages => Inheritage[],
             :contracts => Contract[],
             :salary_multiplier => 1.0,
             :demand_size => 0,
             :supply_size => 0,
-            :construction_sector => ConstructionSector(construction_sector_wealth, PendingConstruction[], 16, Mortgage[]),
+            :construction_sector => ConstructionSector(STARTING_CONSTRUCTION_SECTOR_WEALTH, PendingConstruction[], 16, Mortgage[]),
             :births => 0, 
             :breakups => 0,
             :deaths => 0,
             :children_leaving_home => 0,
+            :subsidiesPaid => 0.0,
+            :ircCollected => 0.0,
+            :ivaCollected => 0.0,
+            :irsCollected => 0.0,
+            :companyServicesPaid => 0.0,
+            :inheritagesFlow => 0.0,
+            :constructionLabor => 0.0,
+            :rawSalariesPaid => 0.0,
+            :liquidSalariesReceived => 0.0,
+            :expensesReceived => 0.0,
+            :buckets => InitiateBuckets(), # Houses characteristics => Transaction
         )
 
     model = StandardABM(MyMultiAgent; agent_step! = agent_step!, model_step! = model_step!, properties,scheduler = Schedulers.Randomly())
-
-    for i in 1:num_households
+    initiateHouses(model)
+    nextHouseIdToAssign = 1
+    for i in 1:NUMBER_OF_HOUSEHOLDS
         houseIds = Int[]
-        if (rand() < 0.7)
-            house = House(houses_sizes[i], Lisbon, NotSocialNeighbourhood, 1, calculate_market_price(houses_sizes[i], 1))
-            push!(model.houses, house)
-            push!(houseIds, length(model.houses))
-            if (rand() < 0.4)
-                house = House(houses_sizes[num_households - i], Lisbon, NotSocialNeighbourhood, 1, calculate_market_price(houses_sizes[houses_sizes[num_households - i]], 1))
-                push!(model.houses, house)
-                push!(houseIds, length(model.houses))
+        if (rand() < FRACTION_OF_HOMEOWNERS)
+            # house = House(houses_sizes[i], Lisbon, NotSocialNeighbourhood, 1)
+            # push!(model.houses, house)
+            push!(houseIds, nextHouseIdToAssign)
+            nextHouseIdToAssign += 1
+            if (rand() < FRACTION_OF_DOUBLE_OWNERS)
+                # house = House(houses_sizes[NUMBER_OF_HOUSEHOLDS - i], Lisbon, NotSocialNeighbourhood, 1)
+                # push!(model.houses, house)
+                push!(houseIds, nextHouseIdToAssign)
+                nextHouseIdToAssign += 1
             end
         end
-        percentile = calculate_percentile(1 - i/num_households)
-        initial_age = households_initial_ages[rand(1:num_households)]
-        add_agent!(Household, model, generateInitialWealth(initial_age, percentile), initial_age, households_sizes[i], houseIds, percentile, Mortgage[], Int[], 0)
-    end
-    for i in 1:num_companies
-        add_agent!(Company, model, 10)
+        percentile = calculate_percentile(1 - i/NUMBER_OF_HOUSEHOLDS)
+        initial_age = households_initial_ages[rand(1:NUMBER_OF_HOUSEHOLDS)]
+        add_agent!(Household, model, generateInitialWealth(initial_age, percentile), initial_age, households_sizes[i], houseIds, percentile, Mortgage[], Int[], 0, 0.0)
     end
     return model
 end
@@ -146,10 +141,12 @@ function model_step!(model)
     end
     clearHouseMarket(model)
     clearRentalMarket(model)
+    trimBucketsIfNeeded(model)
     if model.steps % 12 == 0
         if model.company_prev_wealth < model.company_wealth
             model.company_wealth -= (model.company_wealth - model.company_prev_wealth) * model.government.irc
             model.government.wealth += (model.company_wealth - model.company_prev_wealth) * model.government.irc
+            model.ircCollected += (model.company_wealth - model.company_prev_wealth) * model.government.irc
         end
         company_adjust_salaries(model)
         gov_adjust_taxes(model)
@@ -239,14 +236,14 @@ end
 
 function put_house_to_rent(agent::MyMultiAgent, model, index)
     house = model.houses[agent.houseIds[index]]
-    push!(model.rentalMarket.supply, RentalSupply(agent.houseIds[index], calculate_rental_market_price(house.area, house.maintenanceLevel), agent.id, true))
+    push!(model.rentalMarket.supply, RentalSupply(agent.houseIds[index], calculate_rental_market_price(house), agent.id, true))
     # removing house from agent when putting to sale
     splice!(agent.houseIds, index)
 end
 
 function put_house_to_sale(agent::MyMultiAgent, model, index)
     house = model.houses[agent.houseIds[index]]
-    push!(model.houseMarket.supply, HouseSupply(agent.houseIds[index], calculate_market_price(house.area, house.maintenanceLevel), Int[], agent.id, true))
+    push!(model.houseMarket.supply, HouseSupply(agent.houseIds[index], calculate_market_price(house, model), Int[], agent.id, true))
     # removing house from agent when putting to sale
     splice!(agent.houseIds, index)
 end
@@ -255,10 +252,10 @@ end
 function calculate_subsidy(household, model)
     subsidy = 0
     salary = calculateLiquidSalary(household, model)
-    if (salary > 600 * household.size)
+    if (salary > 500 * household.size)
         return 0
     end
-    return subsidy + (600 * household.size - salary)*0.7 * model.government.subsidyRate
+    return subsidy + (500 * household.size - salary)*0.4 * model.government.subsidyRate
 end
 
 function decideToRent(household, model, house)
@@ -309,6 +306,11 @@ end
 
         
 function household_step!(household::MyMultiAgent, model)
+    wealthInHouses = 0.0
+    for houseId in household.houseIds
+        wealthInHouses += calculate_market_price(model.houses[houseId], model)
+    end
+    household.wealthInHouses = wealthInHouses
     if (model.steps % 12 == 0)
         household.age += 1
     end
@@ -319,22 +321,30 @@ function household_step!(household::MyMultiAgent, model)
         terminateContractsOnLandLordSide(household, model)
         return
     end
+
+    update_houses(household, model)
     receive_inheritages(household, model)
     housing_decisions(household, model)
     salary = calculateSalary(household, model)
     liquid_salary = calculateLiquidSalary(household, model)
     taxes = salary - liquid_salary
     model.government.wealth += taxes
+    model.irsCollected += taxes
     household.wealth += liquid_salary
+    model.rawSalariesPaid += salary
+    model.liquidSalariesReceived += liquid_salary
     model.company_wealth -= salary
 
     subsidy = calculate_subsidy(household, model)
     model.government.wealth -= subsidy
+    model.subsidiesPaid += subsidy
     household.wealth += subsidy
-    expenses = calculate_non_housing_consumption(household, liquid_salary + subsidy, model.alpha)
+    expenses = calculate_non_housing_consumption(household, liquid_salary + subsidy)
     household.wealth -= expenses
     model.company_wealth += expenses * (1 - model.government.vat)
+    model.expensesReceived += expenses * (1 - model.government.vat)
     model.government.wealth += expenses* model.government.vat
+    model.ivaCollected += expenses* model.government.vat
 
     payMortgages(model, household)
     payRent(model, household)
@@ -391,16 +401,22 @@ adata = [(household, sum_wealth),(household, sum_houses),
          (isHousehold, count), (isHouseholdHomeOwner, count),
          (isHouseholdTenant, count), (isHouseholdLandlord, count),
          (isHouseholdMultipleHomeOwner, count),
-         (household, wealth_distribution), (household, size_distribution), (household, age_distribution)]
+         (household, wealth_distribution), (household, money_distribution), (household, size_distribution), (household, age_distribution)]
 mdata = [count_supply, gov_wealth, construction_wealth, company_wealth,
-         bank_wealth, calculate_houses_prices_perm2, supply_volume, demand_volume,
+         bank_wealth, calculate_houses_prices_perm2, supply_volume, demand_volume, transactions,
          calculate_prices_in_supply, irs, vat, irc, subsidyRate, salaryRate, 
-         births, breakups, deaths, children_leaving_home]
-N_of_steps = 2000
+         births, breakups, deaths, children_leaving_home,
+         ## Gov Money flow ##
+         subsidiesPaid, ircCollected, ivaCollected, irsCollected, companyServicesPaid, inheritagesFlow, constructionLabor,
+         ## Company Money flow ##
+         rawSalariesPaid, liquidSalariesReceived, expensesReceived,
+         ## Houses prices per bucket
+         #bucket_1, bucket_2, bucket_3, bucket_4
+         ]
+
+N_of_steps = NUMBER_OF_STEPS
 # interactive_abm(model, agent_step!, model_step!)
-# for alpha in [0.2, 0.5, 0.7, 1.0]
-alpha = 0.5
-model = wealth_model(alpha=alpha)
+model = wealth_model()
 
 
 agent_data, model_data = run!(model, N_of_steps; adata, mdata)
@@ -413,10 +429,15 @@ save("1supply_and_demand.png", plot_supply_and_demand(agent_data[2:end, :], mode
 save("1household_status.png", plot_household_status(agent_data[2:end, :], model_data[2:end, :]))
 save("1house_prices_in_supply.png", plot_houses_prices_in_supply(agent_data[2:end, :], model_data[2:end, :]))
 save("1taxes_and_subsidies.png", plot_taxes_and_subsidy_rates(agent_data[2:end, :], model_data[2:end, :]))
+save("1household_money.png", plot_households_money_distribution(agent_data[2:end, :], model_data[2:end, :]))
 save("1household_wealth.png", plot_households_wealth_distribution(agent_data[2:end, :], model_data[2:end, :]))
 save("1demographic_events.png", plot_demographic_events(agent_data[2:end, :], model_data[2:end, :]))
 save("1household_size_distribution.png", plot_households_size_distribution(agent_data[2:end, :], model_data[2:end, :]))
 save("1household_age_distribution.png", plot_households_age_distribution(agent_data[2:end, :], model_data[2:end, :]))
+save("1taxes_and_subsidies_flow.png", plot_taxes_and_subsidies_flow(agent_data[2:end, :], model_data[2:end, :]))
+save("1salaries_and_expenses.png", plot_salaries_and_expenses(agent_data[2:end, :], model_data[2:end, :]))
+# save("1houses_prices_per_bucket.png", plot_houses_prices_per_bucket(agent_data[2:end, :], model_data[2:end, :]))
+save("1houses_prices_per_region.png", plot_houses_prices_per_region(agent_data[2:end, :], model_data[2:end, :]))
 
 # end
 

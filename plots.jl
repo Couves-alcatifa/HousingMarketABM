@@ -73,6 +73,24 @@ function get_quartile(vv, quartile_fun)
     return res
 end
 
+function plot_households_money_distribution(adf, mdf)
+    figure = Figure(size = (600, 400))
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Wealth")
+    lowest(v) = 1
+    quartile_25(v) = Int64(floor(length(v)/4))
+    quartile_50(v) = Int64(floor(length(v)/2))
+    quartile_75(v) = Int64(floor((length(v)/4)*3))
+    quartile_100(v) = length(v)
+    println("get_quartile -> " * string(get_quartile(adf.money_distribution_household, lowest)))
+    wealth_0 = lines!(ax, adf.step, get_quartile(adf.money_distribution_household, lowest), color = :black)
+    wealth_25 = lines!(ax, adf.step, get_quartile(adf.money_distribution_household, quartile_25), color = :blue)
+    wealth_50 = lines!(ax, adf.step, get_quartile(adf.money_distribution_household, quartile_50), color = :green)
+    wealth_75 = lines!(ax, adf.step, get_quartile(adf.money_distribution_household, quartile_75), color = :yellow)
+    wealth_100 = lines!(ax, adf.step, get_quartile(adf.money_distribution_household, quartile_100), color = :pink)
+    figure[1, 2] = Legend(figure, [wealth_0, wealth_25, wealth_50, wealth_75, wealth_100], ["Lowest Wealth", "First Quartile", "Median", "Third Quartile", "Highest Wealth"])
+    figure
+end
+
 function plot_households_wealth_distribution(adf, mdf)
     figure = Figure(size = (600, 400))
     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Wealth")
@@ -145,5 +163,80 @@ function plot_demographic_events(adf, mdf)
     breakups = lines!(ax, adf.step, mdf.breakups, color = :blue)
     leaving_home = lines!(ax, adf.step, mdf.children_leaving_home, color = :yellow)
     figure[1, 2] = Legend(figure, [births, deaths, breakups, leaving_home], ["Births", "Deaths", "Divorces", "Young leaving home"])
+    figure
+end
+
+function plot_taxes_and_subsidies_flow(adf, mdf)
+    figure = Figure(size = (600, 400))
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
+    subsidiesPaid = lines!(ax, adf.step, mdf.subsidiesPaid, color = :red)
+    ircCollected = lines!(ax, adf.step, mdf.ircCollected, color = :green)
+    ivaCollected = lines!(ax, adf.step, mdf.ivaCollected, color = :black)
+    irsCollected = lines!(ax, adf.step, mdf.irsCollected, color = :blue)
+    companyServicesPaid = lines!(ax, adf.step, mdf.companyServicesPaid, color = :yellow)
+    figure[1, 2] = Legend(figure, [subsidiesPaid, ircCollected, ivaCollected, irsCollected, companyServicesPaid], ["Subsidies", "IRC", "IRS", "IVA", "Public Investment"])
+    figure
+end
+
+function plot_salaries_and_expenses(adf, mdf)
+    figure = Figure(size = (600, 400))
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
+    rawSalariesPaid = lines!(ax, adf.step, mdf.rawSalariesPaid, color = :red)
+    liquidSalariesReceived = lines!(ax, adf.step, mdf.liquidSalariesReceived, color = :green)
+    expensesReceived = lines!(ax, adf.step, mdf.expensesReceived, color = :black)
+    figure[1, 2] = Legend(figure, [rawSalariesPaid, liquidSalariesReceived, expensesReceived], ["Raw Salaries Paid", "Liquid Salaries Received", "Non housing consumption"])
+    figure
+end
+
+function plot_houses_prices_per_bucket(adf, mdf)
+    figure = Figure(size = (600, 400))
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
+    
+    bucket_1 = lines!(ax, adf.step, mdf.bucket_1, color = :red)
+    bucket_2 = lines!(ax, adf.step, mdf.bucket_2, color = :green)
+    bucket_3 = lines!(ax, adf.step, mdf.bucket_3, color = :yellow)
+    bucket_4 = lines!(ax, adf.step, mdf.bucket_4, color = :blue)
+    figure[1, 2] = Legend(figure, [bucket_1, bucket_2, bucket_3, bucket_4], ["Bucket 1", "Bucket 2", "Bucket 3", "Bucket 4"])
+    figure
+end
+
+function plot_houses_prices_per_region(adf, mdf)
+    figure = Figure(size = (600, 400))
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
+    vv = mdf.transactions
+    organizedPerRegion = Dict() # this will be filled with [[MeanValueForAmadoraStep1, ..Step2, ...Step3], [MeanValueForLisboaStep1, ...]]
+    for location in instances(HouseLocation)
+        organizedPerRegion[location] = []
+    end
+
+    for step in eachindex(vv)
+        for location in instances(HouseLocation)
+            push!(organizedPerRegion[location], [])
+        end
+        for transaction in vv[step]
+            push!(organizedPerRegion[transaction.location][step], transaction.price / transaction.area)
+        end
+    end
+
+    for location in instances(HouseLocation)
+        means = Float32[]
+        for step in eachindex(organizedPerRegion[location])
+            if length(organizedPerRegion[location][step]) != 0
+                push!(means, mean(organizedPerRegion[location][step]))
+            else
+                push!(means, 0.0)
+            end
+        end
+        organizedPerRegion[location] = means
+    end
+
+    lines = []
+    locations = []
+    for location in instances(HouseLocation)
+        push!(lines, lines!(ax, adf.step, organizedPerRegion[location], color = color_map[location]))
+        push!(locations, string(location))
+    end
+
+    figure[1, 2] = Legend(figure, lines, locations)
     figure
 end

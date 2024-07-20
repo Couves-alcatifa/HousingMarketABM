@@ -1,16 +1,11 @@
-# salaries_sub24 = rand(247:1500, Int64(num_households/4))
-# salaries_25_34 = vcat(salaries, rand(500:2670, Int64(num_households/4)))
-# salaries_35_44 = vcat(salaries, rand(500:3500, Int64(num_households/4)))
-# salaries_45_54 = vcat(salaries, rand(544:3800, Int64(num_households/4)))
-# salaries_55_64 = vcat(salaries, rand(480:4100, znum_households/4)))
+# salaries_sub24 = rand(247:1500, Int64(NUMBER_OF_HOUSEHOLDS/4))
+# salaries_25_34 = vcat(salaries, rand(500:2670, Int64(NUMBER_OF_HOUSEHOLDS/4)))
+# salaries_35_44 = vcat(salaries, rand(500:3500, Int64(NUMBER_OF_HOUSEHOLDS/4)))
+# salaries_45_54 = vcat(salaries, rand(544:3800, Int64(NUMBER_OF_HOUSEHOLDS/4)))
+# salaries_55_64 = vcat(salaries, rand(480:4100, zNUMBER_OF_HOUSEHOLDS/4)))
 include("table.jl")
+include("consts.jl")
 
-@enum HouseLocation begin
-    Lisbon = 1
-    Oeiras = 2
-    Sintra = 3
-    Almada = 4
-end
 
 mutable struct Mortgage
     intialValue::Float64
@@ -35,6 +30,7 @@ end
         mortgages::Array{Mortgage}
         contractsIdsAsLandlord::Array{Int}
         contractIdAsTenant::Int # 0 is no contract
+        wealthInHouses::Float64
     end
     
     @subagent struct Company
@@ -62,12 +58,12 @@ mutable struct House
     location::HouseLocation
     locationType::HouseLocationType
     maintenanceLevel::Float64 # 0..1
-    marketPrice::Float64 # update each model step (or several model steps ? )
 end
 
 mutable struct Transaction
     area
     price
+    location
 end
 
 mutable struct Bid
@@ -148,12 +144,31 @@ mutable struct HouseInfo
     area::Int
 end
 
-function calculate_rental_market_price(area, maintenanceLevel)
-    return area * 8.20 * maintenanceLevel
+@enum BucketKey begin
+    smaller_than_50 = 1
+    smaller_than_90 = 2
+    smaller_than_120 = 3
+    bigger_than_120 = 4
 end
 
-function calculate_market_price(area, maintenanceLevel)
-    return area * 1500 * maintenanceLevel
+function calculate_rental_market_price(house)
+    return house.area * 8.20 * house.maintenanceLevel
+end
+
+function calculate_market_price(house, model)
+    bucketKey = calculateBucketKey(house)
+    transactions = model.buckets[bucketKey]
+    if length(transactions) == 0
+        return calculate_initial_market_price(house)
+    end
+    return mean(transactions) * house.area * house.maintenanceLevel
+end
+
+function calculate_initial_market_price(house)
+    ## TODO: houses should have a quality (maybe replace maintenanceLevel ?)
+    ## this quality should influence the price per m2 according to the firstQuartileHousePricesPerRegion
+    ## stop using only first quartile
+    return house.area * firstQuartileHousePricesPerRegion[house.location] * house.maintenanceLevel
 end
 
 function updateMortgage(mortgage, spread)
@@ -201,7 +216,7 @@ function maxMortgageValue(model, household, bank, house; maxSpread=0, maxMonthly
         return 0
     end
     startingMaxValue = household.wealth * (1 / (1 - bank.ltv))
-    # startingMaxValue = calculate_market_price(house.area, house.maintenanceLevel) * bank.ltv
+    # startingMaxValue = calculate_market_price(house, model) * bank.ltv
     maxValue = 0
     while maxValue == 0
         duration = calculateMortgageDuration(startingMaxValue, household.age)
@@ -243,9 +258,13 @@ function calculateSalary(household, model)
     elseif percentile < 50
         salary = 900 + 150 * ((percentile / 100) - 0.25) * 4
     elseif percentile < 75
-        salary = 1000 + 1000 * ((percentile / 100) - 0.50) * 4
+        salary = 1000 + 400 * ((percentile / 100) - 0.50) * 4
+    elseif percentile < 85
+        salary = 1400 + 500 * ((percentile / 100) - 0.75) * 10
+    elseif percentile < 95
+        salary = 1900 + 600 * ((percentile / 100) - 0.85) * 10
     else
-        salary = 2000 + 2000 * ((percentile / 100) - 0.75) * 4
+        salary = 2500 + 2000 * ((percentile / 100) - 0.95) * 20
     end
     # age = household.age
     size = household.size
@@ -350,6 +369,7 @@ function handle_deaths(household, model)
             push!(model.inheritages, Inheritage(household.houseIds, household.wealth, household.mortgages, household.percentile))
             # gov takes the wealth
             model.government.wealth += household.wealth
+            model.inheritagesFlow += household.wealth
             #println("remove Agent! id = " * string(household.id))
             model.deaths += 1
             remove_agent!(household, model)
@@ -369,8 +389,8 @@ function handle_breakups(household, model)
             probability_of_breakup += 0.00005 * (60 - household.age)
         end
         if (rand() < probability_of_breakup)
-            add_agent!(Household, model, household.wealth / 2, household.age, 1, Int[], household.percentile, Mortgage[], Int[], 0)
-            add_agent!(Household, model, household.wealth / 2, household.age, household.size - 1, household.houseIds, household.percentile, household.mortgages, Int[], 0)
+            add_agent!(Household, model, household.wealth / 2, household.age, 1, Int[], household.percentile, Mortgage[], Int[], 0, 0.0)
+            add_agent!(Household, model, household.wealth / 2, household.age, household.size - 1, household.houseIds, household.percentile, household.mortgages, Int[], 0, 0.0)
             #println("remove Agent! id = " * string(household.id) * " step = " * string(model.steps))
             remove_agent!(household, model)
             model.breakups += 1
@@ -396,7 +416,7 @@ function handle_children_leaving_home(household, model)
             randomNumber = rand()
             if randomNumber < 0.45
                 # a couple of young people leave their parents home
-                add_agent!(Household, model, expected_wealth, expected_age, 2, Int[], household.percentile, Mortgage[], Int[], 0)
+                add_agent!(Household, model, expected_wealth, expected_age, 2, Int[], household.percentile, Mortgage[], Int[], 0, 0.0)
                 household.wealth -= expected_wealth
                 household.size -= 1
                 model.children_leaving_home += 2
@@ -405,7 +425,7 @@ function handle_children_leaving_home(household, model)
                 household.size -= 1
             else
                 # single young person leaves their parents home
-                add_agent!(Household, model, expected_wealth, expected_age, 1, Int[], household.percentile, Mortgage[], Int[], 0)
+                add_agent!(Household, model, expected_wealth, expected_age, 1, Int[], household.percentile, Mortgage[], Int[], 0, 0.0)
                 household.wealth -= expected_wealth
                 household.size -= 1
                 model.children_leaving_home += 1
@@ -436,6 +456,7 @@ function receive_inheritages(household, model)
                 household.houseIds = vcat(household.houseIds, inheritage.houseIds)
                 household.wealth += inheritage.wealth
                 model.government.wealth -= inheritage.wealth
+                model.inheritagesFlow -= inheritage.wealth
                 splice!(model.inheritages, i)
                 break
             end
@@ -471,7 +492,7 @@ function terminateContractsOnLandLordSide(household, model)
 end
 
 function clearHouseMarket(model)
-    # TODO: optimize this
+    # TODO: optimize this (below block is slower than all household_steps)
     for i in 1:length(model.houseMarket.supply)
         supply = model.houseMarket.supply[i]
         for j in 1:length(model.houseMarket.demand)
@@ -520,7 +541,6 @@ function clearHouseMarket(model)
             splice!(model.houseMarket.supply, i)
         else
             model.houseMarket.supply[i].price *= 0.99 # reduce price
-            model.houses[model.houseMarket.supply[i].houseId].marketPrice = model.houseMarket.supply[i].price
             empty!(model.houseMarket.supply[i].bids)
             i += 1
         end
@@ -638,7 +658,8 @@ function buy_house(model, supply::HouseSupply)
     seller.wealth += secondHighestBid
     push!(household.houseIds, supply.houseId)
     terminateContractsOnTentantSide(household, model)
-    push!(model.transactions, Transaction(model.houses[supply.houseId].area, secondHighestBid))
+    addTransactionToBuckets(model, model.houses[supply.houseId], secondHighestBid)
+    push!(model.transactions, Transaction(model.houses[supply.houseId].area, secondHighestBid, model.houses[supply.houseId].location))
     supply.valid = false
     # for i in 1:length(seller.houseIds)
     #     if (seller.houseIds[i] == supply.houseId)
@@ -682,6 +703,7 @@ function updateConstructions(model)
         if pendingConstruction.time > model.construction_sector.constructionDelay
             # already building
             model.government.wealth += laborCost
+            model.constructionLabor += laborCost
             model.construction_sector.wealth -= laborCost
         else
             # still waiting for permit
@@ -715,6 +737,7 @@ function startNewConstruction(model)
         end
     end
     model.government.wealth += materialCost
+    model.constructionLabor += laborCost
     model.construction_sector.wealth -= materialCost
     push!(model.construction_sector.housesInConstruction, PendingConstruction(0, newHouse))
     return true
@@ -738,7 +761,7 @@ end
 ## TODO: Change this to something with logic
 function generateRandomHouse()
     area = rand(50:125)
-    return House(area, Lisbon, NotSocialNeighbourhood, 1, calculate_market_price(area, 1))
+    return House(area, Lisboa, NotSocialNeighbourhood, 1)
 end
 
 function put_newly_built_house_to_sale(model, house)
@@ -759,6 +782,107 @@ end
 
 function public_investment(model)
     # gov pays company services for each household
-    model.company_wealth += model.num_households * 1300 * model.government.subsidyRate
-    model.government.wealth -= model.num_households * 1300 * model.government.subsidyRate
+    model.company_wealth += NUMBER_OF_HOUSEHOLDS * 1300 * model.government.subsidyRate
+    model.government.wealth -= NUMBER_OF_HOUSEHOLDS * 1300 * model.government.subsidyRate
+    model.companyServicesPaid += NUMBER_OF_HOUSEHOLDS * 1300 * model.government.subsidyRate
+end
+
+function InitiateBuckets()
+    result = Dict([
+        (Amadora, Float64[])
+        (Cascais, Float64[])
+        (Lisboa, Float64[])
+        (Loures, Float64[])
+        (Mafra, Float64[])
+        (Odivelas, Float64[])
+        (Oeiras, Float64[])
+        (Sintra, Float64[])
+        (VilaFrancaDeXira, Float64[])
+        (Alcochete, Float64[])
+        (Almada, Float64[])
+        (Barreiro, Float64[])
+        (Moita, Float64[])
+        (Montijo, Float64[])
+        (Palmela, Float64[])
+        (Seixal, Float64[])
+        (Sesimbra, Float64[])
+        (Setubal, Float64[])
+    ])
+    return result
+end
+
+function calculateBucketKey(house)
+    return house.location
+#     if house.area < 50
+#         return smaller_than_50
+#     elseif house.area < 90
+#         return smaller_than_90
+#     elseif house.area < 120
+#         return smaller_than_120
+#     else
+#         return bigger_than_120
+#     end
+end
+
+function addTransactionToBuckets(model, house, price)
+    bucketKey = calculateBucketKey(house)
+    push!(model.buckets[bucketKey], price / house.area)
+end
+
+function trimBucketsIfNeeded(model)
+    # avoid holding to many transaction in the buckets, keep the most recent MAX_BUCKET_SIZE (initially 30)
+    for bucket in model.buckets
+        if length(bucket[2]) > MAX_BUCKET_SIZE
+            sizeToCut = length(bucket[2]) - MAX_BUCKET_SIZE
+            splice!(bucket[2], 1:sizeToCut)
+        end
+    end
+end
+
+function sortRandomly(left, right)
+    return rand() < 0.5
+end
+
+function initiateHouses(model)
+    houses_sizes = rand(30:60, Int64(NUMBER_OF_HOUSES/4))
+    houses_sizes = vcat(houses_sizes, rand(60:80, Int64(NUMBER_OF_HOUSES/4)))
+    houses_sizes = vcat(houses_sizes, rand(80:120, Int64(NUMBER_OF_HOUSES/4)))
+    houses_sizes = vcat(houses_sizes, rand(120:180, Int64(NUMBER_OF_HOUSES/4)))
+    
+    sort!(houses_sizes, lt=sortRandomly)
+    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Amadora, Amadora, houses_sizes)
+    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Cascais, Cascais, houses_sizes)
+    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Lisboa, Lisboa, houses_sizes)
+    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Loures, Loures, houses_sizes)
+    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Mafra, Mafra, houses_sizes)
+    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Odivelas, Odivelas, houses_sizes)
+    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Oeiras, Oeiras, houses_sizes)
+    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Sintra, Sintra, houses_sizes)
+    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_VilaFrancaDeXira, VilaFrancaDeXira, houses_sizes)
+    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Alcochete, Alcochete, houses_sizes)
+    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Almada, Almada, houses_sizes)
+    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Barreiro, Barreiro, houses_sizes)
+    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Moita, Moita, houses_sizes)
+    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Montijo, Montijo, houses_sizes)
+    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Palmela, Palmela, houses_sizes)
+    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Seixal, Seixal, houses_sizes)
+    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Sesimbra, Sesimbra, houses_sizes)
+    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Setubal, Setubal, houses_sizes)
+    sort!(model.houses, lt=sortRandomly)
+end
+
+function initiateHousesPerRegion(model, targetNumberOfHouses, location, houses_sizes)
+    for i in 1:targetNumberOfHouses
+        push!(model.houses, House(houses_sizes[1], location, NotSocialNeighbourhood, 1))
+        splice!(houses_sizes, 1)
+    end
+end
+
+function update_houses(household, model)
+    for houseId in household.houseIds
+        if rand() < 0.16 # 16 % probability to simulate twice a year, but not all at the same time
+            house = model.houses[houseId]
+            house.maintenanceLevel -= 0.01
+        end
+    end
 end

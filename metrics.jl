@@ -14,7 +14,7 @@ function sum_wealth(iter)
     return soma
 end
 
-function wealth_distribution(iter)
+function money_distribution(iter)
     next = iterate(iter)
     distribution = []
     while next !== nothing
@@ -24,6 +24,21 @@ function wealth_distribution(iter)
             continue
         end
         push!(distribution, i.wealth)
+        next = iterate(iter, state)
+    end
+    return sort(distribution)
+end
+
+function wealth_distribution(iter)
+    next = iterate(iter)
+    distribution = []
+    while next !== nothing
+        (i, state) = next
+        if i == false
+            next = iterate(iter, state)
+            continue
+        end
+        push!(distribution, i.wealth + i.wealthInHouses)
         next = iterate(iter, state)
     end
     return sort(distribution)
@@ -105,6 +120,58 @@ function household(a)
     return false
 end
 
+function subsidiesPaid(model)
+    res = copy(model.subsidiesPaid)
+    model.subsidiesPaid = 0.0
+    return res
+end 
+function ircCollected(model)
+    res = copy(model.ircCollected)
+    model.ircCollected = 0.0
+    return res
+end 
+function ivaCollected(model)
+    res = copy(model.ivaCollected)
+    model.ivaCollected = 0.0
+    return res
+end 
+function irsCollected(model)
+    res = copy(model.irsCollected)
+    model.irsCollected = 0.0
+    return res
+end 
+function companyServicesPaid(model)
+    res = copy(model.companyServicesPaid)
+    model.companyServicesPaid = 0.0
+    return res
+end 
+function inheritagesFlow(model)
+    res = copy(model.inheritagesFlow)
+    model.inheritagesFlow = 0.0
+    return res
+end 
+function constructionLabor(model)
+    res = copy(model.constructionLabor)
+    model.constructionLabor = 0.0
+    return res
+end 
+function rawSalariesPaid(model)
+    res = copy(model.rawSalariesPaid)
+    model.rawSalariesPaid = 0.0
+    return res
+end 
+function liquidSalariesReceived(model)
+    res = copy(model.liquidSalariesReceived)
+    model.liquidSalariesReceived = 0.0
+    return res
+end 
+function expensesReceived(model)
+    res = copy(model.expensesReceived)
+    model.expensesReceived = 0.0
+    return res
+end 
+
+
 company(a) = kindof(a) == :Company
 
 isHousehold(a) = kindof(a) == :Household
@@ -117,6 +184,12 @@ irs(model) = model.government.irs
 vat(model) = model.government.vat
 irc(model) = model.government.irc
 salaryRate(model) = model.salary_multiplier
+
+transactions(model) = copy(model.transactions)
+# bucket_1(model) = mean(model.buckets[smaller_than_50])
+# bucket_2(model) = mean(model.buckets[smaller_than_90])
+# bucket_3(model) = mean(model.buckets[smaller_than_120])
+# bucket_4(model) = mean(model.buckets[bigger_than_120])
 
 count_supply(model) = length(model.houseMarket.supply)
 gov_wealth(model) = model.government.wealth
