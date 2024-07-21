@@ -74,14 +74,14 @@ end
 mutable struct HouseSupply
     houseId::Int
     price::Float64
-    bids::Array{Bid}
+    @atomic bids::Array{Bid}
     sellerId::Int
     valid::Bool
 end
 
 mutable struct HouseDemand
     householdId::Int
-    supplyMatches::Array{HouseSupply}
+    @atomic supplyMatches::Array{HouseSupply}
     size::UInt16
 end
 
@@ -493,7 +493,8 @@ end
 
 function clearHouseMarket(model)
     # TODO: optimize this (below block is slower than all household_steps)
-    for i in 1:length(model.houseMarket.supply)
+    localLock = ReentrantLock()
+    Threads.@threads for i in 1:length(model.houseMarket.supply)
         supply = model.houseMarket.supply[i]
         for j in 1:length(model.houseMarket.demand)
             if rand() < 0.7 # only view 30% of the offers
@@ -510,8 +511,10 @@ function clearHouseMarket(model)
             # println("###")
             demandBid = calculateBid(model[demand.householdId], model.houses[supply.houseId], supply.price, maxMortgage)
             if (has_enough_size(model.houses[supply.houseId], model[demand.householdId].size) && demandBid > supply.price)
-                push!(supply.bids, Bid(demandBid, demand.householdId))
-                push!(demand.supplyMatches, supply)
+                lock(localLock) do
+                    push!(supply.bids, Bid(demandBid, demand.householdId))
+                    push!(demand.supplyMatches, supply)
+                end
             end
         end
     end

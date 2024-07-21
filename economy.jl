@@ -1,8 +1,13 @@
+# using Pkg ; Pkg.add("Agents") ; 
+# Pkg.add("Distributions") ; Pkg.add("Random") ; 
+# Pkg.add("CairoMakie") ; Pkg.add("CSV") ; Pkg.add("Statistics")
+
 using Agents
 using Distributions, Random
 using CairoMakie
 using CSV
 using Statistics
+using Base.Threads
 
 include("utilities.jl")
 include("metrics.jl")
@@ -445,4 +450,4 @@ CSV.write("agentData.csv", agent_data)
 CSV.write("modelData.csv", model_data)
 
 
-println(agent_data[(end - 5):end, :])
+# println(agent_data[(end - 5):end, :])
