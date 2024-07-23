@@ -31,6 +31,7 @@ end
         contractsIdsAsLandlord::Array{Int}
         contractIdAsTenant::Int # 0 is no contract
         wealthInHouses::Float64
+        residencyZone::HouseLocation
     end
     
     @subagent struct Company
@@ -389,8 +390,8 @@ function handle_breakups(household, model)
             probability_of_breakup += 0.00005 * (60 - household.age)
         end
         if (rand() < probability_of_breakup)
-            add_agent!(Household, model, household.wealth / 2, household.age, 1, Int[], household.percentile, Mortgage[], Int[], 0, 0.0)
-            add_agent!(Household, model, household.wealth / 2, household.age, household.size - 1, household.houseIds, household.percentile, household.mortgages, Int[], 0, 0.0)
+            add_agent!(Household, model, household.wealth / 2, household.age, 1, Int[], household.percentile, Mortgage[], Int[], 0, 0.0, getChildResidencyZone(household))
+            add_agent!(Household, model, household.wealth / 2, household.age, household.size - 1, household.houseIds, household.percentile, household.mortgages, Int[], 0, 0.0, getChildResidencyZone(household))
             #println("remove Agent! id = " * string(household.id) * " step = " * string(model.steps))
             remove_agent!(household, model)
             model.breakups += 1
@@ -416,7 +417,8 @@ function handle_children_leaving_home(household, model)
             randomNumber = rand()
             if randomNumber < 0.45
                 # a couple of young people leave their parents home
-                add_agent!(Household, model, expected_wealth, expected_age, 2, Int[], household.percentile, Mortgage[], Int[], 0, 0.0)
+                newZone = getChildResidencyZone(household)
+                add_agent!(Household, model, expected_wealth, expected_age, 2, Int[], household.percentile, Mortgage[], Int[], 0, 0.0, newZone)
                 household.wealth -= expected_wealth
                 household.size -= 1
                 model.children_leaving_home += 2
@@ -425,7 +427,8 @@ function handle_children_leaving_home(household, model)
                 household.size -= 1
             else
                 # single young person leaves their parents home
-                add_agent!(Household, model, expected_wealth, expected_age, 1, Int[], household.percentile, Mortgage[], Int[], 0, 0.0)
+                newZone = getChildResidencyZone(household)
+                add_agent!(Household, model, expected_wealth, expected_age, 1, Int[], household.percentile, Mortgage[], Int[], 0, 0.0, newZone)
                 household.wealth -= expected_wealth
                 household.size -= 1
                 model.children_leaving_home += 1
@@ -446,6 +449,15 @@ function household_evolution(household, model)
     end
     handle_children_leaving_home(household, model)
     return false
+end
+
+function getChildResidencyZone(household)
+    possibleZones = adjacentZones[household.residencyZone]
+    for i in 1:10
+        # Virtually increase likelihood of staying in the residencyZone
+        push!(possibleZones, household.residencyZone)
+    end
+    return possibleZones[rand(1:length(possibleZones))]
 end
 
 function receive_inheritages(household, model)
@@ -881,11 +893,186 @@ function initiateHousesPerRegion(model, targetNumberOfHouses, location, houses_s
     end
 end
 
+function initiateHouseholds(model, households_initial_ages)
+    for zone_str in ZONES_STRINGS
+        for size_str in SIZES_STRINGS
+            number_of_households = eval(Symbol("HOUSEHOLDS_WITH_SIZE_" * size_str * "_IN_" * zone_str))
+            for i in 1:number_of_households
+                initial_age = households_initial_ages[1]
+                splice!(households_initial_ages, 1)
+                percentile = calculate_percentile(rand())
+                zone = eval(Symbol(zone_str))
+                size = get_household_size(size_str)
+                add_agent!(Household, model, generateInitialWealth(initial_age, percentile), initial_age, size, Int64[], percentile, Mortgage[], Int[], 0, 0.0, zone)
+            end
+        end
+    end
+end
+
+function assignHousesToHouseholds(model)
+    zones_to_n_of_home_owners = Dict()
+    for location in instances(HouseLocation)
+        zones_to_n_of_home_owners[location] = 0
+    end
+    not_home_owners = []
+    housePool = splice!(model.houses, 1:length(model.houses))
+    for i in 1:nagents(model) # due to round() it might not be equal to NUMBER_OF_HOUSEHOLDS
+        household = model[i]
+        # if shouldAssignHouse(model, household, zones_to_n_of_home_owners)
+        if !assignHouseThatMakesSense(model, household, housePool)
+            # Wasn't assigned a house...
+            push!(not_home_owners, household)
+            continue # also not going to get houses for rental
+        else
+            zones_to_n_of_home_owners[household.residencyZone] += 1
+        end
+        # else
+        #     push!(not_home_owners, household)
+        #     continue        
+        # end
+        numberOfExtraHousesToAssign = shouldAssignMultipleHouses(model, household)
+        assignHousesForRental(model, household, numberOfExtraHousesToAssign, housePool)
+    end
+end
+
+# function shouldAssignHouse(model, household, zones_to_n_of_home_owners)
+#     zone = household.residencyZone
+#     zone_str = string(zone)
+#     target_home_owners_in_the_zone = eval(Symbol("HOME_OWNERS_IN_" * zone_str))
+#     current_home_owners_in_the_zone = zones_to_n_of_home_owners[zone]
+#     if current_home_owners_in_the_zone >= target_home_owners_in_the_zone
+#         return false # no more houses to assign in this phase
+#     end
+#     probabilityOfBeingHomeOwner = target_home_owners_in_the_zone / eval(Symbol("NUMBER_OF_HOUSES_IN_" * zone_str))
+#     probabilityMultiplier = 1
+#     # add probability of owning house to the bigger households, and to the older ones
+#     # max 30% extra likelihood
+#     if household.age > 40
+#         probabilityMultiplier += 0.15
+#     end
+
+#     if household.size > 2
+#         probabilityMultiplier += 0.15
+#     end
+#     if rand() < probabilityOfBeingHomeOwner * probabilityMultiplier * 1.15 # increased probability, to make sure we assign all the houses
+#         return true
+#     end
+#     return false
+# end
+
 function update_houses(household, model)
     for houseId in household.houseIds
         if rand() < 0.16 # 16 % probability to simulate twice a year, but not all at the same time
             house = model.houses[houseId]
             house.maintenanceLevel -= 0.01
         end
+    end
+end
+
+function get_household_size(size_str)
+    if size_str == "1"
+        return 1
+    elseif size_str == "2"
+        return 2
+    elseif size_str == "3"
+        return 3
+    elseif size_str == "4"
+        return 4
+    else
+        randomNumber = rand()
+        if randomNumber > 0.3
+            return 5
+        elseif randomNumber > 0.15
+            return 6
+        elseif randomNumber > 0.05
+            return 7
+        else
+            return 8
+        end
+    end
+end
+
+function assignHouseThatMakesSense(model, household, housePool)
+    for i in eachindex(housePool)
+        house = housePool[i]
+        if household.residencyZone != house.location || 
+           !has_enough_size(house, household.size)
+            continue
+        end
+        if rand() < probabilityOfHouseholdBeingAssignedToHouse(household, house)
+            push!(model.houses, house)
+            splice!(housePool, i)
+            push!(household.houseIds, length(model.houses))
+            return true
+        end
+    end
+    return false
+end
+
+function probabilityOfHouseholdBeingAssignedToHouse(household, house)
+    m2_per_person = house.area / household.size
+    numberOfHousesInThatZone = eval(Symbol("NUMBER_OF_HOUSES_IN_" * string(house.location)))
+    numberOfHousesWithThatRatioInThatZone = 0
+    if m2_per_person < 10
+        numberOfHousesWithThatRatioInThatZone = eval(Symbol("NUMBER_OF_HOUSES_WITH_LT_10_M2_PER_PERSON_IN_" * string(house.location)))
+    elseif m2_per_person < 15
+        numberOfHousesWithThatRatioInThatZone = eval(Symbol("NUMBER_OF_HOUSES_WITH_LT_15_M2_PER_PERSON_IN_" * string(house.location)))
+    elseif m2_per_person < 20
+        numberOfHousesWithThatRatioInThatZone = eval(Symbol("NUMBER_OF_HOUSES_WITH_LT_20_M2_PER_PERSON_IN_" * string(house.location)))
+    elseif m2_per_person < 30
+        numberOfHousesWithThatRatioInThatZone = eval(Symbol("NUMBER_OF_HOUSES_WITH_LT_30_M2_PER_PERSON_IN_" * string(house.location)))
+    elseif m2_per_person < 40
+        numberOfHousesWithThatRatioInThatZone = eval(Symbol("NUMBER_OF_HOUSES_WITH_LT_40_M2_PER_PERSON_IN_" * string(house.location)))
+    elseif m2_per_person < 60
+        numberOfHousesWithThatRatioInThatZone = eval(Symbol("NUMBER_OF_HOUSES_WITH_LT_60_M2_PER_PERSON_IN_" * string(house.location)))
+    elseif m2_per_person < 80
+        numberOfHousesWithThatRatioInThatZone = eval(Symbol("NUMBER_OF_HOUSES_WITH_LT_80_M2_PER_PERSON_IN_" * string(house.location)))
+    else
+        numberOfHousesWithThatRatioInThatZone = eval(Symbol("NUMBER_OF_HOUSES_WITH_MT_80_M2_PER_PERSON_IN_" * string(house.location)))
+    end
+    return numberOfHousesWithThatRatioInThatZone / numberOfHousesInThatZone
+end
+
+function shouldAssignMultipleHouses(model, household)
+    randomNumber = rand()
+    if household.age < 30
+        if randomNumber < 0.02
+            return 1
+        end
+    elseif household.age < 40
+        if randomNumber < 0.15
+            return 1 + Int64(round(rand()))
+        end
+    else
+        if randomNumber < 0.10
+            return 1 + Int64(round(rand() * 6))
+        elseif randomNumber < 0.20
+            return 1 + Int64(round(rand() * 3))
+        elseif randomNumber < 0.3
+            return 1 + Int64(round(rand()))
+        end
+    end
+    return 0
+end
+
+function assignHousesForRental(model, household, numberOfExtraHousesToAssign, housePool)
+    zones = adjacentZones[household.residencyZone]
+    assignedSoFar = 0
+    push!(zones, household.residencyZone)
+    i = 1
+    while i <= length(housePool)
+        if assignedSoFar == numberOfExtraHousesToAssign
+            return
+        end
+        house = housePool[i]
+        if !(house.location in zones)
+            i += 1
+            continue
+        end
+        push!(model.houses, house)
+        splice!(housePool, i)
+        push!(household.houseIds, length(model.houses))
+        put_house_to_rent(household, model, length(household.houseIds))
+        assignedSoFar += 1
     end
 end

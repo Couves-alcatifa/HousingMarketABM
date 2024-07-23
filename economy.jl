@@ -56,6 +56,7 @@ function wealth_model()
         households_initial_ages = vcat(households_initial_ages, rand(46:64, Int64(NUMBER_OF_HOUSEHOLDS/4)))
         households_initial_ages = vcat(households_initial_ages, rand(65:100, Int64(NUMBER_OF_HOUSEHOLDS/4)))
         
+        households_zones_and_sizes = 
         # per quartile
         houses_prices_per_m2 = [1300, 1800, 2500]
         
@@ -96,25 +97,27 @@ function wealth_model()
 
     model = StandardABM(MyMultiAgent; agent_step! = agent_step!, model_step! = model_step!, properties,scheduler = Schedulers.Randomly())
     initiateHouses(model)
-    nextHouseIdToAssign = 1
-    for i in 1:NUMBER_OF_HOUSEHOLDS
-        houseIds = Int[]
-        if (rand() < FRACTION_OF_HOMEOWNERS)
-            # house = House(houses_sizes[i], Lisbon, NotSocialNeighbourhood, 1)
-            # push!(model.houses, house)
-            push!(houseIds, nextHouseIdToAssign)
-            nextHouseIdToAssign += 1
-            if (rand() < FRACTION_OF_DOUBLE_OWNERS)
-                # house = House(houses_sizes[NUMBER_OF_HOUSEHOLDS - i], Lisbon, NotSocialNeighbourhood, 1)
-                # push!(model.houses, house)
-                push!(houseIds, nextHouseIdToAssign)
-                nextHouseIdToAssign += 1
-            end
-        end
-        percentile = calculate_percentile(1 - i/NUMBER_OF_HOUSEHOLDS)
-        initial_age = households_initial_ages[rand(1:NUMBER_OF_HOUSEHOLDS)]
-        add_agent!(Household, model, generateInitialWealth(initial_age, percentile), initial_age, households_sizes[i], houseIds, percentile, Mortgage[], Int[], 0, 0.0)
-    end
+    initiateHouseholds(model, households_initial_ages)
+    assignHousesToHouseholds(model)
+    # nextHouseIdToAssign = 1
+    # for i in 1:NUMBER_OF_HOUSEHOLDS
+    #     houseIds = Int[]
+    #     if (rand() < FRACTION_OF_HOMEOWNERS)
+    #         # house = House(houses_sizes[i], Lisbon, NotSocialNeighbourhood, 1)
+    #         # push!(model.houses, house)
+    #         push!(houseIds, nextHouseIdToAssign)
+    #         nextHouseIdToAssign += 1
+    #         if (rand() < FRACTION_OF_DOUBLE_OWNERS)
+    #             # house = House(houses_sizes[NUMBER_OF_HOUSEHOLDS - i], Lisbon, NotSocialNeighbourhood, 1)
+    #             # push!(model.houses, house)
+    #             push!(houseIds, nextHouseIdToAssign)
+    #             nextHouseIdToAssign += 1
+    #         end
+    #     end
+    #     percentile = calculate_percentile(1 - i/NUMBER_OF_HOUSEHOLDS)
+    #     initial_age = households_initial_ages[rand(1:NUMBER_OF_HOUSEHOLDS)]
+    #     add_agent!(Household, model, generateInitialWealth(initial_age, percentile), initial_age, households_sizes[i], houseIds, percentile, Mortgage[], Int[], 0, 0.0)
+    # end
     return model
 end
 
@@ -242,8 +245,8 @@ end
 function put_house_to_rent(agent::MyMultiAgent, model, index)
     house = model.houses[agent.houseIds[index]]
     push!(model.rentalMarket.supply, RentalSupply(agent.houseIds[index], calculate_rental_market_price(house), agent.id, true))
-    # removing house from agent when putting to sale
-    splice!(agent.houseIds, index)
+    # # removing house from agent when putting to sale
+    # splice!(agent.houseIds, index)
 end
 
 function put_house_to_sale(agent::MyMultiAgent, model, index)
@@ -269,7 +272,14 @@ end
 
 function supply_decisions(household, model)
     i = 2
+    if length(household.contractsIdsAsLandlord) + 1 == length(household.houseIds)
+        return
+    end
     while i <= length(household.houseIds)
+        if houseIsAlreadyRenting(household, model, household.houseIds[i])
+            i += 1
+            continue
+        end
         if decideToRent(household, model, model.houses[household.houseIds[i]])
             put_house_to_rent(household, model, i)
         else # decides to sell...
@@ -277,6 +287,16 @@ function supply_decisions(household, model)
         end
         i += 1
     end
+end
+
+function houseIsAlreadyRenting(household, model, houseId)
+    for contractId in household.contractsIdsAsLandlord
+        contract = model.contracts[contractId]
+        if contract.houseId == houseId
+            return true
+        end
+    end
+    return false
 end
 
 function not_home_owner_decisions(household, model)
