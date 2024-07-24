@@ -56,7 +56,7 @@ function wealth_model()
         households_initial_ages = vcat(households_initial_ages, rand(46:64, Int64(NUMBER_OF_HOUSEHOLDS/4)))
         households_initial_ages = vcat(households_initial_ages, rand(65:100, Int64(NUMBER_OF_HOUSEHOLDS/4)))
         
-        households_zones_and_sizes = 
+        println("households_initial_ages = " * string(households_initial_ages))
         # per quartile
         houses_prices_per_m2 = [1300, 1800, 2500]
         

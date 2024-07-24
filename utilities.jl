@@ -898,6 +898,12 @@ function initiateHouseholds(model, households_initial_ages)
         for size_str in SIZES_STRINGS
             number_of_households = eval(Symbol("HOUSEHOLDS_WITH_SIZE_" * size_str * "_IN_" * zone_str))
             for i in 1:number_of_households
+                if length(households_initial_ages) == 0
+                    # this means we would have slightly more households due to round()
+                    # doesn't really matter, lets just ignore the remaining...
+                    # maybe change to floor?
+                    return
+                end
                 initial_age = households_initial_ages[1]
                 splice!(households_initial_ages, 1)
                 percentile = calculate_percentile(rand())
