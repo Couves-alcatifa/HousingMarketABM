@@ -44,80 +44,64 @@ end
 
 function wealth_model()
 
-        households_sizes = rand(1:4, NUMBER_OF_HOUSEHOLDS)
+    start_time = time()
+    households_sizes = rand(1:4, NUMBER_OF_HOUSEHOLDS)
 
-        houses_sizes = rand(30:60, Int64(NUMBER_OF_HOUSEHOLDS/4))
-        houses_sizes = vcat(houses_sizes, rand(60:80, Int64(NUMBER_OF_HOUSEHOLDS/4)))
-        houses_sizes = vcat(houses_sizes, rand(80:120, Int64(NUMBER_OF_HOUSEHOLDS/4)))
-        houses_sizes = vcat(houses_sizes, rand(120:180, Int64(NUMBER_OF_HOUSEHOLDS/4)))
-        
-        households_initial_ages = rand(20:35, Int64(NUMBER_OF_HOUSEHOLDS/4))
-        households_initial_ages = vcat(households_initial_ages, rand(36:45, Int64(NUMBER_OF_HOUSEHOLDS/4)))
-        households_initial_ages = vcat(households_initial_ages, rand(46:64, Int64(NUMBER_OF_HOUSEHOLDS/4)))
-        households_initial_ages = vcat(households_initial_ages, rand(65:100, Int64(NUMBER_OF_HOUSEHOLDS/4)))
-        
-        println("households_initial_ages = " * string(households_initial_ages))
-        # per quartile
-        houses_prices_per_m2 = [1300, 1800, 2500]
-        
-        properties = Dict(
-            :sum_wealth => 0,
-            :steps => 0,
-            :houses => House[],
-            :houseMarket => HouseMarket(HouseSupply[], HouseDemand[]),
-            :rentalMarket => RentalMarket(RentalSupply[], RentalDemand[]),
-            :gov_prev_wealth => STARTING_GOV_WEALTH,
-            :government => Government(STARTING_GOV_WEALTH, IRS, IRC, VAT, 1.0),
-            :company_prev_wealth => STARTING_COMPANY_WEALTH,
-            :company_wealth => STARTING_COMPANY_WEALTH,
-            :bank => Bank(STARTING_BANK_WEALTH, INTEREST_RATE, LTV, DSTI),
-            :transactions => Transaction[],
-            :inheritages => Inheritage[],
-            :contracts => Contract[],
-            :salary_multiplier => 1.0,
-            :demand_size => 0,
-            :supply_size => 0,
-            :construction_sector => ConstructionSector(STARTING_CONSTRUCTION_SECTOR_WEALTH, PendingConstruction[], 16, Mortgage[]),
-            :births => 0, 
-            :breakups => 0,
-            :deaths => 0,
-            :children_leaving_home => 0,
-            :subsidiesPaid => 0.0,
-            :ircCollected => 0.0,
-            :ivaCollected => 0.0,
-            :irsCollected => 0.0,
-            :companyServicesPaid => 0.0,
-            :inheritagesFlow => 0.0,
-            :constructionLabor => 0.0,
-            :rawSalariesPaid => 0.0,
-            :liquidSalariesReceived => 0.0,
-            :expensesReceived => 0.0,
-            :buckets => InitiateBuckets(), # Houses characteristics => Transaction
-        )
+    houses_sizes = rand(30:60, Int64(NUMBER_OF_HOUSEHOLDS/4))
+    houses_sizes = vcat(houses_sizes, rand(60:80, Int64(NUMBER_OF_HOUSEHOLDS/4)))
+    houses_sizes = vcat(houses_sizes, rand(80:120, Int64(NUMBER_OF_HOUSEHOLDS/4)))
+    houses_sizes = vcat(houses_sizes, rand(120:180, Int64(NUMBER_OF_HOUSEHOLDS/4)))
+    
+    households_initial_ages = rand(20:35, Int64(NUMBER_OF_HOUSEHOLDS/4))
+    households_initial_ages = vcat(households_initial_ages, rand(36:45, Int64(NUMBER_OF_HOUSEHOLDS/4)))
+    households_initial_ages = vcat(households_initial_ages, rand(46:64, Int64(NUMBER_OF_HOUSEHOLDS/4)))
+    households_initial_ages = vcat(households_initial_ages, rand(65:100, Int64(NUMBER_OF_HOUSEHOLDS/4)))
+    
+    # per quartile
+    houses_prices_per_m2 = [1300, 1800, 2500]
+    
+    properties = Dict(
+        :sum_wealth => 0,
+        :steps => 0,
+        :houses => Dict(),
+        :houseMarket => HouseMarket(HouseSupply[], HouseDemand[]),
+        :rentalMarket => RentalMarket(RentalSupply[], RentalDemand[]),
+        :gov_prev_wealth => STARTING_GOV_WEALTH,
+        :government => Government(STARTING_GOV_WEALTH, IRS, IRC, VAT, 1.0),
+        :company_prev_wealth => STARTING_COMPANY_WEALTH,
+        :company_wealth => STARTING_COMPANY_WEALTH,
+        :bank => Bank(STARTING_BANK_WEALTH, INTEREST_RATE, LTV, DSTI),
+        :transactions => Transaction[],
+        :inheritages => Inheritage[],
+        :contracts => Contract[],
+        :salary_multiplier => 1.0,
+        :demand_size => 0,
+        :supply_size => 0,
+        :construction_sector => ConstructionSector(STARTING_CONSTRUCTION_SECTOR_WEALTH, PendingConstruction[], 16, Mortgage[]),
+        :births => 0, 
+        :breakups => 0,
+        :deaths => 0,
+        :children_leaving_home => 0,
+        :subsidiesPaid => 0.0,
+        :ircCollected => 0.0,
+        :ivaCollected => 0.0,
+        :irsCollected => 0.0,
+        :companyServicesPaid => 0.0,
+        :inheritagesFlow => 0.0,
+        :constructionLabor => 0.0,
+        :rawSalariesPaid => 0.0,
+        :liquidSalariesReceived => 0.0,
+        :expensesReceived => 0.0,
+        :buckets => InitiateBuckets(), # Houses characteristics => Transaction
+    )
 
     model = StandardABM(MyMultiAgent; agent_step! = agent_step!, model_step! = model_step!, properties,scheduler = Schedulers.Randomly())
     initiateHouses(model)
+    LOG_INFO("finished initateHouses in $(time() - start_time) seconds")
     initiateHouseholds(model, households_initial_ages)
+    LOG_INFO("finished initiateHouseholds in $(time() - start_time) seconds")
     assignHousesToHouseholds(model)
-    # nextHouseIdToAssign = 1
-    # for i in 1:NUMBER_OF_HOUSEHOLDS
-    #     houseIds = Int[]
-    #     if (rand() < FRACTION_OF_HOMEOWNERS)
-    #         # house = House(houses_sizes[i], Lisbon, NotSocialNeighbourhood, 1)
-    #         # push!(model.houses, house)
-    #         push!(houseIds, nextHouseIdToAssign)
-    #         nextHouseIdToAssign += 1
-    #         if (rand() < FRACTION_OF_DOUBLE_OWNERS)
-    #             # house = House(houses_sizes[NUMBER_OF_HOUSEHOLDS - i], Lisbon, NotSocialNeighbourhood, 1)
-    #             # push!(model.houses, house)
-    #             push!(houseIds, nextHouseIdToAssign)
-    #             nextHouseIdToAssign += 1
-    #         end
-    #     end
-    #     percentile = calculate_percentile(1 - i/NUMBER_OF_HOUSEHOLDS)
-    #     initial_age = households_initial_ages[rand(1:NUMBER_OF_HOUSEHOLDS)]
-    #     add_agent!(Household, model, generateInitialWealth(initial_age, percentile), initial_age, households_sizes[i], houseIds, percentile, Mortgage[], Int[], 0, 0.0)
-    # end
+    LOG_INFO("finished assignHousesToHouseholds in $(time() - start_time) seconds")
     return model
 end
 
@@ -127,6 +111,8 @@ function has_enough_size(house, household_size)
 end
 
 function model_step!(model)
+    LOG_INFO("Model step started")
+    start_time = time()
     model.supply_size = length(model.houseMarket.supply)
     model.demand_size = length(model.houseMarket.demand)
     println("----------------")
@@ -166,6 +152,7 @@ function model_step!(model)
     updateConstructions(model)
     payMortgages(model, model.construction_sector)
     println("end of model_step!")
+    LOG_INFO("Model step took $(string(time() - start_time)) seconds")
 end
 
 function company_adjust_salaries(model)
@@ -237,23 +224,22 @@ function gov_adjust_taxes(model)
     end
 end
 function is_home_owner(household)
-    return length(household.houseIds) > 0
+    return length(household.houses) > 0
 end
 
 
 
-function put_house_to_rent(agent::MyMultiAgent, model, index)
-    house = model.houses[agent.houseIds[index]]
-    push!(model.rentalMarket.supply, RentalSupply(agent.houseIds[index], calculate_rental_market_price(house), agent.id, true))
+function put_house_to_rent(household::MyMultiAgent, model, house)
+    push!(model.rentalMarket.supply, RentalSupply(house, calculate_rental_market_price(house), household.id, true))
     # # removing house from agent when putting to sale
     # splice!(agent.houseIds, index)
 end
 
-function put_house_to_sale(agent::MyMultiAgent, model, index)
-    house = model.houses[agent.houseIds[index]]
-    push!(model.houseMarket.supply, HouseSupply(agent.houseIds[index], calculate_market_price(house, model), Int[], agent.id, true))
+function put_house_to_sale(household::MyMultiAgent, model, index)
+    house = household.houses[index]
+    push!(model.houseMarket.supply, HouseSupply(house, calculate_market_price(house, model), Int[], household.id, true))
     # removing house from agent when putting to sale
-    splice!(agent.houseIds, index)
+    splice!(household.houses, index)
 end
 
 # this might need some changes...
@@ -272,16 +258,17 @@ end
 
 function supply_decisions(household, model)
     i = 2
-    if length(household.contractsIdsAsLandlord) + 1 == length(household.houseIds)
+    if length(household.contractsIdsAsLandlord) + 1 == length(household.houses)
         return
     end
-    while i <= length(household.houseIds)
-        if houseIsAlreadyRenting(household, model, household.houseIds[i])
+    while i <= length(household.houses)
+        house = household.houses[i]
+        if houseIsAlreadyRenting(household, model, house)
             i += 1
             continue
         end
-        if decideToRent(household, model, model.houses[household.houseIds[i]])
-            put_house_to_rent(household, model, i)
+        if decideToRent(household, model, house)
+            put_house_to_rent(household, model, house)
         else # decides to sell...
             put_house_to_sale(household, model, i)
         end
@@ -289,10 +276,10 @@ function supply_decisions(household, model)
     end
 end
 
-function houseIsAlreadyRenting(household, model, houseId)
+function houseIsAlreadyRenting(household, model, house)
     for contractId in household.contractsIdsAsLandlord
         contract = model.contracts[contractId]
-        if contract.houseId == houseId
+        if contract.house == house
             return true
         end
     end
@@ -309,7 +296,7 @@ function not_home_owner_decisions(household, model)
 end
 
 function home_owner_decisions(household, model)
-    house = model.houses[household.houseIds[1]]
+    house = household.houses[1]
     if !has_enough_size(house, household.size)
         # moves out, put_house_to_sale
         # this doesnt make much sense... having a house and selling it
@@ -320,7 +307,7 @@ function home_owner_decisions(household, model)
 end
 
 function housing_decisions(household, model)
-    if length(household.houseIds) > 1
+    if length(household.houses) > 1
         supply_decisions(household, model)
     elseif (!is_home_owner(household))
         not_home_owner_decisions(household, model)
@@ -332,8 +319,8 @@ end
         
 function household_step!(household::MyMultiAgent, model)
     wealthInHouses = 0.0
-    for houseId in household.houseIds
-        wealthInHouses += calculate_market_price(model.houses[houseId], model)
+    for house in household.houses
+        wealthInHouses += calculate_market_price(house, model)
     end
     household.wealthInHouses = wealthInHouses
     if (model.steps % 12 == 0)
@@ -347,7 +334,7 @@ function household_step!(household::MyMultiAgent, model)
         return
     end
 
-    update_houses(household, model)
+    # update_houses(household, model)
     receive_inheritages(household, model)
     housing_decisions(household, model)
     salary = calculateSalary(household, model)
@@ -441,6 +428,7 @@ mdata = [count_supply, gov_wealth, construction_wealth, company_wealth,
 
 N_of_steps = NUMBER_OF_STEPS
 # interactive_abm(model, agent_step!, model_step!)
+
 model = wealth_model()
 
 

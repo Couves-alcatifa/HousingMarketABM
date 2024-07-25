@@ -84,7 +84,7 @@ function sum_houses(iter)
             continue
         end
         # println(i)
-        soma += length(i.houseIds)
+        soma += length(i.houses)
         next = iterate(iter, state)
     end
     return soma
@@ -175,10 +175,10 @@ end
 company(a) = kindof(a) == :Company
 
 isHousehold(a) = kindof(a) == :Household
-isHouseholdHomeOwner(a) = isHousehold(a) && length(a.houseIds) > 0
+isHouseholdHomeOwner(a) = isHousehold(a) && length(a.houses) > 0
 isHouseholdTenant(a) = isHousehold(a) && a.contractIdAsTenant != 0
 isHouseholdLandlord(a) = isHousehold(a) && length(a.contractsIdsAsLandlord) > 0
-isHouseholdMultipleHomeOwner(a) = isHousehold(a) && length(a.houseIds) > 1
+isHouseholdMultipleHomeOwner(a) = isHousehold(a) && length(a.houses) > 1
 subsidyRate(model) = model.government.subsidyRate
 irs(model) = model.government.irs
 vat(model) = model.government.vat

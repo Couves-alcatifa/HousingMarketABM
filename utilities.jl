@@ -5,8 +5,19 @@
 # salaries_55_64 = vcat(salaries, rand(480:4100, zNUMBER_OF_HOUSEHOLDS/4)))
 include("table.jl")
 include("consts.jl")
+include("logger.jl")
 
-
+# Highly influences price, without big changes in geographical location
+@enum HouseLocationType begin
+    SocialNeighbourhood = 1
+    NotSocialNeighbourhood = 2
+end
+mutable struct House
+    area::UInt16
+    location::HouseLocation
+    locationType::HouseLocationType
+    maintenanceLevel::Float64 # 0..1
+end
 mutable struct Mortgage
     intialValue::Float64
     valueInDebt::Float64
@@ -14,18 +25,13 @@ mutable struct Mortgage
     duration::UInt16 # months
 end
 
-# Highly influences price, without big changes in geographical location
-@enum HouseLocationType begin
-    SocialNeighbourhood = 1
-    NotSocialNeighbourhood = 2
-end
 
 @multiagent :opt_speed struct MyMultiAgent(NoSpaceAgent)
     @subagent struct Household
         wealth::Float64
         age::Int64
         size::Int64
-        houseIds::Array{Int}
+        houses::Array{House}
         percentile::Int64
         mortgages::Array{Mortgage}
         contractsIdsAsLandlord::Array{Int}
@@ -42,24 +48,18 @@ end
 mutable struct Contract
     landlordId::Int
     tenantId::Int
-    houseId::Int
+    house::House
     monthlyPayment::Float64
 end
 
 mutable struct Inheritage
-    houseIds::Array{Int}
+    houses::Array{House}
     wealth::Float64
     mortgages::Array{Mortgage}
     # characteristics of the household maybe?
     percentile::Int64
 end
 
-mutable struct House
-    area::UInt16
-    location::HouseLocation
-    locationType::HouseLocationType
-    maintenanceLevel::Float64 # 0..1
-end
 
 mutable struct Transaction
     area
@@ -73,16 +73,16 @@ mutable struct Bid
 end
 
 mutable struct HouseSupply
-    houseId::Int
+    house::House
     price::Float64
-    @atomic bids::Array{Bid}
+    bids::Array{Bid}
     sellerId::Int
     valid::Bool
 end
 
 mutable struct HouseDemand
     householdId::Int
-    @atomic supplyMatches::Array{HouseSupply}
+    supplyMatches::Array{HouseSupply}
     size::UInt16
 end
 
@@ -92,7 +92,7 @@ mutable struct HouseMarket
 end
 
 mutable struct RentalSupply
-    houseId::Int
+    house::House
     monthlyPrice::Float64
     sellerId::Int
     valid::Bool
@@ -160,8 +160,10 @@ function calculate_market_price(house, model)
     bucketKey = calculateBucketKey(house)
     transactions = model.buckets[bucketKey]
     if length(transactions) == 0
+        println("house = $house calculate_initial_market_price(house) = $(calculate_initial_market_price(house))")
         return calculate_initial_market_price(house)
     end
+    println("house = $house mean(transactions) * house.area * house.maintenanceLevel = $(mean(transactions) * house.area * house.maintenanceLevel)")
     return mean(transactions) * house.area * house.maintenanceLevel
 end
 
@@ -367,7 +369,7 @@ function handle_deaths(household, model)
     end
     if (rand() < probability_of_death)
         if household.size == 1
-            push!(model.inheritages, Inheritage(household.houseIds, household.wealth, household.mortgages, household.percentile))
+            push!(model.inheritages, Inheritage(household.houses, household.wealth, household.mortgages, household.percentile))
             # gov takes the wealth
             model.government.wealth += household.wealth
             model.inheritagesFlow += household.wealth
@@ -391,7 +393,7 @@ function handle_breakups(household, model)
         end
         if (rand() < probability_of_breakup)
             add_agent!(Household, model, household.wealth / 2, household.age, 1, Int[], household.percentile, Mortgage[], Int[], 0, 0.0, getChildResidencyZone(household))
-            add_agent!(Household, model, household.wealth / 2, household.age, household.size - 1, household.houseIds, household.percentile, household.mortgages, Int[], 0, 0.0, getChildResidencyZone(household))
+            add_agent!(Household, model, household.wealth / 2, household.age, household.size - 1, household.houses, household.percentile, household.mortgages, Int[], 0, 0.0, getChildResidencyZone(household))
             #println("remove Agent! id = " * string(household.id) * " step = " * string(model.steps))
             remove_agent!(household, model)
             model.breakups += 1
@@ -465,7 +467,7 @@ function receive_inheritages(household, model)
         for i in 1:length(model.inheritages)
             inheritage = model.inheritages[i]
             if (abs(inheritage.percentile - household.percentile) <= 50) # change this percentile?
-                household.houseIds = vcat(household.houseIds, inheritage.houseIds)
+                household.houses = vcat(household.houses, inheritage.houses)
                 household.wealth += inheritage.wealth
                 model.government.wealth -= inheritage.wealth
                 model.inheritagesFlow -= inheritage.wealth
@@ -482,7 +484,7 @@ function terminateContractsOnTentantSide(household, model)
         println("landlordId = " * string(contract.landlordId))
         println("tenantId = " * string(contract.tenantId))
         landlord = model[contract.landlordId]
-        push!(landlord.houseIds, contract.houseId)
+        push!(landlord.houses, contract.house)
         for i in 1:length(landlord.contractsIdsAsLandlord)
             if landlord.contractsIdsAsLandlord[i] == household.contractIdAsTenant
                 splice!(landlord.contractsIdsAsLandlord, i)
@@ -499,7 +501,7 @@ function terminateContractsOnLandLordSide(household, model)
         contract = model.contracts[contractId]
         tenant = model[contract.tenantId]
         tenant.contractIdAsTenant = 0
-        push!(household.houseIds, contract.houseId)
+        push!(household.houses, contract.house)
     end
 end
 
@@ -516,13 +518,13 @@ function clearHouseMarket(model)
             if model[demand.householdId].wealth < 0
                 continue
             end
-            maxMortgage = maxMortgageValue(model, model[demand.householdId], model.bank, model.houses[supply.houseId])
+            maxMortgage = maxMortgageValue(model, model[demand.householdId], model.bank, supply.house)
             # println("###")
             # println("maxMortage = " * string(maxMortgage))
             # println("householdId = " * string(demand.householdId))
             # println("###")
-            demandBid = calculateBid(model[demand.householdId], model.houses[supply.houseId], supply.price, maxMortgage)
-            if (has_enough_size(model.houses[supply.houseId], model[demand.householdId].size) && demandBid > supply.price)
+            demandBid = calculateBid(model[demand.householdId], supply.house, supply.price, maxMortgage)
+            if (has_enough_size(supply.house, model[demand.householdId].size) && demandBid > supply.price)
                 lock(localLock) do
                     push!(supply.bids, Bid(demandBid, demand.householdId))
                     push!(demand.supplyMatches, supply)
@@ -573,7 +575,7 @@ function clearRentalMarket(model)
             end
             demand = model.rentalMarket.demand[j]
             household = model[demand.householdId]
-            if (has_enough_size(model.houses[supply.houseId], household.size) && calculateLiquidSalary(household, model) * 0.40 > supply.monthlyPrice)
+            if (has_enough_size(supply.house, household.size) && calculateLiquidSalary(household, model) * 0.40 > supply.monthlyPrice)
                 push!(demand.supplyMatches, supply)
             end
         end
@@ -671,17 +673,11 @@ function buy_house(model, supply::HouseSupply)
     end
     household.wealth -= secondHighestBid
     seller.wealth += secondHighestBid
-    push!(household.houseIds, supply.houseId)
+    push!(household.houses, supply.house)
     terminateContractsOnTentantSide(household, model)
-    addTransactionToBuckets(model, model.houses[supply.houseId], secondHighestBid)
-    push!(model.transactions, Transaction(model.houses[supply.houseId].area, secondHighestBid, model.houses[supply.houseId].location))
+    addTransactionToBuckets(model, supply.house, secondHighestBid)
+    push!(model.transactions, Transaction(supply.house.area, secondHighestBid, supply.house.location))
     supply.valid = false
-    # for i in 1:length(seller.houseIds)
-    #     if (seller.houseIds[i] == supply.houseId)
-    #         splice!(seller.houseIds, i)
-    #         break
-    #     end
-    # end
 end
 
 function rent_house(model, supply::RentalSupply, household)
@@ -695,7 +691,7 @@ function rent_house(model, supply::RentalSupply, household)
     if household.contractIdAsTenant != 0
         return # already renting
     end
-    push!(model.contracts, Contract(seller.id, household.id, supply.houseId, supply.monthlyPrice))
+    push!(model.contracts, Contract(seller.id, household.id, supply.house, supply.monthlyPrice))
     household.contractIdAsTenant = length(model.contracts)
     push!(seller.contractsIdsAsLandlord, length(model.contracts))
 end
@@ -776,14 +772,16 @@ end
 ## TODO: Change this to something with logic
 function generateRandomHouse()
     area = rand(50:125)
+    # WARNNING: House must be generated for a specific region
+    # taking into consideration the supply and demand in that region
     return House(area, Lisboa, NotSocialNeighbourhood, 1)
 end
 
 function put_newly_built_house_to_sale(model, house)
     laborCost = 6000 * 12
     costBasedPrice = (model.construction_sector.constructionDelay * 500 + laborCost + house.area * 500) * 1.2 # markup
-    push!(model.houses, house)
-    push!(model.houseMarket.supply, HouseSupply(length(model.houses), costBasedPrice, Int[], -1, true))
+    push!(model.houses[house.location], house)
+    push!(model.houseMarket.supply, HouseSupply(house, costBasedPrice, Int[], -1, true))
     println("costBasedPrice = " * string(costBasedPrice))
 end
 
@@ -864,6 +862,9 @@ function initiateHouses(model)
     houses_sizes = vcat(houses_sizes, rand(80:120, Int64(NUMBER_OF_HOUSES/4)))
     houses_sizes = vcat(houses_sizes, rand(120:180, Int64(NUMBER_OF_HOUSES/4)))
     
+    for location in instances(HouseLocation)
+        model.houses[location] = House[]
+    end
     sort!(houses_sizes, lt=sortRandomly)
     initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Amadora, Amadora, houses_sizes)
     initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Cascais, Cascais, houses_sizes)
@@ -883,12 +884,11 @@ function initiateHouses(model)
     initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Seixal, Seixal, houses_sizes)
     initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Sesimbra, Sesimbra, houses_sizes)
     initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Setubal, Setubal, houses_sizes)
-    sort!(model.houses, lt=sortRandomly)
 end
 
 function initiateHousesPerRegion(model, targetNumberOfHouses, location, houses_sizes)
     for i in 1:targetNumberOfHouses
-        push!(model.houses, House(houses_sizes[1], location, NotSocialNeighbourhood, 1))
+        push!(model.houses[location], House(houses_sizes[1], location, NotSocialNeighbourhood, 1))
         splice!(houses_sizes, 1)
     end
 end
@@ -921,23 +921,23 @@ function assignHousesToHouseholds(model)
         zones_to_n_of_home_owners[location] = 0
     end
     not_home_owners = []
-    housePool = splice!(model.houses, 1:length(model.houses))
     for i in 1:nagents(model) # due to round() it might not be equal to NUMBER_OF_HOUSEHOLDS
+        println("assignHousesToHouseholds i = $(i)")
         household = model[i]
+        target_home_owners_in_the_zone = eval(Symbol("HOME_OWNERS_IN_" * string(household.residencyZone)))
+        current_home_owners_in_the_zone = zones_to_n_of_home_owners[household.residencyZone]
+        if current_home_owners_in_the_zone >= target_home_owners_in_the_zone
+            continue # no more houses to assign in this phase
+        end
         # if shouldAssignHouse(model, household, zones_to_n_of_home_owners)
-        if !assignHouseThatMakesSense(model, household, housePool)
+        if !assignHouseThatMakesSense(model, household)
             # Wasn't assigned a house...
             push!(not_home_owners, household)
             continue # also not going to get houses for rental
-        else
-            zones_to_n_of_home_owners[household.residencyZone] += 1
         end
-        # else
-        #     push!(not_home_owners, household)
-        #     continue        
-        # end
+        zones_to_n_of_home_owners[household.residencyZone] += 1
         numberOfExtraHousesToAssign = shouldAssignMultipleHouses(model, household)
-        assignHousesForRental(model, household, numberOfExtraHousesToAssign, housePool)
+        assignHousesForRental(model, household, numberOfExtraHousesToAssign)
     end
 end
 
@@ -967,9 +967,8 @@ end
 # end
 
 function update_houses(household, model)
-    for houseId in household.houseIds
+    for house in household.houses
         if rand() < 0.16 # 16 % probability to simulate twice a year, but not all at the same time
-            house = model.houses[houseId]
             house.maintenanceLevel -= 0.01
         end
     end
@@ -998,17 +997,11 @@ function get_household_size(size_str)
     end
 end
 
-function assignHouseThatMakesSense(model, household, housePool)
-    for i in eachindex(housePool)
-        house = housePool[i]
-        if household.residencyZone != house.location || 
-           !has_enough_size(house, household.size)
-            continue
-        end
+function assignHouseThatMakesSense(model, household)
+    for house in model.houses[household.residencyZone]
+        # println("assignHouseThatMakesSense house = $(house)")
         if rand() < probabilityOfHouseholdBeingAssignedToHouse(household, house)
-            push!(model.houses, house)
-            splice!(housePool, i)
-            push!(household.houseIds, length(model.houses))
+            push!(household.houses, house)
             return true
         end
     end
@@ -1061,24 +1054,18 @@ function shouldAssignMultipleHouses(model, household)
     return 0
 end
 
-function assignHousesForRental(model, household, numberOfExtraHousesToAssign, housePool)
+function assignHousesForRental(model, household, numberOfExtraHousesToAssign)
     zones = adjacentZones[household.residencyZone]
     assignedSoFar = 0
     push!(zones, household.residencyZone)
-    i = 1
-    while i <= length(housePool)
+    # for house in collect(Iterators.flatten([model.houses[zone] for zone in zones]))
+    for house in model.houses[household.residencyZone]
+        println("assignHousesForRental house = $(house)")
         if assignedSoFar == numberOfExtraHousesToAssign
             return
         end
-        house = housePool[i]
-        if !(house.location in zones)
-            i += 1
-            continue
-        end
-        push!(model.houses, house)
-        splice!(housePool, i)
-        push!(household.houseIds, length(model.houses))
-        put_house_to_rent(household, model, length(household.houseIds))
+        push!(household.houses, house)
+        put_house_to_rent(household, model, house)
         assignedSoFar += 1
     end
 end
