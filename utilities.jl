@@ -518,13 +518,17 @@ function clearHouseMarket(model)
             if model[demand.householdId].wealth < 0
                 continue
             end
+            if (!has_enough_size(supply.house, model[demand.householdId].size) ||
+                supply.house.location != model[demand.householdId].residencyZone)
+                continue
+            end
             maxMortgage = maxMortgageValue(model, model[demand.householdId], model.bank, supply.house)
             # println("###")
             # println("maxMortage = " * string(maxMortgage))
             # println("householdId = " * string(demand.householdId))
             # println("###")
             demandBid = calculateBid(model[demand.householdId], supply.house, supply.price, maxMortgage)
-            if (has_enough_size(supply.house, model[demand.householdId].size) && demandBid > supply.price)
+            if (demandBid > supply.price)
                 lock(localLock) do
                     push!(supply.bids, Bid(demandBid, demand.householdId))
                     push!(demand.supplyMatches, supply)
