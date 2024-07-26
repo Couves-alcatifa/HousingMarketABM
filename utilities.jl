@@ -926,7 +926,7 @@ function assignHousesToHouseholds(model)
     end
     not_home_owners = []
     for i in 1:nagents(model) # due to round() it might not be equal to NUMBER_OF_HOUSEHOLDS
-        println("assignHousesToHouseholds i = $(i)")
+        # println("assignHousesToHouseholds i = $(i)")
         household = model[i]
         target_home_owners_in_the_zone = eval(Symbol("HOME_OWNERS_IN_" * string(household.residencyZone)))
         current_home_owners_in_the_zone = zones_to_n_of_home_owners[household.residencyZone]
