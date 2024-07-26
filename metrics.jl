@@ -125,11 +125,6 @@ function subsidiesPaid(model)
     model.subsidiesPaid = 0.0
     return res
 end 
-function ircCollected(model)
-    res = copy(model.ircCollected)
-    model.ircCollected = 0.0
-    return res
-end 
 function ivaCollected(model)
     res = copy(model.ivaCollected)
     model.ivaCollected = 0.0
@@ -171,6 +166,8 @@ function expensesReceived(model)
     return res
 end 
 
+houses_per_region(model) = copy(model.houses)
+transactions_per_region(model) = Dict(location => copy(last(model.transactions_per_region[location])) for location in instances(HouseLocation))
 
 company(a) = kindof(a) == :Company
 
@@ -182,10 +179,8 @@ isHouseholdMultipleHomeOwner(a) = isHousehold(a) && length(a.houses) > 1
 subsidyRate(model) = model.government.subsidyRate
 irs(model) = model.government.irs
 vat(model) = model.government.vat
-irc(model) = model.government.irc
 salaryRate(model) = model.salary_multiplier
 
-transactions(model) = copy(model.transactions)
 # bucket_1(model) = mean(model.buckets[smaller_than_50])
 # bucket_2(model) = mean(model.buckets[smaller_than_90])
 # bucket_3(model) = mean(model.buckets[smaller_than_120])

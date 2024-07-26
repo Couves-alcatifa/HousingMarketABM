@@ -67,11 +67,12 @@ function wealth_model()
         :houseMarket => HouseMarket(HouseSupply[], HouseDemand[]),
         :rentalMarket => RentalMarket(RentalSupply[], RentalDemand[]),
         :gov_prev_wealth => STARTING_GOV_WEALTH,
-        :government => Government(STARTING_GOV_WEALTH, IRS, IRC, VAT, 1.0),
+        :government => Government(STARTING_GOV_WEALTH, IRS, VAT, 1.0),
         :company_prev_wealth => STARTING_COMPANY_WEALTH,
         :company_wealth => STARTING_COMPANY_WEALTH,
         :bank => Bank(STARTING_BANK_WEALTH, INTEREST_RATE, LTV, DSTI),
         :transactions => Transaction[],
+        :transactions_per_region => Dict(location => [] for location in instances(HouseLocation)),
         :inheritages => Inheritage[],
         :contracts => Contract[],
         :salary_multiplier => 1.0,
@@ -83,7 +84,6 @@ function wealth_model()
         :deaths => 0,
         :children_leaving_home => 0,
         :subsidiesPaid => 0.0,
-        :ircCollected => 0.0,
         :ivaCollected => 0.0,
         :irsCollected => 0.0,
         :companyServicesPaid => 0.0,
@@ -96,6 +96,10 @@ function wealth_model()
     )
 
     model = StandardABM(MyMultiAgent; agent_step! = agent_step!, model_step! = model_step!, properties,scheduler = Schedulers.Randomly())
+    model.steps += 1
+    for location in instances(HouseLocation)
+        push!(model.transactions_per_region[location], Transaction[])
+    end
     initiateHouses(model)
     LOG_INFO("finished initateHouses in $(time() - start_time) seconds")
     initiateHouseholds(model, households_initial_ages)
@@ -129,7 +133,7 @@ function model_step!(model)
     # end
 
     
-    model.steps += 1
+
     if model.steps % 5 == 0
         println("5 steps!")
     end
@@ -137,11 +141,6 @@ function model_step!(model)
     clearRentalMarket(model)
     trimBucketsIfNeeded(model)
     if model.steps % 12 == 0
-        if model.company_prev_wealth < model.company_wealth
-            model.company_wealth -= (model.company_wealth - model.company_prev_wealth) * model.government.irc
-            model.government.wealth += (model.company_wealth - model.company_prev_wealth) * model.government.irc
-            model.ircCollected += (model.company_wealth - model.company_prev_wealth) * model.government.irc
-        end
         company_adjust_salaries(model)
         gov_adjust_taxes(model)
         
@@ -194,9 +193,6 @@ function gov_adjust_taxes(model)
 
     ratio = model.government.wealth / model.gov_prev_wealth
     if ratio < 1
-        if model.company_prev_wealth * 1.1 < model.company_wealth
-            model.government.irc += 0.01
-        end
         if ratio > 0.95
             model.government.irs += 0.01
             model.government.vat += 0.01
@@ -209,7 +205,6 @@ function gov_adjust_taxes(model)
         end
         println("irs = " * string(model.government.irs))
         println("vat = " * string(model.government.vat))
-        println("irc = " * string(model.government.irc))
         # model.government.irs += (1 - ratio) / 2            
         # model.government.vat += 0.005
     end
@@ -415,13 +410,13 @@ adata = [(household, sum_wealth),(household, sum_houses),
          (isHouseholdMultipleHomeOwner, count),
          (household, wealth_distribution), (household, money_distribution), (household, size_distribution), (household, age_distribution)]
 mdata = [count_supply, gov_wealth, construction_wealth, company_wealth,
-         bank_wealth, calculate_houses_prices_perm2, supply_volume, demand_volume, transactions,
-         calculate_prices_in_supply, irs, vat, irc, subsidyRate, salaryRate, 
+         bank_wealth, calculate_houses_prices_perm2, supply_volume, demand_volume,
+         calculate_prices_in_supply, irs, vat, subsidyRate, salaryRate, 
          births, breakups, deaths, children_leaving_home,
          ## Gov Money flow ##
-         subsidiesPaid, ircCollected, ivaCollected, irsCollected, companyServicesPaid, inheritagesFlow, constructionLabor,
+         subsidiesPaid, ivaCollected, irsCollected, companyServicesPaid, inheritagesFlow, constructionLabor,
          ## Company Money flow ##
-         rawSalariesPaid, liquidSalariesReceived, expensesReceived,
+         rawSalariesPaid, liquidSalariesReceived, expensesReceived, houses_per_region, transactions_per_region
          ## Houses prices per bucket
          #bucket_1, bucket_2, bucket_3, bucket_4
          ]
@@ -452,10 +447,13 @@ save("1salaries_and_expenses.png", plot_salaries_and_expenses(agent_data[2:end, 
 # save("1houses_prices_per_bucket.png", plot_houses_prices_per_bucket(agent_data[2:end, :], model_data[2:end, :]))
 save("1houses_prices_per_region.png", plot_houses_prices_per_region(agent_data[2:end, :], model_data[2:end, :]))
 
+save("1number_of_houses_per_region.png", plot_number_of_houses_per_region(agent_data[2:end, :], model_data[2:end, :]))
+save("1number_of_transactions_per_region.png", plot_number_of_transactions_per_region(agent_data[2:end, :], model_data[2:end, :]))
+
 # end
 
-CSV.write("agentData.csv", agent_data)
-CSV.write("modelData.csv", model_data)
+CSV.write("agentData.csv", agent_data, delim=';')
+CSV.write("modelData.csv", model_data, delim=';')
 
 
 # println(agent_data[(end - 5):end, :])

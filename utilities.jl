@@ -112,7 +112,6 @@ end
 mutable struct Government
     wealth::Float64
     irs
-    irc
     vat
     subsidyRate::Float64
 end
@@ -160,10 +159,10 @@ function calculate_market_price(house, model)
     bucketKey = calculateBucketKey(house)
     transactions = model.buckets[bucketKey]
     if length(transactions) == 0
-        println("house = $house calculate_initial_market_price(house) = $(calculate_initial_market_price(house))")
+        # println("house = $house calculate_initial_market_price(house) = $(calculate_initial_market_price(house))")
         return calculate_initial_market_price(house)
     end
-    println("house = $house mean(transactions) * house.area * house.maintenanceLevel = $(mean(transactions) * house.area * house.maintenanceLevel)")
+    # println("house = $house mean(transactions) * house.area * house.maintenanceLevel = $(mean(transactions) * house.area * house.maintenanceLevel)")
     return mean(transactions) * house.area * house.maintenanceLevel
 end
 
@@ -681,6 +680,7 @@ function buy_house(model, supply::HouseSupply)
     terminateContractsOnTentantSide(household, model)
     addTransactionToBuckets(model, supply.house, secondHighestBid)
     push!(model.transactions, Transaction(supply.house.area, secondHighestBid, supply.house.location))
+    push!(model.transactions_per_region[supply.house.location][model.steps], Transaction(supply.house.area, secondHighestBid, supply.house.location))
     supply.valid = false
 end
 
@@ -1064,7 +1064,7 @@ function assignHousesForRental(model, household, numberOfExtraHousesToAssign)
     push!(zones, household.residencyZone)
     # for house in collect(Iterators.flatten([model.houses[zone] for zone in zones]))
     for house in model.houses[household.residencyZone]
-        println("assignHousesForRental house = $(house)")
+        # println("assignHousesForRental house = $(house)")
         if assignedSoFar == numberOfExtraHousesToAssign
             return
         end

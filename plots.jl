@@ -148,10 +148,9 @@ function plot_taxes_and_subsidy_rates(adf, mdf)
     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Rates")
     subsidyRate = lines!(ax, adf.step, mdf.subsidyRate, color = :black)
     irs = lines!(ax, adf.step, mdf.irs, color = :blue)
-    irc = lines!(ax, adf.step, mdf.irc, color = :green)
     vat = lines!(ax, adf.step, mdf.vat, color = :yellow)
     salaryRate = lines!(ax, adf.step, mdf.salaryRate, color = :purple)
-    figure[1, 2] = Legend(figure, [subsidyRate, irs, irc, vat, salaryRate], ["Subsidy Rate", "IRS", "IRC", "IVA", "Salary Rate"])
+    figure[1, 2] = Legend(figure, [subsidyRate, irs, vat, salaryRate], ["Subsidy Rate", "IRS", "IVA", "Salary Rate"])
     figure
 end
 
@@ -170,11 +169,10 @@ function plot_taxes_and_subsidies_flow(adf, mdf)
     figure = Figure(size = (600, 400))
     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
     subsidiesPaid = lines!(ax, adf.step, mdf.subsidiesPaid, color = :red)
-    ircCollected = lines!(ax, adf.step, mdf.ircCollected, color = :green)
     ivaCollected = lines!(ax, adf.step, mdf.ivaCollected, color = :black)
     irsCollected = lines!(ax, adf.step, mdf.irsCollected, color = :blue)
     companyServicesPaid = lines!(ax, adf.step, mdf.companyServicesPaid, color = :yellow)
-    figure[1, 2] = Legend(figure, [subsidiesPaid, ircCollected, ivaCollected, irsCollected, companyServicesPaid], ["Subsidies", "IRC", "IRS", "IVA", "Public Investment"])
+    figure[1, 2] = Legend(figure, [subsidiesPaid, ivaCollected, irsCollected, companyServicesPaid], ["Subsidies", "IRS", "IVA", "Public Investment"])
     figure
 end
 
@@ -203,37 +201,63 @@ end
 function plot_houses_prices_per_region(adf, mdf)
     figure = Figure(size = (600, 400))
     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
-    vv = mdf.transactions
     organizedPerRegion = Dict() # this will be filled with [[MeanValueForAmadoraStep1, ..Step2, ...Step3], [MeanValueForLisboaStep1, ...]]
     for location in instances(HouseLocation)
-        organizedPerRegion[location] = []
-    end
-
-    for step in eachindex(vv)
-        for location in instances(HouseLocation)
-            push!(organizedPerRegion[location], [])
-        end
-        for transaction in vv[step]
-            push!(organizedPerRegion[transaction.location][step], transaction.price / transaction.area)
-        end
-    end
-
-    for location in instances(HouseLocation)
-        means = Float32[]
-        for step in eachindex(organizedPerRegion[location])
-            if length(organizedPerRegion[location][step]) != 0
-                push!(means, mean(organizedPerRegion[location][step]))
+        organizedPerRegion[location] = Float32[]
+        for step in 1:NUMBER_OF_STEPS
+            step_values = Float32[]
+            for transaction in mdf.transactions_per_region[step][location]
+                push!(step_values, transaction.price / transaction.area)
+            end
+            if length(step_values) != 0
+                push!(organizedPerRegion[location], mean(step_values))
             else
-                push!(means, 0.0)
+                push!(organizedPerRegion[location], 0.0)
             end
         end
-        organizedPerRegion[location] = means
     end
-
     lines = []
     locations = []
     for location in instances(HouseLocation)
+        println("adf.step = $(adf.step)")
+        println("organizedPerRegion[location] = $(organizedPerRegion[location])")
         push!(lines, lines!(ax, adf.step, organizedPerRegion[location], color = color_map[location]))
+        push!(locations, string(location))
+    end
+
+    figure[1, 2] = Legend(figure, lines, locations)
+    figure
+end
+
+function plot_number_of_houses_per_region(adf, mdf)
+    figure = Figure(size = (600, 400))
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
+    lines = []
+    locations = []
+    for location in instances(HouseLocation)
+        regional_number_of_houses = Int32[]
+        for step in 1:NUMBER_OF_STEPS
+            push!(regional_number_of_houses, length(mdf.houses_per_region[step][location])) 
+        end
+        push!(lines, lines!(ax, adf.step, regional_number_of_houses, color = color_map[location]))
+        push!(locations, string(location))
+    end
+
+    figure[1, 2] = Legend(figure, lines, locations)
+    figure
+end
+
+function plot_number_of_transactions_per_region(adf, mdf)
+    figure = Figure(size = (600, 400))
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
+    lines = []
+    locations = []
+    for location in instances(HouseLocation)
+        regional_number_of_transaction = Int32[]
+        for step in 1:NUMBER_OF_STEPS
+            push!(regional_number_of_transaction, length(mdf.transactions_per_region[step][location]))
+        end
+        push!(lines, lines!(ax, adf.step, regional_number_of_transaction, color = color_map[location]))
         push!(locations, string(location))
     end
 
