@@ -37,12 +37,29 @@ function plot_total_wealth(adf, mdf)
 end
 
 function plot_supply_and_demand(adf, mdf)
-    figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Volume")
-    supply_volume = lines!(ax, adf.step, mdf.supply_volume, color = :blue)
-    demand_volume = lines!(ax, adf.step, mdf.demand_volume, color = :red)
-    figure[1, 2] = Legend(figure, [supply_volume, demand_volume], ["Supply Volume", "Demand Volume"])
-    figure
+    regional_supply = Dict(location => Float32[] for location in instances(HouseLocation))
+    regional_demand = Dict(location => Float32[] for location in instances(HouseLocation))
+
+    for step in 1:length(adf.step)
+        supply_step_dict = mdf.supply_volume[step]
+        demand_step_dict = mdf.demand_volume[step]
+        for location in instances(HouseLocation)
+            push!(regional_supply[location], supply_step_dict[location])
+            push!(regional_demand[location], demand_step_dict[location])
+        end
+    end
+    figures = []
+    for location in instances(HouseLocation)
+        figure = Figure(size = (600, 400))
+        ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Volume")
+        supply_lines = lines!(ax, adf.step, regional_supply[location], color = color_map[location])
+        supply_legends = "Supply in $(string(location))"
+        demand_lines = lines!(ax, adf.step, regional_demand[location], color = color_map[location])
+        demand_legends = "Demand in $(string(location))"
+        figure[1, 2] = Legend(figure, [supply_lines, demand_lines], [supply_legends, demand_legends])
+        push!(figures, figure)
+    end
+    return figures
 end
 
 function plot_household_status(adf, mdf)

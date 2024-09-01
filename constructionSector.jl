@@ -1,16 +1,23 @@
 function updateConstructions(model)
-    targetConstruction = calculateTargetConstruction(model)
-    newConstructions = targetConstruction - length(model.construction_sector.housesInConstruction)
+    for location in instances(HouseLocation)
+        updateConstructionsPerRegion(model, location)
+    end
+
+end
+
+function updateConstructionsPerRegion(model, location)
+    targetConstruction = calculateTargetConstructionPerRegion(model, location)
+    newConstructions = targetConstruction - length(model.construction_sector.housesInConstruction[location])
     if (newConstructions > 0)
         for i in 1:newConstructions
-            if (!startNewConstruction(model))
+            if (!startNewConstruction(model, location))
                 break
             end
         end
     end
     i = 1
-    while i <= length(model.construction_sector.housesInConstruction)
-        pendingConstruction = model.construction_sector.housesInConstruction[i]
+    while i <= length(model.construction_sector.housesInConstruction[location])
+        pendingConstruction = model.construction_sector.housesInConstruction[location][i]
         pendingConstruction.time += 1
         laborCost = 6000
         if pendingConstruction.time > model.construction_sector.constructionDelay
@@ -21,28 +28,27 @@ function updateConstructions(model)
         else
             # still waiting for permit
         end
-        timeItTakesToBuild = 12 # 12 months for actual construction
-        if (pendingConstruction.time == model.construction_sector.constructionDelay + timeItTakesToBuild)
+        if (pendingConstruction.time >= model.construction_sector.constructionDelay + model.construction_sector.constructionTimeMultiplier * pendingConstruction.house.area)
             put_newly_built_house_to_sale(model, pendingConstruction.house)
-            splice!(model.construction_sector.housesInConstruction, i)
+            splice!(model.construction_sector.housesInConstruction[location], i)
         else
             i += 1
         end
-    end
+    end 
 end
 
-function calculateTargetConstruction(model)
-    return model.demand_size - model.supply_size
+function calculateTargetConstructionPerRegion(model, location)
+    return model.demand_size[location] - model.supply_size[location]
 end
 
 function calculateMortgageDurationForConstructionSector()
     return 100
 end
 
-function startNewConstruction(model)
-    newHouse = generateRandomHouse()
-    materialCost = newHouse.area * 500
-    laborCost = model.construction_sector.constructionDelay * 6000
+function startNewConstruction(model, location)
+    newHouse = generateRandomHouse(location)
+    materialCost = newHouse.area * MATERIAL_COSTS
+    laborCost = model.construction_sector.constructionTimeMultiplier * CONSTRUCTION_LABOR_COST * newHouse.area
 
     if materialCost + laborCost > model.construction_sector.wealth
         if !createConstructionLoan(model, materialCost + laborCost)
@@ -52,7 +58,7 @@ function startNewConstruction(model)
     model.government.wealth += materialCost
     model.constructionLabor += laborCost
     model.construction_sector.wealth -= materialCost
-    push!(model.construction_sector.housesInConstruction, PendingConstruction(0, newHouse))
+    push!(model.construction_sector.housesInConstruction[location], PendingConstruction(0, newHouse))
     return true
 end
 
@@ -72,15 +78,13 @@ function createConstructionLoan(model, value)
 end
 
 ## TODO: Change this to something with logic
-function generateRandomHouse()
+function generateRandomHouse(location)
     area = rand(50:125)
-    # WARNNING: House must be generated for a specific region
-    # taking into consideration the supply and demand in that region
-    return House(area, Lisboa, NotSocialNeighbourhood, 1)
+    return House(area, location, NotSocialNeighbourhood, 1)
 end
 
 function put_newly_built_house_to_sale(model, house)
-    laborCost = 6000 * 12
+    laborCost = CONSTRUCTION_LABOR_COST * model.construction_sector.constructionTimeMultiplier * house.area
     costBasedPrice = (model.construction_sector.constructionDelay * 500 + laborCost + house.area * 500) * 1.2 # markup
     push!(model.houses[house.location], house)
     push!(model.houseMarket.supply, HouseSupply(house, costBasedPrice, Int[], -1, true))

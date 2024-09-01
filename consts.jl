@@ -22,6 +22,9 @@ VAT = 0.15
 FRACTION_OF_HOMEOWNERS = 0.7
 FRACTION_OF_DOUBLE_OWNERS = 0.3
 CONSTRUCTION_DELAY = 16
+CONSTRUCTION_TIME_MULTIPLIER = 1/10 # 1 month for each 10m2 of the house 
+MATERIAL_COSTS = 500 # to be multiplied by the area of the house
+CONSTRUCTION_LABOR_COST = 6000 # monthly
 
 TotalTheoreticalNumberOfHouses = 1191363
 # TheoreticalNumberOfHousesInGrandeLisboa = 858646

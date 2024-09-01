@@ -142,9 +142,10 @@ end
 
 mutable struct ConstructionSector
     wealth::Float64
-    housesInConstruction::Array{PendingConstruction}
+    housesInConstruction # dict with and array of pending constructions per region
     constructionDelay::Int # in months
     mortgages::Array{Mortgage}
+    constructionTimeMultiplier::Float64 # to be multiplied by the area of the house
 end
 
 mutable struct HouseholdInfo #TODO: drop this

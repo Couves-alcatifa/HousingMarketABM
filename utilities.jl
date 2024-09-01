@@ -833,3 +833,19 @@ function assignHousesForRental(model, household, numberOfExtraHousesToAssign)
         assignedSoFar += 1
     end
 end
+
+function measureSupplyAndDemandRegionally(model)
+    for location in instances(HouseLocation)
+        model.demand_size[location] = 0
+        model.supply_size[location] = 0
+    end
+    
+    for demand in model.houseMarket.demand
+        household = model[demand.householdId]
+        model.demand_size[household.residencyZone] += 1
+    end
+    for supply in model.houseMarket.supply
+        house = supply.house
+        model.supply_size[house.location] += 1
+    end
+end

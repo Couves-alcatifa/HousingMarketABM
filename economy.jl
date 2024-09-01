@@ -78,9 +78,9 @@ function wealth_model()
         :inheritages => Inheritage[],
         :contracts => Contract[],
         :salary_multiplier => 1.0,
-        :demand_size => 0,
-        :supply_size => 0,
-        :construction_sector => ConstructionSector(STARTING_CONSTRUCTION_SECTOR_WEALTH, PendingConstruction[], CONSTRUCTION_DELAY, Mortgage[]),
+        :demand_size => Dict(location => 0 for location in instances(HouseLocation)),
+        :supply_size => Dict(location => 0 for location in instances(HouseLocation)),
+        :construction_sector => ConstructionSector(STARTING_CONSTRUCTION_SECTOR_WEALTH, Dict(location => PendingConstruction[] for location in instances(HouseLocation)), CONSTRUCTION_DELAY, Mortgage[], CONSTRUCTION_TIME_MULTIPLIER),
         :births => 0, 
         :breakups => 0,
         :deaths => 0,
@@ -119,8 +119,8 @@ end
 function model_step!(model)
     LOG_INFO("Model step started")
     start_time = time()
-    model.supply_size = length(model.houseMarket.supply)
-    model.demand_size = length(model.houseMarket.demand)
+    measureSupplyAndDemandRegionally(model)
+
     println("----------------")
     println("number of households = " * string(nagents(model)))
     println("----------------")
@@ -435,7 +435,13 @@ agent_data, model_data = run!(model, N_of_steps; adata, mdata)
 save("$output_folder/houses_prices.png", plot_houses_prices(agent_data[2:end, :], model_data[2:end, :]))
 save("$output_folder/houses_owned.png", plot_houses_owned(agent_data[2:end, :], model_data[2:end, :]))
 save("$output_folder/total_wealth.png", plot_total_wealth(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/supply_and_demand.png", plot_supply_and_demand(agent_data[2:end, :], model_data[2:end, :]))
+
+supply_and_demand_figures_regionally = plot_supply_and_demand(agent_data[2:end, :], model_data[2:end, :])
+locations = instances(HouseLocation)
+for i in eachindex(supply_and_demand_figures_regionally)
+    save("$output_folder/supply_and_demand_in_$(string(locations[i])).png", supply_and_demand_figures_regionally[i])
+end
+
 save("$output_folder/household_status.png", plot_household_status(agent_data[2:end, :], model_data[2:end, :]))
 save("$output_folder/house_prices_in_supply.png", plot_houses_prices_in_supply(agent_data[2:end, :], model_data[2:end, :]))
 save("$output_folder/taxes_and_subsidies.png", plot_taxes_and_subsidy_rates(agent_data[2:end, :], model_data[2:end, :]))
