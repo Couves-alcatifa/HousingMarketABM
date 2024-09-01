@@ -152,7 +152,7 @@ function model_step!(model)
     public_investment(model)
     updateConstructions(model)
     payMortgages(model, model.construction_sector)
-    println("end of model_step!")
+    println("end of model_step $(string(model.steps))")
     LOG_INFO("Model step took $(string(time() - start_time)) seconds")
 end
 
