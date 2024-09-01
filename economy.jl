@@ -80,7 +80,7 @@ function wealth_model()
         :salary_multiplier => 1.0,
         :demand_size => 0,
         :supply_size => 0,
-        :construction_sector => ConstructionSector(STARTING_CONSTRUCTION_SECTOR_WEALTH, PendingConstruction[], 16, Mortgage[]),
+        :construction_sector => ConstructionSector(STARTING_CONSTRUCTION_SECTOR_WEALTH, PendingConstruction[], CONSTRUCTION_DELAY, Mortgage[]),
         :births => 0, 
         :breakups => 0,
         :deaths => 0,

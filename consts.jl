@@ -1,6 +1,8 @@
+include("types.jl")
+
 MAX_BUCKET_SIZE = 50
-NUMBER_OF_HOUSEHOLDS = 50000
-NUMBER_OF_STEPS = 144
+NUMBER_OF_HOUSEHOLDS = 500
+NUMBER_OF_STEPS = 15
 STARTING_GOV_WEALTH_PER_CAPITA = 100000.0
 STARTING_COMPANY_WEALTH_PER_CAPITA = 60000.0
 STARTING_BANK_WEALTH_PER_CAPITA = 67000.0
@@ -19,6 +21,7 @@ IRS = 0.3
 VAT = 0.15
 FRACTION_OF_HOMEOWNERS = 0.7
 FRACTION_OF_DOUBLE_OWNERS = 0.3
+CONSTRUCTION_DELAY = 16
 
 TotalTheoreticalNumberOfHouses = 1191363
 # TheoreticalNumberOfHousesInGrandeLisboa = 858646
@@ -140,27 +143,6 @@ THIRD_QUARTILE_SALES_IN_Palmela = 1839
 THIRD_QUARTILE_SALES_IN_Seixal = 2099
 THIRD_QUARTILE_SALES_IN_Sesimbra = 2428
 THIRD_QUARTILE_SALES_IN_Setubal = 2020
-
-@enum HouseLocation begin
-    Amadora = 1
-    Cascais = 2
-    Lisboa = 3
-    Loures = 4
-    Mafra = 5
-    Odivelas = 6
-    Oeiras = 7
-    Sintra = 8
-    VilaFrancaDeXira = 9
-    Alcochete = 10
-    Almada = 11
-    Barreiro = 12
-    Moita = 13
-    Montijo = 14
-    Palmela = 15
-    Seixal =  16
-    Sesimbra = 17
-    Setubal = 18
-end
 
 color_map = Dict(
     Amadora => :red,
