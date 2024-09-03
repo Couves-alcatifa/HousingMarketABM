@@ -52,9 +52,9 @@ function plot_supply_and_demand(adf, mdf)
     for location in instances(HouseLocation)
         figure = Figure(size = (600, 400))
         ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Volume")
-        supply_lines = lines!(ax, adf.step, regional_supply[location], color = color_map[location])
+        supply_lines = lines!(ax, adf.step, regional_supply[location], color = :blue)
         supply_legends = "Supply in $(string(location))"
-        demand_lines = lines!(ax, adf.step, regional_demand[location], color = color_map[location])
+        demand_lines = lines!(ax, adf.step, regional_demand[location], color = :red)
         demand_legends = "Demand in $(string(location))"
         figure[1, 2] = Legend(figure, [supply_lines, demand_lines], [supply_legends, demand_legends])
         push!(figures, figure)

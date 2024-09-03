@@ -12,6 +12,7 @@ using Base.Threads
 include("utilities.jl")
 include("metrics.jl")
 include("plots.jl")
+include("tables.jl")
 # include("marketsLogic.jl")
 # Set the seed for reproducibility
 Random.seed!(1234)
@@ -98,10 +99,7 @@ function wealth_model()
     )
 
     model = StandardABM(MyMultiAgent; agent_step! = agent_step!, model_step! = model_step!, properties,scheduler = Schedulers.Randomly())
-    model.steps += 1
-    for location in instances(HouseLocation)
-        push!(model.transactions_per_region[location], Transaction[])
-    end
+
     initiateHouses(model)
     LOG_INFO("finished initateHouses in $(time() - start_time) seconds")
     initiateHouseholds(model, households_initial_ages)
@@ -120,7 +118,10 @@ function model_step!(model)
     LOG_INFO("Model step started")
     start_time = time()
     measureSupplyAndDemandRegionally(model)
-
+    model.steps += 1
+    for location in instances(HouseLocation)
+        push!(model.transactions_per_region[location], Transaction[])
+    end
     println("----------------")
     println("number of households = " * string(nagents(model)))
     println("----------------")
@@ -465,4 +466,5 @@ CSV.write("$output_folder/modelData.csv", model_data, delim=';')
 
 Base.Filesystem.cptree("$output_folder", "latest_run", force=true)
 
+writeToCsv("QuarterLyHousePrices.csv", generate_houses_prices_table(agent_data, model_data))
 # println(agent_data[(end - 5):end, :])

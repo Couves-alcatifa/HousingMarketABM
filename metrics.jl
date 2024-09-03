@@ -167,8 +167,17 @@ function expensesReceived(model)
 end 
 
 houses_per_region(model) = copy(model.houses)
-transactions_per_region(model) = Dict(location => copy(last(model.transactions_per_region[location])) for location in instances(HouseLocation))
-
+function transactions_per_region(model)
+    d = Dict()
+    for location in instances(HouseLocation)
+        if length(model.transactions_per_region[location]) != 0
+            d[location] = last(model.transactions_per_region[location])
+        else
+            d[location] = Transaction[]
+        end
+    end
+    return d
+end
 company(a) = kindof(a) == :Company
 
 isHousehold(a) = kindof(a) == :Household
