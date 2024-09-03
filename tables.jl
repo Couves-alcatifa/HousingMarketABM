@@ -21,7 +21,7 @@ function generate_houses_prices_table(adf, mdf)
             push!(finalTable[1], "$(currentYear)Q$(currentQuarter)")
             for location in instances(HouseLocation)
                 if length(currentQuarterTransactions[location]) != 0
-                    push!(finalTable[locationToIndex[location]], mean(currentQuarterTransactions[location]))
+                    push!(finalTable[locationToIndex[location]], median(currentQuarterTransactions[location]))
                 else
                     push!(finalTable[locationToIndex[location]], 0)
                 end

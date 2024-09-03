@@ -463,8 +463,8 @@ save("$output_folder/number_of_transactions_per_region.png", plot_number_of_tran
 
 CSV.write("$output_folder/agentData.csv", agent_data, delim=';')
 CSV.write("$output_folder/modelData.csv", model_data, delim=';')
+writeToCsv("$output_folder/QuarterLyHousePrices.csv", generate_houses_prices_table(agent_data, model_data))
 
 Base.Filesystem.cptree("$output_folder", "latest_run", force=true)
 
-writeToCsv("QuarterLyHousePrices.csv", generate_houses_prices_table(agent_data, model_data))
 # println(agent_data[(end - 5):end, :])
