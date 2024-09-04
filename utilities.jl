@@ -111,39 +111,29 @@ function generateInitialWealth(age, percentile)
 end
 
 function calculateSalary(household, model)
+    location = household.residencyZone
     percentile = household.percentile
-    if percentile < 25
-        salary = 750 + 150 * (percentile / 100) * 4
-    elseif percentile < 50
-        salary = 900 + 150 * ((percentile / 100) - 0.25) * 4
-    elseif percentile < 75
-        salary = 1000 + 400 * ((percentile / 100) - 0.50) * 4
-    elseif percentile < 85
-        salary = 1400 + 500 * ((percentile / 100) - 0.75) * 10
-    elseif percentile < 95
-        salary = 1900 + 600 * ((percentile / 100) - 0.85) * 10
+    if percentile < 20
+        base = eval(Symbol("FIRST_QUINTILE_INCOME_IN_$(string(location))")) / 2
+        range = base * 2
+        salary = base + range * (percentile / 100) * 5
+    elseif percentile < 40
+        base = eval(Symbol("FIRST_QUINTILE_INCOME_IN_$(string(location))"))
+        range = eval(Symbol("SECOND_QUINTILE_INCOME_IN_$(string(location))")) - base
+        salary = base + range * (percentile / 100 - 0.2) * 5
+    elseif percentile < 60
+        base = eval(Symbol("SECOND_QUINTILE_INCOME_IN_$(string(location))"))
+        range = eval(Symbol("THIRD_QUINTILE_INCOME_IN_$(string(location))")) - base
+        salary = base + range * (percentile / 100 - 0.4) * 5
+    elseif percentile < 80
+        base = eval(Symbol("THIRD_QUINTILE_INCOME_IN_$(string(location))"))
+        range = eval(Symbol("FOURTH_QUINTILE_INCOME_IN_$(string(location))")) - base
+        salary = base + range * (percentile / 100 - 0.6) * 5
     else
-        salary = 2500 + 2000 * ((percentile / 100) - 0.95) * 20
+        base = eval(Symbol("FOURTH_QUINTILE_INCOME_IN_$(string(location))"))
+        range = base * 3
+        salary = base + range * (percentile / 100 - 0.8) * 5
     end
-    # age = household.age
-    size = household.size
-    # salary = 0
-    # if (age <= 24)
-    #     lowest_salary_in_percentile = age_less_24_salary_map[percentile]
-    #     salary = lowest_salary_in_percentile + rand(1:lowest_salary_in_percentile*0.10) 
-    # elseif (age <= 34)
-    #     lowest_salary_in_percentile = age_less_34_salary_map[percentile]
-    #     salary = lowest_salary_in_percentile + rand(1:lowest_salary_in_percentile*0.10) 
-    # elseif (age <= 44)
-    #     lowest_salary_in_percentile = age_less_44_salary_map[percentile]
-    #     salary = lowest_salary_in_percentile + rand(1:lowest_salary_in_percentile*0.10) 
-    # elseif (age <= 54)
-    #     lowest_salary_in_percentile = age_less_54_salary_map[percentile]
-    #     salary = lowest_salary_in_percentile + rand(1:lowest_salary_in_percentile*0.10) 
-    # else
-    #     lowest_salary_in_percentile = age_less_64_salary_map[percentile]
-    #     salary = lowest_salary_in_percentile + rand(1:lowest_salary_in_percentile*0.10) 
-    # end
     if (size == 1)
         return salary * model.salary_multiplier
     else
@@ -154,14 +144,12 @@ end
 function calculateLiquidSalary(household, model)
     baseSalary = calculateSalary(household, model)
     irs = model.government.irs
-    if baseSalary < 1600
-        return baseSalary * (1 - irs)
-    elseif baseSalary < 2400
-        taxes = 1600 * irs + (baseSalary - 1600) * irs * 1.5
-        return baseSalary - taxes
+    if baseSalary < 1200
+        return baseSalary * (1 - irs / 4)
+    elseif baseSalary < 1600
+        return 1200 * (1 - irs / 4) + (baseSalary - 1200) * (1 - irs / 2)
     else
-        taxes = 1600 * irs + (2400 - 1600) * irs * 1.5 + (baseSalary - 2400) * irs * 2
-        return baseSalary - taxes
+        return 1200 * (1 - irs / 4) + 400 * (1 - irs / 2) + (baseSalary - 1600) * (1 - irs)
     end
 end
 

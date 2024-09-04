@@ -244,10 +244,10 @@ end
 function calculate_subsidy(household, model)
     subsidy = 0
     salary = calculateLiquidSalary(household, model)
-    if (salary > 500 * household.size)
+    if (salary > 700 * household.size)
         return 0
     end
-    return subsidy + (500 * household.size - salary)*0.4 * model.government.subsidyRate
+    return subsidy + (700 * household.size - salary)*0.4 * model.government.subsidyRate
 end
 
 function decideToRent(household, model, house)
