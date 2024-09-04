@@ -200,8 +200,8 @@ gov_wealth(model) = model.government.wealth
 company_wealth(model) = model.company_wealth
 bank_wealth(model) = model.bank.wealth
 construction_wealth(model) = model.construction_sector.wealth
-supply_volume(model) = model.supply_size
-demand_volume(model) = model.demand_size
+supply_volume(model) = copy(model.supply_size)
+demand_volume(model) = copy(model.demand_size)
 
 births(model) = model.births
 breakups(model) = model.breakups
