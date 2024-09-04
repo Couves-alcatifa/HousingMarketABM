@@ -134,10 +134,11 @@ function calculateSalary(household, model)
         range = base * 3
         salary = base + range * (percentile / 100 - 0.8) * 5
     end
+    # TODO: this extra 1.5 ideally should be removed
     if (size == 1)
-        return salary * model.salary_multiplier
+        return salary * model.salary_multiplier * 1.5
     else
-        return salary * 2 * model.salary_multiplier
+        return salary * 2 * model.salary_multiplier * 1.5
     end
 end
 
