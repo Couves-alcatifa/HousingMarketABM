@@ -106,7 +106,7 @@ function calculateCostBasedPrice(model, size, location)
 end
 
 function generateInitialWealth(age, percentile)
-    return age * 200 + percentile * 50
+    return age * INITIAL_WEALTH_PER_AGE + percentile * INITIAL_WEALTH_PER_PERCENTILE
     # return age * 20 + percentile * 5
 end
 
@@ -134,11 +134,10 @@ function calculateSalary(household, model)
         range = base * 3
         salary = base + range * (percentile / 100 - 0.8) * 5
     end
-    # TODO: this extra 1.5 ideally should be removed
     if (size == 1)
-        return salary * model.salary_multiplier * 1.5
+        return salary * model.salary_multiplier * INCOME_MULTIPLICATION_FACTOR
     else
-        return salary * 2 * model.salary_multiplier * 1.5
+        return salary * 2 * model.salary_multiplier * INCOME_MULTIPLICATION_FACTOR
     end
 end
 
@@ -356,7 +355,7 @@ function clearHouseMarket(model)
     Threads.@threads for i in 1:length(model.houseMarket.supply)
         supply = model.houseMarket.supply[i]
         for j in 1:length(model.houseMarket.demand)
-            if rand() < 0.7 # only view 30% of the offers
+            if rand() < HOUSE_SEARCH_OBFUSCATION_FACTOR # only view 30% of the offers
                 continue
             end
             demand = model.houseMarket.demand[j]
@@ -406,7 +405,7 @@ function clearHouseMarket(model)
         if !model.houseMarket.supply[i].valid
             splice!(model.houseMarket.supply, i)
         else
-            model.houseMarket.supply[i].price *= 0.99 # reduce price
+            model.houseMarket.supply[i].price *= (1 - HOUSE_PRICE_REDUCTION_FACTOR) # reduce price
             empty!(model.houseMarket.supply[i].bids)
             i += 1
         end
@@ -419,7 +418,7 @@ function clearRentalMarket(model)
     for i in 1:length(model.rentalMarket.supply)
         supply = model.rentalMarket.supply[i]
         for j in 1:length(model.rentalMarket.demand)
-            if rand() < 0.7 # only view 30% of the offers
+            if rand() < HOUSE_SEARCH_OBFUSCATION_FACTOR_FOR_RENTAL # only view 30% of the offers
                 continue
             end
             demand = model.rentalMarket.demand[j]
