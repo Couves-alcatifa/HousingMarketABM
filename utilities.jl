@@ -237,8 +237,8 @@ function handle_breakups(household, model)
             probability_of_breakup += 0.00005 * (60 - household.age)
         end
         if (rand() < probability_of_breakup)
-            add_agent!(Household, model, household.wealth / 2, household.age, 1, Int[], household.percentile, Mortgage[], Int[], 0, 0.0, getChildResidencyZone(household))
-            add_agent!(Household, model, household.wealth / 2, household.age, household.size - 1, household.houses, household.percentile, household.mortgages, Int[], 0, 0.0, getChildResidencyZone(household))
+            add_agent!(Household, model, household.wealth / 2, household.age, 1, Int[], household.percentile, Mortgage[], Int[], 0, 0.0, getChildResidencyZone(household), rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV), 1)[1])
+            add_agent!(Household, model, household.wealth / 2, household.age, household.size - 1, household.houses, household.percentile, household.mortgages, Int[], 0, 0.0, getChildResidencyZone(household), rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV), 1)[1])
             #println("remove Agent! id = " * string(household.id) * " step = " * string(model.steps))
             remove_agent!(household, model)
             model.breakups += 1
@@ -265,7 +265,7 @@ function handle_children_leaving_home(household, model)
             if randomNumber < 0.45
                 # a couple of young people leave their parents home
                 newZone = getChildResidencyZone(household)
-                add_agent!(Household, model, expected_wealth, expected_age, 2, Int[], household.percentile, Mortgage[], Int[], 0, 0.0, newZone)
+                add_agent!(Household, model, expected_wealth, expected_age, 2, Int[], household.percentile, Mortgage[], Int[], 0, 0.0, newZone, rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV), 1)[1])
                 household.wealth -= expected_wealth
                 household.size -= 1
                 model.children_leaving_home += 2
@@ -275,7 +275,7 @@ function handle_children_leaving_home(household, model)
             else
                 # single young person leaves their parents home
                 newZone = getChildResidencyZone(household)
-                add_agent!(Household, model, expected_wealth, expected_age, 1, Int[], household.percentile, Mortgage[], Int[], 0, 0.0, newZone)
+                add_agent!(Household, model, expected_wealth, expected_age, 1, Int[], household.percentile, Mortgage[], Int[], 0, 0.0, newZone, rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV), 1)[1])
                 household.wealth -= expected_wealth
                 household.size -= 1
                 model.children_leaving_home += 1
@@ -646,7 +646,7 @@ function initiateHousesPerRegion(model, targetNumberOfHouses, location, houses_s
     end
 end
 
-function initiateHouseholds(model, households_initial_ages)
+function initiateHouseholds(model, households_initial_ages, greedinesses)
     for zone_str in ZONES_STRINGS
         for size_str in SIZES_STRINGS
             number_of_households = eval(Symbol("HOUSEHOLDS_WITH_SIZE_" * size_str * "_IN_" * zone_str))
@@ -662,7 +662,7 @@ function initiateHouseholds(model, households_initial_ages)
                 percentile = calculate_percentile(rand())
                 zone = eval(Symbol(zone_str))
                 size = get_household_size(size_str)
-                add_agent!(Household, model, generateInitialWealth(initial_age, percentile), initial_age, size, Int64[], percentile, Mortgage[], Int[], 0, 0.0, zone)
+                add_agent!(Household, model, generateInitialWealth(initial_age, percentile), initial_age, size, Int64[], percentile, Mortgage[], Int[], 0, 0.0, zone, greedinesses[i])
             end
         end
     end
@@ -682,7 +682,6 @@ function assignHousesToHouseholds(model)
         if current_home_owners_in_the_zone >= target_home_owners_in_the_zone
             continue # no more houses to assign in this phase
         end
-        # if shouldAssignHouse(model, household, zones_to_n_of_home_owners)
         if !assignHouseThatMakesSense(model, household)
             # Wasn't assigned a house...
             push!(not_home_owners, household)

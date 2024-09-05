@@ -63,6 +63,9 @@ function wealth_model()
     # per quartile
     houses_prices_per_m2 = [1300, 1800, 2500]
     
+    # initiate greediness
+    greedinesses = rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV), NUMBER_OF_HOUSEHOLDS)
+
     properties = Dict(
         :sum_wealth => 0,
         :steps => 0,
@@ -102,7 +105,7 @@ function wealth_model()
 
     initiateHouses(model)
     LOG_INFO("finished initateHouses in $(time() - start_time) seconds")
-    initiateHouseholds(model, households_initial_ages)
+    initiateHouseholds(model, households_initial_ages, greedinesses)
     LOG_INFO("finished initiateHouseholds in $(time() - start_time) seconds")
     assignHousesToHouseholds(model)
     LOG_INFO("finished assignHousesToHouseholds in $(time() - start_time) seconds")

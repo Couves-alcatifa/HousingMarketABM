@@ -50,6 +50,7 @@ end
         contractIdAsTenant::Int # 0 is no contract
         wealthInHouses::Float64
         residencyZone::HouseLocation
+        greediness::Float64
     end
     
     @subagent struct Company
