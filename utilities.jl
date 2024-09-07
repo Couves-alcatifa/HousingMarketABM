@@ -106,7 +106,9 @@ function calculateCostBasedPrice(model, size, location)
 end
 
 function generateInitialWealth(age, percentile)
-    return age * INITIAL_WEALTH_PER_AGE + percentile * INITIAL_WEALTH_PER_PERCENTILE
+    # TODO: add a random factor
+    return age * INITIAL_WEALTH_PER_AGE * rand(Normal(INITIAL_WEALTH_MULTIPLICATION_AVERAGE, INITIAL_WEALTH_MULTIPLICATION_STDEV)) 
+        + percentile * INITIAL_WEALTH_PER_PERCENTILE * rand(Normal(INITIAL_WEALTH_MULTIPLICATION_AVERAGE, INITIAL_WEALTH_MULTIPLICATION_STDEV))
     # return age * 20 + percentile * 5
 end
 
@@ -135,9 +137,9 @@ function calculateSalary(household, model)
         salary = base + range * (percentile / 100 - 0.8) * 5
     end
     if (size == 1)
-        return salary * model.salary_multiplier * INCOME_MULTIPLICATION_FACTOR
+        return salary * model.salary_multiplier * INCOME_MULTIPLICATION_FACTOR * (1 + househod.age/50)
     else
-        return salary * 2 * model.salary_multiplier * INCOME_MULTIPLICATION_FACTOR
+        return salary * 2 * model.salary_multiplier * INCOME_MULTIPLICATION_FACTOR * (1 + househod.age/50)
     end
 end
 
@@ -155,33 +157,7 @@ end
 
 # convert a [0..1] float value to a percentile {5, 10, 20...90, 95}
 function calculate_percentile(percentileInFloat::Float64)
-    if percentileInFloat < 0.10
-        return 5
-    elseif percentileInFloat < 0.20
-        return 10
-    elseif percentileInFloat < 0.25
-        return 20
-    elseif percentileInFloat < 0.30
-        return 25
-    elseif percentileInFloat < 0.40
-        return 30
-    elseif percentileInFloat < 0.50
-        return 40
-    elseif percentileInFloat < 0.60
-        return 50
-    elseif percentileInFloat < 0.70
-        return 60
-    elseif percentileInFloat < 0.75
-        return 70
-    elseif percentileInFloat < 0.70
-        return 75
-    elseif percentileInFloat < 0.90
-        return 80
-    elseif percentileInFloat < 0.9
-        return 90
-    else
-        return 95
-    end
+    return rand(0:100)
 end
 
 function handle_births(household, model)
