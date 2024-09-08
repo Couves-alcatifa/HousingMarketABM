@@ -486,14 +486,17 @@ function buy_house(model, supply::HouseSupply)
         push!(model.mortgagesInStep, mortgage)
         println("########")
         println("mortgageValue = " * string(mortgageValue))
+        println("house.area = $(supply.house.area)")
+        println("house.location = $(string(supply.house.location))")
         println("household.wealth = " * string(household.wealth))
         println("raw salary = " * string(calculateSalary(household, model)))
         println("liquid salary = " * string(calculateLiquidSalary(household, model)))
-        println("householdId = " * string(highestBidder))
+        println("household percentile = $(household.percentile)")
         println("########")
         model.bank.wealth -= mortgageValue
         household.wealth += mortgageValue
     else
+        println("house ")
         # house will be paid without mortgage... unusual
     end
     household.wealth -= secondHighestBid
@@ -793,7 +796,7 @@ function assignHousesForRental(model, household, numberOfExtraHousesToAssign)
             return
         end
         push!(household.houses, house)
-        put_house_to_rent(household, model, house)
+        # put_house_to_rent(household, model, house)
         assignedSoFar += 1
     end
 end

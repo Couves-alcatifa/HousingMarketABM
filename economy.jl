@@ -278,11 +278,11 @@ function supply_decisions(household, model)
             i += 1
             continue
         end
-        if decideToRent(household, model, house)
-            put_house_to_rent(household, model, house)
-        else # decides to sell...
-            put_house_to_sale(household, model, i)
-        end
+        # if decideToRent(household, model, house)
+        #     put_house_to_rent(household, model, house)
+        # else # decides to sell...
+        put_house_to_sale(household, model, i)
+        # end
         i += 1
     end
 end
