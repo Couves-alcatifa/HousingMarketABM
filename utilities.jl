@@ -117,29 +117,29 @@ function calculateSalary(household, model)
     percentile = household.percentile
     if percentile < 20
         base = eval(Symbol("FIRST_QUINTILE_INCOME_IN_$(string(location))")) / 2
-        range = base * 2
+        range = base * 2 * (1 + household.age/50)
         salary = base + range * (percentile / 100) * 5
     elseif percentile < 40
         base = eval(Symbol("FIRST_QUINTILE_INCOME_IN_$(string(location))"))
-        range = eval(Symbol("SECOND_QUINTILE_INCOME_IN_$(string(location))")) - base
+        range = (eval(Symbol("SECOND_QUINTILE_INCOME_IN_$(string(location))")) - base) * (1 + household.age/50)
         salary = base + range * (percentile / 100 - 0.2) * 5
     elseif percentile < 60
         base = eval(Symbol("SECOND_QUINTILE_INCOME_IN_$(string(location))"))
-        range = eval(Symbol("THIRD_QUINTILE_INCOME_IN_$(string(location))")) - base
+        range = (eval(Symbol("THIRD_QUINTILE_INCOME_IN_$(string(location))")) - base) * (1 + household.age/50)
         salary = base + range * (percentile / 100 - 0.4) * 5
     elseif percentile < 80
         base = eval(Symbol("THIRD_QUINTILE_INCOME_IN_$(string(location))"))
-        range = eval(Symbol("FOURTH_QUINTILE_INCOME_IN_$(string(location))")) - base
+        range = (eval(Symbol("FOURTH_QUINTILE_INCOME_IN_$(string(location))")) - base) * (1 + household.age/50)
         salary = base + range * (percentile / 100 - 0.6) * 5
     else
         base = eval(Symbol("FOURTH_QUINTILE_INCOME_IN_$(string(location))"))
-        range = base * 3
+        range = base * 3 * (1 + household.age/50)
         salary = base + range * (percentile / 100 - 0.8) * 5
     end
     if (size == 1)
-        return salary * model.salary_multiplier * INCOME_MULTIPLICATION_FACTOR * (1 + househod.age/50)
+        return salary * model.salary_multiplier * INCOME_MULTIPLICATION_FACTOR 
     else
-        return salary * 2 * model.salary_multiplier * INCOME_MULTIPLICATION_FACTOR * (1 + househod.age/50)
+        return salary * 2 * model.salary_multiplier * INCOME_MULTIPLICATION_FACTOR
     end
 end
 
