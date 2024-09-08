@@ -107,6 +107,7 @@ function wealth_model()
         :liquidSalariesReceived => 0.0,
         :expensesReceived => 0.0,
         :buckets => InitiateBuckets(), # Houses characteristics => Transaction
+        :mortgagesInStep => Mortgage[],
     )
 
     model = StandardABM(MyMultiAgent; agent_step! = agent_step!, model_step! = model_step!, properties,scheduler = Schedulers.Randomly())
@@ -151,6 +152,7 @@ function model_step!(model)
     if model.steps % 5 == 0
         println("5 steps!")
     end
+    model.mortgagesInStep = Mortgage[]
     clearHouseMarket(model)
     clearRentalMarket(model)
     trimBucketsIfNeeded(model)
@@ -469,6 +471,8 @@ save("$output_folder/houses_prices_per_region.png", plot_houses_prices_per_regio
 
 save("$output_folder/number_of_houses_per_region.png", plot_number_of_houses_per_region(agent_data[2:end, :], model_data[2:end, :]))
 save("$output_folder/number_of_transactions_per_region.png", plot_number_of_transactions_per_region(agent_data[2:end, :], model_data[2:end, :]))
+# save("$output_folder/mortgages_median_values_regionally.png", plot_mortgages_median_values_regionally(agent_data[2:end, :], model_data[2:end, :]))
+# save("$output_folder/mortgages_values_distribution.png", plot_mortgages_values_distribution(agent_data[2:end, :], model_data[2:end, :]))
 
 # end
 

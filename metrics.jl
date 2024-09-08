@@ -23,7 +23,11 @@ function money_distribution(iter)
             next = iterate(iter, state)
             continue
         end
-        push!(distribution, i.wealth)
+        if i.wealth <= 1
+            push!(distribution, 1.0)
+        else
+            push!(distribution, i.wealth)
+        end
         next = iterate(iter, state)
     end
     return sort(distribution)
@@ -38,7 +42,11 @@ function wealth_distribution(iter)
             next = iterate(iter, state)
             continue
         end
-        push!(distribution, i.wealth + i.wealthInHouses)
+        if i.wealth + i.wealthInHouses <= 1
+            push!(distribution, 1.0)
+        else
+            push!(distribution, i.wealth + i.wealthInHouses)
+        end
         next = iterate(iter, state)
     end
     return sort(distribution)
@@ -202,6 +210,8 @@ bank_wealth(model) = model.bank.wealth
 construction_wealth(model) = model.construction_sector.wealth
 supply_volume(model) = copy(model.supply_size)
 demand_volume(model) = copy(model.demand_size)
+
+mortgages(model) = copy(model.mortgagesInStep)
 
 births(model) = model.births
 breakups(model) = model.breakups
