@@ -13,21 +13,37 @@ function calculate_rental_market_price(house)
 end
 
 function calculate_market_price(house, model)
-    bucketKey = calculateBucketKey(house)
-    transactions = model.buckets[bucketKey]
-    if length(transactions) == 0
+    bucket = calculateBucket(model, house)
+    if length(bucket) == 0
         # println("house = $house calculate_initial_market_price(house) = $(calculate_initial_market_price(house))")
         return calculate_initial_market_price(house)
     end
     # println("house = $house mean(transactions) * house.area * house.maintenanceLevel = $(mean(transactions) * house.area * house.maintenanceLevel)")
-    return mean(transactions) * house.area * house.maintenanceLevel
+    return mean(bucket) * house.area * house.maintenanceLevel
 end
 
 function calculate_initial_market_price(house)
     ## TODO: houses should have a quality (maybe replace maintenanceLevel ?)
     ## this quality should influence the price per m2 according to the firstQuartileHousePricesPerRegion
     ## stop using only first quartile
-    return house.area * firstQuartileHousePricesPerRegion[house.location] * house.maintenanceLevel
+    if house.percentile <= 25
+        firstQuartile = eval(Symbol("FIRST_QUARTILE_SALES_IN_$(string(house.location))"))
+        base = firstQuartile / 1.25
+        range = firstQuartile - base
+        return house.area * (base + range * (house.percentile/100) * 4) * house.maintenanceLevel
+    elseif house.percentile <= 50
+        base = eval(Symbol("FIRST_QUARTILE_SALES_IN_$(string(house.location))"))
+        range = eval(Symbol("MEDIAN_SALES_IN_$(string(house.location))")) - base
+        return house.area * (base + range * (house.percentile/100 - 0.25) * 4) * house.maintenanceLevel
+    elseif house.percentile <= 75
+        base = eval(Symbol("MEDIAN_SALES_IN_$(string(house.location))"))
+        range = eval(Symbol("THIRD_QUARTILE_SALES_IN_$(string(house.location))")) - base
+        return house.area * (base + range * (house.percentile/100 - 0.50) * 4) * house.maintenanceLevel
+    else
+        base = eval(Symbol("THIRD_QUARTILE_SALES_IN_$(string(house.location))"))
+        range = base
+        return house.area * (base + range * (house.percentile/100 - 0.75) * 4) * house.maintenanceLevel
+    end
 end
 
 function updateMortgage(mortgage, spread)
@@ -335,19 +351,27 @@ function clearHouseMarket(model)
                 continue
             end
             demand = model.houseMarket.demand[j]
-            if model[demand.householdId].wealth < 0
+            household = model[demand.householdId]
+            if household.wealth < 0
                 continue
             end
-            if (!has_enough_size(supply.house, model[demand.householdId].size) ||
-                supply.house.location != model[demand.householdId].residencyZone)
+
+            # TODO:
+            # instead we should calculate the bid that we are willing to give 
+            # and if that is below ask price -> continue
+            # Alternative would be to calculate a consumerSurplus, that would be a multiplier
+            # to our final bid, if that consumerSurplus is == 0 -> continue right away
+            if (!has_enough_size(supply.house, household.size) 
+                    || supply.house.location != household.residencyZone
+                    || supply.house.percentile < household.percentile  - 20)
                 continue
             end
-            maxMortgage = maxMortgageValue(model, model[demand.householdId], model.bank, supply.house)
+            maxMortgage = maxMortgageValue(model, household, model.bank, supply.house)
             # println("###")
             # println("maxMortage = " * string(maxMortgage))
             # println("householdId = " * string(demand.householdId))
             # println("###")
-            demandBid = calculateBid(model[demand.householdId], supply.house, supply.price, maxMortgage)
+            demandBid = calculateBid(household, supply.house, supply.price, maxMortgage)
             if (demandBid > supply.price)
                 lock(localLock) do
                     push!(supply.bids, Bid(demandBid, demand.householdId))
@@ -534,52 +558,53 @@ end
 
 function InitiateBuckets()
     result = Dict([
-        (Amadora, Float64[])
-        (Cascais, Float64[])
-        (Lisboa, Float64[])
-        (Loures, Float64[])
-        (Mafra, Float64[])
-        (Odivelas, Float64[])
-        (Oeiras, Float64[])
-        (Sintra, Float64[])
-        (VilaFrancaDeXira, Float64[])
-        (Alcochete, Float64[])
-        (Almada, Float64[])
-        (Barreiro, Float64[])
-        (Moita, Float64[])
-        (Montijo, Float64[])
-        (Palmela, Float64[])
-        (Seixal, Float64[])
-        (Sesimbra, Float64[])
-        (Setubal, Float64[])
+        (Amadora, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
+        (Cascais, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
+        (Lisboa, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
+        (Loures, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
+        (Mafra, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
+        (Odivelas, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
+        (Oeiras, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
+        (Sintra, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
+        (VilaFrancaDeXira, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
+        (Alcochete, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
+        (Almada, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
+        (Barreiro, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
+        (Moita, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
+        (Montijo, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
+        (Palmela, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
+        (Seixal, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
+        (Sesimbra, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
+        (Setubal, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
     ])
     return result
 end
 
-function calculateBucketKey(house)
-    return house.location
-#     if house.area < 50
-#         return smaller_than_50
-#     elseif house.area < 90
-#         return smaller_than_90
-#     elseif house.area < 120
-#         return smaller_than_120
-#     else
-#         return bigger_than_120
-#     end
+function calculateBucket(model, house)
+    if house.percentile < 25
+        return model.buckets[house.location][25]
+    elseif house.percentile < 50
+        return model.buckets[house.location][50]
+    elseif house.percentile < 75
+        return model.buckets[house.location][75]
+    else
+        return model.buckets[house.location][100]
+    end
 end
 
 function addTransactionToBuckets(model, house, price)
-    bucketKey = calculateBucketKey(house)
-    push!(model.buckets[bucketKey], price / house.area)
+    bucket = calculateBucket(model, house)
+    push!(bucket, price / house.area)
 end
 
 function trimBucketsIfNeeded(model)
     # avoid holding to many transaction in the buckets, keep the most recent MAX_BUCKET_SIZE (initially 30)
-    for bucket in model.buckets
-        if length(bucket[2]) > MAX_BUCKET_SIZE
-            sizeToCut = length(bucket[2]) - MAX_BUCKET_SIZE
-            splice!(bucket[2], 1:sizeToCut)
+    for location in instances(HouseLocation)
+        for quartile in [25, 50, 75, 100]
+            if length(model.buckets[location][quartile]) > MAX_BUCKET_SIZE
+                sizeToCut = length(model.buckets[location][quartile]) - MAX_BUCKET_SIZE
+                splice!(model.buckets[location][quartile], 1:sizeToCut)
+            end
         end
     end
 end
@@ -589,10 +614,10 @@ function sortRandomly(left, right)
 end
 
 function initiateHouses(model)
-    houses_sizes = rand(30:60, Int64(NUMBER_OF_HOUSES/4))
-    houses_sizes = vcat(houses_sizes, rand(60:80, Int64(NUMBER_OF_HOUSES/4)))
-    houses_sizes = vcat(houses_sizes, rand(80:120, Int64(NUMBER_OF_HOUSES/4)))
-    houses_sizes = vcat(houses_sizes, rand(120:180, Int64(NUMBER_OF_HOUSES/4)))
+    houses_sizes = rand(UInt16(30):UInt16(60), Int64(NUMBER_OF_HOUSES/4))
+    houses_sizes = vcat(houses_sizes, rand(UInt16(60):UInt16(80), Int64(NUMBER_OF_HOUSES/4)))
+    houses_sizes = vcat(houses_sizes, rand(UInt16(80):UInt16(120), Int64(NUMBER_OF_HOUSES/4)))
+    houses_sizes = vcat(houses_sizes, rand(UInt16(120):UInt16(180), Int64(NUMBER_OF_HOUSES/4)))
     
     for location in instances(HouseLocation)
         model.houses[location] = House[]
@@ -620,7 +645,7 @@ end
 
 function initiateHousesPerRegion(model, targetNumberOfHouses, location, houses_sizes)
     for i in 1:targetNumberOfHouses
-        push!(model.houses[location], House(houses_sizes[1], location, NotSocialNeighbourhood, 1))
+        push!(model.houses[location], House(houses_sizes[1], location, NotSocialNeighbourhood, 1.0))
         splice!(houses_sizes, 1)
     end
 end

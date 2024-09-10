@@ -29,6 +29,10 @@ mutable struct House
     location::HouseLocation
     locationType::HouseLocationType
     maintenanceLevel::Float64 # 0..1
+    percentile::Int64
+    function House(area::UInt16, location::HouseLocation, locationType::HouseLocationType, maintenanceLevel::Float64)
+        return new(area, location, locationType, maintenanceLevel, rand(0:100))
+    end
 end
 mutable struct Mortgage
     intialValue::Float64

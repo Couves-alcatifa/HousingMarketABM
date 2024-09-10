@@ -79,8 +79,8 @@ end
 
 ## TODO: Change this to something with logic
 function generateRandomHouse(location)
-    area = rand(50:125)
-    return House(area, location, NotSocialNeighbourhood, 1)
+    area = rand(UInt16(50):UInt16(125))
+    return House(area, location, NotSocialNeighbourhood, 1.0)
 end
 
 function put_newly_built_house_to_sale(model, house)
