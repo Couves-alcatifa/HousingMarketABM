@@ -248,7 +248,7 @@ end
 
 function put_house_to_sale(household::MyMultiAgent, model, index)
     house = household.houses[index]
-    push!(model.houseMarket.supply, HouseSupply(house, calculate_market_price(house, model), Int[], household.id, true))
+    push!(model.houseMarket.supply, HouseSupply(house, calculate_market_price(house, model), Int[], household.id))
     # removing house from agent when putting to sale
     splice!(household.houses, index)
 end

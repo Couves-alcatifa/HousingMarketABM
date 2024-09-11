@@ -94,7 +94,6 @@ mutable struct HouseSupply
     price::Float64
     bids::Array{Bid}
     sellerId::Int
-    valid::Bool
 end
 
 mutable struct SupplyMatch

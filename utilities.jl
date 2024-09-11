@@ -41,7 +41,7 @@ function calculate_initial_market_price(house)
         return house.area * (base + range * (house.percentile/100 - 0.50) * 4) * house.maintenanceLevel
     else
         base = eval(Symbol("THIRD_QUARTILE_SALES_IN_$(string(house.location))"))
-        range = base
+        range = base * 0.30
         return house.area * (base + range * (house.percentile/100 - 0.75) * 4) * house.maintenanceLevel
     end
 end
@@ -72,12 +72,14 @@ function shouldBid(household, house, askPrice)
     
 end
 
-function calculateBid(household, house, askPrice, maxMortgageValue)
+function calculateBid(household, house, askPrice, maxMortgageValue, consumerSurplus)
     demandValue = household.wealth * 0.95 + maxMortgageValue
     if (demandValue < askPrice)
         return 0
     end
-    return demandValue * 0.5 + askPrice * 0.5
+    extra = demandValue - askPrice
+    extra = extra * sqrt(consumerSurplus)
+    return askPrice + extra
 end
 
 # few options here, we can have a maxMortgageValue that the bank is
@@ -361,16 +363,13 @@ function clearHouseMarket(model)
             # and if that is below ask price -> continue
             # Alternative would be to calculate a consumerSurplus, that would be a multiplier
             # to our final bid, if that consumerSurplus is == 0 -> continue right away
-            if (!has_enough_size(supply.house, household.size))
+            if (!has_enough_size(supply.house, household.size)
+                || supply.house.location != household.residencyZone)
                 continue
             end
             consumerSurplus = calculateConsumerSurplus(household, supply.house)
             maxMortgage = maxMortgageValue(model, household, model.bank, supply.house)
-            # println("###")
-            # println("maxMortage = " * string(maxMortgage))
-            # println("householdId = " * string(demand.householdId))
-            # println("###")
-            demandBid = calculateBid(household, supply.house, supply.price, maxMortgage)
+            demandBid = calculateBid(household, supply.house, supply.price, maxMortgage, consumerSurplus)
             if (demandBid > supply.price)
                 lock(localLock) do
                     push!(supply.bids, Bid(demandBid, demand.householdId))
@@ -380,37 +379,17 @@ function clearHouseMarket(model)
         end
     end
 
-    for i in 1:length(model.houseMarket.demand)
-        demand = model.houseMarket.demand[i]
-        cheapest_value = 99999999 # TODO: find const value for this
-        cheapest_supply = nothing
-        sort!(demand.supplyMatches, lt=sortByConsumerSurplus)
-        for j in 1:length(demand.supplyMatches)
-            supply = demand.supplyMatches[j].supply
-            if !supply.valid
-                continue
-            end
-            if (cheapest_value > supply.price)
-                cheapest_value = supply.price
-                cheapest_supply = supply
-            end
-        end
-        if cheapest_supply !== nothing
-            buy_house(model, cheapest_supply)
+    i = 1
+    while i < length(model.houseMarket.supply)
+        supply = model.houseMarket.supply[i]
+        sort!(supply.bids, lt=sortBids)
+        if buy_house(model, supply)
+            splice!(model.houseMarket.supply, i)
+        else
+            i += 1
         end
     end
     empty!(model.houseMarket.demand)
-    i = 1
-    while i < length(model.houseMarket.supply)
-        if !model.houseMarket.supply[i].valid
-            splice!(model.houseMarket.supply, i)
-        else
-            model.houseMarket.supply[i].price *= (1 - HOUSE_PRICE_REDUCTION_FACTOR) # reduce price
-            empty!(model.houseMarket.supply[i].bids)
-            i += 1
-        end
-            # println("model_step")
-    end
 end
 
 function clearRentalMarket(model)
@@ -469,40 +448,27 @@ function buy_house(model, supply::HouseSupply)
         try
             seller = model[supply.sellerId]
         catch
-            return # seller died, more luck next time...
+            return false # seller died, more luck next time...
         end
     end
 
-    highestBidder = nothing
-    highestBid = supply.price
-    secondHighestBid = 0
-    for i in 1:length(supply.bids)
-        currentBidder = nothing
-        try
-            currentBidder = model[supply.bids[i].householdId]
-        catch
-            continue # this bidder died, more luck next time...
-        end
-        if (is_home_owner(currentBidder)) 
-            # already won a bid for other houses
-            # this check needs to change, a home owner might want to buy a house for rental
-            continue
-        end
-        if (supply.bids[i].value > highestBid)
-            secondHighestBid = highestBid
-            highestBid = supply.bids[i].value
-            highestBidder = supply.bids[i].householdId
-        end
+    actualBid = 0
+    if length(supply.bids) == 0
+        return false # no bids
+    elseif length(supply.bids) == 1
+        actualBid = supply.price
+    else
+        actualBid = supply.bids[2].value
     end
-    if (highestBidder === nothing)
-        return
-    end
+
+    highestBidder = supply.bids[1].householdId
+
     household = model[highestBidder]
-    if (household.wealth < secondHighestBid)
+    if (household.wealth < actualBid)
         paidWithOwnMoney = household.wealth * 0.95
-        mortgageValue = secondHighestBid - paidWithOwnMoney
+        mortgageValue = actualBid - paidWithOwnMoney
         if mortgageValue > model.bank.wealth * 0.5
-            return
+            return false
         end
         mortgageDuration = calculateMortgageDuration(mortgageValue, household.age)
         mortgage = Mortgage(mortgageValue, mortgageValue, 0, mortgageDuration)
@@ -520,17 +486,17 @@ function buy_house(model, supply::HouseSupply)
         model.bank.wealth -= mortgageValue
         household.wealth += mortgageValue
     else
-        println("house ")
+        println("\n\nhouse will be paid without mortgage... unusual\n\n")
         # house will be paid without mortgage... unusual
     end
-    household.wealth -= secondHighestBid
-    seller.wealth += secondHighestBid
+    household.wealth -= actualBid
+    seller.wealth += actualBid
     push!(household.houses, supply.house)
     terminateContractsOnTentantSide(household, model)
-    addTransactionToBuckets(model, supply.house, secondHighestBid)
-    push!(model.transactions, Transaction(supply.house.area, secondHighestBid, supply.house.location))
-    push!(model.transactions_per_region[supply.house.location][model.steps], Transaction(supply.house.area, secondHighestBid, supply.house.location))
-    supply.valid = false
+    addTransactionToBuckets(model, supply.house, actualBid)
+    push!(model.transactions, Transaction(supply.house.area, actualBid, supply.house.location))
+    push!(model.transactions_per_region[supply.house.location][model.steps], Transaction(supply.house.area, actualBid, supply.house.location))
+    return true
 end
 
 function rent_house(model, supply::RentalSupply, household)
@@ -864,5 +830,9 @@ function calculateConsumerSurplus(household, house)
 end
 
 function sortByConsumerSurplus(l, r)
-    l.consumerSurplus < r.consumerSurplus
+    (l.supply.price / sqrt(l.consumerSurplus)) < (r.supply.price / sqrt(r.consumerSurplus))
+end
+
+function sortBids(l, r)
+    l.value > r.value
 end

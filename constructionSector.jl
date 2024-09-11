@@ -87,7 +87,7 @@ function put_newly_built_house_to_sale(model, house)
     laborCost = CONSTRUCTION_LABOR_COST * model.construction_sector.constructionTimeMultiplier * house.area
     costBasedPrice = (model.construction_sector.constructionDelay * 500 + laborCost + house.area * 500) * 1.2 # markup
     push!(model.houses[house.location], house)
-    push!(model.houseMarket.supply, HouseSupply(house, costBasedPrice, Int[], -1, true))
+    push!(model.houseMarket.supply, HouseSupply(house, costBasedPrice, Int[], -1))
     println("costBasedPrice = " * string(costBasedPrice))
 end
 
