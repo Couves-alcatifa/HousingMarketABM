@@ -97,11 +97,17 @@ mutable struct HouseSupply
     valid::Bool
 end
 
+mutable struct SupplyMatch
+    supply::HouseSupply
+    consumerSurplus::Float64
+end
+
 mutable struct HouseDemand
     householdId::Int
-    supplyMatches::Array{HouseSupply}
+    supplyMatches::Array{SupplyMatch}
     size::UInt16
 end
+
 
 mutable struct HouseMarket
     supply::Array{HouseSupply}

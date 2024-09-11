@@ -361,11 +361,10 @@ function clearHouseMarket(model)
             # and if that is below ask price -> continue
             # Alternative would be to calculate a consumerSurplus, that would be a multiplier
             # to our final bid, if that consumerSurplus is == 0 -> continue right away
-            if (!has_enough_size(supply.house, household.size) 
-                    || supply.house.location != household.residencyZone
-                    || supply.house.percentile < household.percentile  - 20)
+            if (!has_enough_size(supply.house, household.size))
                 continue
             end
+            consumerSurplus = calculateConsumerSurplus(household, supply.house)
             maxMortgage = maxMortgageValue(model, household, model.bank, supply.house)
             # println("###")
             # println("maxMortage = " * string(maxMortgage))
@@ -375,7 +374,7 @@ function clearHouseMarket(model)
             if (demandBid > supply.price)
                 lock(localLock) do
                     push!(supply.bids, Bid(demandBid, demand.householdId))
-                    push!(demand.supplyMatches, supply)
+                    push!(demand.supplyMatches, SupplyMatch(supply, consumerSurplus))
                 end
             end
         end
@@ -384,9 +383,10 @@ function clearHouseMarket(model)
     for i in 1:length(model.houseMarket.demand)
         demand = model.houseMarket.demand[i]
         cheapest_value = 99999999 # TODO: find const value for this
-        cheapest_supply = nothing 
+        cheapest_supply = nothing
+        sort!(demand.supplyMatches, lt=sortByConsumerSurplus)
         for j in 1:length(demand.supplyMatches)
-            supply = demand.supplyMatches[j]
+            supply = demand.supplyMatches[j].supply
             if !supply.valid
                 continue
             end
@@ -840,4 +840,29 @@ function measureSupplyAndDemandRegionally(model)
         house = supply.house
         model.supply_size[house.location] += 1
     end
+end
+
+function calculateConsumerSurplus(household, house)
+    locationMultiplier = 1
+
+    if house.location in adjacentZones[household.residencyZone]
+        locationMultiplier = 0.5
+    elseif house.location == household.residencyZone
+        locationMultiplier = 2
+    else
+        locationMultiplier = 0
+    end
+
+    percentileMultiplier = sqrt(house.percentile / 100)
+
+    sizeMultiplier = (house.area / (35 * household.size))
+    if sizeMultiplier > 2.5
+        sizeMultiplier = 2.5
+    end 
+
+    return locationMultiplier * percentileMultiplier * sizeMultiplier
+end
+
+function sortByConsumerSurplus(l, r)
+    l.consumerSurplus < r.consumerSurplus
 end
