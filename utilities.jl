@@ -481,7 +481,7 @@ function buy_house(model, supply::HouseSupply)
         mortgage = Mortgage(mortgageValue, mortgageValue, 0, mortgageDuration)
         push!(household.mortgages, mortgage)
         push!(model.mortgagesInStep, mortgage)
-        content *= "########\n"
+        content = "########\n"
         content *= "mortgageValue = $mortgageValue\n"
         content *= "house.area = $(supply.house.area)\n"
         content *= "house.location = $(string(supply.house.location))\n"
