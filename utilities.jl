@@ -77,7 +77,7 @@ function calculateBid(household, house, askPrice, maxMortgageValue, consumerSurp
     if (demandValue < askPrice)
         return 0
     end
-    extra = demandValue - askPrice
+    extra = (demandValue - askPrice) / 2
     extra = extra * sqrt(consumerSurplus)
     return askPrice + extra
 end
@@ -123,10 +123,14 @@ function calculateCostBasedPrice(model, size, location)
     # TODO:
 end
 
-function generateInitialWealth(age, percentile)
+function generateInitialWealth(age, percentile, size)
     # TODO: add a random factor
-    return age * INITIAL_WEALTH_PER_AGE * rand(Normal(INITIAL_WEALTH_MULTIPLICATION_AVERAGE, INITIAL_WEALTH_MULTIPLICATION_STDEV)) 
-        + percentile * INITIAL_WEALTH_PER_PERCENTILE * rand(Normal(INITIAL_WEALTH_MULTIPLICATION_AVERAGE, INITIAL_WEALTH_MULTIPLICATION_STDEV))
+    value = age * INITIAL_WEALTH_PER_AGE * rand(INITIAL_WEALTH_MULTIPLICATION_BASE:INITIAL_WEALTH_MULTIPLICATION_ROOF) 
+        + percentile * INITIAL_WEALTH_PER_PERCENTILE * rand(INITIAL_WEALTH_MULTIPLICATION_BASE:INITIAL_WEALTH_MULTIPLICATION_ROOF)
+    return value * size
+    
+    # return age * INITIAL_WEALTH_PER_AGE * rand(Normal(INITIAL_WEALTH_MULTIPLICATION_AVERAGE, INITIAL_WEALTH_MULTIPLICATION_STDEV)) 
+    #     + percentile * INITIAL_WEALTH_PER_PERCENTILE * rand(Normal(INITIAL_WEALTH_MULTIPLICATION_AVERAGE, INITIAL_WEALTH_MULTIPLICATION_STDEV))
     # return age * 20 + percentile * 5
 end
 
@@ -250,7 +254,7 @@ function handle_children_leaving_home(household, model)
         probability_of_child_leaving = 0.1 + rand() * 0.4
         if (rand() < probability_of_child_leaving)
             expected_age = household.age - 20 # TODO: this should have a random factor
-            expected_wealth = generateInitialWealth(expected_age, household.percentile) * 0.6
+            expected_wealth = generateInitialWealth(expected_age, household.percentile, household.size) * 0.6
             if (expected_wealth > household.wealth)
                 expected_wealth = household.wealth * 0.2
             end
@@ -477,15 +481,19 @@ function buy_house(model, supply::HouseSupply)
         mortgage = Mortgage(mortgageValue, mortgageValue, 0, mortgageDuration)
         push!(household.mortgages, mortgage)
         push!(model.mortgagesInStep, mortgage)
-        println("########")
-        println("mortgageValue = " * string(mortgageValue))
-        println("house.area = $(supply.house.area)")
-        println("house.location = $(string(supply.house.location))")
-        println("household.wealth = " * string(household.wealth))
-        println("raw salary = " * string(calculateSalary(household, model)))
-        println("liquid salary = " * string(calculateLiquidSalary(household, model)))
-        println("household percentile = $(household.percentile)")
-        println("########")
+        content *= "########\n"
+        content *= "mortgageValue = $mortgageValue\n"
+        content *= "house.area = $(supply.house.area)\n"
+        content *= "house.location = $(string(supply.house.location))\n"
+        content *= "household.wealth = $(string(household.wealth))\n"
+        content *= "raw salary = $(string(calculateSalary(household, model)))\n" 
+        content *= "liquid salary = $(string(calculateLiquidSalary(household, model)))\n"
+        content *= "household percentile = $(household.percentile)\n"
+        content *= "########\n"
+        print(content)
+        open("$output_folder/transactions_logs.txt", "a") do file
+            write(file, content)
+        end
         model.bank.wealth -= mortgageValue
         household.wealth += mortgageValue
     else
@@ -635,7 +643,7 @@ function initiateHouseholds(model, households_initial_ages, greedinesses)
                 percentile = calculate_percentile(rand())
                 zone = eval(Symbol(zone_str))
                 size = get_household_size(size_str)
-                add_agent!(Household, model, generateInitialWealth(initial_age, percentile), initial_age, size, Int64[], percentile, Mortgage[], Int[], 0, 0.0, zone, greedinesses[i])
+                add_agent!(Household, model, generateInitialWealth(initial_age, percentile, size), initial_age, size, Int64[], percentile, Mortgage[], Int[], 0, 0.0, zone, greedinesses[i])
             end
         end
     end
