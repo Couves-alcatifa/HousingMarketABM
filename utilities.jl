@@ -74,12 +74,11 @@ end
 
 function calculateBid(household, house, askPrice, maxMortgageValue, consumerSurplus)
     demandValue = household.wealth * 0.95 + maxMortgageValue
-    if (demandValue < askPrice)
-        return 0
+    bidValue = askPrice * calculateConsumerSurplusAddedValue(consumerSurplus)
+    if (demandValue < bidValue)
+        bidValue = demandValue
     end
-    extra = (demandValue - askPrice) / 2
-    extra = extra * sqrt(consumerSurplus)
-    return askPrice + extra
+    return bidValue
 end
 
 # few options here, we can have a maxMortgageValue that the bank is
@@ -384,10 +383,11 @@ function clearHouseMarket(model)
     end
 
     i = 1
-    while i < length(model.houseMarket.supply)
+    householdsWhoBoughtAHouse = Set()
+    while i <= length(model.houseMarket.supply)
         supply = model.houseMarket.supply[i]
         sort!(supply.bids, lt=sortBids)
-        if buy_house(model, supply)
+        if buy_house(model, supply, householdsWhoBoughtAHouse)
             splice!(model.houseMarket.supply, i)
         else
             # house wasn't purchased, but we will clear the bids just in case
@@ -437,7 +437,7 @@ function clearRentalMarket(model)
     end
     empty!(model.rentalMarket.demand)
     i = 1
-    while i < length(model.rentalMarket.supply)
+    while i <= length(model.rentalMarket.supply)
         if !model.rentalMarket.supply[i].valid
             splice!(model.rentalMarket.supply, i)
         else
@@ -447,7 +447,7 @@ function clearRentalMarket(model)
     end
 end
 
-function buy_house(model, supply::HouseSupply)
+function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     seller = nothing
     if supply.sellerId == -1
         seller = model.construction_sector
@@ -468,7 +468,16 @@ function buy_house(model, supply::HouseSupply)
         actualBid = supply.bids[2].value
     end
 
+    i = 1
     highestBidder = supply.bids[1].householdId
+    while i <= length(supply.bids) && highestBidder in householdsWhoBoughtAHouse
+        highestBidder = supply.bids[i].householdId
+        i += 1
+    end
+    
+    if i > length(supply.bids)
+        return false
+    end
 
     household = model[highestBidder]
     if (household.wealth < actualBid)
@@ -507,6 +516,7 @@ function buy_house(model, supply::HouseSupply)
     addTransactionToBuckets(model, supply.house, actualBid)
     push!(model.transactions, Transaction(supply.house.area, actualBid, supply.house.location))
     push!(model.transactions_per_region[supply.house.location][model.steps], Transaction(supply.house.area, actualBid, supply.house.location))
+    push!(householdsWhoBoughtAHouse, highestBidder)
     return true
 end
 
@@ -820,24 +830,21 @@ function measureSupplyAndDemandRegionally(model)
 end
 
 function calculateConsumerSurplus(household, house)
-    locationMultiplier = 1
-
-    if house.location in adjacentZones[household.residencyZone]
-        locationMultiplier = 0.5
-    elseif house.location == household.residencyZone
-        locationMultiplier = 2
-    else
-        locationMultiplier = 0
-    end
-
-    percentileMultiplier = sqrt(house.percentile / 100)
+    percentileMultiplier = 0.5 + (house.percentile / 10) * 7 * 0.35
+    percentileMultiplier *= (0.5 + rand()) # final value between 0.35... 3.75
 
     sizeMultiplier = (house.area / (35 * household.size))
     if sizeMultiplier > 2.5
         sizeMultiplier = 2.5
-    end 
+    end
+    sizeMultiplier *= (0.5 + rand()) # final value between 0.35... 3.75
 
-    return locationMultiplier * percentileMultiplier * sizeMultiplier
+    return percentileMultiplier * sizeMultiplier # final value between 0.7... 7.5
+end
+
+# convert a value from 0.7...7.5 to 0.98...1.27
+function calculateConsumerSurplusAddedValue(consumerSurplus)
+    return (consumerSurplus + 0.2)^(1/8)
 end
 
 function sortByConsumerSurplus(l, r)
