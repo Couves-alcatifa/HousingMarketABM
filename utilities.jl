@@ -386,6 +386,9 @@ function clearHouseMarket(model)
         if buy_house(model, supply)
             splice!(model.houseMarket.supply, i)
         else
+            # house wasn't purchased, but we will clear the bids just in case
+            empty!(supply.bids)
+            supply.price *= (1 - HOUSE_PRICE_REDUCTION_FACTOR)
             i += 1
         end
     end
@@ -467,9 +470,9 @@ function buy_house(model, supply::HouseSupply)
     if (household.wealth < actualBid)
         paidWithOwnMoney = household.wealth * 0.95
         mortgageValue = actualBid - paidWithOwnMoney
-        if mortgageValue > model.bank.wealth * 0.5
-            return false
-        end
+        # if mortgageValue > model.bank.wealth * 0.5
+        #     return false
+        # end
         mortgageDuration = calculateMortgageDuration(mortgageValue, household.age)
         mortgage = Mortgage(mortgageValue, mortgageValue, 0, mortgageDuration)
         push!(household.mortgages, mortgage)
