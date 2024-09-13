@@ -73,12 +73,17 @@ function shouldBid(household, house, askPrice)
 end
 
 function calculateBid(household, house, askPrice, maxMortgageValue, consumerSurplus)
+    # demandValue = household.wealth * 0.95 + maxMortgageValue
+    # bidValue = askPrice * calculateConsumerSurplusAddedValue(consumerSurplus)
+    # if (demandValue < bidValue)
+    #     bidValue = demandValue
+    # end
+    # return bidValue
     demandValue = household.wealth * 0.95 + maxMortgageValue
-    bidValue = askPrice * calculateConsumerSurplusAddedValue(consumerSurplus)
-    if (demandValue < bidValue)
-        bidValue = demandValue
+    if (demandValue < askPrice)
+        return 0
     end
-    return bidValue
+    return askPrice
 end
 
 # few options here, we can have a maxMortgageValue that the bank is
@@ -373,7 +378,7 @@ function clearHouseMarket(model)
             consumerSurplus = calculateConsumerSurplus(household, supply.house)
             maxMortgage = maxMortgageValue(model, household, model.bank, supply.house)
             demandBid = calculateBid(household, supply.house, supply.price, maxMortgage, consumerSurplus)
-            if (demandBid > supply.price)
+            if (demandBid >= supply.price)
                 lock(localLock) do
                     push!(supply.bids, Bid(demandBid, demand.householdId))
                     push!(demand.supplyMatches, SupplyMatch(supply, consumerSurplus))
