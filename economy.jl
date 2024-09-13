@@ -248,7 +248,7 @@ end
 
 function put_house_to_sale(household::MyMultiAgent, model, index)
     house = household.houses[index]
-    push!(model.houseMarket.supply, HouseSupply(house, calculate_market_price(house, model), Int[], household.id))
+    push!(model.houseMarket.supply, HouseSupply(house, calculate_market_price(house, model) * rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV)), Int[], household.id))
     # removing house from agent when putting to sale
     splice!(household.houses, index)
 end

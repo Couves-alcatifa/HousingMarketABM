@@ -16,7 +16,7 @@ function calculate_market_price(house, model)
     bucket = calculateBucket(model, house)
     if length(bucket) == 0
         # println("house = $house calculate_initial_market_price(house) = $(calculate_initial_market_price(house))")
-        return calculate_initial_market_price(house)
+        return calculate_initial_market_price(house) / 1.2
     end
     # println("house = $house mean(transactions) * house.area * house.maintenanceLevel = $(mean(transactions) * house.area * house.maintenanceLevel)")
     return mean(bucket) * house.area * house.maintenanceLevel
@@ -41,7 +41,7 @@ function calculate_initial_market_price(house)
         return house.area * (base + range * (house.percentile/100 - 0.50) * 4) * house.maintenanceLevel
     else
         base = eval(Symbol("THIRD_QUARTILE_SALES_IN_$(string(house.location))"))
-        range = base * 0.30
+        range = base * 0.20
         return house.area * (base + range * (house.percentile/100 - 0.75) * 4) * house.maintenanceLevel
     end
 end
@@ -498,9 +498,12 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
         content *= "raw salary = $(string(calculateSalary(household, model)))\n" 
         content *= "liquid salary = $(string(calculateLiquidSalary(household, model)))\n"
         content *= "household percentile = $(household.percentile)\n"
+        content *= "household id = $(household.id)\n"
+        content *= "household size = $(household.size)\n"
+        content *= "askPrice = $(supply.price)\n"
         content *= "########\n"
         print(content)
-        open("$output_folder/transactions_logs.txt", "a") do file
+        open("$output_folder/transactions_logs_$(model.steps).txt", "a") do file
             write(file, content)
         end
         model.bank.wealth -= mortgageValue
@@ -830,7 +833,7 @@ function measureSupplyAndDemandRegionally(model)
 end
 
 function calculateConsumerSurplus(household, house)
-    percentileMultiplier = 0.5 + (house.percentile / 10) * 7 * 0.35
+    percentileMultiplier = 0.5 + (sqrt(house.percentile) / 10) * 7 * 0.35
     percentileMultiplier *= (0.5 + rand()) # final value between 0.35... 3.75
 
     sizeMultiplier = (house.area / (35 * household.size))
@@ -839,12 +842,12 @@ function calculateConsumerSurplus(household, house)
     end
     sizeMultiplier *= (0.5 + rand()) # final value between 0.35... 3.75
 
-    return percentileMultiplier * sizeMultiplier # final value between 0.7... 7.5
+    return percentileMultiplier + sizeMultiplier # final value between 0.7... 7.5
 end
 
 # convert a value from 0.7...7.5 to 0.98...1.27
 function calculateConsumerSurplusAddedValue(consumerSurplus)
-    return (consumerSurplus + 0.2)^(1/8)
+    return (consumerSurplus + 0.2)^(1/50)
 end
 
 function sortByConsumerSurplus(l, r)
