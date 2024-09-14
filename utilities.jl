@@ -80,10 +80,15 @@ function calculateBid(household, house, askPrice, maxMortgageValue, consumerSurp
     # end
     # return bidValue
     demandValue = household.wealth * 0.95 + maxMortgageValue
-    if (demandValue < askPrice)
+    consumerSurplusMultiplier = calculateConsumerSurplusAddedValue(consumerSurplus)
+    if (demandValue >= askPrice * consumerSurplusMultiplier)
+        return askPrice * consumerSurplusMultiplier
+    elseif demandValue >= askPrice
+        return askPrice
+    else
         return 0
     end
-    return askPrice
+    
 end
 
 # few options here, we can have a maxMortgageValue that the bank is
@@ -378,7 +383,7 @@ function clearHouseMarket(model)
             consumerSurplus = calculateConsumerSurplus(household, supply.house)
             maxMortgage = maxMortgageValue(model, household, model.bank, supply.house)
             demandBid = calculateBid(household, supply.house, supply.price, maxMortgage, consumerSurplus)
-            if (demandBid >= supply.price)
+            if (demandBid >= supply.price * 0.95)
                 lock(localLock) do
                     push!(supply.bids, Bid(demandBid, demand.householdId))
                     push!(demand.supplyMatches, SupplyMatch(supply, consumerSurplus))
@@ -475,12 +480,28 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
 
     i = 1
     highestBidder = supply.bids[1].householdId
-    while i <= length(supply.bids) && highestBidder in householdsWhoBoughtAHouse
+    while i <= length(supply.bids)
         highestBidder = supply.bids[i].householdId
-        i += 1
+        if highestBidder in householdsWhoBoughtAHouse
+            i += 1
+        else
+            break
+        end
     end
     
     if i > length(supply.bids)
+        return false
+    end
+
+    if i + 1 <= length(supply.bids)
+        actualBid = supply.bids[i + 1].value
+    elseif supply.bids[i].value > supply.price
+        actualBid = supply.price
+    else
+        actualBid = supply.bids[i].value 
+    end
+
+    if rand() > calculateProbabilityOfAcceptingBid(actualBid, supply.price)
         return false
     end
 
@@ -499,6 +520,7 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
         content *= "mortgageValue = $mortgageValue\n"
         content *= "house.area = $(supply.house.area)\n"
         content *= "house.location = $(string(supply.house.location))\n"
+        content *= "house percentile = $(supply.house.percentile)\n"
         content *= "household.wealth = $(string(household.wealth))\n"
         content *= "raw salary = $(string(calculateSalary(household, model)))\n" 
         content *= "liquid salary = $(string(calculateLiquidSalary(household, model)))\n"
@@ -506,6 +528,7 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
         content *= "household id = $(household.id)\n"
         content *= "household size = $(household.size)\n"
         content *= "askPrice = $(supply.price)\n"
+        content *= "actualBid = $(actualBid)\n"
         content *= "########\n"
         print(content)
         open("$output_folder/transactions_logs_$(model.steps).txt", "a") do file
@@ -838,21 +861,30 @@ function measureSupplyAndDemandRegionally(model)
 end
 
 function calculateConsumerSurplus(household, house)
-    percentileMultiplier = 0.5 + (sqrt(house.percentile) / 10) * 7 * 0.35
-    percentileMultiplier *= (0.5 + rand()) # final value between 0.35... 3.75
+    percentileMultiplier = house.percentile / 10 # value between 0.1... 10
+    percentileMultiplier *= (0.8 + rand() * 0.4) # between 0.8...1.2 
 
-    sizeMultiplier = (house.area / (35 * household.size))
-    if sizeMultiplier > 2.5
-        sizeMultiplier = 2.5
+    sizeMultiplier = (house.area /  household.size) / 2
+    if sizeMultiplier > 25
+        sizeMultiplier = 25 # value between 0... 25
     end
-    sizeMultiplier *= (0.5 + rand()) # final value between 0.35... 3.75
+    sizeMultiplier *= (0.8 + rand() * 0.4) # between 0.8...1.2  
 
-    return percentileMultiplier + sizeMultiplier # final value between 0.7... 7.5
+    return percentileMultiplier + sizeMultiplier # final value between 0.1... 42
 end
 
-# convert a value from 0.7...7.5 to 0.98...1.27
+# convert a value from 0.7...7.5 to 0.98...1.04
 function calculateConsumerSurplusAddedValue(consumerSurplus)
-    return (consumerSurplus + 0.2)^(1/50)
+    return map_value(consumerSurplus, 0.0, 42.0, CONSUMER_SURPLUS_MIN, CONSUMER_SURPLUS_MAX)
+end
+
+function calculateProbabilityOfAcceptingBid(bid, askPrice)
+    ratio = bid / askPrice
+    return map_value(ratio, 0.95, 1.0, 0.2, 1.0)
+end
+
+function map_value(x::Float64, in_min::Float64, in_max::Float64, out_min::Float64, out_max::Float64)::Float64
+    return out_min + (x - in_min) * (out_max - out_min) / (in_max - in_min)
 end
 
 function sortByConsumerSurplus(l, r)
