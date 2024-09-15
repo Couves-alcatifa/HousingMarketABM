@@ -16,7 +16,7 @@ function calculate_market_price(house, model)
     bucket = calculateBucket(model, house)
     if length(bucket) == 0
         # println("house = $house calculate_initial_market_price(house) = $(calculate_initial_market_price(house))")
-        return calculate_initial_market_price(house) / 1.2
+        return calculate_initial_market_price(house)
     end
     # println("house = $house mean(transactions) * house.area * house.maintenanceLevel = $(mean(transactions) * house.area * house.maintenanceLevel)")
     return mean(bucket) * house.area * house.maintenanceLevel
@@ -133,10 +133,9 @@ function calculateCostBasedPrice(model, size, location)
 end
 
 function generateInitialWealth(age, percentile, size)
-    # TODO: add a random factor
     value = age * INITIAL_WEALTH_PER_AGE * rand(INITIAL_WEALTH_MULTIPLICATION_BASE:INITIAL_WEALTH_MULTIPLICATION_ROOF) 
         + percentile * INITIAL_WEALTH_PER_PERCENTILE * rand(INITIAL_WEALTH_MULTIPLICATION_BASE:INITIAL_WEALTH_MULTIPLICATION_ROOF)
-    return value * size
+    return value * (size > 1 ? 2 : 1)
     
     # return age * INITIAL_WEALTH_PER_AGE * rand(Normal(INITIAL_WEALTH_MULTIPLICATION_AVERAGE, INITIAL_WEALTH_MULTIPLICATION_STDEV)) 
     #     + percentile * INITIAL_WEALTH_PER_PERCENTILE * rand(Normal(INITIAL_WEALTH_MULTIPLICATION_AVERAGE, INITIAL_WEALTH_MULTIPLICATION_STDEV))
@@ -641,24 +640,24 @@ function initiateHouses(model)
         model.houses[location] = House[]
     end
     sort!(houses_sizes, lt=sortRandomly)
-    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Amadora, Amadora, houses_sizes)
-    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Cascais, Cascais, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Amadora, Amadora, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Cascais, Cascais, houses_sizes)
     initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Lisboa, Lisboa, houses_sizes)
-    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Loures, Loures, houses_sizes)
-    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Mafra, Mafra, houses_sizes)
-    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Odivelas, Odivelas, houses_sizes)
-    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Oeiras, Oeiras, houses_sizes)
-    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Sintra, Sintra, houses_sizes)
-    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_VilaFrancaDeXira, VilaFrancaDeXira, houses_sizes)
-    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Alcochete, Alcochete, houses_sizes)
-    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Almada, Almada, houses_sizes)
-    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Barreiro, Barreiro, houses_sizes)
-    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Moita, Moita, houses_sizes)
-    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Montijo, Montijo, houses_sizes)
-    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Palmela, Palmela, houses_sizes)
-    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Seixal, Seixal, houses_sizes)
-    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Sesimbra, Sesimbra, houses_sizes)
-    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Setubal, Setubal, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Loures, Loures, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Mafra, Mafra, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Odivelas, Odivelas, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Oeiras, Oeiras, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Sintra, Sintra, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_VilaFrancaDeXira, VilaFrancaDeXira, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Alcochete, Alcochete, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Almada, Almada, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Barreiro, Barreiro, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Moita, Moita, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Montijo, Montijo, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Palmela, Palmela, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Seixal, Seixal, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Sesimbra, Sesimbra, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Setubal, Setubal, houses_sizes)
 end
 
 function initiateHousesPerRegion(model, targetNumberOfHouses, location, houses_sizes)
@@ -669,7 +668,7 @@ function initiateHousesPerRegion(model, targetNumberOfHouses, location, houses_s
 end
 
 function initiateHouseholds(model, households_initial_ages, greedinesses)
-    for zone_str in ZONES_STRINGS
+    for zone_str in ["Lisboa"]
         for size_str in SIZES_STRINGS
             number_of_households = eval(Symbol("HOUSEHOLDS_WITH_SIZE_" * size_str * "_IN_" * zone_str))
             for i in 1:number_of_households
