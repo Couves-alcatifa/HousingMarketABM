@@ -191,9 +191,12 @@ function calculate_percentile(percentileInFloat::Float64)
 end
 
 function handle_births(household, model)
-    if (household.age >= 20 && household.age < 40 && household.size >= 2)
+    if (household.age >= 20 && household.age < 44  && household.size >= 2 && household.size < 6)
+        probability = eval(Symbol("PROBABILITY_OF_BIRTH_IN_$(string(household.residencyZone))"))
+                      + eval(Symbol("MIGRATION_RATE_IN_$(string(household.residencyZone))"))
+        ratioOfFertileWomen = eval(Symbol("RATIO_OF_FERTILE_WOMEN_IN_$(string(household.residencyZone))"))
         # probability should not be fixed
-        if  (rand() < 0.055 * (7 - household.size) * (1200 / nagents(model))) # TODO: hardcoded number of agents
+        if  (rand() < probability / ratioOfFertileWomen)
             # 5% for size == 2
             # 4% for size == 3
             # 3% for size == 4
@@ -209,13 +212,11 @@ end
 
 # returns true if household died
 function handle_deaths(household, model)
-    probability_of_death = 0.001
-    if (household.age > 90)
-        probability_of_death += 0.05 + 0.015 * (household.age - 80) + 0.05 * (household.age - 90)
-    elseif (household.age > 80)
-        probability_of_death += 0.03 + 0.015 * (household.age - 80) + 0.01 * (household.age - 70)
-    elseif (household.age > 70)
-        probability_of_death += 0.02 + 0.01 * (household.age - 70)
+    probability_of_death = eval(Symbol("PROBABILITY_OF_DEATH_IN_$(string(household.residencyZone))"))
+    if (household.age > 60)
+        probability_of_death += (0.005 * (household.age - 60)) * rand()
+    else
+        probability_of_death -= (0.005 * (60 - household.age)) * rand()
     end
     if (rand() < probability_of_death)
         if household.size == 1
@@ -237,10 +238,7 @@ end
 # returns true if household died
 function handle_breakups(household, model)
     if (household.size >= 2)
-        probability_of_breakup = 0.001
-        if (household.age < 60)
-            probability_of_breakup += 0.00005 * (60 - household.age)
-        end
+        probability_of_breakup = eval(Symbol("PROBABILITY_OF_DIVORCE_IN_$(string(household.residencyZone))"))
         if (rand() < probability_of_breakup)
             add_agent!(Household, model, household.wealth / 2, household.age, 1, Int[], household.percentile, Mortgage[], Int[], 0, 0.0, getChildResidencyZone(household), rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV), 1)[1])
             add_agent!(Household, model, household.wealth / 2, household.age, household.size - 1, household.houses, household.percentile, household.mortgages, Int[], 0, 0.0, getChildResidencyZone(household), rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV), 1)[1])
@@ -259,7 +257,7 @@ end
 # returns true if household died
 function handle_children_leaving_home(household, model)
     if (household.size > 2 && household.age > 38)
-        probability_of_child_leaving = 0.1 + rand() * 0.4
+        probability_of_child_leaving = 0.1 + rand() * 0.3
         if (rand() < probability_of_child_leaving)
             expected_age = household.age - 20 # TODO: this should have a random factor
             expected_wealth = generateInitialWealth(expected_age, household.percentile, household.size) * 0.6
@@ -530,7 +528,7 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
         content *= "actualBid = $(actualBid)\n"
         content *= "########\n"
         print(content)
-        open("$output_folder/transactions_logs_$(model.steps).txt", "a") do file
+        open("$output_folder/transactions_logs/step_$(model.steps).txt", "a") do file
             write(file, content)
         end
         model.bank.wealth -= mortgageValue

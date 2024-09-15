@@ -19,6 +19,7 @@ Random.seed!(1234)
 
 output_folder = "all_runs/NHH_$(NUMBER_OF_HOUSEHOLDS)_NSTEPS_$(NUMBER_OF_STEPS)_$(Dates.format(now(), "yyyy_mm_dd_THH_MM"))"
 mkdir(output_folder)
+mkdir("$output_folder/transactions_logs")
 content = ""
 
 file = open("calibrationTable.jl", "r")
