@@ -335,12 +335,10 @@ function household_step!(household::MyMultiAgent, model)
         wealthInHouses += calculate_market_price(house, model)
     end
     household.wealthInHouses = wealthInHouses
-    if (model.steps % 12 == 0)
-        household.age += 1
-    end
     # 8% probability to simulate a year, but not all at the same time...
     if (rand() < 0.08 && household_evolution(household, model))
         # household died
+        household.age += 1
         terminateContractsOnTentantSide(household, model)
         terminateContractsOnLandLordSide(household, model)
         return

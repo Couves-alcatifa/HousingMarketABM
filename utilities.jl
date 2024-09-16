@@ -213,10 +213,10 @@ end
 # returns true if household died
 function handle_deaths(household, model)
     probability_of_death = eval(Symbol("PROBABILITY_OF_DEATH_IN_$(string(household.residencyZone))"))
-    if (household.age > 60)
-        probability_of_death += (0.005 * (household.age - 60)) * rand()
+    if (household.age > 70)
+        probability_of_death *= (1 + 0.1 * (household.age - 70)) * rand()
     else
-        probability_of_death -= (0.005 * (60 - household.age)) * rand()
+        probability_of_death /= (1 + 0.1 * (70 - household.age)) * rand()
     end
     if (rand() < probability_of_death)
         if household.size == 1
