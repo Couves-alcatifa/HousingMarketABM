@@ -427,11 +427,11 @@ adata = [(household, sum_wealth),(household, sum_houses),
 mdata = [count_supply, gov_wealth, construction_wealth, company_wealth,
          bank_wealth, calculate_houses_prices_perm2, supply_volume, demand_volume,
          calculate_prices_in_supply, irs, vat, subsidyRate, salaryRate, 
-         births, breakups, deaths, children_leaving_home,
+         births, breakups, deaths, children_leaving_home, n_of_households,
          ## Gov Money flow ##
          subsidiesPaid, ivaCollected, irsCollected, companyServicesPaid, inheritagesFlow, constructionLabor,
          ## Company Money flow ##
-         rawSalariesPaid, liquidSalariesReceived, expensesReceived, houses_per_region, transactions_per_region
+         rawSalariesPaid, liquidSalariesReceived, expensesReceived, houses_per_region, transactions_per_region, 
          ## Houses prices per bucket
          #bucket_1, bucket_2, bucket_3, bucket_4
          ]
@@ -476,6 +476,7 @@ save("$output_folder/number_of_transactions_per_region.png", plot_number_of_tran
 # end
 
 writeToCsv("$output_folder/QuarterLyHousePrices.csv", generate_houses_prices_table(agent_data, model_data))
+writeToCsv("$output_folder/DemographicEvents.csv", generate_demographic_table(agent_data, model_data))
 # CSV.write("$output_folder/agentData.csv", agent_data, delim=';')
 #CSV.write("$output_folder/modelData.csv", model_data, delim=';')
 

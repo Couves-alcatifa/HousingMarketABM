@@ -48,9 +48,26 @@ function exportToCsv(vv)
     result = ""
     for v in vv
         for value in v
-            result *= string(value) * ";"
+            result *= string(value) * ","
         end
         result *= "\n"
     end
     return result
+end
+
+function generate_demographic_table(adf, mdf)
+
+    births = mdf.births
+    deaths = mdf.deaths
+    breakups = mdf.breakups
+    n_of_households = mdf.n_of_households
+    finalTable = Any[Any["Step", "Birth Rate", "Mortality Rate", "Divorces"]]
+    for step in 1:length(adf.step)
+        push!(finalTable, Any[])
+        push!(finalTable[lastindex(finalTable)], step)
+        push!(finalTable[lastindex(finalTable)], (births[step] / n_of_households[step]) * 1000)
+        push!(finalTable[lastindex(finalTable)], (deaths[step] / n_of_households[step]) * 1000)
+        push!(finalTable[lastindex(finalTable)], (breakups[step] / n_of_households[step])* 1000)
+    end
+    return finalTable
 end

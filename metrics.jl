@@ -213,7 +213,25 @@ demand_volume(model) = copy(model.demand_size)
 
 mortgages(model) = copy(model.mortgagesInStep)
 
-births(model) = model.births
-breakups(model) = model.breakups
-deaths(model) = model.deaths
-children_leaving_home(model) = model.children_leaving_home
+function births(model)
+    res = copy(model.births)
+    model.births = 0
+    return res
+end
+function breakups(model)
+    res = copy(model.breakups)
+    model.breakups = 0
+    return res
+end
+function deaths(model)
+    res = copy(model.deaths)
+    model.deaths = 0
+    return res
+end
+function children_leaving_home(model)
+    res = copy(model.children_leaving_home)
+    model.children_leaving_home = 0
+    return res
+end
+
+n_of_households(model) = nagents(model)
