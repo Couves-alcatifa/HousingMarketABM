@@ -525,6 +525,7 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
         content *= "household id = $(household.id)\n"
         content *= "household size = $(household.size)\n"
         content *= "askPrice = $(supply.price)\n"
+        content *= "sellerId = $(supply.sellerId)\n"
         content *= "actualBid = $(actualBid)\n"
         content *= "########\n"
         print(content)
