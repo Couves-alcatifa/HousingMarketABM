@@ -459,11 +459,7 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     if supply.sellerId == -1
         seller = model.construction_sector
     else
-        try
-            seller = model[supply.sellerId]
-        catch
-            return false # seller died, more luck next time...
-        end
+        seller = model[supply.sellerId]
     end
 
     actualBid = 0
@@ -770,10 +766,12 @@ function get_household_size(size_str)
 end
 
 function assignHouseThatMakesSense(model, household)
-    for house in model.houses[household.residencyZone]
+    for i in eachindex(model.houses[household.residencyZone])
+        house = model.houses[household.residencyZone][i]
         # println("assignHouseThatMakesSense house = $(house)")
         if rand() < probabilityOfHouseholdBeingAssignedToHouse(household, house)
             push!(household.houses, house)
+            splice!(model.houses[household.residencyZone], i)
             return true
         end
     end
@@ -831,14 +829,18 @@ function assignHousesForRental(model, household, numberOfExtraHousesToAssign)
     assignedSoFar = 0
     push!(zones, household.residencyZone)
     # for house in collect(Iterators.flatten([model.houses[zone] for zone in zones]))
-    for house in model.houses[household.residencyZone]
+    i = 1
+    while i < length(model.houses[household.residencyZone])
+        house = model.houses[household.residencyZone][i]
         # println("assignHousesForRental house = $(house)")
         if assignedSoFar == numberOfExtraHousesToAssign
             return
         end
         push!(household.houses, house)
+        splice!(model.houses[household.residencyZone], i)
         # put_house_to_rent(household, model, house)
         assignedSoFar += 1
+        i += 1
     end
 end
 
@@ -859,21 +861,24 @@ function measureSupplyAndDemandRegionally(model)
 end
 
 function calculateConsumerSurplus(household, house)
-    percentileMultiplier = house.percentile / 10 # value between 0.1... 10
-    percentileMultiplier *= (0.8 + rand() * 0.4) # between 0.8...1.2 
+    house_percentile = house.percentile
+    house_area = house.area
+    household_size = household.size
+    percentileMultiplier = map_value(house_percentile, 1.0, 100.0, 1.0, 8.0) 
+    percentileMultiplier *= (0.8 + rand() * 0.4)
 
-    sizeMultiplier = (house.area /  household.size) / 2
-    if sizeMultiplier > 25
-        sizeMultiplier = 25 # value between 0... 25
+    areaPerPerson = (house_area /  household_size)
+    if areaPerPerson > 60
+        areaPerPerson = 60
     end
-    sizeMultiplier *= (0.8 + rand() * 0.4) # between 0.8...1.2  
+    sizeMultiplier = map_value(areaPerPerson, 25.0, 60.0, 5.0, 15.0)
+    sizeMultiplier *= (0.8 + rand() * 0.4) 
 
-    return percentileMultiplier + sizeMultiplier # final value between 0.1... 42
+    return percentileMultiplier + sizeMultiplier
 end
 
-# convert a value from 0.7...7.5 to 0.98...1.04
 function calculateConsumerSurplusAddedValue(consumerSurplus)
-    return map_value(consumerSurplus, 0.0, 42.0, CONSUMER_SURPLUS_MIN, CONSUMER_SURPLUS_MAX)
+    return map_value(consumerSurplus, 6.0, 23.0, CONSUMER_SURPLUS_MIN, CONSUMER_SURPLUS_MAX)
 end
 
 function calculateProbabilityOfAcceptingBid(bid, askPrice)
@@ -881,7 +886,7 @@ function calculateProbabilityOfAcceptingBid(bid, askPrice)
     return map_value(ratio, 0.95, 1.0, 0.2, 1.0)
 end
 
-function map_value(x::Float64, in_min::Float64, in_max::Float64, out_min::Float64, out_max::Float64)::Float64
+function map_value(x, in_min::Float64, in_max::Float64, out_min::Float64, out_max::Float64)::Float64
     return out_min + (x - in_min) * (out_max - out_min) / (in_max - in_min)
 end
 
@@ -891,4 +896,23 @@ end
 
 function sortBids(l, r)
     l.value > r.value
+end
+
+function clearHangingSupplies(model)
+    i = 1
+    while i <= length(model.houseMarket.supply)
+        if model.houseMarket.supply[i].sellerId == -1
+            i += 1
+            # construction sector -> we don't want to remove the supply
+            continue
+        end
+        try
+            model[model.houseMarket.supply[i].sellerId]
+            i += 1
+        catch
+            supply = model.houseMarket.supply[i]
+            push!(model.inheritages, Inheritage([supply.house], 0, Mortgage[], rand(1:100)))
+            splice!(model.houseMarket.supply, i)
+        end
+    end
 end

@@ -1,11 +1,12 @@
 function calculateConsumerSurplus(house_percentile, house_area, household_size)
-    percentileMultiplier = house_percentile / 10 # value between 0.1... 10
-    percentileMultiplier *= (0.8 + rand() * 0.4) # between 0.8...1.2 
+    percentileMultiplier = map_value(house_percentile, 1.0, 100.0, 1.0, 8.0) 
+    percentileMultiplier *= (0.8 + rand() * 0.4) # between 0.8...1.2  
 
-    sizeMultiplier = (house_area /  household_size) - 25
-    if sizeMultiplier > 25
-        sizeMultiplier = 25 # value between 0... 25
+    areaPerPerson = (house_area /  household_size)
+    if areaPerPerson > 60
+        areaPerPerson = 60
     end
+    sizeMultiplier = map_value(areaPerPerson, 25.0, 60.0, 5.0, 15.0)
     sizeMultiplier *= (0.8 + rand() * 0.4) # between 0.8...1.2  
 
     return percentileMultiplier + sizeMultiplier # final value between 0.1... 42
@@ -16,10 +17,10 @@ function calculateConsumerSurplusAddedValue(house_percentile, house_area, househ
     consumerSurplus = calculateConsumerSurplus(house_percentile, house_area, household_size)
     result = consumerSurplus
     println("$house_percentile, $house_area, $household_size = $result")
-    println(map_value(consumerSurplus, 0.0, 42.0, 0.94, 1.05))
+    println(map_value(consumerSurplus, 6.0, 23.0, 0.94, 1.05))
 end
 
-function map_value(x::Float64, in_min::Float64, in_max::Float64, out_min::Float64, out_max::Float64)::Float64
+function map_value(x, in_min::Float64, in_max::Float64, out_min::Float64, out_max::Float64)::Float64
     return out_min + (x - in_min) * (out_max - out_min) / (in_max - in_min)
 end
 

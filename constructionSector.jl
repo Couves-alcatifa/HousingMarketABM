@@ -59,6 +59,10 @@ function startNewConstruction(model, location)
     model.constructionLabor += laborCost
     model.construction_sector.wealth -= materialCost
     push!(model.construction_sector.housesInConstruction[location], PendingConstruction(0, newHouse))
+    content = "Start new Construction $(newHouse.area) $(newHouse.percentile) $(newHouse.location)\n"
+    open("$output_folder/transactions_logs/step_$(model.steps).txt", "a") do file
+        write(file, content)
+    end
     return true
 end
 
@@ -79,16 +83,23 @@ end
 
 ## TODO: Change this to something with logic
 function generateRandomHouse(location)
-    area = rand(UInt16(50):UInt16(125))
+    area = UInt16(floor(rand(40:150) * (rand() + 0.8)))
     return House(area, location, NotSocialNeighbourhood, 1.0)
 end
 
 function put_newly_built_house_to_sale(model, house)
     laborCost = CONSTRUCTION_LABOR_COST * model.construction_sector.constructionTimeMultiplier * house.area
-    costBasedPrice = (model.construction_sector.constructionDelay * 500 + laborCost + house.area * 500) * 1.2 # markup
-    push!(model.houses[house.location], house)
-    push!(model.houseMarket.supply, HouseSupply(house, costBasedPrice, Int[], -1))
-    println("costBasedPrice = " * string(costBasedPrice))
+    costBasedPrice = (model.construction_sector.constructionDelay * 500 + laborCost + house.area * 500)
+    askPrice = calculate_market_price(house, model)
+    if costBasedPrice > askPrice
+        askPrice = costBasedPrice
+    end
+    askPrice *= CONSTRUCTION_SECTOR_MARKUP
+    push!(model.houseMarket.supply, HouseSupply(house, askPrice, Bid[], -1))
+    open("$output_folder/transactions_logs/step_$(model.steps).txt", "a") do file
+        write(file, "askPrice = $askPrice\n")
+    end
+    println("askPrice = " * string(askPrice))
 end
 
 function calculate_construction_sector_debt(model)

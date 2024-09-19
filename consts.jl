@@ -2,8 +2,8 @@ include("types.jl")
 include("calibrationTable.jl")
 
 MAX_BUCKET_SIZE = 50
-NUMBER_OF_HOUSEHOLDS = 25000
-NUMBER_OF_STEPS = 500
+NUMBER_OF_HOUSEHOLDS = 5000
+NUMBER_OF_STEPS = 30
 STARTING_GOV_WEALTH_PER_CAPITA = 100000.0
 STARTING_COMPANY_WEALTH_PER_CAPITA = 60000.0
 STARTING_BANK_WEALTH_PER_CAPITA = 67000.0
@@ -25,10 +25,11 @@ MATERIAL_COSTS = 500 # to be multiplied by the area of the house
 CONSTRUCTION_LABOR_COST = 6000 # monthly
 INITIAL_WEALTH_MULTIPLICATION_BASE = 1.0
 INITIAL_WEALTH_MULTIPLICATION_ROOF = 4.0
-INITIAL_WEALTH_MULTIPLICATION_AVERAGE = 7.0
+INITIAL_WEALTH_MULTIPLICATION_AVERAGE = 6.0
 INITIAL_WEALTH_MULTIPLICATION_STDEV = 4.0
 CONSUMER_SURPLUS_MIN = 0.94
 CONSUMER_SURPLUS_MAX = 1.05
+CONSTRUCTION_SECTOR_MARKUP = 1.2
 
 
 TotalTheoreticalNumberOfHouses = 1191363
@@ -53,25 +54,28 @@ TheoreticalNumberOfHousesInSesimbra = 20557
 TheoreticalNumberOfHousesInSetubal = 51169
 
 NUMBER_OF_HOUSES=NUMBER_OF_HOUSEHOLDS
+MODEL_SCALE = NUMBER_OF_HOUSES / TheoreticalNumberOfHousesInLisboa
+# MODEL_SCALE = NUMBER_OF_HOUSES / TotalTheoreticalNumberOfHouses
+
 # NUMBER_OF_HOUSES_IN_GrandeLisboa = (TheoreticalNumberOfHousesInGrandeLisboa / TotalTheoreticalNumberOfHouses) * NUMBER_OF_HOUSES 
-NUMBER_OF_HOUSES_IN_Amadora = (TheoreticalNumberOfHousesInAmadora / TotalTheoreticalNumberOfHouses) * NUMBER_OF_HOUSES 
-NUMBER_OF_HOUSES_IN_Cascais = (TheoreticalNumberOfHousesInCascais / TotalTheoreticalNumberOfHouses) * NUMBER_OF_HOUSES 
-NUMBER_OF_HOUSES_IN_Lisboa = (TheoreticalNumberOfHousesInLisboa / TotalTheoreticalNumberOfHouses) * NUMBER_OF_HOUSES 
-NUMBER_OF_HOUSES_IN_Loures = (TheoreticalNumberOfHousesInLoures / TotalTheoreticalNumberOfHouses) * NUMBER_OF_HOUSES 
-NUMBER_OF_HOUSES_IN_Mafra = (TheoreticalNumberOfHousesInMafra / TotalTheoreticalNumberOfHouses) * NUMBER_OF_HOUSES 
-NUMBER_OF_HOUSES_IN_Odivelas = (TheoreticalNumberOfHousesInOdivelas / TotalTheoreticalNumberOfHouses) * NUMBER_OF_HOUSES 
-NUMBER_OF_HOUSES_IN_Oeiras = (TheoreticalNumberOfHousesInOeiras / TotalTheoreticalNumberOfHouses) * NUMBER_OF_HOUSES 
-NUMBER_OF_HOUSES_IN_Sintra = (TheoreticalNumberOfHousesInSintra / TotalTheoreticalNumberOfHouses) * NUMBER_OF_HOUSES 
-NUMBER_OF_HOUSES_IN_VilaFrancaDeXira = (TheoreticalNumberOfHousesInVilaFrancaDeXira / TotalTheoreticalNumberOfHouses) * NUMBER_OF_HOUSES 
-NUMBER_OF_HOUSES_IN_Alcochete = (TheoreticalNumberOfHousesInAlcochete / TotalTheoreticalNumberOfHouses) * NUMBER_OF_HOUSES 
-NUMBER_OF_HOUSES_IN_Almada = (TheoreticalNumberOfHousesInAlmada / TotalTheoreticalNumberOfHouses) * NUMBER_OF_HOUSES 
-NUMBER_OF_HOUSES_IN_Barreiro = (TheoreticalNumberOfHousesInBarreiro / TotalTheoreticalNumberOfHouses) * NUMBER_OF_HOUSES 
-NUMBER_OF_HOUSES_IN_Moita = (TheoreticalNumberOfHousesInMoita / TotalTheoreticalNumberOfHouses) * NUMBER_OF_HOUSES 
-NUMBER_OF_HOUSES_IN_Montijo = (TheoreticalNumberOfHousesInMontijo / TotalTheoreticalNumberOfHouses) * NUMBER_OF_HOUSES 
-NUMBER_OF_HOUSES_IN_Palmela = (TheoreticalNumberOfHousesInPalmela / TotalTheoreticalNumberOfHouses) * NUMBER_OF_HOUSES 
-NUMBER_OF_HOUSES_IN_Seixal = (TheoreticalNumberOfHousesInSeixal / TotalTheoreticalNumberOfHouses) * NUMBER_OF_HOUSES 
-NUMBER_OF_HOUSES_IN_Sesimbra = (TheoreticalNumberOfHousesInSesimbra / TotalTheoreticalNumberOfHouses) * NUMBER_OF_HOUSES 
-NUMBER_OF_HOUSES_IN_Setubal = (TheoreticalNumberOfHousesInSetubal / TotalTheoreticalNumberOfHouses) * NUMBER_OF_HOUSES 
+NUMBER_OF_HOUSES_IN_Amadora = TheoreticalNumberOfHousesInAmadora * MODEL_SCALE 
+NUMBER_OF_HOUSES_IN_Cascais = TheoreticalNumberOfHousesInCascais * MODEL_SCALE 
+NUMBER_OF_HOUSES_IN_Lisboa = TheoreticalNumberOfHousesInLisboa * MODEL_SCALE 
+NUMBER_OF_HOUSES_IN_Loures = TheoreticalNumberOfHousesInLoures * MODEL_SCALE 
+NUMBER_OF_HOUSES_IN_Mafra = TheoreticalNumberOfHousesInMafra * MODEL_SCALE 
+NUMBER_OF_HOUSES_IN_Odivelas = TheoreticalNumberOfHousesInOdivelas * MODEL_SCALE 
+NUMBER_OF_HOUSES_IN_Oeiras = TheoreticalNumberOfHousesInOeiras * MODEL_SCALE 
+NUMBER_OF_HOUSES_IN_Sintra = TheoreticalNumberOfHousesInSintra * MODEL_SCALE 
+NUMBER_OF_HOUSES_IN_VilaFrancaDeXira = TheoreticalNumberOfHousesInVilaFrancaDeXira * MODEL_SCALE 
+NUMBER_OF_HOUSES_IN_Alcochete = TheoreticalNumberOfHousesInAlcochete * MODEL_SCALE 
+NUMBER_OF_HOUSES_IN_Almada = TheoreticalNumberOfHousesInAlmada * MODEL_SCALE 
+NUMBER_OF_HOUSES_IN_Barreiro = TheoreticalNumberOfHousesInBarreiro * MODEL_SCALE 
+NUMBER_OF_HOUSES_IN_Moita = TheoreticalNumberOfHousesInMoita * MODEL_SCALE 
+NUMBER_OF_HOUSES_IN_Montijo = TheoreticalNumberOfHousesInMontijo * MODEL_SCALE 
+NUMBER_OF_HOUSES_IN_Palmela = TheoreticalNumberOfHousesInPalmela * MODEL_SCALE 
+NUMBER_OF_HOUSES_IN_Seixal = TheoreticalNumberOfHousesInSeixal * MODEL_SCALE 
+NUMBER_OF_HOUSES_IN_Sesimbra = TheoreticalNumberOfHousesInSesimbra * MODEL_SCALE 
+NUMBER_OF_HOUSES_IN_Setubal = TheoreticalNumberOfHousesInSetubal * MODEL_SCALE 
 
 FIRST_QUARTILE_RENT_IN_Amadora = 7.35
 FIRST_QUARTILE_RENT_IN_Cascais = 9.42
@@ -343,8 +347,6 @@ Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Setubal = 2525
 Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Sintra = 9371
 Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_VilaFrancaDeXira = 2574
 
-MODEL_SCALE = NUMBER_OF_HOUSES / TheoreticalNumberOfHousesInLisboa
-# MODEL_SCALE = NUMBER_OF_HOUSES / TotalTheoreticalNumberOfHouses
 
 TOTAL_HOUSEHOLDS_WITH_SIZE_1 = Int64(round(MODEL_SCALE * Theoretical_TOTAL_HOUSEHOLDS_WITH_SIZE_1))
 HOUSEHOLDS_WITH_SIZE_1_IN_Alcochete = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Alcochete))
