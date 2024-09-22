@@ -337,7 +337,7 @@ function household_step!(household::MyMultiAgent, model)
         wealthInHouses += calculate_market_price(house, model)
     end
     household.wealthInHouses = wealthInHouses
-    if (household_evolution(household, model))
+    if (household.id % 12 == model.steps % 12 && household_evolution(household, model))
         # household died
         terminateContractsOnTentantSide(household, model)
         terminateContractsOnLandLordSide(household, model)

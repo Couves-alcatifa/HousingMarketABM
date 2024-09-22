@@ -13,14 +13,11 @@ function household_evolution(household, model)
 end
 
 function handle_births(household, model)
-    println("in handle_births")
     if (household.age >= 20 && household.age < 44  && household.size >= 2)
-        println("household with conditions")
         probability = BIRTH_RATE
         ratioOfFertileWomen = eval(Symbol("RATIO_OF_FERTILE_WOMEN_IN_$(string(household.residencyZone))"))
         # probability should not be fixed
         if (rand() < (probability / ratioOfFertileWomen) * (1 + (TOTAL_HOUSEHOLDS_WITH_SIZE_1 * ratioOfFertileWomen) / NUMBER_OF_HOUSEHOLDS))
-            println("birth happened") 
             # 5% for size == 2
             # 4% for size == 3
             # 3% for size == 4
@@ -39,7 +36,7 @@ function handle_deaths(household, model)
     if (household.age < 60)
         return false
     end
-    probability_of_death = MORTALITY_RATE / 0.35 # assuming 35% of the households have >= 60 years
+    probability_of_death = MORTALITY_RATE / 0.40 # assuming 40% of the households have >= 60 years
     # if (household.age > 70)
     #     probability_of_death *= (1 + 0.1 * (household.age - 70)) * rand()
     # else
