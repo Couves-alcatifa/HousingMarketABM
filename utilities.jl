@@ -509,6 +509,7 @@ function initiateHouses(model)
         model.houses[location] = House[]
     end
     sort!(houses_sizes, lt=sortRandomly)
+    # TODO: region hack
     # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Amadora, Amadora, houses_sizes)
     # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Cascais, Cascais, houses_sizes)
     initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Lisboa, Lisboa, houses_sizes)
@@ -536,6 +537,7 @@ function initiateHousesPerRegion(model, targetNumberOfHouses, location, houses_s
     end
 end
 
+# TODO: region hack
 function initiateHouseholds(model, households_initial_ages, greedinesses)
     for zone_str in ["Lisboa"]
         for size_str in SIZES_STRINGS

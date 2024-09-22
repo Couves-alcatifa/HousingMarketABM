@@ -1,3 +1,4 @@
+
 # returns true if household died
 function household_evolution(household, model)
     household.age += 1
@@ -120,4 +121,21 @@ function getChildResidencyZone(household)
     # end
     # return possibleZones[rand(1:length(possibleZones))]
     return household.residencyZone
+end
+
+
+# TODO: region hack
+function handle_migrations(model)
+    for location in [Lisboa]
+        expectedMigrants = eval(Symbol("MIGRATION_RATE_IN_$(string(location))")) / 12
+        expectedMigrants *= (0.90 + rand() * 0.2)
+        added = 0
+        while added < expectedMigrants
+            age = rand(20:55)
+            percentile = rand(0:100)
+            size = rand(1:3)
+            add_agent!(Household, model, generateInitialWealth(age, percentile, size), age, size, House[], percentile, Mortgage[], Int[], 0, 0, location, rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV)))
+            added += size
+        end
+    end
 end
