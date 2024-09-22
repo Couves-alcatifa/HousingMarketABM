@@ -9,7 +9,7 @@ function updateConstructionsPerRegion(model, location)
     targetConstruction = calculateTargetConstructionPerRegion(model, location)
     newConstructions = targetConstruction - length(model.construction_sector.housesInConstruction[location])
     
-    if rand() < 0.08
+    if model.steps % 12 == 1
         # only generate new construction once a year to avoid overcommiting
         newConstructions = Int64(floor(newConstructions * (rand() / 3)))
         if (newConstructions > 0)

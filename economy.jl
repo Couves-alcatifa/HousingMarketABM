@@ -13,6 +13,7 @@ include("utilities.jl")
 include("metrics.jl")
 include("plots.jl")
 include("tables.jl")
+include("demography.jl")
 # include("marketsLogic.jl")
 # Set the seed for reproducibility
 Random.seed!(1234)
@@ -57,18 +58,19 @@ end
 function wealth_model()
 
     start_time = time()
-    households_sizes = rand(1:4, NUMBER_OF_HOUSEHOLDS)
-
     houses_sizes = rand(30:60, Int64(NUMBER_OF_HOUSEHOLDS/4))
     houses_sizes = vcat(houses_sizes, rand(60:80, Int64(NUMBER_OF_HOUSEHOLDS/4)))
     houses_sizes = vcat(houses_sizes, rand(80:120, Int64(NUMBER_OF_HOUSEHOLDS/4)))
     houses_sizes = vcat(houses_sizes, rand(120:180, Int64(NUMBER_OF_HOUSEHOLDS/4)))
     
-    households_initial_ages = rand(20:35, Int64(NUMBER_OF_HOUSEHOLDS/4))
-    households_initial_ages = vcat(households_initial_ages, rand(36:45, Int64(NUMBER_OF_HOUSEHOLDS/4)))
-    households_initial_ages = vcat(households_initial_ages, rand(46:64, Int64(NUMBER_OF_HOUSEHOLDS/4)))
-    households_initial_ages = vcat(households_initial_ages, rand(65:100, Int64(NUMBER_OF_HOUSEHOLDS/4)))
+    number_of_household_in_fertile_age = Int64(round(NUMBER_OF_HOUSEHOLDS * RATIO_OF_FERTILE_WOMEN))
+    number_of_households_in_not_fertile_age = NUMBER_OF_HOUSEHOLDS - number_of_household_in_fertile_age
+    households_initial_ages = rand(20:44, number_of_household_in_fertile_age)
+    households_initial_ages = vcat(households_initial_ages, rand(44:58, Int64(round(number_of_households_in_not_fertile_age/3))))
+    households_initial_ages = vcat(households_initial_ages, rand(58:75, Int64(round(number_of_households_in_not_fertile_age/3))))
+    households_initial_ages = vcat(households_initial_ages, rand(75:100, Int64(round(number_of_households_in_not_fertile_age/3))))
     
+    sort!(households_initial_ages, lt=sortRandomly)
     # per quartile
     houses_prices_per_m2 = [1300, 1800, 2500]
     
@@ -148,7 +150,6 @@ function model_step!(model)
     #     model.houses[i].maintenanceLevel -= 0.001
     # end
 
-    
 
     if model.steps % 5 == 0
         println("5 steps!")
@@ -336,10 +337,8 @@ function household_step!(household::MyMultiAgent, model)
         wealthInHouses += calculate_market_price(house, model)
     end
     household.wealthInHouses = wealthInHouses
-    # 8% probability to simulate a year, but not all at the same time...
-    if (rand() < 0.08 && household_evolution(household, model))
+    if (household_evolution(household, model))
         # household died
-        household.age += 1
         terminateContractsOnTentantSide(household, model)
         terminateContractsOnLandLordSide(household, model)
         return
@@ -476,10 +475,10 @@ save("$output_folder/number_of_transactions_per_region.png", plot_number_of_tran
 
 # end
 
-writeToCsv("$output_folder/QuarterLyHousePrices.csv", generate_houses_prices_table(agent_data, model_data))
-writeToCsv("$output_folder/DemographicEvents.csv", generate_demographic_table(agent_data, model_data))
+writeToCsv("$output_folder/QuarterLyHousePrices.csv", generate_houses_prices_table(agent_data[2:end, :], model_data[2:end, :]))
+writeToCsv("$output_folder/DemographicEvents.csv", generate_demographic_table(agent_data[2:end, :], model_data[2:end, :]))
 # CSV.write("$output_folder/agentData.csv", agent_data, delim=';')
-#CSV.write("$output_folder/modelData.csv", model_data, delim=';')
+CSV.write("$output_folder/modelData.csv", model_data, delim=';')
 
 Base.Filesystem.cptree("$output_folder", "latest_run", force=true)
 

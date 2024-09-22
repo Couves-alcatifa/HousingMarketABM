@@ -61,13 +61,27 @@ function generate_demographic_table(adf, mdf)
     deaths = mdf.deaths
     breakups = mdf.breakups
     n_of_households = mdf.n_of_households
-    finalTable = Any[Any["Step", "Birth Rate", "Mortality Rate", "Divorces"]]
+    finalTable = Any[Any["Year", "Birth Rate", "Mortality Rate", "Divorces"]]
+    startingYear = 2021
+    currentYear = startingYear
+    cummulativeBirthRate = 0
+    cummulativeDeathRate = 0
+    cummulativeDivorceRate = 0
     for step in 1:length(adf.step)
-        push!(finalTable, Any[])
-        push!(finalTable[lastindex(finalTable)], step)
-        push!(finalTable[lastindex(finalTable)], (births[step] / n_of_households[step]) * 1000)
-        push!(finalTable[lastindex(finalTable)], (deaths[step] / n_of_households[step]) * 1000)
-        push!(finalTable[lastindex(finalTable)], (breakups[step] / n_of_households[step])* 1000)
+        cummulativeBirthRate += (births[step] / n_of_households[step]) * 1000
+        cummulativeDeathRate += (deaths[step] / n_of_households[step]) * 1000
+        cummulativeDivorceRate += (breakups[step] / n_of_households[step])* 1000
+        if step % 12 == 0
+            push!(finalTable, Any[])
+            push!(finalTable[lastindex(finalTable)], currentYear)
+            push!(finalTable[lastindex(finalTable)], cummulativeBirthRate)
+            push!(finalTable[lastindex(finalTable)], cummulativeDeathRate)
+            push!(finalTable[lastindex(finalTable)], cummulativeDivorceRate)
+            currentYear += 1
+            cummulativeBirthRate = 0
+            cummulativeDeathRate = 0
+            cummulativeDivorceRate = 0
+        end
     end
     return finalTable
 end
