@@ -1,3 +1,19 @@
+percentile_color_map = Dict(
+    1 => :red,
+    10 => :green,
+    20 => :blue,
+    30 => :orange,
+    40 => :purple,
+    50 => :pink,
+    60 => :lime,
+    70 => :indigo,
+    80 => :magenta,
+    90 => :gray,
+    100 => :black
+)
+
+average_color = :white
+
 function plot_houses_prices(adf, mdf)
     figure = Figure(size = (600, 400))
     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Houses prices per m2")
@@ -74,18 +90,34 @@ function plot_household_status(adf, mdf)
     figure
 end
 
-function get_quartile(vv, quartile_fun)
+function get_percentile_index(vector, percentile)
+    return Int64(floor((length(vector)/100) * percentile))
+end
+
+function get_percentile_along_vv(vv, percentile)
     res = Float32[]
     for vector in vv
         if length(vector) == 0
             push!(res, 0)
             continue
         end
-        quartile = quartile_fun(vector)
-        if quartile == 0
-            quartile = 1 # avoid trying to access at index 0
+        percentile = percentile(vector, percentile)
+        if percentile == 0
+            percentile = 1 # avoid trying to access at index 0
         end
-        push!(res, vector[quartile])
+        push!(res, vector[percentile])
+    end
+    return res
+end
+
+function get_average_along_vv(vv)
+    res = Float32[]
+    for vector in vv
+        if length(vector) == 0
+            push!(res, 0)
+            continue
+        end
+        push!(res, mean(vector))
     end
     return res
 end
@@ -93,98 +125,62 @@ end
 function plot_households_money_distribution(adf, mdf)
     figure = Figure(size = (600, 400))
     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
-    lowest(v) = 1
-    percentile_10(v) = Int64(floor((length(v)/10) * 1))
-    percentile_20(v) = Int64(floor((length(v)/10) * 2))
-    percentile_30(v) = Int64(floor((length(v)/10) * 3))
-    percentile_40(v) = Int64(floor((length(v)/10) * 4))
-    percentile_50(v) = Int64(floor((length(v)/10) * 5))
-    percentile_60(v) = Int64(floor((length(v)/10) * 6))
-    percentile_70(v) = Int64(floor((length(v)/10) * 7))
-    percentile_80(v) = Int64(floor((length(v)/10) * 8))
-    percentile_90(v) = Int64(floor((length(v)/10) * 9))
-    percentile_100(v) = length(v)
-    wealth_0 = lines!(ax, adf.step, get_quartile(adf.money_distribution_household, lowest), color = :red)
-    wealth_10 = lines!(ax, adf.step, get_quartile(adf.money_distribution_household, percentile_10), color = :green)
-    wealth_20 = lines!(ax, adf.step, get_quartile(adf.money_distribution_household, percentile_20), color = :blue)
-    wealth_30 = lines!(ax, adf.step, get_quartile(adf.money_distribution_household, percentile_30), color = :orange)
-    wealth_40 = lines!(ax, adf.step, get_quartile(adf.money_distribution_household, percentile_40), color = :purple)
-    wealth_50 = lines!(ax, adf.step, get_quartile(adf.money_distribution_household, percentile_50), color = :pink)
-    wealth_60 = lines!(ax, adf.step, get_quartile(adf.money_distribution_household, percentile_60), color = :lime)
-    wealth_70 = lines!(ax, adf.step, get_quartile(adf.money_distribution_household, percentile_70), color = :indigo)
-    wealth_80 = lines!(ax, adf.step, get_quartile(adf.money_distribution_household, percentile_80), color = :magenta)
-    wealth_90 = lines!(ax, adf.step, get_quartile(adf.money_distribution_household, percentile_90), color = :gray)
-    # wealth_100 = lines!(ax, adf.step, get_quartile(adf.money_distribution_household, percentile_100), color = :black)
-    figure[1, 2] = Legend(figure, [wealth_0, wealth_10, wealth_20, wealth_30, wealth_40, wealth_50, wealth_60, wealth_70,
-                    wealth_80, wealth_90], ["Lowest Wealth", "10th percentile", "20th percentile",
-                    "30th percentile", "40th percentile", "50th percentile", "60th percentile", "70th percentile",
-                     "80th percentile", "90th percentile"])
+    all_lines = []
+    all_legends = []
+    for percentile in [1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+        push!(all_lines, lines!(ax, adf.step, get_percentile_along_vv(adf.money_distribution_household, percentile), color = percentile_color_map[percentile]))
+        push!(all_legends, "Percentile $(string(percentile))")
+    end
+    push!(all_lines, lines!(ax, adf.step, get_average_along_vv(adf.money_distribution_household), color = average_color))
+    push!(all_legends, "Average")
+
+    figure[1, 2] = Legend(figure, all_lines, all_legends)
     figure
 end
 
 function plot_households_wealth_distribution(adf, mdf)
     figure = Figure(size = (600, 400))
     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Wealth")
-    lowest(v) = 1
-    percentile_10(v) = Int64(floor((length(v)/10) * 1))
-    percentile_20(v) = Int64(floor((length(v)/10) * 2))
-    percentile_30(v) = Int64(floor((length(v)/10) * 3))
-    percentile_40(v) = Int64(floor((length(v)/10) * 4))
-    percentile_50(v) = Int64(floor((length(v)/10) * 5))
-    percentile_60(v) = Int64(floor((length(v)/10) * 6))
-    percentile_70(v) = Int64(floor((length(v)/10) * 7))
-    percentile_80(v) = Int64(floor((length(v)/10) * 8))
-    percentile_90(v) = Int64(floor((length(v)/10) * 9))
-    percentile_100(v) = length(v)
-    wealth_0 = lines!(ax, adf.step, get_quartile(adf.wealth_distribution_household, lowest), color = :red)
-    wealth_10 = lines!(ax, adf.step, get_quartile(adf.wealth_distribution_household, percentile_10), color = :green)
-    wealth_20 = lines!(ax, adf.step, get_quartile(adf.wealth_distribution_household, percentile_20), color = :blue)
-    wealth_30 = lines!(ax, adf.step, get_quartile(adf.wealth_distribution_household, percentile_30), color = :orange)
-    wealth_40 = lines!(ax, adf.step, get_quartile(adf.wealth_distribution_household, percentile_40), color = :purple)
-    wealth_50 = lines!(ax, adf.step, get_quartile(adf.wealth_distribution_household, percentile_50), color = :pink)
-    wealth_60 = lines!(ax, adf.step, get_quartile(adf.wealth_distribution_household, percentile_60), color = :lime)
-    wealth_70 = lines!(ax, adf.step, get_quartile(adf.wealth_distribution_household, percentile_70), color = :indigo)
-    wealth_80 = lines!(ax, adf.step, get_quartile(adf.wealth_distribution_household, percentile_80), color = :magenta)
-    wealth_90 = lines!(ax, adf.step, get_quartile(adf.wealth_distribution_household, percentile_90), color = :gray)
-    # wealth_100 = lines!(ax, adf.step, get_quartile(adf.wealth_distribution_household, percentile_100), color = :black)
-    figure[1, 2] = Legend(figure, [wealth_0, wealth_10, wealth_20, wealth_30, wealth_40, wealth_50, wealth_60, wealth_70,
-                    wealth_80, wealth_90], ["Lowest Wealth", "10th percentile", "20th percentile",
-                    "30th percentile", "40th percentile", "50th percentile", "60th percentile", "70th percentile",
-                     "80th percentile", "90th percentile"])
+    all_lines = []
+    all_legends = []
+    for percentile in [1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+        push!(all_lines, lines!(ax, adf.step, get_percentile_along_vv(adf.wealth_distribution_household, percentile), color = percentile_color_map[percentile]))
+        push!(all_legends, "Percentile $(string(percentile))")
+    end
+    push!(all_lines, lines!(ax, adf.step, get_average_along_vv(adf.wealth_distribution_household), color = average_color))
+    push!(all_legends, "Average")
+    figure[1, 2] = Legend(figure, all_lines, all_legends)
     figure
 end
+
 
 function plot_households_size_distribution(adf, mdf)
     figure = Figure(size = (600, 400))
     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Household Size")
-    lowest(v) = 1
-    quartile_25(v) = Int64(floor(length(v)/4))
-    quartile_50(v) = Int64(floor(length(v)/2))
-    quartile_75(v) = Int64(floor((length(v)/4)*3))
-    quartile_100(v) = length(v)
-    wealth_0 = lines!(ax, adf.step, get_quartile(adf.size_distribution_household, lowest), color = :black)
-    wealth_25 = lines!(ax, adf.step, get_quartile(adf.size_distribution_household, quartile_25), color = :blue)
-    wealth_50 = lines!(ax, adf.step, get_quartile(adf.size_distribution_household, quartile_50), color = :green)
-    wealth_75 = lines!(ax, adf.step, get_quartile(adf.size_distribution_household, quartile_75), color = :yellow)
-    wealth_100 = lines!(ax, adf.step, get_quartile(adf.size_distribution_household, quartile_100), color = :pink)
-    figure[1, 2] = Legend(figure, [wealth_0, wealth_25, wealth_50, wealth_75, wealth_100], ["Lowest Size", "First Quartile", "Median", "Third Quartile", "Highest Size"])
+    all_lines = []
+    all_legends = []
+    for percentile in [1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+        push!(all_lines, lines!(ax, adf.step, get_percentile_along_vv(adf.size_distribution_household, percentile), color = percentile_color_map[percentile]))
+        push!(all_legends, "Percentile $(string(percentile))")
+    end
+    push!(all_lines, lines!(ax, adf.step, get_average_along_vv(adf.size_distribution_household), color = average_color))
+    push!(all_legends, "Average")
+    figure[1, 2] = Legend(figure, all_lines, all_legends)
     figure
 end
 
 function plot_households_age_distribution(adf, mdf)
     figure = Figure(size = (600, 400))
     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Household Size")
-    lowest(v) = 1
-    quartile_25(v) = Int64(floor(length(v)/4))
-    quartile_50(v) = Int64(floor(length(v)/2))
-    quartile_75(v) = Int64(floor((length(v)/4)*3))
-    quartile_100(v) = length(v)
-    wealth_0 = lines!(ax, adf.step, get_quartile(adf.age_distribution_household, lowest), color = :black)
-    wealth_25 = lines!(ax, adf.step, get_quartile(adf.age_distribution_household, quartile_25), color = :blue)
-    wealth_50 = lines!(ax, adf.step, get_quartile(adf.age_distribution_household, quartile_50), color = :green)
-    wealth_75 = lines!(ax, adf.step, get_quartile(adf.age_distribution_household, quartile_75), color = :yellow)
-    wealth_100 = lines!(ax, adf.step, get_quartile(adf.age_distribution_household, quartile_100), color = :pink)
-    figure[1, 2] = Legend(figure, [wealth_0, wealth_25, wealth_50, wealth_75, wealth_100], ["Youngest", "First Quartile", "Median", "Third Quartile", "Oldest"])
+    all_lines = []
+    all_legends = []
+    for percentile in [1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+        push!(all_lines, lines!(ax, adf.step, get_percentile_along_vv(adf.age_distribution_household, percentile), color = percentile_color_map[percentile]))
+        push!(all_legends, "Percentile $(string(percentile))")
+    end
+    push!(all_lines, lines!(ax, adf.step, get_average_along_vv(adf.age_distribution_household), color = average_color))
+    push!(all_legends, "Average")
+    figure[1, 2] = Legend(figure, all_lines, all_legends)
     figure
 end
 
