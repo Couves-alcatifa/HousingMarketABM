@@ -12,7 +12,7 @@ percentile_color_map = Dict(
     100 => :black
 )
 
-average_color = :white
+average_color = :bordeaux
 
 function plot_houses_prices(adf, mdf)
     figure = Figure(size = (600, 400))
@@ -101,11 +101,11 @@ function get_percentile_along_vv(vv, percentile)
             push!(res, 0)
             continue
         end
-        percentile = percentile(vector, percentile)
-        if percentile == 0
-            percentile = 1 # avoid trying to access at index 0
+        percentile_index = get_percentile_index(vector, percentile)
+        if percentile_index == 0
+            percentile_index = 1 # avoid trying to access at index 0
         end
-        push!(res, vector[percentile])
+        push!(res, vector[percentile_index])
     end
     return res
 end
