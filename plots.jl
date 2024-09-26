@@ -12,7 +12,7 @@ percentile_color_map = Dict(
     100 => :black
 )
 
-average_color = :bordeaux
+average_color = :darkblue
 
 function plot_houses_prices(adf, mdf)
     figure = Figure(size = (600, 400))

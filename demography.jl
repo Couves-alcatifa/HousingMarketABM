@@ -34,15 +34,11 @@ end
 
 # returns true if household died
 function handle_deaths(household, model)
-    if (household.age < 60)
-        return false
-    end
-    probability_of_death = MORTALITY_RATE / 0.40 # assuming 40% of the households have >= 60 years
-    # if (household.age > 70)
-    #     probability_of_death *= (1 + 0.1 * (household.age - 70)) * rand()
-    # else
-    #     probability_of_death /= (1 + 0.1 * (70 - household.age)) * rand()
+    probability_of_death = 0.0005 + 10^(-4.2+0.032*household.age)
+    # if (household.age < 60)
+    #     return false
     # end
+    # probability_of_death = MORTALITY_RATE / 0.40 # assuming 40% of the households have >= 60 years
     if (rand() < probability_of_death)
         model.deaths += 1
         if household.size == 1
