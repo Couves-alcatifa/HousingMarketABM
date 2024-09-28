@@ -277,6 +277,14 @@ function clearHouseMarket(model)
             i += 1
         end
     end
+
+    empty!(model.householdsInDemand)
+    for demand in model.houseMarket.demand
+        if !(demand.householdId in householdsWhoBoughtAHouse)
+            push!(model.householdsInDemand, demand.householdId)
+            # save the information about the demand
+        end
+    end
     empty!(model.houseMarket.demand)
 end
 
@@ -443,39 +451,26 @@ function public_investment(model)
 end
 
 function InitiateBuckets()
-    result = Dict([
-        (Amadora, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
-        (Cascais, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
-        (Lisboa, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
-        (Loures, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
-        (Mafra, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
-        (Odivelas, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
-        (Oeiras, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
-        (Sintra, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
-        (VilaFrancaDeXira, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
-        (Alcochete, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
-        (Almada, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
-        (Barreiro, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
-        (Moita, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
-        (Montijo, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
-        (Palmela, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
-        (Seixal, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
-        (Sesimbra, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
-        (Setubal, Dict(quartile => Float64[] for quartile in [25, 50, 75, 100]))
-    ])
+    result = Dict(location => Dict(
+                    quartile => Dict( 
+                        size_interval => Float64[]
+                        for size_interval in instances(SizeInterval))
+                    for quartile in [25, 50, 75, 100])
+                  for location in instances(HouseLocation))
     return result
 end
 
 function calculateBucket(model, house)
+    percentile = 100
     if house.percentile < 25
-        return model.buckets[house.location][25]
+        percentile = 25
     elseif house.percentile < 50
-        return model.buckets[house.location][50]
+        percentile = 50
     elseif house.percentile < 75
-        return model.buckets[house.location][75]
-    else
-        return model.buckets[house.location][100]
+        percentile = 75
     end
+    size_interval = getSizeInterval(house)
+    return model.buckets[house.location][percentile][size_interval]
 end
 
 function addTransactionToBuckets(model, house, price)
@@ -762,7 +757,7 @@ function calculateProbabilityOfAcceptingBid(bid, askPrice)
     return map_value(ratio, 0.95, 1.0, 0.2, 1.0)
 end
 
-function map_value(x, in_min::Float64, in_max::Float64, out_min::Float64, out_max::Float64)::Float64
+function map_value(x, in_min, in_max, out_min, out_max)::Float64
     return out_min + (x - in_min) * (out_max - out_min) / (in_max - in_min)
 end
 
@@ -791,4 +786,42 @@ function clearHangingSupplies(model)
             splice!(model.houseMarket.supply, i)
         end
     end
+end
+
+function measureDemandForSizeAndRegion(model, size_interval, location)
+    count = 0
+    for householdId in model.householdsInDemand
+        household = model[householdId]
+        if (household.residencyZone != location 
+            || household.size * 25 >= Int(size_interval))
+            continue
+        end
+        count += 1
+    end
+    return count
+end
+
+function measureSupplyForSizeAndRegion(model, size_interval, location)
+    count = 0
+    for supply in model.houseMarket.supply
+        house = supply.house
+        if (house.location != location
+            || getSizeInterval(house) != size_interval)
+            continue
+        end
+        count += 1
+    end
+    return count
+end
+
+function getSizeInterval(house)
+    size_interval = More
+    if house.area < 50
+        size_interval = LessThan50
+    elseif house.area < 75
+        size_interval = LessThan75
+    elseif house.area < 125
+        size_interval = LessThan125
+    end
+    return size_interval
 end

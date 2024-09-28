@@ -174,7 +174,7 @@ function expensesReceived(model)
     return res
 end 
 
-houses_per_region(model) = copy(model.houses)
+number_of_houses_per_region(model) = Dict(location => length(model.houses[location]) for location in instances(HouseLocation))
 function transactions_per_region(model)
     d = Dict()
     for location in instances(HouseLocation)

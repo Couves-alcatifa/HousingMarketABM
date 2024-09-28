@@ -19,6 +19,13 @@
     Setubal = 18
 end
 
+@enum SizeInterval begin
+    LessThan50 = 50
+    LessThan75 = 75
+    LessThan125 = 125
+    More = 1000
+end
+
 # Highly influences price, without big changes in geographical location
 @enum HouseLocationType begin
     SocialNeighbourhood = 1
@@ -30,10 +37,11 @@ mutable struct House
     locationType::HouseLocationType
     maintenanceLevel::Float64 # 0..1
     percentile::Int64
-    function House(area::UInt16, location::HouseLocation, locationType::HouseLocationType, maintenanceLevel::Float64)
-        return new(area, location, locationType, maintenanceLevel, rand(1:100))
-    end
 end
+function House(area::UInt16, location::HouseLocation, locationType::HouseLocationType, maintenanceLevel::Float64)
+    return House(area, location, locationType, maintenanceLevel, rand(1:100))
+end
+
 mutable struct Mortgage
     intialValue::Float64
     valueInDebt::Float64
@@ -104,7 +112,6 @@ end
 mutable struct HouseDemand
     householdId::Int
     supplyMatches::Array{SupplyMatch}
-    size::UInt16
 end
 
 
@@ -123,7 +130,6 @@ end
 mutable struct RentalDemand
     householdId::Int
     supplyMatches::Array{RentalSupply}
-    size::UInt16
 end
 
 mutable struct RentalMarket
@@ -147,15 +153,15 @@ end
 
 mutable struct PendingConstruction
     time::Int # time that has passed since the start of the construction
+    permitTime::Int # total real time that will take
+    constructionTime::Int # total real time that will take
     house::House
 end
 
 mutable struct ConstructionSector
     wealth::Float64
-    housesInConstruction # dict with and array of pending constructions per region
-    constructionDelay::Int # in months
+    housesInConstruction # dict of dicts with arrays of pending constructions per region/size_interval
     mortgages::Array{Mortgage}
-    constructionTimeMultiplier::Float64 # to be multiplied by the area of the house
 end
 
 mutable struct HouseholdInfo #TODO: drop this

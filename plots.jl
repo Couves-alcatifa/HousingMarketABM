@@ -278,7 +278,7 @@ function plot_number_of_houses_per_region(adf, mdf)
     for location in instances(HouseLocation)
         regional_number_of_houses = Int32[]
         for step in 1:NUMBER_OF_STEPS
-            push!(regional_number_of_houses, length(mdf.houses_per_region[step][location])) 
+            push!(regional_number_of_houses, mdf.number_of_houses_per_region[step][location]) 
         end
         push!(lines, lines!(ax, adf.step, regional_number_of_houses, color = color_map[location]))
         push!(locations, string(location))

@@ -95,7 +95,7 @@ function wealth_model()
         :salary_multiplier => 1.0,
         :demand_size => Dict(location => 0 for location in instances(HouseLocation)),
         :supply_size => Dict(location => 0 for location in instances(HouseLocation)),
-        :construction_sector => ConstructionSector(STARTING_CONSTRUCTION_SECTOR_WEALTH, Dict(location => PendingConstruction[] for location in instances(HouseLocation)), CONSTRUCTION_DELAY, Mortgage[], CONSTRUCTION_TIME_MULTIPLIER),
+        :construction_sector => ConstructionSector(STARTING_CONSTRUCTION_SECTOR_WEALTH, Dict(location => Dict(size_interval => PendingConstruction[] for size_interval in instances(SizeInterval)) for location in instances(HouseLocation)), Mortgage[]),
         :births => 0, 
         :breakups => 0,
         :deaths => 0,
@@ -111,6 +111,7 @@ function wealth_model()
         :expensesReceived => 0.0,
         :buckets => InitiateBuckets(), # Houses characteristics => Transaction
         :mortgagesInStep => Mortgage[],
+        :householdsInDemand => Int[],
     )
 
     model = StandardABM(MyMultiAgent; agent_step! = agent_step!, model_step! = model_step!, properties,scheduler = Schedulers.Randomly())
@@ -282,11 +283,11 @@ function supply_decisions(household, model)
             i += 1
             continue
         end
-        # if decideToRent(household, model, house)
-        #     put_house_to_rent(household, model, house)
-        # else # decides to sell...
-        put_house_to_sale(household, model, i)
-        # end
+        if decideToRent(household, model, house)
+            put_house_to_rent(household, model, house)
+        else # decides to sell...
+            put_house_to_sale(household, model, i)
+        end
         i += 1
     end
 end
@@ -304,9 +305,9 @@ end
 function not_home_owner_decisions(household, model)
     # let's say the household always tries to buy a house
     # and in the meantime it rents
-    push!(model.houseMarket.demand, HouseDemand(household.id, HouseSupply[], household.size))
+    push!(model.houseMarket.demand, HouseDemand(household.id, HouseSupply[]))
     if (household.contractIdAsTenant == 0)
-        push!(model.rentalMarket.demand, RentalDemand(household.id, RentalSupply[], household.size))
+        push!(model.rentalMarket.demand, RentalDemand(household.id, RentalSupply[]))
     end
 end
 
@@ -324,7 +325,8 @@ end
 function housing_decisions(household, model)
     if length(household.houses) > 1
         supply_decisions(household, model)
-    elseif (!is_home_owner(household))
+    end
+    if (!is_home_owner(household))
         not_home_owner_decisions(household, model)
     else
         home_owner_decisions(household, model)
@@ -432,7 +434,7 @@ mdata = [count_supply, gov_wealth, construction_wealth, company_wealth,
          ## Gov Money flow ##
          subsidiesPaid, ivaCollected, irsCollected, companyServicesPaid, inheritagesFlow, constructionLabor,
          ## Company Money flow ##
-         rawSalariesPaid, liquidSalariesReceived, expensesReceived, houses_per_region, transactions_per_region, 
+         rawSalariesPaid, liquidSalariesReceived, expensesReceived, number_of_houses_per_region, transactions_per_region, 
          ## Houses prices per bucket
          #bucket_1, bucket_2, bucket_3, bucket_4
          ]

@@ -124,7 +124,7 @@ end
 function handle_migrations(model)
     for location in [Lisboa]
         expectedMigrants = eval(Symbol("MIGRATION_RATE_IN_$(string(location))")) / 12
-        expectedMigrants *= (0.90 + rand() * 0.2)
+        expectedMigrants = rand(Normal(expectedMigrants, expectedMigrants * 0.2))
         added = 0
         while added < expectedMigrants
             age = rand(20:55)
