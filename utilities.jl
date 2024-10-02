@@ -121,16 +121,43 @@ function calculateBid(household, house, askPrice, maxMortgageValue, consumerSurp
     
 end
 
+function calculateRentalBid(household, model, askPrice, consumerSurplus)
+    demandValue = calculateLiquidSalary(household, model) * MAX_EFFORT_FOR_RENT
+    consumerSurplusMultiplier = calculateConsumerSurplusAddedValue(consumerSurplus)
+    if (demandValue >= askPrice * consumerSurplusMultiplier)
+        return askPrice * consumerSurplusMultiplier
+    elseif demandValue >= askPrice
+        return askPrice
+    else
+        return 0
+    end
+    
+end
+
+function calculateMortgagesPayment(household, model)
+    mortgagePayment = 0
+    for mortgage in household.mortgages
+        mortgagePayment += calculateMortgagePayment(mortgage, model.bank.interestRate)
+    end
+    return mortgagePayment
+end
+
 # few options here, we can have a maxMortgageValue that the bank is
 # willing to provide or we can have the maxValue for the conditions established by the household
 # so the behaviour should be something like:
 # - maxMortgageValue(h, b, house) -> max value the bank is willing to lend
 # - maxMortgageValue(h, b, house, maxSpread = x | maxMonthlyPayment = y) -> maxValue with certain conditions
-function maxMortgageValue(model, household, bank, house; maxSpread=0, maxMonthlyPayment=0)
+function maxMortgageValue(model, household)
+    bank = model.bank
     salary = calculateLiquidSalary(household, model)
+    
+    # remove the payments from the liquid salary to avoid one household contracting too many mortgages
+    salary -= calculateMortgagesPayment(household, model)
+    
     if salary < 0
         return 0
     end
+
     startingMaxValue = household.wealth * (1 / (1 - bank.ltv))
     # startingMaxValue = calculate_market_price(house, model) * bank.ltv
     maxValue = 0
@@ -268,25 +295,28 @@ function clearHouseMarket(model)
             end
             demand = model.houseMarket.demand[j]
             household = model[demand.householdId]
+            house = supply.house
             if household.wealth < 0
                 continue
             end
 
-            # TODO:
-            # instead we should calculate the bid that we are willing to give 
-            # and if that is below ask price -> continue
-            # Alternative would be to calculate a consumerSurplus, that would be a multiplier
-            # to our final bid, if that consumerSurplus is == 0 -> continue right away
-            if (!has_enough_size(supply.house, household.size)
-                || supply.house.location != household.residencyZone)
+            if demand.type == ForRental
+                rentability = calculateHouseAnnualRentalRentability(house, model)
+                if rentability < 0.05
+                    continue
+                end
+            end
+
+            if (!has_enough_size(house, household.size)
+                || house.location != household.residencyZone)
                 continue
             end
-            consumerSurplus = calculateConsumerSurplus(household, supply.house)
-            maxMortgage = maxMortgageValue(model, household, model.bank, supply.house)
-            demandBid = calculateBid(household, supply.house, supply.price, maxMortgage, consumerSurplus)
+            consumerSurplus = calculateConsumerSurplus(household, house)
+            maxMortgage = maxMortgageValue(model, household)
+            demandBid = calculateBid(household, house, supply.price, maxMortgage, consumerSurplus)
             if (demandBid >= supply.price * 0.95)
                 lock(localLock) do
-                    push!(supply.bids, Bid(demandBid, demand.householdId))
+                    push!(supply.bids, Bid(demandBid, demand.householdId, demand.type))
                     push!(demand.supplyMatches, SupplyMatch(supply, consumerSurplus))
                 end
             end
@@ -343,11 +373,10 @@ function clearRentalMarket(model)
                 continue
             end
             consumerSurplus = calculateConsumerSurplus(household, supply.house)
-            maxMortgage = maxMortgageValue(model, household, model.bank, supply.house)
-            demandBid = calculateBid(household, supply.house, supply.monthlyPrice, maxMortgage, consumerSurplus)
+            demandBid = calculateRentalBid(household, model, supply.monthlyPrice, consumerSurplus)
             if (demandBid >= supply.monthlyPrice * 0.95)
                 lock(localLock) do
-                    push!(supply.bids, Bid(demandBid, demand.householdId))
+                    push!(supply.bids, Bid(demandBid, demand.householdId, Regular))
                     push!(demand.supplyMatches, RentalSupplyMatch(supply, consumerSurplus))
                 end
             end
@@ -378,54 +407,6 @@ function clearRentalMarket(model)
     # end
     empty!(model.rentalMarket.demand)
 end
-
-# function clearRentalMarket(model)
-#     # TODO: optimize this
-#     for i in 1:length(model.rentalMarket.supply)
-#         supply = model.rentalMarket.supply[i]
-#         for j in 1:length(model.rentalMarket.demand)
-#             if rand() < HOUSE_SEARCH_OBFUSCATION_FACTOR_FOR_RENTAL # only view 30% of the offers
-#                 continue
-#             end
-#             demand = model.rentalMarket.demand[j]
-#             household = model[demand.householdId]
-#             if (has_enough_size(supply.house, household.size) && calculateLiquidSalary(household, model) * 0.40 > supply.monthlyPrice)
-#                 push!(demand.supplyMatches, supply)
-#             end
-#         end
-#     end
-
-#     for i in 1:length(model.rentalMarket.demand)
-#         demand = model.rentalMarket.demand[i]
-#         household = model[demand.householdId]
-#         cheapest_value = 99999999 # TODO: find const value for this
-#         cheapest_supply = nothing 
-#         for j in 1:length(demand.supplyMatches)
-#             supply = demand.supplyMatches[j]
-#             if !supply.valid
-#                 continue
-#             end
-#             if (cheapest_value > supply.monthlyPrice)
-#                 cheapest_value = supply.monthlyPrice
-#                 cheapest_supply = supply
-#             end
-#         end
-#         if cheapest_supply !== nothing
-#             rent_house(model, cheapest_supply, household)
-#             cheapest_supply.valid = false
-#         end
-#     end
-#     empty!(model.rentalMarket.demand)
-#     i = 1
-#     while i <= length(model.rentalMarket.supply)
-#         if !model.rentalMarket.supply[i].valid
-#             splice!(model.rentalMarket.supply, i)
-#         else
-#             model.rentalMarket.supply[i].monthlyPrice *= 0.99 # reduce price
-#             i += 1
-#         end
-#     end
-# end
 
 function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     seller = nothing
@@ -459,22 +440,24 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
         return false
     end
 
+    winningBid = supply.bids[i]
+
     if i + 1 <= length(supply.bids)
-        actualBid = supply.bids[i + 1].value
+        bidValue = supply.bids[i + 1].value
     elseif supply.bids[i].value > supply.price
-        actualBid = supply.price
+        bidValue = supply.price
     else
-        actualBid = supply.bids[i].value 
+        bidValue = supply.bids[i].value 
     end
 
-    if rand() > calculateProbabilityOfAcceptingBid(actualBid, supply.price)
+    if rand() > calculateProbabilityOfAcceptingBid(bidValue, supply.price)
         return false
     end
 
     household = model[highestBidder]
-    if (household.wealth < actualBid)
+    if (household.wealth < bidValue)
         paidWithOwnMoney = household.wealth * 0.95
-        mortgageValue = actualBid - paidWithOwnMoney
+        mortgageValue = bidValue - paidWithOwnMoney
         # if mortgageValue > model.bank.wealth * 0.5
         #     return false
         # end
@@ -495,7 +478,7 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
         content *= "household size = $(household.size)\n"
         content *= "askPrice = $(supply.price)\n"
         content *= "sellerId = $(supply.sellerId)\n"
-        content *= "actualBid = $(actualBid)\n"
+        content *= "bidValue = $(bidValue)\n"
         content *= "########\n"
         print(content)
         open("$output_folder/transactions_logs/step_$(model.steps).txt", "a") do file
@@ -507,14 +490,18 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
         println("\n\nhouse will be paid without mortgage... unusual\n\n")
         # house will be paid without mortgage... unusual
     end
-    household.wealth -= actualBid
-    seller.wealth += actualBid
+    household.wealth -= bidValue
+    seller.wealth += bidValue
     push!(household.houses, supply.house)
     terminateContractsOnTentantSide(household, model)
-    addTransactionToBuckets(model, supply.house, actualBid)
-    push!(model.transactions, Transaction(supply.house.area, actualBid, supply.house.location))
-    push!(model.transactions_per_region[supply.house.location][model.steps], Transaction(supply.house.area, actualBid, supply.house.location))
+    addTransactionToBuckets(model, supply.house, bidValue)
+    push!(model.transactions, Transaction(supply.house.area, bidValue, supply.house.location))
+    push!(model.transactions_per_region[supply.house.location][model.steps], Transaction(supply.house.area, bidValue, supply.house.location))
     push!(householdsWhoBoughtAHouse, highestBidder)
+    
+    if winningBid.type == ForRental
+        put_house_to_rent(household, model, supply.house)
+    end
     return true
 end
 
@@ -999,4 +986,10 @@ function getSizeInterval(house)
         size_interval = LessThan125
     end
     return size_interval
+end
+
+function calculateHouseAnnualRentalRentability(house, model)
+    marketPrice = calculate_market_price(house, model)
+    rent = calculate_rental_market_price(house, model)
+    return (rent * 12)/marketPrice
 end

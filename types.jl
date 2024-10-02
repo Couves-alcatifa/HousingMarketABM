@@ -92,9 +92,15 @@ mutable struct Transaction
     location
 end
 
+@enum DemandType begin
+    Regular = 1
+    ForRental = 2
+end
+
 mutable struct Bid
     value::Float64
     householdId::Int
+    type::DemandType
 end
 
 mutable struct HouseSupply
@@ -109,9 +115,12 @@ mutable struct SupplyMatch
     consumerSurplus::Float64
 end
 
+
+
 mutable struct HouseDemand
     householdId::Int
     supplyMatches::Array{SupplyMatch}
+    type::DemandType
 end
 
 

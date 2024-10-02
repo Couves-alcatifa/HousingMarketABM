@@ -307,7 +307,7 @@ end
 function not_home_owner_decisions(household, model)
     # let's say the household always tries to buy a house
     # and in the meantime it rents
-    push!(model.houseMarket.demand, HouseDemand(household.id, HouseSupply[]))
+    push!(model.houseMarket.demand, HouseDemand(household.id, HouseSupply[], Regular))
     if (household.contractIdAsTenant == 0)
         push!(model.rentalMarket.demand, RentalDemand(household.id, RentalSupply[]))
     end
@@ -321,6 +321,15 @@ function home_owner_decisions(household, model)
         # is not the same as not having one in the first place
         put_house_to_sale(household, model, 1)
         not_home_owner_decisions(household, model)
+    else
+        # lets assess the household economical situation
+        # WARNING: this might be computationally expensive
+        mortgage = maxMortgageValue(model, household)
+        if household.wealth + mortgage > calculate_market_price(House(25, household.residencyZone, NotSocialNeighbourhood, 1.0, 25), model)
+            if household.percentile > 70 # not everyone who can will do this do
+                push!(model.houseMarket.demand, HouseDemand(household.id, SupplyMatch[], ForRental))
+            end
+        end
     end
 end
 
@@ -389,6 +398,7 @@ function payRent(model, household)
         household.wealth -= contract.monthlyPayment
     end
 end
+
 function payMortgages(model, household)
     if (length(household.mortgages) != 0)
         for i in 1:length(household.mortgages)
