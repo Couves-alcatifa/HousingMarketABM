@@ -384,11 +384,10 @@ function clearRentalMarket(model)
     end
 
     i = 1
-    householdsWhoBoughtAHouse = Set()
     while i <= length(model.rentalMarket.supply)
         supply = model.rentalMarket.supply[i]
         sort!(supply.bids, lt=sortBids)
-        if rent_house(model, supply, householdsWhoBoughtAHouse)
+        if rent_house(model, supply)
             splice!(model.rentalMarket.supply, i)
         else
             # house wasn't rented, but we will clear the bids just in case
@@ -505,7 +504,7 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     return true
 end
 
-function rent_house(model, supply::RentalSupply, householdsWhoBoughtAHouse)
+function rent_house(model, supply::RentalSupply)
     seller = nothing
     if supply.sellerId == -1
         seller = model.construction_sector
@@ -526,7 +525,8 @@ function rent_house(model, supply::RentalSupply, householdsWhoBoughtAHouse)
     highestBidder = supply.bids[1].householdId
     while i <= length(supply.bids)
         highestBidder = supply.bids[i].householdId
-        if highestBidder in householdsWhoBoughtAHouse
+        if model[highestBidder].contractIdAsTenant != 0
+            # already renting a house... next
             i += 1
         else
             break
@@ -551,27 +551,15 @@ function rent_house(model, supply::RentalSupply, householdsWhoBoughtAHouse)
     end
 
     push!(model.contracts, Contract(seller.id, highestBidder, supply.house, actualBid))
+    
+    #PROBLEM: if this tenant overrides his contract, we get a misalignment between the model
+    # contract and the household
+    # This system needs some refactor maybe...
     household.contractIdAsTenant = length(model.contracts)
     push!(seller.contractsIdsAsLandlord, length(model.contracts))
     addTransactionToRentalBuckets(model, supply.house, actualBid)
     return true
 end
-
-# function rent_house(model, supply::RentalSupply, household)
-#     seller = nothing
-#     try
-#         seller = model[supply.sellerId]
-#     catch
-#         return # landlord died, more luck next time...
-#     end
-
-#     if household.contractIdAsTenant != 0
-#         return # already renting
-#     end
-#     push!(model.contracts, Contract(seller.id, household.id, supply.house, supply.monthlyPrice))
-#     household.contractIdAsTenant = length(model.contracts)
-#     push!(seller.contractsIdsAsLandlord, length(model.contracts))
-# end
 
 function public_investment(model)
     # gov pays company services for each household
