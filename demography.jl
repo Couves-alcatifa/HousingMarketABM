@@ -42,6 +42,8 @@ function handle_deaths(household, model)
     if (rand() < probability_of_death)
         model.deaths += 1
         if household.size == 1
+            terminateContractsOnTentantSide(household, model)
+            terminateContractsOnLandLordSide(household, model)
             push!(model.inheritages, Inheritage(household.houses, household.wealth, household.mortgages, household.percentile))
             # gov takes the wealth
             model.government.wealth += household.wealth
@@ -57,11 +59,15 @@ function handle_deaths(household, model)
 end
 
 # returns true if household died
+# TODO: contracts logic should be enhanced
 function handle_breakups(household, model)
     if (household.size >= 2)
         probability_of_breakup = eval(Symbol("PROBABILITY_OF_DIVORCE_IN_$(string(household.residencyZone))"))
         if (rand() < probability_of_breakup)
-            add_agent!(Household, model, household.wealth / 2, household.age, 1, Int[], household.percentile, Mortgage[], Int[], 0, 0.0, getChildResidencyZone(household), rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV), 1)[1])
+            terminateContractsOnTentantSide(household, model)
+            terminateContractsOnLandLordSide(household, model)
+            
+            add_agent!(Household, model, household.wealth / 2, household.age, 1, House[], household.percentile, Mortgage[], Int[], 0, 0.0, getChildResidencyZone(household), rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV), 1)[1])
             add_agent!(Household, model, household.wealth / 2, household.age, household.size - 1, household.houses, household.percentile, household.mortgages, Int[], 0, 0.0, getChildResidencyZone(household), rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV), 1)[1])
             #println("remove Agent! id = " * string(household.id) * " step = " * string(model.steps))
             remove_agent!(household, model)

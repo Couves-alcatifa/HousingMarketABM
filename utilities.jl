@@ -8,8 +8,14 @@ include("consts.jl")
 include("logger.jl")
 include("constructionSector.jl")
 
-function calculate_rental_market_price(house)
-    return house.area * 8.20 * house.maintenanceLevel
+function calculate_rental_market_price(house, model)
+    bucket = calculateRentalBucket(model, house)
+    if length(bucket) == 0
+        # println("house = $house calculate_initial_market_price(house) = $(calculate_initial_market_price(house))")
+        return calculate_initial_rental_market_price(house)
+    end
+    # println("house = $house mean(transactions) * house.area * house.maintenanceLevel = $(mean(transactions) * house.area * house.maintenanceLevel)")
+    return mean(bucket) * house.area * house.maintenanceLevel
 end
 
 function calculate_market_price(house, model)
@@ -22,25 +28,49 @@ function calculate_market_price(house, model)
     return mean(bucket) * house.area * house.maintenanceLevel
 end
 
+function calculate_initial_rental_market_price(house)
+    ## TODO: houses should have a quality (maybe replace maintenanceLevel ?)
+    ## this quality should influence the price per m2 according to the firstQuartileHousePricesPerRegion
+    ## stop using only first quartile
+    if house.percentile <= 25
+        firstQuartile = FIRST_QUARTILE_RENT_MAP[house.location]
+        base = firstQuartile / 1.25
+        range = firstQuartile - base
+        return house.area * (base + range * (house.percentile/100) * 4) * house.maintenanceLevel
+    elseif house.percentile <= 50
+        base = FIRST_QUARTILE_RENT_MAP[house.location]
+        range = MEDIAN_RENT_MAP[house.location] - base
+        return house.area * (base + range * (house.percentile/100 - 0.25) * 4) * house.maintenanceLevel
+    elseif house.percentile <= 75
+        base = MEDIAN_RENT_MAP[house.location]
+        range = THIRD_QUARTILE_RENT_MAP[house.location] - base
+        return house.area * (base + range * (house.percentile/100 - 0.50) * 4) * house.maintenanceLevel
+    else
+        base = THIRD_QUARTILE_RENT_MAP[house.location]
+        range = base * 0.20
+        return house.area * (base + range * (house.percentile/100 - 0.75) * 4) * house.maintenanceLevel
+    end
+end
+
 function calculate_initial_market_price(house)
     ## TODO: houses should have a quality (maybe replace maintenanceLevel ?)
     ## this quality should influence the price per m2 according to the firstQuartileHousePricesPerRegion
     ## stop using only first quartile
     if house.percentile <= 25
-        firstQuartile = eval(Symbol("FIRST_QUARTILE_SALES_IN_$(string(house.location))"))
+        firstQuartile = FIRST_QUARTILE_SALES_MAP[house.location]
         base = firstQuartile / 1.25
         range = firstQuartile - base
         return house.area * (base + range * (house.percentile/100) * 4) * house.maintenanceLevel
     elseif house.percentile <= 50
-        base = eval(Symbol("FIRST_QUARTILE_SALES_IN_$(string(house.location))"))
-        range = eval(Symbol("MEDIAN_SALES_IN_$(string(house.location))")) - base
+        base = FIRST_QUARTILE_SALES_MAP[house.location]
+        range = MEDIAN_SALES_MAP[house.location] - base
         return house.area * (base + range * (house.percentile/100 - 0.25) * 4) * house.maintenanceLevel
     elseif house.percentile <= 75
-        base = eval(Symbol("MEDIAN_SALES_IN_$(string(house.location))"))
-        range = eval(Symbol("THIRD_QUARTILE_SALES_IN_$(string(house.location))")) - base
+        base = MEDIAN_SALES_MAP[house.location]
+        range = THIRD_QUARTILE_SALES_MAP[house.location] - base
         return house.area * (base + range * (house.percentile/100 - 0.50) * 4) * house.maintenanceLevel
     else
-        base = eval(Symbol("THIRD_QUARTILE_SALES_IN_$(string(house.location))"))
+        base = THIRD_QUARTILE_SALES_MAP[house.location]
         range = base * 0.20
         return house.area * (base + range * (house.percentile/100 - 0.75) * 4) * house.maintenanceLevel
     end
@@ -289,52 +319,113 @@ function clearHouseMarket(model)
 end
 
 function clearRentalMarket(model)
-    # TODO: optimize this
-    for i in 1:length(model.rentalMarket.supply)
+    # TODO: optimize this (below block is slower than all household_steps)
+    localLock = ReentrantLock()
+    Threads.@threads for i in 1:length(model.rentalMarket.supply)
         supply = model.rentalMarket.supply[i]
         for j in 1:length(model.rentalMarket.demand)
-            if rand() < HOUSE_SEARCH_OBFUSCATION_FACTOR_FOR_RENTAL # only view 30% of the offers
+            if rand() < HOUSE_SEARCH_OBFUSCATION_FACTOR # only view 30% of the offers
                 continue
             end
             demand = model.rentalMarket.demand[j]
             household = model[demand.householdId]
-            if (has_enough_size(supply.house, household.size) && calculateLiquidSalary(household, model) * 0.40 > supply.monthlyPrice)
-                push!(demand.supplyMatches, supply)
+            if household.wealth < 0
+                continue
+            end
+
+            # TODO:
+            # instead we should calculate the bid that we are willing to give 
+            # and if that is below ask price -> continue
+            # Alternative would be to calculate a consumerSurplus, that would be a multiplier
+            # to our final bid, if that consumerSurplus is == 0 -> continue right away
+            if (!has_enough_size(supply.house, household.size)
+                || supply.house.location != household.residencyZone)
+                continue
+            end
+            consumerSurplus = calculateConsumerSurplus(household, supply.house)
+            maxMortgage = maxMortgageValue(model, household, model.bank, supply.house)
+            demandBid = calculateBid(household, supply.house, supply.monthlyPrice, maxMortgage, consumerSurplus)
+            if (demandBid >= supply.monthlyPrice * 0.95)
+                lock(localLock) do
+                    push!(supply.bids, Bid(demandBid, demand.householdId))
+                    push!(demand.supplyMatches, RentalSupplyMatch(supply, consumerSurplus))
+                end
             end
         end
     end
 
-    for i in 1:length(model.rentalMarket.demand)
-        demand = model.rentalMarket.demand[i]
-        household = model[demand.householdId]
-        cheapest_value = 99999999 # TODO: find const value for this
-        cheapest_supply = nothing 
-        for j in 1:length(demand.supplyMatches)
-            supply = demand.supplyMatches[j]
-            if !supply.valid
-                continue
-            end
-            if (cheapest_value > supply.monthlyPrice)
-                cheapest_value = supply.monthlyPrice
-                cheapest_supply = supply
-            end
-        end
-        if cheapest_supply !== nothing
-            rent_house(model, cheapest_supply, household)
-            cheapest_supply.valid = false
-        end
-    end
-    empty!(model.rentalMarket.demand)
     i = 1
+    householdsWhoBoughtAHouse = Set()
     while i <= length(model.rentalMarket.supply)
-        if !model.rentalMarket.supply[i].valid
+        supply = model.rentalMarket.supply[i]
+        sort!(supply.bids, lt=sortBids)
+        if rent_house(model, supply, householdsWhoBoughtAHouse)
             splice!(model.rentalMarket.supply, i)
         else
-            model.rentalMarket.supply[i].monthlyPrice *= 0.99 # reduce price
+            # house wasn't rented, but we will clear the bids just in case
+            empty!(supply.bids)
+            supply.monthlyPrice *= (1 - HOUSE_PRICE_REDUCTION_FACTOR)
             i += 1
         end
     end
+
+    # empty!(model.householdsInDemand)
+    # for demand in model.rentalMarket.demand
+    #     if !(demand.householdId in householdsWhoBoughtAHouse)
+    #         push!(model.householdsInDemand, demand.householdId)
+    #         # save the information about the demand
+    #     end
+    # end
+    empty!(model.rentalMarket.demand)
 end
+
+# function clearRentalMarket(model)
+#     # TODO: optimize this
+#     for i in 1:length(model.rentalMarket.supply)
+#         supply = model.rentalMarket.supply[i]
+#         for j in 1:length(model.rentalMarket.demand)
+#             if rand() < HOUSE_SEARCH_OBFUSCATION_FACTOR_FOR_RENTAL # only view 30% of the offers
+#                 continue
+#             end
+#             demand = model.rentalMarket.demand[j]
+#             household = model[demand.householdId]
+#             if (has_enough_size(supply.house, household.size) && calculateLiquidSalary(household, model) * 0.40 > supply.monthlyPrice)
+#                 push!(demand.supplyMatches, supply)
+#             end
+#         end
+#     end
+
+#     for i in 1:length(model.rentalMarket.demand)
+#         demand = model.rentalMarket.demand[i]
+#         household = model[demand.householdId]
+#         cheapest_value = 99999999 # TODO: find const value for this
+#         cheapest_supply = nothing 
+#         for j in 1:length(demand.supplyMatches)
+#             supply = demand.supplyMatches[j]
+#             if !supply.valid
+#                 continue
+#             end
+#             if (cheapest_value > supply.monthlyPrice)
+#                 cheapest_value = supply.monthlyPrice
+#                 cheapest_supply = supply
+#             end
+#         end
+#         if cheapest_supply !== nothing
+#             rent_house(model, cheapest_supply, household)
+#             cheapest_supply.valid = false
+#         end
+#     end
+#     empty!(model.rentalMarket.demand)
+#     i = 1
+#     while i <= length(model.rentalMarket.supply)
+#         if !model.rentalMarket.supply[i].valid
+#             splice!(model.rentalMarket.supply, i)
+#         else
+#             model.rentalMarket.supply[i].monthlyPrice *= 0.99 # reduce price
+#             i += 1
+#         end
+#     end
+# end
 
 function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     seller = nothing
@@ -427,21 +518,73 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     return true
 end
 
-function rent_house(model, supply::RentalSupply, household)
+function rent_house(model, supply::RentalSupply, householdsWhoBoughtAHouse)
     seller = nothing
-    try
+    if supply.sellerId == -1
+        seller = model.construction_sector
+    else
         seller = model[supply.sellerId]
-    catch
-        return # landlord died, more luck next time...
     end
 
-    if household.contractIdAsTenant != 0
-        return # already renting
+    actualBid = 0
+    if length(supply.bids) == 0
+        return false # no bids
+    elseif length(supply.bids) == 1
+        actualBid = supply.monthlyPrice
+    else
+        actualBid = supply.bids[2].value
     end
-    push!(model.contracts, Contract(seller.id, household.id, supply.house, supply.monthlyPrice))
+
+    i = 1
+    highestBidder = supply.bids[1].householdId
+    while i <= length(supply.bids)
+        highestBidder = supply.bids[i].householdId
+        if highestBidder in householdsWhoBoughtAHouse
+            i += 1
+        else
+            break
+        end
+    end
+    
+    if i > length(supply.bids)
+        return false
+    end
+
+    if i + 1 <= length(supply.bids)
+        actualBid = supply.bids[i + 1].value
+    elseif supply.bids[i].value > supply.monthlyPrice
+        actualBid = supply.monthlyPrice
+    else
+        actualBid = supply.bids[i].value 
+    end
+
+    household = model[highestBidder]
+    if rand() > calculateProbabilityOfAcceptingBid(actualBid, supply.monthlyPrice)
+        return false
+    end
+
+    push!(model.contracts, Contract(seller.id, highestBidder, supply.house, actualBid))
     household.contractIdAsTenant = length(model.contracts)
     push!(seller.contractsIdsAsLandlord, length(model.contracts))
+    addTransactionToRentalBuckets(model, supply.house, actualBid)
+    return true
 end
+
+# function rent_house(model, supply::RentalSupply, household)
+#     seller = nothing
+#     try
+#         seller = model[supply.sellerId]
+#     catch
+#         return # landlord died, more luck next time...
+#     end
+
+#     if household.contractIdAsTenant != 0
+#         return # already renting
+#     end
+#     push!(model.contracts, Contract(seller.id, household.id, supply.house, supply.monthlyPrice))
+#     household.contractIdAsTenant = length(model.contracts)
+#     push!(seller.contractsIdsAsLandlord, length(model.contracts))
+# end
 
 function public_investment(model)
     # gov pays company services for each household
@@ -473,8 +616,26 @@ function calculateBucket(model, house)
     return model.buckets[house.location][percentile][size_interval]
 end
 
+function calculateRentalBucket(model, house)
+    percentile = 100
+    if house.percentile < 25
+        percentile = 25
+    elseif house.percentile < 50
+        percentile = 50
+    elseif house.percentile < 75
+        percentile = 75
+    end
+    size_interval = getSizeInterval(house)
+    return model.rentalBuckets[house.location][percentile][size_interval]
+end
+
 function addTransactionToBuckets(model, house, price)
     bucket = calculateBucket(model, house)
+    push!(bucket, price / house.area)
+end
+
+function addTransactionToRentalBuckets(model, house, price)
+    bucket = calculateRentalBucket(model, house)
     push!(bucket, price / house.area)
 end
 
@@ -482,9 +643,11 @@ function trimBucketsIfNeeded(model)
     # avoid holding to many transaction in the buckets, keep the most recent MAX_BUCKET_SIZE (initially 30)
     for location in instances(HouseLocation)
         for quartile in [25, 50, 75, 100]
-            if length(model.buckets[location][quartile]) > MAX_BUCKET_SIZE
-                sizeToCut = length(model.buckets[location][quartile]) - MAX_BUCKET_SIZE
-                splice!(model.buckets[location][quartile], 1:sizeToCut)
+            for size_interval in instances(SizeInterval) 
+                if length(model.buckets[location][quartile][size_interval]) > MAX_BUCKET_SIZE
+                    sizeToCut = length(model.buckets[location][quartile][size_interval]) - MAX_BUCKET_SIZE
+                    splice!(model.buckets[location][quartile][size_interval], 1:sizeToCut)
+                end
             end
         end
     end
@@ -534,9 +697,9 @@ end
 
 # TODO: region hack
 function initiateHouseholds(model, households_initial_ages, greedinesses)
-    for zone_str in ["Lisboa"]
-        for size_str in SIZES_STRINGS
-            number_of_households = eval(Symbol("HOUSEHOLDS_WITH_SIZE_" * size_str * "_IN_" * zone_str))
+    for location in [Lisboa]
+        for size in [1, 2, 3, 4, 5]
+            number_of_households = HOUSEHOLDS_SIZES_MAP[size][location]
             for i in 1:number_of_households
                 if length(households_initial_ages) == 0
                     # this means we would have slightly more households due to round()
@@ -547,9 +710,8 @@ function initiateHouseholds(model, households_initial_ages, greedinesses)
                 initial_age = households_initial_ages[1]
                 splice!(households_initial_ages, 1)
                 percentile = rand(0:100)
-                zone = eval(Symbol(zone_str))
-                size = get_household_size(size_str)
-                add_agent!(Household, model, generateInitialWealth(initial_age, percentile, size), initial_age, size, Int64[], percentile, Mortgage[], Int[], 0, 0.0, zone, greedinesses[i])
+                actualSize = get_household_size(size)
+                add_agent!(Household, model, generateInitialWealth(initial_age, percentile, actualSize), initial_age, actualSize, Int64[], percentile, Mortgage[], Int[], 0, 0.0, location, greedinesses[i])
             end
         end
     end
@@ -613,15 +775,9 @@ function update_houses(household, model)
     end
 end
 
-function get_household_size(size_str)
-    if size_str == "1"
-        return 1
-    elseif size_str == "2"
-        return 2
-    elseif size_str == "3"
-        return 3
-    elseif size_str == "4"
-        return 4
+function get_household_size(size)
+    if size < 5
+        return size
     else
         randomNumber = rand()
         if randomNumber > 0.3
@@ -784,6 +940,25 @@ function clearHangingSupplies(model)
             supply = model.houseMarket.supply[i]
             push!(model.inheritages, Inheritage([supply.house], 0, Mortgage[], rand(1:100)))
             splice!(model.houseMarket.supply, i)
+        end
+    end
+end
+
+function clearHangingRentalSupplies(model)
+    i = 1
+    while i <= length(model.rentalMarket.supply)
+        if model.rentalMarket.supply[i].sellerId == -1
+            i += 1
+            # construction sector -> we don't want to remove the supply
+            continue
+        end
+        try
+            model[model.rentalMarket.supply[i].sellerId]
+            i += 1
+        catch
+            supply = model.rentalMarket.supply[i]
+            push!(model.inheritages, Inheritage([supply.house], 0, Mortgage[], rand(1:100)))
+            splice!(model.rentalMarket.supply, i)
         end
     end
 end

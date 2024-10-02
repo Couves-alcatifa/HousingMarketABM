@@ -1,7 +1,7 @@
 include("types.jl")
 include("calibrationTable.jl")
 
-MAX_BUCKET_SIZE = 50
+MAX_BUCKET_SIZE = 100
 NUMBER_OF_HOUSEHOLDS = 1200
 NUMBER_OF_STEPS = 24
 STARTING_GOV_WEALTH_PER_CAPITA = 100000.0
@@ -85,106 +85,131 @@ NUMBER_OF_HOUSES_IN_Seixal = TheoreticalNumberOfHousesInSeixal * MODEL_SCALE
 NUMBER_OF_HOUSES_IN_Sesimbra = TheoreticalNumberOfHousesInSesimbra * MODEL_SCALE 
 NUMBER_OF_HOUSES_IN_Setubal = TheoreticalNumberOfHousesInSetubal * MODEL_SCALE 
 
-FIRST_QUARTILE_RENT_IN_Amadora = 7.35
-FIRST_QUARTILE_RENT_IN_Cascais = 9.42
-FIRST_QUARTILE_RENT_IN_Lisboa = 9.86
-FIRST_QUARTILE_RENT_IN_Loures = 6.31
-FIRST_QUARTILE_RENT_IN_Mafra = 5.27
-FIRST_QUARTILE_RENT_IN_Odivelas = 6.59
-FIRST_QUARTILE_RENT_IN_Oeiras = 8.98
-FIRST_QUARTILE_RENT_IN_Sintra = 6.00
-FIRST_QUARTILE_RENT_IN_VilaFrancaDeXira = 5.77
-FIRST_QUARTILE_RENT_IN_Alcochete = 5.65
-FIRST_QUARTILE_RENT_IN_Almada = 7.04
-FIRST_QUARTILE_RENT_IN_Barreiro = 6.27
-FIRST_QUARTILE_RENT_IN_Moita = 5.38
-FIRST_QUARTILE_RENT_IN_Montijo = 5.76
-FIRST_QUARTILE_RENT_IN_Palmela = 5.23
-FIRST_QUARTILE_RENT_IN_Seixal = 6.25
-FIRST_QUARTILE_RENT_IN_Sesimbra = 5.29
-FIRST_QUARTILE_RENT_IN_Setubal = 5.65
+FIRST_QUARTILE_RENT_MAP = Dict(
+    Amadora => 7.14,
+    Cascais => 8.62,
+    Lisboa => 8.89,
+    Loures => 5.94,
+    Mafra => 5.03,
+    Odivelas => 6.12,
+    Oeiras => 8.05,
+    Sintra => 5.67,
+    VilaFrancaDeXira => 5.56,
+    Alcochete => 5.35,
+    Almada => 6.75,
+    Barreiro => 5.80,
+    Moita => 4.99,
+    Montijo => 5.26,
+    Palmela => 4.74,
+    Seixal => 5.52,
+    Sesimbra => 4.22,
+    Setubal => 5.17,
+)
 
+MEDIAN_RENT_MAP = Dict(
+    Amadora => 8.85,
+    Cascais => 10.95,
+    Lisboa => 11.24,
+    Loures => 7.90,
+    Mafra => 6.94,
+    Odivelas => 8.43,
+    Oeiras =>.10,
+    Sintra => 7.46,
+    VilaFrancaDeXira => 7.09,
+    Alcochete => 6.74,
+    Almada => 8.58,
+    Barreiro => 7.24,
+    Moita => 6.21,
+    Montijo => 6.48,
+    Palmela => 6.03,
+    Seixal => 7.01,
+    Sesimbra => 6.07,
+    Setubal => 6.85,
+)
 
+THIRD_QUARTILE_RENT_MAP = Dict(
+    Amadora => 10.66,
+    Cascais => 13.84,
+    Lisboa => 13.87,
+    Loures => 9.75,
+    Mafra => 8.92,
+    Odivelas => 10.15,
+    Oeiras => 12.17,
+    Sintra => 9.10,
+    VilaFrancaDeXira => 8.51,
+    Alcochete => 8.66,
+    Almada => 10.59,
+    Barreiro => 8.66,
+    Moita => 7.78,
+    Montijo => 7.58,
+    Palmela => 7.57,
+    Seixal => 8.50,
+    Sesimbra => 7.78,
+    Setubal => 8.42,
+)
 
+FIRST_QUARTILE_SALES_MAP = Dict(
+    Amadora => 1408,
+    Cascais => 2133,
+    Lisboa => 2523,
+    Loures => 1403,
+    Mafra => 1212,
+    Odivelas => 1603,
+    Oeiras => 1995,
+    Sintra => 1157,
+    VilaFrancaDeXira => 1101,
+    Alcochete => 1211,
+    Almada => 1466,
+    Barreiro => 908,
+    Moita => 733,
+    Montijo => 1023,
+    Palmela => 988,
+    Seixal => 1117,
+    Sesimbra => 1205,
+    Setubal => 1014,
+)
 
-THIRD_QUARTILE_RENT_IN_Amadora = 11.6
-THIRD_QUARTILE_RENT_IN_Cascais = 16.38
-THIRD_QUARTILE_RENT_IN_Lisboa = 16.67
-THIRD_QUARTILE_RENT_IN_Loures = 10.67
-THIRD_QUARTILE_RENT_IN_Mafra = 9.91
-THIRD_QUARTILE_RENT_IN_Odivelas = 11.07
-THIRD_QUARTILE_RENT_IN_Oeiras = 14.16
-THIRD_QUARTILE_RENT_IN_Sintra = 10.0
-THIRD_QUARTILE_RENT_IN_VilaFrancaDeXira = 9.16
-THIRD_QUARTILE_RENT_IN_Alcochete = 9.45
-THIRD_QUARTILE_RENT_IN_Almada = 11.9
-THIRD_QUARTILE_RENT_IN_Barreiro = 9.52
-THIRD_QUARTILE_RENT_IN_Moita = 8.73
-THIRD_QUARTILE_RENT_IN_Montijo = 8.93
-THIRD_QUARTILE_RENT_IN_Palmela = 8.33
-THIRD_QUARTILE_RENT_IN_Seixal = 9.86
-THIRD_QUARTILE_RENT_IN_Sesimbra = 8.65
-THIRD_QUARTILE_RENT_IN_Setubal = 9.61
+MEDIAN_SALES_MAP = Dict(
+    Amadora => 1723,
+    Cascais => 2776,
+    Lisboa => 3333,
+    Loures => 1820,
+    Mafra => 1600,
+    Odivelas => 2057,
+    Oeiras => 2440,
+    Sintra => 1441,
+    VilaFrancaDeXira => 1383,
+    Alcochete => 1525,
+    Almada => 1801,
+    Barreiro => 1136,
+    Moita => 952,
+    Montijo => 1334,
+    Palmela => 1198,
+    Seixal => 1380,
+    Sesimbra => 1456,
+    Setubal => 1307,
+)
 
-FIRST_QUARTILE_SALES_IN_Amadora = 1408
-FIRST_QUARTILE_SALES_IN_Cascais = 2133
-FIRST_QUARTILE_SALES_IN_Lisboa = 2523
-FIRST_QUARTILE_SALES_IN_Loures = 1403
-FIRST_QUARTILE_SALES_IN_Mafra = 1212
-FIRST_QUARTILE_SALES_IN_Odivelas = 1603
-FIRST_QUARTILE_SALES_IN_Oeiras = 1995
-FIRST_QUARTILE_SALES_IN_Sintra = 1157
-FIRST_QUARTILE_SALES_IN_VilaFrancaDeXira = 1101
-FIRST_QUARTILE_SALES_IN_Alcochete = 1211
-FIRST_QUARTILE_SALES_IN_Almada = 1466
-FIRST_QUARTILE_SALES_IN_Barreiro = 908
-FIRST_QUARTILE_SALES_IN_Moita = 733
-FIRST_QUARTILE_SALES_IN_Montijo = 1023
-FIRST_QUARTILE_SALES_IN_Palmela = 988
-FIRST_QUARTILE_SALES_IN_Seixal = 1117
-FIRST_QUARTILE_SALES_IN_Sesimbra = 1205
-FIRST_QUARTILE_SALES_IN_Setubal = 1014
-
-
-MEDIAN_SALES_IN_Amadora = 1723
-MEDIAN_SALES_IN_Cascais = 2776
-MEDIAN_SALES_IN_Lisboa = 3333
-MEDIAN_SALES_IN_Loures = 1820
-MEDIAN_SALES_IN_Mafra = 1600
-MEDIAN_SALES_IN_Odivelas = 2057
-MEDIAN_SALES_IN_Oeiras = 2440
-MEDIAN_SALES_IN_Sintra = 1441
-MEDIAN_SALES_IN_VilaFrancaDeXira = 1383
-MEDIAN_SALES_IN_Alcochete = 1525
-MEDIAN_SALES_IN_Almada = 1801
-MEDIAN_SALES_IN_Barreiro = 1136
-MEDIAN_SALES_IN_Moita = 952
-MEDIAN_SALES_IN_Montijo = 1334
-MEDIAN_SALES_IN_Palmela = 1198
-MEDIAN_SALES_IN_Seixal = 1380
-MEDIAN_SALES_IN_Sesimbra = 1456
-MEDIAN_SALES_IN_Setubal = 1307
-
-
-THIRD_QUARTILE_SALES_IN_Amadora = 2060
-THIRD_QUARTILE_SALES_IN_Cascais = 3644
-THIRD_QUARTILE_SALES_IN_Lisboa = 4392
-THIRD_QUARTILE_SALES_IN_Loures = 2296
-THIRD_QUARTILE_SALES_IN_Mafra = 1999
-THIRD_QUARTILE_SALES_IN_Odivelas = 2464
-THIRD_QUARTILE_SALES_IN_Oeiras = 2957
-THIRD_QUARTILE_SALES_IN_Sintra = 1703
-THIRD_QUARTILE_SALES_IN_VilaFrancaDeXira = 1704
-THIRD_QUARTILE_SALES_IN_Alcochete = 2051
-THIRD_QUARTILE_SALES_IN_Almada = 2177
-THIRD_QUARTILE_SALES_IN_Barreiro = 1341
-THIRD_QUARTILE_SALES_IN_Moita = 1190
-THIRD_QUARTILE_SALES_IN_Montijo = 1602
-THIRD_QUARTILE_SALES_IN_Palmela = 1426
-THIRD_QUARTILE_SALES_IN_Seixal = 1667
-THIRD_QUARTILE_SALES_IN_Sesimbra = 1799
-THIRD_QUARTILE_SALES_IN_Setubal = 1610
-
+THIRD_QUARTILE_SALES_MAP = Dict(
+    Amadora => 2060,
+    Cascais => 3644,
+    Lisboa => 4392,
+    Loures => 2296,
+    Mafra => 1999,
+    Odivelas => 2464,
+    Oeiras => 2957,
+    Sintra => 1703,
+    VilaFrancaDeXira => 1704,
+    Alcochete => 2051,
+    Almada => 2177,
+    Barreiro => 1341,
+    Moita => 1190,
+    Montijo => 1602,
+    Palmela => 1426,
+    Seixal => 1667,
+    Sesimbra => 1799,
+    Setubal => 1610,
+)
 
 color_map = Dict(
     Amadora => :red,
@@ -206,58 +231,6 @@ color_map = Dict(
     Sesimbra => :fuchsia,
     Setubal => :gold
 )
-
-firstQuartileHousePricesPerRegion = Dict(
-    Amadora          => 1686,
-    Cascais          => 2692,
-    Lisboa           => 3015,
-    Loures           => 1667,
-    Mafra            => 1593,
-    Odivelas         => 1939,
-    Oeiras           => 2485,
-    Sintra           => 1531,
-    VilaFrancaDeXira => 1375,
-    Alcochete        => 1424,
-    Almada           => 1753,
-    Barreiro         => 1244,
-    Moita            => 985,
-    Montijo          => 1364,
-    Palmela          => 1287,
-    Seixal           => 1480,
-    Sesimbra         => 1571,
-    Setubal          => 1300,
-)
-
-thirdQuartileHousePricesPerRegion = Dict(
-    Amadora          => 2414,
-    Cascais          => 4667,
-    Lisboa           => 4977,
-    Loures           => 2662,
-    Mafra            => 2548,
-    Odivelas         => 2819,
-    Oeiras           => 3626,
-    Sintra           => 2137,
-    VilaFrancaDeXira => 2100,
-    Alcochete        => 2421,
-    Almada           => 2679,
-    Barreiro         => 1763,
-    Moita            => 1556,
-    Montijo          => 2006,
-    Palmela          => 1839,
-    Seixal           => 2099,
-    Sesimbra         => 2428,
-    Setubal          => 2020,
-)
-
-ZONES_STRINGS = ["Alcochete",
-    "Almada", "Amadora", "Barreiro",
-    "Cascais", "Lisboa", "Loures",
-    "Mafra", "Moita",  "Montijo",
-    "Odivelas", "Oeiras", "Palmela",
-    "Seixal", "Sesimbra", "Setubal",
-    "Sintra", "VilaFrancaDeXira"]
-
-SIZES_STRINGS = ["1", "2", "3", "4", "GT_5"]
 
 Theoretical_TOTAL_HOUSEHOLDS_WITH_SIZE_1 = 336274
 Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Alcochete = 1699
@@ -357,104 +330,123 @@ Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_VilaFrancaDeXira = 2574
 
 
 TOTAL_HOUSEHOLDS_WITH_SIZE_1 = Int64(round(MODEL_SCALE * Theoretical_TOTAL_HOUSEHOLDS_WITH_SIZE_1))
-HOUSEHOLDS_WITH_SIZE_1_IN_Alcochete = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Alcochete))
-HOUSEHOLDS_WITH_SIZE_1_IN_Almada = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Almada))
-HOUSEHOLDS_WITH_SIZE_1_IN_Amadora = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Amadora))
-HOUSEHOLDS_WITH_SIZE_1_IN_Barreiro = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Barreiro))
-HOUSEHOLDS_WITH_SIZE_1_IN_Cascais = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Cascais))
-HOUSEHOLDS_WITH_SIZE_1_IN_Lisboa = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Lisboa))
-HOUSEHOLDS_WITH_SIZE_1_IN_Loures = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Loures))
-HOUSEHOLDS_WITH_SIZE_1_IN_Mafra = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Mafra))
-HOUSEHOLDS_WITH_SIZE_1_IN_Moita = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Moita))
-HOUSEHOLDS_WITH_SIZE_1_IN_Montijo = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Montijo))
-HOUSEHOLDS_WITH_SIZE_1_IN_Odivelas = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Odivelas))
-HOUSEHOLDS_WITH_SIZE_1_IN_Oeiras = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Oeiras))
-HOUSEHOLDS_WITH_SIZE_1_IN_Palmela = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Palmela))
-HOUSEHOLDS_WITH_SIZE_1_IN_Seixal = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Seixal))
-HOUSEHOLDS_WITH_SIZE_1_IN_Sesimbra = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Sesimbra))
-HOUSEHOLDS_WITH_SIZE_1_IN_Setubal = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Setubal))
-HOUSEHOLDS_WITH_SIZE_1_IN_Sintra = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Sintra))
-HOUSEHOLDS_WITH_SIZE_1_IN_VilaFrancaDeXira = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_VilaFrancaDeXira))
+
+HOUSEHOLDS_WITH_SIZE_1_MAP = Dict(
+    Alcochete => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Alcochete)),
+    Almada => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Almada)),
+    Amadora => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Amadora)),
+    Barreiro => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Barreiro)),
+    Cascais => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Cascais)),
+    Lisboa => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Lisboa)),
+    Loures => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Loures)),
+    Mafra => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Mafra)),
+    Moita => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Moita)),
+    Montijo => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Montijo)),
+    Odivelas => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Odivelas)),
+    Oeiras => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Oeiras)),
+    Palmela => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Palmela)),
+    Seixal => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Seixal)),
+    Sesimbra => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Sesimbra)),
+    Setubal => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Setubal)),
+    Sintra => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_Sintra)),
+    VilaFrancaDeXira => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_1_IN_VilaFrancaDeXira)),
+)
 
 TOTAL_HOUSEHOLDS_WITH_SIZE_2 = Int64(round(MODEL_SCALE * Theoretical_TOTAL_HOUSEHOLDS_WITH_SIZE_2))
-HOUSEHOLDS_WITH_SIZE_2_IN_Alcochete = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Alcochete))
-HOUSEHOLDS_WITH_SIZE_2_IN_Almada = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Almada))
-HOUSEHOLDS_WITH_SIZE_2_IN_Amadora = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Amadora))
-HOUSEHOLDS_WITH_SIZE_2_IN_Barreiro = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Barreiro))
-HOUSEHOLDS_WITH_SIZE_2_IN_Cascais = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Cascais))
-HOUSEHOLDS_WITH_SIZE_2_IN_Lisboa = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Lisboa))
-HOUSEHOLDS_WITH_SIZE_2_IN_Loures = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Loures))
-HOUSEHOLDS_WITH_SIZE_2_IN_Mafra = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Mafra))
-HOUSEHOLDS_WITH_SIZE_2_IN_Moita = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Moita))
-HOUSEHOLDS_WITH_SIZE_2_IN_Montijo = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Montijo))
-HOUSEHOLDS_WITH_SIZE_2_IN_Odivelas = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Odivelas))
-HOUSEHOLDS_WITH_SIZE_2_IN_Oeiras = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Oeiras))
-HOUSEHOLDS_WITH_SIZE_2_IN_Palmela = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Palmela))
-HOUSEHOLDS_WITH_SIZE_2_IN_Seixal = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Seixal))
-HOUSEHOLDS_WITH_SIZE_2_IN_Sesimbra = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Sesimbra))
-HOUSEHOLDS_WITH_SIZE_2_IN_Setubal = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Setubal))
-HOUSEHOLDS_WITH_SIZE_2_IN_Sintra = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Sintra))
-HOUSEHOLDS_WITH_SIZE_2_IN_VilaFrancaDeXira = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_VilaFrancaDeXira))
+HOUSEHOLDS_WITH_SIZE_2_MAP = Dict(
+    Alcochete => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Alcochete)),
+    Almada => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Almada)),
+    Amadora => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Amadora)),
+    Barreiro => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Barreiro)),
+    Cascais => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Cascais)),
+    Lisboa => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Lisboa)),
+    Loures => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Loures)),
+    Mafra => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Mafra)),
+    Moita => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Moita)),
+    Montijo => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Montijo)),
+    Odivelas => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Odivelas)),
+    Oeiras => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Oeiras)),
+    Palmela => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Palmela)),
+    Seixal => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Seixal)),
+    Sesimbra => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Sesimbra)),
+    Setubal => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Setubal)),
+    Sintra => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_Sintra)),
+    VilaFrancaDeXira => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_2_IN_VilaFrancaDeXira)),
+)
 
 TOTAL_HOUSEHOLDS_WITH_SIZE_3 = Int64(round(MODEL_SCALE * Theoretical_TOTAL_HOUSEHOLDS_WITH_SIZE_3))
-HOUSEHOLDS_WITH_SIZE_3_IN_Alcochete = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Alcochete))
-HOUSEHOLDS_WITH_SIZE_3_IN_Almada = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Almada))
-HOUSEHOLDS_WITH_SIZE_3_IN_Amadora = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Amadora))
-HOUSEHOLDS_WITH_SIZE_3_IN_Barreiro = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Barreiro))
-HOUSEHOLDS_WITH_SIZE_3_IN_Cascais = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Cascais))
-HOUSEHOLDS_WITH_SIZE_3_IN_Lisboa = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Lisboa))
-HOUSEHOLDS_WITH_SIZE_3_IN_Loures = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Loures))
-HOUSEHOLDS_WITH_SIZE_3_IN_Mafra = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Mafra))
-HOUSEHOLDS_WITH_SIZE_3_IN_Moita = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Moita))
-HOUSEHOLDS_WITH_SIZE_3_IN_Montijo = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Montijo))
-HOUSEHOLDS_WITH_SIZE_3_IN_Odivelas = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Odivelas))
-HOUSEHOLDS_WITH_SIZE_3_IN_Oeiras = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Oeiras))
-HOUSEHOLDS_WITH_SIZE_3_IN_Palmela = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Palmela))
-HOUSEHOLDS_WITH_SIZE_3_IN_Seixal = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Seixal))
-HOUSEHOLDS_WITH_SIZE_3_IN_Sesimbra = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Sesimbra))
-HOUSEHOLDS_WITH_SIZE_3_IN_Setubal = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Setubal))
-HOUSEHOLDS_WITH_SIZE_3_IN_Sintra = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Sintra))
-HOUSEHOLDS_WITH_SIZE_3_IN_VilaFrancaDeXira = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_VilaFrancaDeXira))
+HOUSEHOLDS_WITH_SIZE_3_MAP = Dict(
+    Alcochete => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Alcochete)),
+    Almada => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Almada)),
+    Amadora => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Amadora)),
+    Barreiro => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Barreiro)),
+    Cascais => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Cascais)),
+    Lisboa => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Lisboa)),
+    Loures => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Loures)),
+    Mafra => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Mafra)),
+    Moita => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Moita)),
+    Montijo => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Montijo)),
+    Odivelas => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Odivelas)),
+    Oeiras => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Oeiras)),
+    Palmela => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Palmela)),
+    Seixal => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Seixal)),
+    Sesimbra => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Sesimbra)),
+    Setubal => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Setubal)),
+    Sintra => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_Sintra)),
+    VilaFrancaDeXira => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_3_IN_VilaFrancaDeXira)),
+)
 
 TOTAL_HOUSEHOLDS_WITH_SIZE_4 = Int64(round(MODEL_SCALE * Theoretical_TOTAL_HOUSEHOLDS_WITH_SIZE_4))
-HOUSEHOLDS_WITH_SIZE_4_IN_Alcochete = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Alcochete))
-HOUSEHOLDS_WITH_SIZE_4_IN_Almada = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Almada))
-HOUSEHOLDS_WITH_SIZE_4_IN_Amadora = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Amadora))
-HOUSEHOLDS_WITH_SIZE_4_IN_Barreiro = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Barreiro))
-HOUSEHOLDS_WITH_SIZE_4_IN_Cascais = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Cascais))
-HOUSEHOLDS_WITH_SIZE_4_IN_Lisboa = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Lisboa))
-HOUSEHOLDS_WITH_SIZE_4_IN_Loures = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Loures))
-HOUSEHOLDS_WITH_SIZE_4_IN_Mafra = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Mafra))
-HOUSEHOLDS_WITH_SIZE_4_IN_Moita = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Moita))
-HOUSEHOLDS_WITH_SIZE_4_IN_Montijo = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Montijo))
-HOUSEHOLDS_WITH_SIZE_4_IN_Odivelas = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Odivelas))
-HOUSEHOLDS_WITH_SIZE_4_IN_Oeiras = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Oeiras))
-HOUSEHOLDS_WITH_SIZE_4_IN_Palmela = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Palmela))
-HOUSEHOLDS_WITH_SIZE_4_IN_Seixal = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Seixal))
-HOUSEHOLDS_WITH_SIZE_4_IN_Sesimbra = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Sesimbra))
-HOUSEHOLDS_WITH_SIZE_4_IN_Setubal = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Setubal))
-HOUSEHOLDS_WITH_SIZE_4_IN_Sintra = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Sintra))
-HOUSEHOLDS_WITH_SIZE_4_IN_VilaFrancaDeXira = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_VilaFrancaDeXira))
+HOUSEHOLDS_WITH_SIZE_4_MAP = Dict(
+    Alcochete => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Alcochete)),
+    Almada => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Almada)),
+    Amadora => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Amadora)),
+    Barreiro => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Barreiro)),
+    Cascais => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Cascais)),
+    Lisboa => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Lisboa)),
+    Loures => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Loures)),
+    Mafra => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Mafra)),
+    Moita => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Moita)),
+    Montijo => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Montijo)),
+    Odivelas => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Odivelas)),
+    Oeiras => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Oeiras)),
+    Palmela => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Palmela)),
+    Seixal => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Seixal)),
+    Sesimbra => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Sesimbra)),
+    Setubal => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Setubal)),
+    Sintra => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_Sintra)),
+    VilaFrancaDeXira => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_4_IN_VilaFrancaDeXira)),
+)
 
 TOTAL_HOUSEHOLDS_WITH_SIZE_GT_5 = Int64(round(MODEL_SCALE * Theoretical_TOTAL_HOUSEHOLDS_WITH_SIZE_GT_5))
-HOUSEHOLDS_WITH_SIZE_GT_5_IN_Alcochete = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Alcochete))
-HOUSEHOLDS_WITH_SIZE_GT_5_IN_Almada = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Almada))
-HOUSEHOLDS_WITH_SIZE_GT_5_IN_Amadora = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Amadora))
-HOUSEHOLDS_WITH_SIZE_GT_5_IN_Barreiro = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Barreiro))
-HOUSEHOLDS_WITH_SIZE_GT_5_IN_Cascais = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Cascais))
-HOUSEHOLDS_WITH_SIZE_GT_5_IN_Lisboa = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Lisboa))
-HOUSEHOLDS_WITH_SIZE_GT_5_IN_Loures = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Loures))
-HOUSEHOLDS_WITH_SIZE_GT_5_IN_Mafra = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Mafra))
-HOUSEHOLDS_WITH_SIZE_GT_5_IN_Moita = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Moita))
-HOUSEHOLDS_WITH_SIZE_GT_5_IN_Montijo = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Montijo))
-HOUSEHOLDS_WITH_SIZE_GT_5_IN_Odivelas = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Odivelas))
-HOUSEHOLDS_WITH_SIZE_GT_5_IN_Oeiras = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Oeiras))
-HOUSEHOLDS_WITH_SIZE_GT_5_IN_Palmela = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Palmela))
-HOUSEHOLDS_WITH_SIZE_GT_5_IN_Seixal = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Seixal))
-HOUSEHOLDS_WITH_SIZE_GT_5_IN_Sesimbra = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Sesimbra))
-HOUSEHOLDS_WITH_SIZE_GT_5_IN_Setubal = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Setubal))
-HOUSEHOLDS_WITH_SIZE_GT_5_IN_Sintra = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Sintra))
-HOUSEHOLDS_WITH_SIZE_GT_5_IN_VilaFrancaDeXira = Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_VilaFrancaDeXira))
+HOUSEHOLDS_WITH_SIZE_GT_5_MAP = Dict(
+    Alcochete => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Alcochete)),
+    Almada => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Almada)),
+    Amadora => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Amadora)),
+    Barreiro => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Barreiro)),
+    Cascais => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Cascais)),
+    Lisboa => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Lisboa)),
+    Loures => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Loures)),
+    Mafra => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Mafra)),
+    Moita => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Moita)),
+    Montijo => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Montijo)),
+    Odivelas => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Odivelas)),
+    Oeiras => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Oeiras)),
+    Palmela => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Palmela)),
+    Seixal => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Seixal)),
+    Sesimbra => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Sesimbra)),
+    Setubal => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Setubal)),
+    Sintra => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_Sintra)),
+    VilaFrancaDeXira => Int64(round(MODEL_SCALE * Theoretical_HOUSEHOLDS_WITH_SIZE_GT_5_IN_VilaFrancaDeXira)),
+)
+
+HOUSEHOLDS_SIZES_MAP = Dict(
+    1 => HOUSEHOLDS_WITH_SIZE_1_MAP,
+    2 => HOUSEHOLDS_WITH_SIZE_2_MAP,
+    3 => HOUSEHOLDS_WITH_SIZE_3_MAP,
+    4 => HOUSEHOLDS_WITH_SIZE_4_MAP,
+    5 => HOUSEHOLDS_WITH_SIZE_GT_5_MAP,
+)
 
 HOME_OWNERS_IN_Alcochete = Int64(round(5085  * MODEL_SCALE))
 HOME_OWNERS_IN_Almada = Int64(round(47380 * MODEL_SCALE))

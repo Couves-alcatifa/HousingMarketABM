@@ -109,7 +109,8 @@ function wealth_model()
         :rawSalariesPaid => 0.0,
         :liquidSalariesReceived => 0.0,
         :expensesReceived => 0.0,
-        :buckets => InitiateBuckets(), # Houses characteristics => Transaction
+        :buckets => InitiateBuckets(), # Houses characteristics => Prices[]
+        :rentalBuckets => InitiateBuckets(), # Houses characteristics => Prices[]
         :mortgagesInStep => Mortgage[],
         :householdsInDemand => Int[],
     )
@@ -158,6 +159,7 @@ function model_step!(model)
     end
     model.mortgagesInStep = Mortgage[]
     clearHangingSupplies(model)
+    clearHangingRentalSupplies(model)
     clearHouseMarket(model)
     clearRentalMarket(model)
     trimBucketsIfNeeded(model)
@@ -246,7 +248,7 @@ end
 
 
 function put_house_to_rent(household::MyMultiAgent, model, house)
-    push!(model.rentalMarket.supply, RentalSupply(house, calculate_rental_market_price(house), household.id, true))
+    push!(model.rentalMarket.supply, RentalSupply(house, calculate_rental_market_price(house, model), household.id, Bid[]))
     # # removing house from agent when putting to sale
     # splice!(agent.houseIds, index)
 end
@@ -342,8 +344,7 @@ function household_step!(household::MyMultiAgent, model)
     household.wealthInHouses = wealthInHouses
     if (household.id % 12 == model.steps % 12 && household_evolution(household, model))
         # household died
-        terminateContractsOnTentantSide(household, model)
-        terminateContractsOnLandLordSide(household, model)
+
         return
     end
 

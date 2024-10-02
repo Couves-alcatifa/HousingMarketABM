@@ -124,13 +124,19 @@ mutable struct RentalSupply
     house::House
     monthlyPrice::Float64
     sellerId::Int
-    valid::Bool
+    bids::Array{Bid}
+end
+
+mutable struct RentalSupplyMatch
+    supply::RentalSupply
+    consumerSurplus::Float64
 end
 
 mutable struct RentalDemand
     householdId::Int
-    supplyMatches::Array{RentalSupply}
+    supplyMatches::Array{RentalSupplyMatch}
 end
+
 
 mutable struct RentalMarket
     supply::Array{RentalSupply}
