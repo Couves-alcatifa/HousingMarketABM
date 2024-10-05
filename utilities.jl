@@ -987,7 +987,7 @@ end
 # 75 -> 2,3
 # 125 -> 3,4
 # 125+ -> 4+
-function isHouseSizeAppropriate(size_interval, household)
+function isSizeIntervalAppropriate(size_interval, household)
     if household.size * 25 >= Int(size_interval)
         return false
     end
