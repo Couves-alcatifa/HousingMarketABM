@@ -78,6 +78,36 @@ function plot_supply_and_demand(adf, mdf)
     return figures
 end
 
+function plot_supply_and_demand_per_bucket(adf, mdf)
+    figures = Dict(location => Dict(size_interval => Figure() for size_interval in instances(SizeInterval)) for location in instances(HouseLocation))
+    supply_per_bucket = Dict(location => Dict(size_interval => Float32[] for size_interval in instances(SizeInterval)) for location in instances(HouseLocation))
+    demand_per_bucket = Dict(location => Dict(size_interval => Float32[] for size_interval in instances(SizeInterval)) for location in instances(HouseLocation))
+
+    for step in 1:length(adf.step)
+        supply_step_dict = mdf.supply_per_bucket[step]
+        demand_step_dict = mdf.demand_per_bucket[step]
+        for location in instances(HouseLocation)
+            for size_interval in instances(SizeInterval)
+                push!(supply_per_bucket[location][size_interval], supply_step_dict[location][size_interval])
+                push!(demand_per_bucket[location][size_interval], demand_step_dict[location][size_interval])
+            end
+        end
+    end
+    for location in instances(HouseLocation)
+        for size_interval in instances(SizeInterval)
+            figure = Figure(size = (600, 400))
+            ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Volume")
+            supply_lines = lines!(ax, adf.step, supply_per_bucket[location][size_interval], color = :blue)
+            supply_legends = "Supply in $(string(location)) for houses $(get_size_interval_legend(size_interval))"
+            demand_lines = lines!(ax, adf.step, demand_per_bucket[location][size_interval], color = :red)
+            demand_legends = "Demand in $(string(location)) for houses $(get_size_interval_legend(size_interval))"
+            figure[1, 2] = Legend(figure, [supply_lines, demand_lines], [supply_legends, demand_legends])
+            figures[location][size_interval] = figure
+        end
+    end
+    return figures
+end
+
 function plot_household_status(adf, mdf)
     figure = Figure(size = (600, 400))
     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Status")
@@ -270,6 +300,35 @@ function plot_houses_prices_per_region(adf, mdf)
     figure
 end
 
+function plot_rents_per_region(adf, mdf)
+    figure = Figure(size = (600, 400))
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
+    organizedPerRegion = Dict() # this will be filled with [[MeanValueForAmadoraStep1, ..Step2, ...Step3], [MeanValueForLisboaStep1, ...]]
+    for location in instances(HouseLocation)
+        organizedPerRegion[location] = Float32[]
+        for step in 1:NUMBER_OF_STEPS
+            step_values = Float32[]
+            for transaction in mdf.rents_per_region[step][location]
+                push!(step_values, transaction.price / transaction.area)
+            end
+            if length(step_values) != 0
+                push!(organizedPerRegion[location], mean(step_values))
+            else
+                push!(organizedPerRegion[location], 0.0)
+            end
+        end
+    end
+    lines = []
+    locations = []
+    for location in instances(HouseLocation)
+        push!(lines, lines!(ax, adf.step, organizedPerRegion[location], color = color_map[location]))
+        push!(locations, string(location))
+    end
+
+    figure[1, 2] = Legend(figure, lines, locations)
+    figure
+end
+
 function plot_number_of_houses_per_region(adf, mdf)
     figure = Figure(size = (600, 400))
     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
@@ -286,6 +345,31 @@ function plot_number_of_houses_per_region(adf, mdf)
 
     figure[1, 2] = Legend(figure, lines, locations)
     figure
+end
+
+function plot_number_of_houses_built_per_region(adf, mdf)
+    figure = Figure(size = (600, 400))
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
+    lines = []
+    sizes_intervals = []
+    figures = []
+    for location in instances(HouseLocation)
+        for size_interval in instances(SizeInterval)
+            regional_number_of_houses = Int32[]
+            for step in 1:NUMBER_OF_STEPS
+                push!(regional_number_of_houses, mdf.number_of_houses_built_per_region[step][location][size_interval]) 
+            end
+            push!(lines, lines!(ax, adf.step, regional_number_of_houses, color = sizes_color_map[size_interval]))
+            push!(sizes_intervals, get_size_interval_legend(size_interval))
+        end
+        figure[1, 2] = Legend(figure, lines, sizes_intervals)
+        figure
+        push!(figures, figure)
+        empty!(sizes_intervals)
+        empty!(lines)
+    end
+    return figures
+
 end
 
 function plot_number_of_transactions_per_region(adf, mdf)

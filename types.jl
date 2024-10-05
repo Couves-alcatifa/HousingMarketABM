@@ -26,6 +26,18 @@ end
     More = 1000
 end
 
+function get_size_interval_legend(size_interval)
+    if size_interval == LessThan50
+        return "Smaller than 50m2"
+    elseif size_interval == LessThan75
+        return "Smaller than 75m2"
+    elseif size_interval == LessThan125
+        return "Smaller than 125m2"
+    else
+        return "Bigger than 125m2"
+    end
+end
+
 # Highly influences price, without big changes in geographical location
 @enum HouseLocationType begin
     SocialNeighbourhood = 1

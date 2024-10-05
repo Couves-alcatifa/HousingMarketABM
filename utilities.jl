@@ -3,7 +3,6 @@
 # salaries_35_44 = vcat(salaries, rand(500:3500, Int64(NUMBER_OF_HOUSEHOLDS/4)))
 # salaries_45_54 = vcat(salaries, rand(544:3800, Int64(NUMBER_OF_HOUSEHOLDS/4)))
 # salaries_55_64 = vcat(salaries, rand(480:4100, zNUMBER_OF_HOUSEHOLDS/4)))
-include("table.jl")
 include("consts.jl")
 include("logger.jl")
 include("constructionSector.jl")
@@ -285,6 +284,8 @@ function terminateContractsOnLandLordSide(household, model)
 end
 
 function clearHouseMarket(model)
+    LOG_INFO("clearHouseMarket started")
+    start_time = time()
     # TODO: optimize this (below block is slower than all household_steps)
     localLock = ReentrantLock()
     Threads.@threads for i in 1:length(model.houseMarket.supply)
@@ -322,7 +323,9 @@ function clearHouseMarket(model)
             end
         end
     end
+    LOG_INFO("clearHouseMarket - first block took $(time() - start_time)")
 
+    start_time = time()
     i = 1
     householdsWhoBoughtAHouse = Set()
     while i <= length(model.houseMarket.supply)
@@ -337,6 +340,8 @@ function clearHouseMarket(model)
             i += 1
         end
     end
+    LOG_INFO("clearHouseMarket - second block took $(time() - start_time)")
+    start_time = time()
 
     empty!(model.householdsInDemand)
     for demand in model.houseMarket.demand
@@ -346,10 +351,12 @@ function clearHouseMarket(model)
         end
     end
     empty!(model.houseMarket.demand)
+    LOG_INFO("clearHouseMarket - third block took $(time() - start_time)")
 end
 
 function clearRentalMarket(model)
-    # TODO: optimize this (below block is slower than all household_steps)
+    LOG_INFO("clearRentalMarket started")
+    start_time = time()
     localLock = ReentrantLock()
     Threads.@threads for i in 1:length(model.rentalMarket.supply)
         supply = model.rentalMarket.supply[i]
@@ -382,6 +389,8 @@ function clearRentalMarket(model)
             end
         end
     end
+    LOG_INFO("clearRentalMarket - first block took $(time() - start_time)")
+    start_time = time()
 
     i = 1
     while i <= length(model.rentalMarket.supply)
@@ -396,6 +405,7 @@ function clearRentalMarket(model)
             i += 1
         end
     end
+    LOG_INFO("clearRentalMarket - second block took $(time() - start_time)")
 
     # empty!(model.householdsInDemand)
     # for demand in model.rentalMarket.demand
@@ -558,6 +568,7 @@ function rent_house(model, supply::RentalSupply)
     household.contractIdAsTenant = length(model.contracts)
     push!(seller.contractsIdsAsLandlord, length(model.contracts))
     addTransactionToRentalBuckets(model, supply.house, actualBid)
+    push!(model.rents_per_region[supply.house.location][model.steps], Transaction(supply.house.area, actualBid, supply.house.location))
     return true
 end
 
@@ -901,6 +912,8 @@ function sortBids(l, r)
 end
 
 function clearHangingSupplies(model)
+    LOG_INFO("clearHangingSupplies started")
+    start_time = time()
     i = 1
     while i <= length(model.houseMarket.supply)
         if model.houseMarket.supply[i].sellerId == -1
@@ -917,9 +930,13 @@ function clearHangingSupplies(model)
             splice!(model.houseMarket.supply, i)
         end
     end
+    LOG_INFO("clearHangingSupplies took $(time() - start_time)")
+
 end
 
 function clearHangingRentalSupplies(model)
+    LOG_INFO("clearHangingRentalSupplies started")
+    start_time = time()
     i = 1
     while i <= length(model.rentalMarket.supply)
         if model.rentalMarket.supply[i].sellerId == -1
@@ -936,6 +953,7 @@ function clearHangingRentalSupplies(model)
             splice!(model.rentalMarket.supply, i)
         end
     end
+    LOG_INFO("clearHangingRentalSupplies took $(time() - start_time)")
 end
 
 function measureDemandForSizeAndRegion(model, size_interval, location)
@@ -943,7 +961,7 @@ function measureDemandForSizeAndRegion(model, size_interval, location)
     for householdId in model.householdsInDemand
         household = model[householdId]
         if (household.residencyZone != location 
-            || household.size * 25 >= Int(size_interval))
+            || !isSizeIntervalAppropriate(size_interval, household))
             continue
         end
         count += 1
@@ -962,6 +980,31 @@ function measureSupplyForSizeAndRegion(model, size_interval, location)
         count += 1
     end
     return count
+end
+
+
+# 50 -> 1,2
+# 75 -> 2,3
+# 125 -> 3,4
+# 125+ -> 4+
+function isHouseSizeAppropriate(size_interval, household)
+    if household.size * 25 >= Int(size_interval)
+        return false
+    end
+
+    if size_interval == LessThan50
+        return household.size <= 2
+    elseif size_interval == LessThan75
+        return household.size in [2,3]
+    elseif size_interval == LessThan125
+        return household.size in [3, 4]
+    elseif size_interval == More
+        return household.size >= 4
+    else
+        println("Error: unknown sizeInterval $size_interval")
+        exit(1)
+    end
+
 end
 
 function getSizeInterval(house)

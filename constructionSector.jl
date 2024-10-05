@@ -9,7 +9,7 @@ end
 
 function updateConstructionsPerBucket(model, location, size_interval)
     targetConstruction = calculateTargetConstructionPerBucket(model, location, size_interval)
-    newConstructions = targetConstruction - length(model.construction_sector.housesInConstruction[location])
+    newConstructions = targetConstruction - length(model.construction_sector.housesInConstruction[location][size_interval])
     
     if (newConstructions > 0)
         # attempt to start construction for half the demand in one year (hence divide by 12 and by 2) 
@@ -45,8 +45,9 @@ function updateConstructionsPerBucket(model, location, size_interval)
 end
 
 function calculateTargetConstructionPerBucket(model, location, size_interval)
-    return measureSupplyForSizeAndRegion(model, size_interval, location) - 
-           measureDemandForSizeAndRegion(model, size_interval, location)
+    return measureDemandForSizeAndRegion(model, size_interval, location) - 
+           measureSupplyForSizeAndRegion(model, size_interval, location)
+           
 end
 
 function calculateMortgageDurationForConstructionSector()
@@ -62,7 +63,7 @@ function startNewConstruction(model, location, size_interval)
         return false
     end
     expectedDuration = rand(CONSTRUCTION_DELAY_MIN:CONSTRUCTION_DELAY_MAX)
-    expectedDuration += rand(CONSTRUCTION_TIME_MIN:CONSTRUCTION_DELAY_MAX)
+    expectedDuration += rand(CONSTRUCTION_TIME_MIN:CONSTRUCTION_TIME_MAX)
     constructionCost = calculate_total_construction_costs(model, newHouse, expectedDuration)
 
     if constructionCost > model.construction_sector.wealth
@@ -73,7 +74,7 @@ function startNewConstruction(model, location, size_interval)
     model.government.wealth += LAND_COSTS * newHouse.area
     model.construction_sector.wealth -= LAND_COSTS * newHouse.area
     permitTime = rand(CONSTRUCTION_DELAY_MIN:CONSTRUCTION_DELAY_MAX)
-    constructionTime = rand(CONSTRUCTION_TIME_MIN:CONSTRUCTION_DELAY_MAX)
+    constructionTime = rand(CONSTRUCTION_TIME_MIN:CONSTRUCTION_TIME_MAX)
     push!(model.construction_sector.housesInConstruction[location][size_interval], PendingConstruction(0, permitTime, constructionTime, newHouse))
     content = "Start new Construction $(newHouse.area) $(newHouse.percentile) $(newHouse.location)\n"
     open("$output_folder/transactions_logs/step_$(model.steps).txt", "a") do file
@@ -99,24 +100,25 @@ function generateHouseToBeBuilt(location, size_interval)
         area = rand(25:50)
     elseif size_interval == LessThan75
         area = rand(50:75)
-    elseif size_interval == LessThan75
+    elseif size_interval == LessThan125
         area = rand(75:125)
     elseif size_interval == More
         area = rand(125:200)
     else
-        println("Error: unknown sizeInterval")
+        println("Error: unknown sizeInterval $size_interval")
         exit(1)
     end
     bestPercentile = -1
     bestMargin = -1
     expectedDuration = rand(CONSTRUCTION_DELAY_MIN:CONSTRUCTION_DELAY_MAX)
-    expectedDuration += rand(CONSTRUCTION_TIME_MIN:CONSTRUCTION_DELAY_MAX)
+    expectedDuration += rand(CONSTRUCTION_TIME_MIN:CONSTRUCTION_TIME_MAX)
     for testPercentile in rand(1:100, 5)
         marketPrice = calculate_market_price(House(area, location, NotSocialNeighbourhood, 1.0, testPercentile), model)
         constructionCosts = calculate_total_construction_costs(model, House(area, location, NotSocialNeighbourhood, 1.0, testPercentile), expectedDuration)
-        if constructionCosts > marketPrice
-            continue
-        end
+        
+        # if constructionCosts > marketPrice
+        #     continue
+        # end
         margin = marketPrice / constructionCosts
         if margin > bestMargin
             bestMargin = bestMargin
@@ -138,10 +140,12 @@ function put_newly_built_house_to_sale(model, house)
         askPrice = costBasedPrice
     end
     push!(model.houseMarket.supply, HouseSupply(house, askPrice, Bid[], -1))
+    push!(model.housesBuiltPerRegion[house.location][getSizeInterval(house)], house)
+    LOG_INFO("Pushed house into housesBuiltPerRegion (location,size) = ($(string(house.location)), $(string(getSizeInterval(house))))")
     open("$output_folder/transactions_logs/step_$(model.steps).txt", "a") do file
         write(file, "askPrice = $askPrice\n")
     end
-    println("askPrice = " * string(askPrice))
+    println("price of newly built house = " * string(askPrice))
 end
 
 # function calculate_construction_sector_debt(model)

@@ -175,11 +175,24 @@ function expensesReceived(model)
 end 
 
 number_of_houses_per_region(model) = Dict(location => length(model.houses[location]) for location in instances(HouseLocation))
+number_of_houses_built_per_region(model) = Dict(location => Dict(size_interval => length(model.housesBuiltPerRegion[location][size_interval]) for size_interval in instances(SizeInterval)) for location in instances(HouseLocation))
 function transactions_per_region(model)
     d = Dict()
     for location in instances(HouseLocation)
         if length(model.transactions_per_region[location]) != 0
             d[location] = last(model.transactions_per_region[location])
+        else
+            d[location] = Transaction[]
+        end
+    end
+    return d
+end
+
+function rents_per_region(model)
+    d = Dict()
+    for location in instances(HouseLocation)
+        if length(model.rents_per_region[location]) != 0
+            d[location] = last(model.rents_per_region[location])
         else
             d[location] = Transaction[]
         end
@@ -210,6 +223,9 @@ bank_wealth(model) = model.bank.wealth
 construction_wealth(model) = model.construction_sector.wealth
 supply_volume(model) = copy(model.supply_size)
 demand_volume(model) = copy(model.demand_size)
+
+supply_per_bucket(model) = Dict(location => Dict(size_interval => measureSupplyForSizeAndRegion(model, size_interval, location) for size_interval in instances(SizeInterval)) for location in instances(HouseLocation))
+demand_per_bucket(model) = Dict(location => Dict(size_interval => measureDemandForSizeAndRegion(model, size_interval, location) for size_interval in instances(SizeInterval)) for location in instances(HouseLocation))
 
 mortgages(model) = copy(model.mortgagesInStep)
 

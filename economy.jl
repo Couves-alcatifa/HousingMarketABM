@@ -90,6 +90,7 @@ function wealth_model()
         :bank => Bank(STARTING_BANK_WEALTH, INTEREST_RATE, LTV, DSTI),
         :transactions => Transaction[],
         :transactions_per_region => Dict(location => [] for location in instances(HouseLocation)),
+        :rents_per_region => Dict(location => [] for location in instances(HouseLocation)),
         :inheritages => Inheritage[],
         :contracts => Contract[],
         :salary_multiplier => 1.0,
@@ -113,6 +114,7 @@ function wealth_model()
         :rentalBuckets => InitiateBuckets(), # Houses characteristics => Prices[]
         :mortgagesInStep => Mortgage[],
         :householdsInDemand => Int[],
+        :housesBuiltPerRegion => Dict(location => Dict(size_interval => House[] for size_interval in instances(SizeInterval)) for location in instances(HouseLocation))
     )
 
     model = StandardABM(MyMultiAgent; agent_step! = agent_step!, model_step! = model_step!, properties,scheduler = Schedulers.Randomly())
@@ -138,6 +140,10 @@ function model_step!(model)
     model.steps += 1
     for location in instances(HouseLocation)
         push!(model.transactions_per_region[location], Transaction[])
+        push!(model.rents_per_region[location], Transaction[])
+        for size_interval in instances(SizeInterval)
+            model.housesBuiltPerRegion[location][size_interval] = House[]
+        end
     end
     println("----------------")
     println("number of households = " * string(nagents(model)))
@@ -445,7 +451,9 @@ mdata = [count_supply, gov_wealth, construction_wealth, company_wealth,
          ## Gov Money flow ##
          subsidiesPaid, ivaCollected, irsCollected, companyServicesPaid, inheritagesFlow, constructionLabor,
          ## Company Money flow ##
-         rawSalariesPaid, liquidSalariesReceived, expensesReceived, number_of_houses_per_region, transactions_per_region, 
+         rawSalariesPaid, liquidSalariesReceived, expensesReceived, number_of_houses_per_region, 
+         transactions_per_region, rents_per_region, number_of_houses_built_per_region,
+         supply_per_bucket, demand_per_bucket,
          ## Houses prices per bucket
          #bucket_1, bucket_2, bucket_3, bucket_4
          ]
@@ -469,6 +477,16 @@ for i in eachindex(supply_and_demand_figures_regionally)
     save("$output_folder/supply_and_demand_in_$(string(locations[i])).png", supply_and_demand_figures_regionally[i])
 end
 
+mkdir("$output_folder/supply_and_demand_per_bucket")
+
+supply_and_demand_figures_per_bucket = plot_supply_and_demand_per_bucket(agent_data[2:end, :], model_data[2:end, :])
+locations = instances(HouseLocation)
+for location in instances(HouseLocation)
+    for size_interval in instances(SizeInterval)
+        save("$output_folder/supply_and_demand_per_bucket/supply_and_demand_in_$(string(location))_for_$(string(size_interval)).png", supply_and_demand_figures_per_bucket[location][size_interval])
+    end
+end
+
 save("$output_folder/household_status.png", plot_household_status(agent_data[2:end, :], model_data[2:end, :]))
 save("$output_folder/house_prices_in_supply.png", plot_houses_prices_in_supply(agent_data[2:end, :], model_data[2:end, :]))
 save("$output_folder/taxes_and_subsidies.png", plot_taxes_and_subsidy_rates(agent_data[2:end, :], model_data[2:end, :]))
@@ -481,8 +499,15 @@ save("$output_folder/taxes_and_subsidies_flow.png", plot_taxes_and_subsidies_flo
 save("$output_folder/salaries_and_expenses.png", plot_salaries_and_expenses(agent_data[2:end, :], model_data[2:end, :]))
 # save("$output_folder/houses_prices_per_bucket.png", plot_houses_prices_per_bucket(agent_data[2:end, :], model_data[2:end, :]))
 save("$output_folder/houses_prices_per_region.png", plot_houses_prices_per_region(agent_data[2:end, :], model_data[2:end, :]))
+save("$output_folder/rents_of_new_contracts_per_region.png", plot_rents_per_region(agent_data[2:end, :], model_data[2:end, :]))
 
 save("$output_folder/number_of_houses_per_region.png", plot_number_of_houses_per_region(agent_data[2:end, :], model_data[2:end, :]))
+number_of_houses_built_figures = plot_number_of_houses_built_per_region(agent_data[2:end, :], model_data[2:end, :])
+locations = instances(HouseLocation)
+for i in eachindex(number_of_houses_built_figures)
+    save("$output_folder/number_of_houses_built_in_$(string(locations[i])).png", number_of_houses_built_figures[i])
+end
+
 save("$output_folder/number_of_transactions_per_region.png", plot_number_of_transactions_per_region(agent_data[2:end, :], model_data[2:end, :]))
 # save("$output_folder/mortgages_median_values_regionally.png", plot_mortgages_median_values_regionally(agent_data[2:end, :], model_data[2:end, :]))
 # save("$output_folder/mortgages_values_distribution.png", plot_mortgages_values_distribution(agent_data[2:end, :], model_data[2:end, :]))
@@ -490,6 +515,7 @@ save("$output_folder/number_of_transactions_per_region.png", plot_number_of_tran
 # end
 
 writeToCsv("$output_folder/QuarterLyHousePrices.csv", generate_houses_prices_table(agent_data[2:end, :], model_data[2:end, :]))
+writeToCsv("$output_folder/QuarterLyRentsOfNewContracts.csv", generate_rent_prices_table(agent_data[2:end, :], model_data[2:end, :]))
 writeToCsv("$output_folder/DemographicEvents.csv", generate_demographic_table(agent_data[2:end, :], model_data[2:end, :]))
 # CSV.write("$output_folder/agentData.csv", agent_data, delim=';')
 CSV.write("$output_folder/modelData.csv", model_data, delim=';')

@@ -2,8 +2,8 @@ include("types.jl")
 include("calibrationTable.jl")
 
 MAX_BUCKET_SIZE = 100
-NUMBER_OF_HOUSEHOLDS = 7500
-NUMBER_OF_STEPS = 500
+NUMBER_OF_HOUSEHOLDS = 5000
+NUMBER_OF_STEPS = 50
 STARTING_GOV_WEALTH_PER_CAPITA = 100000.0
 STARTING_COMPANY_WEALTH_PER_CAPITA = 60000.0
 STARTING_BANK_WEALTH_PER_CAPITA = 67000.0
@@ -231,6 +231,13 @@ color_map = Dict(
     Seixal => :aqua,
     Sesimbra => :fuchsia,
     Setubal => :gold
+)
+
+sizes_color_map = Dict(
+    LessThan50 => :olive,
+    LessThan75 => :cyan,
+    LessThan125 => :pink,
+    More => :gold
 )
 
 Theoretical_TOTAL_HOUSEHOLDS_WITH_SIZE_1 = 336274
@@ -841,6 +848,48 @@ MIGRATION_RATE_IN_Setubal = 2001 * MODEL_SCALE
 MIGRATION_RATE_IN_Sintra = 7733 * MODEL_SCALE
 MIGRATION_RATE_IN_VilaFrancaDeXira = 1628 * MODEL_SCALE
 
+NUMBER_OF_HOUSEHOLDS_MAP = Dict(
+    Alcochete => sum([ HOUSEHOLDS_SIZES_MAP[size][Alcochete] for size in [1, 2, 3, 4, 5]]),
+    Almada => sum([ HOUSEHOLDS_SIZES_MAP[size][Almada] for size in [1, 2, 3, 4, 5]]),
+    Amadora => sum([ HOUSEHOLDS_SIZES_MAP[size][Amadora] for size in [1, 2, 3, 4, 5]]),
+    Barreiro => sum([ HOUSEHOLDS_SIZES_MAP[size][Barreiro] for size in [1, 2, 3, 4, 5]]),
+    Cascais => sum([ HOUSEHOLDS_SIZES_MAP[size][Cascais] for size in [1, 2, 3, 4, 5]]),
+    Lisboa => sum([ HOUSEHOLDS_SIZES_MAP[size][Lisboa] for size in [1, 2, 3, 4, 5]]),
+    Loures => sum([ HOUSEHOLDS_SIZES_MAP[size][Loures] for size in [1, 2, 3, 4, 5]]),
+    Mafra => sum([ HOUSEHOLDS_SIZES_MAP[size][Mafra] for size in [1, 2, 3, 4, 5]]),
+    Moita => sum([ HOUSEHOLDS_SIZES_MAP[size][Moita] for size in [1, 2, 3, 4, 5]]),
+    Montijo => sum([ HOUSEHOLDS_SIZES_MAP[size][Montijo] for size in [1, 2, 3, 4, 5]]),
+    Odivelas => sum([ HOUSEHOLDS_SIZES_MAP[size][Odivelas] for size in [1, 2, 3, 4, 5]]),
+    Oeiras => sum([ HOUSEHOLDS_SIZES_MAP[size][Oeiras] for size in [1, 2, 3, 4, 5]]),
+    Palmela => sum([ HOUSEHOLDS_SIZES_MAP[size][Palmela] for size in [1, 2, 3, 4, 5]]),
+    Seixal => sum([ HOUSEHOLDS_SIZES_MAP[size][Seixal] for size in [1, 2, 3, 4, 5]]),
+    Sesimbra => sum([ HOUSEHOLDS_SIZES_MAP[size][Sesimbra] for size in [1, 2, 3, 4, 5]]),
+    Setubal => sum([ HOUSEHOLDS_SIZES_MAP[size][Setubal] for size in [1, 2, 3, 4, 5]]),
+    Sintra => sum([ HOUSEHOLDS_SIZES_MAP[size][Sintra] for size in [1, 2, 3, 4, 5]]),
+    VilaFrancaDeXira => sum([ HOUSEHOLDS_SIZES_MAP[size][VilaFrancaDeXira] for size in [1, 2, 3, 4, 5]]),
+)
+0.66
+
+migrationValueMap = Dict(
+    Alcochete => 1.36 * NUMBER_OF_HOUSEHOLDS_MAP[Alcochete],
+    Almada => 0.45 * NUMBER_OF_HOUSEHOLDS_MAP[Almada],
+    Amadora => 0.74 * NUMBER_OF_HOUSEHOLDS_MAP[Amadora],
+    Barreiro => 0.56 * NUMBER_OF_HOUSEHOLDS_MAP[Barreiro],
+    Cascais => 0.29 * NUMBER_OF_HOUSEHOLDS_MAP[Cascais],
+    Lisboa => 0.95 * NUMBER_OF_HOUSEHOLDS_MAP[Lisboa],
+    Loures => 0.47 * NUMBER_OF_HOUSEHOLDS_MAP[Loures],
+    Mafra => 0.80 * NUMBER_OF_HOUSEHOLDS_MAP[Mafra],
+    Moita => 1.15 * NUMBER_OF_HOUSEHOLDS_MAP[Moita],
+    Montijo => 1.52 * NUMBER_OF_HOUSEHOLDS_MAP[Montijo],
+    Odivelas => 0.64 * NUMBER_OF_HOUSEHOLDS_MAP[Odivelas],
+    Oeiras => 0.76 * NUMBER_OF_HOUSEHOLDS_MAP[Oeiras],
+    Palmela => 1.89 * NUMBER_OF_HOUSEHOLDS_MAP[Palmela],
+    Seixal => 1.00 * NUMBER_OF_HOUSEHOLDS_MAP[Seixal],
+    Sesimbra => 1.76 * NUMBER_OF_HOUSEHOLDS_MAP[Sesimbra],
+    Setubal => -0.06 * NUMBER_OF_HOUSEHOLDS_MAP[Setubal],
+    Sintra => 0.21 * NUMBER_OF_HOUSEHOLDS_MAP[Sintra],
+    VilaFrancaDeXira => 0.18 * NUMBER_OF_HOUSEHOLDS_MAP[VilaFrancaDeXira],
+)
 
 PROBABILITY_OF_DIVORCE_IN_Alcochete = 2.3 / 1000
 PROBABILITY_OF_DIVORCE_IN_Almada = 1.6 / 1000
@@ -881,22 +930,4 @@ RATIO_OF_FERTILE_WOMEN_IN_Setubal = 40.6 / 100
 RATIO_OF_FERTILE_WOMEN_IN_Sintra = 44.1 / 100
 RATIO_OF_FERTILE_WOMEN_IN_VilaFrancaDeXira = 44.4 / 100
 
-0,66
-1,36
-0,45
-0,74
-0,56
-0,29
-0,95
-0,47
-0,80
-1,15
-1,52
-0,64
-0,76
-1,89
-1,00
-1,76
--0,06
-0,21
-0,18
+
