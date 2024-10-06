@@ -1,7 +1,27 @@
-#TODO: should be initiated with constructions in progress
 function initiateConstructionSector()
+    averageTimeForPermit = (CONSTRUCTION_DELAY_MIN + CONSTRUCTION_DELAY_MAX) / 2
+    averageTimeForConstruction = (CONSTRUCTION_TIME_MIN + CONSTRUCTION_TIME_MAX) / 2
+    averageTotalTime = averageTimeForPermit + averageTimeForConstruction
+
+    housesInConstruction = Dict(location => Dict(size_interval => PendingConstruction[] for size_interval in instances(SizeInterval)) for location in instances(HouseLocation))
+    for location in instances(HouseLocation)
+        # divide the time by 12 because the MAX_NEW_CONSTRUCTIONS_MAP data is yearly
+        # this way we calculate the expected constructions in progress based on the time it usually
+        # takes for a project to complete and the amount of projects that get completed each year
+        expectedConstructionInProgress = MAX_NEW_CONSTRUCTIONS_MAP[location] * (averageTotalTime / 12)
+        for i in 1:expectedConstructionInProgress
+            # pick a random size_interval
+            # TODO: could be data driven
+            size_interval = instances(SizeInterval)[rand(1:length(instances(SizeInterval)))]
+            permitTime = rand(CONSTRUCTION_DELAY_MIN:CONSTRUCTION_DELAY_MAX)
+            constructionTime = rand(CONSTRUCTION_TIME_MIN:CONSTRUCTION_TIME_MAX)
+            totalDuration = permitTime + constructionTime
+            house = House(generateAreaFromSizeInterval(size_interval), location, NotSocialNeighbourhood, 1.0, rand(1:100))
+            push!(housesInConstruction[location][size_interval], PendingConstruction(rand(1:totalDuration), permitTime, constructionTime, house))
+        end
+    end
     return ConstructionSector(STARTING_CONSTRUCTION_SECTOR_WEALTH, 
-            Dict(location => Dict(size_interval => PendingConstruction[] for size_interval in instances(SizeInterval)) for location in instances(HouseLocation)),
+            housesInConstruction,
             Mortgage[],
             Dict(location => 0.0 for location in instances(HouseLocation))
             )
@@ -20,13 +40,14 @@ function sortSizesBucketsByProfitability(model, location)
     res = SizePriority[]
     expectedDuration = rand(CONSTRUCTION_DELAY_MIN:CONSTRUCTION_DELAY_MAX)
     expectedDuration += rand(CONSTRUCTION_TIME_MIN:CONSTRUCTION_TIME_MAX)
+    testPercentile = rand(1:100)
     for size_interval in instances(SizeInterval)
-        sampleHouse = House(generateAreaFromSizeInterval(size_interval), location, NotSocialNeighbourhood, 1.0, rand(1:100))
+        sampleHouse = House(generateAreaFromSizeInterval(size_interval), location, NotSocialNeighbourhood, 1.0, testPercentile)
         costs = calculate_total_construction_costs(model, sampleHouse, expectedDuration)
         marketPrice = calculate_market_price(sampleHouse, model)
         margin = marketPrice/costs
         # to introduce a random factor:
-        margin = rand(Normal(margin, margin * 0.5))
+        margin = rand(Normal(margin, margin * 0.25))
         push!(res, SizePriority(size_interval, margin))
     end
     sort!(res, lt=sortSizePriority)
