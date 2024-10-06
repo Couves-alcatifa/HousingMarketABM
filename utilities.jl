@@ -110,9 +110,9 @@ function calculateBid(household, house, askPrice, maxMortgageValue, consumerSurp
     # return bidValue
     demandValue = household.wealth * 0.95 + maxMortgageValue
     consumerSurplusMultiplier = calculateConsumerSurplusAddedValue(consumerSurplus)
-    if (demandValue >= askPrice * consumerSurplusMultiplier)
+    if (demandValue >= askPrice * consumerSurplusMultiplier + calculateImt(askPrice * consumerSurplusMultiplier))
         return askPrice * consumerSurplusMultiplier
-    elseif demandValue >= askPrice
+    elseif demandValue >= askPrice + calculateImt(askPrice)
         return askPrice
     else
         return 0
@@ -464,9 +464,9 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     end
 
     household = model[highestBidder]
-    if (household.wealth < bidValue)
+    if (household.wealth < bidValue + calculateImt(bidValue))
         paidWithOwnMoney = household.wealth * 0.95
-        mortgageValue = bidValue - paidWithOwnMoney
+        mortgageValue = bidValue + calculateImt(bidValue) - paidWithOwnMoney
         # if mortgageValue > model.bank.wealth * 0.5
         #     return false
         # end
@@ -501,6 +501,9 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     end
     household.wealth -= bidValue
     seller.wealth += bidValue
+    imt = calculateImt(bidValue)
+    household.wealth -= imt
+    model.government.wealth += imt
     push!(household.houses, supply.house)
     terminateContractsOnTentantSide(household, model)
     addTransactionToBuckets(model, supply.house, bidValue)
@@ -1033,19 +1036,40 @@ function calculateHouseAnnualRentalRentability(house, model)
 end
 
 function calculateImt(price)
-    if price <= 101917
-        return 0
-    elseif price <= 139412
-        return 0
-    elseif price <= 190086
-        return 0
-    elseif price <= 316772
-        return 0
-    elseif price <= 633453
-        return 0
-    elseif price <= 1102920
-        return 0
-    else
-        return 0
+    if price >= 1102920
+        return price * 0.075
+    elseif price >= 633453
+        return price * 0.06
     end
+    tax = 0
+
+    if price >= 101917
+        extra = (price - 101917) * 0.02
+        if extra > (139412 - 101917) * 0.02
+            extra = (139412 - 101917) * 0.02
+        end
+        tax += extra
+    end
+    if price >= 139412
+        extra = (price - 139412) * 0.05
+        if extra > (190086 - 139412) * 0.05
+            extra = (190086 - 139412) * 0.05
+        end
+        tax += extra
+    end
+    if price >= 190086
+        extra = (price - 190086) * 0.07
+        if extra > (316772 - 190086) * 0.07
+            extra = (316772 - 190086) * 0.07
+        end
+        tax += extra
+    end
+    if price >= 316772
+        extra = (price - 316772) * 0.08
+        if extra > (633453 - 316772) * 0.08
+            extra = (633453 - 316772) * 0.08
+        end
+        tax += extra
+    end
+    return tax
 end
