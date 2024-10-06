@@ -2,8 +2,8 @@ include("types.jl")
 include("calibrationTable.jl")
 
 MAX_BUCKET_SIZE = 50
-NUMBER_OF_HOUSEHOLDS = 7500
-NUMBER_OF_STEPS = 200
+NUMBER_OF_HOUSEHOLDS = 2500
+NUMBER_OF_STEPS = 12
 STARTING_GOV_WEALTH_PER_CAPITA = 100000.0
 STARTING_COMPANY_WEALTH_PER_CAPITA = 60000.0
 STARTING_BANK_WEALTH_PER_CAPITA = 67000.0
@@ -931,3 +931,23 @@ RATIO_OF_FERTILE_WOMEN_IN_Sintra = 44.1 / 100
 RATIO_OF_FERTILE_WOMEN_IN_VilaFrancaDeXira = 44.4 / 100
 
 
+MAX_NEW_CONSTRUCTIONS_MAP = Dict(
+    Alcochete => 24 * MODEL_SCALE,
+    Almada => 187 * MODEL_SCALE,
+    Amadora => 10 * MODEL_SCALE,
+    Barreiro => 18 * MODEL_SCALE,
+    Cascais => 139 * MODEL_SCALE,
+    Lisboa => 15 * MODEL_SCALE,
+    Loures => 127 * MODEL_SCALE,
+    Mafra => 165 * MODEL_SCALE,
+    Moita => 50 * MODEL_SCALE,
+    Montijo => 52 * MODEL_SCALE,
+    Odivelas => 204 * MODEL_SCALE,
+    Oeiras => 82 * MODEL_SCALE,
+    Palmela => 58 * MODEL_SCALE,
+    Seixal => 343 * MODEL_SCALE,
+    Sesimbra => 76 * MODEL_SCALE,
+    Setubal => 161 * MODEL_SCALE,
+    Sintra => 207 * MODEL_SCALE,
+    VilaFrancaDeXira => 43 * MODEL_SCALE,
+)

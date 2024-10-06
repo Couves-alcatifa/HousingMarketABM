@@ -189,6 +189,7 @@ mutable struct ConstructionSector
     wealth::Float64
     housesInConstruction # dict of dicts with arrays of pending constructions per region/size_interval
     mortgages::Array{Mortgage}
+    constructionGoals # simillar to housesInConstruction but the values are floats with the amount of houses that we want to build
 end
 
 mutable struct HouseholdInfo #TODO: drop this

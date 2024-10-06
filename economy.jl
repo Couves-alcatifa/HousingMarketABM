@@ -96,7 +96,7 @@ function wealth_model()
         :salary_multiplier => 1.0,
         :demand_size => Dict(location => 0 for location in instances(HouseLocation)),
         :supply_size => Dict(location => 0 for location in instances(HouseLocation)),
-        :construction_sector => ConstructionSector(STARTING_CONSTRUCTION_SECTOR_WEALTH, Dict(location => Dict(size_interval => PendingConstruction[] for size_interval in instances(SizeInterval)) for location in instances(HouseLocation)), Mortgage[]),
+        :construction_sector => initiateConstructionSector(),
         :births => 0, 
         :breakups => 0,
         :deaths => 0,

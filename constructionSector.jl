@@ -1,6 +1,42 @@
+#TODO: should be initiated with constructions in progress
+function initiateConstructionSector()
+    return ConstructionSector(STARTING_CONSTRUCTION_SECTOR_WEALTH, 
+            Dict(location => Dict(size_interval => PendingConstruction[] for size_interval in instances(SizeInterval)) for location in instances(HouseLocation)),
+            Mortgage[],
+            Dict(location => 0.0 for location in instances(HouseLocation))
+            )
+end
+
+mutable struct SizePriority
+    size_interval::SizeInterval
+    margin::Float64
+end
+
+function sortSizePriority(l, r)
+    return l.margin > r.margin
+end
+
+function sortSizesBucketsByProfitability(model, location)
+    res = SizePriority[]
+    expectedDuration = rand(CONSTRUCTION_DELAY_MIN:CONSTRUCTION_DELAY_MAX)
+    expectedDuration += rand(CONSTRUCTION_TIME_MIN:CONSTRUCTION_TIME_MAX)
+    for size_interval in instances(SizeInterval)
+        sampleHouse = House(generateAreaFromSizeInterval(size_interval), location, NotSocialNeighbourhood, 1.0, rand(1:100))
+        costs = calculate_total_construction_costs(model, sampleHouse, expectedDuration)
+        marketPrice = calculate_market_price(sampleHouse, model)
+        margin = marketPrice/costs
+        # to introduce a random factor:
+        margin = rand(Normal(margin, margin * 0.5))
+        push!(res, SizePriority(size_interval, margin))
+    end
+    sort!(res, lt=sortSizePriority)
+    return [sizePriority.size_interval for sizePriority in res]
+end
+
 function updateConstructions(model)
     for location in instances(HouseLocation)
-        for size_interval in instances(SizeInterval)
+        sizesOrdered = sortSizesBucketsByProfitability(model, location)
+        for size_interval in sizesOrdered
             updateConstructionsPerBucket(model, location, size_interval)
         end
     end
@@ -10,14 +46,20 @@ end
 function updateConstructionsPerBucket(model, location, size_interval)
     targetConstruction = calculateTargetConstructionPerBucket(model, location, size_interval)
     newConstructions = targetConstruction - length(model.construction_sector.housesInConstruction[location][size_interval])
-    
-    if (newConstructions > 0)
-        # attempt to start construction for half the demand in one year (hence divide by 12 and by 2) 
-        newConstructions = Int64(floor(newConstructions / 24))
-        newConstructions = rand(Normal(newConstructions, newConstructions * 0.5))
-        for i in 1:newConstructions
+    if newConstructions > MAX_NEW_CONSTRUCTIONS_MAP[location] / 12
+        newConstructions = MAX_NEW_CONSTRUCTIONS_MAP[location] / 12
+    end
+    model.construction_sector.constructionGoals[location] += newConstructions
+    constructionGoals = copy(model.construction_sector.constructionGoals[location])
+    if (constructionGoals >= 1)
+        # # attempt to start construction for half the demand in one year (hence divide by 12 and by 2) 
+        # newConstructions = Int64(floor(newConstructions / 24))
+        # newConstructions = rand(Normal(newConstructions, newConstructions * 0.5))
+        for i in 1:constructionGoals
             if (!startNewConstruction(model, location, size_interval))
                 break
+            else
+                model.construction_sector.constructionGoals[location] -= 1.0
             end
         end
     end
@@ -93,7 +135,7 @@ function createConstructionLoan(model, value)
     return true
 end
 
-function generateHouseToBeBuilt(location, size_interval)
+function generateAreaFromSizeInterval(size_interval)
     area = 0
     if size_interval == LessThan50
         area = rand(25:50)
@@ -107,6 +149,10 @@ function generateHouseToBeBuilt(location, size_interval)
         println("Error: unknown sizeInterval $size_interval")
         exit(1)
     end
+    return area
+end
+function generateHouseToBeBuilt(location, size_interval)
+    area = generateAreaFromSizeInterval(size_interval)
     bestPercentile = -1
     bestMargin = -1
     expectedDuration = rand(CONSTRUCTION_DELAY_MIN:CONSTRUCTION_DELAY_MAX)
