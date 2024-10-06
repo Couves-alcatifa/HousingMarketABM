@@ -1,4 +1,5 @@
 function sum_wealth(iter)
+    start = time()
     next = iterate(iter)
     soma = 0
     while next !== nothing
@@ -11,10 +12,12 @@ function sum_wealth(iter)
         soma += i.wealth
         next = iterate(iter, state)
     end
+    LOG_INFO("Metrics: sum_wealth took $(time() - start)")
     return soma
 end
 
 function money_distribution(iter)
+    start = time()
     next = iterate(iter)
     distribution = []
     while next !== nothing
@@ -30,12 +33,17 @@ function money_distribution(iter)
         end
         next = iterate(iter, state)
     end
-    return sort(distribution)
+    result = sort(distribution)
+    LOG_INFO("Metrics: money_distribution took $(time() - start)")
+    return result
 end
 
 function wealth_distribution(iter)
+    start = time()
     next = iterate(iter)
     distribution = []
+    # NOTE: if the iteration is taking to long we can try to collect
+    # only the wealth,age etc... instead of the whole household
     while next !== nothing
         (i, state) = next
         if i == false
@@ -49,10 +57,13 @@ function wealth_distribution(iter)
         end
         next = iterate(iter, state)
     end
-    return sort(distribution)
+    result = sort(distribution)
+    LOG_INFO("Metrics: wealth_distribution took $(time() - start)")
+    return result
 end
 
 function size_distribution(iter)
+    start = time()
     next = iterate(iter)
     distribution = []
     while next !== nothing
@@ -64,10 +75,13 @@ function size_distribution(iter)
         push!(distribution, i.size)
         next = iterate(iter, state)
     end
-    return sort(distribution)
+    result = sort(distribution)
+    LOG_INFO("Metrics: size_distribution took $(time() - start)")
+    return result
 end
 
 function age_distribution(iter)
+    start = time()
     next = iterate(iter)
     distribution = []
     while next !== nothing
@@ -79,7 +93,9 @@ function age_distribution(iter)
         push!(distribution, i.age)
         next = iterate(iter, state)
     end
-    return sort(distribution)
+    result = sort(distribution)
+    LOG_INFO("Metrics: age_distribution took $(time() - start)")
+    return result
 end
 
 function sum_houses(iter)
@@ -224,8 +240,8 @@ construction_wealth(model) = model.construction_sector.wealth
 supply_volume(model) = copy(model.supply_size)
 demand_volume(model) = copy(model.demand_size)
 
-supply_per_bucket(model) = Dict(location => Dict(size_interval => measureSupplyForSizeAndRegion(model, size_interval, location) for size_interval in instances(SizeInterval)) for location in instances(HouseLocation))
-demand_per_bucket(model) = Dict(location => Dict(size_interval => measureDemandForSizeAndRegion(model, size_interval, location) for size_interval in instances(SizeInterval)) for location in instances(HouseLocation))
+supply_per_bucket(model) = copy(model.supplyPerBucket)
+demand_per_bucket(model) = copy(model.demandPerBucket)
 
 mortgages(model) = copy(model.mortgagesInStep)
 

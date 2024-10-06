@@ -45,9 +45,8 @@ function updateConstructionsPerBucket(model, location, size_interval)
 end
 
 function calculateTargetConstructionPerBucket(model, location, size_interval)
-    return measureDemandForSizeAndRegion(model, size_interval, location) - 
-           measureSupplyForSizeAndRegion(model, size_interval, location)
-           
+    return model.demandPerBucket[location][size_interval] -
+           model.supplyPerBucket[location][size_interval]
 end
 
 function calculateMortgageDurationForConstructionSector()

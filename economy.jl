@@ -114,7 +114,9 @@ function wealth_model()
         :rentalBuckets => InitiateBuckets(), # Houses characteristics => Prices[]
         :mortgagesInStep => Mortgage[],
         :householdsInDemand => Int[],
-        :housesBuiltPerRegion => Dict(location => Dict(size_interval => House[] for size_interval in instances(SizeInterval)) for location in instances(HouseLocation))
+        :housesBuiltPerRegion => Dict(location => Dict(size_interval => House[] for size_interval in instances(SizeInterval)) for location in instances(HouseLocation)),
+        :supplyPerBucket => Dict(location => Dict(size_interval => 0 for size_interval in instances(SizeInterval)) for location in instances(HouseLocation)),
+        :demandPerBucket => Dict(location => Dict(size_interval => 0 for size_interval in instances(SizeInterval)) for location in instances(HouseLocation)),
     )
 
     model = StandardABM(MyMultiAgent; agent_step! = agent_step!, model_step! = model_step!, properties,scheduler = Schedulers.Randomly())
@@ -169,6 +171,7 @@ function model_step!(model)
     clearHouseMarket(model)
     clearRentalMarket(model)
     trimBucketsIfNeeded(model)
+    measureSupplyAndDemandPerBucket(model)
     if model.steps % 12 == 0
         company_adjust_salaries(model)
         gov_adjust_taxes(model)

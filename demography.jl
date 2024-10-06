@@ -34,7 +34,7 @@ end
 
 # returns true if household died
 function handle_deaths(household, model)
-    probability_of_death = 0.0005 + 10^(-4.2+0.032*household.age)
+    probability_of_death = 0.0005 + 10^(-4.0+0.032*household.age)
     # if (household.age < 60)
     #     return false
     # end

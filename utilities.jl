@@ -873,6 +873,15 @@ function measureSupplyAndDemandRegionally(model)
     end
 end
 
+function measureSupplyAndDemandPerBucket(model)
+    for location in instances(HouseLocation)
+        for size_interval in instances(SizeInterval)
+            measureDemandForSizeAndRegion(model, size_interval, location)
+            measureSupplyForSizeAndRegion(model, size_interval, location)
+        end
+    end
+end
+
 function calculateConsumerSurplus(household, house)
     house_percentile = house.percentile
     house_area = house.area
@@ -957,29 +966,27 @@ function clearHangingRentalSupplies(model)
 end
 
 function measureDemandForSizeAndRegion(model, size_interval, location)
-    count = 0
+    model.demandPerBucket[location][size_interval] = 0
     for householdId in model.householdsInDemand
         household = model[householdId]
         if (household.residencyZone != location 
             || !isSizeIntervalAppropriate(size_interval, household))
             continue
         end
-        count += 1
+        model.demandPerBucket[location][size_interval] += 1
     end
-    return count
 end
 
 function measureSupplyForSizeAndRegion(model, size_interval, location)
-    count = 0
+    model.supplyPerBucket[location][size_interval] = 0
     for supply in model.houseMarket.supply
         house = supply.house
         if (house.location != location
             || getSizeInterval(house) != size_interval)
             continue
         end
-        count += 1
+        model.supplyPerBucket[location][size_interval] += 1
     end
-    return count
 end
 
 
@@ -1023,4 +1030,22 @@ function calculateHouseAnnualRentalRentability(house, model)
     marketPrice = calculate_market_price(house, model)
     rent = calculate_rental_market_price(house, model)
     return (rent * 12)/marketPrice
+end
+
+function calculateImt(price)
+    if price <= 101917
+        return 0
+    elseif price <= 139412
+        return 0
+    elseif price <= 190086
+        return 0
+    elseif price <= 316772
+        return 0
+    elseif price <= 633453
+        return 0
+    elseif price <= 1102920
+        return 0
+    else
+        return 0
+    end
 end

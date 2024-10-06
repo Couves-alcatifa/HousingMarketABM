@@ -1,7 +1,7 @@
 include("types.jl")
 include("calibrationTable.jl")
 
-MAX_BUCKET_SIZE = 100
+MAX_BUCKET_SIZE = 50
 NUMBER_OF_HOUSEHOLDS = 7500
 NUMBER_OF_STEPS = 200
 STARTING_GOV_WEALTH_PER_CAPITA = 100000.0
@@ -871,24 +871,24 @@ NUMBER_OF_HOUSEHOLDS_MAP = Dict(
 0.66
 
 migrationValueMap = Dict(
-    Alcochete => 1.36 * NUMBER_OF_HOUSEHOLDS_MAP[Alcochete],
-    Almada => 0.45 * NUMBER_OF_HOUSEHOLDS_MAP[Almada],
-    Amadora => 0.74 * NUMBER_OF_HOUSEHOLDS_MAP[Amadora],
-    Barreiro => 0.56 * NUMBER_OF_HOUSEHOLDS_MAP[Barreiro],
-    Cascais => 0.29 * NUMBER_OF_HOUSEHOLDS_MAP[Cascais],
-    Lisboa => 0.95 * NUMBER_OF_HOUSEHOLDS_MAP[Lisboa],
-    Loures => 0.47 * NUMBER_OF_HOUSEHOLDS_MAP[Loures],
-    Mafra => 0.80 * NUMBER_OF_HOUSEHOLDS_MAP[Mafra],
-    Moita => 1.15 * NUMBER_OF_HOUSEHOLDS_MAP[Moita],
-    Montijo => 1.52 * NUMBER_OF_HOUSEHOLDS_MAP[Montijo],
-    Odivelas => 0.64 * NUMBER_OF_HOUSEHOLDS_MAP[Odivelas],
-    Oeiras => 0.76 * NUMBER_OF_HOUSEHOLDS_MAP[Oeiras],
-    Palmela => 1.89 * NUMBER_OF_HOUSEHOLDS_MAP[Palmela],
-    Seixal => 1.00 * NUMBER_OF_HOUSEHOLDS_MAP[Seixal],
-    Sesimbra => 1.76 * NUMBER_OF_HOUSEHOLDS_MAP[Sesimbra],
-    Setubal => -0.06 * NUMBER_OF_HOUSEHOLDS_MAP[Setubal],
-    Sintra => 0.21 * NUMBER_OF_HOUSEHOLDS_MAP[Sintra],
-    VilaFrancaDeXira => 0.18 * NUMBER_OF_HOUSEHOLDS_MAP[VilaFrancaDeXira],
+    Alcochete => (1.36 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Alcochete],
+    Almada => (0.45 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Almada],
+    Amadora => (0.74 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Amadora],
+    Barreiro => (0.56 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Barreiro],
+    Cascais => (0.29 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Cascais],
+    Lisboa => (0.95 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Lisboa],
+    Loures => (0.47 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Loures],
+    Mafra => (0.80 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Mafra],
+    Moita => (1.15 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Moita],
+    Montijo => (1.52 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Montijo],
+    Odivelas => (0.64 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Odivelas],
+    Oeiras => (0.76 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Oeiras],
+    Palmela => (1.89 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Palmela],
+    Seixal => (1.00 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Seixal],
+    Sesimbra => (1.76 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Sesimbra],
+    Setubal => (-0.06 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Setubal],
+    Sintra => (0.21 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Sintra],
+    VilaFrancaDeXira => (0.18 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[VilaFrancaDeXira],
 )
 
 PROBABILITY_OF_DIVORCE_IN_Alcochete = 2.3 / 1000
