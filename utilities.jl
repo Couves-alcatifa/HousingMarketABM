@@ -302,8 +302,7 @@ function clearHouseMarket(model)
             end
 
             if demand.type == ForRental
-                rentability = calculateHouseAnnualRentalRentability(house, model)
-                if rentability < 0.05
+                if !isHouseViableForRenting(model, house)
                     continue
                 end
             end
@@ -397,6 +396,7 @@ function clearRentalMarket(model)
         supply = model.rentalMarket.supply[i]
         sort!(supply.bids, lt=sortBids)
         if rent_house(model, supply)
+            delete!(model.housesInRentalMarket, supply.house)
             splice!(model.rentalMarket.supply, i)
         else
             # house wasn't rented, but we will clear the bids just in case
@@ -494,7 +494,7 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     content *= "askPrice = $(supply.price)\n"
     content *= "sellerId = $(supply.sellerId)\n"
     content *= "bidValue = $(bidValue)\n"
-    content *= "pricePerm2 = $(bidValue / supply.house.area)"
+    content *= "pricePerm2 = $(bidValue / supply.house.area)\n"
     content *= "########\n"
     print(content)
     open("$output_folder/transactions_logs/step_$(model.steps).txt", "a") do file
@@ -965,6 +965,7 @@ function clearHangingRentalSupplies(model)
         catch
             supply = model.rentalMarket.supply[i]
             push!(model.inheritages, Inheritage([supply.house], 0, Mortgage[], rand(1:100)))
+            delete!(model.housesInRentalMarket, supply.house)
             splice!(model.rentalMarket.supply, i)
         end
     end
@@ -1075,4 +1076,10 @@ function calculateImt(price)
         tax += extra
     end
     return tax
+end
+
+function isHouseViableForRenting(model, house)
+    rentalPrice = calculate_rental_market_price(house, model)
+    marketPrice = calculate_market_price(house, model)
+    return rentalPrice * 12 >= marketPrice * 0.05
 end

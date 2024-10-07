@@ -117,6 +117,7 @@ function wealth_model()
         :housesBuiltPerRegion => Dict(location => Dict(size_interval => House[] for size_interval in instances(SizeInterval)) for location in instances(HouseLocation)),
         :supplyPerBucket => Dict(location => Dict(size_interval => 0 for size_interval in instances(SizeInterval)) for location in instances(HouseLocation)),
         :demandPerBucket => Dict(location => Dict(size_interval => 0 for size_interval in instances(SizeInterval)) for location in instances(HouseLocation)),
+        :housesInRentalMarket => Set(),
     )
 
     model = StandardABM(MyMultiAgent; agent_step! = agent_step!, model_step! = model_step!, properties,scheduler = Schedulers.Randomly())
@@ -258,6 +259,7 @@ end
 
 function put_house_to_rent(household::MyMultiAgent, model, house)
     push!(model.rentalMarket.supply, RentalSupply(house, calculate_rental_market_price(house, model), household.id, Bid[]))
+    push!(model.housesInRentalMarket, house)
     # # removing house from agent when putting to sale
     # splice!(agent.houseIds, index)
 end
@@ -280,37 +282,62 @@ function calculate_subsidy(household, model)
 end
 
 function decideToRent(household, model, house)
-    return household.percentile > 80 # TODO: something more interesting...
+    if isHouseViableForRenting(model, house) && rand() < 0.35
+        return true
+    end
+    return false
 end
 
 function supply_decisions(household, model)
-    i = 2
+    houseIdx = 2
     if length(household.contractsIdsAsLandlord) + 1 == length(household.houses)
         return
     end
-    while i <= length(household.houses)
-        house = household.houses[i]
-        if houseIsAlreadyRenting(household, model, house)
-            i += 1
+    while houseIdx <= length(household.houses)
+        house = household.houses[houseIdx]
+        contractId = getContractId(household, model, house)
+        if contractId != -1
+            # house is already renting
+            houseIdx += 1
             continue
+        elseif house in model.housesInRentalMarket
+            if isHouseViableForRenting(model, house)
+                houseIdx += 1
+                continue
+            else
+                for supplyIdx in eachindex(model.rentalMarket.supply)
+                    supply = model.rentalMarket.supply[supplyIdx]
+                    if supply.house == house
+                        splice!(model.rentalMarket.supply, supplyIdx)
+                        delete!(model.housesInRentalMarket, house)
+                        put_house_to_sale(household, model, houseIdx)
+                        houseIdx -= 1
+                        break
+                    end
+                end
+                houseIdx += 1
+                continue
+            end
         end
         if decideToRent(household, model, house)
             put_house_to_rent(household, model, house)
         else # decides to sell...
-            put_house_to_sale(household, model, i)
+            put_house_to_sale(household, model, houseIdx)
         end
-        i += 1
+        houseIdx += 1
     end
 end
 
-function houseIsAlreadyRenting(household, model, house)
+
+
+function getContractId(household, model, house)
     for contractId in household.contractsIdsAsLandlord
         contract = model.contracts[contractId]
         if contract.house == house
-            return true
+            return contractId
         end
     end
-    return false
+    return -1
 end
 
 function not_home_owner_decisions(household, model)
