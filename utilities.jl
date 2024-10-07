@@ -464,6 +464,7 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     end
 
     household = model[highestBidder]
+    content = "########\n"
     if (household.wealth < bidValue + calculateImt(bidValue))
         paidWithOwnMoney = household.wealth * 0.95
         mortgageValue = bidValue + calculateImt(bidValue) - paidWithOwnMoney
@@ -474,31 +475,33 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
         mortgage = Mortgage(mortgageValue, mortgageValue, 0, mortgageDuration)
         push!(household.mortgages, mortgage)
         push!(model.mortgagesInStep, mortgage)
-        content = "########\n"
         content *= "mortgageValue = $mortgageValue\n"
-        content *= "house.area = $(supply.house.area)\n"
-        content *= "house.location = $(string(supply.house.location))\n"
-        content *= "house percentile = $(supply.house.percentile)\n"
-        content *= "household.wealth = $(string(household.wealth))\n"
-        content *= "raw salary = $(string(calculateSalary(household, model)))\n" 
-        content *= "liquid salary = $(string(calculateLiquidSalary(household, model)))\n"
-        content *= "household percentile = $(household.percentile)\n"
-        content *= "household id = $(household.id)\n"
-        content *= "household size = $(household.size)\n"
-        content *= "askPrice = $(supply.price)\n"
-        content *= "sellerId = $(supply.sellerId)\n"
-        content *= "bidValue = $(bidValue)\n"
-        content *= "########\n"
-        print(content)
-        open("$output_folder/transactions_logs/step_$(model.steps).txt", "a") do file
-            write(file, content)
-        end
         model.bank.wealth -= mortgageValue
         household.wealth += mortgageValue
     else
-        println("\n\nhouse will be paid without mortgage... unusual\n\n")
+        content *= "house will be paid without mortgage... unusual\n"
         # house will be paid without mortgage... unusual
     end
+    content *= "house.area = $(supply.house.area)\n"
+    content *= "house.location = $(string(supply.house.location))\n"
+    content *= "house percentile = $(supply.house.percentile)\n"
+    content *= "household.wealth = $(string(household.wealth))\n"
+    content *= "raw salary = $(string(calculateSalary(household, model)))\n" 
+    content *= "liquid salary = $(string(calculateLiquidSalary(household, model)))\n"
+    content *= "household percentile = $(household.percentile)\n"
+    content *= "household id = $(household.id)\n"
+    content *= "household size = $(household.size)\n"
+    content *= "askPrice = $(supply.price)\n"
+    content *= "sellerId = $(supply.sellerId)\n"
+    content *= "bidValue = $(bidValue)\n"
+    content *= "pricePerm2 = $(bidValue / supply.house.area)"
+    content *= "########\n"
+    print(content)
+    open("$output_folder/transactions_logs/step_$(model.steps).txt", "a") do file
+        write(file, content)
+    end
+    
+    
     household.wealth -= bidValue
     seller.wealth += bidValue
     imt = calculateImt(bidValue)

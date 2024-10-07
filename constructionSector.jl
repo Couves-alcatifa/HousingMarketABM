@@ -209,7 +209,7 @@ function put_newly_built_house_to_sale(model, house)
     push!(model.housesBuiltPerRegion[house.location][getSizeInterval(house)], house)
     LOG_INFO("Pushed house into housesBuiltPerRegion (location,size) = ($(string(house.location)), $(string(getSizeInterval(house))))")
     open("$output_folder/transactions_logs/step_$(model.steps).txt", "a") do file
-        write(file, "askPrice = $askPrice\n")
+        write(file, "price of newly built house = $askPrice\n")
     end
     println("price of newly built house = " * string(askPrice))
 end
