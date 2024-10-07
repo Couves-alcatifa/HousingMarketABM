@@ -506,9 +506,8 @@ save("$output_folder/rents_of_new_contracts_per_region.png", plot_rents_per_regi
 
 save("$output_folder/number_of_houses_per_region.png", plot_number_of_houses_per_region(agent_data[2:end, :], model_data[2:end, :]))
 number_of_houses_built_figures = plot_number_of_houses_built_per_region(agent_data[2:end, :], model_data[2:end, :])
-locations = instances(HouseLocation)
-for i in eachindex(number_of_houses_built_figures)
-    save("$output_folder/number_of_houses_built_in_$(string(locations[i])).png", number_of_houses_built_figures[i])
+for location in instances(HouseLocation)
+    save("$output_folder/number_of_houses_built_in_$(string(location)).png", number_of_houses_built_figures[location])
 end
 
 save("$output_folder/number_of_transactions_per_region.png", plot_number_of_transactions_per_region(agent_data[2:end, :], model_data[2:end, :]))

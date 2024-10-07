@@ -240,8 +240,8 @@ construction_wealth(model) = model.construction_sector.wealth
 supply_volume(model) = copy(model.supply_size)
 demand_volume(model) = copy(model.demand_size)
 
-supply_per_bucket(model) = copy(model.supplyPerBucket)
-demand_per_bucket(model) = copy(model.demandPerBucket)
+supply_per_bucket(model) = deepcopy(model.supplyPerBucket)
+demand_per_bucket(model) = deepcopy(model.demandPerBucket)
 
 mortgages(model) = copy(model.mortgagesInStep)
 

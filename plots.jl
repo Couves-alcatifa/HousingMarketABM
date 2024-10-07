@@ -352,7 +352,7 @@ function plot_number_of_houses_built_per_region(adf, mdf)
     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
     lines = []
     sizes_intervals = []
-    figures = []
+    figures = Dict(location => Figure() for location in instances(HouseLocation))
     for location in instances(HouseLocation)
         for size_interval in instances(SizeInterval)
             regional_number_of_houses = Int32[]
@@ -364,7 +364,7 @@ function plot_number_of_houses_built_per_region(adf, mdf)
         end
         figure[1, 2] = Legend(figure, lines, sizes_intervals)
         figure
-        push!(figures, figure)
+        figures[location] = figure
         empty!(sizes_intervals)
         empty!(lines)
     end
