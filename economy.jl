@@ -39,13 +39,13 @@ function calculate_non_housing_consumption(household, income)
         expenses += (income / size - EXPENSES_MINIMUM_VALUE)  * size * (EXPENSES_EXTRA_MINIMUM + rand() * EXPENSES_EXTRA_OFFSET)
     end
     if is_home_owner(household) && wealth > 50000
-        expenses += sqrt(wealth) * 2
+        expenses += sqrt(wealth) * 10
     end
     if is_home_owner(household) && wealth > 1000000
-        expenses += sqrt(wealth) * 3
+        expenses += sqrt(wealth) * 20
     end
     if is_home_owner(household) && wealth > 5000000
-        expenses += cbrt(wealth) * cbrt(wealth) * 2
+        expenses += cbrt(wealth) * cbrt(wealth) * 20
     end
     return expenses
     # if (income * 0.6 > 500)
