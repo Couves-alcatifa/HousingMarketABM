@@ -157,7 +157,7 @@ function plot_households_money_distribution(adf, mdf)
     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
     all_lines = []
     all_legends = []
-    for percentile in [1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    for percentile in [1, 10, 20, 30, 40, 50, 60, 70, 80, 90]
         push!(all_lines, lines!(ax, adf.step, get_percentile_along_vv(adf.money_distribution_household, percentile), color = percentile_color_map[percentile]))
         push!(all_legends, "Percentile $(string(percentile))")
     end
@@ -173,7 +173,7 @@ function plot_households_wealth_distribution(adf, mdf)
     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Wealth")
     all_lines = []
     all_legends = []
-    for percentile in [1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    for percentile in [1, 10, 20, 30, 40, 50, 60, 70, 80, 90]
         push!(all_lines, lines!(ax, adf.step, get_percentile_along_vv(adf.wealth_distribution_household, percentile), color = percentile_color_map[percentile]))
         push!(all_legends, "Percentile $(string(percentile))")
     end

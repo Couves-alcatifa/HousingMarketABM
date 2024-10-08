@@ -146,7 +146,10 @@ function startNewConstruction(model, location, size_interval)
 end
 
 function createConstructionLoan(model, value)
-    if model.bank.wealth * 0.5 < value 
+    if (model.bank.wealth * 0.5 < value 
+    # TODO: this is just experimental - remove
+        || model.steps > 50)
+
         return false # verify bank liquidity
     end
 

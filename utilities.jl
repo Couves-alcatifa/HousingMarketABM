@@ -147,6 +147,11 @@ end
 # - maxMortgageValue(h, b, house) -> max value the bank is willing to lend
 # - maxMortgageValue(h, b, house, maxSpread = x | maxMonthlyPayment = y) -> maxValue with certain conditions
 function maxMortgageValue(model, household)
+    
+    # TODO: this is just experimental - remove
+    if model.steps > 50
+        return 0
+    end
     bank = model.bank
     salary = calculateLiquidSalary(household, model)
     
@@ -200,25 +205,29 @@ end
 function calculateSalary(household, model)
     location = household.residencyZone
     percentile = household.percentile
+    salaryAgeMultiplier = (1 + household.age/70 - 0.2)
+    if household.age > 70
+        salaryAgeMultiplier = 0.75
+    end
     if percentile < 20
         base = eval(Symbol("FIRST_QUINTILE_INCOME_IN_$(string(location))")) / 2
-        range = base * 2 * (1 + household.age/50)
+        range = base * 2 * salaryAgeMultiplier
         salary = base + range * (percentile / 100) * 5
     elseif percentile < 40
         base = eval(Symbol("FIRST_QUINTILE_INCOME_IN_$(string(location))"))
-        range = (eval(Symbol("SECOND_QUINTILE_INCOME_IN_$(string(location))")) - base) * (1 + household.age/50)
+        range = (eval(Symbol("SECOND_QUINTILE_INCOME_IN_$(string(location))")) - base) * salaryAgeMultiplier
         salary = base + range * (percentile / 100 - 0.2) * 5
     elseif percentile < 60
         base = eval(Symbol("SECOND_QUINTILE_INCOME_IN_$(string(location))"))
-        range = (eval(Symbol("THIRD_QUINTILE_INCOME_IN_$(string(location))")) - base) * (1 + household.age/50)
+        range = (eval(Symbol("THIRD_QUINTILE_INCOME_IN_$(string(location))")) - base) * salaryAgeMultiplier
         salary = base + range * (percentile / 100 - 0.4) * 5
     elseif percentile < 80
         base = eval(Symbol("THIRD_QUINTILE_INCOME_IN_$(string(location))"))
-        range = (eval(Symbol("FOURTH_QUINTILE_INCOME_IN_$(string(location))")) - base) * (1 + household.age/50)
+        range = (eval(Symbol("FOURTH_QUINTILE_INCOME_IN_$(string(location))")) - base) * salaryAgeMultiplier
         salary = base + range * (percentile / 100 - 0.6) * 5
     else
         base = eval(Symbol("FOURTH_QUINTILE_INCOME_IN_$(string(location))"))
-        range = base * 3 * (1 + household.age/50)
+        range = base * 3 * salaryAgeMultiplier
         salary = base + range * (percentile / 100 - 0.8) * 5
     end
     if (size == 1)
@@ -465,7 +474,9 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
 
     household = model[highestBidder]
     content = "########\n"
-    if (household.wealth < bidValue + calculateImt(bidValue))
+    if (household.wealth < bidValue + calculateImt(bidValue)
+        # TODO: this is just experimental - remove
+        && model.steps < 50)
         paidWithOwnMoney = household.wealth * 0.95
         mortgageValue = bidValue + calculateImt(bidValue) - paidWithOwnMoney
         # if mortgageValue > model.bank.wealth * 0.5
