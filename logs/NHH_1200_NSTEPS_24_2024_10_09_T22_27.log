@@ -1,0 +1,491 @@
+2024_10_09_T22:27:35 -  finished initateHouses in 0.831387996673584 seconds
+2024_10_09_T22:27:35 -  finished initiateHouseholds in 1.087555170059204 seconds
+2024_10_09_T22:27:36 -  finished assignHousesToHouseholds in 1.2934510707855225 seconds
+2024_10_09_T22:27:40 -  Metrics: sum_wealth took 9.5367431640625e-7
+2024_10_09_T22:27:41 -  Metrics: wealth_distribution took 3.814697265625e-6
+2024_10_09_T22:27:41 -  Metrics: money_distribution took 6.9141387939453125e-6
+2024_10_09_T22:27:41 -  Metrics: size_distribution took 9.059906005859375e-6
+2024_10_09_T22:27:41 -  Metrics: age_distribution took 4.0531158447265625e-6
+2024_10_09_T22:27:43 -  Metrics: sum_wealth took 3.600120544433594e-5
+2024_10_09_T22:27:44 -  Metrics: wealth_distribution took 0.04065704345703125
+2024_10_09_T22:27:44 -  Metrics: money_distribution took 0.0003509521484375
+2024_10_09_T22:27:44 -  Metrics: size_distribution took 0.009001970291137695
+2024_10_09_T22:27:44 -  Metrics: age_distribution took 0.00034809112548828125
+2024_10_09_T22:27:46 -  Model step started
+2024_10_09_T22:27:47 -  clearHangingSupplies started
+2024_10_09_T22:27:47 -  clearHangingSupplies took 0.007706165313720703
+2024_10_09_T22:27:47 -  clearHangingRentalSupplies started
+2024_10_09_T22:27:47 -  clearHangingRentalSupplies took 0.004243135452270508
+2024_10_09_T22:27:47 -  clearHouseMarket started
+2024_10_09_T22:27:47 -  clearHouseMarket - first block took 0.4727640151977539
+2024_10_09_T22:27:47 -  clearHouseMarket - second block took 0.2420520782470703
+2024_10_09_T22:27:47 -  clearHouseMarket - third block took 0.018004894256591797
+2024_10_09_T22:27:47 -  clearRentalMarket started
+2024_10_09_T22:27:48 -  clearRentalMarket - first block took 0.08599615097045898
+2024_10_09_T22:27:48 -  clearRentalMarket - second block took 2.5033950805664062e-5
+2024_10_09_T22:27:48 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan75)
+2024_10_09_T22:27:48 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, LessThan125)
+2024_10_09_T22:27:48 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan50)
+2024_10_09_T22:27:48 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, LessThan50)
+2024_10_09_T22:27:48 -  Pushed house into housesBuiltPerRegion (location,size) = (VilaFrancaDeXira, LessThan75)
+2024_10_09_T22:27:48 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, More)
+2024_10_09_T22:27:48 -  Model step took 1.3860630989074707 seconds
+2024_10_09_T22:27:48 -  Metrics: sum_wealth took 5.412101745605469e-5
+2024_10_09_T22:27:48 -  Metrics: wealth_distribution took 0.00040411949157714844
+2024_10_09_T22:27:48 -  Metrics: money_distribution took 0.0003781318664550781
+2024_10_09_T22:27:48 -  Metrics: size_distribution took 0.0003879070281982422
+2024_10_09_T22:27:48 -  Metrics: age_distribution took 0.00037980079650878906
+2024_10_09_T22:27:50 -  Model step started
+2024_10_09_T22:27:50 -  clearHangingSupplies started
+2024_10_09_T22:27:50 -  clearHangingSupplies took 0.00021314620971679688
+2024_10_09_T22:27:50 -  clearHangingRentalSupplies started
+2024_10_09_T22:27:50 -  clearHangingRentalSupplies took 6.9141387939453125e-6
+2024_10_09_T22:27:50 -  clearHouseMarket started
+2024_10_09_T22:27:50 -  clearHouseMarket - first block took 0.2834501266479492
+2024_10_09_T22:27:50 -  clearHouseMarket - second block took 0.0007061958312988281
+2024_10_09_T22:27:50 -  clearHouseMarket - third block took 0.00014495849609375
+2024_10_09_T22:27:50 -  clearRentalMarket started
+2024_10_09_T22:27:50 -  clearRentalMarket - first block took 1.5974044799804688e-5
+2024_10_09_T22:27:50 -  clearRentalMarket - second block took 2.1457672119140625e-6
+2024_10_09_T22:27:50 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, LessThan50)
+2024_10_09_T22:27:50 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan50)
+2024_10_09_T22:27:50 -  Model step took 0.3125021457672119 seconds
+2024_10_09_T22:27:50 -  Metrics: sum_wealth took 4.38690185546875e-5
+2024_10_09_T22:27:50 -  Metrics: wealth_distribution took 0.00037097930908203125
+2024_10_09_T22:27:50 -  Metrics: money_distribution took 0.0003650188446044922
+2024_10_09_T22:27:50 -  Metrics: size_distribution took 0.00034880638122558594
+2024_10_09_T22:27:50 -  Metrics: age_distribution took 0.00042700767517089844
+2024_10_09_T22:27:53 -  Model step started
+2024_10_09_T22:27:53 -  clearHangingSupplies started
+2024_10_09_T22:27:53 -  clearHangingSupplies took 0.00025010108947753906
+2024_10_09_T22:27:53 -  clearHangingRentalSupplies started
+2024_10_09_T22:27:53 -  clearHangingRentalSupplies took 0.012283086776733398
+2024_10_09_T22:27:53 -  clearHouseMarket started
+2024_10_09_T22:27:53 -  clearHouseMarket - first block took 0.35535597801208496
+2024_10_09_T22:27:53 -  clearHouseMarket - second block took 0.0009319782257080078
+2024_10_09_T22:27:53 -  clearHouseMarket - third block took 0.0001499652862548828
+2024_10_09_T22:27:53 -  clearRentalMarket started
+2024_10_09_T22:27:53 -  clearRentalMarket - first block took 0.048822879791259766
+2024_10_09_T22:27:53 -  clearRentalMarket - second block took 0.03352999687194824
+2024_10_09_T22:27:53 -  Model step took 0.4696540832519531 seconds
+2024_10_09_T22:27:53 -  Metrics: sum_wealth took 5.2928924560546875e-5
+2024_10_09_T22:27:53 -  Metrics: wealth_distribution took 0.00037407875061035156
+2024_10_09_T22:27:53 -  Metrics: money_distribution took 0.00037407875061035156
+2024_10_09_T22:27:53 -  Metrics: size_distribution took 0.0003230571746826172
+2024_10_09_T22:27:53 -  Metrics: age_distribution took 0.00034809112548828125
+2024_10_09_T22:27:55 -  Model step started
+2024_10_09_T22:27:55 -  clearHangingSupplies started
+2024_10_09_T22:27:55 -  clearHangingSupplies took 0.012812137603759766
+2024_10_09_T22:27:55 -  clearHangingRentalSupplies started
+2024_10_09_T22:27:55 -  clearHangingRentalSupplies took 5.0067901611328125e-6
+2024_10_09_T22:27:55 -  clearHouseMarket started
+2024_10_09_T22:27:55 -  clearHouseMarket - first block took 0.3205230236053467
+2024_10_09_T22:27:55 -  clearHouseMarket - second block took 0.01752614974975586
+2024_10_09_T22:27:55 -  clearHouseMarket - third block took 0.00020694732666015625
+2024_10_09_T22:27:55 -  clearRentalMarket started
+2024_10_09_T22:27:55 -  clearRentalMarket - first block took 0.003298044204711914
+2024_10_09_T22:27:55 -  clearRentalMarket - second block took 0.009366989135742188
+2024_10_09_T22:27:55 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan125)
+2024_10_09_T22:27:55 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan50)
+2024_10_09_T22:27:55 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, More)
+2024_10_09_T22:27:55 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan125)
+2024_10_09_T22:27:55 -  Model step took 0.3890531063079834 seconds
+2024_10_09_T22:27:55 -  Metrics: sum_wealth took 5.602836608886719e-5
+2024_10_09_T22:27:55 -  Metrics: wealth_distribution took 0.00036215782165527344
+2024_10_09_T22:27:55 -  Metrics: money_distribution took 0.000408172607421875
+2024_10_09_T22:27:55 -  Metrics: size_distribution took 0.0002818107604980469
+2024_10_09_T22:27:55 -  Metrics: age_distribution took 0.0003299713134765625
+2024_10_09_T22:27:57 -  Model step started
+2024_10_09_T22:27:57 -  clearHangingSupplies started
+2024_10_09_T22:27:57 -  clearHangingSupplies took 0.00019812583923339844
+2024_10_09_T22:27:57 -  clearHangingRentalSupplies started
+2024_10_09_T22:27:57 -  clearHangingRentalSupplies took 2.1457672119140625e-6
+2024_10_09_T22:27:57 -  clearHouseMarket started
+2024_10_09_T22:27:58 -  clearHouseMarket - first block took 0.30561399459838867
+2024_10_09_T22:27:58 -  clearHouseMarket - second block took 0.0042629241943359375
+2024_10_09_T22:27:58 -  clearHouseMarket - third block took 0.00022292137145996094
+2024_10_09_T22:27:58 -  clearRentalMarket started
+2024_10_09_T22:27:58 -  clearRentalMarket - first block took 0.0009760856628417969
+2024_10_09_T22:27:58 -  clearRentalMarket - second block took 3.0994415283203125e-5
+2024_10_09_T22:27:58 -  Pushed house into housesBuiltPerRegion (location,size) = (VilaFrancaDeXira, LessThan50)
+2024_10_09_T22:27:58 -  Pushed house into housesBuiltPerRegion (location,size) = (Alcochete, More)
+2024_10_09_T22:27:58 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, LessThan50)
+2024_10_09_T22:27:58 -  Model step took 0.3325800895690918 seconds
+2024_10_09_T22:27:58 -  Metrics: sum_wealth took 3.910064697265625e-5
+2024_10_09_T22:27:58 -  Metrics: wealth_distribution took 0.0005860328674316406
+2024_10_09_T22:27:58 -  Metrics: money_distribution took 0.0004189014434814453
+2024_10_09_T22:27:58 -  Metrics: size_distribution took 0.00038313865661621094
+2024_10_09_T22:27:58 -  Metrics: age_distribution took 0.00037407875061035156
+2024_10_09_T22:28:00 -  Model step started
+2024_10_09_T22:28:00 -  clearHangingSupplies started
+2024_10_09_T22:28:00 -  clearHangingSupplies took 0.00018286705017089844
+2024_10_09_T22:28:00 -  clearHangingRentalSupplies started
+2024_10_09_T22:28:00 -  clearHangingRentalSupplies took 3.0994415283203125e-6
+2024_10_09_T22:28:00 -  clearHouseMarket started
+2024_10_09_T22:28:00 -  clearHouseMarket - first block took 0.3013889789581299
+2024_10_09_T22:28:00 -  clearHouseMarket - second block took 0.0010280609130859375
+2024_10_09_T22:28:00 -  clearHouseMarket - third block took 0.0002410411834716797
+2024_10_09_T22:28:00 -  clearRentalMarket started
+2024_10_09_T22:28:00 -  clearRentalMarket - first block took 1.9073486328125e-5
+2024_10_09_T22:28:00 -  clearRentalMarket - second block took 5.0067901611328125e-6
+2024_10_09_T22:28:00 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan75)
+2024_10_09_T22:28:00 -  Model step took 0.3268561363220215 seconds
+2024_10_09_T22:28:00 -  Metrics: sum_wealth took 4.982948303222656e-5
+2024_10_09_T22:28:00 -  Metrics: wealth_distribution took 0.00042510032653808594
+2024_10_09_T22:28:00 -  Metrics: money_distribution took 0.0003790855407714844
+2024_10_09_T22:28:00 -  Metrics: size_distribution took 0.0002799034118652344
+2024_10_09_T22:28:00 -  Metrics: age_distribution took 0.00041604042053222656
+2024_10_09_T22:28:02 -  Model step started
+2024_10_09_T22:28:02 -  clearHangingSupplies started
+2024_10_09_T22:28:02 -  clearHangingSupplies took 0.00019097328186035156
+2024_10_09_T22:28:02 -  clearHangingRentalSupplies started
+2024_10_09_T22:28:02 -  clearHangingRentalSupplies took 1.5020370483398438e-5
+2024_10_09_T22:28:02 -  clearHouseMarket started
+2024_10_09_T22:28:02 -  clearHouseMarket - first block took 0.29776811599731445
+2024_10_09_T22:28:02 -  clearHouseMarket - second block took 0.0008571147918701172
+2024_10_09_T22:28:02 -  clearHouseMarket - third block took 0.00014901161193847656
+2024_10_09_T22:28:02 -  clearRentalMarket started
+2024_10_09_T22:28:02 -  clearRentalMarket - first block took 0.0005960464477539062
+2024_10_09_T22:28:02 -  clearRentalMarket - second block took 4.506111145019531e-5
+2024_10_09_T22:28:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, LessThan50)
+2024_10_09_T22:28:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Montijo, LessThan50)
+2024_10_09_T22:28:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, More)
+2024_10_09_T22:28:02 -  Model step took 0.31867504119873047 seconds
+2024_10_09_T22:28:02 -  Metrics: sum_wealth took 6.890296936035156e-5
+2024_10_09_T22:28:02 -  Metrics: wealth_distribution took 0.00037097930908203125
+2024_10_09_T22:28:02 -  Metrics: money_distribution took 0.0003418922424316406
+2024_10_09_T22:28:02 -  Metrics: size_distribution took 0.00036907196044921875
+2024_10_09_T22:28:02 -  Metrics: age_distribution took 0.00030994415283203125
+2024_10_09_T22:28:05 -  Model step started
+2024_10_09_T22:28:05 -  clearHangingSupplies started
+2024_10_09_T22:28:05 -  clearHangingSupplies took 0.0001678466796875
+2024_10_09_T22:28:05 -  clearHangingRentalSupplies started
+2024_10_09_T22:28:05 -  clearHangingRentalSupplies took 1.9073486328125e-6
+2024_10_09_T22:28:05 -  clearHouseMarket started
+2024_10_09_T22:28:05 -  clearHouseMarket - first block took 0.31128501892089844
+2024_10_09_T22:28:05 -  clearHouseMarket - second block took 0.0010559558868408203
+2024_10_09_T22:28:05 -  clearHouseMarket - third block took 0.00016188621520996094
+2024_10_09_T22:28:05 -  clearRentalMarket started
+2024_10_09_T22:28:05 -  clearRentalMarket - first block took 0.0010190010070800781
+2024_10_09_T22:28:05 -  clearRentalMarket - second block took 2.7894973754882812e-5
+2024_10_09_T22:28:05 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan75)
+2024_10_09_T22:28:05 -  Pushed house into housesBuiltPerRegion (location,size) = (Oeiras, More)
+2024_10_09_T22:28:05 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan50)
+2024_10_09_T22:28:05 -  Model step took 0.3402211666107178 seconds
+2024_10_09_T22:28:05 -  Metrics: sum_wealth took 5.2928924560546875e-5
+2024_10_09_T22:28:05 -  Metrics: wealth_distribution took 0.00041794776916503906
+2024_10_09_T22:28:05 -  Metrics: money_distribution took 0.0003418922424316406
+2024_10_09_T22:28:05 -  Metrics: size_distribution took 0.0002598762512207031
+2024_10_09_T22:28:05 -  Metrics: age_distribution took 0.00032711029052734375
+2024_10_09_T22:28:07 -  Model step started
+2024_10_09_T22:28:07 -  clearHangingSupplies started
+2024_10_09_T22:28:07 -  clearHangingSupplies took 0.00021004676818847656
+2024_10_09_T22:28:07 -  clearHangingRentalSupplies started
+2024_10_09_T22:28:07 -  clearHangingRentalSupplies took 4.0531158447265625e-6
+2024_10_09_T22:28:07 -  clearHouseMarket started
+2024_10_09_T22:28:07 -  clearHouseMarket - first block took 0.30997490882873535
+2024_10_09_T22:28:07 -  clearHouseMarket - second block took 0.00038695335388183594
+2024_10_09_T22:28:07 -  clearHouseMarket - third block took 0.00014901161193847656
+2024_10_09_T22:28:07 -  clearRentalMarket started
+2024_10_09_T22:28:07 -  clearRentalMarket - first block took 2.002716064453125e-5
+2024_10_09_T22:28:07 -  clearRentalMarket - second block took 1.1920928955078125e-6
+2024_10_09_T22:28:07 -  Model step took 0.3366820812225342 seconds
+2024_10_09_T22:28:07 -  Metrics: sum_wealth took 5.698204040527344e-5
+2024_10_09_T22:28:07 -  Metrics: wealth_distribution took 0.0004470348358154297
+2024_10_09_T22:28:07 -  Metrics: money_distribution took 0.000370025634765625
+2024_10_09_T22:28:07 -  Metrics: size_distribution took 0.00037407875061035156
+2024_10_09_T22:28:07 -  Metrics: age_distribution took 0.00032401084899902344
+2024_10_09_T22:28:09 -  Model step started
+2024_10_09_T22:28:09 -  clearHangingSupplies started
+2024_10_09_T22:28:09 -  clearHangingSupplies took 0.000553131103515625
+2024_10_09_T22:28:09 -  clearHangingRentalSupplies started
+2024_10_09_T22:28:09 -  clearHangingRentalSupplies took 3.0994415283203125e-6
+2024_10_09_T22:28:09 -  clearHouseMarket started
+2024_10_09_T22:28:10 -  clearHouseMarket - first block took 0.31533098220825195
+2024_10_09_T22:28:10 -  clearHouseMarket - second block took 0.0010180473327636719
+2024_10_09_T22:28:10 -  clearHouseMarket - third block took 0.00015807151794433594
+2024_10_09_T22:28:10 -  clearRentalMarket started
+2024_10_09_T22:28:10 -  clearRentalMarket - first block took 1.5020370483398438e-5
+2024_10_09_T22:28:10 -  clearRentalMarket - second block took 9.5367431640625e-7
+2024_10_09_T22:28:10 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan75)
+2024_10_09_T22:28:10 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, More)
+2024_10_09_T22:28:10 -  Model step took 0.33493900299072266 seconds
+2024_10_09_T22:28:10 -  Metrics: sum_wealth took 5.984306335449219e-5
+2024_10_09_T22:28:10 -  Metrics: wealth_distribution took 0.0003871917724609375
+2024_10_09_T22:28:10 -  Metrics: money_distribution took 0.0003509521484375
+2024_10_09_T22:28:10 -  Metrics: size_distribution took 0.0003299713134765625
+2024_10_09_T22:28:10 -  Metrics: age_distribution took 0.0003521442413330078
+2024_10_09_T22:28:12 -  Model step started
+2024_10_09_T22:28:12 -  clearHangingSupplies started
+2024_10_09_T22:28:12 -  clearHangingSupplies took 0.00014209747314453125
+2024_10_09_T22:28:12 -  clearHangingRentalSupplies started
+2024_10_09_T22:28:12 -  clearHangingRentalSupplies took 2.1457672119140625e-6
+2024_10_09_T22:28:12 -  clearHouseMarket started
+2024_10_09_T22:28:12 -  clearHouseMarket - first block took 0.33023881912231445
+2024_10_09_T22:28:12 -  clearHouseMarket - second block took 0.0019321441650390625
+2024_10_09_T22:28:12 -  clearHouseMarket - third block took 0.00018596649169921875
+2024_10_09_T22:28:12 -  clearRentalMarket started
+2024_10_09_T22:28:12 -  clearRentalMarket - first block took 0.005863189697265625
+2024_10_09_T22:28:12 -  clearRentalMarket - second block took 0.00015401840209960938
+2024_10_09_T22:28:12 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan50)
+2024_10_09_T22:28:12 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, More)
+2024_10_09_T22:28:12 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan75)
+2024_10_09_T22:28:12 -  Model step took 0.37334585189819336 seconds
+2024_10_09_T22:28:12 -  Metrics: sum_wealth took 6.890296936035156e-5
+2024_10_09_T22:28:12 -  Metrics: wealth_distribution took 0.00041604042053222656
+2024_10_09_T22:28:12 -  Metrics: money_distribution took 0.0004220008850097656
+2024_10_09_T22:28:12 -  Metrics: size_distribution took 0.00027298927307128906
+2024_10_09_T22:28:12 -  Metrics: age_distribution took 0.00030493736267089844
+2024_10_09_T22:28:14 -  Model step started
+2024_10_09_T22:28:14 -  clearHangingSupplies started
+2024_10_09_T22:28:14 -  clearHangingSupplies took 0.0004329681396484375
+2024_10_09_T22:28:14 -  clearHangingRentalSupplies started
+2024_10_09_T22:28:14 -  clearHangingRentalSupplies took 3.0994415283203125e-6
+2024_10_09_T22:28:14 -  clearHouseMarket started
+2024_10_09_T22:28:15 -  clearHouseMarket - first block took 0.29946398735046387
+2024_10_09_T22:28:15 -  clearHouseMarket - second block took 0.0005710124969482422
+2024_10_09_T22:28:15 -  clearHouseMarket - third block took 0.0002129077911376953
+2024_10_09_T22:28:15 -  clearRentalMarket started
+2024_10_09_T22:28:15 -  clearRentalMarket - first block took 1.5020370483398438e-5
+2024_10_09_T22:28:15 -  clearRentalMarket - second block took 9.5367431640625e-7
+2024_10_09_T22:28:15 -  Model step took 0.3195459842681885 seconds
+2024_10_09_T22:28:15 -  Metrics: sum_wealth took 5.3882598876953125e-5
+2024_10_09_T22:28:15 -  Metrics: wealth_distribution took 0.00035881996154785156
+2024_10_09_T22:28:15 -  Metrics: money_distribution took 0.0004029273986816406
+2024_10_09_T22:28:15 -  Metrics: size_distribution took 0.0003209114074707031
+2024_10_09_T22:28:15 -  Metrics: age_distribution took 0.0003819465637207031
+2024_10_09_T22:28:17 -  Model step started
+2024_10_09_T22:28:17 -  clearHangingSupplies started
+2024_10_09_T22:28:17 -  clearHangingSupplies took 0.0001728534698486328
+2024_10_09_T22:28:17 -  clearHangingRentalSupplies started
+2024_10_09_T22:28:17 -  clearHangingRentalSupplies took 1.9073486328125e-6
+2024_10_09_T22:28:17 -  clearHouseMarket started
+2024_10_09_T22:28:17 -  clearHouseMarket - first block took 0.309053897857666
+2024_10_09_T22:28:17 -  clearHouseMarket - second block took 0.0010080337524414062
+2024_10_09_T22:28:17 -  clearHouseMarket - third block took 0.00015091896057128906
+2024_10_09_T22:28:17 -  clearRentalMarket started
+2024_10_09_T22:28:17 -  clearRentalMarket - first block took 1.4066696166992188e-5
+2024_10_09_T22:28:17 -  clearRentalMarket - second block took 9.5367431640625e-7
+2024_10_09_T22:28:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan125)
+2024_10_09_T22:28:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, LessThan125)
+2024_10_09_T22:28:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Montijo, LessThan75)
+2024_10_09_T22:28:17 -  Model step took 0.34087395668029785 seconds
+2024_10_09_T22:28:17 -  Metrics: sum_wealth took 9.989738464355469e-5
+2024_10_09_T22:28:17 -  Metrics: wealth_distribution took 0.00037598609924316406
+2024_10_09_T22:28:17 -  Metrics: money_distribution took 0.00036597251892089844
+2024_10_09_T22:28:17 -  Metrics: size_distribution took 0.0003058910369873047
+2024_10_09_T22:28:17 -  Metrics: age_distribution took 0.00030803680419921875
+2024_10_09_T22:28:19 -  Model step started
+2024_10_09_T22:28:19 -  clearHangingSupplies started
+2024_10_09_T22:28:19 -  clearHangingSupplies took 0.000186920166015625
+2024_10_09_T22:28:19 -  clearHangingRentalSupplies started
+2024_10_09_T22:28:19 -  clearHangingRentalSupplies took 4.0531158447265625e-6
+2024_10_09_T22:28:19 -  clearHouseMarket started
+2024_10_09_T22:28:19 -  clearHouseMarket - first block took 0.32359910011291504
+2024_10_09_T22:28:19 -  clearHouseMarket - second block took 0.004392862319946289
+2024_10_09_T22:28:19 -  clearHouseMarket - third block took 0.000576019287109375
+2024_10_09_T22:28:19 -  clearRentalMarket started
+2024_10_09_T22:28:19 -  clearRentalMarket - first block took 0.003484964370727539
+2024_10_09_T22:28:19 -  clearRentalMarket - second block took 0.00011110305786132812
+2024_10_09_T22:28:19 -  Model step took 0.35416698455810547 seconds
+2024_10_09_T22:28:19 -  Metrics: sum_wealth took 4.9114227294921875e-5
+2024_10_09_T22:28:19 -  Metrics: wealth_distribution took 0.0003859996795654297
+2024_10_09_T22:28:19 -  Metrics: money_distribution took 0.00036597251892089844
+2024_10_09_T22:28:19 -  Metrics: size_distribution took 0.000270843505859375
+2024_10_09_T22:28:19 -  Metrics: age_distribution took 0.00034308433532714844
+2024_10_09_T22:28:22 -  Model step started
+2024_10_09_T22:28:22 -  clearHangingSupplies started
+2024_10_09_T22:28:22 -  clearHangingSupplies took 0.00018596649169921875
+2024_10_09_T22:28:22 -  clearHangingRentalSupplies started
+2024_10_09_T22:28:22 -  clearHangingRentalSupplies took 4.0531158447265625e-6
+2024_10_09_T22:28:22 -  clearHouseMarket started
+2024_10_09_T22:28:22 -  clearHouseMarket - first block took 0.34565114974975586
+2024_10_09_T22:28:22 -  clearHouseMarket - second block took 0.0059659481048583984
+2024_10_09_T22:28:22 -  clearHouseMarket - third block took 0.00017786026000976562
+2024_10_09_T22:28:22 -  clearRentalMarket started
+2024_10_09_T22:28:22 -  clearRentalMarket - first block took 0.007097959518432617
+2024_10_09_T22:28:22 -  clearRentalMarket - second block took 0.00018095970153808594
+2024_10_09_T22:28:22 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, More)
+2024_10_09_T22:28:22 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan125)
+2024_10_09_T22:28:22 -  Model step took 0.3789029121398926 seconds
+2024_10_09_T22:28:22 -  Metrics: sum_wealth took 6.794929504394531e-5
+2024_10_09_T22:28:22 -  Metrics: wealth_distribution took 0.0004069805145263672
+2024_10_09_T22:28:22 -  Metrics: money_distribution took 0.0003428459167480469
+2024_10_09_T22:28:22 -  Metrics: size_distribution took 0.0002880096435546875
+2024_10_09_T22:28:22 -  Metrics: age_distribution took 0.0003170967102050781
+2024_10_09_T22:28:24 -  Model step started
+2024_10_09_T22:28:24 -  clearHangingSupplies started
+2024_10_09_T22:28:24 -  clearHangingSupplies took 0.00034689903259277344
+2024_10_09_T22:28:24 -  clearHangingRentalSupplies started
+2024_10_09_T22:28:24 -  clearHangingRentalSupplies took 3.0994415283203125e-6
+2024_10_09_T22:28:24 -  clearHouseMarket started
+2024_10_09_T22:28:24 -  clearHouseMarket - first block took 0.2902209758758545
+2024_10_09_T22:28:24 -  clearHouseMarket - second block took 0.008873939514160156
+2024_10_09_T22:28:24 -  clearHouseMarket - third block took 0.00023889541625976562
+2024_10_09_T22:28:24 -  clearRentalMarket started
+2024_10_09_T22:28:24 -  clearRentalMarket - first block took 3.0040740966796875e-5
+2024_10_09_T22:28:24 -  clearRentalMarket - second block took 9.5367431640625e-7
+2024_10_09_T22:28:24 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, More)
+2024_10_09_T22:28:24 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, LessThan75)
+2024_10_09_T22:28:24 -  Pushed house into housesBuiltPerRegion (location,size) = (Setubal, LessThan50)
+2024_10_09_T22:28:24 -  Model step took 0.3187839984893799 seconds
+2024_10_09_T22:28:24 -  Metrics: sum_wealth took 5.3882598876953125e-5
+2024_10_09_T22:28:24 -  Metrics: wealth_distribution took 0.00037097930908203125
+2024_10_09_T22:28:24 -  Metrics: money_distribution took 0.00041413307189941406
+2024_10_09_T22:28:24 -  Metrics: size_distribution took 0.0002551078796386719
+2024_10_09_T22:28:24 -  Metrics: age_distribution took 0.00032401084899902344
+2024_10_09_T22:28:26 -  Model step started
+2024_10_09_T22:28:26 -  clearHangingSupplies started
+2024_10_09_T22:28:26 -  clearHangingSupplies took 0.00019097328186035156
+2024_10_09_T22:28:26 -  clearHangingRentalSupplies started
+2024_10_09_T22:28:26 -  clearHangingRentalSupplies took 3.0994415283203125e-6
+2024_10_09_T22:28:26 -  clearHouseMarket started
+2024_10_09_T22:28:27 -  clearHouseMarket - first block took 0.2942230701446533
+2024_10_09_T22:28:27 -  clearHouseMarket - second block took 0.0006759166717529297
+2024_10_09_T22:28:27 -  clearHouseMarket - third block took 0.00014901161193847656
+2024_10_09_T22:28:27 -  clearRentalMarket started
+2024_10_09_T22:28:27 -  clearRentalMarket - first block took 1.2874603271484375e-5
+2024_10_09_T22:28:27 -  clearRentalMarket - second block took 9.5367431640625e-7
+2024_10_09_T22:28:27 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, LessThan125)
+2024_10_09_T22:28:27 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan125)
+2024_10_09_T22:28:27 -  Model step took 0.3139050006866455 seconds
+2024_10_09_T22:28:27 -  Metrics: sum_wealth took 5.221366882324219e-5
+2024_10_09_T22:28:27 -  Metrics: wealth_distribution took 0.00043487548828125
+2024_10_09_T22:28:27 -  Metrics: money_distribution took 0.0004169940948486328
+2024_10_09_T22:28:27 -  Metrics: size_distribution took 0.0002589225769042969
+2024_10_09_T22:28:27 -  Metrics: age_distribution took 0.0002930164337158203
+2024_10_09_T22:28:29 -  Model step started
+2024_10_09_T22:28:29 -  clearHangingSupplies started
+2024_10_09_T22:28:29 -  clearHangingSupplies took 0.0001609325408935547
+2024_10_09_T22:28:29 -  clearHangingRentalSupplies started
+2024_10_09_T22:28:29 -  clearHangingRentalSupplies took 1.9073486328125e-6
+2024_10_09_T22:28:29 -  clearHouseMarket started
+2024_10_09_T22:28:29 -  clearHouseMarket - first block took 0.37827515602111816
+2024_10_09_T22:28:29 -  clearHouseMarket - second block took 0.0005810260772705078
+2024_10_09_T22:28:29 -  clearHouseMarket - third block took 0.0002510547637939453
+2024_10_09_T22:28:29 -  clearRentalMarket started
+2024_10_09_T22:28:29 -  clearRentalMarket - first block took 2.6941299438476562e-5
+2024_10_09_T22:28:29 -  clearRentalMarket - second block took 9.5367431640625e-7
+2024_10_09_T22:28:29 -  Model step took 0.40212416648864746 seconds
+2024_10_09_T22:28:29 -  Metrics: sum_wealth took 5.984306335449219e-5
+2024_10_09_T22:28:29 -  Metrics: wealth_distribution took 0.00041484832763671875
+2024_10_09_T22:28:29 -  Metrics: money_distribution took 0.0004551410675048828
+2024_10_09_T22:28:29 -  Metrics: size_distribution took 0.0002830028533935547
+2024_10_09_T22:28:29 -  Metrics: age_distribution took 0.0003371238708496094
+2024_10_09_T22:28:33 -  Model step started
+2024_10_09_T22:28:33 -  clearHangingSupplies started
+2024_10_09_T22:28:33 -  clearHangingSupplies took 0.00015997886657714844
+2024_10_09_T22:28:33 -  clearHangingRentalSupplies started
+2024_10_09_T22:28:33 -  clearHangingRentalSupplies took 3.814697265625e-6
+2024_10_09_T22:28:33 -  clearHouseMarket started
+2024_10_09_T22:28:33 -  clearHouseMarket - first block took 0.34127092361450195
+2024_10_09_T22:28:33 -  clearHouseMarket - second block took 0.0008790493011474609
+2024_10_09_T22:28:33 -  clearHouseMarket - third block took 0.0002529621124267578
+2024_10_09_T22:28:33 -  clearRentalMarket started
+2024_10_09_T22:28:33 -  clearRentalMarket - first block took 2.193450927734375e-5
+2024_10_09_T22:28:33 -  clearRentalMarket - second block took 9.5367431640625e-7
+2024_10_09_T22:28:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan50)
+2024_10_09_T22:28:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, LessThan50)
+2024_10_09_T22:28:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Oeiras, LessThan50)
+2024_10_09_T22:28:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Alcochete, More)
+2024_10_09_T22:28:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Montijo, More)
+2024_10_09_T22:28:33 -  Model step took 0.429811954498291 seconds
+2024_10_09_T22:28:33 -  Metrics: sum_wealth took 9.202957153320312e-5
+2024_10_09_T22:28:33 -  Metrics: wealth_distribution took 0.0004029273986816406
+2024_10_09_T22:28:33 -  Metrics: money_distribution took 0.0004131793975830078
+2024_10_09_T22:28:33 -  Metrics: size_distribution took 0.0003230571746826172
+2024_10_09_T22:28:33 -  Metrics: age_distribution took 0.0019888877868652344
+2024_10_09_T22:28:36 -  Model step started
+2024_10_09_T22:28:36 -  clearHangingSupplies started
+2024_10_09_T22:28:36 -  clearHangingSupplies took 0.0002880096435546875
+2024_10_09_T22:28:36 -  clearHangingRentalSupplies started
+2024_10_09_T22:28:36 -  clearHangingRentalSupplies took 5.0067901611328125e-6
+2024_10_09_T22:28:36 -  clearHouseMarket started
+2024_10_09_T22:28:37 -  clearHouseMarket - first block took 0.3123021125793457
+2024_10_09_T22:28:37 -  clearHouseMarket - second block took 0.0006799697875976562
+2024_10_09_T22:28:37 -  clearHouseMarket - third block took 0.00020003318786621094
+2024_10_09_T22:28:37 -  clearRentalMarket started
+2024_10_09_T22:28:37 -  clearRentalMarket - first block took 1.4781951904296875e-5
+2024_10_09_T22:28:37 -  clearRentalMarket - second block took 0.0
+2024_10_09_T22:28:37 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan75)
+2024_10_09_T22:28:37 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, More)
+2024_10_09_T22:28:37 -  Pushed house into housesBuiltPerRegion (location,size) = (Sesimbra, LessThan75)
+2024_10_09_T22:28:37 -  Model step took 0.33431506156921387 seconds
+2024_10_09_T22:28:37 -  Metrics: sum_wealth took 5.1975250244140625e-5
+2024_10_09_T22:28:37 -  Metrics: wealth_distribution took 0.0003819465637207031
+2024_10_09_T22:28:37 -  Metrics: money_distribution took 0.00044608116149902344
+2024_10_09_T22:28:37 -  Metrics: size_distribution took 0.0002989768981933594
+2024_10_09_T22:28:37 -  Metrics: age_distribution took 0.00035309791564941406
+2024_10_09_T22:28:39 -  Model step started
+2024_10_09_T22:28:39 -  clearHangingSupplies started
+2024_10_09_T22:28:39 -  clearHangingSupplies took 0.0001671314239501953
+2024_10_09_T22:28:39 -  clearHangingRentalSupplies started
+2024_10_09_T22:28:39 -  clearHangingRentalSupplies took 2.86102294921875e-6
+2024_10_09_T22:28:39 -  clearHouseMarket started
+2024_10_09_T22:28:39 -  clearHouseMarket - first block took 0.3198730945587158
+2024_10_09_T22:28:39 -  clearHouseMarket - second block took 0.0006568431854248047
+2024_10_09_T22:28:39 -  clearHouseMarket - third block took 0.00017690658569335938
+2024_10_09_T22:28:39 -  clearRentalMarket started
+2024_10_09_T22:28:39 -  clearRentalMarket - first block took 0.0003478527069091797
+2024_10_09_T22:28:39 -  clearRentalMarket - second block took 2.7894973754882812e-5
+2024_10_09_T22:28:39 -  Model step took 0.3400900363922119 seconds
+2024_10_09_T22:28:39 -  Metrics: sum_wealth took 7.200241088867188e-5
+2024_10_09_T22:28:39 -  Metrics: wealth_distribution took 0.00043892860412597656
+2024_10_09_T22:28:39 -  Metrics: money_distribution took 0.00045800209045410156
+2024_10_09_T22:28:39 -  Metrics: size_distribution took 0.00034499168395996094
+2024_10_09_T22:28:39 -  Metrics: age_distribution took 0.0003459453582763672
+2024_10_09_T22:28:41 -  Model step started
+2024_10_09_T22:28:41 -  clearHangingSupplies started
+2024_10_09_T22:28:41 -  clearHangingSupplies took 0.0001678466796875
+2024_10_09_T22:28:41 -  clearHangingRentalSupplies started
+2024_10_09_T22:28:41 -  clearHangingRentalSupplies took 2.86102294921875e-6
+2024_10_09_T22:28:41 -  clearHouseMarket started
+2024_10_09_T22:28:42 -  clearHouseMarket - first block took 0.3230299949645996
+2024_10_09_T22:28:42 -  clearHouseMarket - second block took 0.0010409355163574219
+2024_10_09_T22:28:42 -  clearHouseMarket - third block took 0.000164031982421875
+2024_10_09_T22:28:42 -  clearRentalMarket started
+2024_10_09_T22:28:42 -  clearRentalMarket - first block took 0.0012979507446289062
+2024_10_09_T22:28:42 -  clearRentalMarket - second block took 3.409385681152344e-5
+2024_10_09_T22:28:42 -  Pushed house into housesBuiltPerRegion (location,size) = (Palmela, LessThan50)
+2024_10_09_T22:28:42 -  Model step took 0.34392499923706055 seconds
+2024_10_09_T22:28:42 -  Metrics: sum_wealth took 0.0002300739288330078
+2024_10_09_T22:28:42 -  Metrics: wealth_distribution took 0.0003991127014160156
+2024_10_09_T22:28:42 -  Metrics: money_distribution took 0.00034117698669433594
+2024_10_09_T22:28:42 -  Metrics: size_distribution took 0.0002460479736328125
+2024_10_09_T22:28:42 -  Metrics: age_distribution took 0.00029587745666503906
+2024_10_09_T22:28:44 -  Model step started
+2024_10_09_T22:28:44 -  clearHangingSupplies started
+2024_10_09_T22:28:44 -  clearHangingSupplies took 0.00017499923706054688
+2024_10_09_T22:28:44 -  clearHangingRentalSupplies started
+2024_10_09_T22:28:44 -  clearHangingRentalSupplies took 3.0994415283203125e-6
+2024_10_09_T22:28:44 -  clearHouseMarket started
+2024_10_09_T22:28:44 -  clearHouseMarket - first block took 0.36541008949279785
+2024_10_09_T22:28:44 -  clearHouseMarket - second block took 0.0018420219421386719
+2024_10_09_T22:28:44 -  clearHouseMarket - third block took 0.0002090930938720703
+2024_10_09_T22:28:44 -  clearRentalMarket started
+2024_10_09_T22:28:44 -  clearRentalMarket - first block took 0.0028738975524902344
+2024_10_09_T22:28:44 -  clearRentalMarket - second block took 5.1975250244140625e-5
+2024_10_09_T22:28:44 -  Model step took 0.3938601016998291 seconds
+2024_10_09_T22:28:44 -  Metrics: sum_wealth took 7.700920104980469e-5
+2024_10_09_T22:28:44 -  Metrics: wealth_distribution took 0.0004100799560546875
+2024_10_09_T22:28:44 -  Metrics: money_distribution took 0.00043892860412597656
+2024_10_09_T22:28:44 -  Metrics: size_distribution took 0.0003120899200439453
+2024_10_09_T22:28:44 -  Metrics: age_distribution took 0.0003509521484375
+2024_10_09_T22:28:47 -  Model step started
+2024_10_09_T22:28:47 -  clearHangingSupplies started
+2024_10_09_T22:28:47 -  clearHangingSupplies took 0.0004520416259765625
+2024_10_09_T22:28:47 -  clearHangingRentalSupplies started
+2024_10_09_T22:28:47 -  clearHangingRentalSupplies took 2.1457672119140625e-6
+2024_10_09_T22:28:47 -  clearHouseMarket started
+2024_10_09_T22:28:47 -  clearHouseMarket - first block took 0.34696483612060547
+2024_10_09_T22:28:47 -  clearHouseMarket - second block took 0.0017170906066894531
+2024_10_09_T22:28:47 -  clearHouseMarket - third block took 0.0002999305725097656
+2024_10_09_T22:28:47 -  clearRentalMarket started
+2024_10_09_T22:28:47 -  clearRentalMarket - first block took 0.0008769035339355469
+2024_10_09_T22:28:47 -  clearRentalMarket - second block took 2.384185791015625e-5
+2024_10_09_T22:28:47 -  Model step took 0.37276291847229004 seconds
+2024_10_09_T22:28:47 -  Metrics: sum_wealth took 6.103515625e-5
+2024_10_09_T22:28:47 -  Metrics: wealth_distribution took 0.00037097930908203125
+2024_10_09_T22:28:47 -  Metrics: money_distribution took 0.00038695335388183594
+2024_10_09_T22:28:47 -  Metrics: size_distribution took 0.0002789497375488281
+2024_10_09_T22:28:47 -  Metrics: age_distribution took 0.0003020763397216797

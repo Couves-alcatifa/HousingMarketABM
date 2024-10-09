@@ -83,7 +83,7 @@ function updateMortgage(mortgage, spread)
 end
 
 function calculateMortgageDuration(value, age)
-    return 360 # TODO: hardcoded, age of the household also relevant to calculate max mortgageValue
+    return -1 * round(map_value(age, 20, 60, -40, -10))
 end
 
 # 100000 * (0.015/12) / (1 - (1 + 0.015/12)^(-360))
@@ -149,7 +149,10 @@ end
 function maxMortgageValue(model, household)
     
     # TODO: this is just experimental - remove
-    if model.steps > 50
+    # if model.steps > 50
+    #     return 0
+    # end
+    if household.age > 65
         return 0
     end
     bank = model.bank
@@ -1094,3 +1097,14 @@ function isHouseViableForRenting(model, house)
     marketPrice = calculate_market_price(house, model)
     return rentalPrice * 12 >= marketPrice * 0.05
 end
+
+function nonResidentsBuyHouses(model)
+    housesToBuy = rand(Normal(HOUSES_BOUGHT_BY_NON_RESIDENTS * 0.85, HOUSES_BOUGHT_BY_NON_RESIDENTS*0.5))
+    housesBought = 0
+    sort!(model.houseMarket.supply, lt=sortRandomly)
+    while housesBought < housesToBuy
+        splice!(model.houseMarket.supply, 1)
+        housesBought += 1
+    end
+end
+

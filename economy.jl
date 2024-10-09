@@ -167,6 +167,7 @@ function model_step!(model)
         println("5 steps!")
     end
     model.mortgagesInStep = Mortgage[]
+    nonResidentsBuyHouses(model)
     clearHangingSupplies(model)
     clearHangingRentalSupplies(model)
     clearHouseMarket(model)
