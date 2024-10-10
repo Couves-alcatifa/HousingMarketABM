@@ -1103,6 +1103,9 @@ function nonResidentsBuyHouses(model)
     housesBought = 0
     sort!(model.houseMarket.supply, lt=sortRandomly)
     while housesBought < housesToBuy
+        if length(model.houseMarket.supply) == 0
+            return
+        end
         splice!(model.houseMarket.supply, 1)
         housesBought += 1
     end
