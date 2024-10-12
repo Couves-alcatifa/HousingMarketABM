@@ -477,9 +477,7 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
 
     household = model[highestBidder]
     content = "########\n"
-    if (household.wealth < bidValue + calculateImt(bidValue)
-        # TODO: this is just experimental - remove
-        && model.steps < 50)
+    if (household.wealth < bidValue + calculateImt(bidValue))
         paidWithOwnMoney = household.wealth * 0.95
         mortgageValue = bidValue + calculateImt(bidValue) - paidWithOwnMoney
         # if mortgageValue > model.bank.wealth * 0.5
@@ -1098,6 +1096,7 @@ function isHouseViableForRenting(model, house)
     return rentalPrice * 12 >= marketPrice * 0.05
 end
 
+# TODO: this should be mostly focused in Lisbon...
 function housesBoughtByNoNResidentsPerRegion(location)
     total = rand(Normal(HOUSES_BOUGHT_BY_NON_RESIDENTS * 0.85, HOUSES_BOUGHT_BY_NON_RESIDENTS * 0.5))
     return total * (NUMBER_OF_HOUSES_MAP[location] / NUMBER_OF_HOUSEHOLDS)

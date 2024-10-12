@@ -67,9 +67,9 @@ end
 function updateConstructionsPerBucket(model, location, size_interval)
     targetConstruction = calculateTargetConstructionPerBucket(model, location, size_interval)
     newConstructions = targetConstruction - length(model.construction_sector.housesInConstruction[location][size_interval])
-    if newConstructions > MAX_NEW_CONSTRUCTIONS_MAP[location] / 12
-        newConstructions = MAX_NEW_CONSTRUCTIONS_MAP[location] / 12
-    end
+    # if newConstructions > MAX_NEW_CONSTRUCTIONS_MAP[location] / 12
+    #     newConstructions = MAX_NEW_CONSTRUCTIONS_MAP[location] / 12
+    # end
     model.construction_sector.constructionGoals[location] += newConstructions
     constructionGoals = copy(model.construction_sector.constructionGoals[location])
     if (constructionGoals >= 1)
@@ -146,11 +146,14 @@ function startNewConstruction(model, location, size_interval)
 end
 
 function createConstructionLoan(model, value)
-    if (model.bank.wealth * 0.5 < value 
-    # TODO: this is just experimental - remove
-        || model.steps > 50)
+    if (model.bank.wealth * 0.5 < value)
 
         return false # verify bank liquidity
+    end
+
+    debt = calculate_construction_sector_debt(model)
+    if model.construction_sector.wealth - debt < -1 * STARTING_CONSTRUCTION_SECTOR_WEALTH
+        return false
     end
 
     push!(model.construction_sector.mortgages, Mortgage(value, value, 0, calculateMortgageDurationForConstructionSector()))
@@ -217,13 +220,13 @@ function put_newly_built_house_to_sale(model, house)
     println("price of newly built house = " * string(askPrice))
 end
 
-# function calculate_construction_sector_debt(model)
-#     debt = 0
-#     for i in 1:length(model.construction_sector.mortgages)
-#         debt += model.construction_sector.mortgages[i].valueInDebt
-#     end
-#     return debt
-# end
+function calculate_construction_sector_debt(model)
+    debt = 0
+    for i in 1:length(model.construction_sector.mortgages)
+        debt += model.construction_sector.mortgages[i].valueInDebt
+    end
+    return debt
+end
 
 function calculate_total_construction_costs(model, house, expectedDuration)
     finnancingMultiplier = expectedDuration * (model.bank.interestRate / 12)
