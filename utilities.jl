@@ -674,24 +674,24 @@ function initiateHouses(model)
     end
     sort!(houses_sizes, lt=sortRandomly)
     # TODO: region hack
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Amadora, Amadora, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Cascais, Cascais, houses_sizes)
-    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Lisboa, Lisboa, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Loures, Loures, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Mafra, Mafra, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Odivelas, Odivelas, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Oeiras, Oeiras, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Sintra, Sintra, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_VilaFrancaDeXira, VilaFrancaDeXira, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Alcochete, Alcochete, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Almada, Almada, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Barreiro, Barreiro, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Moita, Moita, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Montijo, Montijo, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Palmela, Palmela, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Seixal, Seixal, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Sesimbra, Sesimbra, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_IN_Setubal, Setubal, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Amadora], Amadora, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Cascais], Cascais, houses_sizes)
+    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Lisboa], Lisboa, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Loures], Loures, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Mafra], Mafra, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Odivelas], Odivelas, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Oeiras], Oeiras, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Sintra], Sintra, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[VilaFrancaDeXira], VilaFrancaDeXira, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Alcochete], Alcochete, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Almada], Almada, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Barreiro], Barreiro, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Moita], Moita, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Montijo], Montijo, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Palmela], Palmela, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Seixal], Seixal, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Sesimbra], Sesimbra, houses_sizes)
+    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Setubal], Setubal, houses_sizes)
 end
 
 function initiateHousesPerRegion(model, targetNumberOfHouses, location, houses_sizes)
@@ -732,7 +732,7 @@ function assignHousesToHouseholds(model)
     for i in 1:nagents(model) # due to round() it might not be equal to NUMBER_OF_HOUSEHOLDS
         # println("assignHousesToHouseholds i = $(i)")
         household = model[i]
-        target_home_owners_in_the_zone = eval(Symbol("HOME_OWNERS_IN_" * string(household.residencyZone)))
+        target_home_owners_in_the_zone = HOME_OWNERS_MAP[household.residencyZone]
         current_home_owners_in_the_zone = zones_to_n_of_home_owners[household.residencyZone]
         if current_home_owners_in_the_zone >= target_home_owners_in_the_zone
             continue # no more houses to assign in this phase
@@ -813,24 +813,24 @@ end
 
 function probabilityOfHouseholdBeingAssignedToHouse(household, house)
     m2_per_person = house.area / household.size
-    numberOfHousesInThatZone = eval(Symbol("NUMBER_OF_HOUSES_IN_" * string(house.location)))
+    numberOfHousesInThatZone = NUMBER_OF_HOUSES_MAP[house.location]
     numberOfHousesWithThatRatioInThatZone = 0
     if m2_per_person < 10
-        numberOfHousesWithThatRatioInThatZone = eval(Symbol("NUMBER_OF_HOUSES_WITH_LT_10_M2_PER_PERSON_IN_" * string(house.location)))
+        numberOfHousesWithThatRatioInThatZone = NUMBER_OF_HOUSES_WITH_LT_10_M2_PER_PERSON_MAP[house.location]
     elseif m2_per_person < 15
-        numberOfHousesWithThatRatioInThatZone = eval(Symbol("NUMBER_OF_HOUSES_WITH_LT_15_M2_PER_PERSON_IN_" * string(house.location)))
+        numberOfHousesWithThatRatioInThatZone = NUMBER_OF_HOUSES_WITH_LT_15_M2_PER_PERSON_MAP[house.location]
     elseif m2_per_person < 20
-        numberOfHousesWithThatRatioInThatZone = eval(Symbol("NUMBER_OF_HOUSES_WITH_LT_20_M2_PER_PERSON_IN_" * string(house.location)))
+        numberOfHousesWithThatRatioInThatZone = NUMBER_OF_HOUSES_WITH_LT_20_M2_PER_PERSON_MAP[house.location]
     elseif m2_per_person < 30
-        numberOfHousesWithThatRatioInThatZone = eval(Symbol("NUMBER_OF_HOUSES_WITH_LT_30_M2_PER_PERSON_IN_" * string(house.location)))
+        numberOfHousesWithThatRatioInThatZone = NUMBER_OF_HOUSES_WITH_LT_30_M2_PER_PERSON_MAP[house.location]
     elseif m2_per_person < 40
-        numberOfHousesWithThatRatioInThatZone = eval(Symbol("NUMBER_OF_HOUSES_WITH_LT_40_M2_PER_PERSON_IN_" * string(house.location)))
+        numberOfHousesWithThatRatioInThatZone = NUMBER_OF_HOUSES_WITH_LT_40_M2_PER_PERSON_MAP[house.location]
     elseif m2_per_person < 60
-        numberOfHousesWithThatRatioInThatZone = eval(Symbol("NUMBER_OF_HOUSES_WITH_LT_60_M2_PER_PERSON_IN_" * string(house.location)))
+        numberOfHousesWithThatRatioInThatZone = NUMBER_OF_HOUSES_WITH_LT_60_M2_PER_PERSON_MAP[house.location]
     elseif m2_per_person < 80
-        numberOfHousesWithThatRatioInThatZone = eval(Symbol("NUMBER_OF_HOUSES_WITH_LT_80_M2_PER_PERSON_IN_" * string(house.location)))
+        numberOfHousesWithThatRatioInThatZone = NUMBER_OF_HOUSES_WITH_LT_80_M2_PER_PERSON_MAP[house.location]
     else
-        numberOfHousesWithThatRatioInThatZone = eval(Symbol("NUMBER_OF_HOUSES_WITH_MT_80_M2_PER_PERSON_IN_" * string(house.location)))
+        numberOfHousesWithThatRatioInThatZone = NUMBER_OF_HOUSES_WITH_MT_80_M2_PER_PERSON_MAP[house.location]
     end
     return numberOfHousesWithThatRatioInThatZone / numberOfHousesInThatZone
 end
@@ -1098,16 +1098,23 @@ function isHouseViableForRenting(model, house)
     return rentalPrice * 12 >= marketPrice * 0.05
 end
 
+function housesBoughtByNoNResidentsPerRegion(location)
+    total = rand(Normal(HOUSES_BOUGHT_BY_NON_RESIDENTS * 0.85, HOUSES_BOUGHT_BY_NON_RESIDENTS * 0.5))
+    return total * (NUMBER_OF_HOUSES_MAP[location] / NUMBER_OF_HOUSEHOLDS)
+end
+
 function nonResidentsBuyHouses(model)
-    housesToBuy = rand(Normal(HOUSES_BOUGHT_BY_NON_RESIDENTS * 0.85, HOUSES_BOUGHT_BY_NON_RESIDENTS*0.5))
-    housesBought = 0
-    sort!(model.houseMarket.supply, lt=sortRandomly)
-    while housesBought < housesToBuy
-        if length(model.houseMarket.supply) == 0
-            return
+    for location in instances(HouseLocation)
+        housesToBuy = housesBoughtByNoNResidentsPerRegion(location)
+        housesBought = 0
+        sort!(model.houseMarket.supply, lt=sortRandomly)
+        while housesBought < housesToBuy
+            if length(model.houseMarket.supply) == 0
+                return
+            end
+            splice!(model.houseMarket.supply, 1)
+            housesBought += 1
         end
-        splice!(model.houseMarket.supply, 1)
-        housesBought += 1
     end
 end
 
