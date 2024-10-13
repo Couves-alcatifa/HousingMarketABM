@@ -171,7 +171,7 @@ function generateAreaFromSizeInterval(size_interval)
     elseif size_interval == LessThan125
         area = rand(75:125)
     elseif size_interval == More
-        area = Int64(rand(Normal(135, 10)))
+        area = Int64(round(rand(Normal(135, 10))))
         if area <  125
             area = Int64(round(125 + 10 * rand()))
         end
