@@ -1111,6 +1111,16 @@ function nonResidentsBuyHouses(model)
             if length(model.houseMarket.supply) == 0
                 return
             end
+            supply = model.houseMarket.supply[1]
+            seller = model[supply.sellerId]
+            seller.wealth += supply.price
+            content = "Sold to non resident area = $(supply.house.area)\n"
+            content += "Sold to non resident percentile = $(supply.house.percentile)\n"
+            content += "Sold to non resident location = $(supply.house.location)\n"
+            content += "Sold to non resident price = $(supply.price)\n"
+            open("$output_folder/transactions_logs/step_$(model.steps).txt", "a") do file
+                write(file, content)
+            end
             splice!(model.houseMarket.supply, 1)
             housesBought += 1
         end

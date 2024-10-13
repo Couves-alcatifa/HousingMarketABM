@@ -63,7 +63,7 @@ end
 function handle_breakups(household, model)
     if (household.size >= 2)
         probability_of_breakup = eval(Symbol("PROBABILITY_OF_DIVORCE_IN_$(string(household.residencyZone))"))
-        if (rand() < probability_of_breakup)
+        if (rand() < probability_of_breakup * 2.0) # increase the probability to match real values
             terminateContractsOnTentantSide(household, model)
             terminateContractsOnLandLordSide(household, model)
             
