@@ -70,7 +70,7 @@ function updateConstructionsPerBucket(model, location, size_interval)
     # if newConstructions > MAX_NEW_CONSTRUCTIONS_MAP[location] / 12
     #     newConstructions = MAX_NEW_CONSTRUCTIONS_MAP[location] / 12
     # end
-    model.construction_sector.constructionGoals[location] += newConstructions
+    model.construction_sector.constructionGoals[location] += newConstructions / 12
     constructionGoals = copy(model.construction_sector.constructionGoals[location])
     if (constructionGoals >= 1)
         # # attempt to start construction for half the demand in one year (hence divide by 12 and by 2) 
@@ -171,7 +171,10 @@ function generateAreaFromSizeInterval(size_interval)
     elseif size_interval == LessThan125
         area = rand(75:125)
     elseif size_interval == More
-        area = rand(125:200)
+        area = Int64(rand(Normal(135, 10)))
+        if area <  125
+            area = Int64(round(125 + 10 * rand()))
+        end
     else
         println("Error: unknown sizeInterval $size_interval")
         exit(1)
