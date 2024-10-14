@@ -1112,6 +1112,9 @@ function nonResidentsBuyHouses(model)
                 return
             end
             supply = model.houseMarket.supply[1]
+            if supply.house.location != location
+                continue
+            end
             seller = Nothing
             if supply.sellerId == -1
                 seller = model.construction_sector
