@@ -1107,12 +1107,14 @@ function nonResidentsBuyHouses(model)
         housesToBuy = housesBoughtByNoNResidentsPerRegion(location)
         housesBought = 0
         sort!(model.houseMarket.supply, lt=sortRandomly)
-        while housesBought < housesToBuy
+        idx = 1
+        while housesBought < housesToBuy && idx <= length(model.houseMarket.supply) 
             if length(model.houseMarket.supply) == 0
                 return
             end
-            supply = model.houseMarket.supply[1]
+            supply = model.houseMarket.supply[idx]
             if supply.house.location != location
+                idx += 1
                 continue
             end
             seller = Nothing
@@ -1129,7 +1131,7 @@ function nonResidentsBuyHouses(model)
             open("$output_folder/transactions_logs/step_$(model.steps).txt", "a") do file
                 write(file, content)
             end
-            splice!(model.houseMarket.supply, 1)
+            splice!(model.houseMarket.supply, idx)
             housesBought += 1
         end
     end
