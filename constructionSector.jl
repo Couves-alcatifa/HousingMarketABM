@@ -115,7 +115,7 @@ end
 function calculateMortgageDurationForConstructionSector()
     # construction sector sells the house and finishes paying the debt
     # this should simulate that somehow
-    return 80
+    return rand(60:120)
 end
 
 function startNewConstruction(model, location, size_interval)

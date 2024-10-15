@@ -240,6 +240,16 @@ construction_wealth(model) = model.construction_sector.wealth
 supply_volume(model) = copy(model.supply_size)
 demand_volume(model) = copy(model.demand_size)
 
+function newly_built_houses_for_sale(model)
+    houses = House[]
+    for supply in model.houseMarket.supply
+        if supply.sellerId == -1
+            push!(houses, supply.house)
+        end
+    end
+    return houses
+end
+
 supply_per_bucket(model) = deepcopy(model.supplyPerBucket)
 demand_per_bucket(model) = deepcopy(model.demandPerBucket)
 

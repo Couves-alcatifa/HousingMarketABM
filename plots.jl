@@ -331,7 +331,7 @@ end
 
 function plot_number_of_houses_per_region(adf, mdf)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Quantity")
     lines = []
     locations = []
     for location in instances(HouseLocation)
@@ -349,7 +349,7 @@ end
 
 function plot_number_of_houses_built_per_region(adf, mdf)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Quantity")
     lines = []
     sizes_intervals = []
     figures = Dict(location => Figure() for location in instances(HouseLocation))
@@ -374,7 +374,7 @@ end
 
 function plot_number_of_transactions_per_region(adf, mdf)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Quantity")
     lines = []
     locations = []
     for location in instances(HouseLocation)
@@ -387,6 +387,36 @@ function plot_number_of_transactions_per_region(adf, mdf)
     end
 
     figure[1, 2] = Legend(figure, lines, locations)
+    figure
+end
+
+function plot_number_of_newly_built_houses_for_sale(adf, mdf)
+    figure = Figure(size = (600, 400))
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Quantity")
+    lines = []
+    number_of_new_built_houses_for_sale_per_step = Int32[]
+    for step in 1:NUMBER_OF_STEPS
+        push!(number_of_new_built_houses_for_sale_per_step, length(mdf.newly_built_houses_for_sale[step]))
+    end
+    push!(lines, lines!(ax, adf.step, number_of_new_built_houses_for_sale_per_step, color = :black))
+
+    figure[1, 2] = Legend(figure, lines, ["Number of newly built houses for sale"])
+    figure
+end
+
+function plot_newly_built_houses_for_sale_size_distribution(adf, mdf)
+    figure = Figure(size = (600, 400))
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Size")
+    all_lines = []
+    all_legends = []
+    for percentile in [1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+        push!(all_lines, lines!(ax, adf.step, get_percentile_along_vv([[house.area for house in v] for v in mdf.newly_built_houses_for_sale], percentile), color = percentile_color_map[percentile]))
+        push!(all_legends, "Percentile $(string(percentile))")
+    end
+
+    push!(all_lines, lines!(ax, adf.step, get_average_along_vv(adf.age_distribution_household), color = average_color))
+    push!(all_legends, "Average")
+    figure[1, 2] = Legend(figure, all_lines, all_legends)
     figure
 end
 
