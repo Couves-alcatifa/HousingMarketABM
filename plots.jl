@@ -409,8 +409,12 @@ function plot_newly_built_houses_for_sale_size_distribution(adf, mdf)
     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Size")
     all_lines = []
     all_legends = []
+    houses_areas_vv = [[house.area for house in v] for v in mdf.newly_built_houses_for_sale]
+    for v in houses_areas_vv
+        sort!(v)
+    end
     for percentile in [1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
-        push!(all_lines, lines!(ax, adf.step, get_percentile_along_vv([[house.area for house in v] for v in mdf.newly_built_houses_for_sale], percentile), color = percentile_color_map[percentile]))
+        push!(all_lines, lines!(ax, adf.step, get_percentile_along_vv(houses_areas_vv, percentile), color = percentile_color_map[percentile]))
         push!(all_legends, "Percentile $(string(percentile))")
     end
 
