@@ -989,7 +989,8 @@ function measureDemandForSizeAndRegion(model, size_interval, location)
     for householdId in model.householdsInDemand
         household = model[householdId]
         if (household.residencyZone != location 
-            || !isSizeIntervalAppropriate(size_interval, household))
+            || !isSizeIntervalAppropriate(size_interval, household)
+            || !canHouseholdBuyHouse(model, household, size_interval))
             continue
         end
         model.demandPerBucket[location][size_interval] += 1
@@ -1137,3 +1138,34 @@ function nonResidentsBuyHouses(model)
     end
 end
 
+
+function generateAreaFromSizeInterval(size_interval)
+    area = 0
+    if size_interval == LessThan50
+        area = rand(25:50)
+    elseif size_interval == LessThan75
+        area = rand(50:75)
+    elseif size_interval == LessThan125
+        area = rand(75:125)
+    elseif size_interval == More
+        area = Int64(round(rand(Normal(135, 10))))
+        if area <  125
+            area = Int64(round(125 + 10 * rand()))
+        end
+    else
+        println("Error: unknown sizeInterval $size_interval")
+        exit(1)
+    end
+    return area
+end
+
+function canHouseholdBuyHouse(model, household, size_interval)
+    location = household.residencyZone
+    house = House(generateAreaFromSizeInterval(size_interval), location, NotSocialNeighbourhood, 1.0, rand(1:100))
+    marketPrice = calculate_market_price(house, model)
+    if household.wealth >= marketPrice
+        return true
+    end
+    maxMortgage = maxMortgageValue(model, household)
+    return household.wealth + maxMortgage >= marketPrice
+end

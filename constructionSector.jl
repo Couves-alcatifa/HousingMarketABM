@@ -162,25 +162,7 @@ function createConstructionLoan(model, value)
     return true
 end
 
-function generateAreaFromSizeInterval(size_interval)
-    area = 0
-    if size_interval == LessThan50
-        area = rand(25:50)
-    elseif size_interval == LessThan75
-        area = rand(50:75)
-    elseif size_interval == LessThan125
-        area = rand(75:125)
-    elseif size_interval == More
-        area = Int64(round(rand(Normal(135, 10))))
-        if area <  125
-            area = Int64(round(125 + 10 * rand()))
-        end
-    else
-        println("Error: unknown sizeInterval $size_interval")
-        exit(1)
-    end
-    return area
-end
+
 function generateHouseToBeBuilt(location, size_interval)
     area = generateAreaFromSizeInterval(size_interval)
     bestPercentile = -1
