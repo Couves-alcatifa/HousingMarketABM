@@ -208,7 +208,7 @@ end
 function calculateSalary(household, model)
     location = household.residencyZone
     percentile = household.percentile
-    salaryAgeMultiplier = (1 + household.age/70 - 0.2)
+    salaryAgeMultiplier = map_value(household.age, 20, 70, 0.7, 1.7)
     if household.age > 70
         salaryAgeMultiplier = 0.75
     end
@@ -230,7 +230,7 @@ function calculateSalary(household, model)
         salary = base + range * (percentile / 100 - 0.6) * 5
     else
         base = eval(Symbol("FOURTH_QUINTILE_INCOME_IN_$(string(location))"))
-        range = base * 3 * salaryAgeMultiplier
+        range = base * 2 * salaryAgeMultiplier
         salary = base + range * (percentile / 100 - 0.8) * 5
     end
     if (size == 1)
@@ -242,14 +242,41 @@ end
 
 function calculateLiquidSalary(household, model)
     baseSalary = calculateSalary(household, model)
-    irs = model.government.irs
-    if baseSalary < 1200
-        return baseSalary * (1 - irs / 4)
-    elseif baseSalary < 1600
-        return 1200 * (1 - irs / 4) + (baseSalary - 1200) * (1 - irs / 2)
+    return baseSalary - incomeTaxes(baseSalary)
+end
+
+function calculateIrs(income)
+    if income <= 820
+        return 0
+    elseif income <= 935
+        return calculateIrs(820) + (income - 820) * 0.13
+    elseif income <= 1125
+        return calculateIrs(935) + (income - 935) * 0.165
+    elseif income <= 1175
+        return calculateIrs(1125) + (income - 1125) * 0.22
+    elseif income <= 1769
+        return calculateIrs(1175) + (income - 1175) * 0.25
+    elseif income <= 2057
+        return calculateIrs(1769) + (income - 1769) * 0.32
+    elseif income <= 2408
+        return calculateIrs(2057) + (income - 2057) * 0.355
+    elseif income <= 3201
+        return calculateIrs(2408) + (income - 2408) * 0.3872
+    elseif income <= 5492
+        return calculateIrs(3201) + (income - 3201) * 0.4005
+    elseif income <= 20021
+        return calculateIrs(5492) + (income - 5492) * 0.4495
     else
-        return 1200 * (1 - irs / 4) + 400 * (1 - irs / 2) + (baseSalary - 1600) * (1 - irs)
+        return calculateIrs(20021) + (income - 20021) * 0.4717
     end
+end
+
+function calculateSocialSecurityTax(income)
+    return income * SOCIAL_SECURITY_TAX
+end
+
+function incomeTaxes(income)
+    return calculateIrs(income) + calculateSocialSecurityTax(income)
 end
 
 function receive_inheritages(household, model)
