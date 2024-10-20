@@ -146,8 +146,8 @@ end
 # so the behaviour should be something like:
 # - maxMortgageValue(h, b, house) -> max value the bank is willing to lend
 # - maxMortgageValue(h, b, house, maxSpread = x | maxMonthlyPayment = y) -> maxValue with certain conditions
-function maxMortgageValue(model, household)
-    
+function maxMortgageValue(model, household; stopIfItIsBelowThisValue = 0)
+    start = time()
     # TODO: this is just experimental - remove
     # if model.steps > 50
     #     return 0
@@ -169,18 +169,23 @@ function maxMortgageValue(model, household)
     # startingMaxValue = calculate_market_price(house, model) * bank.ltv
     maxValue = 0
     while maxValue == 0
+        # if startingMaxValue < stopIfItIsBelowThisValue
+        #     break
+        # end
         duration = calculateMortgageDuration(startingMaxValue, household.age)
         payment = calculateMortgagePayment(Mortgage(startingMaxValue, startingMaxValue, 0, duration), bank.interestRate)
         if payment > salary * bank.dsti
-            startingMaxValue *= 0.90
+            startingMaxValue *= 0.98
         else
             maxValue = startingMaxValue
             break
         end
     end
+    model.timeTakenInMaxMortgageValue += time() - start
     if maxValue < 0
         return 0
     end
+
     return maxValue 
 end
 
@@ -351,6 +356,14 @@ function clearHouseMarket(model)
                 continue
             end
             consumerSurplus = calculateConsumerSurplus(household, house)
+            # thresholdValue = (supply.price - household.wealth) * 0.5
+            # if thresholdValue <= 0
+            #     # the household has more money than the askPrice, lets establish
+            #     # that it might still ask for 5% more due to the consumerSurplus
+            #     thresholdValue = 0.05 * supply.price
+            # end
+
+            # maxMortgage = maxMortgageValue(model, household, stopIfItIsBelowThisValue = thresholdValue)
             maxMortgage = maxMortgageValue(model, household)
             demandBid = calculateBid(household, house, supply.price, maxMortgage, consumerSurplus)
             if (demandBid >= supply.price * 0.95)
@@ -507,6 +520,14 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     if (household.wealth < bidValue + calculateImt(bidValue))
         paidWithOwnMoney = household.wealth * 0.95
         mortgageValue = bidValue + calculateImt(bidValue) - paidWithOwnMoney
+        maxMortgage = maxMortgageValue(model, household, stopIfItIsBelowThisValue = mortgageValue)
+        if maxMortgage < mortgageValue
+            content = "Household failed to acquire mortgage\n"
+            open("$output_folder/transactions_logs/step_$(model.steps).txt", "a") do file
+                write(file, content)
+            end
+            return false
+        end
         # if mortgageValue > model.bank.wealth * 0.5
         #     return false
         # end
@@ -619,9 +640,9 @@ end
 
 function public_investment(model)
     # gov pays company services for each household
-    model.company_wealth += NUMBER_OF_HOUSEHOLDS * 1300 * model.government.subsidyRate
-    model.government.wealth -= NUMBER_OF_HOUSEHOLDS * 1300 * model.government.subsidyRate
-    model.companyServicesPaid += NUMBER_OF_HOUSEHOLDS * 1300 * model.government.subsidyRate
+    model.company_wealth += NUMBER_OF_HOUSEHOLDS * 2000 * model.government.subsidyRate
+    model.government.wealth -= NUMBER_OF_HOUSEHOLDS * 2000 * model.government.subsidyRate
+    model.companyServicesPaid += NUMBER_OF_HOUSEHOLDS * 2000 * model.government.subsidyRate
 end
 
 function InitiateBuckets()
@@ -1193,6 +1214,6 @@ function canHouseholdBuyHouse(model, household, size_interval)
     if household.wealth >= marketPrice
         return true
     end
-    maxMortgage = maxMortgageValue(model, household)
+    maxMortgage = maxMortgageValue(model, household, stopIfItIsBelowThisValue = marketPrice - household.wealth)
     return household.wealth + maxMortgage >= marketPrice
 end

@@ -118,6 +118,7 @@ function wealth_model()
         :supplyPerBucket => Dict(location => Dict(size_interval => 0 for size_interval in instances(SizeInterval)) for location in instances(HouseLocation)),
         :demandPerBucket => Dict(location => Dict(size_interval => 0 for size_interval in instances(SizeInterval)) for location in instances(HouseLocation)),
         :housesInRentalMarket => Set(),
+        :timeTakenInMaxMortgageValue => 0.0,
     )
 
     model = StandardABM(MyMultiAgent; agent_step! = agent_step!, model_step! = model_step!, properties,scheduler = Schedulers.Randomly())
@@ -184,6 +185,7 @@ function model_step!(model)
     public_investment(model)
     updateConstructions(model)
     payMortgages(model, model.construction_sector)
+    LOG_INFO("So far maxMortgageValue has spent $(model.timeTakenInMaxMortgageValue) seconds")
     println("end of model_step $(string(model.steps))")
     LOG_INFO("Model step took $(string(time() - start_time)) seconds")
 end
@@ -361,8 +363,9 @@ function home_owner_decisions(household, model)
     else
         # lets assess the household economical situation
         # WARNING: this might be computationally expensive
-        mortgage = maxMortgageValue(model, household)
-        if household.wealth + mortgage > calculate_market_price(House(25, household.residencyZone, NotSocialNeighbourhood, 1.0, 25), model)
+        marketPrice = calculate_market_price(House(25, household.residencyZone, NotSocialNeighbourhood, 1.0, 25), model)
+        mortgage = maxMortgageValue(model, household, stopIfItIsBelowThisValue = marketPrice - household.wealth)
+        if household.wealth + mortgage > marketPrice
             if household.percentile > 70 # not everyone who can will do this do
                 push!(model.houseMarket.demand, HouseDemand(household.id, SupplyMatch[], ForRental))
             end

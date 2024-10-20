@@ -1,0 +1,768 @@
+2024_10_20_T20:11:48 -  finished initateHouses in 0.48073911666870117 seconds
+2024_10_20_T20:11:48 -  finished initiateHouseholds in 0.6375911235809326 seconds
+2024_10_20_T20:11:48 -  finished assignHousesToHouseholds in 0.7883141040802002 seconds
+2024_10_20_T20:11:50 -  Metrics: sum_wealth took 1.9073486328125e-6
+2024_10_20_T20:11:51 -  Metrics: wealth_distribution took 5.0067901611328125e-6
+2024_10_20_T20:11:51 -  Metrics: money_distribution took 4.0531158447265625e-6
+2024_10_20_T20:11:51 -  Metrics: size_distribution took 3.0994415283203125e-6
+2024_10_20_T20:11:51 -  Metrics: age_distribution took 4.0531158447265625e-6
+2024_10_20_T20:11:52 -  Metrics: sum_wealth took 0.0005340576171875
+2024_10_20_T20:11:52 -  Metrics: wealth_distribution took 0.014557123184204102
+2024_10_20_T20:11:52 -  Metrics: money_distribution took 0.007308006286621094
+2024_10_20_T20:11:52 -  Metrics: size_distribution took 0.009967803955078125
+2024_10_20_T20:11:52 -  Metrics: age_distribution took 0.006346225738525391
+2024_10_20_T20:12:13 -  Model step started
+2024_10_20_T20:12:13 -  clearHangingSupplies started
+2024_10_20_T20:12:13 -  clearHangingSupplies took 0.005079984664916992
+2024_10_20_T20:12:13 -  clearHangingRentalSupplies started
+2024_10_20_T20:12:13 -  clearHangingRentalSupplies took 0.002081155776977539
+2024_10_20_T20:12:13 -  clearHouseMarket started
+2024_10_20_T20:15:13 -  clearHouseMarket - first block took 179.96651792526245
+2024_10_20_T20:15:13 -  clearHouseMarket - second block took 0.11529016494750977
+2024_10_20_T20:15:13 -  clearHouseMarket - third block took 0.011898994445800781
+2024_10_20_T20:15:13 -  clearRentalMarket started
+2024_10_20_T20:15:13 -  clearRentalMarket - first block took 0.06656599044799805
+2024_10_20_T20:15:13 -  clearRentalMarket - second block took 1.0013580322265625e-5
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan50)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan50)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan50)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan75)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan125)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan125)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, More)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan125)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan75)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan75)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, More)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, More)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, More)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan50)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan50)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan50)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, LessThan50)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, LessThan50)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, LessThan50)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, More)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, More)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, LessThan75)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan50)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan50)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, More)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, More)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan75)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan50)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan75)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan75)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan75)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Oeiras, LessThan75)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Oeiras, More)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Oeiras, LessThan125)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, LessThan75)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, LessThan75)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, LessThan75)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, LessThan125)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, LessThan125)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (VilaFrancaDeXira, LessThan50)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (VilaFrancaDeXira, LessThan125)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Alcochete, LessThan125)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Alcochete, LessThan75)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, LessThan125)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, LessThan125)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, LessThan50)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, More)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, More)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, LessThan75)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, LessThan75)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Barreiro, More)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Moita, LessThan50)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Moita, LessThan75)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Montijo, More)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Palmela, More)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Palmela, LessThan125)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Palmela, LessThan50)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Palmela, LessThan50)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Palmela, LessThan75)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, More)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, More)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, More)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, More)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, More)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan75)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan75)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan125)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan125)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan125)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan125)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan50)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Sesimbra, More)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Setubal, LessThan75)
+2024_10_20_T20:15:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Setubal, LessThan50)
+2024_10_20_T20:15:14 -  So far maxMortgageValue has spent 4.4405834674835205 seconds
+2024_10_20_T20:15:14 -  Model step took 181.88134002685547 seconds
+2024_10_20_T20:15:14 -  Metrics: sum_wealth took 0.0005781650543212891
+2024_10_20_T20:15:14 -  Metrics: wealth_distribution took 0.007605075836181641
+2024_10_20_T20:15:14 -  Metrics: money_distribution took 0.0073850154876708984
+2024_10_20_T20:15:14 -  Metrics: size_distribution took 0.0062198638916015625
+2024_10_20_T20:15:14 -  Metrics: age_distribution took 0.00642704963684082
+2024_10_20_T20:15:34 -  Model step started
+2024_10_20_T20:15:34 -  clearHangingSupplies started
+2024_10_20_T20:15:34 -  clearHangingSupplies took 0.010178089141845703
+2024_10_20_T20:15:34 -  clearHangingRentalSupplies started
+2024_10_20_T20:15:34 -  clearHangingRentalSupplies took 3.0994415283203125e-6
+2024_10_20_T20:15:34 -  clearHouseMarket started
+2024_10_20_T20:20:13 -  clearHouseMarket - first block took 278.7217929363251
+2024_10_20_T20:20:13 -  clearHouseMarket - second block took 0.002969980239868164
+2024_10_20_T20:20:13 -  clearHouseMarket - third block took 0.0018668174743652344
+2024_10_20_T20:20:13 -  clearRentalMarket started
+2024_10_20_T20:20:13 -  clearRentalMarket - first block took 0.00014400482177734375
+2024_10_20_T20:20:13 -  clearRentalMarket - second block took 9.5367431640625e-7
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan75)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, More)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan125)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan125)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan50)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, LessThan50)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, LessThan125)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan75)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, More)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, LessThan75)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, LessThan75)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, LessThan125)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, LessThan125)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan75)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan75)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan75)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan50)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Oeiras, LessThan50)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, LessThan125)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, More)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Moita, LessThan50)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Moita, More)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Montijo, More)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Montijo, More)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Montijo, LessThan50)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Palmela, More)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Palmela, More)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Palmela, LessThan50)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Palmela, LessThan75)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Palmela, LessThan75)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan125)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan125)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan125)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan125)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan50)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, More)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, More)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, More)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, More)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Sesimbra, LessThan50)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Sesimbra, LessThan125)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Sesimbra, LessThan75)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Setubal, LessThan50)
+2024_10_20_T20:20:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Setubal, LessThan75)
+2024_10_20_T20:20:14 -  So far maxMortgageValue has spent 11.223183870315552 seconds
+2024_10_20_T20:20:14 -  Model step took 280.1488289833069 seconds
+2024_10_20_T20:20:14 -  Metrics: sum_wealth took 0.0006070137023925781
+2024_10_20_T20:20:14 -  Metrics: wealth_distribution took 0.006464958190917969
+2024_10_20_T20:20:14 -  Metrics: money_distribution took 0.0065920352935791016
+2024_10_20_T20:20:14 -  Metrics: size_distribution took 0.006494998931884766
+2024_10_20_T20:20:15 -  Metrics: age_distribution took 0.006513833999633789
+2024_10_20_T20:20:34 -  Model step started
+2024_10_20_T20:20:34 -  clearHangingSupplies started
+2024_10_20_T20:20:34 -  clearHangingSupplies took 0.0020589828491210938
+2024_10_20_T20:20:34 -  clearHangingRentalSupplies started
+2024_10_20_T20:20:34 -  clearHangingRentalSupplies took 1.9073486328125e-6
+2024_10_20_T20:20:34 -  clearHouseMarket started
+2024_10_20_T20:25:40 -  clearHouseMarket - first block took 305.42804288864136
+2024_10_20_T20:25:40 -  clearHouseMarket - second block took 0.0032930374145507812
+2024_10_20_T20:25:40 -  clearHouseMarket - third block took 0.002146005630493164
+2024_10_20_T20:25:40 -  clearRentalMarket started
+2024_10_20_T20:25:40 -  clearRentalMarket - first block took 0.002844095230102539
+2024_10_20_T20:25:40 -  clearRentalMarket - second block took 4.0531158447265625e-6
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan75)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan75)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan75)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan125)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan125)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, More)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, LessThan50)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan50)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan75)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan125)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, More)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, LessThan125)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, LessThan75)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, More)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan75)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan125)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan125)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan125)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan125)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan125)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan75)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Oeiras, More)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, More)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, LessThan50)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, LessThan125)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, More)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, More)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Barreiro, LessThan75)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan75)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan50)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan125)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, More)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, More)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Sesimbra, LessThan125)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Setubal, LessThan125)
+2024_10_20_T20:25:41 -  Pushed house into housesBuiltPerRegion (location,size) = (Setubal, LessThan125)
+2024_10_20_T20:25:41 -  So far maxMortgageValue has spent 18.61871647834778 seconds
+2024_10_20_T20:25:41 -  Model step took 306.8675720691681 seconds
+2024_10_20_T20:25:41 -  Metrics: sum_wealth took 0.0006220340728759766
+2024_10_20_T20:25:41 -  Metrics: wealth_distribution took 0.011202096939086914
+2024_10_20_T20:25:41 -  Metrics: money_distribution took 0.006943941116333008
+2024_10_20_T20:25:41 -  Metrics: size_distribution took 0.006333112716674805
+2024_10_20_T20:25:41 -  Metrics: age_distribution took 0.006317138671875
+2024_10_20_T20:26:01 -  Model step started
+2024_10_20_T20:26:01 -  clearHangingSupplies started
+2024_10_20_T20:26:01 -  clearHangingSupplies took 0.0018939971923828125
+2024_10_20_T20:26:01 -  clearHangingRentalSupplies started
+2024_10_20_T20:26:01 -  clearHangingRentalSupplies took 1.9073486328125e-6
+2024_10_20_T20:26:01 -  clearHouseMarket started
+2024_10_20_T20:31:12 -  clearHouseMarket - first block took 310.6472737789154
+2024_10_20_T20:31:12 -  clearHouseMarket - second block took 0.04475998878479004
+2024_10_20_T20:31:12 -  clearHouseMarket - third block took 0.0019788742065429688
+2024_10_20_T20:31:12 -  clearRentalMarket started
+2024_10_20_T20:31:12 -  clearRentalMarket - first block took 0.07632303237915039
+2024_10_20_T20:31:12 -  clearRentalMarket - second block took 0.020608901977539062
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan50)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan125)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, More)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, More)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, More)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, More)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan50)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan50)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan75)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan50)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, LessThan125)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, LessThan125)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, LessThan125)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, LessThan75)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, LessThan75)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, More)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan125)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan125)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan50)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, More)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan75)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, More)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, More)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, More)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, LessThan125)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, LessThan125)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (VilaFrancaDeXira, LessThan125)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Alcochete, LessThan50)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, LessThan50)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, More)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Montijo, More)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Montijo, More)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Montijo, LessThan50)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Palmela, LessThan125)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Palmela, LessThan125)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan75)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan75)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan75)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan75)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan75)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan50)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan50)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, More)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, More)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Sesimbra, More)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Sesimbra, More)
+2024_10_20_T20:31:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Setubal, More)
+2024_10_20_T20:31:13 -  So far maxMortgageValue has spent 26.589621782302856 seconds
+2024_10_20_T20:31:13 -  Model step took 312.2655129432678 seconds
+2024_10_20_T20:31:13 -  Metrics: sum_wealth took 0.0005741119384765625
+2024_10_20_T20:31:13 -  Metrics: wealth_distribution took 0.006404876708984375
+2024_10_20_T20:31:13 -  Metrics: money_distribution took 0.0067291259765625
+2024_10_20_T20:31:13 -  Metrics: size_distribution took 0.00640106201171875
+2024_10_20_T20:31:13 -  Metrics: age_distribution took 0.006402015686035156
+2024_10_20_T20:31:33 -  Model step started
+2024_10_20_T20:31:33 -  clearHangingSupplies started
+2024_10_20_T20:31:33 -  clearHangingSupplies took 0.0020210742950439453
+2024_10_20_T20:31:33 -  clearHangingRentalSupplies started
+2024_10_20_T20:31:33 -  clearHangingRentalSupplies took 2.1457672119140625e-6
+2024_10_20_T20:31:33 -  clearHouseMarket started
+2024_10_20_T20:36:43 -  clearHouseMarket - first block took 309.7233099937439
+2024_10_20_T20:36:43 -  clearHouseMarket - second block took 0.004232168197631836
+2024_10_20_T20:36:43 -  clearHouseMarket - third block took 0.002891063690185547
+2024_10_20_T20:36:43 -  clearRentalMarket started
+2024_10_20_T20:36:43 -  clearRentalMarket - first block took 0.010757923126220703
+2024_10_20_T20:36:43 -  clearRentalMarket - second block took 0.005856990814208984
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan50)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan125)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan125)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan125)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, LessThan50)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, More)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, LessThan125)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan75)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan75)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, More)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan50)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan50)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan50)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, More)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, More)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, More)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, LessThan50)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan50)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan50)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan75)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, More)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan125)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan125)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, LessThan75)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, LessThan75)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, More)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, LessThan125)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (VilaFrancaDeXira, LessThan75)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Alcochete, LessThan50)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Alcochete, LessThan50)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Alcochete, LessThan75)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, LessThan50)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Montijo, LessThan75)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Montijo, LessThan75)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Montijo, More)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Montijo, More)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Palmela, LessThan125)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan125)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan125)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, More)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan50)
+2024_10_20_T20:36:44 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan50)
+2024_10_20_T20:36:44 -  So far maxMortgageValue has spent 34.51714277267456 seconds
+2024_10_20_T20:36:44 -  Model step took 311.22349309921265 seconds
+2024_10_20_T20:36:44 -  Metrics: sum_wealth took 0.0006232261657714844
+2024_10_20_T20:36:44 -  Metrics: wealth_distribution took 0.007861852645874023
+2024_10_20_T20:36:44 -  Metrics: money_distribution took 0.007297039031982422
+2024_10_20_T20:36:44 -  Metrics: size_distribution took 0.006855964660644531
+2024_10_20_T20:36:44 -  Metrics: age_distribution took 0.006503105163574219
+2024_10_20_T20:37:04 -  Model step started
+2024_10_20_T20:37:04 -  clearHangingSupplies started
+2024_10_20_T20:37:04 -  clearHangingSupplies took 0.002087831497192383
+2024_10_20_T20:37:04 -  clearHangingRentalSupplies started
+2024_10_20_T20:37:04 -  clearHangingRentalSupplies took 9.5367431640625e-7
+2024_10_20_T20:37:04 -  clearHouseMarket started
+2024_10_20_T20:42:12 -  clearHouseMarket - first block took 307.291246175766
+2024_10_20_T20:42:12 -  clearHouseMarket - second block took 0.004015922546386719
+2024_10_20_T20:42:12 -  clearHouseMarket - third block took 0.0016560554504394531
+2024_10_20_T20:42:12 -  clearRentalMarket started
+2024_10_20_T20:42:12 -  clearRentalMarket - first block took 0.0001518726348876953
+2024_10_20_T20:42:12 -  clearRentalMarket - second block took 9.5367431640625e-7
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, More)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan125)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan125)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, LessThan75)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, LessThan75)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, LessThan125)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan50)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan125)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan125)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan125)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, LessThan75)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, More)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan75)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan50)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan125)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan125)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, More)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, More)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, More)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, More)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan125)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan125)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Oeiras, LessThan75)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (VilaFrancaDeXira, LessThan75)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Alcochete, More)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, More)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, More)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, More)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, LessThan50)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Montijo, LessThan50)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Palmela, LessThan125)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Palmela, More)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Palmela, LessThan75)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Palmela, LessThan75)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, More)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, More)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan125)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan125)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan75)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan75)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan75)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan50)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Setubal, LessThan125)
+2024_10_20_T20:42:13 -  Pushed house into housesBuiltPerRegion (location,size) = (Setubal, LessThan75)
+2024_10_20_T20:42:13 -  So far maxMortgageValue has spent 42.64655828475952 seconds
+2024_10_20_T20:42:13 -  Model step took 308.8114821910858 seconds
+2024_10_20_T20:42:13 -  Metrics: sum_wealth took 0.0005331039428710938
+2024_10_20_T20:42:13 -  Metrics: wealth_distribution took 0.007010936737060547
+2024_10_20_T20:42:13 -  Metrics: money_distribution took 0.006296873092651367
+2024_10_20_T20:42:13 -  Metrics: size_distribution took 0.006548881530761719
+2024_10_20_T20:42:13 -  Metrics: age_distribution took 0.006698131561279297
+2024_10_20_T20:42:33 -  Model step started
+2024_10_20_T20:42:33 -  clearHangingSupplies started
+2024_10_20_T20:42:33 -  clearHangingSupplies took 0.002223968505859375
+2024_10_20_T20:42:33 -  clearHangingRentalSupplies started
+2024_10_20_T20:42:33 -  clearHangingRentalSupplies took 1.9073486328125e-6
+2024_10_20_T20:42:33 -  clearHouseMarket started
+2024_10_20_T20:47:39 -  clearHouseMarket - first block took 305.50404500961304
+2024_10_20_T20:47:39 -  clearHouseMarket - second block took 0.004302978515625
+2024_10_20_T20:47:39 -  clearHouseMarket - third block took 0.0018129348754882812
+2024_10_20_T20:47:39 -  clearRentalMarket started
+2024_10_20_T20:47:39 -  clearRentalMarket - first block took 0.00015306472778320312
+2024_10_20_T20:47:39 -  clearRentalMarket - second block took 9.5367431640625e-7
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, More)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, More)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, More)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, More)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan75)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan125)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan125)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan125)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan50)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, More)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, LessThan75)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, LessThan75)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, LessThan75)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, LessThan75)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, LessThan50)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, More)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan125)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan125)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan50)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan50)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan125)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan50)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan75)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan75)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, More)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, LessThan125)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, LessThan125)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, LessThan50)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, LessThan50)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (VilaFrancaDeXira, LessThan50)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (VilaFrancaDeXira, LessThan125)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Alcochete, LessThan50)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, LessThan125)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, More)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Moita, LessThan50)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Montijo, LessThan125)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan50)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan50)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan125)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, More)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan75)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan75)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan75)
+2024_10_20_T20:47:40 -  Pushed house into housesBuiltPerRegion (location,size) = (Setubal, LessThan75)
+2024_10_20_T20:47:40 -  So far maxMortgageValue has spent 50.923240184783936 seconds
+2024_10_20_T20:47:40 -  Model step took 307.00849986076355 seconds
+2024_10_20_T20:47:40 -  Metrics: sum_wealth took 0.0007138252258300781
+2024_10_20_T20:47:40 -  Metrics: wealth_distribution took 0.007443904876708984
+2024_10_20_T20:47:40 -  Metrics: money_distribution took 0.007218122482299805
+2024_10_20_T20:47:40 -  Metrics: size_distribution took 0.0069501399993896484
+2024_10_20_T20:47:40 -  Metrics: age_distribution took 0.006723880767822266
+2024_10_20_T20:48:00 -  Model step started
+2024_10_20_T20:48:00 -  clearHangingSupplies started
+2024_10_20_T20:48:00 -  clearHangingSupplies took 0.002274036407470703
+2024_10_20_T20:48:00 -  clearHangingRentalSupplies started
+2024_10_20_T20:48:00 -  clearHangingRentalSupplies took 9.5367431640625e-7
+2024_10_20_T20:48:00 -  clearHouseMarket started
+2024_10_20_T20:53:13 -  clearHouseMarket - first block took 312.21117997169495
+2024_10_20_T20:53:13 -  clearHouseMarket - second block took 0.004876136779785156
+2024_10_20_T20:53:13 -  clearHouseMarket - third block took 0.0017879009246826172
+2024_10_20_T20:53:13 -  clearRentalMarket started
+2024_10_20_T20:53:13 -  clearRentalMarket - first block took 0.03638505935668945
+2024_10_20_T20:53:13 -  clearRentalMarket - second block took 0.0022971630096435547
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan50)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan50)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan75)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan125)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, LessThan125)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, More)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan50)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan125)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, More)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan75)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, LessThan75)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, LessThan125)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, LessThan50)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan75)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan50)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Oeiras, More)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Oeiras, LessThan125)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Oeiras, LessThan75)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Oeiras, LessThan50)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Oeiras, LessThan50)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, LessThan125)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, LessThan125)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Alcochete, LessThan125)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, More)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Montijo, LessThan125)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Palmela, LessThan125)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Palmela, LessThan75)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Palmela, More)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan50)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan75)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan75)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan125)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Setubal, LessThan75)
+2024_10_20_T20:53:14 -  Pushed house into housesBuiltPerRegion (location,size) = (Setubal, LessThan50)
+2024_10_20_T20:53:14 -  So far maxMortgageValue has spent 59.99250268936157 seconds
+2024_10_20_T20:53:14 -  Model step took 313.8894121646881 seconds
+2024_10_20_T20:53:14 -  Metrics: sum_wealth took 0.0005822181701660156
+2024_10_20_T20:53:14 -  Metrics: wealth_distribution took 0.006510019302368164
+2024_10_20_T20:53:14 -  Metrics: money_distribution took 0.006657838821411133
+2024_10_20_T20:53:14 -  Metrics: size_distribution took 0.006200075149536133
+2024_10_20_T20:53:14 -  Metrics: age_distribution took 0.006031990051269531
+2024_10_20_T20:53:35 -  Model step started
+2024_10_20_T20:53:35 -  clearHangingSupplies started
+2024_10_20_T20:53:35 -  clearHangingSupplies took 0.0021779537200927734
+2024_10_20_T20:53:35 -  clearHangingRentalSupplies started
+2024_10_20_T20:53:35 -  clearHangingRentalSupplies took 1.1205673217773438e-5
+2024_10_20_T20:53:35 -  clearHouseMarket started
+2024_10_20_T20:59:31 -  clearHouseMarket - first block took 355.6854078769684
+2024_10_20_T20:59:31 -  clearHouseMarket - second block took 0.010660886764526367
+2024_10_20_T20:59:31 -  clearHouseMarket - third block took 0.002081155776977539
+2024_10_20_T20:59:31 -  clearRentalMarket started
+2024_10_20_T20:59:31 -  clearRentalMarket - first block took 0.1453092098236084
+2024_10_20_T20:59:31 -  clearRentalMarket - second block took 0.007212162017822266
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan125)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan125)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, LessThan50)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, More)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, More)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, LessThan75)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan125)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan125)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan75)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, More)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, More)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, More)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan50)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan50)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan75)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan125)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, More)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan50)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan50)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan50)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan75)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Oeiras, LessThan50)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Alcochete, LessThan125)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Alcochete, LessThan125)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Alcochete, LessThan125)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, LessThan50)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, LessThan50)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, More)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, More)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, More)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Montijo, LessThan125)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Montijo, More)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan75)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, More)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, More)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, More)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, More)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan50)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan50)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Sesimbra, LessThan50)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Sesimbra, LessThan50)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Sesimbra, More)
+2024_10_20_T20:59:33 -  Pushed house into housesBuiltPerRegion (location,size) = (Setubal, LessThan50)
+2024_10_20_T20:59:33 -  So far maxMortgageValue has spent 71.47123527526855 seconds
+2024_10_20_T20:59:33 -  Model step took 357.5497078895569 seconds
+2024_10_20_T20:59:33 -  Metrics: sum_wealth took 0.0005249977111816406
+2024_10_20_T20:59:33 -  Metrics: wealth_distribution took 0.0072040557861328125
+2024_10_20_T20:59:33 -  Metrics: money_distribution took 0.006956815719604492
+2024_10_20_T20:59:33 -  Metrics: size_distribution took 0.006639957427978516
+2024_10_20_T20:59:33 -  Metrics: age_distribution took 0.0065670013427734375
+2024_10_20_T20:59:54 -  Model step started
+2024_10_20_T20:59:54 -  clearHangingSupplies started
+2024_10_20_T20:59:54 -  clearHangingSupplies took 0.002168893814086914
+2024_10_20_T20:59:54 -  clearHangingRentalSupplies started
+2024_10_20_T20:59:54 -  clearHangingRentalSupplies took 9.5367431640625e-7
+2024_10_20_T20:59:54 -  clearHouseMarket started
+2024_10_20_T21:05:15 -  clearHouseMarket - first block took 320.59355306625366
+2024_10_20_T21:05:15 -  clearHouseMarket - second block took 0.004681110382080078
+2024_10_20_T21:05:15 -  clearHouseMarket - third block took 0.0019388198852539062
+2024_10_20_T21:05:15 -  clearRentalMarket started
+2024_10_20_T21:05:15 -  clearRentalMarket - first block took 0.003587007522583008
+2024_10_20_T21:05:15 -  clearRentalMarket - second block took 1.9073486328125e-6
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan50)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan75)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, LessThan50)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan50)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan50)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan125)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan125)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan125)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, LessThan75)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, LessThan75)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan75)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan125)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan125)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, More)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, More)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan125)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan125)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, LessThan125)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, LessThan125)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, More)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Alcochete, LessThan50)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Alcochete, LessThan75)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, LessThan125)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, More)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Moita, LessThan75)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Montijo, LessThan125)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Montijo, LessThan125)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Montijo, LessThan75)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Montijo, LessThan75)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Montijo, More)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Palmela, More)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Palmela, More)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Palmela, LessThan125)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan125)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan50)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan75)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan75)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan75)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan75)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan75)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, More)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Sesimbra, LessThan125)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Setubal, More)
+2024_10_20_T21:05:17 -  Pushed house into housesBuiltPerRegion (location,size) = (Setubal, LessThan50)
+2024_10_20_T21:05:17 -  So far maxMortgageValue has spent 81.97584319114685 seconds
+2024_10_20_T21:05:17 -  Model step took 322.17729091644287 seconds
+2024_10_20_T21:05:17 -  Metrics: sum_wealth took 0.0005309581756591797
+2024_10_20_T21:05:17 -  Metrics: wealth_distribution took 0.006654977798461914
+2024_10_20_T21:05:17 -  Metrics: money_distribution took 0.006636857986450195
+2024_10_20_T21:05:17 -  Metrics: size_distribution took 0.0062711238861083984
+2024_10_20_T21:05:17 -  Metrics: age_distribution took 0.006123065948486328
+2024_10_20_T21:05:37 -  Model step started
+2024_10_20_T21:05:37 -  clearHangingSupplies started
+2024_10_20_T21:05:37 -  clearHangingSupplies took 0.0023860931396484375
+2024_10_20_T21:05:37 -  clearHangingRentalSupplies started
+2024_10_20_T21:05:37 -  clearHangingRentalSupplies took 1.2159347534179688e-5
+2024_10_20_T21:05:37 -  clearHouseMarket started
+2024_10_20_T21:11:00 -  clearHouseMarket - first block took 322.74274802207947
+2024_10_20_T21:11:00 -  clearHouseMarket - second block took 0.007669925689697266
+2024_10_20_T21:11:00 -  clearHouseMarket - third block took 0.0023550987243652344
+2024_10_20_T21:11:00 -  clearRentalMarket started
+2024_10_20_T21:11:00 -  clearRentalMarket - first block took 0.17488813400268555
+2024_10_20_T21:11:00 -  clearRentalMarket - second block took 0.0067119598388671875
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan50)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, LessThan50)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, More)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, LessThan75)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan50)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan50)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan50)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan75)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Mafra, LessThan125)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, More)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, More)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan75)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan75)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan50)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan50)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Oeiras, More)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Oeiras, More)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, LessThan125)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, LessThan50)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, More)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (VilaFrancaDeXira, More)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Alcochete, More)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Alcochete, LessThan75)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, LessThan75)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Montijo, LessThan125)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Palmela, LessThan50)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Palmela, More)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan50)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan50)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan125)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan125)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan125)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan125)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, More)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan75)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan75)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan75)
+2024_10_20_T21:11:02 -  Pushed house into housesBuiltPerRegion (location,size) = (Setubal, LessThan75)
+2024_10_20_T21:11:02 -  So far maxMortgageValue has spent 93.32625985145569 seconds
+2024_10_20_T21:11:02 -  Model step took 324.51993203163147 seconds
+2024_10_20_T21:11:02 -  Metrics: sum_wealth took 0.0005669593811035156
+2024_10_20_T21:11:02 -  Metrics: wealth_distribution took 0.006793975830078125
+2024_10_20_T21:11:02 -  Metrics: money_distribution took 0.007135868072509766
+2024_10_20_T21:11:02 -  Metrics: size_distribution took 0.0064830780029296875
+2024_10_20_T21:11:02 -  Metrics: age_distribution took 0.007036924362182617
+2024_10_20_T21:11:23 -  Model step started
+2024_10_20_T21:11:23 -  clearHangingSupplies started
+2024_10_20_T21:11:23 -  clearHangingSupplies took 0.001918792724609375
+2024_10_20_T21:11:23 -  clearHangingRentalSupplies started
+2024_10_20_T21:11:23 -  clearHangingRentalSupplies took 1.9073486328125e-6
+2024_10_20_T21:11:23 -  clearHouseMarket started
+2024_10_20_T21:16:41 -  clearHouseMarket - first block took 317.5559799671173
+2024_10_20_T21:16:41 -  clearHouseMarket - second block took 0.006574153900146484
+2024_10_20_T21:16:41 -  clearHouseMarket - third block took 0.0018870830535888672
+2024_10_20_T21:16:41 -  clearRentalMarket started
+2024_10_20_T21:16:41 -  clearRentalMarket - first block took 0.039340972900390625
+2024_10_20_T21:16:41 -  clearRentalMarket - second block took 0.0021178722381591797
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Amadora, LessThan75)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Cascais, LessThan50)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan125)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, More)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, More)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Lisboa, LessThan50)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, More)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, LessThan125)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, LessThan125)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Loures, LessThan75)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan50)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan125)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan125)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan125)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan75)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan75)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Odivelas, LessThan75)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Oeiras, More)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Oeiras, More)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Oeiras, LessThan125)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Sintra, LessThan50)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Almada, LessThan50)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Barreiro, LessThan50)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Barreiro, LessThan75)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Montijo, LessThan75)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Montijo, LessThan50)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, More)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan75)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Seixal, LessThan125)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Setubal, LessThan125)
+2024_10_20_T21:16:43 -  Pushed house into housesBuiltPerRegion (location,size) = (Setubal, LessThan75)
+2024_10_20_T21:16:43 -  So far maxMortgageValue has spent 105.36550831794739 seconds
+2024_10_20_T21:16:43 -  Model step took 319.7707211971283 seconds
+2024_10_20_T21:16:43 -  Metrics: sum_wealth took 0.0005271434783935547
+2024_10_20_T21:16:43 -  Metrics: wealth_distribution took 0.007088899612426758
+2024_10_20_T21:16:43 -  Metrics: money_distribution took 0.007339954376220703
+2024_10_20_T21:16:43 -  Metrics: size_distribution took 0.00741887092590332
+2024_10_20_T21:16:43 -  Metrics: age_distribution took 0.008091926574707031
+2024_10_20_T21:17:04 -  Model step started
+2024_10_20_T21:17:04 -  clearHangingSupplies started
+2024_10_20_T21:17:04 -  clearHangingSupplies took 0.002073049545288086
+2024_10_20_T21:17:04 -  clearHangingRentalSupplies started
+2024_10_20_T21:17:04 -  clearHangingRentalSupplies took 9.5367431640625e-7
+2024_10_20_T21:17:04 -  clearHouseMarket started
