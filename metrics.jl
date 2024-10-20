@@ -253,7 +253,7 @@ end
 supply_per_bucket(model) = deepcopy(model.supplyPerBucket)
 demand_per_bucket(model) = deepcopy(model.demandPerBucket)
 
-mortgages(model) = copy(model.mortgagesInStep)
+mortgages_per_step(model) = copy(model.mortgagesInStep)
 
 function births(model)
     res = copy(model.births)

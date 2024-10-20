@@ -424,6 +424,34 @@ function plot_newly_built_houses_for_sale_size_distribution(adf, mdf)
     figure
 end
 
+function plot_number_of_mortgages(adf, mdf)
+    figure = Figure(size = (600, 400))
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Quantity")
+    lines = []
+    number_of_mortgages = Int32[]
+    for step in 1:NUMBER_OF_STEPS
+        push!(number_of_mortgages, length(mdf.mortgages_per_step[step]))
+    end
+    push!(lines, lines!(ax, adf.step, number_of_mortgages, color = :black))
+
+    figure[1, 2] = Legend(figure, lines, ["Number of mortgages provided"])
+    figure
+end
+
+function plot_volume_of_lent_money(adf, mdf)
+    figure = Figure(size = (600, 400))
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
+    lines = []
+    money_lent = Float64[]
+    for step in 1:NUMBER_OF_STEPS
+        push!(money_lent, sum([mortgage.intialValue for mortgage in mdf.mortgages_per_step[step]]))
+    end
+    push!(lines, lines!(ax, adf.step, money_lent, color = :black))
+
+    figure[1, 2] = Legend(figure, lines, ["Money Lent"])
+    figure
+end
+
 # function plot_mortgages_median_values_regionally(adf, mdf)
 #     figure = Figure(size = (600, 400))
 #     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
