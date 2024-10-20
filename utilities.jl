@@ -88,6 +88,7 @@ end
 
 # 100000 * (0.015/12) / (1 - (1 + 0.015/12)^(-360))
 function calculateMortgagePayment(mortgage, spread)
+    # WARNING: don't change this without changing maxMortgageValue, the math is related
     monthly_spread = spread / 12
     return (mortgage.intialValue * monthly_spread) / (1 - (1 + monthly_spread)^(-1 * mortgage.duration)) 
 end
@@ -165,28 +166,19 @@ function maxMortgageValue(model, household; stopIfItIsBelowThisValue = 0)
         return 0
     end
 
-    startingMaxValue = household.wealth * (1 / (1 - bank.ltv))
-    # startingMaxValue = calculate_market_price(house, model) * bank.ltv
-    maxValue = 0
-    while maxValue == 0
-        # if startingMaxValue < stopIfItIsBelowThisValue
-        #     break
-        # end
-        duration = calculateMortgageDuration(startingMaxValue, household.age)
-        payment = calculateMortgagePayment(Mortgage(startingMaxValue, startingMaxValue, 0, duration), bank.interestRate)
-        if payment > salary * bank.dsti
-            startingMaxValue *= 0.98
-        else
-            maxValue = startingMaxValue
-            break
-        end
-    end
-    model.timeTakenInMaxMortgageValue += time() - start
-    if maxValue < 0
-        return 0
-    end
+    valueRestrictedByLTV = household.wealth * (1 / (1 - bank.ltv))
+    duration = calculateMortgageDuration(valueRestrictedByLTV, household.age)
 
-    return maxValue 
+
+    highestPayment = salary * bank.dsti
+    monthly_spread = bank.interestRate / 12
+    
+    # WARNING: This math is tied to the way we calculateMortgagePayment
+    maxValue = (highestPayment * (1 - (1 + monthly_spread)^(-1 * duration))) / monthly_spread
+    if maxValue > valueRestrictedByLTV
+        maxValue = valueRestrictedByLTV
+    end
+    return maxValue
 end
 
 # Baseprice is the market price when the offer was posted
