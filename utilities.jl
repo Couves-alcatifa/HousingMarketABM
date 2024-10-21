@@ -827,21 +827,22 @@ function shouldAssignMultipleHouses(model, household)
     return 0
 end
 
-function assignHousesForRental(model, household, numberOfExtraHousesToAssign)
-    zones = adjacentZones[household.residencyZone]
+function assignHousesForRental(model, household, numberOfExtraHousesToAssign, houses_sizes_for_rental)
+    location = household.residencyZone
     assignedSoFar = 0
-    push!(zones, household.residencyZone)
-    # for house in collect(Iterators.flatten([model.houses[zone] for zone in zones]))
     i = 1
     while i < length(model.houses[household.residencyZone])
-        house = model.houses[household.residencyZone][i]
+        if length(houses_sizes_for_rental[location]) == 0
+            return
+        end
+        area = splice!(houses_sizes_for_rental[location], 1)
+        house = House(UInt16(area), location, NotSocialNeighbourhood, 1.0, rand(1:100))
         # println("assignHousesForRental house = $(house)")
         if assignedSoFar == numberOfExtraHousesToAssign
             return
         end
         push!(household.houses, house)
-        splice!(model.houses[household.residencyZone], i)
-        # put_house_to_rent(household, model, house)
+        put_house_to_rent(household, model, house)
         assignedSoFar += 1
         i += 1
     end

@@ -8,31 +8,28 @@ function initiateHouses(model)
         model.houses[location] = House[]
     end
     sort!(houses_sizes, lt=sortRandomly)
-    # TODO: region hack
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Amadora], Amadora, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Cascais], Cascais, houses_sizes)
-    initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Lisboa], Lisboa, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Loures], Loures, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Mafra], Mafra, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Odivelas], Odivelas, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Oeiras], Oeiras, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Sintra], Sintra, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[VilaFrancaDeXira], VilaFrancaDeXira, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Alcochete], Alcochete, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Almada], Almada, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Barreiro], Barreiro, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Moita], Moita, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Montijo], Montijo, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Palmela], Palmela, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Seixal], Seixal, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Sesimbra], Sesimbra, houses_sizes)
-    # initiateHousesPerRegion(model, NUMBER_OF_HOUSES_MAP[Setubal], Setubal, houses_sizes)
+    initiateHousesPerRegion(model)
 end
 
-function initiateHousesPerRegion(model, targetNumberOfHouses, location, houses_sizes)
-    for i in 1:targetNumberOfHouses
-        push!(model.houses[location], House(houses_sizes[1], location, NotSocialNeighbourhood, 1.0))
-        splice!(houses_sizes, 1)
+# TODO: region hack
+function initiateHousesPerRegion(model)
+    # for location in instances(HouseLocation)
+    for location in [Lisboa]
+        houses_sizes = rand(20:29, Int64(ceil(NUMBER_OF_HOUSES_PER_SIZE_MAP[LessThan29][location])))
+        houses_sizes = vcat(houses_sizes, rand(30:39, Int64(ceil(NUMBER_OF_HOUSES_PER_SIZE_MAP[LessThan39][location]))))
+        houses_sizes = vcat(houses_sizes, rand(40:49, Int64(ceil(NUMBER_OF_HOUSES_PER_SIZE_MAP[LessThan49][location]))))
+        houses_sizes = vcat(houses_sizes, rand(50:59, Int64(ceil(NUMBER_OF_HOUSES_PER_SIZE_MAP[LessThan59][location]))))
+        houses_sizes = vcat(houses_sizes, rand(60:79, Int64(ceil(NUMBER_OF_HOUSES_PER_SIZE_MAP[LessThan79][location]))))
+        houses_sizes = vcat(houses_sizes, rand(80:99, Int64(ceil(NUMBER_OF_HOUSES_PER_SIZE_MAP[LessThan99][location]))))
+        houses_sizes = vcat(houses_sizes, rand(100:119, Int64(ceil(NUMBER_OF_HOUSES_PER_SIZE_MAP[LessThan119][location]))))
+        houses_sizes = vcat(houses_sizes, rand(120:149, Int64(ceil(NUMBER_OF_HOUSES_PER_SIZE_MAP[LessThan149][location]))))
+        houses_sizes = vcat(houses_sizes, rand(150:199, Int64(ceil(NUMBER_OF_HOUSES_PER_SIZE_MAP[LessThan199][location]))))
+        houses_sizes = vcat(houses_sizes, rand(200:300, Int64(ceil(NUMBER_OF_HOUSES_PER_SIZE_MAP[MoreThan200][location]))))
+        sort!(houses_sizes, lt=sortRandomly)
+        for i in eachindex(houses_sizes)
+            push!(model.houses[location], House(UInt16(houses_sizes[1]), location, NotSocialNeighbourhood, 1.0))
+            splice!(houses_sizes, 1)
+        end
     end
 end
 
@@ -59,6 +56,21 @@ function initiateHouseholds(model, households_initial_ages, greedinesses)
 end
 
 function assignHousesToHouseholds(model)
+    houses_sizes_for_rental = Dict()
+    for location in instances(HouseLocation)
+        houses_sizes_for_rental[location] = rand(20:29, Int64(ceil(NUMBER_OF_HOUSES_FOR_RENTAL_PER_SIZE_MAP[LessThan29][location])))
+        houses_sizes_for_rental[location] = vcat(houses_sizes_for_rental[location], rand(30:39, Int64(ceil(NUMBER_OF_HOUSES_FOR_RENTAL_PER_SIZE_MAP[LessThan39][location]))))
+        houses_sizes_for_rental[location] = vcat(houses_sizes_for_rental[location], rand(40:49, Int64(ceil(NUMBER_OF_HOUSES_FOR_RENTAL_PER_SIZE_MAP[LessThan49][location]))))
+        houses_sizes_for_rental[location] = vcat(houses_sizes_for_rental[location], rand(50:59, Int64(ceil(NUMBER_OF_HOUSES_FOR_RENTAL_PER_SIZE_MAP[LessThan59][location]))))
+        houses_sizes_for_rental[location] = vcat(houses_sizes_for_rental[location], rand(60:79, Int64(ceil(NUMBER_OF_HOUSES_FOR_RENTAL_PER_SIZE_MAP[LessThan79][location]))))
+        houses_sizes_for_rental[location] = vcat(houses_sizes_for_rental[location], rand(80:99, Int64(ceil(NUMBER_OF_HOUSES_FOR_RENTAL_PER_SIZE_MAP[LessThan99][location]))))
+        houses_sizes_for_rental[location] = vcat(houses_sizes_for_rental[location], rand(100:119, Int64(ceil(NUMBER_OF_HOUSES_FOR_RENTAL_PER_SIZE_MAP[LessThan119][location]))))
+        houses_sizes_for_rental[location] = vcat(houses_sizes_for_rental[location], rand(120:149, Int64(ceil(NUMBER_OF_HOUSES_FOR_RENTAL_PER_SIZE_MAP[LessThan149][location]))))
+        houses_sizes_for_rental[location] = vcat(houses_sizes_for_rental[location], rand(150:199, Int64(ceil(NUMBER_OF_HOUSES_FOR_RENTAL_PER_SIZE_MAP[LessThan199][location]))))
+        houses_sizes_for_rental[location] = vcat(houses_sizes_for_rental[location], rand(200:300, Int64(ceil(NUMBER_OF_HOUSES_FOR_RENTAL_PER_SIZE_MAP[MoreThan200][location]))))
+        sort!(houses_sizes_for_rental[location], lt=sortRandomly)
+    end
+
     zones_to_n_of_home_owners = Dict()
     for location in instances(HouseLocation)
         zones_to_n_of_home_owners[location] = 0
@@ -79,6 +91,6 @@ function assignHousesToHouseholds(model)
         end
         zones_to_n_of_home_owners[household.residencyZone] += 1
         numberOfExtraHousesToAssign = shouldAssignMultipleHouses(model, household)
-        assignHousesForRental(model, household, numberOfExtraHousesToAssign)
+        assignHousesForRental(model, household, numberOfExtraHousesToAssign, houses_sizes_for_rental)
     end
 end

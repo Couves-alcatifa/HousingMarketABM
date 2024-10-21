@@ -2,8 +2,8 @@ include("types.jl")
 include("calibrationTable.jl")
 
 MAX_BUCKET_SIZE = 50
-NUMBER_OF_HOUSEHOLDS = 25000
-NUMBER_OF_STEPS = 72
+NUMBER_OF_HOUSEHOLDS = 1200
+NUMBER_OF_STEPS = 12
 STARTING_GOV_WEALTH_PER_CAPITA = 100000.0
 STARTING_COMPANY_WEALTH_PER_CAPITA = 60000.0
 STARTING_BANK_WEALTH_PER_CAPITA = 67000.0
@@ -984,3 +984,471 @@ MAX_NEW_CONSTRUCTIONS_MAP = Dict(
 )
 
 HOUSES_BOUGHT_BY_NON_RESIDENTS = (4047 * MODEL_SCALE) / 12
+
+@enum HouseSizeEchelon begin
+    LessThan29 = 30
+    LessThan39 = 39
+    LessThan49 = 49 
+    LessThan59 = 59 
+    LessThan79 = 79 
+    LessThan99 = 99 
+    LessThan119 = 119 
+    LessThan149 = 149 
+    LessThan199 = 199 
+    MoreThan200 = 200 
+end
+
+
+
+NUMBER_OF_HOUSES_WITH_LessThan29_MAP = Dict(
+    Alcochete => 24 * MODEL_SCALE,
+    Almada => 293 * MODEL_SCALE,
+    Amadora => 332 * MODEL_SCALE,
+    Barreiro => 138 * MODEL_SCALE,
+    Cascais => 223 * MODEL_SCALE,
+    Lisboa => 627 * MODEL_SCALE,
+    Loures => 300 * MODEL_SCALE,
+    Mafra => 88 * MODEL_SCALE,
+    Moita => 150 * MODEL_SCALE,
+    Montijo => 70 * MODEL_SCALE,
+    Odivelas => 170 * MODEL_SCALE,
+    Oeiras => 185 * MODEL_SCALE,
+    Palmela => 133 * MODEL_SCALE,
+    Seixal => 247 * MODEL_SCALE,
+    Sesimbra => 89 * MODEL_SCALE,
+    Setubal => 206 * MODEL_SCALE,
+    Sintra => 459 * MODEL_SCALE,
+    VilaFrancaDeXira => 143 * MODEL_SCALE,
+)
+
+NUMBER_OF_HOUSES_WITH_LessThan39_MAP = Dict(
+    Alcochete => 62 * MODEL_SCALE,
+    Almada => 785 * MODEL_SCALE,
+    Amadora => 1156 * MODEL_SCALE,
+    Barreiro => 355 * MODEL_SCALE,
+    Cascais => 681 * MODEL_SCALE,
+    Lisboa => 1822 * MODEL_SCALE,
+    Loures => 710 * MODEL_SCALE,
+    Mafra => 205 * MODEL_SCALE,
+    Moita => 361 * MODEL_SCALE,
+    Montijo => 172 * MODEL_SCALE,
+    Odivelas => 590 * MODEL_SCALE,
+    Oeiras => 609 * MODEL_SCALE,
+    Palmela => 283 * MODEL_SCALE,
+    Seixal => 752 * MODEL_SCALE,
+    Sesimbra => 190 * MODEL_SCALE,
+    Setubal => 459 * MODEL_SCALE,
+    Sintra => 1338 * MODEL_SCALE,
+    VilaFrancaDeXira => 444 * MODEL_SCALE,
+)
+
+NUMBER_OF_HOUSES_WITH_LessThan49_MAP = Dict(
+    Alcochete => 83 * MODEL_SCALE,
+    Almada => 1477 * MODEL_SCALE,
+    Amadora => 1954 * MODEL_SCALE,
+    Barreiro => 726 * MODEL_SCALE,
+    Cascais => 1258 * MODEL_SCALE,
+    Lisboa => 4043 * MODEL_SCALE,
+    Loures => 1416 * MODEL_SCALE,
+    Mafra => 394 * MODEL_SCALE,
+    Moita => 668 * MODEL_SCALE,
+    Montijo => 286 * MODEL_SCALE,
+    Odivelas => 1104 * MODEL_SCALE,
+    Oeiras => 1180 * MODEL_SCALE,
+    Palmela => 423 * MODEL_SCALE,
+    Seixal => 1146 * MODEL_SCALE,
+    Sesimbra => 360 * MODEL_SCALE,
+    Setubal => 822 * MODEL_SCALE,
+    Sintra => 2606 * MODEL_SCALE,
+    VilaFrancaDeXira => 844 * MODEL_SCALE,
+)
+
+NUMBER_OF_HOUSES_WITH_LessThan59_MAP = Dict(
+    Alcochete => 147 * MODEL_SCALE,
+    Almada => 2556 * MODEL_SCALE,
+    Amadora => 3298 * MODEL_SCALE,
+    Barreiro => 1585 * MODEL_SCALE,
+    Cascais => 2132 * MODEL_SCALE,
+    Lisboa => 7707 * MODEL_SCALE,
+    Loures => 2620 * MODEL_SCALE,
+    Mafra => 641 * MODEL_SCALE,
+    Moita => 1178 * MODEL_SCALE,
+    Montijo => 419 * MODEL_SCALE,
+    Odivelas => 1948 * MODEL_SCALE,
+    Oeiras => 2055 * MODEL_SCALE,
+    Palmela => 707 * MODEL_SCALE,
+    Seixal => 2230 * MODEL_SCALE,
+    Sesimbra => 546 * MODEL_SCALE,
+    Setubal => 1325 * MODEL_SCALE,
+    Sintra => 4892 * MODEL_SCALE,
+    VilaFrancaDeXira => 1594 * MODEL_SCALE,
+)
+
+NUMBER_OF_HOUSES_WITH_LessThan79_MAP = Dict(
+    Alcochete => 456 * MODEL_SCALE,
+    Almada => 8637 * MODEL_SCALE,
+    Amadora => 11228 * MODEL_SCALE,
+    Barreiro => 6184 * MODEL_SCALE,
+    Cascais => 7773 * MODEL_SCALE,
+    Lisboa => 22623 * MODEL_SCALE,
+    Loures => 9208 * MODEL_SCALE,
+    Mafra => 2151 * MODEL_SCALE,
+    Moita => 4151 * MODEL_SCALE,
+    Montijo => 1499 * MODEL_SCALE,
+    Odivelas => 7637 * MODEL_SCALE,
+    Oeiras => 7619 * MODEL_SCALE,
+    Palmela => 2329 * MODEL_SCALE,
+    Seixal => 8711 * MODEL_SCALE,
+    Sesimbra => 1877 * MODEL_SCALE,
+    Setubal => 5157 * MODEL_SCALE,
+    Sintra => 20353 * MODEL_SCALE,
+    VilaFrancaDeXira => 7101 * MODEL_SCALE,
+)
+
+NUMBER_OF_HOUSES_WITH_LessThan99_MAP = Dict(
+    Alcochete => 847 * MODEL_SCALE,
+    Almada => 12586 * MODEL_SCALE,
+    Amadora => 12015 * MODEL_SCALE,
+    Barreiro => 5544 * MODEL_SCALE,
+    Cascais => 11918 * MODEL_SCALE,
+    Lisboa => 24608 * MODEL_SCALE,
+    Loures => 12319 * MODEL_SCALE,
+    Mafra => 3898 * MODEL_SCALE,
+    Moita => 5353 * MODEL_SCALE,
+    Montijo => 3329 * MODEL_SCALE,
+    Odivelas => 11142 * MODEL_SCALE,
+    Oeiras => 10768 * MODEL_SCALE,
+    Palmela => 4280 * MODEL_SCALE,
+    Seixal => 13857 * MODEL_SCALE,
+    Sesimbra => 2985 * MODEL_SCALE,
+    Setubal => 8776 * MODEL_SCALE,
+    Sintra => 30277 * MODEL_SCALE,
+    VilaFrancaDeXira => 10313 * MODEL_SCALE,
+)
+
+NUMBER_OF_HOUSES_WITH_LessThan119_MAP = Dict(
+    Alcochete => 1047 * MODEL_SCALE,
+    Almada => 8565 * MODEL_SCALE,
+    Amadora => 7780 * MODEL_SCALE,
+    Barreiro => 3884 * MODEL_SCALE,
+    Cascais => 10516 * MODEL_SCALE,
+    Lisboa => 20529 * MODEL_SCALE,
+    Loures => 9626 * MODEL_SCALE,
+    Mafra => 4417 * MODEL_SCALE,
+    Moita => 3238 * MODEL_SCALE,
+    Montijo => 3725 * MODEL_SCALE,
+    Odivelas => 8085 * MODEL_SCALE,
+    Oeiras => 9637 * MODEL_SCALE,
+    Palmela => 3834 * MODEL_SCALE,
+    Seixal => 9491 * MODEL_SCALE,
+    Sesimbra => 3368 * MODEL_SCALE,
+    Setubal => 7082 * MODEL_SCALE,
+    Sintra => 19017 * MODEL_SCALE,
+    VilaFrancaDeXira => 9159 * MODEL_SCALE,
+)
+
+NUMBER_OF_HOUSES_WITH_LessThan149_MAP = Dict(
+    Alcochete => 994 * MODEL_SCALE,
+    Almada => 5414 * MODEL_SCALE,
+    Amadora => 4352 * MODEL_SCALE,
+    Barreiro => 2992 * MODEL_SCALE,
+    Cascais => 9013 * MODEL_SCALE,
+    Lisboa => 19955 * MODEL_SCALE,
+    Loures => 7403 * MODEL_SCALE,
+    Mafra => 4212 * MODEL_SCALE,
+    Moita => 1866 * MODEL_SCALE,
+    Montijo => 2785 * MODEL_SCALE,
+    Odivelas => 4841 * MODEL_SCALE,
+    Oeiras => 8651 * MODEL_SCALE,
+    Palmela => 3088 * MODEL_SCALE,
+    Seixal => 6193 * MODEL_SCALE,
+    Sesimbra => 2960 * MODEL_SCALE,
+    Setubal => 5576 * MODEL_SCALE,
+    Sintra => 12285 * MODEL_SCALE,
+    VilaFrancaDeXira => 5938 * MODEL_SCALE,
+)
+
+NUMBER_OF_HOUSES_WITH_LessThan199_MAP = Dict(
+    Alcochete => 712 * MODEL_SCALE,
+    Almada => 4201 * MODEL_SCALE,
+    Amadora => 1545 * MODEL_SCALE,
+    Barreiro => 1277 * MODEL_SCALE,
+    Cascais => 6644 * MODEL_SCALE,
+    Lisboa => 13267 * MODEL_SCALE,
+    Loures => 3882 * MODEL_SCALE,
+    Mafra => 3798 * MODEL_SCALE,
+    Moita => 1182 * MODEL_SCALE,
+    Montijo => 1358 * MODEL_SCALE,
+    Odivelas => 2300 * MODEL_SCALE,
+    Oeiras => 5120 * MODEL_SCALE,
+    Palmela => 2405 * MODEL_SCALE,
+    Seixal => 4939 * MODEL_SCALE,
+    Sesimbra => 1893 * MODEL_SCALE,
+    Setubal => 3555 * MODEL_SCALE,
+    Sintra => 7466 * MODEL_SCALE,
+    VilaFrancaDeXira => 2523 * MODEL_SCALE,
+)
+
+NUMBER_OF_HOUSES_WITH_MoreThan200_MAP = Dict(
+    Alcochete => 713 * MODEL_SCALE,
+    Almada => 2866 * MODEL_SCALE,
+    Amadora => 615 * MODEL_SCALE,
+    Barreiro => 802 * MODEL_SCALE,
+    Cascais => 6278 * MODEL_SCALE,
+    Lisboa => 6688 * MODEL_SCALE,
+    Loures => 2363 * MODEL_SCALE,
+    Mafra => 3455 * MODEL_SCALE,
+    Moita => 732 * MODEL_SCALE,
+    Montijo => 912 * MODEL_SCALE,
+    Odivelas => 1628 * MODEL_SCALE,
+    Oeiras => 3312 * MODEL_SCALE,
+    Palmela => 2289 * MODEL_SCALE,
+    Seixal => 3157 * MODEL_SCALE,
+    Sesimbra => 1153 * MODEL_SCALE,
+    Setubal => 2151 * MODEL_SCALE,
+    Sintra => 5609 * MODEL_SCALE,
+    VilaFrancaDeXira => 1560 * MODEL_SCALE,
+)
+
+NUMBER_OF_HOUSES_PER_SIZE_MAP = Dict(
+    LessThan29 => NUMBER_OF_HOUSES_WITH_LessThan29_MAP,
+    LessThan39 => NUMBER_OF_HOUSES_WITH_LessThan39_MAP,
+    LessThan49 => NUMBER_OF_HOUSES_WITH_LessThan49_MAP, 
+    LessThan59 => NUMBER_OF_HOUSES_WITH_LessThan59_MAP, 
+    LessThan79 => NUMBER_OF_HOUSES_WITH_LessThan79_MAP, 
+    LessThan99 => NUMBER_OF_HOUSES_WITH_LessThan99_MAP, 
+    LessThan119 => NUMBER_OF_HOUSES_WITH_LessThan119_MAP, 
+    LessThan149 => NUMBER_OF_HOUSES_WITH_LessThan149_MAP, 
+    LessThan199 => NUMBER_OF_HOUSES_WITH_LessThan199_MAP, 
+    MoreThan200 => NUMBER_OF_HOUSES_WITH_MoreThan200_MAP, 
+)
+
+
+#########
+#########
+#########
+#########
+
+
+NUMBER_OF_HOUSES_FOR_RENTAL_WITH_LessThan29_MAP = Dict(
+    Alcochete => 63 * MODEL_SCALE,
+    Almada => 1006 * MODEL_SCALE,
+    Amadora => 1168 * MODEL_SCALE,
+    Barreiro => 298 * MODEL_SCALE,
+    Cascais => 1174 * MODEL_SCALE,
+    Lisboa => 4777 * MODEL_SCALE,
+    Loures => 1242 * MODEL_SCALE,
+    Mafra => 283 * MODEL_SCALE,
+    Moita => 289 * MODEL_SCALE,
+    Montijo => 244 * MODEL_SCALE,
+    Odivelas => 696 * MODEL_SCALE,
+    Oeiras => 679 * MODEL_SCALE,
+    Palmela => 149 * MODEL_SCALE,
+    Seixal => 466 * MODEL_SCALE,
+    Sesimbra => 147 * MODEL_SCALE,
+    Setubal => 525 * MODEL_SCALE,
+    Sintra => 1225 * MODEL_SCALE,
+    VilaFrancaDeXira => 466 * MODEL_SCALE,
+)
+
+NUMBER_OF_HOUSES_FOR_RENTAL_WITH_LessThan39_MAP = Dict(
+    Alcochete => 147 * MODEL_SCALE,
+    Almada => 1994 * MODEL_SCALE,
+    Amadora => 2486 * MODEL_SCALE,
+    Barreiro => 552 * MODEL_SCALE,
+    Cascais => 1874 * MODEL_SCALE,
+    Lisboa => 8586 * MODEL_SCALE,
+    Loures => 2323 * MODEL_SCALE,
+    Mafra => 514 * MODEL_SCALE,
+    Moita => 561 * MODEL_SCALE,
+    Montijo => 412 * MODEL_SCALE,
+    Odivelas => 1373 * MODEL_SCALE,
+    Oeiras => 1529 * MODEL_SCALE,
+    Palmela => 297 * MODEL_SCALE,
+    Seixal => 956 * MODEL_SCALE,
+    Sesimbra => 274 * MODEL_SCALE,
+    Setubal => 952 * MODEL_SCALE,
+    Sintra => 2591 * MODEL_SCALE,
+    VilaFrancaDeXira => 929 * MODEL_SCALE,
+)
+
+NUMBER_OF_HOUSES_FOR_RENTAL_WITH_LessThan49_MAP = Dict(
+    Alcochete => 164 * MODEL_SCALE,
+    Almada => 2564 * MODEL_SCALE,
+    Amadora => 3315 * MODEL_SCALE,
+    Barreiro => 879 * MODEL_SCALE,
+    Cascais => 2227 * MODEL_SCALE,
+    Lisboa => 11651 * MODEL_SCALE,
+    Loures => 3188 * MODEL_SCALE,
+    Mafra => 629 * MODEL_SCALE,
+    Moita => 765 * MODEL_SCALE,
+    Montijo => 497 * MODEL_SCALE,
+    Odivelas => 1901 * MODEL_SCALE,
+    Oeiras => 2079 * MODEL_SCALE,
+    Palmela => 377 * MODEL_SCALE,
+    Seixal => 1095 * MODEL_SCALE,
+    Sesimbra => 309 * MODEL_SCALE,
+    Setubal => 1180 * MODEL_SCALE,
+    Sintra => 3566 * MODEL_SCALE,
+    VilaFrancaDeXira => 1279 * MODEL_SCALE,
+)
+
+NUMBER_OF_HOUSES_FOR_RENTAL_WITH_LessThan59_MAP = Dict(
+    Alcochete => 189 * MODEL_SCALE,
+    Almada => 3288 * MODEL_SCALE,
+    Amadora => 4116 * MODEL_SCALE,
+    Barreiro => 1381 * MODEL_SCALE,
+    Cascais => 2752 * MODEL_SCALE,
+    Lisboa => 14862 * MODEL_SCALE,
+    Loures => 4137 * MODEL_SCALE,
+    Mafra => 839 * MODEL_SCALE,
+    Moita => 1055 * MODEL_SCALE,
+    Montijo => 592 * MODEL_SCALE,
+    Odivelas => 2543 * MODEL_SCALE,
+    Oeiras => 2513 * MODEL_SCALE,
+    Palmela => 552 * MODEL_SCALE,
+    Seixal => 1389 * MODEL_SCALE,
+    Sesimbra => 438 * MODEL_SCALE,
+    Setubal => 1515 * MODEL_SCALE,
+    Sintra => 5052 * MODEL_SCALE,
+    VilaFrancaDeXira => 1795 * MODEL_SCALE,
+)
+
+NUMBER_OF_HOUSES_FOR_RENTAL_WITH_LessThan79_MAP = Dict(
+    Alcochete => 350 * MODEL_SCALE,
+    Almada => 6179 * MODEL_SCALE,
+    Amadora => 7315 * MODEL_SCALE,
+    Barreiro => 3067 * MODEL_SCALE,
+    Cascais => 5130 * MODEL_SCALE,
+    Lisboa => 26070 * MODEL_SCALE,
+    Loures => 6995 * MODEL_SCALE,
+    Mafra => 1633 * MODEL_SCALE,
+    Moita => 2016 * MODEL_SCALE,
+    Montijo => 1206 * MODEL_SCALE,
+    Odivelas => 4850 * MODEL_SCALE,
+    Oeiras => 5102 * MODEL_SCALE,
+    Palmela => 1027 * MODEL_SCALE,
+    Seixal => 3189 * MODEL_SCALE,
+    Sesimbra => 897 * MODEL_SCALE,
+    Setubal => 3126 * MODEL_SCALE,
+    Sintra => 11182 * MODEL_SCALE,
+    VilaFrancaDeXira => 3798 * MODEL_SCALE,
+)
+
+NUMBER_OF_HOUSES_FOR_RENTAL_WITH_LessThan99_MAP = Dict(
+    Alcochete => 357 * MODEL_SCALE,
+    Almada => 4366 * MODEL_SCALE,
+    Amadora => 4118 * MODEL_SCALE,
+    Barreiro => 1627 * MODEL_SCALE,
+    Cascais => 4265 * MODEL_SCALE,
+    Lisboa => 17411 * MODEL_SCALE,
+    Loures => 4499 * MODEL_SCALE,
+    Mafra => 1499 * MODEL_SCALE,
+    Moita => 1366 * MODEL_SCALE,
+    Montijo => 1335 * MODEL_SCALE,
+    Odivelas => 3222 * MODEL_SCALE,
+    Oeiras => 3611 * MODEL_SCALE,
+    Palmela => 1029 * MODEL_SCALE,
+    Seixal => 3065 * MODEL_SCALE,
+    Sesimbra => 730 * MODEL_SCALE,
+    Setubal => 2954 * MODEL_SCALE,
+    Sintra => 8673 * MODEL_SCALE,
+    VilaFrancaDeXira => 2741 * MODEL_SCALE,
+)
+
+NUMBER_OF_HOUSES_FOR_RENTAL_WITH_LessThan119_MAP = Dict(
+    Alcochete => 217 * MODEL_SCALE,
+    Almada => 1800 * MODEL_SCALE,
+    Amadora => 1460 * MODEL_SCALE,
+    Barreiro => 640 * MODEL_SCALE,
+    Cascais => 2605 * MODEL_SCALE,
+    Lisboa => 9489 * MODEL_SCALE,
+    Loures => 1888 * MODEL_SCALE,
+    Mafra => 926 * MODEL_SCALE,
+    Moita => 535 * MODEL_SCALE,
+    Montijo => 938 * MODEL_SCALE,
+    Odivelas => 1307 * MODEL_SCALE,
+    Oeiras => 1782 * MODEL_SCALE,
+    Palmela => 597 * MODEL_SCALE,
+    Seixal => 1279 * MODEL_SCALE,
+    Sesimbra => 437 * MODEL_SCALE,
+    Setubal => 1357 * MODEL_SCALE,
+    Sintra => 3463 * MODEL_SCALE,
+    VilaFrancaDeXira => 1272 * MODEL_SCALE,
+)
+
+NUMBER_OF_HOUSES_FOR_RENTAL_WITH_LessThan149_MAP = Dict(
+    Alcochete => 113 * MODEL_SCALE,
+    Almada => 687 * MODEL_SCALE,
+    Amadora => 473 * MODEL_SCALE,
+    Barreiro => 294 * MODEL_SCALE,
+    Cascais => 1500 * MODEL_SCALE,
+    Lisboa => 5572 * MODEL_SCALE,
+    Loures => 854 * MODEL_SCALE,
+    Mafra => 493 * MODEL_SCALE,
+    Moita => 181 * MODEL_SCALE,
+    Montijo => 455 * MODEL_SCALE,
+    Odivelas => 499 * MODEL_SCALE,
+    Oeiras => 945 * MODEL_SCALE,
+    Palmela => 278 * MODEL_SCALE,
+    Seixal => 437 * MODEL_SCALE,
+    Sesimbra => 209 * MODEL_SCALE,
+    Setubal => 591 * MODEL_SCALE,
+    Sintra => 1452 * MODEL_SCALE,
+    VilaFrancaDeXira => 477 * MODEL_SCALE,
+)
+
+NUMBER_OF_HOUSES_FOR_RENTAL_WITH_LessThan199_MAP = Dict(
+    Alcochete => 69 * MODEL_SCALE,
+    Almada => 281 * MODEL_SCALE,
+    Amadora => 179 * MODEL_SCALE,
+    Barreiro => 91 * MODEL_SCALE,
+    Cascais => 763 * MODEL_SCALE,
+    Lisboa => 2636 * MODEL_SCALE,
+    Loures => 308 * MODEL_SCALE,
+    Mafra => 206 * MODEL_SCALE,
+    Moita => 80 * MODEL_SCALE,
+    Montijo => 122 * MODEL_SCALE,
+    Odivelas => 180 * MODEL_SCALE,
+    Oeiras => 377 * MODEL_SCALE,
+    Palmela => 117 * MODEL_SCALE,
+    Seixal => 183 * MODEL_SCALE,
+    Sesimbra => 84 * MODEL_SCALE,
+    Setubal => 201 * MODEL_SCALE,
+    Sintra => 575 * MODEL_SCALE,
+    VilaFrancaDeXira => 154 * MODEL_SCALE,
+)
+
+NUMBER_OF_HOUSES_FOR_RENTAL_WITH_MoreThan200_MAP = Dict(
+    Alcochete => 33 * MODEL_SCALE,
+    Almada => 184 * MODEL_SCALE,
+    Amadora => 130 * MODEL_SCALE,
+    Barreiro => 45 * MODEL_SCALE,
+    Cascais => 665 * MODEL_SCALE,
+    Lisboa => 1257 * MODEL_SCALE,
+    Loures => 162 * MODEL_SCALE,
+    Mafra => 134 * MODEL_SCALE,
+    Moita => 53 * MODEL_SCALE,
+    Montijo => 56 * MODEL_SCALE,
+    Odivelas => 104 * MODEL_SCALE,
+    Oeiras => 202 * MODEL_SCALE,
+    Palmela => 106 * MODEL_SCALE,
+    Seixal => 135 * MODEL_SCALE,
+    Sesimbra => 56 * MODEL_SCALE,
+    Setubal => 117 * MODEL_SCALE,
+    Sintra => 442 * MODEL_SCALE,
+    VilaFrancaDeXira => 85 * MODEL_SCALE,
+)
+
+NUMBER_OF_HOUSES_FOR_RENTAL_PER_SIZE_MAP = Dict(
+    LessThan29 => NUMBER_OF_HOUSES_FOR_RENTAL_WITH_LessThan29_MAP,
+    LessThan39 => NUMBER_OF_HOUSES_FOR_RENTAL_WITH_LessThan39_MAP,
+    LessThan49 => NUMBER_OF_HOUSES_FOR_RENTAL_WITH_LessThan49_MAP, 
+    LessThan59 => NUMBER_OF_HOUSES_FOR_RENTAL_WITH_LessThan59_MAP, 
+    LessThan79 => NUMBER_OF_HOUSES_FOR_RENTAL_WITH_LessThan79_MAP, 
+    LessThan99 => NUMBER_OF_HOUSES_FOR_RENTAL_WITH_LessThan99_MAP, 
+    LessThan119 => NUMBER_OF_HOUSES_FOR_RENTAL_WITH_LessThan119_MAP, 
+    LessThan149 => NUMBER_OF_HOUSES_FOR_RENTAL_WITH_LessThan149_MAP, 
+    LessThan199 => NUMBER_OF_HOUSES_FOR_RENTAL_WITH_LessThan199_MAP, 
+    MoreThan200 => NUMBER_OF_HOUSES_FOR_RENTAL_WITH_MoreThan200_MAP, 
+)
