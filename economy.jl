@@ -311,6 +311,10 @@ function supply_decisions(household, model)
                 for supplyIdx in eachindex(model.rentalMarket.supply)
                     supply = model.rentalMarket.supply[supplyIdx]
                     if supply.house == house
+                        content = "household decided that house is no longer viable for renting $(household.id)\n"
+                        open("$output_folder/transactions_logs/step_$(model.steps).txt", "a") do file
+                            write(file, content)
+                        end
                         splice!(model.rentalMarket.supply, supplyIdx)
                         delete!(model.housesInRentalMarket, house)
                         put_house_to_sale(household, model, houseIdx)

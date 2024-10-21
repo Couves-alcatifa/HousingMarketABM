@@ -129,7 +129,7 @@ function calculateRentalBid(household, model, askPrice, consumerSurplus)
     elseif demandValue >= askPrice
         return askPrice
     else
-        return 0
+        return demandValue
     end
     
 end
@@ -424,7 +424,7 @@ function clearRentalMarket(model)
             end
             consumerSurplus = calculateConsumerSurplus(household, supply.house)
             demandBid = calculateRentalBid(household, model, supply.monthlyPrice, consumerSurplus)
-            if (demandBid >= supply.monthlyPrice * 0.95)
+            if (demandBid >= supply.monthlyPrice * 0.90)
                 lock(localLock) do
                     push!(supply.bids, Bid(demandBid, demand.householdId, Regular))
                     push!(demand.supplyMatches, RentalSupplyMatch(supply, consumerSurplus))
@@ -543,10 +543,12 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     content *= "household percentile = $(household.percentile)\n"
     content *= "household id = $(household.id)\n"
     content *= "household size = $(household.size)\n"
+    content *= "household age = $(household.age)\n"
     content *= "askPrice = $(supply.price)\n"
     content *= "sellerId = $(supply.sellerId)\n"
     content *= "bidValue = $(bidValue)\n"
     content *= "pricePerm2 = $(bidValue / supply.house.area)\n"
+    content *= "for renting = $(winningBid.type == ForRental ? "true" : "false")\n"
     content *= "########\n"
     print(content)
     open("$output_folder/transactions_logs/step_$(model.steps).txt", "a") do file

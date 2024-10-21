@@ -68,7 +68,14 @@ function handle_breakups(household, model)
             terminateContractsOnLandLordSide(household, model)
             
             add_agent!(Household, model, household.wealth / 2, household.age, 1, House[], household.percentile, Mortgage[], Int[], 0, 0.0, getChildResidencyZone(household), rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV), 1)[1])
+            content = "generated agent $(nagents(model)) from breakup without houses\n"
+            content *= "wealth = $(household.wealth / 2)\n"
             add_agent!(Household, model, household.wealth / 2, household.age, household.size - 1, household.houses, household.percentile, household.mortgages, Int[], 0, 0.0, getChildResidencyZone(household), rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV), 1)[1])
+            content *= "generated agent $(nagents(model)) from breakup with houses\n"
+            content *= "wealth = $(household.wealth / 2)\n"
+            open("$output_folder/transactions_logs/step_$(model.steps).txt", "a") do file
+                write(file, content)
+            end
             #println("remove Agent! id = " * string(household.id) * " step = " * string(model.steps))
             remove_agent!(household, model)
             model.breakups += 1
@@ -96,6 +103,11 @@ function handle_children_leaving_home(household, model)
                 # a couple of young people leave their parents home
                 newZone = getChildResidencyZone(household)
                 add_agent!(Household, model, expected_wealth, expected_age, 2, Int[], household.percentile, Mortgage[], Int[], 0, 0.0, newZone, rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV), 1)[1])
+                content = "generated agent $(nagents(model)) from leaving home\n"
+                content *= "wealth = $expected_wealth\n"
+                open("$output_folder/transactions_logs/step_$(model.steps).txt", "a") do file
+                    write(file, content)
+                end
                 household.wealth -= expected_wealth
                 household.size -= 1
                 model.children_leaving_home += 2
@@ -106,6 +118,11 @@ function handle_children_leaving_home(household, model)
                 # single young person leaves their parents home
                 newZone = getChildResidencyZone(household)
                 add_agent!(Household, model, expected_wealth, expected_age, 1, Int[], household.percentile, Mortgage[], Int[], 0, 0.0, newZone, rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV), 1)[1])
+                content = "generated agent $(nagents(model)) from leaving home (single)\n"
+                content *= "wealth = $expected_wealth\n"
+                open("$output_folder/transactions_logs/step_$(model.steps).txt", "a") do file
+                    write(file, content)
+                end
                 household.wealth -= expected_wealth
                 household.size -= 1
                 model.children_leaving_home += 1
@@ -134,9 +151,22 @@ function handle_migrations(model)
         added = 0
         while added < expectedMigrants
             age = rand(20:55)
-            percentile = rand(0:100)
+            percentile = Int64(round(rand(Normal(30, 20))))
+            if percentile <= 0
+                percentile = 1
+            elseif percentile > 100
+                percentile = 100
+            elseif percentile > 75
+                # part of the very rich immigrants
+                percentile = rand(95:100)
+            end
             size = rand(1:3)
-            add_agent!(Household, model, generateInitialWealth(age, percentile, size), age, size, House[], percentile, Mortgage[], Int[], 0, 0, location, rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV)))
+            wealth = generateInitialWealth(age, percentile, size)
+            add_agent!(Household, model, wealth, age, size, House[], percentile, Mortgage[], Int[], 0, 0, location, rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV)))
+            content = "generated agent $(nagents(model)) from migration wealth = $wealth\n"
+            open("$output_folder/transactions_logs/step_$(model.steps).txt", "a") do file
+                write(file, content)
+            end
             added += size
         end
     end
