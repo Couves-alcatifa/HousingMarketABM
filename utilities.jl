@@ -338,9 +338,17 @@ function clearHouseMarket(model)
             end
 
             if demand.type == ForRental
-                if !isHouseViableForRenting(model, house)
-                    continue
+                if isHouseViableForRenting(model, house)
+                    maxMortgage = maxMortgageValue(model, household)
+                    bidValue = (rand(95:100) / 100) * supply.price
+                    if maxMortgage + household.wealth > bidValue + calculateImt(bidValue)
+                        lock(localLock) do
+                            push!(supply.bids, Bid(bidValue, demand.householdId, demand.type))
+                            push!(demand.supplyMatches, SupplyMatch(supply))
+                        end
+                    end
                 end
+                continue
             end
 
             if (!has_enough_size(house, household.size)
@@ -361,7 +369,7 @@ function clearHouseMarket(model)
             if (demandBid >= supply.price * 0.95)
                 lock(localLock) do
                     push!(supply.bids, Bid(demandBid, demand.householdId, demand.type))
-                    push!(demand.supplyMatches, SupplyMatch(supply, consumerSurplus))
+                    push!(demand.supplyMatches, SupplyMatch(supply))
                 end
             end
         end
@@ -427,7 +435,7 @@ function clearRentalMarket(model)
             if (demandBid >= supply.monthlyPrice * 0.90)
                 lock(localLock) do
                     push!(supply.bids, Bid(demandBid, demand.householdId, Regular))
-                    push!(demand.supplyMatches, RentalSupplyMatch(supply, consumerSurplus))
+                    push!(demand.supplyMatches, RentalSupplyMatch(supply))
                 end
             end
         end

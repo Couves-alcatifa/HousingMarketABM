@@ -367,10 +367,10 @@ function home_owner_decisions(household, model)
     else
         # lets assess the household economical situation
         # WARNING: this might be computationally expensive
-        marketPrice = calculate_market_price(House(25, household.residencyZone, NotSocialNeighbourhood, 1.0, 25), model)
+        marketPrice = calculate_market_price(House(rand(40:100), household.residencyZone, NotSocialNeighbourhood, 1.0, rand(1:100)), model)
         mortgage = maxMortgageValue(model, household, stopIfItIsBelowThisValue = marketPrice - household.wealth)
-        if household.wealth + mortgage > marketPrice
-            if household.percentile > 70 # not everyone who can will do this do
+        if household.wealth + mortgage > marketPrice * 1.5
+            if household.percentile > 90 # not everyone who can will do this do
                 push!(model.houseMarket.demand, HouseDemand(household.id, SupplyMatch[], ForRental))
             end
         end

@@ -124,7 +124,6 @@ end
 
 mutable struct SupplyMatch
     supply::HouseSupply
-    consumerSurplus::Float64
 end
 
 
@@ -150,7 +149,6 @@ end
 
 mutable struct RentalSupplyMatch
     supply::RentalSupply
-    consumerSurplus::Float64
 end
 
 mutable struct RentalDemand
