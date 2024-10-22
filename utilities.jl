@@ -84,7 +84,7 @@ function updateMortgage(mortgage, spread)
 end
 
 function calculateMortgageDuration(value, age)
-    return -1 * round(map_value(age, 20, 60, -40, -10))
+    return -1 * round(map_value(age, 20, 70, -40, -10))
 end
 
 # 100000 * (0.015/12) / (1 - (1 + 0.015/12)^(-360))
@@ -785,6 +785,7 @@ function probabilityOfHouseholdBeingAssignedToHouse(household, house)
     m2_per_person = house.area / household.size
     numberOfHousesInThatZone = NUMBER_OF_HOUSES_MAP[house.location]
     numberOfHousesWithThatRatioInThatZone = 0
+    probabilityMultiplierDueToAge = map_value(household.age, 20, 90, 0.01, 4.5)
     if m2_per_person < 10
         numberOfHousesWithThatRatioInThatZone = NUMBER_OF_HOUSES_WITH_LT_10_M2_PER_PERSON_MAP[house.location]
     elseif m2_per_person < 15
@@ -802,7 +803,7 @@ function probabilityOfHouseholdBeingAssignedToHouse(household, house)
     else
         numberOfHousesWithThatRatioInThatZone = NUMBER_OF_HOUSES_WITH_MT_80_M2_PER_PERSON_MAP[house.location]
     end
-    return numberOfHousesWithThatRatioInThatZone / numberOfHousesInThatZone
+    return (numberOfHousesWithThatRatioInThatZone / numberOfHousesInThatZone) * probabilityMultiplierDueToAge
 end
 
 function shouldAssignMultipleHouses(model, household)
