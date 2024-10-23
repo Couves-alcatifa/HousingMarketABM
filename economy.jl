@@ -170,7 +170,7 @@ function model_step!(model)
     model.mortgagesInStep = Mortgage[]
     clearHangingSupplies(model)
     clearHangingRentalSupplies(model)
-    nonResidentsBuyHouses(model)
+    # nonResidentsBuyHouses(model)
     clearHouseMarket(model)
     clearRentalMarket(model)
     trimBucketsIfNeeded(model)

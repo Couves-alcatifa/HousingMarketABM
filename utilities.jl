@@ -84,7 +84,7 @@ function updateMortgage(mortgage, spread)
 end
 
 function calculateMortgageDuration(value, age)
-    return -1 * round(map_value(age, 20, 75, -40, -10)) * 12
+    return -1 * round(map_value(age, 20, 65, -40, -10)) * 12
 end
 
 # 100000 * (0.015/12) / (1 - (1 + 0.015/12)^(-360))
@@ -154,7 +154,7 @@ function maxMortgageValue(model, household; stopIfItIsBelowThisValue = 0)
     # if model.steps > 50
     #     return 0
     # end
-    if household.age > 75
+    if household.age > 70
         return 0
     end
     bank = model.bank
