@@ -121,7 +121,6 @@ function wealth_model()
         :supplyPerBucket => Dict(location => Dict(size_interval => 0 for size_interval in instances(SizeInterval)) for location in instances(HouseLocation)),
         :demandPerBucket => Dict(location => Dict(size_interval => 0 for size_interval in instances(SizeInterval)) for location in instances(HouseLocation)),
         :housesInRentalMarket => Set(),
-        :timeTakenInMaxMortgageValue => 0.0,
     )
 
     model = StandardABM(MyMultiAgent; agent_step! = agent_step!, model_step! = model_step!, properties,scheduler = Schedulers.Randomly())
@@ -193,7 +192,6 @@ function model_step!(model)
     public_investment(model)
     updateConstructions(model)
     payMortgages(model, model.construction_sector)
-    LOG_INFO("So far maxMortgageValue has spent $(model.timeTakenInMaxMortgageValue) seconds")
     println("end of model_step $(string(model.steps))")
     LOG_INFO("Model step took $(string(time() - start_time)) seconds")
 end
