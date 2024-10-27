@@ -111,12 +111,12 @@ function calculateBid(household, house, askPrice, maxMortgageValue, consumerSurp
     # return bidValue
     demandValue = household.wealth * 0.95 + maxMortgageValue
     consumerSurplusMultiplier = calculateConsumerSurplusAddedValue(consumerSurplus)
-    if (demandValue >= askPrice * consumerSurplusMultiplier + calculateImt(askPrice * consumerSurplusMultiplier))
+    if (demandValue >= askPrice * consumerSurplusMultiplier + calculateTransactionTaxes(askPrice * consumerSurplusMultiplier))
         return askPrice * consumerSurplusMultiplier
-    elseif demandValue >= askPrice + calculateImt(askPrice)
+    elseif demandValue >= askPrice + calculateTransactionTaxes(askPrice)
         return askPrice
     else
-        return demandValue - calculateImt(demandValue)
+        return demandValue - calculateTransactionTaxes(demandValue)
     end
     
 end
@@ -341,7 +341,7 @@ function clearHouseMarket(model)
                 if isHouseViableForRenting(model, house)
                     maxMortgage = maxMortgageValue(model, household)
                     bidValue = (rand(95:100) / 100) * supply.price
-                    if maxMortgage + household.wealth > bidValue + calculateImt(bidValue)
+                    if maxMortgage + household.wealth > bidValue + calculateTransactionTaxes(bidValue)
                         lock(localLock) do
                             push!(supply.bids, Bid(bidValue, demand.householdId, demand.type))
                             push!(demand.supplyMatches, SupplyMatch(supply))
@@ -517,9 +517,10 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
 
     household = model[highestBidder]
     content = "########\n"
-    if (household.wealth < bidValue + calculateImt(bidValue))
+    transactionTaxes = calculateTransactionTaxes(bidValue)
+    if (household.wealth < bidValue + transactionTaxes)
         paidWithOwnMoney = household.wealth * 0.98
-        mortgageValue = bidValue + calculateImt(bidValue) - paidWithOwnMoney
+        mortgageValue = bidValue + transactionTaxes - paidWithOwnMoney
         maxMortgage = maxMortgageValue(model, household, stopIfItIsBelowThisValue = mortgageValue)
         if maxMortgage < mortgageValue
             content = "Household failed to acquire mortgage\n"
@@ -553,6 +554,7 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     content *= "Transaction: askPrice = $(supply.price)\n"
     content *= "Transaction: sellerId = $(supply.sellerId)\n"
     content *= "Transaction: bidValue = $(bidValue)\n"
+    content *= "Transaction: transactionTaxes = $(transactionTaxes)\n"
     content *= "Transaction: pricePerm2 = $(bidValue / supply.house.area)\n"
     content *= "Transaction: for renting = $(winningBid.type == ForRental ? "true" : "false")\n"
     content *= "Transaction: contractIds as landlord = $(household.contractsIdsAsLandlord)\n"
@@ -567,9 +569,8 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     
     household.wealth -= bidValue
     seller.wealth += bidValue
-    imt = calculateImt(bidValue)
-    household.wealth -= imt
-    model.government.wealth += imt
+    household.wealth -= transactionTaxes
+    model.government.wealth += transactionTaxes
     push!(household.houses, supply.house)
     terminateContractsOnTentantSide(household, model)
     addTransactionToBuckets(model, supply.house, bidValue)
@@ -1018,6 +1019,44 @@ function calculateHouseAnnualRentalRentability(house, model)
     marketPrice = calculate_market_price(house, model)
     rent = calculate_rental_market_price(house, model)
     return (rent * 12)/marketPrice
+end
+
+function calculateImt(price)
+    if price <= 101917.00
+        return 0
+    elseif price <= 139412.00
+        return (price - 101917.00) * 0.02 
+    elseif price <= 190086.00
+        return calculateImt(139412.00) + (price - 139412.00) * 0.05
+    elseif price <= 316772.00
+        return calculateImt(190086.00) + (price - 190086.00) * 0.07
+    elseif price <= 633453.00
+        return calculateImt(316772.00) + (price - 316772.00) * 0.08
+    elseif price <= 1102920.00
+        return calculateImt(633453.00) + (price - 633453.00) * 0.06
+    else
+        return calculateImt(1102920.00) + (price - 1102920.00) * 0.075
+    end
+end
+
+function calculateTaxBenefits(price)
+    if price <= 101917.00
+        return 0
+    elseif price <= 139412.00
+        return 2038.34
+    elseif price <= 190086.00
+        return 6220.70
+    elseif price <= 316772.00
+        return 10022.42
+    elseif price <= 633453.00
+        return 13190.14
+    else
+        return 0
+    end
+end
+
+function calculateTransactionTaxes(price)
+    return calculateImt(price) + 0.008 * price - calculateTaxBenefits(price)
 end
 
 function calculateImt(price)
