@@ -184,12 +184,11 @@ function model_step!(model)
         
         model.company_prev_wealth = model.company_wealth
         model.gov_prev_wealth = model.government.wealth
-
-        # 1% increase until it reaches 5.5%
-        if model.bank.interestRate < 0.055
-            model.bank.interestRate += 0.01
-        end
     end
+    
+    # 1% increase until it reaches 5.5%
+    # TODO: this is an experiment, this change should be annual
+    model.bank.interestRate += 0.01
     public_investment(model)
     updateConstructions(model)
     payMortgages(model, model.construction_sector)
