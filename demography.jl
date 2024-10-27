@@ -73,9 +73,7 @@ function handle_breakups(household, model)
             add_agent!(Household, model, household.wealth / 2, household.age, household.size - 1, household.houses, household.percentile, household.mortgages, Int[], 0, 0.0, getChildResidencyZone(household), rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV), 1)[1])
             content *= "generated agent $(nagents(model)) from breakup with houses\n"
             content *= "wealth = $(household.wealth / 2)\n"
-            open("$output_folder/transactions_logs/step_$(model.steps).txt", "a") do file
-                write(file, content)
-            end
+            TRANSACTION_LOG(content, model)
             #println("remove Agent! id = " * string(household.id) * " step = " * string(model.steps))
             remove_agent!(household, model)
             model.breakups += 1
@@ -105,9 +103,8 @@ function handle_children_leaving_home(household, model)
                 add_agent!(Household, model, expected_wealth, expected_age, 2, Int[], household.percentile, Mortgage[], Int[], 0, 0.0, newZone, rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV), 1)[1])
                 content = "generated agent $(nagents(model)) from leaving home\n"
                 content *= "wealth = $expected_wealth\n"
-                open("$output_folder/transactions_logs/step_$(model.steps).txt", "a") do file
-                    write(file, content)
-                end
+                TRANSACTION_LOG(content, model)
+                
                 household.wealth -= expected_wealth
                 household.size -= 1
                 model.children_leaving_home += 2
@@ -120,9 +117,8 @@ function handle_children_leaving_home(household, model)
                 add_agent!(Household, model, expected_wealth, expected_age, 1, Int[], household.percentile, Mortgage[], Int[], 0, 0.0, newZone, rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV), 1)[1])
                 content = "generated agent $(nagents(model)) from leaving home (single)\n"
                 content *= "wealth = $expected_wealth\n"
-                open("$output_folder/transactions_logs/step_$(model.steps).txt", "a") do file
-                    write(file, content)
-                end
+                TRANSACTION_LOG(content, model)
+
                 household.wealth -= expected_wealth
                 household.size -= 1
                 model.children_leaving_home += 1
@@ -164,9 +160,8 @@ function handle_migrations(model)
             wealth = generateInitialWealth(age, percentile, size)
             add_agent!(Household, model, wealth, age, size, House[], percentile, Mortgage[], Int[], 0, 0, location, rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV)))
             content = "generated agent $(nagents(model)) from migration wealth = $wealth\n"
-            open("$output_folder/transactions_logs/step_$(model.steps).txt", "a") do file
-                write(file, content)
-            end
+            TRANSACTION_LOG(content, model)
+
             added += size
         end
     end

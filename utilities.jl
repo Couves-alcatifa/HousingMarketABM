@@ -3,7 +3,6 @@
 # salaries_35_44 = vcat(salaries, rand(500:3500, Int64(NUMBER_OF_HOUSEHOLDS/4)))
 # salaries_45_54 = vcat(salaries, rand(544:3800, Int64(NUMBER_OF_HOUSEHOLDS/4)))
 # salaries_55_64 = vcat(salaries, rand(480:4100, zNUMBER_OF_HOUSEHOLDS/4)))
-include("consts.jl")
 include("logger.jl")
 include("constructionSector.jl")
 include("startup.jl")
@@ -524,9 +523,7 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
         maxMortgage = maxMortgageValue(model, household, stopIfItIsBelowThisValue = mortgageValue)
         if maxMortgage < mortgageValue
             content = "Household failed to acquire mortgage\n"
-            open("$output_folder/transactions_logs/step_$(model.steps).txt", "a") do file
-                write(file, content)
-            end
+            TRANSACTION_LOG(content, model)
             return false
         end
         # if mortgageValue > model.bank.wealth * 0.5
@@ -536,40 +533,37 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
         mortgage = Mortgage(mortgageValue, mortgageValue, 0, mortgageDuration)
         push!(household.mortgages, mortgage)
         push!(model.mortgagesInStep, mortgage)
-        content *= "mortgageValue = $mortgageValue\n"
+        content *= "Transaction: mortgageValue = $mortgageValue\n"
         model.bank.wealth -= mortgageValue
         household.wealth += mortgageValue
     else
-        content *= "house will be paid without mortgage... unusual\n"
+        content *= "Transaction: house will be paid without mortgage... unusual\n"
         # house will be paid without mortgage... unusual
     end
-    content *= "house.area = $(supply.house.area)\n"
-    content *= "house.location = $(string(supply.house.location))\n"
-    content *= "house percentile = $(supply.house.percentile)\n"
-    content *= "household.wealth = $(string(household.wealth))\n"
-    content *= "raw salary = $(string(calculateSalary(household, model)))\n" 
-    content *= "liquid salary = $(string(calculateLiquidSalary(household, model)))\n"
-    content *= "household percentile = $(household.percentile)\n"
-    content *= "household id = $(household.id)\n"
-    content *= "household size = $(household.size)\n"
-    content *= "household age = $(household.age)\n"
-    content *= "askPrice = $(supply.price)\n"
-    content *= "sellerId = $(supply.sellerId)\n"
-    content *= "bidValue = $(bidValue)\n"
-    content *= "pricePerm2 = $(bidValue / supply.house.area)\n"
-    content *= "for renting = $(winningBid.type == ForRental ? "true" : "false")\n"
-    content *= "contractIds as landlord = $(household.contractsIdsAsLandlord)\n"
-    content *= "contractId as tenant = $(household.contractIdAsTenant)\n"
+    content *= "Transaction: house.area = $(supply.house.area)\n"
+    content *= "Transaction: house.location = $(string(supply.house.location))\n"
+    content *= "Transaction: house percentile = $(supply.house.percentile)\n"
+    content *= "Transaction: household.wealth = $(string(household.wealth))\n"
+    content *= "Transaction: raw salary = $(string(calculateSalary(household, model)))\n" 
+    content *= "Transaction: liquid salary = $(string(calculateLiquidSalary(household, model)))\n"
+    content *= "Transaction: household percentile = $(household.percentile)\n"
+    content *= "Transaction: household id = $(household.id)\n"
+    content *= "Transaction: household size = $(household.size)\n"
+    content *= "Transaction: household age = $(household.age)\n"
+    content *= "Transaction: askPrice = $(supply.price)\n"
+    content *= "Transaction: sellerId = $(supply.sellerId)\n"
+    content *= "Transaction: bidValue = $(bidValue)\n"
+    content *= "Transaction: pricePerm2 = $(bidValue / supply.house.area)\n"
+    content *= "Transaction: for renting = $(winningBid.type == ForRental ? "true" : "false")\n"
+    content *= "Transaction: contractIds as landlord = $(household.contractsIdsAsLandlord)\n"
+    content *= "Transaction: contractId as tenant = $(household.contractIdAsTenant)\n"
     if supply.sellerId != -1
-        content *= "seller contracts as landlord = $(seller.contractsIdsAsLandlord)\n"
-        content *= "seller contract as tenant = $(seller.contractIdAsTenant)\n"
+        content *= "Transaction: seller contracts as landlord = $(seller.contractsIdsAsLandlord)\n"
+        content *= "Transaction: seller contract as tenant = $(seller.contractIdAsTenant)\n"
     end
     content *= "########\n"
     print(content)
-    open("$output_folder/transactions_logs/step_$(model.steps).txt", "a") do file
-        write(file, content)
-    end
-    
+    TRANSACTION_LOG(content, model) 
     
     household.wealth -= bidValue
     seller.wealth += bidValue
@@ -1103,9 +1097,8 @@ function nonResidentsBuyHouses(model)
             content *= "Sold to non resident percentile = $(supply.house.percentile)\n"
             content *= "Sold to non resident location = $(supply.house.location)\n"
             content *= "Sold to non resident price = $(supply.price)\n"
-            open("$output_folder/transactions_logs/step_$(model.steps).txt", "a") do file
-                write(file, content)
-            end
+            TRANSACTION_LOG(content, model)
+
             splice!(model.houseMarket.supply, idx)
             housesBought += 1
         end

@@ -141,9 +141,7 @@ function startNewConstruction(model, location, size_interval)
     constructionTime = rand(CONSTRUCTION_TIME_MIN:CONSTRUCTION_TIME_MAX)
     push!(model.construction_sector.housesInConstruction[location][size_interval], PendingConstruction(0, permitTime, constructionTime, newHouse))
     content = "Start new Construction $(newHouse.area) $(newHouse.percentile) $(newHouse.location)\n"
-    open("$output_folder/transactions_logs/step_$(model.steps).txt", "a") do file
-        write(file, content)
-    end
+    TRANSACTION_LOG(content, model)
     return true
 end
 

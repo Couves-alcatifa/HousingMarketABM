@@ -8,7 +8,10 @@ using CairoMakie
 using CSV
 using Statistics
 using Base.Threads
+using Dates
 
+include("consts.jl")
+output_folder = "all_runs/NHH_$(NUMBER_OF_HOUSEHOLDS)_NSTEPS_$(NUMBER_OF_STEPS)_$(Dates.format(now(), "yyyy_mm_dd_THH_MM"))"
 include("utilities.jl")
 include("metrics.jl")
 include("plots.jl")
@@ -18,7 +21,6 @@ include("demography.jl")
 # Set the seed for reproducibility
 Random.seed!(1234)
 
-output_folder = "all_runs/NHH_$(NUMBER_OF_HOUSEHOLDS)_NSTEPS_$(NUMBER_OF_STEPS)_$(Dates.format(now(), "yyyy_mm_dd_THH_MM"))"
 mkdir(output_folder)
 mkdir("$output_folder/transactions_logs")
 content = ""
@@ -312,9 +314,8 @@ function supply_decisions(household, model)
                     supply = model.rentalMarket.supply[supplyIdx]
                     if supply.house == house
                         content = "household decided that house is no longer viable for renting $(household.id)\n"
-                        open("$output_folder/transactions_logs/step_$(model.steps).txt", "a") do file
-                            write(file, content)
-                        end
+                        TRANSACTION_LOG(content, model)
+
                         splice!(model.rentalMarket.supply, supplyIdx)
                         delete!(model.housesInRentalMarket, house)
                         put_house_to_sale(household, model, houseIdx)
@@ -448,9 +449,31 @@ function payMortgages(model, household)
         for i in 1:length(household.mortgages)
             if (household.mortgages[i].valueInDebt > 0)
                 payment = calculateMortgagePayment(household.mortgages[i], model.bank.interestRate)
-                household.wealth -= payment
-                model.bank.wealth += payment
-                updateMortgage(household.mortgages[i], model.bank.interestRate)
+                if household.wealth < payment && length(household.houses) > 0
+                    content = "## Mortgage rescue: household.wealth = $(string(household.wealth))\n"
+                    content *= "## Mortgage rescue: raw salary = $(string(calculateSalary(household, model)))\n" 
+                    content *= "## Mortgage rescue: liquid salary = $(string(calculateLiquidSalary(household, model)))\n"
+                    content *= "## Mortgage rescue: household percentile = $(household.percentile)\n"
+                    content *= "## Mortgage rescue: household id = $(household.id)\n"
+                    content *= "## Mortgage rescue: household size = $(household.size)\n"
+                    content *= "## Mortgage rescue: household age = $(household.age)\n"
+                    TRANSACTION_LOG(content, model)
+                    put_house_to_sale(household, model, 1)
+                elseif household.wealth < payment
+                    content = "## Household could not pay mortgage: household.wealth = $(string(household.wealth))\n"
+                    content *= "## Household could not pay mortgage: raw salary = $(string(calculateSalary(household, model)))\n" 
+                    content *= "## Household could not pay mortgage: liquid salary = $(string(calculateLiquidSalary(household, model)))\n"
+                    content *= "## Household could not pay mortgage: household percentile = $(household.percentile)\n"
+                    content *= "## Household could not pay mortgage: household id = $(household.id)\n"
+                    content *= "## Household could not pay mortgage: household size = $(household.size)\n"
+                    content *= "## Household could not pay mortgage: household age = $(household.age)\n"
+                    TRANSACTION_LOG(content, model)
+                else
+                    household.wealth -= payment
+                    model.bank.wealth += payment
+                    updateMortgage(household.mortgages[i], model.bank.interestRate)
+                end
+            
             end
             if (household.mortgages[i].valueInDebt == 0)
                 # print("Mortgage was paid! Maturity = " * string(household.mortgages[i].maturity))

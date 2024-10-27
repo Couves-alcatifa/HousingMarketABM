@@ -1,6 +1,5 @@
-using Dates
-using Printf
-LOG_FILE = "logs/NHH_$(NUMBER_OF_HOUSEHOLDS)_NSTEPS_$(NUMBER_OF_STEPS)_$(Dates.format(now(), "yyyy_mm_dd_THH_MM")).log"
+LOG_FILE = "$(output_folder)/NHH_$(NUMBER_OF_HOUSEHOLDS)_NSTEPS_$(NUMBER_OF_STEPS)_$(Dates.format(now(), "yyyy_mm_dd_THH_MM")).log"
+TRANSACTION_LOG_FILE(model) = "$output_folder/transactions_logs/step_$(model.steps).txt"
 
 # function LOG_INFO(msg)
 #     return Meta.parse("""
@@ -13,6 +12,12 @@ LOG_FILE = "logs/NHH_$(NUMBER_OF_HOUSEHOLDS)_NSTEPS_$(NUMBER_OF_STEPS)_$(Dates.f
 function LOG_INFO(msg)
     open(LOG_FILE, "a") do file
         write(file, "$(Dates.format(now(), "yyyy_mm_dd_THH:MM:SS - ")) $(msg)\n")
+    end
+end
+
+function TRANSACTION_LOG(msg, model)
+    open(TRANSACTION_LOG_FILE(model), "a") do file
+        write(file, content)
     end
 end
 
