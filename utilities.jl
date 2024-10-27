@@ -147,8 +147,7 @@ end
 # so the behaviour should be something like:
 # - maxMortgageValue(h, b, house) -> max value the bank is willing to lend
 # - maxMortgageValue(h, b, house, maxSpread = x | maxMonthlyPayment = y) -> maxValue with certain conditions
-function maxMortgageValue(model, household; stopIfItIsBelowThisValue = 0)
-    start = time()
+function maxMortgageValue(model, household)
     # TODO: this is just experimental - remove
     # if model.steps > 50
     #     return 0
@@ -363,7 +362,7 @@ function clearHouseMarket(model)
             #     thresholdValue = 0.05 * supply.price
             # end
 
-            # maxMortgage = maxMortgageValue(model, household, stopIfItIsBelowThisValue = thresholdValue)
+            # maxMortgage = maxMortgageValue(model, household)
             maxMortgage = maxMortgageValue(model, household)
             demandBid = calculateBid(household, house, supply.price, maxMortgage, consumerSurplus)
             if (demandBid >= supply.price * 0.85)
@@ -518,10 +517,12 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     household = model[highestBidder]
     content = "########\n"
     transactionTaxes = calculateTransactionTaxes(bidValue)
+
+    wealthForDisplay = household.wealth
     if (household.wealth < bidValue + transactionTaxes)
         paidWithOwnMoney = household.wealth * 0.98
         mortgageValue = bidValue + transactionTaxes - paidWithOwnMoney
-        maxMortgage = maxMortgageValue(model, household, stopIfItIsBelowThisValue = mortgageValue)
+        maxMortgage = maxMortgageValue(model, household)
         if maxMortgage < mortgageValue
             content = "Household failed to acquire mortgage\n"
             TRANSACTION_LOG(content, model)
@@ -535,6 +536,8 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
         push!(household.mortgages, mortgage)
         push!(model.mortgagesInStep, mortgage)
         content *= "Transaction: mortgageValue = $mortgageValue\n"
+        content *= "Transaction: mortgage payment = $(calculateMortgagePayment(mortgage, model.bank.interestRate))\n"
+        content *= "Transaction: mortgage duration = $(calculateMortgageDuration(mortgageValue, household.age))\n"
         model.bank.wealth -= mortgageValue
         household.wealth += mortgageValue
     else
@@ -544,7 +547,7 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     content *= "Transaction: house.area = $(supply.house.area)\n"
     content *= "Transaction: house.location = $(string(supply.house.location))\n"
     content *= "Transaction: house percentile = $(supply.house.percentile)\n"
-    content *= "Transaction: household.wealth = $(string(household.wealth))\n"
+    content *= "Transaction: household.wealth = $(wealthForDisplay)\n"
     content *= "Transaction: raw salary = $(string(calculateSalary(household, model)))\n" 
     content *= "Transaction: liquid salary = $(string(calculateLiquidSalary(household, model)))\n"
     content *= "Transaction: household percentile = $(household.percentile)\n"
@@ -1059,44 +1062,44 @@ function calculateTransactionTaxes(price)
     return calculateImt(price) + 0.008 * price - calculateTaxBenefits(price)
 end
 
-function calculateImt(price)
-    if price >= 1102920
-        return price * 0.075
-    elseif price >= 633453
-        return price * 0.06
-    end
-    tax = 0
+# function calculateImt(price)
+#     if price >= 1102920
+#         return price * 0.075
+#     elseif price >= 633453
+#         return price * 0.06
+#     end
+#     tax = 0
 
-    if price >= 101917
-        extra = (price - 101917) * 0.02
-        if extra > (139412 - 101917) * 0.02
-            extra = (139412 - 101917) * 0.02
-        end
-        tax += extra
-    end
-    if price >= 139412
-        extra = (price - 139412) * 0.05
-        if extra > (190086 - 139412) * 0.05
-            extra = (190086 - 139412) * 0.05
-        end
-        tax += extra
-    end
-    if price >= 190086
-        extra = (price - 190086) * 0.07
-        if extra > (316772 - 190086) * 0.07
-            extra = (316772 - 190086) * 0.07
-        end
-        tax += extra
-    end
-    if price >= 316772
-        extra = (price - 316772) * 0.08
-        if extra > (633453 - 316772) * 0.08
-            extra = (633453 - 316772) * 0.08
-        end
-        tax += extra
-    end
-    return tax
-end
+#     if price >= 101917
+#         extra = (price - 101917) * 0.02
+#         if extra > (139412 - 101917) * 0.02
+#             extra = (139412 - 101917) * 0.02
+#         end
+#         tax += extra
+#     end
+#     if price >= 139412
+#         extra = (price - 139412) * 0.05
+#         if extra > (190086 - 139412) * 0.05
+#             extra = (190086 - 139412) * 0.05
+#         end
+#         tax += extra
+#     end
+#     if price >= 190086
+#         extra = (price - 190086) * 0.07
+#         if extra > (316772 - 190086) * 0.07
+#             extra = (316772 - 190086) * 0.07
+#         end
+#         tax += extra
+#     end
+#     if price >= 316772
+#         extra = (price - 316772) * 0.08
+#         if extra > (633453 - 316772) * 0.08
+#             extra = (633453 - 316772) * 0.08
+#         end
+#         tax += extra
+#     end
+#     return tax
+# end
 
 function isHouseViableForRenting(model, house)
     rentalPrice = calculate_rental_market_price(house, model)
@@ -1172,6 +1175,6 @@ function canHouseholdBuyHouse(model, household, size_interval)
     if household.wealth >= marketPrice
         return true
     end
-    maxMortgage = maxMortgageValue(model, household, stopIfItIsBelowThisValue = marketPrice - household.wealth)
+    maxMortgage = maxMortgageValue(model, household)
     return household.wealth + maxMortgage >= marketPrice
 end
