@@ -449,7 +449,7 @@ function payMortgages(model, household)
         for i in 1:length(household.mortgages)
             if (household.mortgages[i].valueInDebt > 0)
                 payment = calculateMortgagePayment(household.mortgages[i], model.bank.interestRate)
-                if household.wealth < payment && length(household.houses) > 0
+                if typeof(household) != ConstructionSector && household.wealth < payment && length(household.houses) > 0
                     content = "## Mortgage rescue: household.wealth = $(string(household.wealth))\n"
                     content *= "## Mortgage rescue: raw salary = $(string(calculateSalary(household, model)))\n" 
                     content *= "## Mortgage rescue: liquid salary = $(string(calculateLiquidSalary(household, model)))\n"
@@ -459,7 +459,7 @@ function payMortgages(model, household)
                     content *= "## Mortgage rescue: household age = $(household.age)\n"
                     TRANSACTION_LOG(content, model)
                     put_house_to_sale(household, model, 1)
-                elseif household.wealth < payment
+                elseif typeof(household) != ConstructionSector && household.wealth < payment
                     content = "## Household could not pay mortgage: household.wealth = $(string(household.wealth))\n"
                     content *= "## Household could not pay mortgage: raw salary = $(string(calculateSalary(household, model)))\n" 
                     content *= "## Household could not pay mortgage: liquid salary = $(string(calculateLiquidSalary(household, model)))\n"
