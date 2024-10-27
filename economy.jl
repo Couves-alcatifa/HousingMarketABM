@@ -178,11 +178,17 @@ function model_step!(model)
     trimBucketsIfNeeded(model)
     measureSupplyAndDemandPerBucket(model)
     if model.steps % 12 == 0
-        company_adjust_salaries(model)
+        company_adjust_salaries_in_crash_scenario(model)
+        # company_adjust_salaries(model)
         gov_adjust_taxes(model)
         
         model.company_prev_wealth = model.company_wealth
         model.gov_prev_wealth = model.government.wealth
+
+        # 1% increase until it reaches 5.5%
+        if model.bank.interestRate < 0.055
+            model.bank.interestRate += 0.01
+        end
     end
     public_investment(model)
     updateConstructions(model)
@@ -214,6 +220,10 @@ function company_adjust_salaries(model)
     elseif ratio > 1
         model.salary_multiplier += 0.015
     end 
+end
+
+function company_adjust_salaries_in_crash_scenario(model)
+    model.salary_multiplier *= 0.95
 end
 
 function gov_adjust_taxes(model)
