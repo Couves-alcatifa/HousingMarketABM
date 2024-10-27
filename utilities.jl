@@ -116,7 +116,7 @@ function calculateBid(household, house, askPrice, maxMortgageValue, consumerSurp
     elseif demandValue >= askPrice + calculateImt(askPrice)
         return askPrice
     else
-        return 0
+        return demandValue - calculateImt(demandValue)
     end
     
 end
@@ -366,7 +366,7 @@ function clearHouseMarket(model)
             # maxMortgage = maxMortgageValue(model, household, stopIfItIsBelowThisValue = thresholdValue)
             maxMortgage = maxMortgageValue(model, household)
             demandBid = calculateBid(household, house, supply.price, maxMortgage, consumerSurplus)
-            if (demandBid >= supply.price * 0.95)
+            if (demandBid >= supply.price * 0.85)
                 lock(localLock) do
                     push!(supply.bids, Bid(demandBid, demand.householdId, demand.type))
                     push!(demand.supplyMatches, SupplyMatch(supply))
@@ -518,7 +518,7 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     household = model[highestBidder]
     content = "########\n"
     if (household.wealth < bidValue + calculateImt(bidValue))
-        paidWithOwnMoney = household.wealth * 0.95
+        paidWithOwnMoney = household.wealth * 0.98
         mortgageValue = bidValue + calculateImt(bidValue) - paidWithOwnMoney
         maxMortgage = maxMortgageValue(model, household, stopIfItIsBelowThisValue = mortgageValue)
         if maxMortgage < mortgageValue
@@ -891,7 +891,7 @@ end
 
 function calculateProbabilityOfAcceptingBid(bid, askPrice)
     ratio = bid / askPrice
-    return map_value(ratio, 0.95, 1.0, 0.2, 1.0)
+    return map_value(ratio, 0.85, 1.0, 0.05, 1.0)
 end
 
 function map_value(x, in_min, in_max, out_min, out_max)::Float64

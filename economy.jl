@@ -36,7 +36,8 @@ function calculate_non_housing_consumption(household, income)
     wealth = household.wealth
     size = household.size
     # return 500 + income * 0.6 + log(income) + rand(100:300)
-    expenses = EXPENSES_MINIMUM_VALUE * size * (EXPENSES_EXTRA_MINIMUM + rand() * EXPENSES_EXTRA_OFFSET)
+    # expenses = EXPENSES_MINIMUM_VALUE * size * (1 + EXPENSES_EXTRA_MINIMUM + rand() * EXPENSES_EXTRA_OFFSET)
+    expenses = EXPENSES_MINIMUM_VALUE * size * rand(Normal(1.0, 0.1))
     if income / size > EXPENSES_MINIMUM_VALUE
         expenses += (income / size - EXPENSES_MINIMUM_VALUE)  * size * (EXPENSES_EXTRA_MINIMUM + rand() * EXPENSES_EXTRA_OFFSET)
     end
