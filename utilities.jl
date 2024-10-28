@@ -204,7 +204,7 @@ end
 function calculateSalary(household, model)
     location = household.residencyZone
     percentile = household.percentile
-    salaryAgeMultiplier = map_value(household.age, 20, 70, 0.7, 1.7)
+    salaryAgeMultiplier = map_value(household.age, 20, 70, 0.7, 1.5)
     if household.age > 70
         salaryAgeMultiplier = 0.75
     end
@@ -226,7 +226,7 @@ function calculateSalary(household, model)
         salary = base + range * (percentile / 100 - 0.6) * 5
     else
         base = eval(Symbol("FOURTH_QUINTILE_INCOME_IN_$(string(location))"))
-        range = base * 2 * salaryAgeMultiplier
+        range = base * 1.5 * salaryAgeMultiplier
         salary = base + range * (percentile / 100 - 0.8) * 5
     end
     if (size == 1)

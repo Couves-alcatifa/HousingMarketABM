@@ -172,7 +172,7 @@ function model_step!(model)
     model.mortgagesInStep = Mortgage[]
     clearHangingSupplies(model)
     clearHangingRentalSupplies(model)
-    # nonResidentsBuyHouses(model)
+    nonResidentsBuyHouses(model)
     clearHouseMarket(model)
     clearRentalMarket(model)
     trimBucketsIfNeeded(model)
@@ -184,11 +184,11 @@ function model_step!(model)
         
         model.company_prev_wealth = model.company_wealth
         model.gov_prev_wealth = model.government.wealth
+
+        # 2% increase in interestRates
+        model.bank.interestRate += 0.02
     end
     
-    # 1% increase until it reaches 5.5%
-    # TODO: this is an experiment, this change should be annual
-    model.bank.interestRate += 0.01
     public_investment(model)
     updateConstructions(model)
     payMortgages(model, model.construction_sector)
@@ -221,7 +221,7 @@ function company_adjust_salaries(model)
 end
 
 function company_adjust_salaries_in_crash_scenario(model)
-    model.salary_multiplier *= 0.95
+    model.salary_multiplier *= 0.90
 end
 
 function gov_adjust_taxes(model)
