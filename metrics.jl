@@ -116,11 +116,11 @@ end
 
 function calculate_prices_in_supply(model)
     soma = 0.0
-    if length(model.houseMarket.supply) == 1
-        return 1500.0
+    if length(model.houseMarket.supply) == 0
+        return 0.0
     end
     for i in 1:length(model.houseMarket.supply)
-        soma += model.houseMarket.supply[i].price
+        soma += model.houseMarket.supply[i].price / model.houseMarket.supply[i].house.area
     end
     return soma / length(model.houseMarket.supply)
 end
@@ -246,6 +246,14 @@ function newly_built_houses_for_sale(model)
         if supply.sellerId == -1
             push!(houses, supply.house)
         end
+    end
+    return houses
+end
+
+function houses_for_sale(model)
+    houses = House[]
+    for supply in model.houseMarket.supply
+        push!(houses, supply.house)
     end
     return houses
 end

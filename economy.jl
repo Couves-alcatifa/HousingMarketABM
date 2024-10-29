@@ -522,7 +522,7 @@ mdata = [count_supply, gov_wealth, construction_wealth, company_wealth,
          ## Company Money flow ##
          rawSalariesPaid, liquidSalariesReceived, expensesReceived, number_of_houses_per_region, 
          transactions_per_region, rents_per_region, number_of_houses_built_per_region,
-         supply_per_bucket, demand_per_bucket, newly_built_houses_for_sale, mortgages_per_step,
+         supply_per_bucket, demand_per_bucket, newly_built_houses_for_sale, mortgages_per_step, houses_for_sale,
          ## Houses prices per bucket
          #bucket_1, bucket_2, bucket_3, bucket_4
          ]
@@ -581,6 +581,8 @@ save("$output_folder/number_of_newly_built_houses_for_sale.png", plot_number_of_
 save("$output_folder/newly_built_houses_for_sale_size_distribution.png", plot_newly_built_houses_for_sale_size_distribution(agent_data[2:end, :], model_data[2:end, :]))
 save("$output_folder/number_of_mortgages.png", plot_number_of_mortgages(agent_data[2:end, :], model_data[2:end, :]))
 save("$output_folder/volume_of_lent_money.png", plot_volume_of_lent_money(agent_data[2:end, :], model_data[2:end, :]))
+save("$output_folder/houses_sizes_in_supply.png", plot_houses_for_sale_size_distribution(agent_data[2:end, :], model_data[2:end, :]))
+save("$output_folder/houses_percentile_in_supply.png", plot_houses_for_sale_percentile_distribution(agent_data[2:end, :], model_data[2:end, :]))
 # save("$output_folder/mortgages_median_values_regionally.png", plot_mortgages_median_values_regionally(agent_data[2:end, :], model_data[2:end, :]))
 # save("$output_folder/mortgages_values_distribution.png", plot_mortgages_values_distribution(agent_data[2:end, :], model_data[2:end, :]))
 

@@ -452,6 +452,46 @@ function plot_volume_of_lent_money(adf, mdf)
     figure
 end
 
+function plot_houses_for_sale_size_distribution(adf, mdf)
+    figure = Figure(size = (600, 400))
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Size")
+    all_lines = []
+    all_legends = []
+    houses_areas_vv = [[house.area for house in v] for v in mdf.houses_for_sale]
+    for v in houses_areas_vv
+        sort!(v)
+    end
+    for percentile in [10, 30, 50, 70, 90, 100]
+        push!(all_lines, lines!(ax, adf.step, get_percentile_along_vv(houses_areas_vv, percentile), color = percentile_color_map[percentile]))
+        push!(all_legends, "Percentile $(string(percentile))")
+    end
+
+    push!(all_lines, lines!(ax, adf.step, get_average_along_vv(adf.age_distribution_household), color = average_color))
+    push!(all_legends, "Average")
+    figure[1, 2] = Legend(figure, all_lines, all_legends)
+    figure
+end
+
+function plot_houses_for_sale_percentile_distribution(adf, mdf)
+    figure = Figure(size = (600, 400))
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Size")
+    all_lines = []
+    all_legends = []
+    houses_percentiles_vv = [[house.percentile for house in v] for v in mdf.houses_for_sale]
+    for v in houses_percentiles_vv
+        sort!(v)
+    end
+    # for percentile in [1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    #     push!(all_lines, lines!(ax, adf.step, get_percentile_along_vv(houses_percentiles_vv, percentile), color = percentile_color_map[percentile]))
+    #     push!(all_legends, "Percentile $(string(percentile))")
+    # end
+
+    push!(all_lines, lines!(ax, adf.step, get_average_along_vv(adf.age_distribution_household), color = average_color))
+    push!(all_legends, "Average")
+    figure[1, 2] = Legend(figure, all_lines, all_legends)
+    figure
+end
+
 # function plot_mortgages_median_values_regionally(adf, mdf)
 #     figure = Figure(size = (600, 400))
 #     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
