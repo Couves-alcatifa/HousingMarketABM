@@ -83,7 +83,7 @@ function updateMortgage(mortgage, spread)
 end
 
 function calculateMortgageDuration(value, age)
-    return -1 * round(map_value(age, 20, 65, -40, -10)) * 12
+    return -1 * round(map_value(age, 20, 80, -40, -10)) * 12
 end
 
 # 100000 * (0.015/12) / (1 - (1 + 0.015/12)^(-360))
@@ -152,9 +152,9 @@ function maxMortgageValue(model, household)
     # if model.steps > 50
     #     return 0
     # end
-    if household.age > 70
-        return 0
-    end
+    # if household.age > 70
+    #     return 0
+    # end
     bank = model.bank
     salary = calculateLiquidSalary(household, model)
     
@@ -1103,9 +1103,9 @@ end
 # end
 
 function isHouseViableForRenting(model, house)
-    rentalPrice = calculate_rental_market_price(house, model)
+    rentalPrice = calculate_rental_market_price(house, model) * (1 - RENT_TAX)
     marketPrice = calculate_market_price(house, model)
-    return rentalPrice * 12 >= marketPrice * 0.05
+    return rentalPrice * 12 >= marketPrice * 0.0375
 end
 
 # TODO: this should be mostly focused in Lisbon...

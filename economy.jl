@@ -446,7 +446,8 @@ function payRent(model, household)
     if household.contractIdAsTenant != 0
         contract = model.contracts[household.contractIdAsTenant]
         landlord = model[contract.landlordId]
-        landlord.wealth += contract.monthlyPayment
+        landlord.wealth += contract.monthlyPayment * (1 - RENT_TAX)
+        model.government.wealth += contract.monthlyPayment * RENT_TAX
         # TODO: gov payment
         household.wealth -= contract.monthlyPayment
     end
