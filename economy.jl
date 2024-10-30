@@ -313,27 +313,27 @@ function supply_decisions(household, model)
             # house is already renting
             houseIdx += 1
             continue
-        elseif house in model.housesInRentalMarket
-            if isHouseViableForRenting(model, house)
-                houseIdx += 1
-                continue
-            else
-                for supplyIdx in eachindex(model.rentalMarket.supply)
-                    supply = model.rentalMarket.supply[supplyIdx]
-                    if supply.house == house
-                        content = "household decided that house is no longer viable for renting $(household.id)\n"
-                        TRANSACTION_LOG(content, model)
+        # elseif house in model.housesInRentalMarket
+        #     if isHouseViableForRenting(model, house)
+        #         houseIdx += 1
+        #         continue
+        #     else
+        #         for supplyIdx in eachindex(model.rentalMarket.supply)
+        #             supply = model.rentalMarket.supply[supplyIdx]
+        #             if supply.house == house
+        #                 content = "household decided that house is no longer viable for renting $(household.id)\n"
+        #                 TRANSACTION_LOG(content, model)
 
-                        splice!(model.rentalMarket.supply, supplyIdx)
-                        delete!(model.housesInRentalMarket, house)
-                        put_house_to_sale(household, model, houseIdx)
-                        houseIdx -= 1
-                        break
-                    end
-                end
-                houseIdx += 1
-                continue
-            end
+        #                 splice!(model.rentalMarket.supply, supplyIdx)
+        #                 delete!(model.housesInRentalMarket, house)
+        #                 put_house_to_sale(household, model, houseIdx)
+        #                 houseIdx -= 1
+        #                 break
+        #             end
+        #         end
+        #         houseIdx += 1
+        #         continue
+        #     end
         end
         if decideToRent(household, model, house)
             put_house_to_rent(household, model, house)
@@ -568,6 +568,9 @@ save("$output_folder/taxes_and_subsidies_flow.png", plot_taxes_and_subsidies_flo
 save("$output_folder/salaries_and_expenses.png", plot_salaries_and_expenses(agent_data[2:end, :], model_data[2:end, :]))
 # save("$output_folder/houses_prices_per_bucket.png", plot_houses_prices_per_bucket(agent_data[2:end, :], model_data[2:end, :]))
 save("$output_folder/houses_prices_per_region.png", plot_houses_prices_per_region(agent_data[2:end, :], model_data[2:end, :]))
+for location in [Lisboa]
+    save("$output_folder/detailed_houses_prices_in_$(location).png", plot_detailed_houses_prices_per_region(agent_data[2:end, :], model_data[2:end, :], location))
+end
 save("$output_folder/rents_of_new_contracts_per_region.png", plot_rents_per_region(agent_data[2:end, :], model_data[2:end, :]))
 
 save("$output_folder/number_of_houses_per_region.png", plot_number_of_houses_per_region(agent_data[2:end, :], model_data[2:end, :]))

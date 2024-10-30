@@ -832,6 +832,7 @@ function assignHousesForRental(model, household, numberOfExtraHousesToAssign, ho
     i = 1
     while i < length(model.houses[household.residencyZone])
         if length(houses_sizes_for_rental[location]) == 0
+            LOG_INFO("All houses for rental were assigned in $location")
             return
         end
         area = splice!(houses_sizes_for_rental[location], 1)

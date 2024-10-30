@@ -300,6 +300,26 @@ function plot_houses_prices_per_region(adf, mdf)
     figure
 end
 
+function plot_detailed_houses_prices_per_region(adf, mdf, location)
+    figure = Figure(size = (600, 400))
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Price per m2")
+    all_lines = []
+    all_legends = []
+    houses_prices_vv = [[transaction.price/transaction.area for transaction in v[location]] for v in mdf.transactions_per_region]
+    for v in houses_prices_vv
+        sort!(v)
+    end
+    for percentile in [1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+        push!(all_lines, lines!(ax, adf.step, get_percentile_along_vv(houses_prices_vv, percentile), color = percentile_color_map[percentile]))
+        push!(all_legends, "Percentile $(string(percentile))")
+    end
+
+    push!(all_lines, lines!(ax, adf.step, get_average_along_vv(houses_prices_vv), color = average_color))
+    push!(all_legends, "Average")
+    figure[1, 2] = Legend(figure, all_lines, all_legends)
+    figure
+end
+
 function plot_rents_per_region(adf, mdf)
     figure = Figure(size = (600, 400))
     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")

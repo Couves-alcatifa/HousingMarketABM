@@ -82,6 +82,7 @@ function assignHousesToHouseholds(model)
         target_home_owners_in_the_zone = HOME_OWNERS_MAP[household.residencyZone]
         current_home_owners_in_the_zone = zones_to_n_of_home_owners[household.residencyZone]
         if current_home_owners_in_the_zone >= target_home_owners_in_the_zone
+            LOG_INFO("All home owners were assigned in $(household.residencyZone)")
             continue # no more houses to assign in this phase
         end
         if !assignHouseThatMakesSense(model, household)
