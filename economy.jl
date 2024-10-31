@@ -178,15 +178,18 @@ function model_step!(model)
     trimBucketsIfNeeded(model)
     measureSupplyAndDemandPerBucket(model)
     if model.steps % 12 == 0
-        # company_adjust_salaries_in_crash_scenario(model)
-        company_adjust_salaries(model)
+        if model.steps >= 60
+            company_adjust_salaries_in_crash_scenario(model)
+            # 2% increase in interestRates
+            model.bank.interestRate += 0.02
+        else
+            company_adjust_salaries(model)
+        end
         gov_adjust_taxes(model)
         
         model.company_prev_wealth = model.company_wealth
         model.gov_prev_wealth = model.government.wealth
 
-        # 2% increase in interestRates
-        # model.bank.interestRate += 0.02
     end
     
     public_investment(model)
