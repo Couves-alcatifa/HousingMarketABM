@@ -181,12 +181,14 @@ function model_step!(model)
         # considering start is in 2003
         if model.steps == 12
             # end of 2003
+            model.salary_multiplier *= 0.95
             model.bank.interestRate = 0.025
         elseif model.steps == 24
             # end of 2004
             model.bank.interestRate = 0.021
         elseif model.steps == 36
             # end of 2005
+            model.salary_multiplier *= 0.95
             model.bank.interestRate = 0.027
         elseif model.steps == 48
             # end of 2006
@@ -199,31 +201,24 @@ function model_step!(model)
             model.bank.interestRate = 0.039
         elseif model.steps == 84
             # end of 2009
+            model.salary_multiplier *= 0.85
             model.bank.interestRate = 0.012
         elseif model.steps == 96
             # end of 2010
+            model.salary_multiplier *= 0.90
             model.bank.interestRate = 0.015
         elseif model.steps == 108
             # end of 2011
+            model.salary_multiplier *= 0.90
             model.bank.interestRate = 0.02
         elseif model.steps == 120
             # end of 2012
+            model.salary_multiplier *= 0.85
             model.bank.interestRate = 0.005
         end
-        # if model.steps >= 60
-        #     company_adjust_salaries_in_crash_scenario(model)
 
-            
-        #     # 1% 2005-2006
-        #     # 1% 2006-2007
-        #     # 0.5% 2007-2008
-        #     # 2% increase in interestRates
-        #     model.bank.interestRate += 0.02
-        # else
-        #     company_adjust_salaries(model)
-        # end
-        company_adjust_salaries(model)
-        gov_adjust_taxes(model)
+        # company_adjust_salaries(model)
+        # gov_adjust_taxes(model)
         
         model.company_prev_wealth = model.company_wealth
         model.gov_prev_wealth = model.government.wealth
