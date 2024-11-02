@@ -1115,6 +1115,9 @@ function housesBoughtByNoNResidentsPerRegion(location)
 end
 
 function nonResidentsBuyHouses(model)
+    if model.steps >= 72
+        return
+    end
     for location in instances(HouseLocation)
         housesToBuy = housesBoughtByNoNResidentsPerRegion(location)
         housesBought = 0
