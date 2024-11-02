@@ -90,7 +90,7 @@ function wealth_model()
         :government => Government(STARTING_GOV_WEALTH, IRS, VAT, 1.0),
         :company_prev_wealth => STARTING_COMPANY_WEALTH,
         :company_wealth => STARTING_COMPANY_WEALTH,
-        :bank => Bank(STARTING_BANK_WEALTH, INTEREST_RATE, LTV, DSTI),
+        :bank => Bank(STARTING_BANK_WEALTH, STARTING_INTEREST_RATE, LTV, DSTI),
         :transactions => Transaction[],
         :transactions_per_region => Dict(location => [] for location in instances(HouseLocation)),
         :rents_per_region => Dict(location => [] for location in instances(HouseLocation)),
@@ -178,13 +178,51 @@ function model_step!(model)
     trimBucketsIfNeeded(model)
     measureSupplyAndDemandPerBucket(model)
     if model.steps % 12 == 0
-        if model.steps >= 60
-            company_adjust_salaries_in_crash_scenario(model)
-            # 2% increase in interestRates
-            model.bank.interestRate += 0.02
-        else
-            company_adjust_salaries(model)
+        # considering start is in 2003
+        if model.steps == 12
+            # end of 2003
+            model.bank.interestRate = 0.025
+        elseif model.steps == 24
+            # end of 2004
+            model.bank.interestRate = 0.021
+        elseif model.steps == 36
+            # end of 2005
+            model.bank.interestRate = 0.027
+        elseif model.steps == 48
+            # end of 2006
+            model.bank.interestRate = 0.038
+        elseif model.steps == 60
+            # end of 2007
+            model.bank.interestRate = 0.047
+        elseif model.steps == 72
+            # end of 2008
+            model.bank.interestRate = 0.039
+        elseif model.steps == 84
+            # end of 2009
+            model.bank.interestRate = 0.012
+        elseif model.steps == 96
+            # end of 2010
+            model.bank.interestRate = 0.015
+        elseif model.steps == 108
+            # end of 2011
+            model.bank.interestRate = 0.02
+        elseif model.steps == 120
+            # end of 2012
+            model.bank.interestRate = 0.005
         end
+        # if model.steps >= 60
+        #     company_adjust_salaries_in_crash_scenario(model)
+
+            
+        #     # 1% 2005-2006
+        #     # 1% 2006-2007
+        #     # 0.5% 2007-2008
+        #     # 2% increase in interestRates
+        #     model.bank.interestRate += 0.02
+        # else
+        #     company_adjust_salaries(model)
+        # end
+        company_adjust_salaries(model)
         gov_adjust_taxes(model)
         
         model.company_prev_wealth = model.company_wealth
