@@ -662,6 +662,16 @@ function InitiateBuckets()
     return result
 end
 
+function InitiatePriceIndex()
+    result = Dict(location => Dict(
+                    quartile => Dict( 
+                        size_interval => 0.0
+                        for size_interval in instances(SizeInterval))
+                    for quartile in [25, 50, 75, 100])
+                  for location in instances(HouseLocation))
+    return result
+end
+
 function calculateBucket(model, house)
     percentile = 100
     if house.percentile < 25
@@ -1181,4 +1191,35 @@ function canHouseholdBuyHouse(model, household, size_interval)
     end
     maxMortgage = maxMortgageValue(model, household)
     return household.wealth + maxMortgage >= marketPrice
+end
+
+
+function updateRents(model)
+    for contract in model.contracts
+        house = contract.house
+        bucket = calculateBucket(model, house)
+        percentile = 100
+        if house.percentile < 25
+            percentile = 25
+        elseif house.percentile < 50
+            percentile = 50
+        elseif house.percentile < 75
+            percentile = 75
+        end
+        size_interval = getSizeInterval(house)
+        
+        oldValue = model.rentalPriceIndex[house.location][percentile][size_interval]
+        
+        newValue = mean(bucket)
+        model.rentalPriceIndex[house.location][percentile][size_interval] = newValue
+        if oldValue == 0.0
+            continue
+        end
+        ratio = newValue / oldValue
+        if ratio < 1
+            # we won't reduce the existing contracts value right?...
+            continue
+        end
+        contract.monthlyPayment *= ratio
+    end
 end

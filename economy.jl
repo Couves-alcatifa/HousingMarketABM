@@ -121,6 +121,7 @@ function wealth_model()
         :supplyPerBucket => Dict(location => Dict(size_interval => 0 for size_interval in instances(SizeInterval)) for location in instances(HouseLocation)),
         :demandPerBucket => Dict(location => Dict(size_interval => 0 for size_interval in instances(SizeInterval)) for location in instances(HouseLocation)),
         :housesInRentalMarket => Set(),
+        :rentalPriceIndex => InitiatePriceIndex(),
     )
 
     model = StandardABM(MyMultiAgent; agent_step! = agent_step!, model_step! = model_step!, properties,scheduler = Schedulers.Randomly())
@@ -222,7 +223,7 @@ function model_step!(model)
         
         model.company_prev_wealth = model.company_wealth
         model.gov_prev_wealth = model.government.wealth
-
+        updateRents(model)
     end
     
     public_investment(model)
