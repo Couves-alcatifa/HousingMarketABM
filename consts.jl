@@ -1453,3 +1453,24 @@ NUMBER_OF_HOUSES_FOR_RENTAL_PER_SIZE_MAP = Dict(
     LessThan199 => NUMBER_OF_HOUSES_FOR_RENTAL_WITH_LessThan199_MAP, 
     MoreThan200 => NUMBER_OF_HOUSES_FOR_RENTAL_WITH_MoreThan200_MAP, 
 )
+
+LOCAL_HOUSING_MAP = Dict(
+    Alcochete => 47 * MODEL_SCALE,
+    Almada => 1709 * MODEL_SCALE,
+    Amadora => 170 * MODEL_SCALE,
+    Barreiro => 82 * MODEL_SCALE,
+    Cascais => 2630 * MODEL_SCALE,
+    Lisboa => 19124 * MODEL_SCALE,
+    Loures => 208 * MODEL_SCALE,
+    Mafra => 1141 * MODEL_SCALE,
+    Moita => 50 * MODEL_SCALE,
+    Montijo => 85 * MODEL_SCALE,
+    Odivelas => 87 * MODEL_SCALE,
+    Oeiras => 572 * MODEL_SCALE,
+    Palmela => 202 * MODEL_SCALE,
+    Seixal => 333 * MODEL_SCALE,
+    Sesimbra => 760 * MODEL_SCALE,
+    Setubal => 931 * MODEL_SCALE,
+    Sintra => 1215 * MODEL_SCALE,
+    VilaFrancaDeXira => 59 * MODEL_SCALE,
+)
