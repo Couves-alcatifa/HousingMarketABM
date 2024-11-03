@@ -338,15 +338,24 @@ function decideToRent(household, model, house)
     return false
 end
 
+function getContract(household, house)
+    for contract in household.contractsAsLandlord
+        if contract.house == house
+            return contract
+        end
+    end
+    return Nothing
+end
+
 function supply_decisions(household, model)
     houseIdx = 2
-    if length(household.contractsIdsAsLandlord) + 1 == length(household.houses)
+    if length(household.contractsAsLandlord) + 1 == length(household.houses)
         return
     end
     while houseIdx <= length(household.houses)
         house = household.houses[houseIdx]
-        contractId = getContractId(household, model, house)
-        if contractId != -1
+        contract = getContract(household, house)
+        if contract != Nothing
             # house is already renting
             houseIdx += 1
             continue
@@ -383,21 +392,11 @@ end
 
 
 
-function getContractId(household, model, house)
-    for contractId in household.contractsIdsAsLandlord
-        contract = model.contracts[contractId]
-        if contract.house == house
-            return contractId
-        end
-    end
-    return -1
-end
-
 function not_home_owner_decisions(household, model)
     # let's say the household always tries to buy a house
     # and in the meantime it rents
     push!(model.houseMarket.demand, HouseDemand(household.id, HouseSupply[], Regular))
-    if (household.contractIdAsTenant == 0)
+    if (household.contractAsTenant == Nothing)
         push!(model.rentalMarket.demand, RentalDemand(household.id, RentalSupply[]))
     end
 end
@@ -480,8 +479,8 @@ function household_step!(household::MyMultiAgent, model)
 end
 
 function payRent(model, household)
-    if household.contractIdAsTenant != 0
-        contract = model.contracts[household.contractIdAsTenant]
+    if household.contractAsTenant != Nothing
+        contract = household.contractAsTenant
         landlord = model[contract.landlordId]
         landlord.wealth += contract.monthlyPayment * (1 - RENT_TAX)
         model.government.wealth += contract.monthlyPayment * RENT_TAX
@@ -561,7 +560,7 @@ mdata = [count_supply, gov_wealth, construction_wealth, company_wealth,
          rawSalariesPaid, liquidSalariesReceived, expensesReceived, number_of_houses_per_region, 
          transactions_per_region, rents_per_region, number_of_houses_built_per_region,
          supply_per_bucket, demand_per_bucket, newly_built_houses_for_sale, mortgages_per_step, houses_for_sale,
-         ## Houses prices per bucket
+         contractRents, ## Houses prices per bucket
          #bucket_1, bucket_2, bucket_3, bucket_4
          ]
 
@@ -609,7 +608,8 @@ save("$output_folder/houses_prices_per_region.png", plot_houses_prices_per_regio
 for location in [Lisboa]
     save("$output_folder/detailed_houses_prices_in_$(location).png", plot_detailed_houses_prices_per_region(agent_data[2:end, :], model_data[2:end, :], location))
 end
-save("$output_folder/rents_of_new_contracts_per_region.png", plot_rents_per_region(agent_data[2:end, :], model_data[2:end, :]))
+save("$output_folder/rents_of_new_contracts_per_region.png", plot_rents_of_new_contracts_per_region(agent_data[2:end, :], model_data[2:end, :]))
+save("$output_folder/rents_per_region.png", plot_rents_per_region(agent_data[2:end, :], model_data[2:end, :]))
 
 save("$output_folder/number_of_houses_per_region.png", plot_number_of_houses_per_region(agent_data[2:end, :], model_data[2:end, :]))
 number_of_houses_built_figures = plot_number_of_houses_built_per_region(agent_data[2:end, :], model_data[2:end, :])

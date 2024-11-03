@@ -219,8 +219,8 @@ company(a) = kindof(a) == :Company
 
 isHousehold(a) = kindof(a) == :Household
 isHouseholdHomeOwner(a) = isHousehold(a) && length(a.houses) > 0
-isHouseholdTenant(a) = isHousehold(a) && a.contractIdAsTenant != 0
-isHouseholdLandlord(a) = isHousehold(a) && length(a.contractsIdsAsLandlord) > 0
+isHouseholdTenant(a) = isHousehold(a) && a.contractAsTenant != Nothing
+isHouseholdLandlord(a) = isHousehold(a) && length(a.contractsAsLandlord) > 0
 isHouseholdMultipleHomeOwner(a) = isHousehold(a) && length(a.houses) > 1
 subsidyRate(model) = model.government.subsidyRate
 irs(model) = model.government.irs
@@ -262,6 +262,24 @@ supply_per_bucket(model) = deepcopy(model.supplyPerBucket)
 demand_per_bucket(model) = deepcopy(model.demandPerBucket)
 
 mortgages_per_step(model) = copy(model.mortgagesInStep)
+function contractRents(model)
+    rents = Dict(location => Float64[] for location in instances(HouseLocation))
+    for household in allagents(model)
+        if household.contractAsTenant == Nothing
+            continue
+        end
+        contract = household.contractAsTenant
+        house = contract.house
+        push!(rents[house.location], contract.monthlyPayment / house.area)
+    end
+    res = Dict(location => 0.0 for location in instances(HouseLocation))
+    for location in instances(HouseLocation)
+        if length(rents[location]) != 0
+            res[location] = mean(rents[location])
+        end
+    end
+    return res
+end
 
 function births(model)
     res = copy(model.births)

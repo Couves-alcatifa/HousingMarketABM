@@ -61,6 +61,12 @@ mutable struct Mortgage
     duration::UInt16 # months
 end
 
+mutable struct Contract
+    landlordId::Int
+    tenantId::Int
+    house::House
+    monthlyPayment::Float64
+end
 
 @multiagent :opt_speed struct MyMultiAgent(NoSpaceAgent)
     @subagent struct Household
@@ -70,8 +76,8 @@ end
         houses::Array{House}
         percentile::Int64
         mortgages::Array{Mortgage}
-        contractsIdsAsLandlord::Array{Int}
-        contractIdAsTenant::Int # 0 is no contract
+        contractsAsLandlord::Array{Contract}
+        contractAsTenant #::Contract Nothing is no contract
         wealthInHouses::Float64
         residencyZone::HouseLocation
         greediness::Float64
@@ -80,13 +86,6 @@ end
     @subagent struct Company
         n_of_employees::UInt16
     end
-end
-
-mutable struct Contract
-    landlordId::Int
-    tenantId::Int
-    house::House
-    monthlyPayment::Float64
 end
 
 mutable struct Inheritage

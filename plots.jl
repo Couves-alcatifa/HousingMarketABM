@@ -320,7 +320,7 @@ function plot_detailed_houses_prices_per_region(adf, mdf, location)
     figure
 end
 
-function plot_rents_per_region(adf, mdf)
+function plot_rents_of_new_contracts_per_region(adf, mdf)
     figure = Figure(size = (600, 400))
     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
     organizedPerRegion = Dict() # this will be filled with [[MeanValueForAmadoraStep1, ..Step2, ...Step3], [MeanValueForLisboaStep1, ...]]
@@ -342,6 +342,27 @@ function plot_rents_per_region(adf, mdf)
     locations = []
     for location in instances(HouseLocation)
         push!(lines, lines!(ax, adf.step, organizedPerRegion[location], color = color_map[location]))
+        push!(locations, string(location))
+    end
+
+    figure[1, 2] = Legend(figure, lines, locations)
+    figure
+end
+
+function plot_rents_per_region(adf, mdf)
+    figure = Figure(size = (600, 400))
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
+    organizedPerRegion = Dict()
+    for location in instances(HouseLocation)
+        organizedPerRegion[location] = Float32[]
+        for step in 1:NUMBER_OF_STEPS
+            push!(organizedPerRegion[location], mdf.contractRents[step][location])
+        end
+    end
+    lines = []
+    locations = []
+    for location in instances(HouseLocation)
+        push!(lines, lines!(ax, 1:NUMBER_OF_STEPS, organizedPerRegion[location], color = color_map[location]))
         push!(locations, string(location))
     end
 

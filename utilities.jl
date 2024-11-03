@@ -292,29 +292,29 @@ function receive_inheritages(household, model)
 end
 
 function terminateContractsOnTentantSide(household, model)
-    if household.contractIdAsTenant != 0
-        contract = model.contracts[household.contractIdAsTenant]
+    if household.contractAsTenant != Nothing
+        contract = household.contractAsTenant
         println("landlordId = " * string(contract.landlordId))
         println("tenantId = " * string(contract.tenantId))
         landlord = model[contract.landlordId]
         push!(landlord.houses, contract.house)
-        for i in 1:length(landlord.contractsIdsAsLandlord)
-            if landlord.contractsIdsAsLandlord[i] == household.contractIdAsTenant
-                splice!(landlord.contractsIdsAsLandlord, i)
+        for i in 1:length(landlord.contractsAsLandlord)
+            if landlord.contractsAsLandlord[i] == contract
+                splice!(landlord.contractsAsLandlord, i)
                 break
             end
         end
-        household.contractIdAsTenant = 0
+        household.contractAsTenant = Nothing
     end
 end
 
 function terminateContractsOnLandLordSide(household, model)
-    for i in 1:length(household.contractsIdsAsLandlord)
-        contractId = household.contractsIdsAsLandlord[i]
-        contract = model.contracts[contractId]
+    while length(household.contractsAsLandlord) > 0
+        contract = household.contractsAsLandlord[1]
         tenant = model[contract.tenantId]
-        tenant.contractIdAsTenant = 0
+        tenant.contractAsTenant = Nothing
         push!(household.houses, contract.house)
+        splice!(household.contractsAsLandlord, 1)
     end
 end
 
@@ -560,11 +560,11 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     content *= "Transaction: transactionTaxes = $(transactionTaxes)\n"
     content *= "Transaction: pricePerm2 = $(bidValue / supply.house.area)\n"
     content *= "Transaction: for renting = $(winningBid.type == ForRental ? "true" : "false")\n"
-    content *= "Transaction: contractIds as landlord = $(household.contractsIdsAsLandlord)\n"
-    content *= "Transaction: contractId as tenant = $(household.contractIdAsTenant)\n"
+    content *= "Transaction: contracts as landlord = $(household.contractsAsLandlord)\n"
+    content *= "Transaction: contract as tenant = $(household.contractAsTenant)\n"
     if supply.sellerId != -1
-        content *= "Transaction: seller contracts as landlord = $(seller.contractsIdsAsLandlord)\n"
-        content *= "Transaction: seller contract as tenant = $(seller.contractIdAsTenant)\n"
+        content *= "Transaction: seller contracts as landlord = $(seller.contractsAsLandlord)\n"
+        content *= "Transaction: seller contract as tenant = $(seller.contractAsTenant)\n"
     end
     content *= "########\n"
     print(content)
@@ -608,7 +608,7 @@ function rent_house(model, supply::RentalSupply)
     highestBidder = supply.bids[1].householdId
     while i <= length(supply.bids)
         highestBidder = supply.bids[i].householdId
-        if model[highestBidder].contractIdAsTenant != 0
+        if model[highestBidder].contractAsTenant != Nothing
             # already renting a house... next
             i += 1
         else
@@ -633,13 +633,12 @@ function rent_house(model, supply::RentalSupply)
         return false
     end
 
-    push!(model.contracts, Contract(seller.id, highestBidder, supply.house, actualBid))
-    
+    contract = Contract(seller.id, highestBidder, supply.house, actualBid)
     #PROBLEM: if this tenant overrides his contract, we get a misalignment between the model
     # contract and the household
     # This system needs some refactor maybe...
-    household.contractIdAsTenant = length(model.contracts)
-    push!(seller.contractsIdsAsLandlord, length(model.contracts))
+    household.contractAsTenant = contract
+    push!(seller.contractsAsLandlord, contract)
     addTransactionToRentalBuckets(model, supply.house, actualBid)
     push!(model.rents_per_region[supply.house.location][model.steps], Transaction(supply.house.area, actualBid, supply.house.location))
     return true
@@ -1195,7 +1194,11 @@ end
 
 
 function updateRents(model)
-    for contract in model.contracts
+    for household in allagents(model)
+        if household.contractAsTenant == Nothing
+            continue
+        end
+        contract = household.contractAsTenant
         house = contract.house
         bucket = calculateBucket(model, house)
         percentile = 100
@@ -1208,11 +1211,14 @@ function updateRents(model)
         end
         size_interval = getSizeInterval(house)
         
-        oldValue = model.rentalPriceIndex[house.location][percentile][size_interval]
+        oldValue = copy(model.rentalPriceIndex[house.location][percentile][size_interval])
         
-        newValue = mean(bucket)
+        newValue = 0.0
+        if length(bucket) != 0
+            newValue = mean(bucket)
+        end
         model.rentalPriceIndex[house.location][percentile][size_interval] = newValue
-        if oldValue == 0.0
+        if oldValue == 0.0 || newValue == 0.0
             continue
         end
         ratio = newValue / oldValue
