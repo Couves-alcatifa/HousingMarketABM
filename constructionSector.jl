@@ -5,7 +5,7 @@ function initiateConstructionSector()
     averageTotalTime = averageTimeForPermit + averageTimeForConstruction
 
     housesInConstruction = Dict(location => Dict(size_interval => PendingConstruction[] for size_interval in instances(SizeInterval)) for location in instances(HouseLocation))
-    for location in [Lisboa]
+    for location in instances(HouseLocation)
         # divide the time by 12 because the MAX_NEW_CONSTRUCTIONS_MAP data is yearly
         # this way we calculate the expected constructions in progress based on the time it usually
         # takes for a project to complete and the amount of projects that get completed each year
@@ -57,7 +57,7 @@ end
 
 #TODO: region hack
 function updateConstructions(model)
-    for location in [Lisboa]
+    for location in instances(HouseLocation)
         sizesOrdered = sortSizesBucketsByProfitability(model, location)
         for size_interval in sizesOrdered
             updateConstructionsPerBucket(model, location, size_interval)

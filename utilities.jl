@@ -634,9 +634,8 @@ function rent_house(model, supply::RentalSupply)
     end
 
     contract = Contract(seller.id, highestBidder, supply.house, actualBid)
-    #PROBLEM: if this tenant overrides his contract, we get a misalignment between the model
-    # contract and the household
-    # This system needs some refactor maybe...
+
+    updateHouseRentalInfo(model, supply.house, actualBid)
     household.contractAsTenant = contract
     push!(seller.contractsAsLandlord, contract)
     addTransactionToRentalBuckets(model, supply.house, actualBid)
@@ -1114,7 +1113,7 @@ end
 function isHouseViableForRenting(model, house)
     rentalPrice = calculate_rental_market_price(house, model) * (1 - RENT_TAX)
     marketPrice = calculate_market_price(house, model)
-    return rentalPrice * 12 >= marketPrice * 0.0375
+    return rentalPrice * 12 >= marketPrice * 0.05 # 5% rentability a year
 end
 
 # TODO: this should be mostly focused in Lisbon...
@@ -1229,3 +1228,27 @@ function updateRents(model)
         contract.monthlyPayment *= ratio
     end
 end
+
+function updateHouseRentalInfo(model, house, rent)
+    if house in keys(model.housesInfo)
+        model.housesInfo[house].lastRent = rent
+    else
+        model.housesInfo[house] = HouseInfo(rent, Nothing)
+    end
+end
+
+function updateHouseTransactionInfo(model, house, transactionPrice)
+    if house in keys(model.housesInfo)
+        model.housesInfo[house].purchasePrice = transactionPrice
+    else
+        model.housesInfo[house] = HouseInfo(Nothing, transactionPrice)
+    end
+end
+
+function getPreviousRent(model, house)
+    if house in keys(model.housesInfo)
+        return model.housesInfo[house].lastRent
+    else
+        return Nothing
+    end
+end    

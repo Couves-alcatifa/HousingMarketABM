@@ -122,6 +122,7 @@ function wealth_model()
         :demandPerBucket => Dict(location => Dict(size_interval => 0 for size_interval in instances(SizeInterval)) for location in instances(HouseLocation)),
         :housesInRentalMarket => Set(),
         :rentalPriceIndex => InitiatePriceIndex(),
+        :housesInfo => Dict(),
     )
 
     model = StandardABM(MyMultiAgent; agent_step! = agent_step!, model_step! = model_step!, properties,scheduler = Schedulers.Randomly())
@@ -180,46 +181,46 @@ function model_step!(model)
     measureSupplyAndDemandPerBucket(model)
     if model.steps % 12 == 0
         # considering start is in 2003
-        if model.steps == 12
-            # end of 2003
-            model.salary_multiplier *= 0.95
-            model.bank.interestRate = 0.0383
-        elseif model.steps == 24
-            # end of 2004
-            model.bank.interestRate = 0.0349
-        elseif model.steps == 36
-            # end of 2005
-            model.salary_multiplier *= 0.95
-            model.bank.interestRate = 0.0338
-        elseif model.steps == 48
-            # end of 2006
-            model.bank.interestRate = 0.0401
-        elseif model.steps == 60
-            # end of 2007
-            model.bank.interestRate = 0.0480
-        elseif model.steps == 72
-            # end of 2008
-            model.bank.interestRate = 0.0544
-        elseif model.steps == 84
-            # end of 2009
-            model.salary_multiplier *= 0.95
-            model.bank.interestRate = 0.0273
-        elseif model.steps == 96
-            # end of 2010
-            model.salary_multiplier *= 0.95
-            model.bank.interestRate = 0.0247
-        elseif model.steps == 108
-            # end of 2011
-            model.salary_multiplier *= 0.90
-            model.bank.interestRate = 0.0377
-        elseif model.steps == 120
-            # end of 2012
-            model.salary_multiplier *= 0.95
-            model.bank.interestRate = 0.0388
-        end
+        # if model.steps == 12
+        #     # end of 2003
+        #     model.salary_multiplier *= 0.95
+        #     model.bank.interestRate = 0.0383
+        # elseif model.steps == 24
+        #     # end of 2004
+        #     model.bank.interestRate = 0.0349
+        # elseif model.steps == 36
+        #     # end of 2005
+        #     model.salary_multiplier *= 0.95
+        #     model.bank.interestRate = 0.0338
+        # elseif model.steps == 48
+        #     # end of 2006
+        #     model.bank.interestRate = 0.0401
+        # elseif model.steps == 60
+        #     # end of 2007
+        #     model.bank.interestRate = 0.0480
+        # elseif model.steps == 72
+        #     # end of 2008
+        #     model.bank.interestRate = 0.0544
+        # elseif model.steps == 84
+        #     # end of 2009
+        #     model.salary_multiplier *= 0.95
+        #     model.bank.interestRate = 0.0273
+        # elseif model.steps == 96
+        #     # end of 2010
+        #     model.salary_multiplier *= 0.95
+        #     model.bank.interestRate = 0.0247
+        # elseif model.steps == 108
+        #     # end of 2011
+        #     model.salary_multiplier *= 0.90
+        #     model.bank.interestRate = 0.0377
+        # elseif model.steps == 120
+        #     # end of 2012
+        #     model.salary_multiplier *= 0.95
+        #     model.bank.interestRate = 0.0388
+        # end
 
-        # company_adjust_salaries(model)
-        # gov_adjust_taxes(model)
+        company_adjust_salaries(model)
+        gov_adjust_taxes(model)
         
         model.company_prev_wealth = model.company_wealth
         model.gov_prev_wealth = model.government.wealth
@@ -308,7 +309,13 @@ end
 
 
 function put_house_to_rent(household::MyMultiAgent, model, house)
-    push!(model.rentalMarket.supply, RentalSupply(house, calculate_rental_market_price(house, model), household.id, Bid[]))
+    askRent = calculate_rental_market_price(house, model)
+    previousRent = getPreviousRent(model, house)
+
+    if previousRent != Nothing && askRent > previousRent * RENTS_INCREASE_CEILLING
+        askRent = previousRent * RENTS_INCREASE_CEILLING
+    end
+    push!(model.rentalMarket.supply, RentalSupply(house, askRent, household.id, Bid[]))
     push!(model.housesInRentalMarket, house)
     # # removing house from agent when putting to sale
     # splice!(agent.houseIds, index)
@@ -332,7 +339,7 @@ function calculate_subsidy(household, model)
 end
 
 function decideToRent(household, model, house)
-    if isHouseViableForRenting(model, house) && rand() < 0.35
+    if isHouseViableForRenting(model, house) && rand() < 0.70
         return true
     end
     return false
@@ -414,8 +421,8 @@ function home_owner_decisions(household, model)
         # WARNING: this might be computationally expensive
         marketPrice = calculate_market_price(House(rand(40:100), household.residencyZone, NotSocialNeighbourhood, 1.0, rand(1:100)), model)
         mortgage = maxMortgageValue(model, household)
-        if household.wealth + mortgage > marketPrice * 3
-            if household.percentile > 90 && rand() < 0.05 # not everyone who can will do this do
+        if household.wealth + mortgage > marketPrice
+            if rand() < 0.15 # not everyone who can will do this do
                 push!(model.houseMarket.demand, HouseDemand(household.id, SupplyMatch[], ForRental))
             end
         end
@@ -605,7 +612,7 @@ save("$output_folder/taxes_and_subsidies_flow.png", plot_taxes_and_subsidies_flo
 save("$output_folder/salaries_and_expenses.png", plot_salaries_and_expenses(agent_data[2:end, :], model_data[2:end, :]))
 # save("$output_folder/houses_prices_per_bucket.png", plot_houses_prices_per_bucket(agent_data[2:end, :], model_data[2:end, :]))
 save("$output_folder/houses_prices_per_region.png", plot_houses_prices_per_region(agent_data[2:end, :], model_data[2:end, :]))
-for location in [Lisboa]
+for location in instances(HouseLocation)
     save("$output_folder/detailed_houses_prices_in_$(location).png", plot_detailed_houses_prices_per_region(agent_data[2:end, :], model_data[2:end, :], location))
 end
 save("$output_folder/rents_of_new_contracts_per_region.png", plot_rents_of_new_contracts_per_region(agent_data[2:end, :], model_data[2:end, :]))

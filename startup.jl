@@ -14,7 +14,7 @@ end
 # TODO: region hack
 function initiateHousesPerRegion(model)
     # for location in instances(HouseLocation)
-    for location in [Lisboa]
+    for location in instances(HouseLocation)
         houses_sizes = rand(20:29, Int64(ceil(NUMBER_OF_HOUSES_PER_SIZE_MAP[LessThan29][location])))
         houses_sizes = vcat(houses_sizes, rand(30:39, Int64(ceil(NUMBER_OF_HOUSES_PER_SIZE_MAP[LessThan39][location]))))
         houses_sizes = vcat(houses_sizes, rand(40:49, Int64(ceil(NUMBER_OF_HOUSES_PER_SIZE_MAP[LessThan49][location]))))
@@ -38,7 +38,7 @@ end
 
 # TODO: region hack
 function initiateHouseholds(model, households_initial_ages, greedinesses)
-    for location in [Lisboa]
+    for location in instances(HouseLocation)
         for size in [1, 2, 3, 4, 5]
             number_of_households = HOUSEHOLDS_SIZES_MAP[size][location]
             for i in 1:number_of_households

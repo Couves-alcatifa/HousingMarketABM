@@ -141,9 +141,13 @@ end
 
 # TODO: region hack
 function handle_migrations(model)
-    for location in [Lisboa]
+    for location in instances(HouseLocation)
         expectedMigrants = migrationValueMap[location] / 12
-        expectedMigrants = rand(Normal(expectedMigrants, expectedMigrants * 0.2))
+        stdev = expectedMigrants * 0.2
+        if stdev < 0
+            stdev *= -1
+        end
+        expectedMigrants = rand(Normal(expectedMigrants, stdev))
         added = 0
         while added < expectedMigrants
             age = rand(20:55)

@@ -195,7 +195,8 @@ mutable struct HouseholdInfo #TODO: drop this
 end
 
 mutable struct HouseInfo
-    area::Int
+    lastRent
+    purchasePrice
 end
 
 @enum BucketKey begin
@@ -204,4 +205,3 @@ end
     smaller_than_120 = 3
     bigger_than_120 = 4
 end
-
