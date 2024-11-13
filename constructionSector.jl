@@ -24,7 +24,8 @@ function initiateConstructionSector()
     return ConstructionSector(STARTING_CONSTRUCTION_SECTOR_WEALTH, 
             housesInConstruction,
             Mortgage[],
-            Dict(location => 0.0 for location in instances(HouseLocation))
+            Dict(location => 0.0 for location in instances(HouseLocation)),
+            PendingRenovation[]
             )
 end
 
@@ -44,8 +45,8 @@ function sortSizesBucketsByProfitability(model, location)
     testPercentile = rand(1:100)
     for size_interval in instances(SizeInterval)
         sampleHouse = House(generateAreaFromSizeInterval(size_interval), location, NotSocialNeighbourhood, 1.0, testPercentile)
-        costs = calculate_total_construction_costs(model, sampleHouse, expectedDuration)
-        marketPrice = calculate_market_price(sampleHouse, model)
+        costs = calculate_total_construction_costs(model, sampleHouse, expectedDuration, withVat = true)
+        marketPrice = calculate_market_price(model, sampleHouse)
         margin = marketPrice/costs
         # to introduce a random factor:
         margin = rand(Normal(margin, margin * 0.25))
@@ -92,7 +93,7 @@ function updateConstructionsPerBucket(model, location, size_interval)
         pendingConstruction.time += 1
         if pendingConstruction.time > pendingConstruction.permitTime
             # already building
-            constructionPayment = calculate_construction_costs(model, pendingConstruction.house) / pendingConstruction.constructionTime
+            constructionPayment = calculate_construction_costs(model, pendingConstruction.house, true) / pendingConstruction.constructionTime
             model.government.wealth += constructionPayment
             model.constructionLabor += constructionPayment
             model.construction_sector.wealth -= constructionPayment
@@ -106,7 +107,27 @@ function updateConstructionsPerBucket(model, location, size_interval)
         else
             i += 1
         end
-    end 
+    end
+    i = 1
+    while i <= length(model.construction_sector.pendingRenovations)
+        pendingRenovation = model.construction_sector.pendingRenovations[i]
+        if pendingRenovation.time >= pendingRenovation.renovationTime
+            costs = calculateRenovationCosts(pendingRenovation.house)
+            pendingRenovation.household.wealth -= costs
+            model.construction_sector.wealth += costs
+
+            tax = costs * CONSTRUCTION_VAT
+            pendingRenovation.household.wealth -= tax
+            model.government.wealth += tax
+
+            pendingRenovation.house.percentile = rand(95:100)
+            push!(pendingRenovation.household.houses, pendingRenovation.house)
+            splice!(model.construction_sector.pendingRenovations, i)
+        else
+            pendingRenovation.time += 1
+            i += 1
+        end
+    end
 end
 
 function calculateTargetConstructionPerBucket(model, location, size_interval)
@@ -170,7 +191,7 @@ function generateHouseToBeBuilt(location, size_interval)
     expectedDuration = rand(CONSTRUCTION_DELAY_MIN:CONSTRUCTION_DELAY_MAX)
     expectedDuration += rand(CONSTRUCTION_TIME_MIN:CONSTRUCTION_TIME_MAX)
     for testPercentile in rand(1:100, 5)
-        marketPrice = calculate_market_price(House(area, location, NotSocialNeighbourhood, 1.0, testPercentile), model)
+        marketPrice = calculate_market_price(model, House(area, location, NotSocialNeighbourhood, 1.0, testPercentile))
         constructionCosts = calculate_total_construction_costs(model, House(area, location, NotSocialNeighbourhood, 1.0, testPercentile), expectedDuration)
         
         # if constructionCosts > marketPrice
@@ -191,8 +212,8 @@ function generateHouseToBeBuilt(location, size_interval)
 end
 
 function put_newly_built_house_to_sale(model, house)
-    costBasedPrice = calculate_construction_costs(model, house) * CONSTRUCTION_SECTOR_MARKUP
-    askPrice = calculate_market_price(house, model)
+    costBasedPrice = calculate_construction_costs(model, house, true) * CONSTRUCTION_SECTOR_MARKUP
+    askPrice = calculate_market_price(model, house)
     if costBasedPrice > askPrice
         askPrice = costBasedPrice
     end
@@ -213,16 +234,32 @@ function calculate_construction_sector_debt(model)
     return debt
 end
 
-function calculate_total_construction_costs(model, house, expectedDuration)
+function calculate_total_construction_costs(model, house, expectedDuration; withVat = false)
     finnancingMultiplier = expectedDuration * (model.bank.interestRate / 12)
     landCosts = LAND_COSTS * house.area
-    constructionCosts = calculate_construction_costs(model, house)
+    constructionCosts = calculate_construction_costs(model, house, withVat)
     return (1 + finnancingMultiplier) * (landCosts + constructionCosts)
 end
 
-function calculate_construction_costs(model, house)
+function calculate_construction_costs(model, house, withVat)
     constructionCosts = map_value(house.percentile, 1, 100, CONSTRUCTION_COSTS_MIN, CONSTRUCTION_COSTS_MAX) * house.area
-    constructionCosts *= 1 + CONSTRUCTION_VAT
+    if withVat
+        constructionCosts *= 1 + CONSTRUCTION_VAT
+    end
     constructionCosts *= PROJECT_COST_MULTIPLIER
     return constructionCosts
+end
+
+function calculateRenovationCosts(house)
+    return -1 * map_value(house.percentile, 1, 99, -1300, -400) * house.area
+end
+
+function calculateRenovationTime()
+    return rand(4:6)
+end
+
+function requestRenovation(model, house, household, idx)
+    duration = calculateRenovationTime()
+    push!(model.construction_sector.pendingRenovations, PendingRenovation(0, duration, house, household))
+    splice!(household.houses, idx)
 end

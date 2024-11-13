@@ -323,7 +323,7 @@ end
 
 function put_house_to_sale(household::MyMultiAgent, model, index)
     house = household.houses[index]
-    push!(model.houseMarket.supply, HouseSupply(house, calculate_market_price(house, model) * rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV)), Bid[], household.id))
+    push!(model.houseMarket.supply, HouseSupply(house, calculate_market_price(model, house) * rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV)), Bid[], household.id))
     # removing house from agent when putting to sale
     splice!(household.houses, index)
 end
@@ -419,11 +419,15 @@ function home_owner_decisions(household, model)
     else
         # lets assess the household economical situation
         # WARNING: this might be computationally expensive
-        marketPrice = calculate_market_price(House(rand(40:100), household.residencyZone, NotSocialNeighbourhood, 1.0, rand(1:100)), model)
+        marketPrice = calculate_market_price(model, House(rand(40:100), household.residencyZone, NotSocialNeighbourhood, 1.0, rand(1:100)))
         mortgage = maxMortgageValue(model, household)
         if household.wealth + mortgage > marketPrice
             if rand() < 0.15 # not everyone who can will do this do
-                push!(model.houseMarket.demand, HouseDemand(household.id, SupplyMatch[], ForRental))
+                if rand() < 0.50
+                    push!(model.houseMarket.demand, HouseDemand(household.id, SupplyMatch[], ForRental))
+                else
+                    push!(model.houseMarket.demand, HouseDemand(household.id, SupplyMatch[], ForInvestment))
+                end
             end
         end
     end
@@ -444,7 +448,7 @@ end
 function household_step!(household::MyMultiAgent, model)
     wealthInHouses = 0.0
     for house in household.houses
-        wealthInHouses += calculate_market_price(house, model)
+        wealthInHouses += calculate_market_price(model, house)
     end
     household.wealthInHouses = wealthInHouses
     if (household.id % 12 == model.steps % 12 && household_evolution(household, model))

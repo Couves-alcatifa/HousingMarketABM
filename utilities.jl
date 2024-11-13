@@ -17,7 +17,7 @@ function calculate_rental_market_price(house, model)
     return mean(bucket) * house.area * house.maintenanceLevel
 end
 
-function calculate_market_price(house, model)
+function calculate_market_price(model, house)
     bucket = calculateBucket(model, house)
     if length(bucket) == 0
         # println("house = $house calculate_initial_market_price(house) = $(calculate_initial_market_price(house))")
@@ -348,6 +348,30 @@ function clearHouseMarket(model)
                     end
                 end
                 continue
+            elseif demand.type == ForInvestment
+                marketPrice = calculate_market_price(model, house)
+                renovationCosts = calculateRenovationCosts(house)
+                renovatedHouse = House(house.area, house.location, house.locationType, house.maintenanceLevel, rand(95:100))
+                renovatedMarketPrice = calculate_market_price(model, renovatedHouse)
+
+                totalCosts = marketPrice + calculateTransactionTaxes(marketPrice) + renovationCosts
+                margin = totalCosts - renovatedMarketPrice
+                addedValue = totalCosts - renovatedMarketPrice
+                if addedValue > 0
+                    addedValueTax = calculateIrs(addedValue)
+                    margin -= addedValueTax
+                end 
+                if margin > marketPrice * EXPECTED_RENOVATION_RENTABILITY
+                    maxMortgage = maxMortgageValue(model, household)
+                    bidValue = (rand(95:100) / 100) * supply.price
+                    if maxMortgage + household.wealth > bidValue + calculateTransactionTaxes(bidValue)
+                        lock(localLock) do
+                            push!(supply.bids, Bid(bidValue, demand.householdId, demand.type))
+                            push!(demand.supplyMatches, SupplyMatch(supply))
+                        end
+                    end
+                end
+                continue
             end
 
             if (!has_enough_size(house, household.size)
@@ -581,8 +605,22 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     push!(model.transactions_per_region[supply.house.location][model.steps], Transaction(supply.house.area, bidValue, supply.house.location))
     push!(householdsWhoBoughtAHouse, highestBidder)
     
+    previousPurchasePrice = getPreviousPurchasePrice(model, supply.house)
+
+    if previousPurchasePrice != Nothing
+        addedValue = previousPurchasePrice - bidValue
+        if addedValue > 0
+            addedValueTax = calculateIrs(addedValue)
+            seller.wealth -= addedValueTax
+            model.government.wealth += addedValueTax
+        end
+    end
+
+    updateHouseTransactionInfo(model, supply.house, bidValue)
     if winningBid.type == ForRental
         put_house_to_rent(household, model, supply.house)
+    elseif winningBid.type == ForInvestment
+        requestRenovation(model, supply.house, household, length(household.houses))
     end
     return true
 end
@@ -774,87 +812,6 @@ function get_household_size(size)
     end
 end
 
-function assignHouseThatMakesSense(model, household)
-    for i in eachindex(model.houses[household.residencyZone])
-        house = model.houses[household.residencyZone][i]
-        # println("assignHouseThatMakesSense house = $(house)")
-        if rand() < probabilityOfHouseholdBeingAssignedToHouse(household, house)
-            push!(household.houses, house)
-            splice!(model.houses[household.residencyZone], i)
-            return true
-        end
-    end
-    return false
-end
-
-function probabilityOfHouseholdBeingAssignedToHouse(household, house)
-    m2_per_person = house.area / household.size
-    numberOfHousesInThatZone = NUMBER_OF_HOUSES_MAP[house.location]
-    numberOfHousesWithThatRatioInThatZone = 0
-    probabilityMultiplierDueToAge = map_value(household.age, 20, 90, 0.01, 4.5)
-    if m2_per_person < 10
-        numberOfHousesWithThatRatioInThatZone = NUMBER_OF_HOUSES_WITH_LT_10_M2_PER_PERSON_MAP[house.location]
-    elseif m2_per_person < 15
-        numberOfHousesWithThatRatioInThatZone = NUMBER_OF_HOUSES_WITH_LT_15_M2_PER_PERSON_MAP[house.location]
-    elseif m2_per_person < 20
-        numberOfHousesWithThatRatioInThatZone = NUMBER_OF_HOUSES_WITH_LT_20_M2_PER_PERSON_MAP[house.location]
-    elseif m2_per_person < 30
-        numberOfHousesWithThatRatioInThatZone = NUMBER_OF_HOUSES_WITH_LT_30_M2_PER_PERSON_MAP[house.location]
-    elseif m2_per_person < 40
-        numberOfHousesWithThatRatioInThatZone = NUMBER_OF_HOUSES_WITH_LT_40_M2_PER_PERSON_MAP[house.location]
-    elseif m2_per_person < 60
-        numberOfHousesWithThatRatioInThatZone = NUMBER_OF_HOUSES_WITH_LT_60_M2_PER_PERSON_MAP[house.location]
-    elseif m2_per_person < 80
-        numberOfHousesWithThatRatioInThatZone = NUMBER_OF_HOUSES_WITH_LT_80_M2_PER_PERSON_MAP[house.location]
-    else
-        numberOfHousesWithThatRatioInThatZone = NUMBER_OF_HOUSES_WITH_MT_80_M2_PER_PERSON_MAP[house.location]
-    end
-    return (numberOfHousesWithThatRatioInThatZone / numberOfHousesInThatZone) * probabilityMultiplierDueToAge
-end
-
-function shouldAssignMultipleHouses(model, household)
-    randomNumber = rand()
-    if household.age < 30
-        if randomNumber < 0.02
-            return 1
-        end
-    elseif household.age < 40
-        if randomNumber < 0.15
-            return 1 + Int64(round(rand()))
-        end
-    else
-        if randomNumber < 0.10
-            return 1 + Int64(round(rand() * 6))
-        elseif randomNumber < 0.20
-            return 1 + Int64(round(rand() * 3))
-        elseif randomNumber < 0.3
-            return 1 + Int64(round(rand()))
-        end
-    end
-    return 0
-end
-
-function assignHousesForRental(model, household, numberOfExtraHousesToAssign, houses_sizes_for_rental)
-    location = household.residencyZone
-    assignedSoFar = 0
-    i = 1
-    while i < length(model.houses[household.residencyZone])
-        if length(houses_sizes_for_rental[location]) == 0
-            LOG_INFO("All houses for rental were assigned in $location")
-            return
-        end
-        area = splice!(houses_sizes_for_rental[location], 1)
-        house = House(UInt16(area), location, NotSocialNeighbourhood, 1.0, rand(1:100))
-        # println("assignHousesForRental house = $(house)")
-        if assignedSoFar == numberOfExtraHousesToAssign
-            return
-        end
-        push!(household.houses, house)
-        put_house_to_rent(household, model, house)
-        assignedSoFar += 1
-        i += 1
-    end
-end
 
 function measureSupplyAndDemandRegionally(model)
     for location in instances(HouseLocation)
@@ -1028,7 +985,7 @@ function getSizeInterval(house)
 end
 
 function calculateHouseAnnualRentalRentability(house, model)
-    marketPrice = calculate_market_price(house, model)
+    marketPrice = calculate_market_price(model, house)
     rent = calculate_rental_market_price(house, model)
     return (rent * 12)/marketPrice
 end
@@ -1112,7 +1069,7 @@ end
 
 function isHouseViableForRenting(model, house)
     rentalPrice = calculate_rental_market_price(house, model) * (1 - RENT_TAX)
-    marketPrice = calculate_market_price(house, model)
+    marketPrice = calculate_market_price(model, house)
     return rentalPrice * 12 >= marketPrice * 0.05 # 5% rentability a year
 end
 
@@ -1183,7 +1140,7 @@ end
 function canHouseholdBuyHouse(model, household, size_interval)
     location = household.residencyZone
     house = House(generateAreaFromSizeInterval(size_interval), location, NotSocialNeighbourhood, 1.0, rand(1:100))
-    marketPrice = calculate_market_price(house, model)
+    marketPrice = calculate_market_price(model, house)
     if household.wealth >= marketPrice
         return true
     end
@@ -1251,4 +1208,12 @@ function getPreviousRent(model, house)
     else
         return Nothing
     end
-end    
+end
+
+function getPreviousPurchasePrice(model, house)
+    if house in keys(model.housesInfo)
+        return model.housesInfo[house].purchasePrice
+    else
+        return Nothing
+    end
+end

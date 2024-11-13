@@ -98,3 +98,85 @@ function assignHousesToHouseholds(model)
         assignHousesForRental(model, household, numberOfExtraHousesToAssign, houses_sizes_for_rental)
     end
 end
+
+function assignHouseThatMakesSense(model, household)
+    for i in eachindex(model.houses[household.residencyZone])
+        house = model.houses[household.residencyZone][i]
+        # println("assignHouseThatMakesSense house = $(house)")
+        if rand() < probabilityOfHouseholdBeingAssignedToHouse(household, house)
+            push!(household.houses, house)
+            splice!(model.houses[household.residencyZone], i)
+            return true
+        end
+    end
+    return false
+end
+
+function probabilityOfHouseholdBeingAssignedToHouse(household, house)
+    m2_per_person = house.area / household.size
+    numberOfHousesInThatZone = NUMBER_OF_HOUSES_MAP[house.location]
+    numberOfHousesWithThatRatioInThatZone = 0
+    probabilityMultiplierDueToAge = map_value(household.age, 20, 90, 0.01, 4.5)
+    if m2_per_person < 10
+        numberOfHousesWithThatRatioInThatZone = NUMBER_OF_HOUSES_WITH_LT_10_M2_PER_PERSON_MAP[house.location]
+    elseif m2_per_person < 15
+        numberOfHousesWithThatRatioInThatZone = NUMBER_OF_HOUSES_WITH_LT_15_M2_PER_PERSON_MAP[house.location]
+    elseif m2_per_person < 20
+        numberOfHousesWithThatRatioInThatZone = NUMBER_OF_HOUSES_WITH_LT_20_M2_PER_PERSON_MAP[house.location]
+    elseif m2_per_person < 30
+        numberOfHousesWithThatRatioInThatZone = NUMBER_OF_HOUSES_WITH_LT_30_M2_PER_PERSON_MAP[house.location]
+    elseif m2_per_person < 40
+        numberOfHousesWithThatRatioInThatZone = NUMBER_OF_HOUSES_WITH_LT_40_M2_PER_PERSON_MAP[house.location]
+    elseif m2_per_person < 60
+        numberOfHousesWithThatRatioInThatZone = NUMBER_OF_HOUSES_WITH_LT_60_M2_PER_PERSON_MAP[house.location]
+    elseif m2_per_person < 80
+        numberOfHousesWithThatRatioInThatZone = NUMBER_OF_HOUSES_WITH_LT_80_M2_PER_PERSON_MAP[house.location]
+    else
+        numberOfHousesWithThatRatioInThatZone = NUMBER_OF_HOUSES_WITH_MT_80_M2_PER_PERSON_MAP[house.location]
+    end
+    return (numberOfHousesWithThatRatioInThatZone / numberOfHousesInThatZone) * probabilityMultiplierDueToAge
+end
+
+function shouldAssignMultipleHouses(model, household)
+    randomNumber = rand()
+    if household.age < 30
+        if randomNumber < 0.02
+            return 1
+        end
+    elseif household.age < 40
+        if randomNumber < 0.15
+            return 1 + Int64(round(rand()))
+        end
+    else
+        if randomNumber < 0.10
+            return 1 + Int64(round(rand() * 6))
+        elseif randomNumber < 0.20
+            return 1 + Int64(round(rand() * 3))
+        elseif randomNumber < 0.3
+            return 1 + Int64(round(rand()))
+        end
+    end
+    return 0
+end
+
+function assignHousesForRental(model, household, numberOfExtraHousesToAssign, houses_sizes_for_rental)
+    location = household.residencyZone
+    assignedSoFar = 0
+    i = 1
+    while i < length(model.houses[household.residencyZone])
+        if length(houses_sizes_for_rental[location]) == 0
+            LOG_INFO("All houses for rental were assigned in $location")
+            return
+        end
+        area = splice!(houses_sizes_for_rental[location], 1)
+        house = House(UInt16(area), location, NotSocialNeighbourhood, 1.0, rand(1:100))
+        # println("assignHousesForRental house = $(house)")
+        if assignedSoFar == numberOfExtraHousesToAssign
+            return
+        end
+        push!(household.houses, house)
+        put_house_to_rent(household, model, house)
+        assignedSoFar += 1
+        i += 1
+    end
+end

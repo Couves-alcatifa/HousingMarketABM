@@ -106,6 +106,7 @@ end
 @enum DemandType begin
     Regular = 1
     ForRental = 2
+    ForInvestment = 3
 end
 
 mutable struct Bid
@@ -182,11 +183,19 @@ mutable struct PendingConstruction
     house::House
 end
 
+mutable struct PendingRenovation
+    time::Int # time that has passed since the start of the renovation
+    renovationTime::Int # total real time that will take
+    house::House
+    household
+end
+
 mutable struct ConstructionSector
     wealth::Float64
     housesInConstruction # dict of dicts with arrays of pending constructions per region/size_interval
     mortgages::Array{Mortgage}
     constructionGoals # simillar to housesInConstruction but the values are floats with the amount of houses that we want to build
+    pendingRenovations::Array{PendingRenovation}
 end
 
 mutable struct HouseholdInfo #TODO: drop this
