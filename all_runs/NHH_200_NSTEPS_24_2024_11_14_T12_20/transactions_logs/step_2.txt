@@ -1,0 +1,37 @@
+generated agent 203 from migration wealth = 3346.8849471157864
+Sold to non resident area = 29
+Sold to non resident percentile = 27
+Sold to non resident location = Lisboa
+Sold to non resident price = 83345.63662145502
+########
+Transaction: mortgageValue = 101097.60520257344
+Transaction: mortgage payment = 571.6245779772206
+Transaction: mortgage duration = 324.0
+Transaction: house.area = 50
+Transaction: house.location = Lisboa
+Transaction: house percentile = 24
+Transaction: household.wealth = 15982.236532228673
+Transaction: raw salary = 2428.4906666666666
+Transaction: liquid salary = 1730.8577071999998
+Transaction: household percentile = 48
+Transaction: household id = 122
+Transaction: household size = 2
+Transaction: household age = 40
+Transaction: askPrice = 123556.78680012473
+Transaction: sellerId = 55
+Transaction: bidValue = 117545.60019859683
+Transaction: transactionTaxes = -785.4031944392887
+Transaction: pricePerm2 = 2350.9120039719364
+Transaction: for renting = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Contract(40, 122, House(0x004b, Lisboa, NotSocialNeighbourhood, 1.0, 42), 848.9381169679671)
+Transaction: seller contracts as landlord = Contract[Contract(55, 100, House(0x003d, Lisboa, NotSocialNeighbourhood, 1.0, 91), 890.8425360199999), Contract(55, 96, House(0x0032, Lisboa, NotSocialNeighbourhood, 1.0, 24), 446.61524495640305), Contract(55, 135, House(0x0035, Lisboa, NotSocialNeighbourhood, 1.0, 43), 579.8935511315992), Contract(55, 126, House(0x004c, Lisboa, NotSocialNeighbourhood, 1.0, 59), 986.0829564687014), Contract(55, 161, House(0x005d, Lisboa, NotSocialNeighbourhood, 1.0, 47), 1082.5280471942922)]
+Transaction: seller contract as tenant = Nothing
+########
+## Mortgage rescue: household.wealth = -70.69907260106243
+## Mortgage rescue: raw salary = 1292.6725
+## Mortgage rescue: liquid salary = 1063.7604
+## Mortgage rescue: household percentile = 23
+## Mortgage rescue: household id = 34
+## Mortgage rescue: household size = 1
+## Mortgage rescue: household age = 20

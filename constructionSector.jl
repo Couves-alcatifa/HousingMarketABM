@@ -120,6 +120,7 @@ function updateConstructionsPerBucket(model, location, size_interval)
             pendingRenovation.household.wealth -= tax
             model.government.wealth += tax
 
+            updateHouseRenovationCosts(model, pendingRenovation.house, costs + tax)
             pendingRenovation.house.percentile = rand(95:100)
             push!(pendingRenovation.household.houses, pendingRenovation.house)
             splice!(model.construction_sector.pendingRenovations, i)

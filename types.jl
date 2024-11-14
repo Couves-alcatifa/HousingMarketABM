@@ -206,6 +206,7 @@ end
 mutable struct HouseInfo
     lastRent
     purchasePrice
+    renovationCosts
 end
 
 @enum BucketKey begin

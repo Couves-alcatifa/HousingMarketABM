@@ -123,7 +123,7 @@ end
 
 function calculateRentalBid(household, model, askPrice, consumerSurplus)
     demandValue = calculateLiquidSalary(household, model) * MAX_EFFORT_FOR_RENT
-    consumerSurplusMultiplier = calculateConsumerSurplusAddedValue(consumerSurplus)
+    consumerSurplusMultiplier = calculateConsumerSurplusAddedValueForRent(consumerSurplus)
     if (demandValue >= askPrice * consumerSurplusMultiplier)
         return askPrice * consumerSurplusMultiplier
     elseif demandValue >= askPrice
@@ -356,11 +356,8 @@ function clearHouseMarket(model)
 
                 totalCosts = marketPrice + calculateTransactionTaxes(marketPrice) + renovationCosts
                 margin = totalCosts - renovatedMarketPrice
-                addedValue = totalCosts - renovatedMarketPrice
-                if addedValue > 0
-                    addedValueTax = calculateIrs(addedValue)
-                    margin -= addedValueTax
-                end 
+                margin -= calculateAddedValueTax(renovatedMarketPrice, totalCosts)
+
                 if margin > marketPrice * EXPECTED_RENOVATION_RENTABILITY
                     maxMortgage = maxMortgageValue(model, household)
                     bidValue = (rand(95:100) / 100) * supply.price
@@ -608,12 +605,15 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     previousPurchasePrice = getPreviousPurchasePrice(model, supply.house)
 
     if previousPurchasePrice != Nothing
-        addedValue = previousPurchasePrice - bidValue
-        if addedValue > 0
-            addedValueTax = calculateIrs(addedValue)
-            seller.wealth -= addedValueTax
-            model.government.wealth += addedValueTax
+        renovationCosts = getRenovationCosts(model, supply.house)
+        if renovationCosts == Nothing
+            renovationCosts = 0
         end
+        totalCosts = previousPurchasePrice + renovationCosts 
+
+        addedValueTax = calculateAddedValueTax(bidValue, totalCosts)
+        seller.wealth -= addedValueTax
+        model.government.wealth += addedValueTax
     end
 
     updateHouseTransactionInfo(model, supply.house, bidValue)
@@ -859,6 +859,10 @@ function calculateConsumerSurplusAddedValue(consumerSurplus)
     return map_value(consumerSurplus, 6.0, 23.0, CONSUMER_SURPLUS_MIN, CONSUMER_SURPLUS_MAX)
 end
 
+function calculateConsumerSurplusAddedValueForRent(consumerSurplus)
+    return map_value(consumerSurplus, 6.0, 23.0, CONSUMER_SURPLUS_MIN_FOR_RENT, CONSUMER_SURPLUS_MAX_FOR_RENT)
+end
+
 function calculateProbabilityOfAcceptingBid(bid, askPrice)
     ratio = bid / askPrice
     return map_value(ratio, 0.85, 1.0, 0.05, 1.0)
@@ -1070,9 +1074,10 @@ end
 function isHouseViableForRenting(model, house)
     # if RENTS_INCREASE_CEILLING is being used, than the rentability should be calculated in some other way
     # potentially the starting price should also be higher
-    rentalPrice = calculate_rental_market_price(house, model) * (1 - RENT_TAX)
+    rentalGains = calculate_rental_market_price(house, model) * (1 - RENT_TAX)
     marketPrice = calculate_market_price(model, house)
-    return rentalPrice * 12 >= marketPrice * 0.05 # 5% rentability a year
+
+    return rentalGains * 12 >= marketPrice * 0.05 # 5% rentability a year
 end
 
 # TODO: this should be mostly focused in Lisbon...
@@ -1192,15 +1197,25 @@ function updateHouseRentalInfo(model, house, rent)
     if house in keys(model.housesInfo)
         model.housesInfo[house].lastRent = rent
     else
-        model.housesInfo[house] = HouseInfo(rent, Nothing)
+        model.housesInfo[house] = HouseInfo(rent, Nothing, Nothing)
     end
 end
 
 function updateHouseTransactionInfo(model, house, transactionPrice)
     if house in keys(model.housesInfo)
         model.housesInfo[house].purchasePrice = transactionPrice
+        # house is sold, so we should clear the renovation costs
+        model.housesInfo[house].renovationCosts = Nothing
     else
-        model.housesInfo[house] = HouseInfo(Nothing, transactionPrice)
+        model.housesInfo[house] = HouseInfo(Nothing, transactionPrice, Nothing)
+    end
+end
+
+function updateHouseRenovationCosts(model, house, renovationCosts)
+    if house in keys(model.housesInfo)
+        model.housesInfo[house].renovationCosts = renovationCosts
+    else
+        model.housesInfo[house] = HouseInfo(Nothing, Nothing, renovationCosts)
     end
 end
 
@@ -1218,4 +1233,20 @@ function getPreviousPurchasePrice(model, house)
     else
         return Nothing
     end
+end
+
+function getRenovationCosts(model, house)
+    if house in keys(model.housesInfo)
+        return model.housesInfo[house].renovationCosts
+    else
+        return Nothing
+    end
+end 
+
+function calculateAddedValueTax(gains, expenses)
+    taxableAddedValue = (gains - expenses) * ADDED_VALUE_TAXABLE_PERCENTAGE
+    if taxableAddedValue > 0
+        return calculateIrs(taxableAddedValue)
+    end
+    return 0
 end
