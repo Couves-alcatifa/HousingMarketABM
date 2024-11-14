@@ -240,6 +240,9 @@ construction_wealth(model) = model.construction_sector.wealth
 supply_volume(model) = copy(model.supply_size)
 demand_volume(model) = copy(model.demand_size)
 
+rental_supply_volume(model) = copy(model.rental_supply_size)
+rental_demand_volume(model) = copy(model.rental_demand_size)
+
 function newly_built_houses_for_sale(model)
     houses = House[]
     for supply in model.houseMarket.supply

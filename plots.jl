@@ -78,6 +78,32 @@ function plot_supply_and_demand(adf, mdf)
     return figures
 end
 
+function plot_rental_supply_and_demand(adf, mdf)
+    regional_supply = Dict(location => Float32[] for location in [Lisboa])
+    regional_demand = Dict(location => Float32[] for location in [Lisboa])
+
+    for step in 1:length(adf.step)
+        supply_step_dict = mdf.rental_supply_volume[step]
+        demand_step_dict = mdf.rental_demand_volume[step]
+        for location in [Lisboa]
+            push!(regional_supply[location], supply_step_dict[location])
+            push!(regional_demand[location], demand_step_dict[location])
+        end
+    end
+    figures = []
+    for location in [Lisboa]
+        figure = Figure(size = (600, 400))
+        ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Volume")
+        supply_lines = lines!(ax, adf.step, regional_supply[location], color = :blue)
+        supply_legends = "Supply in $(string(location))"
+        demand_lines = lines!(ax, adf.step, regional_demand[location], color = :red)
+        demand_legends = "Demand in $(string(location))"
+        figure[1, 2] = Legend(figure, [supply_lines, demand_lines], [supply_legends, demand_legends])
+        push!(figures, figure)
+    end
+    return figures
+end
+
 function plot_supply_and_demand_per_bucket(adf, mdf)
     figures = Dict(location => Dict(size_interval => Figure() for size_interval in instances(SizeInterval)) for location in [Lisboa])
     supply_per_bucket = Dict(location => Dict(size_interval => Float32[] for size_interval in instances(SizeInterval)) for location in [Lisboa])

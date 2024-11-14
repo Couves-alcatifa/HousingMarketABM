@@ -673,6 +673,30 @@ function rent_house(model, supply::RentalSupply)
 
     contract = Contract(seller.id, highestBidder, supply.house, actualBid)
 
+    content = "Rental: house.area = $(supply.house.area)\n"
+    content *= "Rental: house.location = $(string(supply.house.location))\n"
+    content *= "Rental: house percentile = $(supply.house.percentile)\n"
+    content *= "Rental: household.wealth = $(household.wealth)\n"
+    content *= "Rental: raw salary = $(string(calculateSalary(household, model)))\n" 
+    content *= "Rental: liquid salary = $(string(calculateLiquidSalary(household, model)))\n"
+    content *= "Rental: household percentile = $(household.percentile)\n"
+    content *= "Rental: household id = $(household.id)\n"
+    content *= "Rental: household size = $(household.size)\n"
+    content *= "Rental: household age = $(household.age)\n"
+    content *= "Rental: askPrice = $(supply.monthlyPrice)\n"
+    content *= "Rental: sellerId = $(supply.sellerId)\n"
+    content *= "Rental: bidValue = $(actualBid)\n"
+    content *= "Rental: pricePerm2 = $(actualBid / supply.house.area)\n"
+    content *= "Rental: contracts as landlord = $(household.contractsAsLandlord)\n"
+    content *= "Rental: contract as tenant = $(household.contractAsTenant)\n"
+    if supply.sellerId != -1
+        content *= "Rental: seller contracts as landlord = $(seller.contractsAsLandlord)\n"
+        content *= "Rental: seller contract as tenant = $(seller.contractAsTenant)\n"
+    end
+    content *= "########\n"
+    print(content)
+    TRANSACTION_LOG(content, model) 
+
     updateHouseRentalInfo(model, supply.house, actualBid)
     household.contractAsTenant = contract
     push!(seller.contractsAsLandlord, contract)
@@ -817,6 +841,8 @@ function measureSupplyAndDemandRegionally(model)
     for location in [Lisboa]
         model.demand_size[location] = 0
         model.supply_size[location] = 0
+        model.rental_demand_size[location] = 0
+        model.rental_supply_size[location] = 0
     end
     
     for demand in model.houseMarket.demand
@@ -826,6 +852,15 @@ function measureSupplyAndDemandRegionally(model)
     for supply in model.houseMarket.supply
         house = supply.house
         model.supply_size[house.location] += 1
+    end
+
+    for demand in model.rentalMarket.demand
+        household = model[demand.householdId]
+        model.rental_demand_size[household.residencyZone] += 1
+    end
+    for supply in model.rentalMarket.supply
+        house = supply.house
+        model.rental_supply_size[house.location] += 1
     end
 end
 
@@ -1031,45 +1066,6 @@ end
 function calculateTransactionTaxes(price)
     return calculateImt(price) + 0.008 * price - calculateTaxBenefits(price)
 end
-
-# function calculateImt(price)
-#     if price >= 1102920
-#         return price * 0.075
-#     elseif price >= 633453
-#         return price * 0.06
-#     end
-#     tax = 0
-
-#     if price >= 101917
-#         extra = (price - 101917) * 0.02
-#         if extra > (139412 - 101917) * 0.02
-#             extra = (139412 - 101917) * 0.02
-#         end
-#         tax += extra
-#     end
-#     if price >= 139412
-#         extra = (price - 139412) * 0.05
-#         if extra > (190086 - 139412) * 0.05
-#             extra = (190086 - 139412) * 0.05
-#         end
-#         tax += extra
-#     end
-#     if price >= 190086
-#         extra = (price - 190086) * 0.07
-#         if extra > (316772 - 190086) * 0.07
-#             extra = (316772 - 190086) * 0.07
-#         end
-#         tax += extra
-#     end
-#     if price >= 316772
-#         extra = (price - 316772) * 0.08
-#         if extra > (633453 - 316772) * 0.08
-#             extra = (633453 - 316772) * 0.08
-#         end
-#         tax += extra
-#     end
-#     return tax
-# end
 
 function isHouseViableForRenting(model, house)
     # if RENTS_INCREASE_CEILLING is being used, than the rentability should be calculated in some other way

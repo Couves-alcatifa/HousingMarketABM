@@ -99,6 +99,8 @@ function wealth_model()
         :salary_multiplier => 1.0,
         :demand_size => Dict(location => 0 for location in [Lisboa]),
         :supply_size => Dict(location => 0 for location in [Lisboa]),
+        :rental_demand_size => Dict(location => 0 for location in [Lisboa]),
+        :rental_supply_size => Dict(location => 0 for location in [Lisboa]),
         :construction_sector => initiateConstructionSector(),
         :births => 0, 
         :breakups => 0,
@@ -563,6 +565,7 @@ adata = [(household, sum_wealth),(household, sum_houses),
          (household, wealth_distribution), (household, money_distribution), (household, size_distribution), (household, age_distribution)]
 mdata = [count_supply, gov_wealth, construction_wealth, company_wealth,
          bank_wealth, calculate_houses_prices_perm2, supply_volume, demand_volume,
+         rental_supply_volume, rental_demand_volume,
          calculate_prices_in_supply, irs, vat, subsidyRate, salaryRate, 
          births, breakups, deaths, children_leaving_home, n_of_households,
          ## Gov Money flow ##
@@ -592,6 +595,12 @@ supply_and_demand_figures_regionally = plot_supply_and_demand(agent_data[2:end, 
 locations = [Lisboa]
 for i in eachindex(supply_and_demand_figures_regionally)
     save("$output_folder/supply_and_demand_in_$(string(locations[i])).png", supply_and_demand_figures_regionally[i])
+end
+
+supply_and_demand_figures_regionally = plot_rental_supply_and_demand(agent_data[2:end, :], model_data[2:end, :])
+locations = [Lisboa]
+for i in eachindex(supply_and_demand_figures_regionally)
+    save("$output_folder/rental_supply_and_demand_in_$(string(locations[i])).png", supply_and_demand_figures_regionally[i])
 end
 
 mkdir("$output_folder/supply_and_demand_per_bucket")
