@@ -141,7 +141,7 @@ end
 
 # TODO: region hack
 function handle_migrations(model)
-    for location in instances(HouseLocation)
+    for location in [Lisboa]
         expectedMigrants = migrationValueMap[location] / 12
         stdev = expectedMigrants * 0.2
         if stdev < 0

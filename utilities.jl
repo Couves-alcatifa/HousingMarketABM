@@ -694,7 +694,7 @@ function InitiateBuckets()
                         size_interval => Float64[]
                         for size_interval in instances(SizeInterval))
                     for quartile in [25, 50, 75, 100])
-                  for location in instances(HouseLocation))
+                  for location in [Lisboa])
     return result
 end
 
@@ -704,7 +704,7 @@ function InitiatePriceIndex()
                         size_interval => 0.0
                         for size_interval in instances(SizeInterval))
                     for quartile in [25, 50, 75, 100])
-                  for location in instances(HouseLocation))
+                  for location in [Lisboa])
     return result
 end
 
@@ -746,7 +746,7 @@ end
 
 function trimBucketsIfNeeded(model)
     # avoid holding to many transaction in the buckets, keep the most recent MAX_BUCKET_SIZE (initially 30)
-    for location in instances(HouseLocation)
+    for location in [Lisboa]
         for quartile in [25, 50, 75, 100]
             for size_interval in instances(SizeInterval) 
                 if length(model.buckets[location][quartile][size_interval]) > MAX_BUCKET_SIZE
@@ -814,7 +814,7 @@ end
 
 
 function measureSupplyAndDemandRegionally(model)
-    for location in instances(HouseLocation)
+    for location in [Lisboa]
         model.demand_size[location] = 0
         model.supply_size[location] = 0
     end
@@ -830,7 +830,7 @@ function measureSupplyAndDemandRegionally(model)
 end
 
 function measureSupplyAndDemandPerBucket(model)
-    for location in instances(HouseLocation)
+    for location in [Lisboa]
         for size_interval in instances(SizeInterval)
             measureDemandForSizeAndRegion(model, size_interval, location)
             measureSupplyForSizeAndRegion(model, size_interval, location)
@@ -1068,6 +1068,8 @@ end
 # end
 
 function isHouseViableForRenting(model, house)
+    # if RENTS_INCREASE_CEILLING is being used, than the rentability should be calculated in some other way
+    # potentially the starting price should also be higher
     rentalPrice = calculate_rental_market_price(house, model) * (1 - RENT_TAX)
     marketPrice = calculate_market_price(model, house)
     return rentalPrice * 12 >= marketPrice * 0.05 # 5% rentability a year
@@ -1083,7 +1085,7 @@ function nonResidentsBuyHouses(model)
     if model.steps >= 72
         return
     end
-    for location in instances(HouseLocation)
+    for location in [Lisboa]
         housesToBuy = housesBoughtByNoNResidentsPerRegion(location)
         housesBought = 0
         sort!(model.houseMarket.supply, lt=sortRandomly)

@@ -4,7 +4,7 @@ function initiateHouses(model)
     houses_sizes = vcat(houses_sizes, rand(UInt16(80):UInt16(120), Int64(NUMBER_OF_HOUSES/4)))
     houses_sizes = vcat(houses_sizes, rand(UInt16(120):UInt16(180), Int64(NUMBER_OF_HOUSES/4)))
     
-    for location in instances(HouseLocation)
+    for location in [Lisboa]
         model.houses[location] = House[]
     end
     sort!(houses_sizes, lt=sortRandomly)
@@ -13,8 +13,8 @@ end
 
 # TODO: region hack
 function initiateHousesPerRegion(model)
-    # for location in instances(HouseLocation)
-    for location in instances(HouseLocation)
+    # for location in [Lisboa]
+    for location in [Lisboa]
         houses_sizes = rand(20:29, Int64(ceil(NUMBER_OF_HOUSES_PER_SIZE_MAP[LessThan29][location])))
         houses_sizes = vcat(houses_sizes, rand(30:39, Int64(ceil(NUMBER_OF_HOUSES_PER_SIZE_MAP[LessThan39][location]))))
         houses_sizes = vcat(houses_sizes, rand(40:49, Int64(ceil(NUMBER_OF_HOUSES_PER_SIZE_MAP[LessThan49][location]))))
@@ -38,7 +38,7 @@ end
 
 # TODO: region hack
 function initiateHouseholds(model, households_initial_ages, greedinesses)
-    for location in instances(HouseLocation)
+    for location in [Lisboa]
         for size in [1, 2, 3, 4, 5]
             number_of_households = HOUSEHOLDS_SIZES_MAP[size][location]
             for i in 1:number_of_households
@@ -60,7 +60,7 @@ end
 
 function assignHousesToHouseholds(model)
     houses_sizes_for_rental = Dict()
-    for location in instances(HouseLocation)
+    for location in [Lisboa]
         houses_sizes_for_rental[location] = rand(20:29, Int64(ceil(NUMBER_OF_HOUSES_FOR_RENTAL_PER_SIZE_MAP[LessThan29][location])))
         houses_sizes_for_rental[location] = vcat(houses_sizes_for_rental[location], rand(30:39, Int64(ceil(NUMBER_OF_HOUSES_FOR_RENTAL_PER_SIZE_MAP[LessThan39][location]))))
         houses_sizes_for_rental[location] = vcat(houses_sizes_for_rental[location], rand(40:49, Int64(ceil(NUMBER_OF_HOUSES_FOR_RENTAL_PER_SIZE_MAP[LessThan49][location]))))
@@ -75,7 +75,7 @@ function assignHousesToHouseholds(model)
     end
 
     zones_to_n_of_home_owners = Dict()
-    for location in instances(HouseLocation)
+    for location in [Lisboa]
         zones_to_n_of_home_owners[location] = 0
     end
     not_home_owners = []
