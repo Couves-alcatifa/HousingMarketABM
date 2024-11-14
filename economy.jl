@@ -312,9 +312,9 @@ function put_house_to_rent(household::MyMultiAgent, model, house)
     askRent = calculate_rental_market_price(house, model)
     previousRent = getPreviousRent(model, house)
 
-    if previousRent != Nothing && askRent > previousRent * RENTS_INCREASE_CEILLING
-        askRent = previousRent * RENTS_INCREASE_CEILLING
-    end
+    # if previousRent != Nothing && askRent > previousRent * RENTS_INCREASE_CEILLING
+    #     askRent = previousRent * RENTS_INCREASE_CEILLING
+    # end
     push!(model.rentalMarket.supply, RentalSupply(house, askRent, household.id, Bid[]))
     push!(model.housesInRentalMarket, house)
     # # removing house from agent when putting to sale
