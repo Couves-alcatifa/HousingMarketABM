@@ -126,8 +126,6 @@ function calculateRentalBid(household, model, askPrice, consumerSurplus)
     consumerSurplusMultiplier = calculateConsumerSurplusAddedValueForRent(consumerSurplus)
     if (demandValue >= askPrice * consumerSurplusMultiplier)
         return askPrice * consumerSurplusMultiplier
-    elseif demandValue >= askPrice
-        return askPrice
     else
         return demandValue
     end
