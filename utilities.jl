@@ -335,7 +335,7 @@ function clearHouseMarket(model)
             end
 
             if demand.type == ForRental
-                if isHouseViableForRenting(model, house)
+                if rand() < isHouseViableForRenting(model, house)
                     maxMortgage = maxMortgageValue(model, household)
                     bidValue = (rand(95:100) / 100) * supply.price
                     if maxMortgage + household.wealth > bidValue + calculateTransactionTaxes(bidValue)
@@ -1065,13 +1065,15 @@ function calculateTransactionTaxes(price)
     return calculateImt(price) + 0.008 * price - calculateTaxBenefits(price)
 end
 
+# returns the probability of a household to think this house is a good fit for renting
 function isHouseViableForRenting(model, house)
     # if RENTS_INCREASE_CEILLING is being used, than the rentability should be calculated in some other way
     # potentially the starting price should also be higher
     rentalGains = calculate_rental_market_price(house, model) * (1 - RENT_TAX)
     marketPrice = calculate_market_price(model, house)
 
-    return rentalGains * 12 >= marketPrice * 0.05 # 5% rentability a year
+    rentability = (rentalGains * 12) / marketPrice
+    return  map_value(rentability, 0, 0.07, 0, 1)
 end
 
 # TODO: this should be mostly focused in Lisbon...

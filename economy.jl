@@ -341,7 +341,7 @@ function calculate_subsidy(household, model)
 end
 
 function decideToRent(household, model, house)
-    if isHouseViableForRenting(model, house) && rand() < 0.70
+    if rand() < isHouseViableForRenting(model, house)
         return true
     end
     return false
