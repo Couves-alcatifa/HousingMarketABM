@@ -27,9 +27,10 @@ function initiateHousesPerRegion(model)
         houses_sizes = vcat(houses_sizes, rand(200:300, Int64(ceil(NUMBER_OF_HOUSES_PER_SIZE_MAP[MoreThan200][location]))))
         sort!(houses_sizes, lt=sortRandomly)
         for i in eachindex(houses_sizes)
-            if i < LOCAL_HOUSING_MAP[location]
-                continue
-            end
+            ### CRASH SCENARIO
+            # if i < LOCAL_HOUSING_MAP[location]
+            #     continue
+            # end
             push!(model.houses[location], House(UInt16(houses_sizes[1]), location, NotSocialNeighbourhood, 1.0))
             splice!(houses_sizes, 1)
         end

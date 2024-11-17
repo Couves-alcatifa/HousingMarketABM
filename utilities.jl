@@ -1083,6 +1083,7 @@ function housesBoughtByNoNResidentsPerRegion(location)
 end
 
 function nonResidentsBuyHouses(model)
+    ### CRASH SCENARIO
     if model.steps >= 72
         return
     end

@@ -183,6 +183,7 @@ function model_step!(model)
     measureSupplyAndDemandPerBucket(model)
     if model.steps % 12 == 0
         # considering start is in 2003
+        # ### CRASH SCENARIO
         if model.steps == 12
             # end of 2003
             model.salary_multiplier *= 0.95
