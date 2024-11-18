@@ -392,10 +392,10 @@ function supply_decisions(household, model)
         #     end
         end
         if decideToRent(household, model, house)
-            TRANSACTION_LOG("Household decided to rent", model)
+            TRANSACTION_LOG("Household decided to rent\n", model)
             put_house_to_rent(household, model, house)
         else # decides to sell...
-            TRANSACTION_LOG("Household decided to sell", model)
+            TRANSACTION_LOG("Household decided to sell\n", model)
             put_house_to_sale(household, model, houseIdx)
         end
         houseIdx += 1
@@ -431,12 +431,12 @@ function home_owner_decisions(household, model)
         # WARNING: this might be computationally expensive
         marketPrice = calculate_market_price(model, House(rand(40:100), household.residencyZone, NotSocialNeighbourhood, 1.0, rand(1:100)))
         mortgage = maxMortgageValue(model, household)
-        if household.wealth + mortgage > marketPrice
+        if household.wealth + mortgage > marketPrice * 3
             if rand() < 0.50
-                TRANSACTION_LOG("Household decided to invest in rental", model)
+                TRANSACTION_LOG("Household decided to invest in rental\n", model)
                 push!(model.houseMarket.demand, HouseDemand(household.id, SupplyMatch[], ForRental))
             else
-                TRANSACTION_LOG("Household decided to invest in renovation", model)
+                TRANSACTION_LOG("Household decided to invest in renovation\n", model)
                 push!(model.houseMarket.demand, HouseDemand(household.id, SupplyMatch[], ForInvestment))
             end
         end
