@@ -61,21 +61,8 @@ end
 function wealth_model()
 
     start_time = time()
-    houses_sizes = rand(30:60, Int64(NUMBER_OF_HOUSEHOLDS/4))
-    houses_sizes = vcat(houses_sizes, rand(60:80, Int64(NUMBER_OF_HOUSEHOLDS/4)))
-    houses_sizes = vcat(houses_sizes, rand(80:120, Int64(NUMBER_OF_HOUSEHOLDS/4)))
-    houses_sizes = vcat(houses_sizes, rand(120:180, Int64(NUMBER_OF_HOUSEHOLDS/4)))
-    
-    number_of_household_in_fertile_age = Int64(round(NUMBER_OF_HOUSEHOLDS * RATIO_OF_FERTILE_WOMEN))
-    number_of_households_in_not_fertile_age = NUMBER_OF_HOUSEHOLDS - number_of_household_in_fertile_age
-    households_initial_ages = rand(20:44, number_of_household_in_fertile_age)
-    households_initial_ages = vcat(households_initial_ages, rand(44:58, Int64(round(number_of_households_in_not_fertile_age/3))))
-    households_initial_ages = vcat(households_initial_ages, rand(58:75, Int64(round(number_of_households_in_not_fertile_age/3))))
-    households_initial_ages = vcat(households_initial_ages, rand(75:100, Int64(round(number_of_households_in_not_fertile_age/3))))
-    
+
     sort!(households_initial_ages, lt=sortRandomly)
-    # per quartile
-    houses_prices_per_m2 = [1300, 1800, 2500]
     
     # initiate greediness
     greedinesses = rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV), NUMBER_OF_HOUSEHOLDS)
@@ -422,14 +409,14 @@ function home_owner_decisions(household, model)
         put_house_to_sale(household, model, 1)
         not_home_owner_decisions(household, model)
     else
-        if household.percentile > 85 && rand() < 0.05
+        if household.percentile < 90 || rand() > 0.05
             # not all household think about investing
             # and it is a slow decision
             return
         end
         # lets assess the household economical situation
         # WARNING: this might be computationally expensive
-        marketPrice = calculate_market_price(model, House(rand(40:100), household.residencyZone, NotSocialNeighbourhood, 1.0, rand(1:100)))
+        marketPrice = calculate_market_price(model, House(rand(60:100), household.residencyZone, NotSocialNeighbourhood, 1.0, rand(50:100)))
         mortgage = maxMortgageValue(model, household)
         if household.wealth + mortgage > marketPrice * 3
             if rand() < 0.50
