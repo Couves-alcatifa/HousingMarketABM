@@ -392,6 +392,7 @@ function supply_decisions(household, model)
         #     end
         end
         if decideToRent(household, model, house)
+            TRANSACTION_LOG("Household decided to rent")
             put_house_to_rent(household, model, house)
         else # decides to sell...
             put_house_to_sale(household, model, houseIdx)
@@ -420,17 +421,20 @@ function home_owner_decisions(household, model)
         put_house_to_sale(household, model, 1)
         not_home_owner_decisions(household, model)
     else
+        if household.percentile < 85 && rand() < 0.05
+            # not all household think about investing
+            # and it is a slow decision
+            return
+        end
         # lets assess the household economical situation
         # WARNING: this might be computationally expensive
         marketPrice = calculate_market_price(model, House(rand(40:100), household.residencyZone, NotSocialNeighbourhood, 1.0, rand(1:100)))
         mortgage = maxMortgageValue(model, household)
         if household.wealth + mortgage > marketPrice
-            if rand() < 0.15 # not everyone who can will do this do
-                if rand() < 0.50
-                    push!(model.houseMarket.demand, HouseDemand(household.id, SupplyMatch[], ForRental))
-                else
-                    push!(model.houseMarket.demand, HouseDemand(household.id, SupplyMatch[], ForInvestment))
-                end
+            if rand() < 0.50
+                push!(model.houseMarket.demand, HouseDemand(household.id, SupplyMatch[], ForRental))
+            else
+                push!(model.houseMarket.demand, HouseDemand(household.id, SupplyMatch[], ForInvestment))
             end
         end
     end
