@@ -335,7 +335,7 @@ function clearHouseMarket(model)
             end
 
             if demand.type == ForRental
-                if rand() < isHouseViableForRenting(model, house)
+                if isHouseViableForRenting(model, house)
                     maxMortgage = maxMortgageValue(model, household)
                     bidValue = (rand(95:100) / 100) * supply.price
                     if maxMortgage + household.wealth > bidValue + calculateTransactionTaxes(bidValue)
@@ -1073,7 +1073,7 @@ function isHouseViableForRenting(model, house)
     marketPrice = calculate_market_price(model, house)
 
     rentability = (rentalGains * 12) / marketPrice
-    return  map_value(rentability, 0, 0.07, 0, 1)
+    return rand() < map_value(rentability, 0, 0.07, 0, 1)
 end
 
 # TODO: this should be mostly focused in Lisbon...

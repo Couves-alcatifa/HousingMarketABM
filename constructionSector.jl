@@ -123,6 +123,7 @@ function updateConstructionsPerBucket(model, location, size_interval)
             updateHouseRenovationCosts(model, pendingRenovation.house, costs + tax)
             pendingRenovation.house.percentile = rand(95:100)
             push!(pendingRenovation.household.houses, pendingRenovation.house)
+            put_house_to_sale(pendingRenovation.household, model, length(pendingRenovation.household.houses))
             splice!(model.construction_sector.pendingRenovations, i)
         else
             pendingRenovation.time += 1

@@ -342,7 +342,7 @@ function calculate_subsidy(household, model)
 end
 
 function decideToRent(household, model, house)
-    if rand() < isHouseViableForRenting(model, house)
+    if isHouseViableForRenting(model, house)
         return true
     end
     return false
@@ -392,9 +392,10 @@ function supply_decisions(household, model)
         #     end
         end
         if decideToRent(household, model, house)
-            TRANSACTION_LOG("Household decided to rent")
+            TRANSACTION_LOG("Household decided to rent", model)
             put_house_to_rent(household, model, house)
         else # decides to sell...
+            TRANSACTION_LOG("Household decided to sell", model)
             put_house_to_sale(household, model, houseIdx)
         end
         houseIdx += 1
@@ -432,8 +433,10 @@ function home_owner_decisions(household, model)
         mortgage = maxMortgageValue(model, household)
         if household.wealth + mortgage > marketPrice
             if rand() < 0.50
+                TRANSACTION_LOG("Household decided to invest in rental", model)
                 push!(model.houseMarket.demand, HouseDemand(household.id, SupplyMatch[], ForRental))
             else
+                TRANSACTION_LOG("Household decided to invest in renovation", model)
                 push!(model.houseMarket.demand, HouseDemand(household.id, SupplyMatch[], ForInvestment))
             end
         end
