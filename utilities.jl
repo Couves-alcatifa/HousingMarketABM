@@ -240,30 +240,52 @@ function calculateLiquidSalary(household, model)
 end
 
 function calculateIrs(income)
-    if income <= 820
-        return 0
-    elseif income <= 935
-        return calculateIrs(820) + (income - 820) * 0.13
-    elseif income <= 1125
-        return calculateIrs(935) + (income - 935) * 0.165
-    elseif income <= 1175
-        return calculateIrs(1125) + (income - 1125) * 0.22
-    elseif income <= 1769
-        return calculateIrs(1175) + (income - 1175) * 0.25
-    elseif income <= 2057
-        return calculateIrs(1769) + (income - 1769) * 0.32
-    elseif income <= 2408
-        return calculateIrs(2057) + (income - 2057) * 0.355
-    elseif income <= 3201
-        return calculateIrs(2408) + (income - 2408) * 0.3872
-    elseif income <= 5492
-        return calculateIrs(3201) + (income - 3201) * 0.4005
-    elseif income <= 20021
-        return calculateIrs(5492) + (income - 5492) * 0.4495
-    else
-        return calculateIrs(20021) + (income - 20021) * 0.4717
+    thresholds = [820, 935, 1125, 1175, 1769, 2057, 2408, 3201, 5492, 20021]
+    rates = [0.0, 0.13, 0.165, 0.22, 0.25, 0.32, 0.355, 0.3872, 0.4005, 0.4495, 0.4717]
+
+    tax = 0.0
+    previous_threshold = 0.0
+
+    for i in eachindex(thresholds)
+        if income <= thresholds[i]
+            tax += (income - previous_threshold) * rates[i]
+            return tax
+        else
+            tax += (thresholds[i] - previous_threshold) * rates[i]
+            previous_threshold = thresholds[i]
+        end
     end
+
+    # Handle income above the last threshold
+    tax += (income - previous_threshold) * rates[end]
+    return tax
 end
+
+# function calculateIrs(income)
+#     if income <= 820
+#         return 0
+#     elseif income <= 935
+#         return calculateIrs(820) + (income - 820) * 0.13
+#     elseif income <= 1125
+#         return calculateIrs(935) + (income - 935) * 0.165
+#     elseif income <= 1175
+#         return calculateIrs(1125) + (income - 1125) * 0.22
+#     elseif income <= 1769
+#         return calculateIrs(1175) + (income - 1175) * 0.25
+#     elseif income <= 2057
+#         return calculateIrs(1769) + (income - 1769) * 0.32
+#     elseif income <= 2408
+#         return calculateIrs(2057) + (income - 2057) * 0.355
+#     elseif income <= 3201
+#         return calculateIrs(2408) + (income - 2408) * 0.3872
+#     elseif income <= 5492
+#         return calculateIrs(3201) + (income - 3201) * 0.4005
+#     elseif income <= 20021
+#         return calculateIrs(5492) + (income - 5492) * 0.4495
+#     else
+#         return calculateIrs(20021) + (income - 20021) * 0.4717
+#     end
+# end
 
 function calculateSocialSecurityTax(income)
     return income * SOCIAL_SECURITY_TAX
