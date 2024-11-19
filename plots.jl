@@ -53,19 +53,19 @@ function plot_total_wealth(adf, mdf)
 end
 
 function plot_supply_and_demand(adf, mdf)
-    regional_supply = Dict(location => Float32[] for location in [Lisboa])
-    regional_demand = Dict(location => Float32[] for location in [Lisboa])
+    regional_supply = Dict(location => Float32[] for location in instances(HouseLocation))
+    regional_demand = Dict(location => Float32[] for location in instances(HouseLocation))
 
     for step in 1:length(adf.step)
         supply_step_dict = mdf.supply_volume[step]
         demand_step_dict = mdf.demand_volume[step]
-        for location in [Lisboa]
+        for location in instances(HouseLocation)
             push!(regional_supply[location], supply_step_dict[location])
             push!(regional_demand[location], demand_step_dict[location])
         end
     end
     figures = []
-    for location in [Lisboa]
+    for location in instances(HouseLocation)
         figure = Figure(size = (600, 400))
         ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Volume")
         supply_lines = scatterlines!(ax, adf.step, regional_supply[location], color = :blue)
@@ -79,19 +79,19 @@ function plot_supply_and_demand(adf, mdf)
 end
 
 function plot_rental_supply_and_demand(adf, mdf)
-    regional_supply = Dict(location => Float32[] for location in [Lisboa])
-    regional_demand = Dict(location => Float32[] for location in [Lisboa])
+    regional_supply = Dict(location => Float32[] for location in instances(HouseLocation))
+    regional_demand = Dict(location => Float32[] for location in instances(HouseLocation))
 
     for step in 1:length(adf.step)
         supply_step_dict = mdf.rental_supply_volume[step]
         demand_step_dict = mdf.rental_demand_volume[step]
-        for location in [Lisboa]
+        for location in instances(HouseLocation)
             push!(regional_supply[location], supply_step_dict[location])
             push!(regional_demand[location], demand_step_dict[location])
         end
     end
     figures = []
-    for location in [Lisboa]
+    for location in instances(HouseLocation)
         figure = Figure(size = (600, 400))
         ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Volume")
         supply_lines = scatterlines!(ax, adf.step, regional_supply[location], color = :blue)
@@ -105,21 +105,21 @@ function plot_rental_supply_and_demand(adf, mdf)
 end
 
 function plot_supply_and_demand_per_bucket(adf, mdf)
-    figures = Dict(location => Dict(size_interval => Figure() for size_interval in instances(SizeInterval)) for location in [Lisboa])
-    supply_per_bucket = Dict(location => Dict(size_interval => Float32[] for size_interval in instances(SizeInterval)) for location in [Lisboa])
-    demand_per_bucket = Dict(location => Dict(size_interval => Float32[] for size_interval in instances(SizeInterval)) for location in [Lisboa])
+    figures = Dict(location => Dict(size_interval => Figure() for size_interval in instances(SizeInterval)) for location in instances(HouseLocation))
+    supply_per_bucket = Dict(location => Dict(size_interval => Float32[] for size_interval in instances(SizeInterval)) for location in instances(HouseLocation))
+    demand_per_bucket = Dict(location => Dict(size_interval => Float32[] for size_interval in instances(SizeInterval)) for location in instances(HouseLocation))
 
     for step in 1:length(adf.step)
         supply_step_dict = mdf.supply_per_bucket[step]
         demand_step_dict = mdf.demand_per_bucket[step]
-        for location in [Lisboa]
+        for location in instances(HouseLocation)
             for size_interval in instances(SizeInterval)
                 push!(supply_per_bucket[location][size_interval], supply_step_dict[location][size_interval])
                 push!(demand_per_bucket[location][size_interval], demand_step_dict[location][size_interval])
             end
         end
     end
-    for location in [Lisboa]
+    for location in instances(HouseLocation)
         for size_interval in instances(SizeInterval)
             figure = Figure(size = (600, 400))
             ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Volume")
@@ -299,7 +299,7 @@ function plot_houses_prices_per_region(adf, mdf)
     figure = Figure(size = (600, 400))
     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
     organizedPerRegion = Dict() # this will be filled with [[MeanValueForAmadoraStep1, ..Step2, ...Step3], [MeanValueForLisboaStep1, ...]]
-    for location in [Lisboa]
+    for location in instances(HouseLocation)
         organizedPerRegion[location] = Float32[]
         for step in 1:NUMBER_OF_STEPS
             step_values = Float32[]
@@ -315,7 +315,7 @@ function plot_houses_prices_per_region(adf, mdf)
     end
     lines = []
     locations = []
-    for location in [Lisboa]
+    for location in instances(HouseLocation)
         println("adf.step = $(adf.step)")
         println("organizedPerRegion[location] = $(organizedPerRegion[location])")
         push!(lines, scatterlines!(ax, adf.step, organizedPerRegion[location], color = color_map[location]))
@@ -350,7 +350,7 @@ function plot_rents_of_new_contracts_per_region(adf, mdf)
     figure = Figure(size = (600, 400))
     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
     organizedPerRegion = Dict() # this will be filled with [[MeanValueForAmadoraStep1, ..Step2, ...Step3], [MeanValueForLisboaStep1, ...]]
-    for location in [Lisboa]
+    for location in instances(HouseLocation)
         organizedPerRegion[location] = Float32[]
         for step in 1:NUMBER_OF_STEPS
             step_values = Float32[]
@@ -366,7 +366,7 @@ function plot_rents_of_new_contracts_per_region(adf, mdf)
     end
     lines = []
     locations = []
-    for location in [Lisboa]
+    for location in instances(HouseLocation)
         push!(lines, scatterlines!(ax, adf.step, organizedPerRegion[location], color = color_map[location]))
         push!(locations, string(location))
     end
@@ -379,7 +379,7 @@ function plot_rents_per_region(adf, mdf)
     figure = Figure(size = (600, 400))
     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
     organizedPerRegion = Dict()
-    for location in [Lisboa]
+    for location in instances(HouseLocation)
         organizedPerRegion[location] = Float32[]
         for step in 1:NUMBER_OF_STEPS
             push!(organizedPerRegion[location], mdf.contractRents[step][location])
@@ -387,7 +387,7 @@ function plot_rents_per_region(adf, mdf)
     end
     lines = []
     locations = []
-    for location in [Lisboa]
+    for location in instances(HouseLocation)
         push!(lines, scatterlines!(ax, 1:NUMBER_OF_STEPS, organizedPerRegion[location], color = color_map[location]))
         push!(locations, string(location))
     end
@@ -401,7 +401,7 @@ function plot_number_of_houses_per_region(adf, mdf)
     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Quantity")
     lines = []
     locations = []
-    for location in [Lisboa]
+    for location in instances(HouseLocation)
         regional_number_of_houses = Int32[]
         for step in 1:NUMBER_OF_STEPS
             push!(regional_number_of_houses, mdf.number_of_houses_per_region[step][location]) 
@@ -419,8 +419,8 @@ function plot_number_of_houses_built_per_region(adf, mdf)
     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Quantity")
     lines = []
     sizes_intervals = []
-    figures = Dict(location => Figure() for location in [Lisboa])
-    for location in [Lisboa]
+    figures = Dict(location => Figure() for location in instances(HouseLocation))
+    for location in instances(HouseLocation)
         for size_interval in instances(SizeInterval)
             regional_number_of_houses = Int32[]
             for step in 1:NUMBER_OF_STEPS
@@ -444,7 +444,7 @@ function plot_number_of_transactions_per_region(adf, mdf)
     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Quantity")
     lines = []
     locations = []
-    for location in [Lisboa]
+    for location in instances(HouseLocation)
         regional_number_of_transaction = Int32[]
         for step in 1:NUMBER_OF_STEPS
             push!(regional_number_of_transaction, length(mdf.transactions_per_region[step][location]))

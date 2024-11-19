@@ -738,7 +738,7 @@ function InitiateBuckets()
                         size_interval => Float64[]
                         for size_interval in instances(SizeInterval))
                     for quartile in [25, 50, 75, 100])
-                  for location in [Lisboa])
+                  for location in instances(HouseLocation))
     return result
 end
 
@@ -748,7 +748,7 @@ function InitiatePriceIndex()
                         size_interval => 0.0
                         for size_interval in instances(SizeInterval))
                     for quartile in [25, 50, 75, 100])
-                  for location in [Lisboa])
+                  for location in instances(HouseLocation))
     return result
 end
 
@@ -790,7 +790,7 @@ end
 
 function trimBucketsIfNeeded(model)
     # avoid holding to many transaction in the buckets, keep the most recent MAX_BUCKET_SIZE (initially 30)
-    for location in [Lisboa]
+    for location in instances(HouseLocation)
         for quartile in [25, 50, 75, 100]
             for size_interval in instances(SizeInterval) 
                 if length(model.buckets[location][quartile][size_interval]) > MAX_BUCKET_SIZE
@@ -858,7 +858,7 @@ end
 
 
 function measureSupplyAndDemandRegionally(model)
-    for location in [Lisboa]
+    for location in instances(HouseLocation)
         model.demand_size[location] = 0
         model.supply_size[location] = 0
         model.rental_demand_size[location] = 0
@@ -885,7 +885,7 @@ function measureSupplyAndDemandRegionally(model)
 end
 
 function measureSupplyAndDemandPerBucket(model)
-    for location in [Lisboa]
+    for location in instances(HouseLocation)
         for size_interval in instances(SizeInterval)
             measureDemandForSizeAndRegion(model, size_interval, location)
             measureSupplyForSizeAndRegion(model, size_interval, location)
@@ -1109,7 +1109,7 @@ function nonResidentsBuyHouses(model)
     # if model.steps >= 72
     #     return
     # end
-    for location in [Lisboa]
+    for location in instances(HouseLocation)
         housesToBuy = housesBoughtByNoNResidentsPerRegion(location)
         housesBought = 0
         sort!(model.houseMarket.supply, lt=sortRandomly)

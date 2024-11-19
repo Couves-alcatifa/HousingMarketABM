@@ -85,15 +85,15 @@ function wealth_model()
         :company_wealth => STARTING_COMPANY_WEALTH,
         :bank => Bank(STARTING_BANK_WEALTH, STARTING_INTEREST_RATE, LTV, DSTI),
         :transactions => Transaction[],
-        :transactions_per_region => Dict(location => [] for location in [Lisboa]),
-        :rents_per_region => Dict(location => [] for location in [Lisboa]),
+        :transactions_per_region => Dict(location => [] for location in instances(HouseLocation)),
+        :rents_per_region => Dict(location => [] for location in instances(HouseLocation)),
         :inheritages => Inheritage[],
         :contracts => Contract[],
         :salary_multiplier => 1.0,
-        :demand_size => Dict(location => 0 for location in [Lisboa]),
-        :supply_size => Dict(location => 0 for location in [Lisboa]),
-        :rental_demand_size => Dict(location => 0 for location in [Lisboa]),
-        :rental_supply_size => Dict(location => 0 for location in [Lisboa]),
+        :demand_size => Dict(location => 0 for location in instances(HouseLocation)),
+        :supply_size => Dict(location => 0 for location in instances(HouseLocation)),
+        :rental_demand_size => Dict(location => 0 for location in instances(HouseLocation)),
+        :rental_supply_size => Dict(location => 0 for location in instances(HouseLocation)),
         :construction_sector => initiateConstructionSector(),
         :births => 0, 
         :breakups => 0,
@@ -112,9 +112,9 @@ function wealth_model()
         :rentalBuckets => InitiateBuckets(), # Houses characteristics => Prices[]
         :mortgagesInStep => Mortgage[],
         :householdsInDemand => Int[],
-        :housesBuiltPerRegion => Dict(location => Dict(size_interval => House[] for size_interval in instances(SizeInterval)) for location in [Lisboa]),
-        :supplyPerBucket => Dict(location => Dict(size_interval => 0 for size_interval in instances(SizeInterval)) for location in [Lisboa]),
-        :demandPerBucket => Dict(location => Dict(size_interval => 0 for size_interval in instances(SizeInterval)) for location in [Lisboa]),
+        :housesBuiltPerRegion => Dict(location => Dict(size_interval => House[] for size_interval in instances(SizeInterval)) for location in instances(HouseLocation)),
+        :supplyPerBucket => Dict(location => Dict(size_interval => 0 for size_interval in instances(SizeInterval)) for location in instances(HouseLocation)),
+        :demandPerBucket => Dict(location => Dict(size_interval => 0 for size_interval in instances(SizeInterval)) for location in instances(HouseLocation)),
         :housesInRentalMarket => Set(),
         :rentalPriceIndex => InitiatePriceIndex(),
         :housesInfo => Dict(),
@@ -141,7 +141,7 @@ function model_step!(model)
     start_time = time()
     measureSupplyAndDemandRegionally(model)
     model.steps += 1
-    for location in [Lisboa]
+    for location in instances(HouseLocation)
         push!(model.transactions_per_region[location], Transaction[])
         push!(model.rents_per_region[location], Transaction[])
         for size_interval in instances(SizeInterval)
@@ -593,13 +593,13 @@ save("$output_folder/houses_owned.png", plot_houses_owned(agent_data[2:end, :], 
 save("$output_folder/total_wealth.png", plot_total_wealth(agent_data[2:end, :], model_data[2:end, :]))
 
 supply_and_demand_figures_regionally = plot_supply_and_demand(agent_data[2:end, :], model_data[2:end, :])
-locations = [Lisboa]
+locations = instances(HouseLocation)
 for i in eachindex(supply_and_demand_figures_regionally)
     save("$output_folder/supply_and_demand_in_$(string(locations[i])).png", supply_and_demand_figures_regionally[i])
 end
 
 supply_and_demand_figures_regionally = plot_rental_supply_and_demand(agent_data[2:end, :], model_data[2:end, :])
-locations = [Lisboa]
+locations = instances(HouseLocation)
 for i in eachindex(supply_and_demand_figures_regionally)
     save("$output_folder/rental_supply_and_demand_in_$(string(locations[i])).png", supply_and_demand_figures_regionally[i])
 end
@@ -607,8 +607,8 @@ end
 mkdir("$output_folder/supply_and_demand_per_bucket")
 
 supply_and_demand_figures_per_bucket = plot_supply_and_demand_per_bucket(agent_data[2:end, :], model_data[2:end, :])
-locations = [Lisboa]
-for location in [Lisboa]
+locations = instances(HouseLocation)
+for location in instances(HouseLocation)
     for size_interval in instances(SizeInterval)
         save("$output_folder/supply_and_demand_per_bucket/supply_and_demand_in_$(string(location))_for_$(string(size_interval)).png", supply_and_demand_figures_per_bucket[location][size_interval])
     end
@@ -626,7 +626,7 @@ save("$output_folder/taxes_and_subsidies_flow.png", plot_taxes_and_subsidies_flo
 save("$output_folder/salaries_and_expenses.png", plot_salaries_and_expenses(agent_data[2:end, :], model_data[2:end, :]))
 # save("$output_folder/houses_prices_per_bucket.png", plot_houses_prices_per_bucket(agent_data[2:end, :], model_data[2:end, :]))
 save("$output_folder/houses_prices_per_region.png", plot_houses_prices_per_region(agent_data[2:end, :], model_data[2:end, :]))
-for location in [Lisboa]
+for location in instances(HouseLocation)
     save("$output_folder/detailed_houses_prices_in_$(location).png", plot_detailed_houses_prices_per_region(agent_data[2:end, :], model_data[2:end, :], location))
 end
 save("$output_folder/rents_of_new_contracts_per_region.png", plot_rents_of_new_contracts_per_region(agent_data[2:end, :], model_data[2:end, :]))
@@ -634,7 +634,7 @@ save("$output_folder/rents_per_region.png", plot_rents_per_region(agent_data[2:e
 
 save("$output_folder/number_of_houses_per_region.png", plot_number_of_houses_per_region(agent_data[2:end, :], model_data[2:end, :]))
 number_of_houses_built_figures = plot_number_of_houses_built_per_region(agent_data[2:end, :], model_data[2:end, :])
-for location in [Lisboa]
+for location in instances(HouseLocation)
     save("$output_folder/number_of_houses_built_in_$(string(location)).png", number_of_houses_built_figures[location])
 end
 

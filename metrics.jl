@@ -190,11 +190,11 @@ function expensesReceived(model)
     return res
 end 
 
-number_of_houses_per_region(model) = Dict(location => length(model.houses[location]) for location in [Lisboa])
-number_of_houses_built_per_region(model) = Dict(location => Dict(size_interval => length(model.housesBuiltPerRegion[location][size_interval]) for size_interval in instances(SizeInterval)) for location in [Lisboa])
+number_of_houses_per_region(model) = Dict(location => length(model.houses[location]) for location in instances(HouseLocation))
+number_of_houses_built_per_region(model) = Dict(location => Dict(size_interval => length(model.housesBuiltPerRegion[location][size_interval]) for size_interval in instances(SizeInterval)) for location in instances(HouseLocation))
 function transactions_per_region(model)
     d = Dict()
-    for location in [Lisboa]
+    for location in instances(HouseLocation)
         if length(model.transactions_per_region[location]) != 0
             d[location] = last(model.transactions_per_region[location])
         else
@@ -206,7 +206,7 @@ end
 
 function rents_per_region(model)
     d = Dict()
-    for location in [Lisboa]
+    for location in instances(HouseLocation)
         if length(model.rents_per_region[location]) != 0
             d[location] = last(model.rents_per_region[location])
         else
@@ -266,7 +266,7 @@ demand_per_bucket(model) = deepcopy(model.demandPerBucket)
 
 mortgages_per_step(model) = copy(model.mortgagesInStep)
 function contractRents(model)
-    rents = Dict(location => Float64[] for location in [Lisboa])
+    rents = Dict(location => Float64[] for location in instances(HouseLocation))
     for household in allagents(model)
         if household.contractAsTenant == Nothing
             continue
@@ -275,8 +275,8 @@ function contractRents(model)
         house = contract.house
         push!(rents[house.location], contract.monthlyPayment / house.area)
     end
-    res = Dict(location => NaN for location in [Lisboa])
-    for location in [Lisboa]
+    res = Dict(location => NaN for location in instances(HouseLocation))
+    for location in instances(HouseLocation)
         if length(rents[location]) != 0
             res[location] = mean(rents[location])
         end
