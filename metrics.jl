@@ -13,7 +13,7 @@ function sum_wealth(iter)
         next = iterate(iter, state)
     end
     LOG_INFO("Metrics: sum_wealth took $(time() - start)")
-    return soma
+    return soma == 0 ? NaN : soma
 end
 
 function money_distribution(iter)
@@ -111,13 +111,13 @@ function sum_houses(iter)
         soma += length(i.houses)
         next = iterate(iter, state)
     end
-    return soma
+    return soma == 0 ? NaN : soma
 end
 
 function calculate_prices_in_supply(model)
     soma = 0.0
     if length(model.houseMarket.supply) == 0
-        return 0.0
+        return NaN
     end
     for i in 1:length(model.houseMarket.supply)
         soma += model.houseMarket.supply[i].price / model.houseMarket.supply[i].house.area
@@ -275,7 +275,7 @@ function contractRents(model)
         house = contract.house
         push!(rents[house.location], contract.monthlyPayment / house.area)
     end
-    res = Dict(location => 0.0 for location in [Lisboa])
+    res = Dict(location => NaN for location in [Lisboa])
     for location in [Lisboa]
         if length(rents[location]) != 0
             res[location] = mean(rents[location])
