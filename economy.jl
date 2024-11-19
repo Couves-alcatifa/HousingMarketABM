@@ -415,7 +415,7 @@ function home_owner_decisions(household, model)
         put_house_to_sale(household, model, 1)
         not_home_owner_decisions(household, model)
     else
-        if household.percentile < 90 || rand() > 0.05
+        if household.percentile < 80 || rand() > 0.20
             # not all household think about investing
             # and it is a slow decision
             return
