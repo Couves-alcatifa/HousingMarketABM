@@ -62,6 +62,12 @@ function wealth_model()
 
     start_time = time()
 
+    number_of_household_in_fertile_age = Int64(round(NUMBER_OF_HOUSEHOLDS * RATIO_OF_FERTILE_WOMEN))
+    number_of_households_in_not_fertile_age = NUMBER_OF_HOUSEHOLDS - number_of_household_in_fertile_age
+    households_initial_ages = rand(20:44, number_of_household_in_fertile_age)
+    households_initial_ages = vcat(households_initial_ages, rand(44:58, Int64(round(number_of_households_in_not_fertile_age/3))))
+    households_initial_ages = vcat(households_initial_ages, rand(58:75, Int64(round(number_of_households_in_not_fertile_age/3))))
+    households_initial_ages = vcat(households_initial_ages, rand(75:100, Int64(round(number_of_households_in_not_fertile_age/3))))
     sort!(households_initial_ages, lt=sortRandomly)
     
     # initiate greediness
