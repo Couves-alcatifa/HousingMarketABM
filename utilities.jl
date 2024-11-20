@@ -1163,6 +1163,7 @@ function generateAreaFromSizeInterval(size_interval)
     return area
 end
 
+# rough measure of the demand economic capability
 function canHouseholdBuyHouse(model, household, size_interval)
     location = household.residencyZone
     house = House(generateAreaFromSizeInterval(size_interval), location, NotSocialNeighbourhood, 1.0, rand(1:100))
@@ -1171,7 +1172,7 @@ function canHouseholdBuyHouse(model, household, size_interval)
         return true
     end
     maxMortgage = maxMortgageValue(model, household)
-    return household.wealth + maxMortgage >= marketPrice
+    return household.wealth + maxMortgage >= marketPrice * (0.50 + rand() * 0.50)
 end
 
 

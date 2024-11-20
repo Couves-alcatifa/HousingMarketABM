@@ -73,10 +73,10 @@ function updateConstructionsPerBucket(model, location, size_interval)
     # if newConstructions > MAX_NEW_CONSTRUCTIONS_MAP[location] / 12
     #     newConstructions = MAX_NEW_CONSTRUCTIONS_MAP[location] / 12
     # end
-    model.construction_sector.constructionGoals[location] += newConstructions / 120
+    model.construction_sector.constructionGoals[location] += newConstructions / 12
     constructionGoals = copy(model.construction_sector.constructionGoals[location])
     if (constructionGoals >= 1)
-        # # attempt to start construction for half the demand in one year (hence divide by 12 and by 2) 
+        # # attempt to start construction for the demand in one year (hence divide by 12) 
         # newConstructions = Int64(floor(newConstructions / 24))
         # newConstructions = rand(Normal(newConstructions, newConstructions * 0.5))
         for i in 1:constructionGoals

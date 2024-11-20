@@ -415,12 +415,12 @@ function plot_number_of_houses_per_region(adf, mdf)
 end
 
 function plot_number_of_houses_built_per_region(adf, mdf)
-    figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Quantity")
-    lines = []
-    sizes_intervals = []
     figures = Dict(location => Figure() for location in instances(HouseLocation))
     for location in instances(HouseLocation)
+        figure = Figure(size = (600, 400))
+        ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Quantity")
+        lines = []
+        sizes_intervals = []
         for size_interval in instances(SizeInterval)
             regional_number_of_houses = Int32[]
             for step in 1:NUMBER_OF_STEPS
@@ -432,8 +432,6 @@ function plot_number_of_houses_built_per_region(adf, mdf)
         figure[1, 2] = Legend(figure, lines, sizes_intervals)
         figure
         figures[location] = figure
-        empty!(sizes_intervals)
-        empty!(lines)
     end
     return figures
 
