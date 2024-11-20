@@ -2,7 +2,7 @@ include("types.jl")
 include("calibrationTable.jl")
 
 MAX_BUCKET_SIZE = 50
-NUMBER_OF_HOUSEHOLDS = 20000
+NUMBER_OF_HOUSEHOLDS = 100000
 NUMBER_OF_STEPS = 120
 STARTING_GOV_WEALTH_PER_CAPITA = 100000.0
 STARTING_COMPANY_WEALTH_PER_CAPITA = 60000.0
@@ -70,8 +70,8 @@ TheoreticalNumberOfHousesInSetubal = 51169
 NUMBER_OF_HOUSES=NUMBER_OF_HOUSEHOLDS
 
 # TODO: region hack
-MODEL_SCALE = NUMBER_OF_HOUSES / TheoreticalNumberOfHousesInLisboa
-# MODEL_SCALE = NUMBER_OF_HOUSES / TotalTheoreticalNumberOfHouses
+# MODEL_SCALE = NUMBER_OF_HOUSES / TheoreticalNumberOfHousesInLisboa
+MODEL_SCALE = NUMBER_OF_HOUSES / TotalTheoreticalNumberOfHouses
 
 # NUMBER_OF_HOUSES_IN_GrandeLisboa = (TheoreticalNumberOfHousesInGrandeLisboa / TotalTheoreticalNumberOfHouses) * NUMBER_OF_HOUSES 
 NUMBER_OF_HOUSES_MAP = Dict(
