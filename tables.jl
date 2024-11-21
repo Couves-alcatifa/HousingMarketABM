@@ -1,4 +1,4 @@
-locationToIndex = Dict(location => 2 for location in instances(HouseLocation))
+locationToIndex = Dict(location => Int(location) + 1 for location in instances(HouseLocation))
 # this function will generate a table with the house prices for each quarter, in each region
 function generate_houses_prices_table(adf, mdf)
     # since we will organize the table in quarters, we don't need the last hanging 1 or 2 steps
