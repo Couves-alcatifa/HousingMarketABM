@@ -158,8 +158,8 @@ function startNewConstruction(model, location, size_interval)
             return false
         end
     end
-    model.government.wealth += LAND_COSTS * newHouse.area
-    model.construction_sector.wealth -= LAND_COSTS * newHouse.area
+    model.government.wealth += LAND_COSTS[location] * newHouse.area
+    model.construction_sector.wealth -= LAND_COSTS[location] * newHouse.area
     permitTime = rand(CONSTRUCTION_DELAY_MIN:CONSTRUCTION_DELAY_MAX)
     constructionTime = rand(CONSTRUCTION_TIME_MIN:CONSTRUCTION_TIME_MAX)
     push!(model.construction_sector.housesInConstruction[location][size_interval], PendingConstruction(0, permitTime, constructionTime, newHouse))
@@ -238,7 +238,7 @@ end
 
 function calculate_total_construction_costs(model, house, expectedDuration; withVat = false)
     finnancingMultiplier = expectedDuration * (model.bank.interestRate / 12)
-    landCosts = LAND_COSTS * house.area
+    landCosts = LAND_COSTS[location] * house.area
     constructionCosts = calculate_construction_costs(model, house, withVat)
     return (1 + finnancingMultiplier) * (landCosts + constructionCosts)
 end

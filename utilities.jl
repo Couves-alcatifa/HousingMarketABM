@@ -1098,10 +1098,9 @@ function isHouseViableForRenting(model, house)
     return rand() < map_value(rentability, 0, 0.07, 0, 1)
 end
 
-# TODO: this should be mostly focused in Lisbon...
 function housesBoughtByNoNResidentsPerRegion(location)
     total = rand(Normal(HOUSES_BOUGHT_BY_NON_RESIDENTS * 0.85, HOUSES_BOUGHT_BY_NON_RESIDENTS * 0.5))
-    return total * (NUMBER_OF_HOUSES_MAP[location] / NUMBER_OF_HOUSEHOLDS)
+    return total * RATIO_OF_HOUSES_BOUGHT_BY_NON_RESIDENTS[location]
 end
 
 function nonResidentsBuyHouses(model)

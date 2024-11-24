@@ -30,7 +30,7 @@ CONSTRUCTION_COSTS_MAX = 2500 # to be multiplied by the area of the house
 CONSTRUCTION_TIME_MIN = 12
 CONSTRUCTION_TIME_MAX = 18
 CONSTRUCTION_VAT = 0.23
-LAND_COSTS = 1000 # TODO: this should be a dict, different price for each region
+
 PROJECT_COST_MULTIPLIER = 1.1
 RENT_TAX = 0.25
 RENTS_INCREASE_CEILLING = 1.02
@@ -991,6 +991,27 @@ MAX_NEW_CONSTRUCTIONS_MAP = Dict(
 
 HOUSES_BOUGHT_BY_NON_RESIDENTS = (4047 * MODEL_SCALE) / 12
 
+RATIO_OF_HOUSES_BOUGHT_BY_NON_RESIDENTS = Dict(
+    Alcochete => 0.02,
+    Almada => 0.02,
+    Amadora => 0.02,
+    Barreiro => 0.02,
+    Cascais => 0.1,
+    Lisboa => 0.5,
+    Loures => 0.02,
+    Mafra => 0.01,
+    Moita => 0.01,
+    Montijo => 0.02,
+    Odivelas => 0.02,
+    Oeiras => 0.1,
+    Palmela => 0.02,
+    Seixal => 0.02,
+    Sesimbra => 0.02,
+    Setubal => 0.02,
+    Sintra => 0.05,
+    VilaFrancaDeXira => 0.01,
+)
+
 @enum HouseSizeEchelon begin
     LessThan29 = 30
     LessThan39 = 39
@@ -1478,4 +1499,25 @@ LOCAL_HOUSING_MAP = Dict(
     Setubal => 931 * MODEL_SCALE,
     Sintra => 1215 * MODEL_SCALE,
     VilaFrancaDeXira => 59 * MODEL_SCALE,
+)
+
+LAND_COSTS = Dict(
+    Amadora => 1000,
+    Cascais => 1300,
+    Lisboa => 1500,
+    Loures => 1100,
+    Mafra => 900,
+    Odivelas => 1200,
+    Oeiras => 1400,
+    Sintra => 800,
+    VilaFrancaDeXira => 700,
+    Alcochete => 900,
+    Almada => 1100,
+    Barreiro => 600,
+    Moita => 500,
+    Montijo => 700,
+    Palmela => 600,
+    Seixal => 700,
+    Sesimbra => 750,
+    Setubal => 700,
 )
