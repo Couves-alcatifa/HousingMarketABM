@@ -238,7 +238,7 @@ end
 
 function calculate_total_construction_costs(model, house, expectedDuration; withVat = false)
     finnancingMultiplier = expectedDuration * (model.bank.interestRate / 12)
-    landCosts = LAND_COSTS[location] * house.area
+    landCosts = LAND_COSTS[house.location] * house.area
     constructionCosts = calculate_construction_costs(model, house, withVat)
     return (1 + finnancingMultiplier) * (landCosts + constructionCosts)
 end
