@@ -92,7 +92,7 @@ function handle_children_leaving_home(household, model)
         probability_of_child_leaving = 0.05 + rand() * 0.05
         if (rand() < probability_of_child_leaving)
             expected_age = household.age - 20 + rand(0:8)
-            expected_wealth = generateInitialWealth(expected_age, household.percentile, household.size) * 0.6
+            expected_wealth = generateInitialWealth(expected_age, household.percentile, household.size, household.residencyZone) * 0.6
             if (expected_wealth > household.wealth)
                 expected_wealth = household.wealth * 0.2
             end
@@ -161,7 +161,7 @@ function handle_migrations(model)
                 percentile = rand(95:100)
             end
             size = rand(1:3)
-            wealth = generateInitialWealth(age, percentile, size)
+            wealth = generateInitialWealth(age, percentile, size, location)
             add_agent!(Household, model, wealth, age, size, House[], percentile, Mortgage[], Contract[], Nothing, 0, location, rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV)))
             content = "generated agent $(nagents(model)) from migration wealth = $wealth\n"
             TRANSACTION_LOG(content, model)
