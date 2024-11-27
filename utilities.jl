@@ -452,7 +452,7 @@ function clearRentalMarket(model)
     Threads.@threads for i in 1:length(model.rentalMarket.supply)
         supply = model.rentalMarket.supply[i]
         for j in 1:length(model.rentalMarket.demand)
-            if rand() < HOUSE_SEARCH_OBFUSCATION_FACTOR # only view 30% of the offers
+            if rand() < HOUSE_SEARCH_OBFUSCATION_FACTOR_FOR_RENTAL # only view 30% of the offers
                 continue
             end
             demand = model.rentalMarket.demand[j]
