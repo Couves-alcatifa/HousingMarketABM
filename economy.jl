@@ -79,6 +79,7 @@ function wealth_model()
         :houses => Dict(),
         :houseMarket => HouseMarket(HouseSupply[], HouseDemand[]),
         :rentalMarket => RentalMarket(RentalSupply[], RentalDemand[]),
+        :rentalQueue => [],
         :gov_prev_wealth => STARTING_GOV_WEALTH,
         :government => Government(STARTING_GOV_WEALTH, IRS, VAT, 1.0),
         :company_prev_wealth => STARTING_COMPANY_WEALTH,
@@ -139,6 +140,7 @@ end
 function model_step!(model)
     LOG_INFO("Model step started")
     start_time = time()
+    pushRentalQueue(model)
     measureSupplyAndDemandRegionally(model)
     model.steps += 1
     for location in instances(HouseLocation)
@@ -315,6 +317,31 @@ function put_house_to_rent(household::MyMultiAgent, model, house)
     push!(model.housesInRentalMarket, house)
     # # removing house from agent when putting to sale
     # splice!(agent.houseIds, index)
+end
+
+function put_house_in_rental_queue(household::MyMultiAgent, model, house)
+    askRent = calculate_rental_market_price(house, model)
+    previousRent = getPreviousRent(model, house)
+
+    # if previousRent != Nothing && askRent > previousRent * RENTS_INCREASE_CEILLING
+    #     askRent = previousRent * RENTS_INCREASE_CEILLING
+    # end
+    push!(model.rentalQueue, [RentalSupply(house, askRent, household.id, Bid[]), rand(1:12)])
+    # # removing house from agent when putting to sale
+    # splice!(agent.houseIds, index)
+end
+
+function push_rental_queue(model)
+    idx = 1
+    while idx <= length(model.rentalQueue)
+        model.rentalQueue[idx][2] -= 1
+        if model.rentalQueue[idx][2] == 0
+            push!(model.rentalMarket.supply, model.rentalQueue[idx][1])
+            splice!(model.rentalQueue, idx)
+        else
+            idx += 1
+        end
+    end
 end
 
 function put_house_to_sale(household::MyMultiAgent, model, index)

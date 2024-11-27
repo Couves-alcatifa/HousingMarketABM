@@ -176,7 +176,7 @@ function assignHousesForRental(model, household, numberOfExtraHousesToAssign, ho
             return
         end
         push!(household.houses, house)
-        put_house_to_rent(household, model, house)
+        put_house_in_rental_queue(household, model, house)
         assignedSoFar += 1
         i += 1
     end
