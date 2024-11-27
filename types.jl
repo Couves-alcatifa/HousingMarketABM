@@ -188,6 +188,7 @@ mutable struct PendingRenovation
     renovationTime::Int # total real time that will take
     house::House
     household
+    type
 end
 
 mutable struct ConstructionSector

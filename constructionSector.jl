@@ -123,7 +123,11 @@ function updateConstructionsPerBucket(model, location, size_interval)
             updateHouseRenovationCosts(model, pendingRenovation.house, costs + tax)
             pendingRenovation.house.percentile = rand(95:100)
             push!(pendingRenovation.household.houses, pendingRenovation.house)
-            put_house_to_sale(pendingRenovation.household, model, length(pendingRenovation.household.houses))
+            if pendingRenovation.type == ForInvestment
+                put_house_to_sale(pendingRenovation.household, model, length(pendingRenovation.household.houses))
+            else
+                put_house_to_rent(pendingRenovation.household, model, pendingRenovation.house)
+            end
             splice!(model.construction_sector.pendingRenovations, i)
         else
             pendingRenovation.time += 1
@@ -260,8 +264,8 @@ function calculateRenovationTime()
     return rand(4:6)
 end
 
-function requestRenovation(model, house, household, idx)
+function requestRenovation(model, house, household, idx, investMentType)
     duration = calculateRenovationTime()
-    push!(model.construction_sector.pendingRenovations, PendingRenovation(0, duration, house, household))
+    push!(model.construction_sector.pendingRenovations, PendingRenovation(0, duration, house, household, investMentType))
     splice!(household.houses, idx)
 end

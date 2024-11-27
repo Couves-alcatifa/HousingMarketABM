@@ -357,7 +357,9 @@ function clearHouseMarket(model)
             end
 
             if demand.type == ForRental
-                if isHouseViableForRenting(model, house)
+                renovatedHouse = House(house.area, house.location, house.locationType, house.maintenanceLevel, rand(95:100))
+
+                if isHouseViableForRenting(model, renovatedHouse)
                     maxMortgage = maxMortgageValue(model, household)
                     bidValue = (rand(95:100) / 100) * supply.price
                     if maxMortgage + household.wealth > bidValue + calculateTransactionTaxes(bidValue)
@@ -638,9 +640,9 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
 
     updateHouseTransactionInfo(model, supply.house, bidValue)
     if winningBid.type == ForRental
-        put_house_to_rent(household, model, supply.house)
+        requestRenovation(model, supply.house, household, length(household.houses), ForRental)
     elseif winningBid.type == ForInvestment
-        requestRenovation(model, supply.house, household, length(household.houses))
+        requestRenovation(model, supply.house, household, length(household.houses), ForInvestment)
     end
     return true
 end
