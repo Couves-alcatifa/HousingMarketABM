@@ -331,7 +331,7 @@ function put_house_in_rental_queue(household::MyMultiAgent, model, house)
     # splice!(agent.houseIds, index)
 end
 
-function push_rental_queue(model)
+function pushRentalQueue(model)
     idx = 1
     while idx <= length(model.rentalQueue)
         model.rentalQueue[idx][2] -= 1
