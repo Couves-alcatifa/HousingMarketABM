@@ -640,7 +640,8 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
 
     updateHouseTransactionInfo(model, supply.house, bidValue)
     if winningBid.type == ForRental
-        requestRenovation(model, supply.house, household, length(household.houses), ForRental)
+        # requestRenovation(model, supply.house, household, length(household.houses), ForRental)
+        put_house_to_rent(household, model, supply.house)
     elseif winningBid.type == ForInvestment
         requestRenovation(model, supply.house, household, length(household.houses), ForInvestment)
     end
