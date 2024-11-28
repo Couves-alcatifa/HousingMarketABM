@@ -307,7 +307,7 @@ end
 
 
 function put_house_to_rent(household::MyMultiAgent, model, house)
-    askRent = calculate_rental_market_price(house, model) * rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV))
+    askRent = calculate_rental_market_price(house, model) * rand(Normal(GREEDINESS_AVERAGE_FOR_RENTAL, GREEDINESS_STDEV_FOR_RENTAL))
     previousRent = getPreviousRent(model, house)
 
     # if previousRent != Nothing && askRent > previousRent * RENTS_INCREASE_CEILLING
