@@ -38,7 +38,7 @@ function initiateHousesPerRegion(model)
 end
 
 # TODO: region hack
-function initiateHouseholds(model, households_initial_ages, greedinesses)
+function initiateHouseholds(model, households_initial_ages)
     for location in instances(HouseLocation)
         for size in [1, 2, 3, 4, 5]
             number_of_households = HOUSEHOLDS_SIZES_MAP[size][location]

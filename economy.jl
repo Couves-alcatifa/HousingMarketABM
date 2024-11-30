@@ -71,7 +71,6 @@ function wealth_model()
     sort!(households_initial_ages, lt=sortRandomly)
     
     # initiate greediness
-    greedinesses = rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV), NUMBER_OF_HOUSEHOLDS)
 
     properties = Dict(
         :sum_wealth => 0,
@@ -125,7 +124,7 @@ function wealth_model()
 
     initiateHouses(model)
     LOG_INFO("finished initateHouses in $(time() - start_time) seconds")
-    initiateHouseholds(model, households_initial_ages, greedinesses)
+    initiateHouseholds(model, households_initial_ages)
     LOG_INFO("finished initiateHouseholds in $(time() - start_time) seconds")
     assignHousesToHouseholds(model)
     LOG_INFO("finished assignHousesToHouseholds in $(time() - start_time) seconds")
