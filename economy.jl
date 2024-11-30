@@ -216,6 +216,7 @@ function model_step!(model)
         #     model.bank.interestRate = 0.0388
         # end
 
+        adjust_interest_rates(model)
         company_adjust_salaries(model)
         gov_adjust_taxes(model)
         
@@ -229,6 +230,22 @@ function model_step!(model)
     payMortgages(model, model.construction_sector)
     println("end of model_step $(string(model.steps))")
     LOG_INFO("Model step took $(string(time() - start_time)) seconds")
+end
+
+function adjust_interest_rates(model)
+    if model.steps == 12
+        # start of 2022
+        model.bank.interestRate = 0.0182
+    elseif model.steps == 24
+        # start of 2023
+        model.bank.interestRate = 0.04
+    elseif model.steps == 36
+        # start of 2024 and beyond...
+        model.bank.interestRate = 0.035
+    elseif model.steps == 48
+        # beyond...
+        model.bank.interestRate = 0.02
+    end        
 end
 
 function company_adjust_salaries(model)
