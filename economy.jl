@@ -425,10 +425,13 @@ end
 
 
 function not_home_owner_decisions(household, model)
-    # let's say the household always tries to buy a house
-    # and in the meantime it rents
-    push!(model.houseMarket.demand, HouseDemand(household.id, HouseSupply[], Regular))
+    # let's say 90% of the households always try to buy a house
+    # and in the meantime they rent
+    if household.id % 12 > 7
+        push!(model.houseMarket.demand, HouseDemand(household.id, HouseSupply[], Regular))
+    end
     if (household.contractAsTenant == Nothing)
+        household.homelessTime += 1 # being here means the household does not own a house and is not renting => increment homeless time
         push!(model.rentalMarket.demand, RentalDemand(household.id, RentalSupply[]))
     end
 end
