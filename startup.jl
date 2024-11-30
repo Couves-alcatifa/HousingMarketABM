@@ -53,7 +53,7 @@ function initiateHouseholds(model, households_initial_ages, greedinesses)
                 splice!(households_initial_ages, 1)
                 percentile = rand(0:100)
                 actualSize = get_household_size(size)
-                add_agent!(Household, model, generateInitialWealth(initial_age, percentile, actualSize, location), initial_age, actualSize, Int64[], percentile, Mortgage[], Contract[], Nothing, 0.0, location, greedinesses[i])
+                add_agent!(Household, model, generateInitialWealth(initial_age, percentile, actualSize, location), initial_age, actualSize, Int64[], percentile, Mortgage[], Contract[], Nothing, 0.0, location, 0)
             end
         end
     end

@@ -113,8 +113,6 @@ function calculateBid(household, house, askPrice, maxMortgageValue, consumerSurp
     consumerSurplusMultiplier = calculateConsumerSurplusAddedValue(consumerSurplus)
     if (demandValue >= askPrice * consumerSurplusMultiplier + calculateTransactionTaxes(askPrice * consumerSurplusMultiplier))
         return askPrice * consumerSurplusMultiplier
-    elseif demandValue >= askPrice + calculateTransactionTaxes(askPrice)
-        return askPrice
     else
         return demandValue - calculateTransactionTaxes(demandValue)
     end
@@ -393,10 +391,10 @@ function clearHouseMarket(model)
                 continue
             end
 
-            if (!has_enough_size(house, household.size)
-                || house.location != household.residencyZone)
-                continue
-            end
+            # if (!has_enough_size(house, household.size)
+            #     || house.location != household.residencyZone)
+            #     continue
+            # end
             consumerSurplus = calculateConsumerSurplus(household, house)
             # thresholdValue = (supply.price - household.wealth) * 0.5
             # if thresholdValue <= 0
@@ -408,7 +406,7 @@ function clearHouseMarket(model)
             # maxMortgage = maxMortgageValue(model, household)
             maxMortgage = maxMortgageValue(model, household)
             demandBid = calculateBid(household, house, supply.price, maxMortgage, consumerSurplus)
-            if (demandBid >= supply.price * 0.85)
+            if (demandBid >= supply.price * 0.90)
                 lock(localLock) do
                     push!(supply.bids, Bid(demandBid, demand.householdId, demand.type))
                     push!(demand.supplyMatches, SupplyMatch(supply))
@@ -468,10 +466,10 @@ function clearRentalMarket(model)
             # and if that is below ask price -> continue
             # Alternative would be to calculate a consumerSurplus, that would be a multiplier
             # to our final bid, if that consumerSurplus is == 0 -> continue right away
-            if (!has_enough_size(supply.house, household.size)
-                || supply.house.location != household.residencyZone)
-                continue
-            end
+            # if (!has_enough_size(supply.house, household.size)
+            #     || supply.house.location != household.residencyZone)
+            #     continue
+            # end
             consumerSurplus = calculateConsumerSurplus(household, supply.house)
             demandBid = calculateRentalBid(household, model, supply.monthlyPrice, consumerSurplus)
             if (demandBid >= supply.monthlyPrice * 0.90)
@@ -900,25 +898,38 @@ function calculateConsumerSurplus(household, house)
     house_percentile = house.percentile
     house_area = house.area
     household_size = household.size
-    percentileMultiplier = map_value(house_percentile, 1.0, 100.0, 1.0, 8.0) 
-    percentileMultiplier *= (0.8 + rand() * 0.4)
+    percentileFactor = map_value(house_percentile, 1.0, 100.0, 1.0, 8.0) 
+    percentileFactor *= (0.8 + rand() * 0.4)
 
     areaPerPerson = (house_area /  household_size)
     if areaPerPerson > 60
         areaPerPerson = 60
     end
-    sizeMultiplier = map_value(areaPerPerson, 25.0, 60.0, 5.0, 15.0)
-    sizeMultiplier *= (0.8 + rand() * 0.4) 
+    sizeFactor = map_value(areaPerPerson, 2.0, 60.0, -15.0, 15.0)
+    sizeFactor *= (0.8 + rand() * 0.4) 
 
-    return percentileMultiplier + sizeMultiplier
+    zoneFactor = -4
+    if household.residencyZone == house.location
+        zoneFactor = 4
+    elseif house.location in adjacentZones[household.residencyZone]
+        zoneFactor = 0
+    end
+
+    desperationFactor = household.homelessTime - 12
+
+    if desperationFactor > 12
+        desperationFactor = 12
+    end
+
+    return percentileFactor + sizeFactor + zoneFactor + desperationFactor
 end
 
 function calculateConsumerSurplusAddedValue(consumerSurplus)
-    return map_value(consumerSurplus, 6.0, 23.0, CONSUMER_SURPLUS_MIN, CONSUMER_SURPLUS_MAX)
+    return map_value(consumerSurplus, -30.0, 39.0, CONSUMER_SURPLUS_MIN, CONSUMER_SURPLUS_MAX)
 end
 
 function calculateConsumerSurplusAddedValueForRent(consumerSurplus)
-    return map_value(consumerSurplus, 6.0, 23.0, CONSUMER_SURPLUS_MIN_FOR_RENT, CONSUMER_SURPLUS_MAX_FOR_RENT)
+    return map_value(consumerSurplus, -30.0, 39.0, CONSUMER_SURPLUS_MIN_FOR_RENT, CONSUMER_SURPLUS_MAX_FOR_RENT)
 end
 
 function calculateProbabilityOfAcceptingBid(bid, askPrice)

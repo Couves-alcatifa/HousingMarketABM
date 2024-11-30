@@ -80,7 +80,7 @@ end
         contractAsTenant #::Contract Nothing is no contract
         wealthInHouses::Float64
         residencyZone::HouseLocation
-        greediness::Float64
+        homelessTime::Int64 # not really meant to represent homeless people, just to lower the house expectations as it struggles to find housing 
     end
     
     @subagent struct Company

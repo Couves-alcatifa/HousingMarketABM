@@ -18,7 +18,7 @@ function handle_births(household, model)
         probability = BIRTH_RATE
         ratioOfFertileWomen = eval(Symbol("RATIO_OF_FERTILE_WOMEN_IN_$(string(household.residencyZone))"))
         # probability should not be fixed
-        if (rand() < (probability / ratioOfFertileWomen) * (1 + (TOTAL_HOUSEHOLDS_WITH_SIZE_1 * ratioOfFertileWomen) / NUMBER_OF_HOUSEHOLDS))
+        if (rand() < (probability / ratioOfFertileWomen) * (1 + (TOTAL_HOUSEHOLDS_WITH_SIZE_1 * ratioOfFertileWomen) / NUMBER_OF_HOUSEHOLDS) * BIRTH_INCREASE_MULTIPLIER)
             # 5% for size == 2
             # 4% for size == 3
             # 3% for size == 4
@@ -67,10 +67,10 @@ function handle_breakups(household, model)
             terminateContractsOnTentantSide(household, model)
             terminateContractsOnLandLordSide(household, model)
             
-            add_agent!(Household, model, household.wealth / 2, household.age, 1, House[], household.percentile, Mortgage[], Contract[], Nothing, 0.0, getChildResidencyZone(household), rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV), 1)[1])
+            add_agent!(Household, model, household.wealth / 2, household.age, 1, House[], household.percentile, Mortgage[], Contract[], Nothing, 0.0, getChildResidencyZone(household), 0)
             content = "generated agent $(nagents(model)) from breakup without houses\n"
             content *= "wealth = $(household.wealth / 2)\n"
-            add_agent!(Household, model, household.wealth / 2, household.age, household.size - 1, household.houses, household.percentile, household.mortgages, Contract[], Nothing, 0.0, getChildResidencyZone(household), rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV), 1)[1])
+            add_agent!(Household, model, household.wealth / 2, household.age, household.size - 1, household.houses, household.percentile, household.mortgages, Contract[], Nothing, 0.0, getChildResidencyZone(household), 0)
             content *= "generated agent $(nagents(model)) from breakup with houses\n"
             content *= "wealth = $(household.wealth / 2)\n"
             TRANSACTION_LOG(content, model)
@@ -100,7 +100,7 @@ function handle_children_leaving_home(household, model)
             if randomNumber < 0.45
                 # a couple of young people leave their parents home
                 newZone = getChildResidencyZone(household)
-                add_agent!(Household, model, expected_wealth, expected_age, 2, Int[], household.percentile, Mortgage[], Contract[], Nothing, 0.0, newZone, rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV), 1)[1])
+                add_agent!(Household, model, expected_wealth, expected_age, 2, Int[], household.percentile, Mortgage[], Contract[], Nothing, 0.0, newZone, 0)
                 content = "generated agent $(nagents(model)) from leaving home\n"
                 content *= "wealth = $expected_wealth\n"
                 TRANSACTION_LOG(content, model)
@@ -114,7 +114,7 @@ function handle_children_leaving_home(household, model)
             else
                 # single young person leaves their parents home
                 newZone = getChildResidencyZone(household)
-                add_agent!(Household, model, expected_wealth, expected_age, 1, Int[], household.percentile, Mortgage[], Contract[], Nothing, 0.0, newZone, rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV), 1)[1])
+                add_agent!(Household, model, expected_wealth, expected_age, 1, Int[], household.percentile, Mortgage[], Contract[], Nothing, 0.0, newZone, 0)
                 content = "generated agent $(nagents(model)) from leaving home (single)\n"
                 content *= "wealth = $expected_wealth\n"
                 TRANSACTION_LOG(content, model)
@@ -162,7 +162,7 @@ function handle_migrations(model)
             end
             size = rand(1:3)
             wealth = generateInitialWealth(age, percentile, size, location)
-            add_agent!(Household, model, wealth, age, size, House[], percentile, Mortgage[], Contract[], Nothing, 0, location, rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV)))
+            add_agent!(Household, model, wealth, age, size, House[], percentile, Mortgage[], Contract[], Nothing, 0, location, 0)
             content = "generated agent $(nagents(model)) from migration wealth = $wealth\n"
             TRANSACTION_LOG(content, model)
 
