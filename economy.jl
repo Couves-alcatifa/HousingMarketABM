@@ -427,7 +427,7 @@ end
 function not_home_owner_decisions(household, model)
     # let's say 90% of the households always try to buy a house
     # and in the meantime they rent
-    if household.id % 12 > 7
+    if household.id % 12 != 7
         push!(model.houseMarket.demand, HouseDemand(household.id, HouseSupply[], Regular))
     end
     if (household.contractAsTenant == Nothing)
