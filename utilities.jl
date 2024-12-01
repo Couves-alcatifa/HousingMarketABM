@@ -365,10 +365,10 @@ function clearHouseMarket(model)
                 continue
             end
 
-            # if (!has_enough_size(house, household.size)
-            #     || house.location != household.residencyZone)
-            #     continue
-            # end
+            if (#!has_enough_size(house, household.size) || 
+                house.location != household.residencyZone)
+                continue
+            end
             consumerSurplus = calculateConsumerSurplus(household, house)
             # thresholdValue = (supply.price - household.wealth) * 0.5
             # if thresholdValue <= 0
@@ -440,10 +440,10 @@ function clearRentalMarket(model)
             # and if that is below ask price -> continue
             # Alternative would be to calculate a consumerSurplus, that would be a multiplier
             # to our final bid, if that consumerSurplus is == 0 -> continue right away
-            # if (!has_enough_size(supply.house, household.size)
-            #     || supply.house.location != household.residencyZone)
-            #     continue
-            # end
+            if (#!has_enough_size(supply.house, household.size) || 
+                supply.house.location != household.residencyZone)
+                continue
+            end
             consumerSurplus = calculateConsumerSurplus(household, supply.house)
             demandBid = calculateRentalBid(household, model, supply.monthlyPrice, consumerSurplus)
             if (demandBid >= supply.monthlyPrice * 0.90)

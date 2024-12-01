@@ -450,12 +450,16 @@ function not_home_owner_decisions(household, model)
         household.homelessTime += 1 # being here means the household does not own a house and is not renting => increment homeless time
         push!(model.rentalMarket.demand, RentalDemand(household.id, RentalSupply[]))
     else
-        household.homelessTime -= 1
+        if household.homelessTime > 0
+            household.homelessTime -= 1
+        end
     end
 end
 
 function home_owner_decisions(household, model)
-    household.homelessTime -= 1
+    if household.homelessTime > 0
+        household.homelessTime -= 1
+    end
     house = household.houses[1]
     if !has_enough_size(house, household.size) && household.homelessTime < 6
         # moves out, put_house_to_sale
