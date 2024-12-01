@@ -313,7 +313,6 @@ end
 function clearHouseMarket(model)
     LOG_INFO("clearHouseMarket started")
     start_time = time()
-    # TODO: optimize this (below block is slower than all household_steps)
     localLock = ReentrantLock()
     Threads.@threads for i in 1:length(model.houseMarket.supply)
         supply = model.houseMarket.supply[i]
