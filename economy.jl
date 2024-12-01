@@ -705,6 +705,9 @@ save("$output_folder/houses_percentile_in_supply.png", plot_houses_for_sale_perc
 
 writeToCsv("$output_folder/QuarterLyHousePrices.csv", generate_houses_prices_table(agent_data[2:end, :], model_data[2:end, :]))
 writeToCsv("$output_folder/QuarterLyRentsOfNewContracts.csv", generate_rent_prices_table(agent_data[2:end, :], model_data[2:end, :]))
+writeToCsv("$output_folder/SemiAnuallyRentsOfNewContracts.csv", generate_semi_annually_rent_prices_table(agent_data[2:end, :], model_data[2:end, :]))
+writeToCsv("$output_folder/QuarterlyNumberOfNewContracts.csv", generate_quarterly_number_of_new_contracts(agent_data[2:end, :], model_data[2:end, :]))
+writeToCsv("$output_folder/AnnuallyScalledNumberOfNewContracts.csv", generate_annually_scalled_number_of_new_contracts(agent_data[2:end, :], model_data[2:end, :]))
 writeToCsv("$output_folder/DemographicEvents.csv", generate_demographic_table(agent_data[2:end, :], model_data[2:end, :]))
 # CSV.write("$output_folder/agentData.csv", agent_data, delim=';')
 CSV.write("$output_folder/modelData.csv", model_data, delim=';')
