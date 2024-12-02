@@ -87,13 +87,13 @@ function assignHousesToHouseholds(model)
         current_home_owners_in_the_zone = zones_to_n_of_home_owners[household.residencyZone]
         if current_home_owners_in_the_zone >= target_home_owners_in_the_zone
             LOG_INFO("All home owners were assigned in $(household.residencyZone)")
-            not_home_owner_decisions(household, model)
+            push!(model.rentalMarket.demand, RentalDemand(household.id, RentalSupply[]))
             continue # no more houses to assign in this phase
         end
         if !assignHouseThatMakesSense(model, household)
             # Wasn't assigned a house...
             push!(not_home_owners, household)
-            not_home_owner_decisions(household, model)
+            push!(model.rentalMarket.demand, RentalDemand(household.id, RentalSupply[]))
             continue # also not going to get houses for rental
         end
         zones_to_n_of_home_owners[household.residencyZone] += 1
