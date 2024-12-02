@@ -591,7 +591,7 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
         content *= "Transaction: seller contract as tenant = $(seller.contractAsTenant)\n"
     end
     content *= "########\n"
-    print(content)
+    # print(content)
     TRANSACTION_LOG(content, model) 
     
     household.wealth -= bidValue
@@ -702,7 +702,7 @@ function rent_house(model, supply::RentalSupply)
         content *= "Rental: seller contract as tenant = $(seller.contractAsTenant)\n"
     end
     content *= "########\n"
-    print(content)
+    # print(content)
     TRANSACTION_LOG(content, model) 
 
     updateHouseRentalInfo(model, supply.house, actualBid)

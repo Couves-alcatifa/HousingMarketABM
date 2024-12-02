@@ -75,7 +75,6 @@ function wealth_model()
     properties = Dict(
         :sum_wealth => 0,
         :steps => 0,
-        :houses => Dict(),
         :houseMarket => HouseMarket(HouseSupply[], HouseDemand[]),
         :rentalMarket => RentalMarket(RentalSupply[], RentalDemand[]),
         :gov_prev_wealth => STARTING_GOV_WEALTH,
@@ -121,7 +120,7 @@ function wealth_model()
 
     model = StandardABM(MyMultiAgent; agent_step! = agent_step!, model_step! = model_step!, properties,scheduler = Schedulers.Randomly())
 
-    initiateHouses(model)
+    # initiateHouses(model)
     LOG_INFO("finished initateHouses in $(time() - start_time) seconds")
     initiateHouseholds(model, households_initial_ages)
     LOG_INFO("finished initiateHouseholds in $(time() - start_time) seconds")
@@ -605,7 +604,7 @@ mdata = [count_supply, gov_wealth, construction_wealth, company_wealth,
          ## Gov Money flow ##
          subsidiesPaid, ivaCollected, irsCollected, companyServicesPaid, inheritagesFlow, constructionLabor,
          ## Company Money flow ##
-         rawSalariesPaid, liquidSalariesReceived, expensesReceived, number_of_houses_per_region, 
+         rawSalariesPaid, liquidSalariesReceived, expensesReceived, 
          transactions_per_region, rents_per_region, number_of_houses_built_per_region,
          supply_per_bucket, demand_per_bucket, newly_built_houses_for_sale, mortgages_per_step, houses_for_sale,
          contractRents, ## Houses prices per bucket
@@ -665,7 +664,6 @@ end
 save("$output_folder/rents_of_new_contracts_per_region.png", plot_rents_of_new_contracts_per_region(agent_data[2:end, :], model_data[2:end, :]))
 save("$output_folder/rents_per_region.png", plot_rents_per_region(agent_data[2:end, :], model_data[2:end, :]))
 
-save("$output_folder/number_of_houses_per_region.png", plot_number_of_houses_per_region(agent_data[2:end, :], model_data[2:end, :]))
 number_of_houses_built_figures = plot_number_of_houses_built_per_region(agent_data[2:end, :], model_data[2:end, :])
 for location in instances(HouseLocation)
     save("$output_folder/number_of_houses_built_in_$(string(location)).png", number_of_houses_built_figures[location])

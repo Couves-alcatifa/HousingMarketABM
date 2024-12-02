@@ -396,24 +396,6 @@ function plot_rents_per_region(adf, mdf)
     figure
 end
 
-function plot_number_of_houses_per_region(adf, mdf)
-    figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Quantity")
-    lines = []
-    locations = []
-    for location in instances(HouseLocation)
-        regional_number_of_houses = Int32[]
-        for step in 1:NUMBER_OF_STEPS
-            push!(regional_number_of_houses, mdf.number_of_houses_per_region[step][location]) 
-        end
-        push!(lines, scatterlines!(ax, adf.step, regional_number_of_houses, color = color_map[location]))
-        push!(locations, string(location))
-    end
-
-    figure[1, 2] = Legend(figure, lines, locations)
-    figure
-end
-
 function plot_number_of_houses_built_per_region(adf, mdf)
     figures = Dict(location => Figure() for location in instances(HouseLocation))
     for location in instances(HouseLocation)

@@ -190,7 +190,6 @@ function expensesReceived(model)
     return res
 end 
 
-number_of_houses_per_region(model) = Dict(location => length(model.houses[location]) for location in instances(HouseLocation))
 number_of_houses_built_per_region(model) = Dict(location => Dict(size_interval => length(model.housesBuiltPerRegion[location][size_interval]) for size_interval in instances(SizeInterval)) for location in instances(HouseLocation))
 function transactions_per_region(model)
     d = Dict()
