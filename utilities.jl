@@ -321,6 +321,9 @@ function clearHouseMarket(model)
                 continue
             end
             demand = model.houseMarket.demand[j]
+            if !hasid(model, demand.householdId)
+                continue
+            end
             household = model[demand.householdId]
             house = supply.house
             if household.wealth < 0
@@ -429,6 +432,9 @@ function clearRentalMarket(model)
                 continue
             end
             demand = model.rentalMarket.demand[j]
+            if !hasid(model, demand.householdId)
+                continue
+            end
             household = model[demand.householdId]
             if household.wealth < 0
                 continue
@@ -985,6 +991,9 @@ end
 function measureDemandForSizeAndRegion(model, size_interval, location)
     model.demandPerBucket[location][size_interval] = 0
     for householdId in model.householdsInDemand
+        if !hasid(model, householdId)
+            continue
+        end
         household = model[householdId]
         if (household.residencyZone != location 
             || !isSizeIntervalAppropriate(size_interval, household)
