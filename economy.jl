@@ -78,7 +78,6 @@ function wealth_model()
         :houses => Dict(),
         :houseMarket => HouseMarket(HouseSupply[], HouseDemand[]),
         :rentalMarket => RentalMarket(RentalSupply[], RentalDemand[]),
-        :rentalQueue => [],
         :gov_prev_wealth => STARTING_GOV_WEALTH,
         :government => Government(STARTING_GOV_WEALTH, IRS, VAT, 1.0),
         :company_prev_wealth => STARTING_COMPANY_WEALTH,
@@ -127,6 +126,12 @@ function wealth_model()
     initiateHouseholds(model, households_initial_ages)
     LOG_INFO("finished initiateHouseholds in $(time() - start_time) seconds")
     assignHousesToHouseholds(model)
+
+    # # first clear to assign rental houses to household
+    # clearRentalMarket(model)
+    # # clear structures that might have been filled during the markets logic
+    # model.rentalBuckets = InitiateBuckets()
+
     LOG_INFO("finished assignHousesToHouseholds in $(time() - start_time) seconds")
     return model
 end
@@ -139,7 +144,6 @@ end
 function model_step!(model)
     LOG_INFO("Model step started")
     start_time = time()
-    pushRentalQueue(model)
     measureSupplyAndDemandRegionally(model)
     model.steps += 1
     for location in instances(HouseLocation)
@@ -335,31 +339,6 @@ function put_house_to_rent(household::MyMultiAgent, model, house)
     # splice!(agent.houseIds, index)
 end
 
-function put_house_in_rental_queue(household::MyMultiAgent, model, house)
-    askRent = calculate_rental_market_price(house, model)
-    previousRent = getPreviousRent(model, house)
-
-    # if previousRent != Nothing && askRent > previousRent * RENTS_INCREASE_CEILLING
-    #     askRent = previousRent * RENTS_INCREASE_CEILLING
-    # end
-    push!(model.rentalQueue, [RentalSupply(house, askRent, household.id, Bid[]), rand(1:12)])
-    # # removing house from agent when putting to sale
-    # splice!(agent.houseIds, index)
-end
-
-function pushRentalQueue(model)
-    idx = 1
-    while idx <= length(model.rentalQueue)
-        model.rentalQueue[idx][2] -= 1
-        if model.rentalQueue[idx][2] == 0
-            push!(model.rentalMarket.supply, model.rentalQueue[idx][1])
-            splice!(model.rentalQueue, idx)
-        else
-            idx += 1
-        end
-    end
-end
-
 function put_house_to_sale(household::MyMultiAgent, model, index)
     house = household.houses[index]
     push!(model.houseMarket.supply, HouseSupply(house, calculate_market_price(model, house) * rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV)), Bid[], household.id))
@@ -475,10 +454,11 @@ function home_owner_decisions(household, model)
         end
         # lets assess the household economical situation
         # WARNING: this might be computationally expensive
-        marketPrice = calculate_market_price(model, House(rand(60:100), household.residencyZone, NotSocialNeighbourhood, 1.0, rand(50:100)))
+        sampleHouse = House(rand(60:100), household.residencyZone, NotSocialNeighbourhood, 1.0, rand(50:100))
+        marketPrice = calculate_market_price(model, sampleHouse)
         mortgage = maxMortgageValue(model, household)
         if household.wealth + mortgage > marketPrice * 3
-            if rand() < 0.50
+            if decideToRent(household, model, sampleHouse)
                 TRANSACTION_LOG("Household decided to invest in rental\n", model)
                 push!(model.houseMarket.demand, HouseDemand(household.id, SupplyMatch[], ForRental))
             else
