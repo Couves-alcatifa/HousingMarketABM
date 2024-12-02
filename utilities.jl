@@ -848,6 +848,9 @@ function measureSupplyAndDemandRegionally(model)
     end
     
     for demand in model.houseMarket.demand
+        if !hasid(model, demand.householdId)
+            continue
+        end
         household = model[demand.householdId]
         model.demand_size[household.residencyZone] += 1
     end
@@ -857,6 +860,9 @@ function measureSupplyAndDemandRegionally(model)
     end
 
     for demand in model.rentalMarket.demand
+        if !hasid(model, demand.householdId)
+            continue
+        end
         household = model[demand.householdId]
         model.rental_demand_size[household.residencyZone] += 1
     end
