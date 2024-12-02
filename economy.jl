@@ -127,10 +127,10 @@ function wealth_model()
     LOG_INFO("finished initiateHouseholds in $(time() - start_time) seconds")
     assignHousesToHouseholds(model)
 
-    # # first clear to assign rental houses to household
-    # clearRentalMarket(model)
-    # # clear structures that might have been filled during the markets logic
-    # model.rentalBuckets = InitiateBuckets()
+    # first clear to assign rental houses to household
+    clearRentalMarket(model)
+    # clear structures that might have been filled during the markets logic
+    model.rentalBuckets = InitiateBuckets()
 
     LOG_INFO("finished assignHousesToHouseholds in $(time() - start_time) seconds")
     return model
