@@ -137,13 +137,14 @@ end
 
 function has_enough_size(house, household)
     if household.homelessTime >= 24
-        return house.area >= household_size * 8
+        return house.area >= household.size * 8
     elseif household.homelessTime >= 12
-        return house.area >= household_size * 12
+        return house.area >= household.size * 12
     elseif household.homelessTime >= 6
-        return house.area >= household_size * 16
+        return house.area >= household.size * 16
     else
-        return house.area >= household_size * 25
+        return house.area >= household.size * 25
+    end
 end
 
 function model_step!(model)

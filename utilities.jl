@@ -445,7 +445,7 @@ function clearRentalMarket(model)
             # and if that is below ask price -> continue
             # Alternative would be to calculate a consumerSurplus, that would be a multiplier
             # to our final bid, if that consumerSurplus is == 0 -> continue right away
-            if (!has_enough_size(supply.house, household.size) || 
+            if (!has_enough_size(supply.house, household) || 
                 supply.house.location != household.residencyZone)
                 continue
             end
