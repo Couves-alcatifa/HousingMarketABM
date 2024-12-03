@@ -135,13 +135,19 @@ function wealth_model()
     return model
 end
 
-function has_enough_size(house, household_size)
-    return house.area >= household_size * 25
-
+function has_enough_size(house, household)
+    if household.homelessTime >= 24
+        return house.area >= household_size * 8
+    elseif household.homelessTime >= 12
+        return house.area >= household_size * 12
+    elseif household.homelessTime >= 6
+        return house.area >= household_size * 16
+    else
+        return house.area >= household_size * 25
 end
 
 function model_step!(model)
-    LOG_INFO("Model step started")
+    LOG_INFO("Model step $(model.steps + 1) started")
     start_time = time()
     measureSupplyAndDemandRegionally(model)
     model.steps += 1
@@ -232,7 +238,7 @@ function model_step!(model)
     updateConstructions(model)
     payMortgages(model, model.construction_sector)
     println("end of model_step $(string(model.steps))")
-    LOG_INFO("Model step took $(string(time() - start_time)) seconds")
+    LOG_INFO("Model step $(model.steps) took $(string(time() - start_time)) seconds")
 end
 
 function adjust_interest_rates(model)
@@ -439,7 +445,7 @@ function home_owner_decisions(household, model)
         household.homelessTime -= 1
     end
     house = household.houses[1]
-    if !has_enough_size(house, household.size) && household.homelessTime < 6
+    if !has_enough_size(house, household)
         # moves out, put_house_to_sale
         # this doesnt make much sense... having a house and selling it
         # is not the same as not having one in the first place
@@ -458,10 +464,10 @@ function home_owner_decisions(household, model)
         mortgage = maxMortgageValue(model, household)
         if household.wealth + mortgage > marketPrice * 3
             if decideToRent(household, model, sampleHouse)
-                TRANSACTION_LOG("Household decided to invest in rental\n", model)
+                TRANSACTION_LOG("Household $(household.id) decided to invest in rental\n", model)
                 push!(model.houseMarket.demand, HouseDemand(household.id, SupplyMatch[], ForRental))
             else
-                TRANSACTION_LOG("Household decided to invest in renovation\n", model)
+                TRANSACTION_LOG("Household $(household.id) decided to invest in renovation\n", model)
                 push!(model.houseMarket.demand, HouseDemand(household.id, SupplyMatch[], ForInvestment))
             end
         end
@@ -548,6 +554,7 @@ function payMortgages(model, household)
                     content *= "## Mortgage rescue: household id = $(household.id)\n"
                     content *= "## Mortgage rescue: household size = $(household.size)\n"
                     content *= "## Mortgage rescue: household age = $(household.age)\n"
+                    content *= "## Mortgage rescue: household zone = $(household.residencyZone)\n"
                     TRANSACTION_LOG(content, model)
                     put_house_to_sale(household, model, 1)
                 elseif typeof(household) != ConstructionSector && household.wealth < payment
@@ -558,6 +565,7 @@ function payMortgages(model, household)
                     content *= "## Household could not pay mortgage: household id = $(household.id)\n"
                     content *= "## Household could not pay mortgage: household size = $(household.size)\n"
                     content *= "## Household could not pay mortgage: household age = $(household.age)\n"
+                    content *= "## Household could not pay mortgage: household zone = $(household.residencyZone)\n"
                     TRANSACTION_LOG(content, model)
                 else
                     household.wealth -= payment
