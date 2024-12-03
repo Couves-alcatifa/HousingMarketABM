@@ -193,14 +193,20 @@ function assignHousesForRental(model, household, numberOfExtraHousesToAssign, ho
     end
     while i <= length(houses_sizes_for_rental[location])
         if assignedSoFar == numberOfExtraHousesToAssign
-            return
+            break
         end
         area = splice!(houses_sizes_for_rental[location], 1)
         house = House(UInt16(area), location, NotSocialNeighbourhood, 1.0, rand(1:100))
         # println("assignHousesForRental house = $(house)")
         println("####HOUSEADDEDRENTAL####")
         push!(household.houses, house)
-        put_house_to_rent(household, model, house)
+        randomValue = rand()
+        if randomValue < 0.75
+            # current contracts, some very old...
+            put_house_to_rent_at_old_value(household, model, house)
+        # elseif randomValue < 0.90
+        #     put_house_to_sale(household, model, length(household.houses))
+        end
         assignedSoFar += 1
         i += 1
     end

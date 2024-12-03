@@ -345,6 +345,18 @@ function put_house_to_rent(household::MyMultiAgent, model, house)
     # splice!(agent.houseIds, index)
 end
 
+function put_house_to_rent_at_old_value(household::MyMultiAgent, model, house)
+    askRent = calculate_initial_rental_market_price(house) / (1 + rand() * 2)
+
+    # if previousRent != Nothing && askRent > previousRent * RENTS_INCREASE_CEILLING
+    #     askRent = previousRent * RENTS_INCREASE_CEILLING
+    # end
+    push!(model.rentalMarket.supply, RentalSupply(house, askRent, household.id, Bid[]))
+    # # removing house from agent when putting to sale
+    # splice!(agent.houseIds, index)
+end
+
+
 function put_house_to_sale(household::MyMultiAgent, model, index)
     house = household.houses[index]
     push!(model.houseMarket.supply, HouseSupply(house, calculate_market_price(model, house) * rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV)), Bid[], household.id))
