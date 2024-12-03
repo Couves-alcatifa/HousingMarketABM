@@ -929,7 +929,7 @@ end
 
 function calculateProbabilityOfAcceptingBid(bid, askPrice)
     ratio = bid / askPrice
-    return map_value(ratio, 0.85, 1.0, 0.05, 1.0)
+    return map_value(ratio, 0.90, 1.0, 0.03, 1.0)
 end
 
 function map_value(x, in_min, in_max, out_min, out_max)::Float64
