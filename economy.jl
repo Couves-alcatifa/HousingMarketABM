@@ -136,15 +136,9 @@ function wealth_model()
 end
 
 function has_enough_size(house, household)
-    if household.homelessTime >= 24
-        return house.area >= household.size * 8
-    elseif household.homelessTime >= 12
-        return house.area >= household.size * 12
-    elseif household.homelessTime >= 6
-        return house.area >= household.size * 16
-    else
-        return house.area >= household.size * 25
-    end
+    areaPerPerson = house.area / household.size
+    value = areaPerPerson + household.homelessTime 
+    return rand() < map_value(value, 10, 25.0, 0.8, 1.0)
 end
 
 function model_step!(model)
