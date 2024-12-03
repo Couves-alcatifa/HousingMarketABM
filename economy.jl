@@ -386,7 +386,7 @@ function supply_decisions(household, model)
     while houseIdx <= length(household.houses)
         house = household.houses[houseIdx]
         contract = getContract(household, house)
-        if contract != Nothing
+        if contract != Nothing || house in model.housesInRentalMarket
             # house is already renting
             houseIdx += 1
             continue
