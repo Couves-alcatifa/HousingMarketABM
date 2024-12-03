@@ -1099,6 +1099,7 @@ function calculateTransactionTaxes(price)
     taxes = calculateImt(price) + 0.008 * price - calculateTaxBenefits(price)
     if taxes < 0
         return 0
+    end
     return taxes
 end
 
