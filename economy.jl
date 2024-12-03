@@ -37,7 +37,12 @@ function calculate_non_housing_consumption(household, income)
     size = household.size
     # return 500 + income * 0.6 + log(income) + rand(100:300)
     # expenses = EXPENSES_MINIMUM_VALUE * size * (1 + EXPENSES_EXTRA_MINIMUM + rand() * EXPENSES_EXTRA_OFFSET)
-    expenses = EXPENSES_MINIMUM_VALUE * size * rand(Normal(1.0, 0.1))
+    expenses = EXPENSES_MINIMUM_VALUE * size * rand(Normal(1.0, 0.2))
+
+    if expenses > income
+        return expenses / (1.5 + rand() * 0.5)
+    end
+
     if income / size > EXPENSES_MINIMUM_VALUE
         expenses += (income / size - EXPENSES_MINIMUM_VALUE)  * size * (EXPENSES_EXTRA_MINIMUM + rand() * EXPENSES_EXTRA_OFFSET)
     end
@@ -522,15 +527,16 @@ function household_step!(household::MyMultiAgent, model)
     model.government.wealth -= subsidy
     model.subsidiesPaid += subsidy
     household.wealth += subsidy
-    expenses = calculate_non_housing_consumption(household, liquid_salary + subsidy)
+    valuePaidInMortages = payMortgages(model, household)
+    valuePaidInRent = payRent(model, household)
+    incomeLeft = liquid_salary + subsidy - valuePaidInMortages - valuePaidInRent
+    expenses = calculate_non_housing_consumption(household, incomeLeft)
     household.wealth -= expenses
     model.company_wealth += expenses * (1 - model.government.vat)
     model.expensesReceived += expenses * (1 - model.government.vat)
     model.government.wealth += expenses* model.government.vat
     model.ivaCollected += expenses* model.government.vat
 
-    payMortgages(model, household)
-    payRent(model, household)
     # if (agent.wealth <= 0)
     #     agent.wealth = 0.0
         # remove_agent!(agent, model)
@@ -545,49 +551,52 @@ function payRent(model, household)
         model.government.wealth += contract.monthlyPayment * RENT_TAX
         # TODO: gov payment
         household.wealth -= contract.monthlyPayment
+        return contract.monthlyPayment
     end
+    return 0
 end
 
 function payMortgages(model, household)
-    if (length(household.mortgages) != 0)
-        for i in 1:length(household.mortgages)
-            if (household.mortgages[i].valueInDebt > 0)
-                payment = calculateMortgagePayment(household.mortgages[i], model.bank.interestRate)
-                if typeof(household) != ConstructionSector && household.wealth < payment && length(household.houses) > 0
-                    content = "## Mortgage rescue: household.wealth = $(string(household.wealth))\n"
-                    content *= "## Mortgage rescue: raw salary = $(string(calculateSalary(household, model)))\n" 
-                    content *= "## Mortgage rescue: liquid salary = $(string(calculateLiquidSalary(household, model)))\n"
-                    content *= "## Mortgage rescue: household percentile = $(household.percentile)\n"
-                    content *= "## Mortgage rescue: household id = $(household.id)\n"
-                    content *= "## Mortgage rescue: household size = $(household.size)\n"
-                    content *= "## Mortgage rescue: household age = $(household.age)\n"
-                    content *= "## Mortgage rescue: household zone = $(household.residencyZone)\n"
-                    TRANSACTION_LOG(content, model)
-                    put_house_to_sale(household, model, 1)
-                elseif typeof(household) != ConstructionSector && household.wealth < payment
-                    content = "## Household could not pay mortgage: household.wealth = $(string(household.wealth))\n"
-                    content *= "## Household could not pay mortgage: raw salary = $(string(calculateSalary(household, model)))\n" 
-                    content *= "## Household could not pay mortgage: liquid salary = $(string(calculateLiquidSalary(household, model)))\n"
-                    content *= "## Household could not pay mortgage: household percentile = $(household.percentile)\n"
-                    content *= "## Household could not pay mortgage: household id = $(household.id)\n"
-                    content *= "## Household could not pay mortgage: household size = $(household.size)\n"
-                    content *= "## Household could not pay mortgage: household age = $(household.age)\n"
-                    content *= "## Household could not pay mortgage: household zone = $(household.residencyZone)\n"
-                    TRANSACTION_LOG(content, model)
-                else
-                    household.wealth -= payment
-                    model.bank.wealth += payment
-                    updateMortgage(household.mortgages[i], model.bank.interestRate)
-                end
-            
+    paid = 0
+    for i in 1:length(household.mortgages)
+        if (household.mortgages[i].valueInDebt > 0)
+            payment = calculateMortgagePayment(household.mortgages[i], model.bank.interestRate)
+            if typeof(household) != ConstructionSector && household.wealth < payment && length(household.houses) > 0
+                content = "## Mortgage rescue: household.wealth = $(string(household.wealth))\n"
+                content *= "## Mortgage rescue: raw salary = $(string(calculateSalary(household, model)))\n" 
+                content *= "## Mortgage rescue: liquid salary = $(string(calculateLiquidSalary(household, model)))\n"
+                content *= "## Mortgage rescue: household percentile = $(household.percentile)\n"
+                content *= "## Mortgage rescue: household id = $(household.id)\n"
+                content *= "## Mortgage rescue: household size = $(household.size)\n"
+                content *= "## Mortgage rescue: household age = $(household.age)\n"
+                content *= "## Mortgage rescue: household zone = $(household.residencyZone)\n"
+                TRANSACTION_LOG(content, model)
+                put_house_to_sale(household, model, 1)
+            elseif typeof(household) != ConstructionSector && household.wealth < payment
+                content = "## Household could not pay mortgage: household.wealth = $(string(household.wealth))\n"
+                content *= "## Household could not pay mortgage: raw salary = $(string(calculateSalary(household, model)))\n" 
+                content *= "## Household could not pay mortgage: liquid salary = $(string(calculateLiquidSalary(household, model)))\n"
+                content *= "## Household could not pay mortgage: household percentile = $(household.percentile)\n"
+                content *= "## Household could not pay mortgage: household id = $(household.id)\n"
+                content *= "## Household could not pay mortgage: household size = $(household.size)\n"
+                content *= "## Household could not pay mortgage: household age = $(household.age)\n"
+                content *= "## Household could not pay mortgage: household zone = $(household.residencyZone)\n"
+                TRANSACTION_LOG(content, model)
+            else
+                paid += payment
+                household.wealth -= payment
+                model.bank.wealth += payment
+                updateMortgage(household.mortgages[i], model.bank.interestRate)
             end
-            if (household.mortgages[i].valueInDebt == 0)
-                # print("Mortgage was paid! Maturity = " * string(household.mortgages[i].maturity))
-            elseif (household.mortgages[i].valueInDebt < 0)
-                # print("value in debt is negative! problems!! value = " * string(household.mortgages[i].valueInDebt))
-            end
+        
+        end
+        if (household.mortgages[i].valueInDebt == 0)
+            # print("Mortgage was paid! Maturity = " * string(household.mortgages[i].maturity))
+        elseif (household.mortgages[i].valueInDebt < 0)
+            # print("value in debt is negative! problems!! value = " * string(household.mortgages[i].valueInDebt))
         end
     end
+    return paid
 end
 
 function agent_step!(agent::MyMultiAgent, model)

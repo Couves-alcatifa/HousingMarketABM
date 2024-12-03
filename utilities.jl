@@ -1096,7 +1096,10 @@ function calculateTaxBenefits(price)
 end
 
 function calculateTransactionTaxes(price)
-    return calculateImt(price) + 0.008 * price - calculateTaxBenefits(price)
+    taxes = calculateImt(price) + 0.008 * price - calculateTaxBenefits(price)
+    if taxes < 0
+        return 0
+    return taxes
 end
 
 # returns the probability of a household to think this house is a good fit for renting
