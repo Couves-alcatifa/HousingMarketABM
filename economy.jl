@@ -135,6 +135,8 @@ function wealth_model()
     clearRentalMarket(model)
     # clear structures that might have been filled during the markets logic
     model.rentalBuckets = InitiateBuckets()
+    empty!(model.rentalMarket.supply)
+    empty!(model.rentalMarket.demand)
 
     LOG_INFO("finished assignHousesToHouseholds in $(time() - start_time) seconds")
     return model
