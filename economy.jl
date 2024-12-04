@@ -228,7 +228,7 @@ function model_step!(model)
         # end
 
         adjust_interest_rates(model)
-        company_adjust_salaries(model)
+        # company_adjust_salaries(model)
         gov_adjust_taxes(model)
         
         model.company_prev_wealth = model.company_wealth

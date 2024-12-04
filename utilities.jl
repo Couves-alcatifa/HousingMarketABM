@@ -225,7 +225,7 @@ function calculateSalary(household, model)
         range = base * 1.5 * salaryAgeMultiplier
         salary = base + range * (percentile / 100 - 0.8) * 5
     end
-    if (size == 1)
+    if (household.size == 1)
         return salary * model.salary_multiplier * INCOME_MULTIPLICATION_FACTOR 
     else
         return salary * 2 * model.salary_multiplier * INCOME_MULTIPLICATION_FACTOR

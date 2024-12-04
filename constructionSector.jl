@@ -119,6 +119,7 @@ function updateConstructionsPerBucket(model, location, size_interval)
             tax = costs * CONSTRUCTION_VAT
             pendingRenovation.household.wealth -= tax
             model.government.wealth += tax
+            TRANSACTION_LOG("Charged $costs + $tax from household $(household.id) due to renovation costs and taxes", model)
 
             updateHouseRenovationCosts(model, pendingRenovation.house, costs + tax)
             pendingRenovation.house.percentile = rand(95:100)
