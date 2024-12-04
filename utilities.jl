@@ -200,7 +200,8 @@ end
 function calculateSalary(household, model)
     location = household.residencyZone
     percentile = household.percentile
-    salaryAgeMultiplier = map_value(household.age, 20, 70, 0.7, 1.5)
+    # salaryAgeMultiplier = map_value(household.age, 20, 70, 0.7, 1.5)
+    salaryAgeMultiplier = 1.0
     if household.age > 70
         salaryAgeMultiplier = 0.75
     end

@@ -128,7 +128,7 @@ function assignHouseThatMakesSense(model, household, houses_sizes)
         # println("assignHouseThatMakesSense house = $(house)")
         if rand() < probabilityOfHouseholdBeingAssignedToHouse(household, house)
             push!(household.houses, house)
-            println("####HOUSEADDED####")
+            # LOG_INFO("####HOUSEADDED location = $(house.location)")
             splice!(houses_sizes[location], idx)
             return true
         end
@@ -198,7 +198,7 @@ function assignHousesForRental(model, household, numberOfExtraHousesToAssign, ho
         area = splice!(houses_sizes_for_rental[location], 1)
         house = House(UInt16(area), location, NotSocialNeighbourhood, 1.0, rand(1:100))
         # println("assignHousesForRental house = $(house)")
-        println("####HOUSEADDEDRENTAL####")
+        # LOG_INFO("####HOUSEADDEDRENTAL location = $(house.location)")
         push!(household.houses, house)
         randomValue = rand()
         if randomValue < 0.75
