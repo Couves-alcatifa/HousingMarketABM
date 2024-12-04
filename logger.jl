@@ -17,7 +17,7 @@ end
 
 function TRANSACTION_LOG(msg, model)
     open(TRANSACTION_LOG_FILE(model), "a") do file
-        write(file, msg + "\n")
+        write(file, msg * "\n")
     end
 end
 

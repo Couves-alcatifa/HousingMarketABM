@@ -115,9 +115,9 @@ function updateConstructionsPerBucket(model, location, size_interval)
             costs = calculateRenovationCosts(pendingRenovation.house)
             tax = costs * CONSTRUCTION_VAT
             household = pendingRenovation.household
-            if cost + tax > household.wealth * 0.95
+            if costs + tax > household.wealth * 0.95
                 paidWithOwnMoney = household.wealth * 0.95
-                mortgageValue = cost + tax - paidWithOwnMoney
+                mortgageValue = costs + tax - paidWithOwnMoney
                 maxMortgage = maxMortgageValue(model, household)
                 if maxMortgage < mortgageValue
                     TRANSACTION_LOG("Household failed to acquire mortgage for renovation", model)
