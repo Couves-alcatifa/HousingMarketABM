@@ -113,21 +113,37 @@ function updateConstructionsPerBucket(model, location, size_interval)
         pendingRenovation = model.construction_sector.pendingRenovations[i]
         if pendingRenovation.time >= pendingRenovation.renovationTime
             costs = calculateRenovationCosts(pendingRenovation.house)
-            pendingRenovation.household.wealth -= costs
+            tax = costs * CONSTRUCTION_VAT
+            household = pendingRenovation.household
+            if cost + tax > household.wealth * 0.95
+                paidWithOwnMoney = household.wealth * 0.95
+                mortgageValue = cost + tax - paidWithOwnMoney
+                maxMortgage = maxMortgageValue(model, household)
+                if maxMortgage < mortgageValue
+                    TRANSACTION_LOG("Household failed to acquire mortgage for renovation", model)
+                    return false
+                end
+                mortgageDuration = calculateMortgageDuration(mortgageValue, household.age)
+                mortgage = Mortgage(mortgageValue, mortgageValue, 0, mortgageDuration)
+                push!(household.mortgages, mortgage)
+                push!(model.mortgagesInStep, mortgage)
+                model.bank.wealth -= mortgageValue
+                household.wealth += mortgageValue
+            end
+            household.wealth -= costs
             model.construction_sector.wealth += costs
 
-            tax = costs * CONSTRUCTION_VAT
-            pendingRenovation.household.wealth -= tax
+            household.wealth -= tax
             model.government.wealth += tax
-            TRANSACTION_LOG("Charged $costs + $tax from household $(pendingRenovation.household.id) due to renovation costs and taxes", model)
+            TRANSACTION_LOG("Charged $costs + $tax from household $(household.id) due to renovation costs and taxes", model)
 
             updateHouseRenovationCosts(model, pendingRenovation.house, costs + tax)
             pendingRenovation.house.percentile = rand(95:100)
-            push!(pendingRenovation.household.houses, pendingRenovation.house)
+            push!(household.houses, pendingRenovation.house)
             if pendingRenovation.type == ForInvestment
-                put_house_to_sale(pendingRenovation.household, model, length(pendingRenovation.household.houses))
+                put_house_to_sale(household, model, length(household.houses))
             else
-                put_house_to_rent(pendingRenovation.household, model, pendingRenovation.house)
+                put_house_to_rent(household, model, pendingRenovation.house)
             end
             splice!(model.construction_sector.pendingRenovations, i)
         else
