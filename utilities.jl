@@ -121,6 +121,8 @@ end
 
 function calculateRentalBid(household, model, askPrice, consumerSurplus)
     demandValue = calculateLiquidSalary(household, model) * MAX_EFFORT_FOR_RENT
+    multiplier = map_value(household.homelessTime, 0, 24, 0.75, 1.25)
+    demandValue *= multiplier
     consumerSurplusMultiplier = calculateConsumerSurplusAddedValueForRent(consumerSurplus)
     if (demandValue >= askPrice * consumerSurplusMultiplier)
         return askPrice * consumerSurplusMultiplier

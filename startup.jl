@@ -205,8 +205,6 @@ function assignHousesForRental(model, household, numberOfExtraHousesToAssign, ho
         if rand() < probabilityOfHouseBeingInOldContract
             # current contracts, some very old...
             put_house_to_rent_at_old_value(household, model, house)
-        # elseif randomValue < 0.90
-        #     put_house_to_sale(household, model, length(household.houses))
         end
         assignedSoFar += 1
         i += 1
