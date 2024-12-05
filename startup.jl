@@ -200,8 +200,8 @@ function assignHousesForRental(model, household, numberOfExtraHousesToAssign, ho
         # println("assignHousesForRental house = $(house)")
         # LOG_INFO("####HOUSEADDEDRENTAL location = $(house.location)")
         push!(household.houses, house)
-        randomValue = rand()
-        if randomValue < 0.75
+        probabilityOfHouseBeingInOldContract = 1 - map_value(house.area, 20, 200, 0.01, 0.98)
+        if rand() < probabilityOfHouseBeingInOldContract
             # current contracts, some very old...
             put_house_to_rent_at_old_value(household, model, house)
         # elseif randomValue < 0.90
