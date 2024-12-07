@@ -950,7 +950,7 @@ function sortBids(l, r)
 end
 
 function sortSupply(l, r)
-    l.house.percentile < r.house.percentile
+    l.house.percentile > r.house.percentile
 end
 
 function clearHangingSupplies(model)
