@@ -923,11 +923,11 @@ function calculateConsumerSurplus(household, house)
 end
 
 function calculateConsumerSurplusAddedValue(consumerSurplus)
-    return map_value(consumerSurplus, -30.0, 39.0, CONSUMER_SURPLUS_MIN, CONSUMER_SURPLUS_MAX)
+    return map_value(consumerSurplus, -60.0, 60.0, CONSUMER_SURPLUS_MIN, CONSUMER_SURPLUS_MAX)
 end
 
 function calculateConsumerSurplusAddedValueForRent(consumerSurplus)
-    return map_value(consumerSurplus, -30.0, 39.0, CONSUMER_SURPLUS_MIN_FOR_RENT, CONSUMER_SURPLUS_MAX_FOR_RENT)
+    return map_value(consumerSurplus, -60.0, 60.0, CONSUMER_SURPLUS_MIN_FOR_RENT, CONSUMER_SURPLUS_MAX_FOR_RENT)
 end
 
 function calculateProbabilityOfAcceptingBid(bid, askPrice)
