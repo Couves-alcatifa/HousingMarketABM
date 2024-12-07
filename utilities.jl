@@ -398,6 +398,7 @@ function clearHouseMarket(model)
     start_time = time()
     i = 1
     householdsWhoBoughtAHouse = Set()
+    sort!(model.houseMarket.supply, lt=sortSupply)
     while i <= length(model.houseMarket.supply)
         supply = model.houseMarket.supply[i]
         sort!(supply.bids, lt=sortBids)
@@ -466,6 +467,7 @@ function clearRentalMarket(model)
     start_time = time()
 
     i = 1
+    sort!(model.rentalMarket.supply, lt=sortSupply)
     while i <= length(model.rentalMarket.supply)
         supply = model.rentalMarket.supply[i]
         sort!(supply.bids, lt=sortBids)
@@ -945,6 +947,10 @@ end
 
 function sortBids(l, r)
     l.value > r.value
+end
+
+function sortSupply(l, r)
+    l.house.percentile < r.house.percentile
 end
 
 function clearHangingSupplies(model)
