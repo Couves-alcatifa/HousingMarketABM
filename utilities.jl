@@ -903,7 +903,7 @@ function calculateConsumerSurplus(household, house)
     if areaPerPerson > 60
         areaPerPerson = 60
     end
-    sizeFactor = map_value(areaPerPerson, 2.0, 60.0, -15.0, 15.0)
+    sizeFactor = map_value(areaPerPerson, 2.0, 60.0, -50.0, 30.0)
     sizeFactor *= (0.8 + rand() * 0.4) 
 
     zoneFactor = -4
@@ -913,10 +913,10 @@ function calculateConsumerSurplus(household, house)
         zoneFactor = 0
     end
 
-    desperationFactor = household.homelessTime - 12
+    desperationFactor = household.homelessTime * 2 - 24
 
-    if desperationFactor > 12
-        desperationFactor = 12
+    if desperationFactor > 24
+        desperationFactor = 24
     end
 
     return percentileFactor + sizeFactor + zoneFactor + desperationFactor
