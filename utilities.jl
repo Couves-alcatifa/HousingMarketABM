@@ -208,23 +208,23 @@ function calculateSalary(household, model)
         salaryAgeMultiplier = 0.75
     end
     if percentile < 20
-        base = eval(Symbol("FIRST_QUINTILE_INCOME_IN_$(string(location))")) / 2
+        base = FIRST_QUINTILE_INCOME_MAP[location] / 2
         range = base * 2 * salaryAgeMultiplier
         salary = base + range * (percentile / 100) * 5
     elseif percentile < 40
-        base = eval(Symbol("FIRST_QUINTILE_INCOME_IN_$(string(location))"))
-        range = (eval(Symbol("SECOND_QUINTILE_INCOME_IN_$(string(location))")) - base) * salaryAgeMultiplier
+        base = FIRST_QUINTILE_INCOME_MAP[location]
+        range = (SECOND_QUINTILE_INCOME_MAP[location] - base) * salaryAgeMultiplier
         salary = base + range * (percentile / 100 - 0.2) * 5
     elseif percentile < 60
-        base = eval(Symbol("SECOND_QUINTILE_INCOME_IN_$(string(location))"))
-        range = (eval(Symbol("THIRD_QUINTILE_INCOME_IN_$(string(location))")) - base) * salaryAgeMultiplier
+        base = SECOND_QUINTILE_INCOME_MAP[location]
+        range = (THIRD_QUINTILE_INCOME_MAP[location] - base) * salaryAgeMultiplier
         salary = base + range * (percentile / 100 - 0.4) * 5
     elseif percentile < 80
-        base = eval(Symbol("THIRD_QUINTILE_INCOME_IN_$(string(location))"))
-        range = (eval(Symbol("FOURTH_QUINTILE_INCOME_IN_$(string(location))")) - base) * salaryAgeMultiplier
+        base = THIRD_QUINTILE_INCOME_MAP[location]
+        range = (FOURTH_QUINTILE_INCOME_MAP[location] - base) * salaryAgeMultiplier
         salary = base + range * (percentile / 100 - 0.6) * 5
     else
-        base = eval(Symbol("FOURTH_QUINTILE_INCOME_IN_$(string(location))"))
+        base = FOURTH_QUINTILE_INCOME_MAP[location]
         range = base * 1.5 * salaryAgeMultiplier
         salary = base + range * (percentile / 100 - 0.8) * 5
     end

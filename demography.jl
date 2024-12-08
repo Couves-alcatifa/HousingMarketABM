@@ -16,7 +16,7 @@ end
 function handle_births(household, model)
     if (household.age >= 20 && household.age < 44  && household.size >= 2)
         probability = BIRTH_RATE
-        ratioOfFertileWomen = eval(Symbol("RATIO_OF_FERTILE_WOMEN_IN_$(string(household.residencyZone))"))
+        ratioOfFertileWomen = RATIO_OF_FERTILE_WOMEN_MAP[household.residencyZone]
         # probability should not be fixed
         if (rand() < (probability / ratioOfFertileWomen) * (1 + (TOTAL_HOUSEHOLDS_WITH_SIZE_1 * ratioOfFertileWomen) / NUMBER_OF_HOUSEHOLDS) * BIRTH_INCREASE_MULTIPLIER)
             # 5% for size == 2
@@ -62,7 +62,7 @@ end
 # TODO: contracts logic should be enhanced
 function handle_breakups(household, model)
     if (household.size >= 2)
-        probability_of_breakup = eval(Symbol("PROBABILITY_OF_DIVORCE_IN_$(string(household.residencyZone))"))
+        probability_of_breakup = PROBABILITY_OF_DIVORCE_MAP[household.residencyZone]
         if (rand() < probability_of_breakup * 2.0) # increase the probability to match real values
             terminateContractsOnTentantSide(household, model)
             terminateContractsOnLandLordSide(household, model)
