@@ -389,8 +389,8 @@ function clearHouseMarket(model)
                 lock(localLock) do
                     push!(supply.bids, Bid(demandBid, demand.householdId, demand.type))
                     push!(demand.supplyMatches, SupplyMatch(supply))
-                    if supply.consumerSurplus < consumerSurplus
-                        supply.consumerSurplus = consumerSurplus
+                    if supply.maxConsumerSurplus < consumerSurplus
+                        supply.maxConsumerSurplus = consumerSurplus
                     end
                 end
             end
@@ -462,8 +462,8 @@ function clearRentalMarket(model)
                 lock(localLock) do
                     push!(supply.bids, Bid(demandBid, demand.householdId, Regular))
                     push!(demand.supplyMatches, RentalSupplyMatch(supply))
-                    if supply.consumerSurplus < consumerSurplus
-                        supply.consumerSurplus = consumerSurplus
+                    if supply.maxConsumerSurplus < consumerSurplus
+                        supply.maxConsumerSurplus = consumerSurplus
                     end
                 end
             end
@@ -956,7 +956,7 @@ function sortBids(l, r)
 end
 
 function sortSupply(l, r)
-    l.consumerSurplus > r.consumerSurplus
+    l.maxConsumerSurplus > r.maxConsumerSurplus
 end
 
 function clearHangingSupplies(model)

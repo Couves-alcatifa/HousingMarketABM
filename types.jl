@@ -150,7 +150,7 @@ mutable struct RentalSupply
     monthlyPrice::Float64
     sellerId::Int
     bids::Array{Bid}
-    consumerSurplus
+    maxConsumerSurplus
 end
 
 function RentalSupply(house, price, sellerId, bids)
