@@ -997,24 +997,24 @@ MAX_NEW_CONSTRUCTIONS_MAP = Dict(
 HOUSES_BOUGHT_BY_NON_RESIDENTS = (4047 * MODEL_SCALE) / 12
 
 RATIO_OF_HOUSES_BOUGHT_BY_NON_RESIDENTS = Dict(
-    Alcochete => 0.01,
+    Alcochete => 0.0,
     Almada => 0.02,
     Amadora => 0.02,
-    Barreiro => 0.02,
-    Cascais => 0.13,
-    Lisboa => 0.5,
+    Barreiro => 0.01,
+    Cascais => 0.17,
+    Lisboa => 0.55,
     Loures => 0.02,
     Mafra => 0.01,
     Moita => 0.01,
-    Montijo => 0.01,
+    Montijo => 0.0,
     Odivelas => 0.02,
     Oeiras => 0.1,
-    Palmela => 0.01,
-    Seixal => 0.02,
-    Sesimbra => 0.02,
+    Palmela => 0.0,
+    Seixal => 0.0,
+    Sesimbra => 0.0,
     Setubal => 0.02,
     Sintra => 0.05,
-    VilaFrancaDeXira => 0.01,
+    VilaFrancaDeXira => 0.0,
 )
 
 @enum HouseSizeEchelon begin
