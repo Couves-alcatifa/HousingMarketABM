@@ -947,6 +947,10 @@ function map_value(x, in_min, in_max, out_min, out_max)::Float64
     return out_min + (x - in_min) * (out_max - out_min) / (in_max - in_min)
 end
 
+function map_value_non_linear(x, in_min, in_max, out_min, out_max)::Float64
+    return out_min + (x - in_min)^3 * (out_max - out_min) / (in_max - in_min)^3
+end
+
 function sortByConsumerSurplus(l, r)
     (l.supply.price / sqrt(l.consumerSurplus)) < (r.supply.price / sqrt(r.consumerSurplus))
 end

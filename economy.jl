@@ -145,7 +145,7 @@ end
 function has_enough_size(house, household)
     areaPerPerson = house.area / household.size
     value = areaPerPerson + household.homelessTime 
-    return rand() < map_value(value, 15, 35.0, 0.01, 1.0)
+    return rand() < map_value_non_linear(value, 15, 35.0, 0.01, 1.0)
 end
 
 function model_step!(model)
