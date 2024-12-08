@@ -120,6 +120,11 @@ mutable struct HouseSupply
     price::Float64
     bids::Array{Bid}
     sellerId::Int
+    maxConsumerSurplus
+end
+
+function HouseSupply(house, price, bids, sellerId)
+    return HouseSupply(house, price, bids, sellerId, -Inf)
 end
 
 mutable struct SupplyMatch
@@ -145,6 +150,11 @@ mutable struct RentalSupply
     monthlyPrice::Float64
     sellerId::Int
     bids::Array{Bid}
+    consumerSurplus
+end
+
+function RentalSupply(house, price, sellerId, bids)
+    return RentalSupply(house, price, sellerId, bids, -Inf)
 end
 
 mutable struct RentalSupplyMatch
