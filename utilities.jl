@@ -904,7 +904,7 @@ function calculateConsumerSurplus(household, house)
     house_percentile = house.percentile
     house_area = house.area
     household_size = household.size
-    percentileFactor = map_value(house_percentile, 1.0, 100.0, 1.0, 8.0) 
+    percentileFactor = map_value(house_percentile, 1.0, 100.0, 1.0, 15.0) 
     percentileFactor *= (0.8 + rand() * 0.4)
 
     areaPerPerson = (house_area /  household_size)
