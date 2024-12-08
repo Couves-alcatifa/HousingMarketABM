@@ -105,11 +105,13 @@ function assignHousesToHouseholds(model)
         current_home_owners_in_the_zone = zones_to_n_of_home_owners[household.residencyZone]
         if current_home_owners_in_the_zone >= target_home_owners_in_the_zone
             LOG_INFO("All home owners were assigned in $(household.residencyZone)")
+            household.homelessTime = generateHomelessTime()
             push!(model.rentalMarket.demand, RentalDemand(household.id, RentalSupply[]))
             continue # no more houses to assign in this phase
         end
         if !assignHouseThatMakesSense(model, household, houses_sizes)
             # Wasn't assigned a house...
+            household.homelessTime = generateHomelessTime()
             push!(model.rentalMarket.demand, RentalDemand(household.id, RentalSupply[]))
             continue # also not going to get houses for rental
         end
@@ -214,4 +216,8 @@ function getProbabilityOfHouseBeingInOldContract(house)
     percentileFactor = map_value(house.percentile, 1, 100, 0.15, 0.99) # from 85% to 1%  
     areaFactor = 1 - map_value(house.area, 20, 200, 0.85, 0.99) # from 15% to 1%
     return areaFactor + percentileFactor
+end
+
+function generateHomelessTime()
+    return rand(1:24)
 end
