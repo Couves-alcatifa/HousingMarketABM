@@ -1,3 +1,4 @@
+using Distributions
 # @enum HouseLocation begin
 #     Amadora = 1
 #     Cascais = 2
@@ -54,9 +55,9 @@
 #     return map_value(consumerSurplus, -30.0, 39.0, CONSUMER_SURPLUS_MIN_FOR_RENT, CONSUMER_SURPLUS_MAX_FOR_RENT)
 # end
 
-# function map_value(x, in_min, in_max, out_min, out_max)::Float64
-#     return out_min + (x - in_min) * (out_max - out_min) / (in_max - in_min)
-# end
+function map_value(x, in_min, in_max, out_min, out_max)::Float64
+    return out_min + (x - in_min) * (out_max - out_min) / (in_max - in_min)
+end
 
 # function calculateConsumerSurplus(house_percentile, house_area, household_size, homelessTime, houseLocation, householdLocation)
 #     percentileFactor = map_value(house_percentile, 1.0, 100.0, 1.0, 8.0) 
@@ -97,3 +98,66 @@
 # calculateConsumerSurplus(70, 70, 2, 24, Lisboa, Oeiras)
 # calculateConsumerSurplus(70, 70, 2, 90, Lisboa, Oeiras)
 # calculateConsumerSurplus(30, 30, 2, 24, Lisboa, Oeiras)
+
+function map_value(x, in_min, in_max, out_min, out_max)::Float64
+    return out_min + (x - in_min) * (out_max - out_min) / (in_max - in_min)
+end
+
+function map_value_non_linear(x, in_min, in_max, out_min, out_max)::Float64
+    return out_min + (x - in_min)^2 * (out_max - out_min) / (in_max - in_min)^2
+end
+
+function calculateConsumerSurplus(house_percentile, house_area, household_size, homelessTime)
+    println("house_percentile, house_area, household_size, homelessTime = $house_percentile, $house_area, $household_size, $homelessTime")
+    if homelessTime > 30
+        homelessTime = 30
+    end
+    percentileFactor = map_value_non_linear(house_percentile, 1.0, 100.0, 1.0, 30.0) 
+    # percentileFactor = rand(Normal(percentileFactor, percentileFactor * 0.1))
+
+    areaPerPerson = (house_area /  household_size)
+    if areaPerPerson > 35
+        areaPerPerson = 35
+    end
+    sizeFactor = map_value_non_linear(areaPerPerson, 10.0, 35.0, 1.0, 30.0)
+    # sizeFactor = rand(Normal(sizeFactor, sizeFactor * 0.1)) 
+
+    desperationFactor = homelessTime + 1
+    # desperationFactor = rand(Normal(desperationFactor, desperationFactor * 0.15)) 
+
+    consumerSurplus = ((percentileFactor^(1/3)) * (sizeFactor^(1/3)) * (desperationFactor^(1/3))) ^ (1/2)
+    if consumerSurplus > 4
+        consumerSurplus = 4
+    end
+    return consumerSurplus 
+end
+
+const CONSUMER_SURPLUS_MIN = 0.75
+const CONSUMER_SURPLUS_MAX = 1.15
+
+function calculateConsumerSurplusAddedValue(consumerSurplus)
+    return map_value(consumerSurplus, 1.0, 4.0, CONSUMER_SURPLUS_MIN, CONSUMER_SURPLUS_MAX)
+end
+
+function test(house_percentile, house_area, household_size, homelessTime)
+    return calculateConsumerSurplusAddedValue(calculateConsumerSurplus(house_percentile, house_area, household_size, homelessTime))
+end
+
+println(test(1, 70, 2, 0))
+println("\n\n")
+println(test(1, 70, 2, 16))
+println("\n\n")
+println(test(80, 70, 2, 0))
+println("\n\n")
+println(test(50, 40, 2, 1))
+println("\n\n")
+println(test(50, 40, 2, 16))
+
+println("\n\n")
+println(test(100, 100, 2, 32))
+println("\n\n")
+println(test(100, 100, 2, 0))
+println("\n\n")
+println(test(15, 50, 2, 1))
+println("\n\n")
+println(test(15, 80, 2, 1))

@@ -913,35 +913,31 @@ function calculateConsumerSurplus(household, house)
     if homelessTime > 30
         homelessTime = 30
     end
-    percentileFactor = map_value(house_percentile, 1.0, 100.0, 1.0, 30.0) 
-    percentileFactor *= (0.8 + rand() * 0.4)
+    percentileFactor = map_value_sqrt(house_percentile, 1.0, 100.0, 1.0, 30.0) 
+    # percentileFactor = rand(Normal(percentileFactor, percentileFactor * 0.1))
 
     areaPerPerson = (house_area /  household_size)
-    if areaPerPerson > 60
-        areaPerPerson = 60
+    if areaPerPerson > 35
+        areaPerPerson = 35
     end
-    sizeFactor = map_value(areaPerPerson, 2.0, 60.0, 1.0, 30.0)
-    sizeFactor *= (0.8 + rand() * 0.4) 
+    sizeFactor = map_value_sqrt(areaPerPerson, 10.0, 35.0, 1.0, 30.0)
+    # sizeFactor = rand(Normal(sizeFactor, sizeFactor * 0.1)) 
 
-    desperationFactor = homelessTime
-    desperationFactor *= (0.8 + rand() * 0.4) 
+    desperationFactor = homelessTime + 1
+    # desperationFactor = rand(Normal(desperationFactor, desperationFactor * 0.15)) 
 
-    # zoneFactor = -4
-    # if household.residencyZone == house.location
-    #     zoneFactor = 4
-    # elseif house.location in adjacentZones[household.residencyZone]
-    #     zoneFactor = 0
-    # end
-
-    return percentileFactor * sizeFactor * desperationFactor
+    consumerSurplus = ((percentileFactor^(1/3)) * (sizeFactor^(1/3)) * (desperationFactor^(1/3))) ^ (1/2)
+    if consumerSurplus > 4
+        consumerSurplus = 4
+    end
+    return consumerSurplus 
 end
 
 function calculateConsumerSurplusAddedValue(consumerSurplus)
-    return map_value(consumerSurplus, 1.0, 27000.0, CONSUMER_SURPLUS_MIN, CONSUMER_SURPLUS_MAX)
+    return map_value(consumerSurplus, 1.0, 4.0, CONSUMER_SURPLUS_MIN, CONSUMER_SURPLUS_MAX)
 end
-
 function calculateConsumerSurplusAddedValueForRent(consumerSurplus)
-    return map_value(consumerSurplus, 1.0, 27000.0, CONSUMER_SURPLUS_MIN_FOR_RENT, CONSUMER_SURPLUS_MAX_FOR_RENT)
+    return map_value(consumerSurplus, 1.0, 4.0, CONSUMER_SURPLUS_MIN_FOR_RENT, CONSUMER_SURPLUS_MAX_FOR_RENT)
 end
 
 function calculateProbabilityOfAcceptingBid(bid, askPrice)
@@ -951,6 +947,10 @@ end
 
 function map_value(x, in_min, in_max, out_min, out_max)::Float64
     return out_min + (x - in_min) * (out_max - out_min) / (in_max - in_min)
+end
+
+function map_value_sqrt(x, in_min, in_max, out_min, out_max)::Float64
+    return out_min + (x - in_min)^2 * (out_max - out_min) / (in_max - in_min)^2
 end
 
 function map_value_non_linear(x, in_min, in_max, out_min, out_max)::Float64
