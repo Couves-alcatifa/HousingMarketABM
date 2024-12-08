@@ -900,42 +900,48 @@ function measureSupplyAndDemandPerBucket(model)
     end
 end
 
+# consumerSurplus baixo:
+# - area baixa + homelessTime baixo
+# - percentil baixo + homelessTime baixo
+# - area baixa + percentil baixo + homelessTime não gigante
+# 
 function calculateConsumerSurplus(household, house)
     house_percentile = house.percentile
     house_area = house.area
     household_size = household.size
-    percentileFactor = map_value(house_percentile, 1.0, 100.0, 1.0, 15.0) 
+    homelessTime = household.homelessTime
+    if homelessTime > 30
+        homelessTime = 30
+    end
+    percentileFactor = map_value(house_percentile, 1.0, 100.0, 1.0, 30.0) 
     percentileFactor *= (0.8 + rand() * 0.4)
 
     areaPerPerson = (house_area /  household_size)
     if areaPerPerson > 60
         areaPerPerson = 60
     end
-    sizeFactor = map_value(areaPerPerson, 2.0, 60.0, -50.0, 30.0)
+    sizeFactor = map_value(areaPerPerson, 2.0, 60.0, 1.0, 30.0)
     sizeFactor *= (0.8 + rand() * 0.4) 
 
-    zoneFactor = -4
-    if household.residencyZone == house.location
-        zoneFactor = 4
-    elseif house.location in adjacentZones[household.residencyZone]
-        zoneFactor = 0
-    end
+    desperationFactor = homelessTime
+    desperationFactor *= (0.8 + rand() * 0.4) 
 
-    desperationFactor = household.homelessTime * 2 - 24
+    # zoneFactor = -4
+    # if household.residencyZone == house.location
+    #     zoneFactor = 4
+    # elseif house.location in adjacentZones[household.residencyZone]
+    #     zoneFactor = 0
+    # end
 
-    if desperationFactor > 24
-        desperationFactor = 24
-    end
-
-    return percentileFactor + sizeFactor + zoneFactor + desperationFactor
+    return percentileFactor * sizeFactor * desperationFactor
 end
 
 function calculateConsumerSurplusAddedValue(consumerSurplus)
-    return map_value(consumerSurplus, -60.0, 60.0, CONSUMER_SURPLUS_MIN, CONSUMER_SURPLUS_MAX)
+    return map_value(consumerSurplus, 1.0, 27000.0, CONSUMER_SURPLUS_MIN, CONSUMER_SURPLUS_MAX)
 end
 
 function calculateConsumerSurplusAddedValueForRent(consumerSurplus)
-    return map_value(consumerSurplus, -60.0, 60.0, CONSUMER_SURPLUS_MIN_FOR_RENT, CONSUMER_SURPLUS_MAX_FOR_RENT)
+    return map_value(consumerSurplus, 1.0, 27000.0, CONSUMER_SURPLUS_MIN_FOR_RENT, CONSUMER_SURPLUS_MAX_FOR_RENT)
 end
 
 function calculateProbabilityOfAcceptingBid(bid, askPrice)
