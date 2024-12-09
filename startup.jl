@@ -219,5 +219,11 @@ function getProbabilityOfHouseBeingInOldContract(house)
 end
 
 function generateHomelessTime()
-    return rand(1:24)
+    rn = rand()
+    if rn < 0.7
+        return rand(1:8)
+    else
+        return rand(1:24)
+    end
+        
 end
