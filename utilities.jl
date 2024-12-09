@@ -910,34 +910,39 @@ function calculateConsumerSurplus(household, house)
     house_area = house.area
     household_size = household.size
     homelessTime = household.homelessTime
-    if homelessTime > 30
-        homelessTime = 30
+    if homelessTime > 24
+        homelessTime = 24
     end
     percentileFactor = map_value_sqrt(house_percentile, 1.0, 100.0, 1.0, 30.0) 
     # percentileFactor = rand(Normal(percentileFactor, percentileFactor * 0.1))
 
     areaPerPerson = (house_area /  household_size)
-    if areaPerPerson > 35
-        areaPerPerson = 35
+    if areaPerPerson > 40
+        areaPerPerson = 40
     end
-    sizeFactor = map_value_sqrt(areaPerPerson, 10.0, 35.0, 1.0, 30.0)
+    sizeFactor = map_value_sqrt(areaPerPerson, 10.0, 40.0, 1.0, 30.0)
     # sizeFactor = rand(Normal(sizeFactor, sizeFactor * 0.1)) 
 
-    desperationFactor = homelessTime + 1
+    desperationFactor = map_value(homelessTime + 1, 1.0, 24.0, 1.0, 30.0)
     # desperationFactor = rand(Normal(desperationFactor, desperationFactor * 0.15)) 
 
-    consumerSurplus = ((percentileFactor^(1/3)) * (sizeFactor^(1/3)) * (desperationFactor^(1/3))) ^ (1/2)
-    if consumerSurplus > 4
-        consumerSurplus = 4
+    consumerSurplus = ((percentileFactor^(1/3)) * (sizeFactor^(1/3)) * (desperationFactor^(1/3)))
+    if consumerSurplus > 9
+        consumerSurplus = 9 + (consumerSurplus - 9) ^ (1/2)
+    end
+
+    if consumerSurplus > 13
+        consumerSurplus = 13
     end
     return consumerSurplus 
 end
 
 function calculateConsumerSurplusAddedValue(consumerSurplus)
-    return map_value(consumerSurplus, 1.0, 4.0, CONSUMER_SURPLUS_MIN, CONSUMER_SURPLUS_MAX)
+    return map_value(consumerSurplus, 1.0, 13.0, CONSUMER_SURPLUS_MIN, CONSUMER_SURPLUS_MAX)
 end
+
 function calculateConsumerSurplusAddedValueForRent(consumerSurplus)
-    return map_value(consumerSurplus, 1.0, 4.0, CONSUMER_SURPLUS_MIN_FOR_RENT, CONSUMER_SURPLUS_MAX_FOR_RENT)
+    return map_value(consumerSurplus, 1.0, 13.0, CONSUMER_SURPLUS_MIN_FOR_RENT, CONSUMER_SURPLUS_MAX_FOR_RENT)
 end
 
 function calculateProbabilityOfAcceptingBid(bid, askPrice)
