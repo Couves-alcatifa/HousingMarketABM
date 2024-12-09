@@ -401,7 +401,8 @@ function clearHouseMarket(model)
     start_time = time()
     i = 1
     householdsWhoBoughtAHouse = Set()
-    sort!(model.houseMarket.supply, lt=sortSupply)
+    # sort!(model.houseMarket.supply, lt=sortSupply)
+    sort!(model.houseMarket.supply, lt=sortRandomly)
     while i <= length(model.houseMarket.supply)
         supply = model.houseMarket.supply[i]
         sort!(supply.bids, lt=sortBids)
