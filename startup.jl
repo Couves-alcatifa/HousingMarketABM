@@ -213,7 +213,7 @@ function assignHousesForRental(model, household, numberOfExtraHousesToAssign, ho
 end
 
 function getProbabilityOfHouseBeingInOldContract(house)
-    percentileFactor = map_value(house.percentile, 1, 100, 0.15, 0.99) # from 85% to 1%  
+    percentileFactor = 1 - map_value(house.percentile, 1, 100, 0.15, 0.99) # from 85% to 1%  
     areaFactor = 1 - map_value(house.area, 20, 200, 0.85, 0.99) # from 15% to 1%
     return areaFactor + percentileFactor
 end
