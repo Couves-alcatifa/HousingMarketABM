@@ -95,6 +95,7 @@ function assignHousesToHouseholds(model)
 
 
     zones_to_n_of_home_owners = Dict()
+    houses_for_rental = [] # list of tuples (house, landlord)
     for location in instances(HouseLocation)
         zones_to_n_of_home_owners[location] = 0
     end
@@ -117,8 +118,42 @@ function assignHousesToHouseholds(model)
         end
         zones_to_n_of_home_owners[household.residencyZone] += 1
         numberOfExtraHousesToAssign = shouldAssignMultipleHouses(model, household)
-        assignHousesForRental(model, household, numberOfExtraHousesToAssign, houses_sizes_for_rental)
+        assignHousesForRental(model, household, numberOfExtraHousesToAssign, houses_sizes_for_rental, houses_for_rental)
     end
+    for i in 1:nagents(model)
+        household = model[i]
+        if length(household.houses) == 0
+            if !createContract(model, household, houses_for_rental)
+                LOG_INFO("Household $(household.id) wasn't assigned a house for rental")
+            end
+        end
+    end
+
+end
+
+function createContract(model, household, houses_for_rental)
+    for idx in eachindex(houses_for_rental)
+        house = houses_for_rental[idx][1]
+        if house.location != household.residencyZone
+            continue
+        end
+        if rand() < probabilityOfHouseholdBeingAssignedToHouse(household, house)
+            seller = houses_for_rental[idx][2]
+            monthlyPrice = calculate_initial_rental_market_price(house) / (1 + rand() * 2)
+            salary = calculateLiquidSalary(household, model)
+            if salary * MAX_EFFORT_FOR_RENT <= monthlyPrice
+                continue
+            end
+    	    contract = Contract(seller.id, household.id, house, monthlyPrice)
+
+            household.contractAsTenant = contract
+            push!(seller.contractsAsLandlord, contract)
+            # LOG_INFO("####HOUSEADDED location = $(house.location)")
+            splice!(houses_for_rental, idx)
+            return true
+        end
+    end
+    return false
 end
 
 function assignHouseThatMakesSense(model, household, houses_sizes)
@@ -186,7 +221,7 @@ function shouldAssignMultipleHouses(model, household)
     return 0
 end
 
-function assignHousesForRental(model, household, numberOfExtraHousesToAssign, houses_sizes_for_rental)
+function assignHousesForRental(model, household, numberOfExtraHousesToAssign, houses_sizes_for_rental, houses_for_rental)
     location = household.residencyZone
     assignedSoFar = 0
     i = 1
@@ -202,11 +237,7 @@ function assignHousesForRental(model, household, numberOfExtraHousesToAssign, ho
         # println("assignHousesForRental house = $(house)")
         # LOG_INFO("####HOUSEADDEDRENTAL location = $(house.location)")
         push!(household.houses, house)
-        probabilityOfHouseBeingInOldContract = getProbabilityOfHouseBeingInOldContract(house)
-        if rand() < 0.85
-            # current contracts, some very old...
-            put_house_to_rent_at_old_value(household, model, house)
-        end
+        push!(houses_for_rental, tuple(house, household))
         assignedSoFar += 1
         i += 1
     end
