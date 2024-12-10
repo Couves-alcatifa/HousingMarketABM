@@ -914,7 +914,7 @@ function calculateConsumerSurplus(household, house)
     if homelessTime > 24
         homelessTime = 24
     end
-    percentileFactor = map_value_sqrt(house_percentile, 1.0, 100.0, 1.0, 30.0) 
+    percentileFactor = map_value(house_percentile, 1.0, 100.0, 1.0, 30.0) 
     # percentileFactor = rand(Normal(percentileFactor, percentileFactor * 0.1))
 
     areaPerPerson = (house_area /  household_size)
