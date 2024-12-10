@@ -14,7 +14,7 @@ function calculate_rental_market_price(house, model)
         return calculate_initial_rental_market_price(house)
     end
     # println("house = $house mean(transactions) * house.area * house.maintenanceLevel = $(mean(transactions) * house.area * house.maintenanceLevel)")
-    return mean(bucket) * house.area * house.maintenanceLevel
+    return mean(bucket) * house.area
 end
 
 function calculate_market_price(model, house)
@@ -24,7 +24,7 @@ function calculate_market_price(model, house)
         return calculate_initial_market_price(house)
     end
     # println("house = $house mean(transactions) * house.area * house.maintenanceLevel = $(mean(transactions) * house.area * house.maintenanceLevel)")
-    return mean(bucket) * house.area * house.maintenanceLevel
+    return mean(bucket) * house.area
 end
 
 function calculate_initial_rental_market_price(house)
@@ -35,19 +35,19 @@ function calculate_initial_rental_market_price(house)
         firstQuartile = FIRST_QUARTILE_RENT_MAP[house.location]
         base = firstQuartile / 1.25
         range = firstQuartile - base
-        return house.area * (base + range * (house.percentile/100) * 4)
+        return house.area * (base + range * (house.percentile/100) * 4) * INITIAL_MARKET_PRICE_CUT
     elseif house.percentile <= 50
         base = FIRST_QUARTILE_RENT_MAP[house.location]
         range = MEDIAN_RENT_MAP[house.location] - base
-        return house.area * (base + range * (house.percentile/100 - 0.25) * 4)
+        return house.area * (base + range * (house.percentile/100 - 0.25) * 4) * INITIAL_MARKET_PRICE_CUT
     elseif house.percentile <= 75
         base = MEDIAN_RENT_MAP[house.location]
         range = THIRD_QUARTILE_RENT_MAP[house.location] - base
-        return house.area * (base + range * (house.percentile/100 - 0.50) * 4)
+        return house.area * (base + range * (house.percentile/100 - 0.50) * 4) * INITIAL_MARKET_PRICE_CUT
     else
         base = THIRD_QUARTILE_RENT_MAP[house.location]
         range = base * 0.20
-        return house.area * (base + range * (house.percentile/100 - 0.75) * 4)
+        return house.area * (base + range * (house.percentile/100 - 0.75) * 4) * INITIAL_MARKET_PRICE_CUT
     end
 end
 
