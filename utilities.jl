@@ -112,7 +112,8 @@ function calculateBid(household, house, askPrice, maxMortgageValue, consumerSurp
     demandValue = household.wealth * 0.95 + maxMortgageValue
     consumerSurplusMultiplier = calculateConsumerSurplusAddedValue(consumerSurplus)
     if (demandValue >= askPrice * consumerSurplusMultiplier + calculateTransactionTaxes(askPrice * consumerSurplusMultiplier))
-        return askPrice * consumerSurplusMultiplier
+        # return askPrice * consumerSurplusMultiplier
+        return askPrice
     else
         return demandValue - calculateTransactionTaxes(demandValue)
     end
