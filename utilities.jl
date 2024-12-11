@@ -14,7 +14,10 @@ function calculate_rental_market_price(house, model)
         return calculate_initial_rental_market_price(house)
     end
     # println("house = $house mean(transactions) * house.area * house.maintenanceLevel = $(mean(transactions) * house.area * house.maintenanceLevel)")
-    return mean(bucket) * house.area
+    return mean(bucket) * house.area * 
+           map_value(house.percentile, 1, 100,
+                     FIRST_QUARTILE_RENT_MAP[house.location] / MEDIAN_RENT_MAP[house.location],
+                     THIRD_QUARTILE_RENT_MAP[house.location] / MEDIAN_RENT_MAP[house.location])
 end
 
 function calculate_market_price(model, house)
@@ -24,7 +27,10 @@ function calculate_market_price(model, house)
         return calculate_initial_market_price(house)
     end
     # println("house = $house mean(transactions) * house.area * house.maintenanceLevel = $(mean(transactions) * house.area * house.maintenanceLevel)")
-    return mean(bucket) * house.area
+    return mean(bucket) * house.area * 
+           map_value(house.percentile, 1, 100,
+                     FIRST_QUARTILE_SALES_MAP[house.location] / MEDIAN_SALES_MAP[house.location],
+                     THIRD_QUARTILE_SALES_MAP[house.location] / MEDIAN_SALES_MAP[house.location])
 end
 
 function calculate_initial_rental_market_price(house)
@@ -736,10 +742,8 @@ end
 
 function InitiateBuckets()
     result = Dict(location => Dict(
-                    quartile => Dict( 
-                        size_interval => Float64[]
-                        for size_interval in instances(SizeInterval))
-                    for quartile in [25, 50, 75, 100])
+                    size_interval => Float64[]
+                    for size_interval in instances(SizeInterval))
                   for location in instances(HouseLocation))
     return result
 end
@@ -755,29 +759,13 @@ function InitiatePriceIndex()
 end
 
 function calculateBucket(model, house)
-    percentile = 100
-    if house.percentile < 25
-        percentile = 25
-    elseif house.percentile < 50
-        percentile = 50
-    elseif house.percentile < 75
-        percentile = 75
-    end
     size_interval = getSizeInterval(house)
-    return model.buckets[house.location][percentile][size_interval]
+    return model.buckets[house.location][size_interval]
 end
 
 function calculateRentalBucket(model, house)
-    percentile = 100
-    if house.percentile < 25
-        percentile = 25
-    elseif house.percentile < 50
-        percentile = 50
-    elseif house.percentile < 75
-        percentile = 75
-    end
     size_interval = getSizeInterval(house)
-    return model.rentalBuckets[house.location][percentile][size_interval]
+    return model.rentalBuckets[house.location][size_interval]
 end
 
 function addTransactionToBuckets(model, house, price)
@@ -793,11 +781,10 @@ end
 function trimBucketsIfNeeded(model)
     # avoid holding to many transaction in the buckets, keep the most recent MAX_BUCKET_SIZE (initially 30)
     for location in instances(HouseLocation)
-        for quartile in [25, 50, 75, 100]
             for size_interval in instances(SizeInterval) 
-                if length(model.buckets[location][quartile][size_interval]) > MAX_BUCKET_SIZE
-                    sizeToCut = length(model.buckets[location][quartile][size_interval]) - MAX_BUCKET_SIZE
-                    splice!(model.buckets[location][quartile][size_interval], 1:sizeToCut)
+                if length(model.buckets[location][size_interval]) > MAX_BUCKET_SIZE
+                    sizeToCut = length(model.buckets[location][size_interval]) - MAX_BUCKET_SIZE
+                    splice!(model.buckets[location][size_interval], 1:sizeToCut)
                 end
             end
         end

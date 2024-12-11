@@ -70,8 +70,8 @@ const NUMBER_OF_HOUSES=NUMBER_OF_HOUSEHOLDS
 # TODO: region hack
 # MODEL_SCALE = NUMBER_OF_HOUSES / TheoreticalNumberOfHousesInLisboa
 const MODEL_SCALE = NUMBER_OF_HOUSES / TotalTheoreticalNumberOfHouses
-const MAX_BUCKET_SIZE = Int64(round(300 * MODEL_SCALE))
-const MINIMUM_NUMBER_OF_TRANSACTIONS_IN_BUCKETS = Int64(round(25 * MODEL_SCALE))
+const MAX_BUCKET_SIZE = Int64(round(1200 * MODEL_SCALE))
+const MINIMUM_NUMBER_OF_TRANSACTIONS_IN_BUCKETS = Int64(round(100 * MODEL_SCALE))
 
 # NUMBER_OF_HOUSES_IN_GrandeLisboa = (TheoreticalNumberOfHousesInGrandeLisboa / TotalTheoreticalNumberOfHouses) * NUMBER_OF_HOUSES 
 const NUMBER_OF_HOUSES_MAP = Dict(
