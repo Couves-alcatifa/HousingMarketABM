@@ -9,7 +9,7 @@ include("startup.jl")
 
 function calculate_rental_market_price(house, model)
     bucket = calculateRentalBucket(model, house)
-    if length(bucket) < 5
+    if length(bucket) < MINIMUM_NUMBER_OF_TRANSACTIONS_IN_BUCKETS
         # println("house = $house calculate_initial_market_price(house) = $(calculate_initial_market_price(house))")
         return calculate_initial_rental_market_price(house)
     end
@@ -19,7 +19,7 @@ end
 
 function calculate_market_price(model, house)
     bucket = calculateBucket(model, house)
-    if length(bucket) < 5
+    if length(bucket) < MINIMUM_NUMBER_OF_TRANSACTIONS_IN_BUCKETS
         # println("house = $house calculate_initial_market_price(house) = $(calculate_initial_market_price(house))")
         return calculate_initial_market_price(house)
     end
