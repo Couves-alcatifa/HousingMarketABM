@@ -781,11 +781,10 @@ end
 function trimBucketsIfNeeded(model)
     # avoid holding to many transaction in the buckets, keep the most recent MAX_BUCKET_SIZE (initially 30)
     for location in instances(HouseLocation)
-            for size_interval in instances(SizeInterval) 
-                if length(model.buckets[location][size_interval]) > MAX_BUCKET_SIZE
-                    sizeToCut = length(model.buckets[location][size_interval]) - MAX_BUCKET_SIZE
-                    splice!(model.buckets[location][size_interval], 1:sizeToCut)
-                end
+        for size_interval in instances(SizeInterval) 
+            if length(model.buckets[location][size_interval]) > MAX_BUCKET_SIZE
+                sizeToCut = length(model.buckets[location][size_interval]) - MAX_BUCKET_SIZE
+                splice!(model.buckets[location][size_interval], 1:sizeToCut)
             end
         end
     end
