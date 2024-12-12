@@ -105,6 +105,10 @@ function assignHousesToHouseholds(model)
         household = model[i]
         target_home_owners_in_the_zone = HOME_OWNERS_MAP[household.residencyZone]
         current_home_owners_in_the_zone = zones_to_n_of_home_owners[household.residencyZone]
+        if !shouldBeHomeOwner(household)
+            continue
+        end
+
         if current_home_owners_in_the_zone >= target_home_owners_in_the_zone
             LOG_INFO("All home owners were assigned in $(household.residencyZone)")
             household.homelessTime = generateHomelessTime()
@@ -196,6 +200,19 @@ function probabilityOfHouseholdBeingAssignedToHouse(household, house)
         numberOfHousesWithThatRatioInThatZone = NUMBER_OF_HOUSES_WITH_MT_80_M2_PER_PERSON_MAP[house.location]
     end
     return (numberOfHousesWithThatRatioInThatZone / numberOfHousesInThatZone) * probabilityMultiplierDueToAge
+end
+
+function shouldBeHomeOwner(household)
+    baseProbability = HOME_OWNERS_MAP[household.residencyZone] / NUMBER_OF_HOUSEHOLDS_MAP[household.residencyZone]
+    inverseProbability = 1 - baseProbability
+
+    ageMultiplier = map_value_sqrt(household.age, 20, 75, 0.1, baseProbability)
+    ageMultiplier = ageMultiplier < baseProbability ? ageMultiplier : baseProbability
+
+    percentileMultiplier = map_value_sqrt(household.percentile, 1, 100, 0.05, inverseProbability)
+    percentileMultiplier = percentileMultiplier < inverseProbability ? percentileMultiplier : inverseProbability
+    
+    return rand() < ageMultiplier + percentileMultiplier
 end
 
 function shouldAssignMultipleHouses(model, household)
