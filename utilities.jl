@@ -741,10 +741,7 @@ function public_investment(model)
 end
 
 function InitiateBuckets()
-    result = Dict(location => Dict(
-                    size_interval => Float64[]
-                    for size_interval in instances(SizeInterval))
-                  for location in instances(HouseLocation))
+    result = Dict(location => Float64[] for location in instances(HouseLocation))
     return result
 end
 
@@ -759,13 +756,11 @@ function InitiatePriceIndex()
 end
 
 function calculateBucket(model, house)
-    size_interval = getSizeInterval(house)
-    return model.buckets[house.location][size_interval]
+    return model.buckets[house.location]
 end
 
 function calculateRentalBucket(model, house)
-    size_interval = getSizeInterval(house)
-    return model.rentalBuckets[house.location][size_interval]
+    return model.rentalBuckets[house.location]
 end
 
 function addTransactionToBuckets(model, house, price)
@@ -781,11 +776,16 @@ end
 function trimBucketsIfNeeded(model)
     # avoid holding to many transaction in the buckets, keep the most recent MAX_BUCKET_SIZE (initially 30)
     for location in instances(HouseLocation)
-        for size_interval in instances(SizeInterval) 
-            if length(model.buckets[location][size_interval]) > MAX_BUCKET_SIZE
-                sizeToCut = length(model.buckets[location][size_interval]) - MAX_BUCKET_SIZE
-                splice!(model.buckets[location][size_interval], 1:sizeToCut)
-            end
+        if length(model.buckets[location]) > MAX_BUCKET_SIZE
+            sizeToCut = length(model.buckets[location]) - MAX_BUCKET_SIZE
+            splice!(model.buckets[location], 1:sizeToCut)
+        end
+    end
+
+    for location in instances(HouseLocation)
+        if length(model.rentalBuckets[location]) > MAX_BUCKET_SIZE
+            sizeToCut = length(model.rentalBuckets[location]) - MAX_BUCKET_SIZE
+            splice!(model.rentalBuckets[location], 1:sizeToCut)
         end
     end
 end
