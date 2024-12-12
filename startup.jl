@@ -238,7 +238,7 @@ function assignHousesForRental(model, household, numberOfExtraHousesToAssign, ho
         push!(household.houses, house)
         assignedSoFar += 1
         i += 1
-        if number_of_houses_for_market[location] < NUMBER_OF_HOUSES_MAP[location] * 0.025
+        if number_of_houses_for_market[location] < NUMBER_OF_HOUSES_MAP[location] * 0.005
             number_of_houses_for_market[location] += 1
             continue
         end
