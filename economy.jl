@@ -334,7 +334,7 @@ end
 
 
 function put_house_to_rent(household::MyMultiAgent, model, house)
-    askRent = calculate_rental_market_price(house, model) * rand(Normal(GREEDINESS_AVERAGE_FOR_RENTAL, GREEDINESS_STDEV_FOR_RENTAL))
+    askRent = calculate_rental_market_price(house, model) # * rand(Normal(GREEDINESS_AVERAGE_FOR_RENTAL, GREEDINESS_STDEV_FOR_RENTAL))
     previousRent = getPreviousRent(model, house)
 
     # if previousRent != Nothing && askRent > previousRent * RENTS_INCREASE_CEILLING
@@ -360,7 +360,8 @@ end
 
 function put_house_to_sale(household::MyMultiAgent, model, index)
     house = household.houses[index]
-    push!(model.houseMarket.supply, HouseSupply(house, calculate_market_price(model, house) * rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV)), Bid[], household.id))
+    price = calculate_market_price(model, house) # * rand(Normal(GREEDINESS_AVERAGE, GREEDINESS_STDEV))
+    push!(model.houseMarket.supply, HouseSupply(house, price, Bid[], household.id))
     # removing house from agent when putting to sale
     splice!(household.houses, index)
 end
