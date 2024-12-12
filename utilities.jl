@@ -11,7 +11,7 @@ function calculate_rental_market_price(house, model)
     bucket = calculateRentalBucket(model, house)
     if length(bucket) < MINIMUM_NUMBER_OF_TRANSACTIONS_IN_BUCKETS
         # println("house = $house calculate_initial_market_price(house) = $(calculate_initial_market_price(house))")
-        return calculate_initial_rental_market_price(house)
+        return calculate_initial_rental_market_price(house) * INITIAL_RENTAL_MARKET_PRICE_CUT
     end
     # println("house = $house mean(transactions) * house.area * house.maintenanceLevel = $(mean(transactions) * house.area * house.maintenanceLevel)")
     return mean(bucket) * house.area * 
@@ -24,7 +24,7 @@ function calculate_market_price(model, house)
     bucket = calculateBucket(model, house)
     if length(bucket) < MINIMUM_NUMBER_OF_TRANSACTIONS_IN_BUCKETS
         # println("house = $house calculate_initial_market_price(house) = $(calculate_initial_market_price(house))")
-        return calculate_initial_market_price(house)
+        return calculate_initial_market_price(house) * INITIAL_MARKET_PRICE_CUT
     end
     # println("house = $house mean(transactions) * house.area * house.maintenanceLevel = $(mean(transactions) * house.area * house.maintenanceLevel)")
     return mean(bucket) * house.area * 
@@ -41,19 +41,19 @@ function calculate_initial_rental_market_price(house)
         firstQuartile = FIRST_QUARTILE_RENT_MAP[house.location]
         base = firstQuartile / 1.25
         range = firstQuartile - base
-        return house.area * (base + range * (house.percentile/100) * 4) * INITIAL_MARKET_PRICE_CUT
+        return house.area * (base + range * (house.percentile/100) * 4)
     elseif house.percentile <= 50
         base = FIRST_QUARTILE_RENT_MAP[house.location]
         range = MEDIAN_RENT_MAP[house.location] - base
-        return house.area * (base + range * (house.percentile/100 - 0.25) * 4) * INITIAL_MARKET_PRICE_CUT
+        return house.area * (base + range * (house.percentile/100 - 0.25) * 4)
     elseif house.percentile <= 75
         base = MEDIAN_RENT_MAP[house.location]
         range = THIRD_QUARTILE_RENT_MAP[house.location] - base
-        return house.area * (base + range * (house.percentile/100 - 0.50) * 4) * INITIAL_MARKET_PRICE_CUT
+        return house.area * (base + range * (house.percentile/100 - 0.50) * 4)
     else
         base = THIRD_QUARTILE_RENT_MAP[house.location]
         range = base * 0.20
-        return house.area * (base + range * (house.percentile/100 - 0.75) * 4) * INITIAL_MARKET_PRICE_CUT
+        return house.area * (base + range * (house.percentile/100 - 0.75) * 4)
     end
 end
 
@@ -65,19 +65,19 @@ function calculate_initial_market_price(house)
         firstQuartile = FIRST_QUARTILE_SALES_MAP[house.location]
         base = firstQuartile / 1.25
         range = firstQuartile - base
-        return house.area * (base + range * (house.percentile/100) * 4) * INITIAL_MARKET_PRICE_CUT
+        return house.area * (base + range * (house.percentile/100) * 4)
     elseif house.percentile <= 50
         base = FIRST_QUARTILE_SALES_MAP[house.location]
         range = MEDIAN_SALES_MAP[house.location] - base
-        return house.area * (base + range * (house.percentile/100 - 0.25) * 4) * INITIAL_MARKET_PRICE_CUT
+        return house.area * (base + range * (house.percentile/100 - 0.25) * 4)
     elseif house.percentile <= 75
         base = MEDIAN_SALES_MAP[house.location]
         range = THIRD_QUARTILE_SALES_MAP[house.location] - base
-        return house.area * (base + range * (house.percentile/100 - 0.50) * 4) * INITIAL_MARKET_PRICE_CUT
+        return house.area * (base + range * (house.percentile/100 - 0.50) * 4)
     else
         base = THIRD_QUARTILE_SALES_MAP[house.location]
         range = base * 0.20
-        return house.area * (base + range * (house.percentile/100 - 0.75) * 4) * INITIAL_MARKET_PRICE_CUT
+        return house.area * (base + range * (house.percentile/100 - 0.75) * 4)
     end
 end
 
