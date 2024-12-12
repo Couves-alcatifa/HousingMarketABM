@@ -1,25 +1,26 @@
-locationToIndex = Dict(location => Int(location) + 1 for location in instances(HouseLocation))
+locationToIndex = Dict(HOUSE_LOCATION_INSTANCES[idx] => idx + 1 for idx in eachindex(HOUSE_LOCATION_INSTANCES))
+
 # this function will generate a table with the house prices for each quarter, in each region
 function generate_houses_prices_table(adf, mdf)
     # since we will organize the table in quarters, we don't need the last hanging 1 or 2 steps
     maxRelevantStep = Int(floor(NUMBER_OF_STEPS/3)) * 3
 
     # 
-    finalTable = vcat([["-"]], [Any[string(location)] for location in instances(HouseLocation)])
+    finalTable = vcat([["-"]], [Any[string(location)] for location in HOUSE_LOCATION_INSTANCES])
 
 
     currentQuarter = 1
     currentYear = 2021
-    currentQuarterTransactions = Dict(location => [] for location in instances(HouseLocation))
+    currentQuarterTransactions = Dict(location => [] for location in HOUSE_LOCATION_INSTANCES)
     for i in 1:maxRelevantStep
-        for location in instances(HouseLocation)
+        for location in HOUSE_LOCATION_INSTANCES
             for transaction in mdf.transactions_per_region[i][location]
                 push!(currentQuarterTransactions[location], transaction.price / transaction.area)
             end
         end
         if i % 3 == 0
             push!(finalTable[1], "$(currentYear)Q$(currentQuarter)")
-            for location in instances(HouseLocation)
+            for location in HOUSE_LOCATION_INSTANCES
                 if length(currentQuarterTransactions[location]) != 0
                     push!(finalTable[locationToIndex[location]], Int64(round(median(currentQuarterTransactions[location]))))
                 else
@@ -43,21 +44,21 @@ function generate_rent_prices_table(adf, mdf)
     maxRelevantStep = Int(floor(NUMBER_OF_STEPS/3)) * 3
 
     # 
-    finalTable = vcat([["-"]], [Any[string(location)] for location in instances(HouseLocation)])
+    finalTable = vcat([["-"]], [Any[string(location)] for location in HOUSE_LOCATION_INSTANCES])
 
 
     currentQuarter = 1
     currentYear = 2021
-    currentQuarterTransactions = Dict(location => [] for location in instances(HouseLocation))
+    currentQuarterTransactions = Dict(location => [] for location in HOUSE_LOCATION_INSTANCES)
     for i in 1:maxRelevantStep
-        for location in instances(HouseLocation)
+        for location in HOUSE_LOCATION_INSTANCES
             for transaction in mdf.rents_per_region[i][location]
                 push!(currentQuarterTransactions[location], transaction.price / transaction.area)
             end
         end
         if i % 3 == 0
             push!(finalTable[1], "$(currentYear)Q$(currentQuarter)")
-            for location in instances(HouseLocation)
+            for location in HOUSE_LOCATION_INSTANCES
                 if length(currentQuarterTransactions[location]) != 0
                     push!(finalTable[locationToIndex[location]], median(currentQuarterTransactions[location]))
                 else
@@ -80,21 +81,21 @@ function generate_semi_annually_rent_prices_table(adf, mdf)
     maxRelevantStep = Int(floor(NUMBER_OF_STEPS/6)) * 6
 
     # 
-    finalTable = vcat([["-"]], [Any[string(location)] for location in instances(HouseLocation)])
+    finalTable = vcat([["-"]], [Any[string(location)] for location in HOUSE_LOCATION_INSTANCES])
 
 
     currentSemester = 1
     currentYear = 2021
-    currentSemesterTransactions = Dict(location => [] for location in instances(HouseLocation))
+    currentSemesterTransactions = Dict(location => [] for location in HOUSE_LOCATION_INSTANCES)
     for i in 1:maxRelevantStep
-        for location in instances(HouseLocation)
+        for location in HOUSE_LOCATION_INSTANCES
             for transaction in mdf.rents_per_region[i][location]
                 push!(currentSemesterTransactions[location], transaction.price / transaction.area)
             end
         end
         if i % 6 == 0
             push!(finalTable[1], "$(currentYear)S$(currentSemester)")
-            for location in instances(HouseLocation)
+            for location in HOUSE_LOCATION_INSTANCES
                 if length(currentSemesterTransactions[location]) != 0
                     push!(finalTable[locationToIndex[location]], median(currentSemesterTransactions[location]))
                 else
@@ -117,21 +118,21 @@ function generate_quarterly_number_of_new_contracts(adf, mdf)
     maxRelevantStep = Int(floor(NUMBER_OF_STEPS/3)) * 3
 
     # 
-    finalTable = vcat([["-"]], [Any[string(location)] for location in instances(HouseLocation)])
+    finalTable = vcat([["-"]], [Any[string(location)] for location in HOUSE_LOCATION_INSTANCES])
 
 
     currentQuarter = 1
     currentYear = 2021
-    currentQuarterTransactions = Dict(location => 0 for location in instances(HouseLocation))
+    currentQuarterTransactions = Dict(location => 0 for location in HOUSE_LOCATION_INSTANCES)
     for i in 1:maxRelevantStep
-        for location in instances(HouseLocation)
+        for location in HOUSE_LOCATION_INSTANCES
             for transaction in mdf.rents_per_region[i][location]
                 currentQuarterTransactions[location] += 1
             end
         end
         if i % 3 == 0
             push!(finalTable[1], "$(currentYear)Q$(currentQuarter)")
-            for location in instances(HouseLocation)
+            for location in HOUSE_LOCATION_INSTANCES
                 push!(finalTable[locationToIndex[location]], currentQuarterTransactions[location])
                 currentQuarterTransactions[location] = 0
             end
@@ -150,20 +151,20 @@ function generate_annually_scalled_number_of_new_contracts(adf, mdf)
     maxRelevantStep = Int(floor(NUMBER_OF_STEPS/12)) * 12
 
     # 
-    finalTable = vcat([["-"]], [Any[string(location)] for location in instances(HouseLocation)])
+    finalTable = vcat([["-"]], [Any[string(location)] for location in HOUSE_LOCATION_INSTANCES])
 
 
     currentYear = 2021
-    currentYearTransactions = Dict(location => 0 for location in instances(HouseLocation))
+    currentYearTransactions = Dict(location => 0 for location in HOUSE_LOCATION_INSTANCES)
     for i in 1:maxRelevantStep
-        for location in instances(HouseLocation)
+        for location in HOUSE_LOCATION_INSTANCES
             for transaction in mdf.rents_per_region[i][location]
                 currentYearTransactions[location] += 1
             end
         end
         if i % 12 == 0
             push!(finalTable[1], "$(currentYear)")
-            for location in instances(HouseLocation)
+            for location in HOUSE_LOCATION_INSTANCES
                 push!(finalTable[locationToIndex[location]], Int64(round(currentYearTransactions[location] / MODEL_SCALE)))
                 currentYearTransactions[location] = 0
             end

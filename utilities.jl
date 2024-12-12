@@ -741,7 +741,7 @@ function public_investment(model)
 end
 
 function InitiateBuckets()
-    result = Dict(location => Float64[] for location in instances(HouseLocation))
+    result = Dict(location => Float64[] for location in HOUSE_LOCATION_INSTANCES)
     return result
 end
 
@@ -751,7 +751,7 @@ function InitiatePriceIndex()
                         size_interval => 0.0
                         for size_interval in instances(SizeInterval))
                     for quartile in [25, 50, 75, 100])
-                  for location in instances(HouseLocation))
+                  for location in HOUSE_LOCATION_INSTANCES)
     return result
 end
 
@@ -775,14 +775,14 @@ end
 
 function trimBucketsIfNeeded(model)
     # avoid holding to many transaction in the buckets, keep the most recent MAX_BUCKET_SIZE (initially 30)
-    for location in instances(HouseLocation)
+    for location in HOUSE_LOCATION_INSTANCES
         if length(model.buckets[location]) > MAX_BUCKET_SIZE
             sizeToCut = length(model.buckets[location]) - MAX_BUCKET_SIZE
             splice!(model.buckets[location], 1:sizeToCut)
         end
     end
 
-    for location in instances(HouseLocation)
+    for location in HOUSE_LOCATION_INSTANCES
         if length(model.rentalBuckets[location]) > MAX_BUCKET_SIZE
             sizeToCut = length(model.rentalBuckets[location]) - MAX_BUCKET_SIZE
             splice!(model.rentalBuckets[location], 1:sizeToCut)
@@ -846,7 +846,7 @@ end
 
 
 function measureSupplyAndDemandRegionally(model)
-    for location in instances(HouseLocation)
+    for location in HOUSE_LOCATION_INSTANCES
         model.demand_size[location] = 0
         model.supply_size[location] = 0
         model.rental_demand_size[location] = 0
@@ -879,7 +879,7 @@ function measureSupplyAndDemandRegionally(model)
 end
 
 function measureSupplyAndDemandPerBucket(model)
-    for location in instances(HouseLocation)
+    for location in HOUSE_LOCATION_INSTANCES
         for size_interval in instances(SizeInterval)
             measureDemandForSizeAndRegion(model, size_interval, location)
             measureSupplyForSizeAndRegion(model, size_interval, location)
@@ -1141,7 +1141,7 @@ function nonResidentsBuyHouses(model)
     # if model.steps >= 72
     #     return
     # end
-    for location in instances(HouseLocation)
+    for location in HOUSE_LOCATION_INSTANCES
         housesToBuy = housesBoughtByNoNResidentsPerRegion(location)
         housesBought = 0
         sort!(model.houseMarket.supply, lt=sortRandomly)

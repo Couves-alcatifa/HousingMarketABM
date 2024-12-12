@@ -1,7 +1,7 @@
 include("types.jl")
 include("calibrationTable.jl")
 
-const NUMBER_OF_HOUSEHOLDS = 400000
+const NUMBER_OF_HOUSEHOLDS = 1200
 const NUMBER_OF_STEPS = 12
 const STARTING_GOV_WEALTH_PER_CAPITA = 100000.0
 const STARTING_COMPANY_WEALTH_PER_CAPITA = 60000.0
@@ -44,27 +44,30 @@ const CONSUMER_SURPLUS_MIN_FOR_RENT = 0.75
 const CONSUMER_SURPLUS_MAX_FOR_RENT = 1.08
 const CONSTRUCTION_SECTOR_MARKUP = 1.2
 
+const HOUSE_LOCATION_INSTANCES = [Oeiras]
 
-const TotalTheoreticalNumberOfHouses = 1191363
-# TheoreticalNumberOfHousesInGrandeLisboa = 858646
-const TheoreticalNumberOfHousesInAmadora = 73513
-const TheoreticalNumberOfHousesInCascais = 86465
-const TheoreticalNumberOfHousesInLisboa = 242044
-const TheoreticalNumberOfHousesInLoures =  81552
-const TheoreticalNumberOfHousesInMafra = 33152
-const TheoreticalNumberOfHousesInOdivelas = 60119
-const TheoreticalNumberOfHousesInOeiras = 73013
-const TheoreticalNumberOfHousesInSintra = 153147
-const TheoreticalNumberOfHousesInVilaFrancaDeXira = 55641
-const TheoreticalNumberOfHousesInAlcochete = 7411
-const TheoreticalNumberOfHousesInAlmada = 75485
-const TheoreticalNumberOfHousesInBarreiro = 34346
-const TheoreticalNumberOfHousesInMoita = 27489
-const TheoreticalNumberOfHousesInMontijo = 22104
-const TheoreticalNumberOfHousesInPalmela = 26622
-const TheoreticalNumberOfHousesInSeixal = 67534
-const TheoreticalNumberOfHousesInSesimbra = 20557
-const TheoreticalNumberOfHousesInSetubal = 51169
+const THEORETICAL_NUMBER_OF_HOUSES_MAP = Dict(
+    Amadora => 73513,
+    Cascais => 86465,
+    Lisboa => 242044,
+    Loures =>  81552,
+    Mafra => 33152,
+    Odivelas => 60119,
+    Oeiras => 73013,
+    Sintra => 153147,
+    VilaFrancaDeXira => 55641,
+    Alcochete => 7411,
+    Almada => 75485,
+    Barreiro => 34346,
+    Moita => 27489,
+    Montijo => 22104,
+    Palmela => 26622,
+    Seixal => 67534,
+    Sesimbra => 20557,
+    Setubal => 51169,
+)
+
+const TotalTheoreticalNumberOfHouses = sum([THEORETICAL_NUMBER_OF_HOUSES_MAP[location] for location in HOUSE_LOCATION_INSTANCES])
 
 const NUMBER_OF_HOUSES=NUMBER_OF_HOUSEHOLDS
 
@@ -72,28 +75,29 @@ const NUMBER_OF_HOUSES=NUMBER_OF_HOUSEHOLDS
 # MODEL_SCALE = NUMBER_OF_HOUSES / TheoreticalNumberOfHousesInLisboa
 const MODEL_SCALE = NUMBER_OF_HOUSES / TotalTheoreticalNumberOfHouses
 const MAX_BUCKET_SIZE = Int64(round(1200 * MODEL_SCALE))
-const MINIMUM_NUMBER_OF_TRANSACTIONS_IN_BUCKETS = Int64(round(150 * MODEL_SCALE))
+const N_OF_TRANS_MINIMUM = Int64(round(150 * MODEL_SCALE))
+const MINIMUM_NUMBER_OF_TRANSACTIONS_IN_BUCKETS = N_OF_TRANS_MINIMUM > 5 ? N_OF_TRANS_MINIMUM : 5  
 
 # NUMBER_OF_HOUSES_IN_GrandeLisboa = (TheoreticalNumberOfHousesInGrandeLisboa / TotalTheoreticalNumberOfHouses) * NUMBER_OF_HOUSES 
 const NUMBER_OF_HOUSES_MAP = Dict(
-    Amadora => TheoreticalNumberOfHousesInAmadora * MODEL_SCALE,
-    Cascais => TheoreticalNumberOfHousesInCascais * MODEL_SCALE,
-    Lisboa => TheoreticalNumberOfHousesInLisboa * MODEL_SCALE,
-    Loures => TheoreticalNumberOfHousesInLoures * MODEL_SCALE,
-    Mafra => TheoreticalNumberOfHousesInMafra * MODEL_SCALE,
-    Odivelas => TheoreticalNumberOfHousesInOdivelas * MODEL_SCALE,
-    Oeiras => TheoreticalNumberOfHousesInOeiras * MODEL_SCALE,
-    Sintra => TheoreticalNumberOfHousesInSintra * MODEL_SCALE,
-    VilaFrancaDeXira => TheoreticalNumberOfHousesInVilaFrancaDeXira * MODEL_SCALE,
-    Alcochete => TheoreticalNumberOfHousesInAlcochete * MODEL_SCALE,
-    Almada => TheoreticalNumberOfHousesInAlmada * MODEL_SCALE,
-    Barreiro => TheoreticalNumberOfHousesInBarreiro * MODEL_SCALE,
-    Moita => TheoreticalNumberOfHousesInMoita * MODEL_SCALE,
-    Montijo => TheoreticalNumberOfHousesInMontijo * MODEL_SCALE,
-    Palmela => TheoreticalNumberOfHousesInPalmela * MODEL_SCALE,
-    Seixal => TheoreticalNumberOfHousesInSeixal * MODEL_SCALE,
-    Sesimbra => TheoreticalNumberOfHousesInSesimbra * MODEL_SCALE,
-    Setubal => TheoreticalNumberOfHousesInSetubal * MODEL_SCALE,
+    Amadora => THEORETICAL_NUMBER_OF_HOUSES_MAP[Amadora] * MODEL_SCALE,
+    Cascais => THEORETICAL_NUMBER_OF_HOUSES_MAP[Cascais] * MODEL_SCALE,
+    Lisboa => THEORETICAL_NUMBER_OF_HOUSES_MAP[Lisboa] * MODEL_SCALE,
+    Loures => THEORETICAL_NUMBER_OF_HOUSES_MAP[Loures] * MODEL_SCALE,
+    Mafra => THEORETICAL_NUMBER_OF_HOUSES_MAP[Mafra] * MODEL_SCALE,
+    Odivelas => THEORETICAL_NUMBER_OF_HOUSES_MAP[Odivelas] * MODEL_SCALE,
+    Oeiras => THEORETICAL_NUMBER_OF_HOUSES_MAP[Oeiras] * MODEL_SCALE,
+    Sintra => THEORETICAL_NUMBER_OF_HOUSES_MAP[Sintra] * MODEL_SCALE,
+    VilaFrancaDeXira => THEORETICAL_NUMBER_OF_HOUSES_MAP[VilaFrancaDeXira] * MODEL_SCALE,
+    Alcochete => THEORETICAL_NUMBER_OF_HOUSES_MAP[Alcochete] * MODEL_SCALE,
+    Almada => THEORETICAL_NUMBER_OF_HOUSES_MAP[Almada] * MODEL_SCALE,
+    Barreiro => THEORETICAL_NUMBER_OF_HOUSES_MAP[Barreiro] * MODEL_SCALE,
+    Moita => THEORETICAL_NUMBER_OF_HOUSES_MAP[Moita] * MODEL_SCALE,
+    Montijo => THEORETICAL_NUMBER_OF_HOUSES_MAP[Montijo] * MODEL_SCALE,
+    Palmela => THEORETICAL_NUMBER_OF_HOUSES_MAP[Palmela] * MODEL_SCALE,
+    Seixal => THEORETICAL_NUMBER_OF_HOUSES_MAP[Seixal] * MODEL_SCALE,
+    Sesimbra => THEORETICAL_NUMBER_OF_HOUSES_MAP[Sesimbra] * MODEL_SCALE,
+    Setubal => THEORETICAL_NUMBER_OF_HOUSES_MAP[Setubal] * MODEL_SCALE,
 )
 
 const FIRST_QUARTILE_RENT_MAP = Dict(
@@ -1513,7 +1517,7 @@ const RELATIVE_WEALTH_RATIO = Dict(
     Sesimbra => 0.482 / NUMBER_OF_HOUSEHOLDS_MAP[Sesimbra],
     Setubal => 1.238 / NUMBER_OF_HOUSEHOLDS_MAP[Setubal]
 )
-const SUM_WEALTH_RATIO = sum([RELATIVE_WEALTH_RATIO[location] for location in instances(HouseLocation)])
+const SUM_WEALTH_RATIO = sum([RELATIVE_WEALTH_RATIO[location] for location in HOUSE_LOCATION_INSTANCES])
 
 const NORMALIZED_WEALTH_RATIO = Dict(
     Amadora => RELATIVE_WEALTH_RATIO[Amadora] / SUM_WEALTH_RATIO,
@@ -1535,7 +1539,7 @@ const NORMALIZED_WEALTH_RATIO = Dict(
     Sesimbra => RELATIVE_WEALTH_RATIO[Sesimbra] / SUM_WEALTH_RATIO,
     Setubal => RELATIVE_WEALTH_RATIO[Setubal] / SUM_WEALTH_RATIO
 )
-const MEAN_NORMALIZED_WEALTH_RATIO = mean([NORMALIZED_WEALTH_RATIO[location] for location in instances(HouseLocation)])
+const MEAN_NORMALIZED_WEALTH_RATIO = mean([NORMALIZED_WEALTH_RATIO[location] for location in HOUSE_LOCATION_INSTANCES])
 
 const WEALTH_RATIO_MULTIPLIER_MAP = Dict(
     Amadora => (NORMALIZED_WEALTH_RATIO[Amadora] / MEAN_NORMALIZED_WEALTH_RATIO) ^ (1/2),

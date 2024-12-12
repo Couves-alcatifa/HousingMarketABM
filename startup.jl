@@ -4,7 +4,7 @@
 #     houses_sizes = vcat(houses_sizes, rand(UInt16(80):UInt16(120), Int64(NUMBER_OF_HOUSES/4)))
 #     houses_sizes = vcat(houses_sizes, rand(UInt16(120):UInt16(180), Int64(NUMBER_OF_HOUSES/4)))
     
-#     for location in instances(HouseLocation)
+#     for location in HOUSE_LOCATION_INSTANCES
 #         model.houses[location] = House[]
 #     end
 #     sort!(houses_sizes, lt=sortRandomly)
@@ -13,8 +13,8 @@
 
 # # TODO: region hack
 # function initiateHousesPerRegion(model)
-#     # for location in instances(HouseLocation)
-#     for location in instances(HouseLocation)
+#     # for location in HOUSE_LOCATION_INSTANCES
+#     for location in HOUSE_LOCATION_INSTANCES
 #         houses_sizes = rand(20:29, Int64(ceil(NUMBER_OF_HOUSES_PER_SIZE_MAP[LessThan29][location])))
 #         houses_sizes = vcat(houses_sizes, rand(30:39, Int64(ceil(NUMBER_OF_HOUSES_PER_SIZE_MAP[LessThan39][location]))))
 #         houses_sizes = vcat(houses_sizes, rand(40:49, Int64(ceil(NUMBER_OF_HOUSES_PER_SIZE_MAP[LessThan49][location]))))
@@ -42,7 +42,7 @@
 
 # TODO: region hack
 function initiateHouseholds(model, households_initial_ages)
-    for location in instances(HouseLocation)
+    for location in HOUSE_LOCATION_INSTANCES
         for size in [1, 2, 3, 4, 5]
             number_of_households = HOUSEHOLDS_SIZES_MAP[size][location]
             for i in 1:number_of_households
@@ -64,7 +64,7 @@ end
 
 function assignHousesToHouseholds(model)
     houses_sizes = Dict()
-    for location in instances(HouseLocation)
+    for location in HOUSE_LOCATION_INSTANCES
         houses_sizes[location] = rand(20:29, Int64(ceil(NUMBER_OF_HOUSES_PER_SIZE_MAP[LessThan29][location])))
         houses_sizes[location] = vcat(houses_sizes[location], rand(30:39, Int64(ceil(NUMBER_OF_HOUSES_PER_SIZE_MAP[LessThan39][location]))))
         houses_sizes[location] = vcat(houses_sizes[location], rand(40:49, Int64(ceil(NUMBER_OF_HOUSES_PER_SIZE_MAP[LessThan49][location]))))
@@ -79,7 +79,7 @@ function assignHousesToHouseholds(model)
     end
 
     houses_sizes_for_rental = Dict()
-    for location in instances(HouseLocation)
+    for location in HOUSE_LOCATION_INSTANCES
         houses_sizes_for_rental[location] = rand(20:29, Int64(ceil(NUMBER_OF_HOUSES_FOR_RENTAL_PER_SIZE_MAP[LessThan29][location])))
         houses_sizes_for_rental[location] = vcat(houses_sizes_for_rental[location], rand(30:39, Int64(ceil(NUMBER_OF_HOUSES_FOR_RENTAL_PER_SIZE_MAP[LessThan39][location]))))
         houses_sizes_for_rental[location] = vcat(houses_sizes_for_rental[location], rand(40:49, Int64(ceil(NUMBER_OF_HOUSES_FOR_RENTAL_PER_SIZE_MAP[LessThan49][location]))))
@@ -95,9 +95,9 @@ function assignHousesToHouseholds(model)
 
 
     zones_to_n_of_home_owners = Dict()
-    houses_for_rental = Dict(location => [] for location in instances(HouseLocation)) # dict location to list of tuples (house, landlord)
-    number_of_houses_for_market = Dict(location => 0 for location in instances(HouseLocation)) # dict location to list of tuples (house, landlord)
-    for location in instances(HouseLocation)
+    houses_for_rental = Dict(location => [] for location in HOUSE_LOCATION_INSTANCES) # dict location to list of tuples (house, landlord)
+    number_of_houses_for_market = Dict(location => 0 for location in HOUSE_LOCATION_INSTANCES) # dict location to list of tuples (house, landlord)
+    for location in HOUSE_LOCATION_INSTANCES
         zones_to_n_of_home_owners[location] = 0
     end
     for i in 1:nagents(model) # due to round() it might not be equal to NUMBER_OF_HOUSEHOLDS
@@ -108,20 +108,18 @@ function assignHousesToHouseholds(model)
         if current_home_owners_in_the_zone >= target_home_owners_in_the_zone
             LOG_INFO("All home owners were assigned in $(household.residencyZone)")
             household.homelessTime = generateHomelessTime()
-            push!(model.rentalMarket.demand, RentalDemand(household.id, RentalSupply[]))
             continue # no more houses to assign in this phase
         end
         if !assignHouseThatMakesSense(model, household, houses_sizes)
             # Wasn't assigned a house...
             household.homelessTime = generateHomelessTime()
-            push!(model.rentalMarket.demand, RentalDemand(household.id, RentalSupply[]))
             continue # also not going to get houses for rental
         end
         zones_to_n_of_home_owners[household.residencyZone] += 1
         numberOfExtraHousesToAssign = shouldAssignMultipleHouses(model, household)
         assignHousesForRental(model, household, numberOfExtraHousesToAssign, houses_sizes_for_rental, houses_for_rental, number_of_houses_for_market)
     end
-    LOG_INFO("Total Number of houses_for_rental = $(sum([length(houses_for_rental[location]) for location in instances(HouseLocation)]))")
+    LOG_INFO("Total Number of houses_for_rental = $(sum([length(houses_for_rental[location]) for location in HOUSE_LOCATION_INSTANCES]))")
     for i in 1:nagents(model)
         household = model[i]
         if length(household.houses) == 0
@@ -131,7 +129,7 @@ function assignHousesToHouseholds(model)
         end
     end
 
-    LOG_INFO("Number of houses_for_rental that weren't assigned = $(sum([length(houses_for_rental[location]) for location in instances(HouseLocation)]))")
+    LOG_INFO("Number of houses_for_rental that weren't assigned = $(sum([length(houses_for_rental[location]) for location in HOUSE_LOCATION_INSTANCES]))")
 
 end
 
