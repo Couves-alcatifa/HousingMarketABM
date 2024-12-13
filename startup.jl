@@ -206,10 +206,10 @@ function shouldBeHomeOwner(household)
     baseProbability = HOME_OWNERS_MAP[household.residencyZone] / NUMBER_OF_HOUSEHOLDS_MAP[household.residencyZone]
     inverseProbability = 1 - baseProbability
 
-    ageMultiplier = map_value_sqrt(household.age, 20, 75, 0.1, baseProbability)
+    ageMultiplier = map_value(household.age, 20, 75, 0.1, baseProbability)
     ageMultiplier = ageMultiplier < baseProbability ? ageMultiplier : baseProbability
 
-    percentileMultiplier = map_value_sqrt(household.percentile, 1, 100, 0.05, inverseProbability)
+    percentileMultiplier = map_value(household.percentile, 1, 100, 0.05, inverseProbability)
     percentileMultiplier = percentileMultiplier < inverseProbability ? percentileMultiplier : inverseProbability
     
     return rand() < ageMultiplier + percentileMultiplier
