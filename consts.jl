@@ -33,7 +33,49 @@ const RENT_TAX = 0.25
 const RENTS_INCREASE_CEILLING = 1.02
 const EXPECTED_RENOVATION_RENTABILITY = 0.2 # 20% of the investment
 const ADDED_VALUE_TAXABLE_PERCENTAGE = 0.5
-const INITIAL_MARKET_PRICE_CUT = 0.80
+
+const INITIAL_MARKET_PRICE_CUT = Dict(
+    Amadora => 0.80,
+    Cascais => 0.80,
+    Lisboa => 0.80,
+    Loures => 0.80,
+    Mafra => 0.80,
+    Odivelas => 0.80,
+    Oeiras => 0.80,
+    Sintra => 0.80,
+    VilaFrancaDeXira => 0.80,
+    Alcochete => 0.80,
+    Almada => 0.80,
+    Barreiro => 0.85,
+    Moita => 0.80,
+    Montijo => 0.80,
+    Palmela => 0.85,
+    Seixal => 0.80,
+    Sesimbra => 0.90,
+    Setubal => 0.80,
+)
+
+const INITIAL_RENTAL_MARKET_PRICE_CUT = Dict(
+    Amadora => 0.75,
+    Cascais => 0.75,
+    Lisboa => 0.75,
+    Loures => 0.75,
+    Mafra => 0.75,
+    Odivelas => 0.75,
+    Oeiras => 0.75,
+    Sintra => 0.75,
+    VilaFrancaDeXira => 0.75,
+    Alcochete => 0.75,
+    Almada => 0.75,
+    Barreiro => 0.80,
+    Moita => 0.75,
+    Montijo => 0.75,
+    Palmela => 0.90,
+    Seixal => 0.75,
+    Sesimbra => 0.90,
+    Setubal => 0.75,
+)
+
 const INITIAL_RENTAL_MARKET_PRICE_CUT = 0.75
 
 const BIRTH_INCREASE_MULTIPLIER = 1.5

@@ -11,7 +11,7 @@ function calculate_rental_market_price(house, model)
     bucket = calculateRentalBucket(model, house)
     if length(bucket) < MINIMUM_NUMBER_OF_TRANSACTIONS_IN_BUCKETS
         # println("house = $house calculate_initial_market_price(house) = $(calculate_initial_market_price(house))")
-        return calculate_initial_rental_market_price(house) * INITIAL_RENTAL_MARKET_PRICE_CUT
+        return calculate_initial_rental_market_price(house) * INITIAL_RENTAL_MARKET_PRICE_CUT[house.location]
     end
     # println("house = $house mean(transactions) * house.area * house.maintenanceLevel = $(mean(transactions) * house.area * house.maintenanceLevel)")
     return mean(bucket) * house.area * 
@@ -24,7 +24,7 @@ function calculate_market_price(model, house)
     bucket = calculateBucket(model, house)
     if length(bucket) < MINIMUM_NUMBER_OF_TRANSACTIONS_IN_BUCKETS
         # println("house = $house calculate_initial_market_price(house) = $(calculate_initial_market_price(house))")
-        return calculate_initial_market_price(house) * INITIAL_MARKET_PRICE_CUT
+        return calculate_initial_market_price(house) * INITIAL_MARKET_PRICE_CUT[house.location]
     end
     # println("house = $house mean(transactions) * house.area * house.maintenanceLevel = $(mean(transactions) * house.area * house.maintenanceLevel)")
     return mean(bucket) * house.area * 
