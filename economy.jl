@@ -173,7 +173,7 @@ function model_step!(model)
     #     model.houses[i].maintenanceLevel -= 0.001
     # end
 
-    # handle_migrations(model)
+    handle_migrations(model)
 
     if model.steps % 5 == 0
         println("5 steps!")
