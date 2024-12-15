@@ -156,7 +156,7 @@ end
 function createContract(model, household, houses_for_rental)
     for idx in eachindex(houses_for_rental[household.residencyZone])
         house = houses_for_rental[household.residencyZone][idx][1]
-        if rand() * 1.25 < probabilityOfHouseholdBeingAssignedToHouse(household, house)
+        if rand() / 1.25 < probabilityOfHouseholdBeingAssignedToHouse(household, house)
             seller = houses_for_rental[household.residencyZone][idx][2]
             monthlyPrice = calculate_initial_rental_market_price(house) / (1 + rand() * 2)
             salary = calculateLiquidSalary(household, model)
