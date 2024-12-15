@@ -128,13 +128,29 @@ function assignHousesToHouseholds(model)
         household = model[i]
         if length(household.houses) == 0
             if !createContract(model, household, houses_for_rental)
-                LOG_INFO("Household $(household.id) wasn't assigned a house for rental")
+                LOG_INFO("Household wasn't assigned a house for rental:\n$(print_household(household))")
             end
         end
     end
 
     LOG_INFO("Number of houses_for_rental that weren't assigned = $(sum([length(houses_for_rental[location]) for location in HOUSE_LOCATION_INSTANCES]))")
 
+end
+
+function print_household(household)
+    res = "Household id = $(household.id)\n"
+    res *= "Household wealth = $(household.wealth)\n"
+    res *= "Household age = $(household.age)\n"
+    res *= "Household size = $(household.size)\n"
+    res *= "Household houses = $(household.houses)\n"
+    res *= "Household percentile = $(household.percentile)\n"
+    res *= "Household mortgages = $(household.mortgages)\n"
+    res *= "Household contractsAsLandlord = $(household.contractsAsLandlord)\n"
+    res *= "Household contractAsTenant = $(household.contractAsTenant)\n" #
+    res *= "Household wealthInHouses = $(household.wealthInHouses)\n"
+    res *= "Household residencyZone = $(household.residencyZone)\n"
+    res *= "Household homelessTime = $(household.homelessTime)\n"
+    return res
 end
 
 function createContract(model, household, houses_for_rental)

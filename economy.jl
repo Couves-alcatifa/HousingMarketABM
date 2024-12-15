@@ -251,7 +251,7 @@ function adjust_interest_rates(model)
         # start of 2023
         model.bank.interestRate = 0.04
     elseif model.steps == 36
-        # start of 2024 and beyond...
+        # start of 2024
         model.bank.interestRate = 0.035
     elseif model.steps == 48
         # beyond...
