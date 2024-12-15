@@ -91,9 +91,9 @@ const GREEDINESS_AVERAGE = Dict(
     Barreiro => 1.025,
     Moita => 1.025,
     Montijo => 1.025,
-    Palmela => 1.025,
+    Palmela => 1.015,
     Seixal => 1.025,
-    Sesimbra => 1.025,
+    Sesimbra => 1.015,
     Setubal => 1.025,
 )
 
