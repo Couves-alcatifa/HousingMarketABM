@@ -174,6 +174,28 @@ function generate_annually_scalled_number_of_new_contracts(adf, mdf)
     return finalTable
 end
 
+function convertCommaToSemiCollon(filename)
+    content = ""
+    open(filename, "r") do file
+        content = read(file)
+    end
+    replace(content, "," => ";")
+    open(filename, "w") do file
+        write(file, content)
+    end
+end
+
+function convertPointToComma(filename)
+    content = ""
+    open(filename, "r") do file
+        content = read(file)
+    end
+    replace(content, "." => ",")
+    open(filename, "w") do file
+        write(file, content)
+    end
+end
+
 function writeToCsv(filename, data)
     open(filename, "w") do file
         write(file, exportToCsv(data))
