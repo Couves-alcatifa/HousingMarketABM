@@ -156,10 +156,14 @@ end
 function createContract(model, household, houses_for_rental)
     for idx in eachindex(houses_for_rental[household.residencyZone])
         house = houses_for_rental[household.residencyZone][idx][1]
-        if rand() < probabilityOfHouseholdBeingAssignedToHouse(household, house)
+        if rand() * 1.25 < probabilityOfHouseholdBeingAssignedToHouse(household, house)
             seller = houses_for_rental[household.residencyZone][idx][2]
             monthlyPrice = calculate_initial_rental_market_price(house) / (1 + rand() * 2)
             salary = calculateLiquidSalary(household, model)
+            retry = 0
+            while salary * MAX_EFFORT_FOR_RENT <= monthlyPrice && retry < 3
+                monthlyPrice /= 1.5 
+            end
             if salary * MAX_EFFORT_FOR_RENT <= monthlyPrice
                 continue
             end
@@ -217,6 +221,21 @@ function probabilityOfHouseholdBeingAssignedToHouse(household, house)
     end
     return (numberOfHousesWithThatRatioInThatZone / numberOfHousesInThatZone) * probabilityMultiplierDueToAge
 end
+
+# function getEchelon(size)
+#     for echelon in instances(HouseSizeEchelon)
+#         if size <= echelon
+#             return echelon
+#         end
+#     end
+#     return MoreThan200
+# end
+
+# function probabilityOfEstablishingARentalContract(household, house)
+#     echelon = getEchelon(house.area)
+#     probability = NUMBER_OF_HOUSES_FOR_RENTAL_PER_SIZE_MAP[echelon][house.location] / sum([NUMBER_OF_HOUSES_FOR_RENTAL_PER_SIZE_MAP[size][house.location] for size in instances(HouseSizeEchelon)])
+#     return probability
+# end
 
 function shouldBeHomeOwner(household)
     baseProbability = HOME_OWNERS_MAP[household.residencyZone] / NUMBER_OF_HOUSEHOLDS_MAP[household.residencyZone]
