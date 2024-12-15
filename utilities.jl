@@ -913,7 +913,9 @@ function calculateConsumerSurplus(household, house)
     desperationFactor = map_value(homelessTime + 1, 1.0, 24.0, 1.0, 25.0)
     # desperationFactor = rand(Normal(desperationFactor, desperationFactor * 0.15)) 
 
-    consumerSurplus = ((percentileFactor^(1/3)) * (sizeFactor^(1/3)) * (desperationFactor^(1/3)))
+    regionFactor = EXTRA_CONSUMER_SURPLUS_PER_REGION[house.location]
+
+    consumerSurplus = ((percentileFactor^(1/3)) * (sizeFactor^(1/3)) * (desperationFactor^(1/3))) + regionFactor
     if consumerSurplus > 9
         consumerSurplus = 9 + (consumerSurplus - 9) ^ (1/2)
     end

@@ -76,6 +76,111 @@ const INITIAL_RENTAL_MARKET_PRICE_CUT = Dict(
     Setubal => 0.75,
 )
 
+const GREEDINESS_AVERAGE = Dict(
+    Amadora => 1.025,
+    Cascais => 1.025,
+    Lisboa => 1.025,
+    Loures => 1.025,
+    Mafra => 1.025,
+    Odivelas => 1.025,
+    Oeiras => 1.025,
+    Sintra => 1.025,
+    VilaFrancaDeXira => 1.025,
+    Alcochete => 1.025,
+    Almada => 1.025,
+    Barreiro => 1.025,
+    Moita => 1.025,
+    Montijo => 1.025,
+    Palmela => 1.025,
+    Seixal => 1.025,
+    Sesimbra => 1.025,
+    Setubal => 1.025,
+)
+
+const GREEDINESS_STDEV = Dict(
+    Amadora => 0.025,
+    Cascais => 0.025,
+    Lisboa => 0.025,
+    Loures => 0.025,
+    Mafra => 0.025,
+    Odivelas => 0.025,
+    Oeiras => 0.025,
+    Sintra => 0.025,
+    VilaFrancaDeXira => 0.025,
+    Alcochete => 0.025,
+    Almada => 0.025,
+    Barreiro => 0.025,
+    Moita => 0.025,
+    Montijo => 0.025,
+    Palmela => 0.025,
+    Seixal => 0.025,
+    Sesimbra => 0.025,
+    Setubal => 0.025,
+)
+
+const GREEDINESS_AVERAGE_FOR_RENTAL = Dict(
+    Amadora => 1.075,
+    Cascais => 1.075,
+    Lisboa => 1.075,
+    Loures => 1.075,
+    Mafra => 1.075,
+    Odivelas => 1.075,
+    Oeiras => 1.075,
+    Sintra => 1.075,
+    VilaFrancaDeXira => 1.075,
+    Alcochete => 1.075,
+    Almada => 1.075,
+    Barreiro => 1.10,
+    Moita => 1.075,
+    Montijo => 1.075,
+    Palmela => 1.075,
+    Seixal => 1.075,
+    Sesimbra => 1.10,
+    Setubal => 1.075,
+)
+
+const GREEDINESS_STDEV_FOR_RENTAL = Dict(
+    Amadora => 0.025,
+    Cascais => 0.025,
+    Lisboa => 0.025,
+    Loures => 0.025,
+    Mafra => 0.025,
+    Odivelas => 0.025,
+    Oeiras => 0.025,
+    Sintra => 0.025,
+    VilaFrancaDeXira => 0.025,
+    Alcochete => 0.025,
+    Almada => 0.025,
+    Barreiro => 0.025,
+    Moita => 0.025,
+    Montijo => 0.025,
+    Palmela => 0.025,
+    Seixal => 0.025,
+    Sesimbra => 0.025,
+    Setubal => 0.025,
+)
+
+const EXTRA_CONSUMER_SURPLUS_PER_REGION = Dict(
+    Amadora => 0.0,
+    Cascais => 0.0,
+    Lisboa => 0.0,
+    Loures => 0.0,
+    Mafra => 0.0,
+    Odivelas => 0.0,
+    Oeiras => 0.0,
+    Sintra => 0.0,
+    VilaFrancaDeXira => 0.0,
+    Alcochete => 0.0,
+    Almada => 0.0,
+    Barreiro => 0.0,
+    Moita => 0.0,
+    Montijo => 0.0,
+    Palmela => -2.0,
+    Seixal => 0.0,
+    Sesimbra => -1.0,
+    Setubal => 0.0,
+)
+
 const BIRTH_INCREASE_MULTIPLIER = 1.5
 
 const CONSUMER_SURPLUS_MIN = 0.75
@@ -918,6 +1023,7 @@ const NUMBER_OF_HOUSEHOLDS_MAP = Dict(
     VilaFrancaDeXira => sum([ HOUSEHOLDS_SIZES_MAP[size][VilaFrancaDeXira] for size in [1, 2, 3, 4, 5]]),
 )
 
+# AER2022_II_01_Pessoas_e_populacao.xlsx
 const migrationValueMap = Dict(
     Alcochete => (1.36 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Alcochete],
     Almada => (0.45 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Almada],

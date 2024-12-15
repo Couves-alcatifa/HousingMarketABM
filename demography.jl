@@ -143,7 +143,7 @@ end
 function handle_migrations(model)
     for location in HOUSE_LOCATION_INSTANCES
         expectedMigrants = migrationValueMap[location] / 12
-        stdev = expectedMigrants * 0.2
+        stdev = expectedMigrants * 0.5
         if stdev < 0
             stdev *= -1
         end
