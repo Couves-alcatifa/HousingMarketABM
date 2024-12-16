@@ -1639,7 +1639,7 @@ const LAND_COSTS = Dict(
     Montijo => 700,
     Palmela => 600,
     Seixal => 700,
-    Sesimbra => 750,
+    Sesimbra => 650,
     Setubal => 700,
 )
 
