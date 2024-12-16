@@ -46,7 +46,7 @@ const INITIAL_MARKET_PRICE_CUT = Dict(
     VilaFrancaDeXira => 0.80,
     Alcochete => 0.80,
     Almada => 0.80,
-    Barreiro => 0.85,
+    Barreiro => 0.90,
     Moita => 0.80,
     Montijo => 0.80,
     Palmela => 0.85,
@@ -67,7 +67,7 @@ const INITIAL_RENTAL_MARKET_PRICE_CUT = Dict(
     VilaFrancaDeXira => 0.75,
     Alcochete => 0.75,
     Almada => 0.75,
-    Barreiro => 0.80,
+    Barreiro => 0.85,
     Moita => 0.75,
     Montijo => 0.75,
     Palmela => 0.90,
@@ -187,7 +187,27 @@ const CONSUMER_SURPLUS_MIN = 0.75
 const CONSUMER_SURPLUS_MAX = 1.08
 const CONSUMER_SURPLUS_MIN_FOR_RENT = 0.75
 const CONSUMER_SURPLUS_MAX_FOR_RENT = 1.08
-const CONSTRUCTION_SECTOR_MARKUP = 1.2
+
+const CONSTRUCTION_SECTOR_MARKUP = Dict(
+    Amadora => 1.2,
+    Cascais => 1.2,
+    Lisboa => 1.2,
+    Loures => 1.2,
+    Mafra => 1.2,
+    Odivelas => 1.2,
+    Oeiras => 1.2,
+    Sintra => 1.2,
+    VilaFrancaDeXira => 1.2,
+    Alcochete => 1.2,
+    Almada => 1.2,
+    Barreiro => 1.2,
+    Moita => 1.2,
+    Montijo => 1.2,
+    Palmela => 1.2,
+    Seixal => 1.2,
+    Sesimbra => 1.2,
+    Setubal => 1.2,
+)
 
 const HOUSE_LOCATION_INSTANCES = [Barreiro, Sesimbra, Palmela]
 

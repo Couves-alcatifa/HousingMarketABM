@@ -235,7 +235,7 @@ function generateHouseToBeBuilt(location, size_interval)
 end
 
 function put_newly_built_house_to_sale(model, house)
-    costBasedPrice = calculate_construction_costs(model, house, true) * CONSTRUCTION_SECTOR_MARKUP
+    costBasedPrice = calculate_construction_costs(model, house, true) * CONSTRUCTION_SECTOR_MARKUP[house.location]
     askPrice = calculate_market_price(model, house)
     if costBasedPrice > askPrice
         askPrice = costBasedPrice

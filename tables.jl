@@ -179,7 +179,7 @@ function convertCommaToSemiCollon(filename)
     open(filename, "r") do file
         content = read(file)
     end
-    replace(content, "," => ";")
+    content = replace(content, "," => ";")
     open(filename, "w") do file
         write(file, content)
     end
@@ -190,7 +190,7 @@ function convertPointToComma(filename)
     open(filename, "r") do file
         content = read(file)
     end
-    replace(content, "." => ",")
+    content = replace(content, "." => ",")
     open(filename, "w") do file
         write(file, content)
     end
