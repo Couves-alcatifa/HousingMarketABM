@@ -23,8 +23,8 @@ const MAX_EFFORT_FOR_RENT = 0.50
 const CONSTRUCTION_DELAY_MIN = 24
 const CONSTRUCTION_DELAY_MAX = 48
 const CONSTRUCTION_VAT = 0.23
-const CONSTRUCTION_COSTS_MIN = 1500 / CONSTRUCTION_VAT # to be multiplied by the area of the house
-const CONSTRUCTION_COSTS_MAX = 2500 / CONSTRUCTION_VAT # to be multiplied by the area of the house
+const CONSTRUCTION_COSTS_MIN = 1500 / (1 + CONSTRUCTION_VAT) # to be multiplied by the area of the house
+const CONSTRUCTION_COSTS_MAX = 2500 / (1 + CONSTRUCTION_VAT) # to be multiplied by the area of the house
 const CONSTRUCTION_TIME_MIN = 12
 const CONSTRUCTION_TIME_MAX = 18
 
