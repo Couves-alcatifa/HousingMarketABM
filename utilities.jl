@@ -14,7 +14,7 @@ function calculate_rental_market_price(house, model)
         return calculate_initial_rental_market_price(house) * INITIAL_RENTAL_MARKET_PRICE_CUT[house.location]
     end
     # println("house = $house mean(transactions) * house.area * house.maintenanceLevel = $(mean(transactions) * house.area * house.maintenanceLevel)")
-    return mean(bucket) * house.area * 
+    return median(bucket) * house.area * 
            map_value(house.percentile, 1, 100,
                      FIRST_QUARTILE_RENT_MAP[house.location] / MEDIAN_RENT_MAP[house.location],
                      THIRD_QUARTILE_RENT_MAP[house.location] / MEDIAN_RENT_MAP[house.location])
@@ -27,7 +27,7 @@ function calculate_market_price(model, house)
         return calculate_initial_market_price(house) * INITIAL_MARKET_PRICE_CUT[house.location]
     end
     # println("house = $house mean(transactions) * house.area * house.maintenanceLevel = $(mean(transactions) * house.area * house.maintenanceLevel)")
-    return mean(bucket) * house.area * 
+    return median(bucket) * house.area * 
            map_value(house.percentile, 1, 100,
                      FIRST_QUARTILE_SALES_MAP[house.location] / MEDIAN_SALES_MAP[house.location],
                      THIRD_QUARTILE_SALES_MAP[house.location] / MEDIAN_SALES_MAP[house.location])
