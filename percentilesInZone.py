@@ -8,7 +8,7 @@ with open("all.txt", "r") as f:
 values = []
 correctZone = False
 for line in content:
-    if "Transaction: house.location = Palmela" in line:
+    if "Transaction: house.location = Barreiro" in line:
         correctZone = True
     elif correctZone and "Transaction: house percentile = " in line:
         value = float(line[len("Transaction: house percentile = "):-1])
