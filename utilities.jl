@@ -374,6 +374,12 @@ function clearHouseMarket(model)
                     end
                 end
                 continue
+            elseif demand.type == NonResidentsDemand
+                lock(localLock) do
+                    push!(supply.bids, Bid(supply.price * 1.05, demand.householdId, demand.type))
+                    push!(demand.supplyMatches, SupplyMatch(supply))
+                end
+                continue
             end
 
             if (!has_enough_size(house, household) || 
@@ -557,7 +563,7 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     transactionTaxes = calculateTransactionTaxes(bidValue)
 
     wealthForDisplay = household.wealth
-    if (household.wealth < bidValue + transactionTaxes)
+    if (household.wealth < bidValue + transactionTaxes && typeof(household) != NonResident)
         paidWithOwnMoney = household.wealth * 0.98
         mortgageValue = bidValue + transactionTaxes - paidWithOwnMoney
         maxMortgage = maxMortgageValue(model, household)
@@ -1169,10 +1175,19 @@ function nonResidentsBuyHouses(model)
             content *= "Sold to non resident location = $(supply.house.location)\n"
             content *= "Sold to non resident price = $(supply.price)\n"
             TRANSACTION_LOG(content, model)
-            addTransactionToBuckets(model, supply.house, supply.price)
-            push!(model.transactions, Transaction(supply.house.area, supply.price, supply.house.location))
-            push!(model.transactions_per_region[supply.house.location][model.steps], Transaction(supply.house.area, supply.price, supply.house.location))            
+
             splice!(model.houseMarket.supply, idx)
+            housesBought += 1
+        end
+    end
+end
+
+function handleNonResidentsDemand(model)
+    for location in HOUSE_LOCATION_INSTANCES
+        housesToBuy = housesBoughtByNoNResidentsPerRegion(location)
+        housesBought = 0
+        while housesBought < housesToBuy && idx <= length(model.houseMarket.supply)
+            push!(model.houseMarket.demand, HouseDemand(-1, SupplyMatch[], NonResidentDemand))
             housesBought += 1
         end
     end

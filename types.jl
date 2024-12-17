@@ -88,6 +88,23 @@ end
     end
 end
 
+mutable struct NonResident
+    wealth::Float64
+    age::Int64
+    size::Int64
+    houses::Array{House}
+    percentile::Int64
+    mortgages::Array{Mortgage}
+    contractsAsLandlord::Array{Contract}
+    contractAsTenant #::Contract Nothing is no contract
+    wealthInHouses::Float64
+    residencyZone::HouseLocation
+    homelessTime::Int64 # not really meant to represent homeless people, just to lower the house expectations as it struggles to find housing 
+
+end
+
+NON_RESIDENT_HOUSEHOLD = NonResident(0, 0, 0, [], 0, [], [], Nothing, 0, Lisboa, 0)
+
 mutable struct Inheritage
     houses::Array{House}
     wealth::Float64
@@ -107,6 +124,7 @@ end
     Regular = 1
     ForRental = 2
     ForInvestment = 3
+    NonResidentDemand = 4
 end
 
 mutable struct Bid

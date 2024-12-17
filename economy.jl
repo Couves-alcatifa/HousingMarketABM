@@ -151,6 +151,7 @@ end
 function model_step!(model)
     LOG_INFO("Model step $(model.steps + 1) started")
     start_time = time()
+    handleNonResidentsDemand(model)
     measureSupplyAndDemandRegionally(model)
     model.steps += 1
     for location in HOUSE_LOCATION_INSTANCES
@@ -181,7 +182,7 @@ function model_step!(model)
     model.mortgagesInStep = Mortgage[]
     clearHangingSupplies(model)
     clearHangingRentalSupplies(model)
-    nonResidentsBuyHouses(model)
+    # nonResidentsBuyHouses(model)
     clearHouseMarket(model)
     clearRentalMarket(model)
     trimBucketsIfNeeded(model)
