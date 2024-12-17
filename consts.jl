@@ -1,7 +1,7 @@
 include("types.jl")
 include("calibrationTable.jl")
 
-const NUMBER_OF_HOUSEHOLDS = 34346 + 20557 + 26622
+const NUMBER_OF_HOUSEHOLDS = 73013
 const NUMBER_OF_STEPS = 36
 const STARTING_GOV_WEALTH_PER_CAPITA = 100000.0
 const STARTING_COMPANY_WEALTH_PER_CAPITA = 60000.0
@@ -27,6 +27,8 @@ const CONSTRUCTION_COSTS_MIN = 1500 / (1 + CONSTRUCTION_VAT) # to be multiplied 
 const CONSTRUCTION_COSTS_MAX = 2500 / (1 + CONSTRUCTION_VAT) # to be multiplied by the area of the house
 const CONSTRUCTION_TIME_MIN = 12
 const CONSTRUCTION_TIME_MAX = 18
+
+const HOUSE_LOCATION_INSTANCES = [Oeiras]
 
 const PROJECT_COST_MULTIPLIER = 1.1
 const RENT_TAX = 0.25
@@ -208,8 +210,6 @@ const CONSTRUCTION_SECTOR_MARKUP = Dict(
     Sesimbra => 1.2,
     Setubal => 1.2,
 )
-
-const HOUSE_LOCATION_INSTANCES = [Barreiro, Sesimbra, Palmela]
 
 const THEORETICAL_NUMBER_OF_HOUSES_MAP = Dict(
     Amadora => 73513,
