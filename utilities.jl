@@ -374,7 +374,7 @@ function clearHouseMarket(model)
                     end
                 end
                 continue
-            elseif demand.type == NonResidentsDemand
+            elseif demand.type == NonResidentDemand
                 lock(localLock) do
                     push!(supply.bids, Bid(supply.price * 1.05, demand.householdId, demand.type))
                     push!(demand.supplyMatches, SupplyMatch(supply))
@@ -1186,7 +1186,7 @@ function handleNonResidentsDemand(model)
     for location in HOUSE_LOCATION_INSTANCES
         housesToBuy = housesBoughtByNoNResidentsPerRegion(location)
         housesBought = 0
-        while housesBought < housesToBuy && idx <= length(model.houseMarket.supply)
+        while housesBought < housesToBuy
             push!(model.houseMarket.demand, HouseDemand(-1, SupplyMatch[], NonResidentDemand))
             housesBought += 1
         end
