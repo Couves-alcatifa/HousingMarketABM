@@ -1169,7 +1169,9 @@ function nonResidentsBuyHouses(model)
             content *= "Sold to non resident location = $(supply.house.location)\n"
             content *= "Sold to non resident price = $(supply.price)\n"
             TRANSACTION_LOG(content, model)
-
+            addTransactionToBuckets(model, supply.house, supply.price)
+            push!(model.transactions, Transaction(supply.house.area, supply.price, supply.house.location))
+            push!(model.transactions_per_region[supply.house.location][model.steps], Transaction(supply.house.area, supply.price, supply.house.location))            
             splice!(model.houseMarket.supply, idx)
             housesBought += 1
         end
