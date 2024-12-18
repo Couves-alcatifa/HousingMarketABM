@@ -375,8 +375,15 @@ function clearHouseMarket(model)
                 end
                 continue
             elseif demand.type == NonResidentDemand
+                if rand() < 0.30
+                    # virtually increase house obfuscation factor for non nonResidentsBuyHouses
+                    continue
+                end
+                if supply.house.percentile < 85 || supply.house.area < 50
+                    continue
+                end
                 lock(localLock) do
-                    push!(supply.bids, Bid(supply.price * 1.05, demand.householdId, demand.type))
+                    push!(supply.bids, Bid(supply.price * rand(Normal(1.05, 0.05)), demand.householdId, demand.type))
                     push!(demand.supplyMatches, SupplyMatch(supply))
                 end
                 continue
@@ -608,6 +615,8 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     content *= "Transaction: transactionTaxes = $(transactionTaxes)\n"
     content *= "Transaction: pricePerm2 = $(bidValue / supply.house.area)\n"
     content *= "Transaction: for renting = $(winningBid.type == ForRental ? "true" : "false")\n"
+    content *= "Transaction: for investment = $(winningBid.type == ForInvestment ? "true" : "false")\n"
+    content *= "Transaction: nonResident = $(winningBid.type == NonResidentDemand ? "true" : "false")\n"
     content *= "Transaction: contracts as landlord = $(household.contractsAsLandlord)\n"
     content *= "Transaction: contract as tenant = $(household.contractAsTenant)\n"
     if supply.sellerId != -1
@@ -762,6 +771,16 @@ function InitiatePriceIndex()
 end
 
 function calculateBucket(model, house)
+    # percentile = 100
+    # if house.percentile < 25
+    #     percentile = 25
+    # elseif house.percentile < 50
+    #     percentile = 50
+    # elseif house.percentile < 75
+    #     percentile = 75
+    # end
+    # size_interval = getSizeInterval(house)
+    # return model.buckets[house.location][percentile][size_interval]
     return model.buckets[house.location]
 end
 
