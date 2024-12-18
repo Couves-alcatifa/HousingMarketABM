@@ -1,7 +1,7 @@
 include("types.jl")
 include("calibrationTable.jl")
 
-const NUMBER_OF_HOUSEHOLDS = 55641
+const NUMBER_OF_HOUSEHOLDS = 20557 + 27489 + 22104
 const NUMBER_OF_STEPS = 36
 const STARTING_GOV_WEALTH_PER_CAPITA = 100000.0
 const STARTING_COMPANY_WEALTH_PER_CAPITA = 60000.0
@@ -28,7 +28,7 @@ const CONSTRUCTION_COSTS_MAX = 2500 / (1 + CONSTRUCTION_VAT) # to be multiplied 
 const CONSTRUCTION_TIME_MIN = 12
 const CONSTRUCTION_TIME_MAX = 18
 
-const HOUSE_LOCATION_INSTANCES = [VilaFrancaDeXira]
+const HOUSE_LOCATION_INSTANCES = [Sesimbra, Moita, Montijo]
 
 const PROJECT_COST_MULTIPLIER = 1.1
 const RENT_TAX = 0.25
@@ -95,7 +95,7 @@ const GREEDINESS_AVERAGE = Dict(
     Montijo => 1.025,
     Palmela => 1.05,
     Seixal => 1.025,
-    Sesimbra => 1.015,
+    Sesimbra => 1.025,
     Setubal => 1.025,
 )
 
