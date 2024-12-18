@@ -1,7 +1,7 @@
 include("types.jl")
 include("calibrationTable.jl")
 
-const NUMBER_OF_HOUSEHOLDS = 73013
+const NUMBER_OF_HOUSEHOLDS = 34346 + 26622
 const NUMBER_OF_STEPS = 36
 const STARTING_GOV_WEALTH_PER_CAPITA = 100000.0
 const STARTING_COMPANY_WEALTH_PER_CAPITA = 60000.0
@@ -28,7 +28,7 @@ const CONSTRUCTION_COSTS_MAX = 2500 / (1 + CONSTRUCTION_VAT) # to be multiplied 
 const CONSTRUCTION_TIME_MIN = 12
 const CONSTRUCTION_TIME_MAX = 18
 
-const HOUSE_LOCATION_INSTANCES = [Oeiras]
+const HOUSE_LOCATION_INSTANCES = [Barreiro, Palmela]
 
 const PROJECT_COST_MULTIPLIER = 1.1
 const RENT_TAX = 0.25
@@ -90,10 +90,10 @@ const GREEDINESS_AVERAGE = Dict(
     VilaFrancaDeXira => 1.025,
     Alcochete => 1.025,
     Almada => 1.025,
-    Barreiro => 1.025,
+    Barreiro => 1.05,
     Moita => 1.025,
     Montijo => 1.025,
-    Palmela => 1.015,
+    Palmela => 1.05,
     Seixal => 1.025,
     Sesimbra => 1.015,
     Setubal => 1.025,
@@ -111,10 +111,10 @@ const GREEDINESS_STDEV = Dict(
     VilaFrancaDeXira => 0.025,
     Alcochete => 0.025,
     Almada => 0.025,
-    Barreiro => 0.025,
+    Barreiro => 0.05,
     Moita => 0.025,
     Montijo => 0.025,
-    Palmela => 0.025,
+    Palmela => 0.05,
     Seixal => 0.025,
     Sesimbra => 0.025,
     Setubal => 0.025,
