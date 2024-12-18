@@ -15,9 +15,7 @@ function calculate_rental_market_price(house, model)
     end
     # println("house = $house mean(transactions) * house.area * house.maintenanceLevel = $(mean(transactions) * house.area * house.maintenanceLevel)")
     return median(bucket) * house.area * 
-           map_value(house.percentile, 1, 100,
-                     FIRST_QUARTILE_RENT_MAP[house.location] / MEDIAN_RENT_MAP[house.location],
-                     THIRD_QUARTILE_RENT_MAP[house.location] / MEDIAN_RENT_MAP[house.location])
+           map_value((house.percentile - 1) % 25, 0, 24, 0.90, 1.10)
 end
 
 function calculate_market_price(model, house)
@@ -28,9 +26,7 @@ function calculate_market_price(model, house)
     end
     # println("house = $house mean(transactions) * house.area * house.maintenanceLevel = $(mean(transactions) * house.area * house.maintenanceLevel)")
     return median(bucket) * house.area * 
-           map_value(house.percentile, 1, 100,
-                     FIRST_QUARTILE_SALES_MAP[house.location] / MEDIAN_SALES_MAP[house.location],
-                     THIRD_QUARTILE_SALES_MAP[house.location] / MEDIAN_SALES_MAP[house.location])
+           map_value((house.percentile - 1) % 25, 0, 24, 0.90, 1.10)
 end
 
 function calculate_initial_rental_market_price(house)
@@ -756,7 +752,10 @@ function public_investment(model)
 end
 
 function InitiateBuckets()
-    result = Dict(location => Float64[] for location in HOUSE_LOCATION_INSTANCES)
+    result = Dict(location => Dict(
+                    quartile => Float64[] 
+                    for quartile in [25, 50, 75, 100])
+                  for location in HOUSE_LOCATION_INSTANCES)
     return result
 end
 
@@ -771,21 +770,30 @@ function InitiatePriceIndex()
 end
 
 function calculateBucket(model, house)
-    # percentile = 100
-    # if house.percentile < 25
-    #     percentile = 25
-    # elseif house.percentile < 50
-    #     percentile = 50
-    # elseif house.percentile < 75
-    #     percentile = 75
-    # end
+    percentile = 100
+    if house.percentile <= 25
+        percentile = 25
+    elseif house.percentile <= 50
+        percentile = 50
+    elseif house.percentile <= 75
+        percentile = 75
+    end
     # size_interval = getSizeInterval(house)
     # return model.buckets[house.location][percentile][size_interval]
-    return model.buckets[house.location]
+    # return model.buckets[house.location]
+    return model.buckets[house.location][percentile]
 end
 
 function calculateRentalBucket(model, house)
-    return model.rentalBuckets[house.location]
+    percentile = 100
+    if house.percentile <= 25
+        percentile = 25
+    elseif house.percentile <= 50
+        percentile = 50
+    elseif house.percentile <= 75
+        percentile = 75
+    end
+    return model.rentalBuckets[house.location][percentile]
 end
 
 function addTransactionToBuckets(model, house, price)
@@ -801,16 +809,20 @@ end
 function trimBucketsIfNeeded(model)
     # avoid holding to many transaction in the buckets, keep the most recent MAX_BUCKET_SIZE (initially 30)
     for location in HOUSE_LOCATION_INSTANCES
-        if length(model.buckets[location]) > MAX_BUCKET_SIZE
-            sizeToCut = length(model.buckets[location]) - MAX_BUCKET_SIZE
-            splice!(model.buckets[location], 1:sizeToCut)
+        for quartile in [25, 50, 75, 100]
+            if length(model.buckets[location][quartile]) > MAX_BUCKET_SIZE
+                sizeToCut = length(model.buckets[location][quartile]) - MAX_BUCKET_SIZE
+                splice!(model.buckets[location][quartile], 1:sizeToCut)
+            end
         end
     end
 
     for location in HOUSE_LOCATION_INSTANCES
-        if length(model.rentalBuckets[location]) > MAX_BUCKET_SIZE
-            sizeToCut = length(model.rentalBuckets[location]) - MAX_BUCKET_SIZE
-            splice!(model.rentalBuckets[location], 1:sizeToCut)
+        for quartile in [25, 50, 75, 100]
+            if length(model.rentalBuckets[location][quartile]) > MAX_BUCKET_SIZE
+                sizeToCut = length(model.rentalBuckets[location][quartile]) - MAX_BUCKET_SIZE
+                splice!(model.rentalBuckets[location][quartile], 1:sizeToCut)
+            end
         end
     end
 end
