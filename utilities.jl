@@ -15,7 +15,9 @@ function calculate_rental_market_price(house, model)
     end
     # println("house = $house mean(transactions) * house.area * house.maintenanceLevel = $(mean(transactions) * house.area * house.maintenanceLevel)")
     return median(bucket) * house.area * 
-           map_value((house.percentile - 1) % 25, 0, 24, 0.90, 1.10)
+           map_value(house.percentile, 1, 100,
+                     FIRST_QUARTILE_RENT_MAP[house.location] / MEDIAN_RENT_MAP[house.location],
+                     THIRD_QUARTILE_RENT_MAP[house.location] / MEDIAN_RENT_MAP[house.location])
 end
 
 function calculate_market_price(model, house)
@@ -785,15 +787,7 @@ function calculateBucket(model, house)
 end
 
 function calculateRentalBucket(model, house)
-    percentile = 100
-    if house.percentile <= 25
-        percentile = 25
-    elseif house.percentile <= 50
-        percentile = 50
-    elseif house.percentile <= 75
-        percentile = 75
-    end
-    return model.rentalBuckets[house.location][percentile]
+    return model.rentalBuckets[house.location]
 end
 
 function addTransactionToBuckets(model, house, price)
@@ -818,11 +812,9 @@ function trimBucketsIfNeeded(model)
     end
 
     for location in HOUSE_LOCATION_INSTANCES
-        for quartile in [25, 50, 75, 100]
-            if length(model.rentalBuckets[location][quartile]) > MAX_BUCKET_SIZE
-                sizeToCut = length(model.rentalBuckets[location][quartile]) - MAX_BUCKET_SIZE
-                splice!(model.rentalBuckets[location][quartile], 1:sizeToCut)
-            end
+        if length(model.rentalBuckets[location]) > MAX_BUCKET_SIZE
+            sizeToCut = length(model.rentalBuckets[location]) - MAX_BUCKET_SIZE
+            splice!(model.rentalBuckets[location], 1:sizeToCut)
         end
     end
 end
