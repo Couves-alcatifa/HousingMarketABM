@@ -49,7 +49,7 @@ const INITIAL_MARKET_PRICE_CUT = Dict(
     Alcochete => 0.80,
     Almada => 0.80,
     Barreiro => 0.90,
-    Moita => 0.80,
+    Moita => 0.95,
     Montijo => 0.80,
     Palmela => 0.85,
     Seixal => 0.80,
@@ -95,7 +95,7 @@ const GREEDINESS_AVERAGE = Dict(
     Montijo => 1.025,
     Palmela => 1.05,
     Seixal => 1.025,
-    Sesimbra => 1.025,
+    Sesimbra => 1.05,
     Setubal => 1.025,
 )
 
