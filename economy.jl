@@ -19,7 +19,7 @@ include("tables.jl")
 include("demography.jl")
 # include("marketsLogic.jl")
 # Set the seed for reproducibility
-Random.seed!(1234)
+Random.seed!(11)
 
 mkdir(output_folder)
 mkdir("$output_folder/transactions_logs")
