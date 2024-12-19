@@ -761,6 +761,11 @@ function InitiateBuckets()
     return result
 end
 
+function InitiateRentalBuckets()
+    result = Dict(location => Float64[] for location in HOUSE_LOCATION_INSTANCES)
+    return result
+end
+
 function InitiatePriceIndex()
     result = Dict(location => Dict(
                     quartile => Dict( 

@@ -112,7 +112,7 @@ function wealth_model()
         :liquidSalariesReceived => 0.0,
         :expensesReceived => 0.0,
         :buckets => InitiateBuckets(), # Houses characteristics => Prices[]
-        :rentalBuckets => InitiateBuckets(), # Houses characteristics => Prices[]
+        :rentalBuckets => InitiateRentalBuckets(), # Houses characteristics => Prices[]
         :mortgagesInStep => Mortgage[],
         :householdsInDemand => Int[],
         :housesBuiltPerRegion => Dict(location => Dict(size_interval => House[] for size_interval in instances(SizeInterval)) for location in HOUSE_LOCATION_INSTANCES),
