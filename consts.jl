@@ -23,8 +23,11 @@ const MAX_EFFORT_FOR_RENT = 0.50
 const CONSTRUCTION_DELAY_MIN = 24
 const CONSTRUCTION_DELAY_MAX = 48
 const CONSTRUCTION_VAT = 0.23
-const CONSTRUCTION_COSTS_MIN = 1500 / (1 + CONSTRUCTION_VAT) # to be multiplied by the area of the house
-const CONSTRUCTION_COSTS_MAX = 2500 / (1 + CONSTRUCTION_VAT) # to be multiplied by the area of the house
+
+# based on: https://www.habitissimo.pt/orcamentos/construcao-de-casa
+const CONSTRUCTION_COSTS_MIN = 1200 / (1 + CONSTRUCTION_VAT) # to be multiplied by the area of the house
+const CONSTRUCTION_COSTS_MAX = 1800 / (1 + CONSTRUCTION_VAT) # to be multiplied by the area of the house
+
 const CONSTRUCTION_TIME_MIN = 12
 const CONSTRUCTION_TIME_MAX = 18
 
@@ -111,10 +114,10 @@ const GREEDINESS_STDEV = Dict(
     VilaFrancaDeXira => 0.025,
     Alcochete => 0.025,
     Almada => 0.025,
-    Barreiro => 0.05,
+    Barreiro => 0.025,
     Moita => 0.05,
     Montijo => 0.025,
-    Palmela => 0.05,
+    Palmela => 0.025,
     Seixal => 0.025,
     Sesimbra => 0.025,
     Setubal => 0.025,
@@ -1136,7 +1139,7 @@ const RATIO_OF_HOUSES_BOUGHT_BY_NON_RESIDENTS = Dict(
     Alcochete => 0.0,
     Almada => 0.02,
     Amadora => 0.02,
-    Barreiro => 0.05,
+    Barreiro => 0.01,
     Cascais => 0.15,
     Lisboa => 0.45,
     Loures => 0.02,
