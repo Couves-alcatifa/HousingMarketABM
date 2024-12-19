@@ -121,6 +121,7 @@ function wealth_model()
         :housesInRentalMarket => Set(),
         :rentalPriceIndex => InitiatePriceIndex(),
         :housesInfo => Dict(),
+        :nonResidentHousehold => NonResident(-1, 0, 0, 0, [], 0, [], [], Nothing, 0, Lisboa, 0),
     )
 
     model = StandardABM(MyMultiAgent; agent_step! = agent_step!, model_step! = model_step!, properties,scheduler = Schedulers.Randomly())

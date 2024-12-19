@@ -563,7 +563,12 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
         return false
     end
 
-    household = model[highestBidder]
+    household = Nothing
+    if highestBidder < 0
+        household = model.nonResidentHousehold
+    else
+        household = model[highestBidder]
+    end
     content = "########\n"
     transactionTaxes = calculateTransactionTaxes(bidValue)
 
@@ -1215,7 +1220,7 @@ function handleNonResidentsDemand(model)
         housesToBuy = housesBoughtByNoNResidentsPerRegion(location)
         housesBought = 0
         while housesBought < housesToBuy
-            push!(model.houseMarket.demand, HouseDemand(-1, SupplyMatch[], NonResidentDemand))
+            push!(model.houseMarket.demand, HouseDemand(getNonResidentId(model), SupplyMatch[], NonResidentDemand))
             housesBought += 1
         end
     end
@@ -1348,4 +1353,9 @@ function calculateAddedValueTax(gains, expenses)
         return calculateIrs(taxableAddedValue)
     end
     return 0
+end
+
+function getNonResidentId(model)
+    model.nonResidentHousehold.id -= 1
+    return model.nonResidentHousehold.id
 end
