@@ -35,6 +35,26 @@ function generate_houses_prices_table(adf, mdf)
             currentYear += 1
         end
     end
+
+    function scatter_plot(x, simulated_y, real_y)
+        figure = Figure(size = (600, 400))
+        ax = figure[1, 1] = Axis(figure; xlabel = "Quarter", ylabel = "Houses prices per m2")
+        simulated_houses_prices = scatterlines!(ax, x, simulated_y, color = :red)
+        real_houses_prices = scatterlines!(ax, x, real_y, color = :blue)
+        figure[1, 2] = Legend(figure, [simulated_houses_prices, real_houses_prices], ["Simulated House prices", "Real House Prices"])
+        figure
+    end
+
+    for line in finalTable[2:end]
+        location = line[1]
+        x = [quarter for quarter in 1:length(line)]
+        y = []
+        for value in line[2:end]
+            y = vcat(y, value)
+        end
+        save("$output_folder/SimulatedPricesIn$location.png", scatter_plot(x, y, REAL_PRICES_MAP[location]))
+    end
+
     print("Final Table: \n$(finalTable)")
     return finalTable
 end
