@@ -47,12 +47,12 @@ function generate_houses_prices_table(adf, mdf)
 
     for line in finalTable[2:end]
         location = line[1]
-        x = [quarter for quarter in 1:length(line)]
-        y = []
+        x = [quarter for quarter in 1:length(line) - 1]
+        y = Int32[]
         for value in line[2:end]
             y = vcat(y, value)
         end
-        save("$output_folder/SimulatedPricesIn$location.png", scatter_plot(x, y, REAL_PRICES_MAP[location]))
+        save("$output_folder/SimulatedPricesIn$location.png", scatter_plot(x, y, REAL_PRICES_MAP[location][1:length(y)]))
     end
 
     print("Final Table: \n$(finalTable)")

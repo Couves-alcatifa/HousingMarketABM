@@ -3,5 +3,5 @@ for location in ${locations[@]}
 do
     python generateScope.py $location
     ./run.sh
-    ./push_run_in_location $location
+    ./push_run_in_location.sh $location
 done

@@ -1,0 +1,61 @@
+generated agent 1220 from migration wealth = 26926.47609087795
+
+########
+Transaction: mortgageValue = 123026.12122062822
+Transaction: mortgage payment = 306.66809023108334
+Transaction: mortgage duration = 468.0
+Transaction: house.area = 73
+Transaction: house.location = Oeiras
+Transaction: house percentile = 48
+Transaction: household.wealth = 19143.901727681226
+Transaction: raw salary = 2867.8
+Transaction: liquid salary = 1951.74244
+Transaction: household percentile = 52
+Transaction: household id = 763
+Transaction: household size = 3
+Transaction: household age = 21
+Transaction: household residencyZone = Oeiras
+Transaction: household homelessTime = 11
+Transaction: area per person = 24.333333333333332
+Transaction: askPrice = 142262.34243750252
+Transaction: sellerId = 794
+Transaction: bidValue = 141787.14491375582
+Transaction: consumerSurplus = 1.0107699717825014
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 1942.2896563528195
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+Rental: house.area = 82
+Rental: house.location = Oeiras
+Rental: house percentile = 100
+Rental: household.wealth = 17793.93974381285
+Rental: raw salary = 4699.841666666667
+Rental: liquid salary = 2852.9583958333333
+Rental: household percentile = 73
+Rental: household id = 773
+Rental: household size = 3
+Rental: household age = 21
+Rental: household residencyZone = Oeiras
+Rental: household homelessTime = 19
+Rental: area per person = 27.333333333333332
+Rental: askPrice = 932.2158926512101
+Rental: sellerId = 109
+Rental: bidValue = 971.4522519583423
+Rental: consumerSurplus = 1.056206935445289
+Rental: pricePerm2 = 11.84697868241881
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[Contract(109, 205, House(0x004f, Oeiras, NotSocialNeighbourhood, 1.0, 81), 381.5615329457947), Contract(109, 302, House(0x0061, Oeiras, NotSocialNeighbourhood, 1.0, 26), 116.18285117751219), Contract(109, 312, House(0x0033, Oeiras, NotSocialNeighbourhood, 1.0, 81), 256.09544723254), Contract(109, 529, House(0x0042, Oeiras, NotSocialNeighbourhood, 1.0, 80), 460.9607096105297)]
+Rental: seller contract as tenant = Nothing
+########
+
+generated agent 1221 from leaving home
+wealth = 6258.308229843648
+
