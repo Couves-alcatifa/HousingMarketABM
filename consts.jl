@@ -6,6 +6,30 @@ const STARTING_GOV_WEALTH_PER_CAPITA = 100000.0
 const STARTING_COMPANY_WEALTH_PER_CAPITA = 60000.0
 const STARTING_BANK_WEALTH_PER_CAPITA = 67000.0
 const STARTING_CONSTRUCTION_SECTOR_WEALTH_PER_CAPITA = 5000.0
+
+const THEORETICAL_NUMBER_OF_HOUSES_MAP = Dict(
+    Amadora => 73513,
+    Cascais => 86465,
+    Lisboa => 242044,
+    Loures =>  81552,
+    Mafra => 33152,
+    Odivelas => 60119,
+    Oeiras => 73013,
+    Sintra => 153147,
+    VilaFrancaDeXira => 55641,
+    Alcochete => 7411,
+    Almada => 75485,
+    Barreiro => 34346,
+    Moita => 27489,
+    Montijo => 22104,
+    Palmela => 26622,
+    Seixal => 67534,
+    Sesimbra => 20557,
+    Setubal => 51169,
+)
+
+include("scope.jl")
+
 const STARTING_GOV_WEALTH = STARTING_GOV_WEALTH_PER_CAPITA * NUMBER_OF_HOUSEHOLDS
 const STARTING_COMPANY_WEALTH = STARTING_COMPANY_WEALTH_PER_CAPITA * NUMBER_OF_HOUSEHOLDS
 const STARTING_BANK_WEALTH = STARTING_BANK_WEALTH_PER_CAPITA * NUMBER_OF_HOUSEHOLDS
@@ -211,28 +235,6 @@ const CONSTRUCTION_SECTOR_MARKUP = Dict(
     Setubal => 1.2,
 )
 
-const THEORETICAL_NUMBER_OF_HOUSES_MAP = Dict(
-    Amadora => 73513,
-    Cascais => 86465,
-    Lisboa => 242044,
-    Loures =>  81552,
-    Mafra => 33152,
-    Odivelas => 60119,
-    Oeiras => 73013,
-    Sintra => 153147,
-    VilaFrancaDeXira => 55641,
-    Alcochete => 7411,
-    Almada => 75485,
-    Barreiro => 34346,
-    Moita => 27489,
-    Montijo => 22104,
-    Palmela => 26622,
-    Seixal => 67534,
-    Sesimbra => 20557,
-    Setubal => 51169,
-)
-
-include("scope.jl")
 
 const TotalTheoreticalNumberOfHouses = sum([THEORETICAL_NUMBER_OF_HOUSES_MAP[location] for location in HOUSE_LOCATION_INSTANCES])
 
