@@ -1,5 +1,23 @@
 locationToIndex = Dict(HOUSE_LOCATION_INSTANCES[idx] => idx + 1 for idx in eachindex(HOUSE_LOCATION_INSTANCES))
 
+function plot_simulated_results(x, simulated_y, real_y)
+    figure = Figure(size = (600, 400))
+    ax = figure[1, 1] = Axis(figure; xlabel = "Quarter", ylabel = "Houses prices per m2")
+    simulated_houses_prices = scatterlines!(ax, x, simulated_y, color = :red)
+    real_houses_prices = scatterlines!(ax, x, real_y, color = :blue)
+    figure[1, 2] = Legend(figure, [simulated_houses_prices, real_houses_prices], ["Simulated House prices", "Real House Prices"])
+    figure
+end
+
+function plot_simulated_rents(x, simulated_y, real_y)
+    figure = Figure(size = (600, 400))
+    ax = figure[1, 1] = Axis(figure; xlabel = "Semester", ylabel = "Rents per m2")
+    simulated_houses_prices = scatterlines!(ax, x, simulated_y, color = :red)
+    real_houses_prices = scatterlines!(ax, x, real_y, color = :blue)
+    figure[1, 2] = Legend(figure, [simulated_houses_prices, real_houses_prices], ["Simulated Rents", "Real Rents"])
+    figure
+end
+
 # this function will generate a table with the house prices for each quarter, in each region
 function generate_houses_prices_table(adf, mdf)
     # since we will organize the table in quarters, we don't need the last hanging 1 or 2 steps
@@ -36,15 +54,6 @@ function generate_houses_prices_table(adf, mdf)
         end
     end
 
-    function scatter_plot(x, simulated_y, real_y)
-        figure = Figure(size = (600, 400))
-        ax = figure[1, 1] = Axis(figure; xlabel = "Quarter", ylabel = "Houses prices per m2")
-        simulated_houses_prices = scatterlines!(ax, x, simulated_y, color = :red)
-        real_houses_prices = scatterlines!(ax, x, real_y, color = :blue)
-        figure[1, 2] = Legend(figure, [simulated_houses_prices, real_houses_prices], ["Simulated House prices", "Real House Prices"])
-        figure
-    end
-
     for line in finalTable[2:end]
         location = line[1]
         x = [quarter for quarter in 1:length(line) - 1]
@@ -52,7 +61,8 @@ function generate_houses_prices_table(adf, mdf)
         for value in line[2:end]
             y = vcat(y, value)
         end
-        save("$output_folder/SimulatedPricesIn$location.png", scatter_plot(x, y, REAL_PRICES_MAP[location][1:length(y)]))
+        sizeToUse = min(length(y), length(REAL_PRICES_MAP[location]))
+        save("$output_folder/SimulatedPricesIn$location.png", plot_simulated_results(x, y[1:sizeToUse], REAL_PRICES_MAP[location][1:sizeToUse]))
     end
 
     print("Final Table: \n$(finalTable)")
@@ -130,6 +140,18 @@ function generate_semi_annually_rent_prices_table(adf, mdf)
             currentYear += 1
         end
     end
+
+    for line in finalTable[2:end]
+        location = line[1]
+        x = [semester for semester in 1:length(line) - 1]
+        y = Int32[]
+        for value in line[2:end]
+            y = vcat(y, value)
+        end
+        sizeToUse = min(length(y), length(REAL_RENTS_MAP[location]))
+        save("$output_folder/SimulatedRentsIn$location.png", plot_simulated_rents(x, y[1:sizeToUse], REAL_RENTS_MAP[location][1:sizeToUse]))
+    end
+
     return finalTable
 end
 
