@@ -62,7 +62,7 @@ const ADDED_VALUE_TAXABLE_PERCENTAGE = 0.5
 
 const INITIAL_MARKET_PRICE_CUT = Dict(
     Amadora => 0.80,
-    Cascais => 0.80,
+    Cascais => 0.90,
     Lisboa => 0.80,
     Loures => 0.80,
     Mafra => 0.80,
@@ -71,7 +71,7 @@ const INITIAL_MARKET_PRICE_CUT = Dict(
     Sintra => 0.80,
     VilaFrancaDeXira => 0.85,
     Alcochete => 0.80,
-    Almada => 0.80,
+    Almada => 0.85,
     Barreiro => 0.80,
     Moita => 0.85,
     Montijo => 0.80,
