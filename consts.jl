@@ -104,7 +104,7 @@ const INITIAL_RENTAL_MARKET_PRICE_CUT = Dict(
 
 const GREEDINESS_AVERAGE = Dict(
     Amadora => 1.025,
-    Cascais => 1.025,
+    Cascais => 1.075,
     Lisboa => 1.025,
     Loures => 1.025,
     Mafra => 1.025,

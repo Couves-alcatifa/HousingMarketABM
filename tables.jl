@@ -62,7 +62,7 @@ function generate_houses_prices_table(adf, mdf)
             y = vcat(y, value)
         end
         sizeToUse = min(length(y), length(REAL_PRICES_MAP[location]))
-        save("$output_folder/SimulatedPricesIn$location.png", plot_simulated_results(x, y[1:sizeToUse], REAL_PRICES_MAP[location][1:sizeToUse]))
+        save("simulated_prices/SimulatedPricesIn$location.png", plot_simulated_results(x, y[1:sizeToUse], REAL_PRICES_MAP[location][1:sizeToUse]))
     end
 
     print("Final Table: \n$(finalTable)")
@@ -149,7 +149,7 @@ function generate_semi_annually_rent_prices_table(adf, mdf)
             y = vcat(y, value)
         end
         sizeToUse = min(length(y), length(REAL_RENTS_MAP[location]))
-        save("$output_folder/SimulatedRentsIn$location.png", plot_simulated_rents(x, y[1:sizeToUse], REAL_RENTS_MAP[location][1:sizeToUse]))
+        save("simulated_rents/SimulatedRentsIn$location.png", plot_simulated_rents(x, y[1:sizeToUse], REAL_RENTS_MAP[location][1:sizeToUse]))
     end
 
     return finalTable
