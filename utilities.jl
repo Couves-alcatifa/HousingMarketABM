@@ -816,16 +816,16 @@ function trimBucketsIfNeeded(model)
     # avoid holding to many transaction in the buckets, keep the most recent MAX_BUCKET_SIZE (initially 30)
     for location in HOUSE_LOCATION_INSTANCES
         for quartile in [25, 50, 75, 100]
-            if length(model.buckets[location][quartile]) > MAX_BUCKET_SIZE
-                sizeToCut = length(model.buckets[location][quartile]) - MAX_BUCKET_SIZE
+            if length(model.buckets[location][quartile]) > MAX_BUCKET_SIZE[location]
+                sizeToCut = length(model.buckets[location][quartile]) - MAX_BUCKET_SIZE[location]
                 splice!(model.buckets[location][quartile], 1:sizeToCut)
             end
         end
     end
 
     for location in HOUSE_LOCATION_INSTANCES
-        if length(model.rentalBuckets[location]) > MAX_BUCKET_SIZE
-            sizeToCut = length(model.rentalBuckets[location]) - MAX_BUCKET_SIZE
+        if length(model.rentalBuckets[location]) > MAX_BUCKET_SIZE[location]
+            sizeToCut = length(model.rentalBuckets[location]) - MAX_BUCKET_SIZE[location]
             splice!(model.rentalBuckets[location], 1:sizeToCut)
         end
     end

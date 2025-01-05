@@ -203,7 +203,7 @@ const EXTRA_CONSUMER_SURPLUS_PER_REGION = Dict(
     Montijo => 0.0,
     Palmela => -2.0,
     Seixal => 0.0,
-    Sesimbra => -1.0,
+    Sesimbra => 0.0,
     Setubal => 0.0,
 )
 
@@ -243,7 +243,8 @@ const NUMBER_OF_HOUSES=NUMBER_OF_HOUSEHOLDS
 # TODO: region hack
 # MODEL_SCALE = NUMBER_OF_HOUSES / TheoreticalNumberOfHousesInLisboa
 const MODEL_SCALE = NUMBER_OF_HOUSES / TotalTheoreticalNumberOfHouses
-const MAX_BUCKET_SIZE = Int64(round(200 * MODEL_SCALE))
+# const MAX_BUCKET_SIZE = Int64(round(200 * MODEL_SCALE))
+const MAX_BUCKET_SIZE = Dict(location => Int64(round(THEORETICAL_NUMBER_OF_HOUSES_MAP[location] * 0.04 * MODEL_SCALE)) for location in HOUSE_LOCATION_INSTANCES)
 const N_OF_TRANS_MINIMUM = Int64(round(30 * MODEL_SCALE))
 const MINIMUM_NUMBER_OF_TRANSACTIONS_IN_BUCKETS = N_OF_TRANS_MINIMUM > 5 ? N_OF_TRANS_MINIMUM : 5  
 
@@ -1751,4 +1752,25 @@ const REAL_PRICES_MAP = Dict(
     "Seixal" => [1380, 1410, 1458, 1510, 1569, 1627, 1700, 1761, 1821, 1878, 1924, 1992],
     "Sesimbra" => [1456, 1503, 1573, 1667, 1701, 1759, 1862, 1956, 2012, 2070, 2091, 2086],
     "Setubal" => [1307, 1325, 1335, 1384, 1447, 1516, 1583, 1648, 1709, 1758, 1811, 1835],
+)
+
+const REAL_RENTS_MAP = Dict(
+    "Amadora" => [8.76, 8.85, 9.00, 9.48, 10.14, 10.72, 11.24],
+    "Cascais" => [10.56, 10.95, 11.56, 12.58, 13.56, 14.22, 14.87],
+    "Lisboa" => [11.12, 11.24, 11.86, 12.88, 14.11, 15.22, 15.63],
+    "Loures" => [7.78, 7.90, 8.13, 8.54, 8.95, 9.68, 10.15],
+    "Mafra" => [6.80, 6.94, 7.27, 7.48, 7.95, 8.37, 8.75],
+    "Odivelas" => [8.21, 8.43, 8.78, 9.00, 9.41, 10.02, 10.91],
+    "Oeiras" => [9.86, 10.00, 10.50, 11.36, 12.32, 13.00, 13.46],
+    "Sintra" => [7.25, 7.46, 7.64, 8.06, 8.75, 9.32, 9.70],
+    "VilaFrancaDeXira" => [6.82, 7.09, 7.17, 7.46, 8.11, 8.94, 9.43],
+    "Alcochete" => [6.35, 6.74, 6.98, 7.52, 7.77, 8.52, 9.00],
+    "Almada" => [8.36, 8.58, 9.01, 9.49, 9.97, 10.67, 11.34],
+    "Barreiro" => [6.95, 7.24, 7.48, 7.84, 8.50, 9.01, 9.45],
+    "Moita" => [5.80, 6.21, 6.39, 6.90, 7.50, 8.05, 8.44],
+    "Montijo" => [6.32, 6.48, 6.74, 7.41, 8.08, 8.44, 8.56],
+    "Palmela" => [5.82, 6.03, 6.39, 6.72, 6.98, 7.22, 7.87],
+    "Seixal" => [6.67, 7.01, 7.45, 8.07, 8.49, 8.78, 9.44],
+    "Sesimbra" => [5.95, 6.07, 6.67, 7.10, 7.41, 7.97, 8.33],
+    "Setubal" => [6.67, 6.85, 7.15, 7.58, 8.08, 8.95, 9.39],
 )
