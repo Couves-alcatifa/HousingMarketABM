@@ -98,7 +98,7 @@ const INITIAL_RENTAL_MARKET_PRICE_CUT = Dict(
     Montijo => 0.75,
     Palmela => 0.80,
     Seixal => 0.75,
-    Sesimbra => 0.90,
+    Sesimbra => 0.70,
     Setubal => 0.75,
 )
 
@@ -1152,9 +1152,9 @@ const RATIO_OF_HOUSES_BOUGHT_BY_NON_RESIDENTS = Dict(
     Oeiras => 0.14,
     Palmela => 0.0,
     Seixal => 0.0,
-    Sesimbra => 0.0,
+    Sesimbra => 0.01,
     Setubal => 0.015,
-    Sintra => 0.05,
+    Sintra => 0.04,
     VilaFrancaDeXira => 0.0,
 )
 
