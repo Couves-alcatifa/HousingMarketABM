@@ -818,6 +818,7 @@ function trimBucketsIfNeeded(model)
         for quartile in [25, 50, 75, 100]
             if length(model.buckets[location][quartile]) > MAX_BUCKET_SIZE[location]
                 sizeToCut = length(model.buckets[location][quartile]) - MAX_BUCKET_SIZE[location]
+                TRANSACTION_LOG("Trimming bucket for location $location and quartile $quartile Size to cut: $sizeToCut\n", model)
                 splice!(model.buckets[location][quartile], 1:sizeToCut)
             end
         end
@@ -826,6 +827,7 @@ function trimBucketsIfNeeded(model)
     for location in HOUSE_LOCATION_INSTANCES
         if length(model.rentalBuckets[location]) > MAX_BUCKET_SIZE[location]
             sizeToCut = length(model.rentalBuckets[location]) - MAX_BUCKET_SIZE[location]
+            TRANSACTION_LOG("Trimming rental bucket for location $location and quartile $quartile Size to cut: $sizeToCut\n", model)
             splice!(model.rentalBuckets[location], 1:sizeToCut)
         end
     end
