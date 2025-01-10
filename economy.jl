@@ -152,7 +152,7 @@ end
 function has_enough_size(house, household)
     areaPerPerson = house.area / household.size
     value = areaPerPerson + household.homelessTime 
-    return rand() < map_value(value, 15, 35.0, 0.01, 1.0)
+    return household.percentile <= map_value(value, 15, 35.0, 1, 100)
 end
 
 function model_step!(model)
@@ -468,7 +468,7 @@ function home_owner_decisions(household, model)
         household.homelessTime -= 1
     end
     house = household.houses[1]
-    if !has_enough_size(house, household) && rand() < 0.01
+    if !has_enough_size(house, household) # && rand() < 0.01
         # moves out, put_house_to_sale
         # this doesnt make much sense... having a house and selling it
         # is not the same as not having one in the first place
