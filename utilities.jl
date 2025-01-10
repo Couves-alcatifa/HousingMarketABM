@@ -827,7 +827,7 @@ function trimBucketsIfNeeded(model)
     for location in HOUSE_LOCATION_INSTANCES
         if length(model.rentalBuckets[location]) > MAX_BUCKET_SIZE[location]
             sizeToCut = length(model.rentalBuckets[location]) - MAX_BUCKET_SIZE[location]
-            TRANSACTION_LOG("Trimming rental bucket for location $location and quartile $quartile Size to cut: $sizeToCut\n", model)
+            TRANSACTION_LOG("Trimming rental bucket for location $location Size to cut: $sizeToCut\n", model)
             splice!(model.rentalBuckets[location], 1:sizeToCut)
         end
     end
