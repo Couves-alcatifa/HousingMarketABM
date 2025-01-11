@@ -54,6 +54,15 @@ function generate_houses_prices_table(adf, mdf)
         end
     end
 
+    REAL_PRICES_MAP_WITHOUT_INFLATION = Dict(location => [] for location in HOUSE_LOCATION_INSTANCES)
+    for location in HOUSE_LOCATION_INSTANCES
+        for idx in eachindex(REAL_PRICES_MAP_ADJUSTED[location])
+            year = CURRENT_YEAR + floor(idx / 4)
+            month = (idx % 4) * 3
+            push!(REAL_PRICES_MAP_WITHOUT_INFLATION[location], custom_adjust_value_to_inflation(REAL_PRICES_MAP_ADJUSTED[location][idx], CURRENT_YEAR, CURRENT_MONTH, year, month))
+        end
+    end
+
     for line in finalTable[2:end]
         location = line[1]
         x = [quarter for quarter in 1:length(line) - 1]
@@ -61,8 +70,8 @@ function generate_houses_prices_table(adf, mdf)
         for value in line[2:end]
             y = vcat(y, value)
         end
-        sizeToUse = min(length(y), length(REAL_PRICES_MAP[location]))
-        save("simulated_prices/SimulatedPricesIn$location.png", plot_simulated_results(x, y[1:sizeToUse], REAL_PRICES_MAP[location][1:sizeToUse]))
+        sizeToUse = min(length(y), length(REAL_PRICES_MAP_ADJUSTED[location]))
+        save("simulated_prices/SimulatedPricesIn$location.png", plot_simulated_results(x, y[1:sizeToUse], REAL_PRICES_MAP_WITHOUT_INFLATION[location][1:sizeToUse]))
     end
 
     print("Final Table: \n$(finalTable)")
@@ -141,6 +150,15 @@ function generate_semi_annually_rent_prices_table(adf, mdf)
         end
     end
 
+    REAL_RENTS_MAP_WITHOUT_INFLATION = Dict(location => [] for location in HOUSE_LOCATION_INSTANCES)
+    for location in HOUSE_LOCATION_INSTANCES
+        for idx in eachindex(REAL_RENTS_MAP_ADJUSTED[location])
+            year = CURRENT_YEAR + floor(idx / 2)
+            month = (idx % 2) * 6
+            push!(REAL_RENTS_MAP_WITHOUT_INFLATION[location], custom_adjust_value_to_inflation(REAL_RENTS_MAP_ADJUSTED[location][idx], CURRENT_YEAR, CURRENT_MONTH, year, month))
+        end
+    end
+
     for line in finalTable[2:end]
         location = line[1]
         x = [semester for semester in 1:length(line) - 1]
@@ -148,8 +166,8 @@ function generate_semi_annually_rent_prices_table(adf, mdf)
         for value in line[2:end]
             y = vcat(y, value)
         end
-        sizeToUse = min(length(y), length(REAL_RENTS_MAP[location]))
-        save("simulated_rents/SimulatedRentsIn$location.png", plot_simulated_rents(x, y[1:sizeToUse], REAL_RENTS_MAP[location][1:sizeToUse]))
+        sizeToUse = min(length(y), length(REAL_RENTS_MAP_WITHOUT_INFLATION[location]))
+        save("simulated_rents/SimulatedRentsIn$location.png", plot_simulated_rents(x, y[1:sizeToUse], REAL_RENTS_MAP_WITHOUT_INFLATION[location][1:sizeToUse]))
     end
 
     return finalTable

@@ -1,5 +1,6 @@
 include("types.jl")
 include("calibrationTable.jl")
+include("valueConverter.jl")
 
 const NUMBER_OF_STEPS = 36
 const STARTING_GOV_WEALTH_PER_CAPITA = 100000.0
@@ -290,6 +291,7 @@ const FIRST_QUARTILE_RENT_MAP = Dict(
     Sesimbra => 4.97,
     Setubal => 5.40,
 )
+const FIRST_QUARTILE_RENT_MAP_ADJUSTED = Dict(location => adjust_value_to_inflation(value) for (location, value) in FIRST_QUARTILE_RENT_MAP)
 
 const MEDIAN_RENT_MAP = Dict(
     Amadora => 8.76,
@@ -311,6 +313,7 @@ const MEDIAN_RENT_MAP = Dict(
     Sesimbra => 5.95,
     Setubal => 6.67,
 )
+const MEDIAN_RENT_MAP_ADJUSTED = Dict(location => adjust_value_to_inflation(value) for (location, value) in MEDIAN_RENT_MAP)
 
 const THIRD_QUARTILE_RENT_MAP = Dict(
     Amadora => 10.78,
@@ -332,6 +335,7 @@ const THIRD_QUARTILE_RENT_MAP = Dict(
     Sesimbra => 7.50,
     Setubal => 8.10,
 )
+const THIRD_QUARTILE_RENT_MAP_ADJUSTED = Dict(location => adjust_value_to_inflation(value) for (location, value) in THIRD_QUARTILE_RENT_MAP)
 
 const FIRST_QUARTILE_SALES_MAP = Dict(
     Amadora => 1408,
@@ -353,6 +357,7 @@ const FIRST_QUARTILE_SALES_MAP = Dict(
     Sesimbra => 1205,
     Setubal => 1014,
 )
+const FIRST_QUARTILE_SALES_MAP_ADJUSTED = Dict(location => adjust_value_to_inflation(value) for (location, value) in FIRST_QUARTILE_SALES_MAP)
 
 const MEDIAN_SALES_MAP = Dict(
     Amadora => 1723,
@@ -374,6 +379,7 @@ const MEDIAN_SALES_MAP = Dict(
     Sesimbra => 1456,
     Setubal => 1307,
 )
+const MEDIAN_SALES_MAP_ADJUSTED = Dict(location => adjust_value_to_inflation(value) for (location, value) in MEDIAN_SALES_MAP)
 
 const THIRD_QUARTILE_SALES_MAP = Dict(
     Amadora => 2060,
@@ -395,6 +401,7 @@ const THIRD_QUARTILE_SALES_MAP = Dict(
     Sesimbra => 1799,
     Setubal => 1610,
 )
+const THIRD_QUARTILE_SALES_MAP_ADJUSTED = Dict(location => adjust_value_to_inflation(value) for (location, value) in THIRD_QUARTILE_SALES_MAP)
 
 const color_map = Dict(
     Amadora => :red,
@@ -903,6 +910,7 @@ const FIRST_QUINTILE_INCOME_MAP = Dict(
     Sintra => 6797 / 12,
     VilaFrancaDeXira => 7604 / 12,
 )
+const FIRST_QUINTILE_INCOME_MAP_ADJUSTED = Dict(location => adjust_value_to_inflation(income) for (location, income) in FIRST_QUINTILE_INCOME_MAP)
 
 const SECOND_QUINTILE_INCOME_MAP = Dict(
     Alcochete => 10874 / 12,
@@ -924,6 +932,8 @@ const SECOND_QUINTILE_INCOME_MAP = Dict(
     Sintra => 9892 / 12,
     VilaFrancaDeXira => 10648 / 12,
 )
+const SECOND_QUINTILE_INCOME_MAP_ADJUSTED = Dict(location => adjust_value_to_inflation(income) for (location, income) in SECOND_QUINTILE_INCOME_MAP)
+
 const THIRD_QUINTILE_INCOME_MAP = Dict(
     Alcochete => 16169 / 12,
     Almada => 14750 / 12,
@@ -943,8 +953,8 @@ const THIRD_QUINTILE_INCOME_MAP = Dict(
     Setubal => 14297 / 12,
     VilaFrancaDeXira => 14252 / 12,
     Sintra => 13417 / 12,
-
 )
+const THIRD_QUINTILE_INCOME_MAP_ADJUSTED = Dict(location => adjust_value_to_inflation(income) for (location, income) in THIRD_QUINTILE_INCOME_MAP)
 
 const FOURTH_QUINTILE_INCOME_MAP = Dict(
     Alcochete => 26716 / 12,
@@ -966,6 +976,7 @@ const FOURTH_QUINTILE_INCOME_MAP = Dict(
     Sintra => 20169 / 12,
     VilaFrancaDeXira => 20828 / 12, 
 )
+const FOURTH_QUINTILE_INCOME_MAP_ADJUSTED = Dict(location => adjust_value_to_inflation(income) for (location, income) in FOURTH_QUINTILE_INCOME_MAP)
 
 
 BIRTH_RATE = 9.8/1000
@@ -1667,6 +1678,7 @@ const LAND_COSTS = Dict(
     Sesimbra => 650,
     Setubal => 700,
 )
+const LAND_COSTS_ADJUSTED = Dict(location => adjust_value_to_inflation(value) for (location, value) in LAND_COSTS)
 
 const RELATIVE_WEALTH_RATIO = Dict(
     Amadora => 1.699 / NUMBER_OF_HOUSEHOLDS_MAP[Amadora],
@@ -1753,6 +1765,7 @@ const REAL_PRICES_MAP = Dict(
     "Sesimbra" => [1456, 1503, 1573, 1667, 1701, 1759, 1862, 1956, 2012, 2070, 2091, 2086],
     "Setubal" => [1307, 1325, 1335, 1384, 1447, 1516, 1583, 1648, 1709, 1758, 1811, 1835],
 )
+const REAL_PRICES_MAP_ADJUSTED = Dict(location => [adjust_value_to_inflation(value) for value in values] for (location, values) in REAL_PRICES_MAP)
 
 const REAL_RENTS_MAP = Dict(
     "Amadora" => [8.76, 8.85, 9.00, 9.48, 10.14, 10.72, 11.24],
@@ -1774,3 +1787,6 @@ const REAL_RENTS_MAP = Dict(
     "Sesimbra" => [5.95, 6.07, 6.67, 7.10, 7.41, 7.97, 8.33],
     "Setubal" => [6.67, 6.85, 7.15, 7.58, 8.08, 8.95, 9.39],
 )
+
+const REAL_RENTS_MAP_ADJUSTED = Dict(location => [adjust_value_to_inflation(value) for value in values] for (location, values) in REAL_RENTS_MAP)
+

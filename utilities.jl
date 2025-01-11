@@ -16,8 +16,8 @@ function calculate_rental_market_price(house, model)
     # println("house = $house mean(transactions) * house.area * house.maintenanceLevel = $(mean(transactions) * house.area * house.maintenanceLevel)")
     return median(bucket) * house.area * 
            map_value(house.percentile, 1, 100,
-                     FIRST_QUARTILE_RENT_MAP[house.location] / MEDIAN_RENT_MAP[house.location],
-                     THIRD_QUARTILE_RENT_MAP[house.location] / MEDIAN_RENT_MAP[house.location])
+                     FIRST_QUARTILE_RENT_MAP_ADJUSTED[house.location] / MEDIAN_RENT_MAP_ADJUSTED[house.location],
+                     THIRD_QUARTILE_RENT_MAP_ADJUSTED[house.location] / MEDIAN_RENT_MAP_ADJUSTED[house.location])
 end
 
 function calculate_market_price(model, house)
@@ -36,20 +36,20 @@ function calculate_initial_rental_market_price(house)
     ## this quality should influence the price per m2 according to the firstQuartileHousePricesPerRegion
     ## stop using only first quartile
     if house.percentile <= 25
-        firstQuartile = FIRST_QUARTILE_RENT_MAP[house.location]
+        firstQuartile = FIRST_QUARTILE_RENT_MAP_ADJUSTED[house.location]
         base = firstQuartile / 1.25
         range = firstQuartile - base
         return house.area * (base + range * (house.percentile/100) * 4)
     elseif house.percentile <= 50
-        base = FIRST_QUARTILE_RENT_MAP[house.location]
-        range = MEDIAN_RENT_MAP[house.location] - base
+        base = FIRST_QUARTILE_RENT_MAP_ADJUSTED[house.location]
+        range = MEDIAN_RENT_MAP_ADJUSTED[house.location] - base
         return house.area * (base + range * (house.percentile/100 - 0.25) * 4)
     elseif house.percentile <= 75
-        base = MEDIAN_RENT_MAP[house.location]
-        range = THIRD_QUARTILE_RENT_MAP[house.location] - base
+        base = MEDIAN_RENT_MAP_ADJUSTED[house.location]
+        range = THIRD_QUARTILE_RENT_MAP_ADJUSTED[house.location] - base
         return house.area * (base + range * (house.percentile/100 - 0.50) * 4)
     else
-        base = THIRD_QUARTILE_RENT_MAP[house.location]
+        base = THIRD_QUARTILE_RENT_MAP_ADJUSTED[house.location]
         range = base * 0.20
         return house.area * (base + range * (house.percentile/100 - 0.75) * 4)
     end
@@ -60,20 +60,20 @@ function calculate_initial_market_price(house)
     ## this quality should influence the price per m2 according to the firstQuartileHousePricesPerRegion
     ## stop using only first quartile
     if house.percentile <= 25
-        firstQuartile = FIRST_QUARTILE_SALES_MAP[house.location]
+        firstQuartile = FIRST_QUARTILE_SALES_MAP_ADJUSTED[house.location]
         base = firstQuartile / 1.25
         range = firstQuartile - base
         return house.area * (base + range * (house.percentile/100) * 4)
     elseif house.percentile <= 50
-        base = FIRST_QUARTILE_SALES_MAP[house.location]
-        range = MEDIAN_SALES_MAP[house.location] - base
+        base = FIRST_QUARTILE_SALES_MAP_ADJUSTED[house.location]
+        range = MEDIAN_SALES_MAP_ADJUSTED[house.location] - base
         return house.area * (base + range * (house.percentile/100 - 0.25) * 4)
     elseif house.percentile <= 75
-        base = MEDIAN_SALES_MAP[house.location]
-        range = THIRD_QUARTILE_SALES_MAP[house.location] - base
+        base = MEDIAN_SALES_MAP_ADJUSTED[house.location]
+        range = THIRD_QUARTILE_SALES_MAP_ADJUSTED[house.location] - base
         return house.area * (base + range * (house.percentile/100 - 0.50) * 4)
     else
-        base = THIRD_QUARTILE_SALES_MAP[house.location]
+        base = THIRD_QUARTILE_SALES_MAP_ADJUSTED[house.location]
         range = base * 0.20
         return house.area * (base + range * (house.percentile/100 - 0.75) * 4)
     end
@@ -214,23 +214,23 @@ function calculateSalary(household, model)
         salaryAgeMultiplier = 0.75
     end
     if percentile < 20
-        base = FIRST_QUINTILE_INCOME_MAP[location] / 2
+        base = FIRST_QUINTILE_INCOME_MAP_ADJUSTED[location] / 2
         range = base * 2 * salaryAgeMultiplier
         salary = base + range * (percentile / 100) * 5
     elseif percentile < 40
-        base = FIRST_QUINTILE_INCOME_MAP[location]
-        range = (SECOND_QUINTILE_INCOME_MAP[location] - base) * salaryAgeMultiplier
+        base = FIRST_QUINTILE_INCOME_MAP_ADJUSTED[location]
+        range = (SECOND_QUINTILE_INCOME_MAP_ADJUSTED[location] - base) * salaryAgeMultiplier
         salary = base + range * (percentile / 100 - 0.2) * 5
     elseif percentile < 60
-        base = SECOND_QUINTILE_INCOME_MAP[location]
-        range = (THIRD_QUINTILE_INCOME_MAP[location] - base) * salaryAgeMultiplier
+        base = SECOND_QUINTILE_INCOME_MAP_ADJUSTED[location]
+        range = (THIRD_QUINTILE_INCOME_MAP_ADJUSTED[location] - base) * salaryAgeMultiplier
         salary = base + range * (percentile / 100 - 0.4) * 5
     elseif percentile < 80
-        base = THIRD_QUINTILE_INCOME_MAP[location]
-        range = (FOURTH_QUINTILE_INCOME_MAP[location] - base) * salaryAgeMultiplier
+        base = THIRD_QUINTILE_INCOME_MAP_ADJUSTED[location]
+        range = (FOURTH_QUINTILE_INCOME_MAP_ADJUSTED[location] - base) * salaryAgeMultiplier
         salary = base + range * (percentile / 100 - 0.6) * 5
     else
-        base = FOURTH_QUINTILE_INCOME_MAP[location]
+        base = FOURTH_QUINTILE_INCOME_MAP_ADJUSTED[location]
         range = base * 1.5 * salaryAgeMultiplier
         salary = base + range * (percentile / 100 - 0.8) * 5
     end
