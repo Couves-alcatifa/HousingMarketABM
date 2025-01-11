@@ -727,6 +727,7 @@ writeToCsv("$output_folder/DemographicEvents.csv", generate_demographic_table(ag
 # CSV.write("$output_folder/agentData.csv", agent_data, delim=';')
 CSV.write("$output_folder/modelData.csv", model_data, delim=';')
 
+write_json(VALUES_FILE, UPDATED_VALUES_DICT)
 Base.Filesystem.cptree("$output_folder", "latest_run", force=true)
 
 # println(agent_data[(end - 5):end, :])
