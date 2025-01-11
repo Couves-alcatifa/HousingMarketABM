@@ -5,6 +5,7 @@ setup(
     version='0.1',
     packages=find_packages(),
     install_requires=[
+        "requests", "beautifulsoup4" 
         # List any dependencies here
     ],
     author='Your Name',

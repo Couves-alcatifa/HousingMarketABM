@@ -6,10 +6,15 @@ Home-page: https://github.com/yourusername/update_values_inflation
 Author: Your Name
 Author-email: your.email@example.com
 License: UNKNOWN
-Description: UNKNOWN
 Platform: UNKNOWN
 Classifier: Programming Language :: Python :: 3
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
 Requires-Python: >=3.6
 Description-Content-Type: text/markdown
+
+run:
+pip install .
+
+To update the package with any changes
+

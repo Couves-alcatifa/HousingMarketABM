@@ -54,11 +54,11 @@ function generate_houses_prices_table(adf, mdf)
         end
     end
 
-    REAL_PRICES_MAP_WITHOUT_INFLATION = Dict(location => [] for location in HOUSE_LOCATION_INSTANCES)
-    for location in HOUSE_LOCATION_INSTANCES
+    REAL_PRICES_MAP_WITHOUT_INFLATION = Dict(string(location) => [] for location in HOUSE_LOCATION_INSTANCES)
+    for (location, values) in REAL_PRICES_MAP_WITHOUT_INFLATION
         for idx in eachindex(REAL_PRICES_MAP_ADJUSTED[location])
-            year = CURRENT_YEAR + floor(idx / 4)
-            month = (idx % 4) * 3
+            year = CURRENT_YEAR + Int64(floor((idx - 1)/ 4))
+            month = 3 + ((idx - 1) % 4) * 3
             push!(REAL_PRICES_MAP_WITHOUT_INFLATION[location], custom_adjust_value_to_inflation(REAL_PRICES_MAP_ADJUSTED[location][idx], CURRENT_YEAR, CURRENT_MONTH, year, month))
         end
     end
@@ -150,11 +150,11 @@ function generate_semi_annually_rent_prices_table(adf, mdf)
         end
     end
 
-    REAL_RENTS_MAP_WITHOUT_INFLATION = Dict(location => [] for location in HOUSE_LOCATION_INSTANCES)
-    for location in HOUSE_LOCATION_INSTANCES
+    REAL_RENTS_MAP_WITHOUT_INFLATION = Dict(string(location) => [] for location in HOUSE_LOCATION_INSTANCES)
+    for (location, values) in REAL_RENTS_MAP_WITHOUT_INFLATION
         for idx in eachindex(REAL_RENTS_MAP_ADJUSTED[location])
-            year = CURRENT_YEAR + floor(idx / 2)
-            month = (idx % 2) * 6
+            year = CURRENT_YEAR + Int(floor((idx - 1) / 2))
+            month = 6 + ((idx - 1) % 2) * 6
             push!(REAL_RENTS_MAP_WITHOUT_INFLATION[location], custom_adjust_value_to_inflation(REAL_RENTS_MAP_ADJUSTED[location][idx], CURRENT_YEAR, CURRENT_MONTH, year, month))
         end
     end
