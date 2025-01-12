@@ -98,6 +98,7 @@ function assignHousesToHouseholds(model)
         houses_sizes_for_rental[location] = vcat(houses_sizes_for_rental[location], rand(150:199, Int64(ceil(NUMBER_OF_HOUSES_FOR_RENTAL_PER_SIZE_MAP[LessThan199][location]))))
         houses_sizes_for_rental[location] = vcat(houses_sizes_for_rental[location], rand(200:300, Int64(ceil(NUMBER_OF_HOUSES_FOR_RENTAL_PER_SIZE_MAP[MoreThan200][location]))))
         sort!(houses_sizes_for_rental[location], lt=sortRandomly)
+        splice!(houses_sizes_for_rental[location], 1:LOCAL_HOUSING_MAP[location])
     end
 
 
