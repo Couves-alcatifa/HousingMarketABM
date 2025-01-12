@@ -1375,19 +1375,25 @@ function handleUnemployment(model)
         end
     end
     targetUnemployedHousehold = Int64(round(model.unemploymentRate * NUMBER_OF_HOUSEHOLDS * 1.05))
+    println("targetUnemployedHousehold = $targetUnemployedHousehold")
     targetHouseholdsToEmploy = Int64(round(model.unemploymentRate * NUMBER_OF_HOUSEHOLDS * 0.95))
+    println("targetHouseholdsToEmploy = $targetHouseholdsToEmploy")
     householdsToUnemploy = targetUnemployedHousehold - unemployedHouseholds
+    println("householdsToUnemploy = $householdsToUnemploy")
     householdsToEmploy = unemployedHouseholds - targetHouseholdsToEmploy
+    println("householdsToEmploy = $householdsToEmploy")
     for householdId in shuffle(collect(allids(model)))
         household = model[householdId]
         if household.unemployedTime > 0
             if shouldBecomeEmployed(model, household, householdsToEmploy)
+                householdsToEmploy -= 1
                 household.unemployedTime = 0
             else
                 household.unemployedTime += 1
             end
         else
             if shouldBecomeUnemployed(model, household, householdsToUnemploy)
+                householdsToUnemploy -= 1
                 household.unemployedTime += 1
             end
         end
@@ -1397,7 +1403,6 @@ function shouldBecomeEmployed(model, household, householdsToEmploy)
     if householdsToEmploy <= 0
         return false
     end
-    householdsToEmploy -= 1
     return true
 end
 
@@ -1405,6 +1410,5 @@ function shouldBecomeUnemployed(model, household, householdsToUnemploy)
     if householdsToUnemploy <= 0
         return false
     end
-    householdsToUnemploy -= 1
     return true
 end

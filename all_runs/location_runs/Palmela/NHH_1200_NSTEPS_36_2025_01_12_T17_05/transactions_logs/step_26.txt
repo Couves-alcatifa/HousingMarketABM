@@ -1,0 +1,194 @@
+generated agent 1263 from migration wealth = 18562.918145021085
+
+generated agent 1264 from migration wealth = 20902.262506270145
+
+########
+Transaction: mortgageValue = 27325.187030409983
+Transaction: mortgage payment = 132.7931582961815
+Transaction: mortgage duration = 348.0
+Transaction: house.area = 40
+Transaction: house.location = Palmela
+Transaction: house percentile = 97
+Transaction: household.wealth = 28033.666910230346
+Transaction: raw salary = 1732.8246000000001
+Transaction: liquid salary = 1345.457744
+Transaction: household percentile = 68
+Transaction: household id = 1149
+Transaction: household size = 6
+Transaction: household age = 37
+Transaction: household residencyZone = Palmela
+Transaction: household homelessTime = 26
+Transaction: household unemployedTime = 1
+Transaction: area per person = 6.666666666666667
+Transaction: askPrice = 57513.979552306075
+Transaction: sellerId = 765
+Transaction: bidValue = 54363.274407178294
+Transaction: consumerSurplus = 0.9452184465472021
+Transaction: transactionTaxes = 434.90619525742636
+Transaction: pricePerm2 = 1359.0818601794574
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 47
+Transaction: house.location = Palmela
+Transaction: house percentile = 98
+Transaction: household.wealth = 95011.86933429724
+Transaction: raw salary = 1656.2637
+Transaction: liquid salary = 1296.458768
+Transaction: household percentile = 68
+Transaction: household id = 757
+Transaction: household size = 3
+Transaction: household age = 103
+Transaction: household residencyZone = Palmela
+Transaction: household homelessTime = 17
+Transaction: household unemployedTime = 1
+Transaction: area per person = 15.666666666666666
+Transaction: askPrice = 73408.57022672132
+Transaction: sellerId = 395
+Transaction: bidValue = 68359.521447382
+Transaction: consumerSurplus = 0.9532156815736482
+Transaction: transactionTaxes = 546.876171579056
+Transaction: pricePerm2 = 1454.457903135787
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 48652.6417787925
+Transaction: mortgage payment = 221.4671861083811
+Transaction: mortgage duration = 396.0
+Transaction: house.area = 90
+Transaction: house.location = Palmela
+Transaction: house percentile = 24
+Transaction: household.wealth = 18937.563256263453
+Transaction: raw salary = 988.5681000000001
+Transaction: liquid salary = 856.0368725000001
+Transaction: household percentile = 39
+Transaction: household id = 1249
+Transaction: household size = 3
+Transaction: household age = 30
+Transaction: household residencyZone = Palmela
+Transaction: household homelessTime = 12
+Transaction: household unemployedTime = 1
+Transaction: area per person = 30.0
+Transaction: askPrice = 67644.33583759062
+Transaction: sellerId = 857
+Transaction: bidValue = 66678.02953366139
+Transaction: consumerSurplus = 0.9857148970129699
+Transaction: transactionTaxes = 533.4242362692911
+Transaction: pricePerm2 = 740.86699481846
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 26040.54510757877
+Transaction: mortgage payment = 112.46652510181562
+Transaction: mortgage duration = 444.0
+Transaction: house.area = 37
+Transaction: house.location = Palmela
+Transaction: house percentile = 95
+Transaction: household.wealth = 26816.4038326999
+Transaction: raw salary = 3343.089749999999
+Transaction: liquid salary = 2188.8283326249993
+Transaction: household percentile = 87
+Transaction: household id = 1123
+Transaction: household size = 6
+Transaction: household age = 24
+Transaction: household residencyZone = Palmela
+Transaction: household homelessTime = 27
+Transaction: household unemployedTime = 1
+Transaction: area per person = 6.166666666666667
+Transaction: askPrice = 55033.106232440856
+Transaction: sellerId = 1057
+Transaction: bidValue = 51905.37784089749
+Transaction: consumerSurplus = 0.9509494436852349
+Transaction: transactionTaxes = 415.24302272717995
+Transaction: pricePerm2 = 1402.8480497539863
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 31390.96627350415
+Transaction: mortgage payment = 174.14152424093942
+Transaction: mortgage duration = 276.0
+Transaction: house.area = 99
+Transaction: house.location = Palmela
+Transaction: house percentile = 80
+Transaction: household.wealth = 112293.1027773844
+Transaction: raw salary = 1962.5073000000002
+Transaction: liquid salary = 1478.909161
+Transaction: household percentile = 74
+Transaction: household id = 992
+Transaction: household size = 4
+Transaction: household age = 45
+Transaction: household residencyZone = Palmela
+Transaction: household homelessTime = 26
+Transaction: household unemployedTime = 1
+Transaction: area per person = 24.75
+Transaction: askPrice = 136240.8637250334
+Transaction: sellerId = 469
+Transaction: bidValue = 141438.20699534085
+Transaction: consumerSurplus = 1.0381481967172266
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 1428.6687575286956
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: seller contracts as landlord = Contract[Contract(469, 1212, House(0x0031, Palmela, NotSocialNeighbourhood, 1.0, 65), 178.24256854771684)]
+Transaction: seller contract as tenant = Nothing
+########
+
+Trimming bucket for location Palmela and quartile 25 Size to cut: 1
+
+Trimming bucket for location Palmela and quartile 100 Size to cut: 4
+
+Household failed to acquire mortgage for renovation
+Household failed to acquire mortgage for renovation
+Household failed to acquire mortgage for renovation
+Start new Construction 101 6 Palmela
+
+Start new Construction 121 13 Palmela
+
+price of newly built house = 149123.28068506185
+Household failed to acquire mortgage for renovation
+generated agent 1265 from leaving home
+wealth = 10596.891590265746
+
+Household 489 decided to invest in renovation
+
+generated agent 1266 from leaving home
+wealth = 22531.578105037246
+
+Household 292 decided to invest in renovation
+
+Household 549 decided to invest in rental
+
+Household 798 decided to invest in rental
+
