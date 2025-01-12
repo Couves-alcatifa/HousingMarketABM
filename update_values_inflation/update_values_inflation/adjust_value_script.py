@@ -22,6 +22,7 @@ def adjust_value(value, from_year, from_month, to_year, to_month):
         # "x": "39",
         # "y": "7",
     }
+    print("Sending a query to INE...")
     response = requests.post(url, headers=headers, data=values)
     try:
         full_soup = BeautifulSoup(response.content, 'html.parser')

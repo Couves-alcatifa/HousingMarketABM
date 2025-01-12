@@ -1374,11 +1374,11 @@ function handleUnemployment(model)
             unemployedHouseholds += 1
         end
     end
-    targetUnemployedHousehold = Int64(round(UNEMPLOYMENT_RATE * NUMBER_OF_HOUSEHOLDS * 1.05))
-    targetHouseholdsToEmploy = Int64(round(UNEMPLOYMENT_RATE * NUMBER_OF_HOUSEHOLDS * 0.95))
+    targetUnemployedHousehold = Int64(round(model.unemploymentRate * NUMBER_OF_HOUSEHOLDS * 1.05))
+    targetHouseholdsToEmploy = Int64(round(model.unemploymentRate * NUMBER_OF_HOUSEHOLDS * 0.95))
     householdsToUnemploy = targetUnemployedHousehold - unemployedHouseholds
     householdsToEmploy = unemployedHouseholds - targetHouseholdsToEmploy
-    for householdId in suffle(allids(model))
+    for householdId in shuffle(collect(allids(model)))
         household = model[householdId]
         if household.unemployedTime > 0
             if shouldBecomeEmployed(model, household, householdsToEmploy)

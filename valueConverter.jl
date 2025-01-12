@@ -6,7 +6,7 @@
 using JSON
 using Logging
 using PyCall
-
+# import Pkg; Pkg.add("JSON")
 
 const VALUES_FILE = "values_updated_for_inflation.json"
 
@@ -14,7 +14,7 @@ function read_json(file::String)::Dict
     # check if file exists
     if !isfile(file)
         # original_year => original_month => current_year => current_month => value => updated_value
-        return Dict(0 => Dict(0 => Dict(0 => Dict(0 => Dict(0 => 0)))))
+        return Dict(0 => Dict(0 => Dict(0 => Dict(0 => Dict(0.0 => 0.0)))))
     end
     open(file, "r") do f
         return JSON.parse(f)
@@ -42,8 +42,13 @@ function adjust_value_to_inflation(value)
     return custom_adjust_value_to_inflation(value, ORIGINAL_YEAR, ORIGINAL_MONTH, CURRENT_YEAR, CURRENT_MONTH)
 end
 
-function custom_adjust_value_to_inflation(value, original_year, original_month, current_year, current_month)
+function custom_adjust_value_to_inflation(in_value, in_original_year, in_original_month, in_current_year, in_current_month)
     valueWasFound = true
+    value = string(in_value)
+    original_year = string(in_original_year)
+    original_month = string(in_original_month)
+    current_year = string(in_current_year)
+    current_month = string(in_current_month)
     if !(original_year in keys(UPDATED_VALUES_DICT))
         valueWasFound = false
         UPDATED_VALUES_DICT[original_year] = Dict()
