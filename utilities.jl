@@ -1186,9 +1186,9 @@ end
 
 function nonResidentsBuyHouses(model)
     ### CRASH SCENARIO
-    # if model.steps >= 72
-    #     return
-    # end
+    if model.steps >= 72
+        return
+    end
     for location in HOUSE_LOCATION_INSTANCES
         housesToBuy = housesBoughtByNoNResidentsPerRegion(location)
         housesBought = 0

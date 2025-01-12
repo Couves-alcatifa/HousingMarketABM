@@ -198,46 +198,46 @@ function model_step!(model)
     if model.steps % 12 == 0
         # considering start is in 2003
         # ### CRASH SCENARIO
-        # if model.steps == 12
-        #     # end of 2003
-        #     model.salary_multiplier *= 0.95
-        #     model.bank.interestRate = 0.0383
-        # elseif model.steps == 24
-        #     # end of 2004
-        #     model.bank.interestRate = 0.0349
-        # elseif model.steps == 36
-        #     # end of 2005
-        #     model.salary_multiplier *= 0.95
-        #     model.bank.interestRate = 0.0338
-        # elseif model.steps == 48
-        #     # end of 2006
-        #     model.bank.interestRate = 0.0401
-        # elseif model.steps == 60
-        #     # end of 2007
-        #     model.bank.interestRate = 0.0480
-        # elseif model.steps == 72
-        #     # end of 2008
-        #     model.bank.interestRate = 0.0544
-        # elseif model.steps == 84
-        #     # end of 2009
-        #     model.salary_multiplier *= 0.95
-        #     model.bank.interestRate = 0.0273
-        # elseif model.steps == 96
-        #     # end of 2010
-        #     model.salary_multiplier *= 0.95
-        #     model.bank.interestRate = 0.0247
-        # elseif model.steps == 108
-        #     # end of 2011
-        #     model.salary_multiplier *= 0.90
-        #     model.bank.interestRate = 0.0377
-        # elseif model.steps == 120
-        #     # end of 2012
-        #     model.salary_multiplier *= 0.95
-        #     model.bank.interestRate = 0.0388
-        # end
-
         if model.steps == 12
-            model.unemploymentRate = 0.2
+            # end of 2003
+            model.unemploymentRate = 0.064
+            model.bank.interestRate = 0.0383
+        elseif model.steps == 24
+            # end of 2004
+            model.unemploymentRate = 0.077
+            model.bank.interestRate = 0.0349
+        elseif model.steps == 36
+            # end of 2005
+            model.unemploymentRate = 0.078
+            model.bank.interestRate = 0.0338
+        elseif model.steps == 48
+            # end of 2006
+            model.unemploymentRate = 0.081
+            model.bank.interestRate = 0.0401
+        elseif model.steps == 60
+            # end of 2007
+            model.unemploymentRate = 0.077
+            model.bank.interestRate = 0.0480
+        elseif model.steps == 72
+            # end of 2008
+            model.unemploymentRate = 0.096
+            model.bank.interestRate = 0.0544
+        elseif model.steps == 84
+            # end of 2009
+            model.unemploymentRate = 0.11
+            model.bank.interestRate = 0.0273
+        elseif model.steps == 96
+            # end of 2010
+            model.unemploymentRate = 0.129
+            model.bank.interestRate = 0.0247
+        elseif model.steps == 108
+            # end of 2011
+            model.unemploymentRate = 0.158
+            model.bank.interestRate = 0.0377
+        elseif model.steps == 120
+            # end of 2012
+            model.unemploymentRate = 0.165
+            model.bank.interestRate = 0.0388
         end
 
         adjust_interest_rates(model)
