@@ -1375,7 +1375,7 @@ function handleUnemployment(model)
             unemployedHouseholds += 1
         end
     end
-    targetUnemployedHousehold = Int64(round(model.unemploymentRate * NUMBER_OF_HOUSEHOLDS))
+    targetUnemployedHousehold = Int64(round(model.unemploymentRate * nagents(model)))
     println("targetUnemployedHousehold = $targetUnemployedHousehold")
     householdsToUnemploy = 0
     householdsToEmploy = 0
@@ -1394,8 +1394,8 @@ function handleUnemployment(model)
     employOrUnemployHouseholds(model, householdsToEmploy, householdsToUnemploy)
 
     # employ / unemploy some of the households to ensure renovation
-    householdsToUnemploy = NUMBER_OF_HOUSEHOLDS * model.unemploymentRate * 0.05 * (0.95 + rand() * 0.1)
-    householdsToEmploy = NUMBER_OF_HOUSEHOLDS * model.unemploymentRate * 0.05 * (0.95 + rand() * 0.1)
+    householdsToUnemploy = nagents(model) * model.unemploymentRate * 0.05 * (0.95 + rand() * 0.1)
+    householdsToEmploy = nagents(model) * model.unemploymentRate * 0.05 * (0.95 + rand() * 0.1)
     println("secound householdsToUnemploy = $householdsToUnemploy")
     println("secound householdsToEmploy = $householdsToEmploy")
     employOrUnemployHouseholds(model, householdsToEmploy, householdsToUnemploy)
