@@ -146,6 +146,17 @@ function plot_household_status(adf, mdf)
     figure
 end
 
+function plot_unemployment_rate(adf, mdf)
+    figure = Figure(size = (600, 400))
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Rate")
+    unemployment_rates = Float64[]
+    for idx in eachindex(adf.count_isHousehold)
+        push!(unemployment_rates, adf.count_isHouseholdUnemployed[idx] / adf.count_isHousehold[idx])
+        unemployment_rate = scatterlines!(ax, adf.step, unemployment_rates, color = :red)
+    figure[1, 2] = Legend(figure, [unemployment_rate], ["Unemployment Rate"])
+    figure
+end
+
 function get_percentile_index(vector, percentile)
     return Int64(floor((length(vector)/100) * percentile))
 end

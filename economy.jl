@@ -128,6 +128,7 @@ function wealth_model()
         :rentalPriceIndex => InitiatePriceIndex(),
         :housesInfo => Dict(),
         :nonResidentHousehold => NonResident(-1, 0, 0, 0, [], 0, [], [], Nothing, 0, Lisboa, 0),
+        :unemploymentRate => STARTING_UNEMPLOYMENT_RATE,
     )
 
     model = StandardABM(MyMultiAgent; agent_step! = agent_step!, model_step! = model_step!, properties,scheduler = Schedulers.Randomly())
@@ -235,6 +236,10 @@ function model_step!(model)
         #     model.bank.interestRate = 0.0388
         # end
 
+        if model.steps == 12
+            model.unemploymentRate = 0.2
+        end
+
         adjust_interest_rates(model)
         # company_adjust_salaries(model)
         gov_adjust_taxes(model)
@@ -247,6 +252,7 @@ function model_step!(model)
     public_investment(model)
     updateConstructions(model)
     payMortgages(model, model.construction_sector)
+    handleUnemployment(model)
     println("end of model_step $(string(model.steps))")
     LOG_INFO("Model step $(model.steps) took $(string(time() - start_time)) seconds")
 end
@@ -581,6 +587,7 @@ function payMortgages(model, household)
                 content *= "## Mortgage rescue: household size = $(household.size)\n"
                 content *= "## Mortgage rescue: household age = $(household.age)\n"
                 content *= "## Mortgage rescue: household zone = $(household.residencyZone)\n"
+                content *= "## Mortgage rescue: household unemployedTime = $(household.unemployedTime)\n"
                 TRANSACTION_LOG(content, model)
                 put_house_to_sale(household, model, 1)
             elseif typeof(household) != ConstructionSector && household.wealth < payment
@@ -592,6 +599,7 @@ function payMortgages(model, household)
                 content *= "## Household could not pay mortgage: household size = $(household.size)\n"
                 content *= "## Household could not pay mortgage: household age = $(household.age)\n"
                 content *= "## Household could not pay mortgage: household zone = $(household.residencyZone)\n"
+                content *= "## Household could not pay mortgage: household unemployedTime = $(household.unemployedTime)\n"
                 TRANSACTION_LOG(content, model)
             else
                 paid += payment
@@ -629,7 +637,7 @@ end
 adata = [(household, sum_wealth),(household, sum_houses),
          (isHousehold, count), (isHouseholdHomeOwner, count),
          (isHouseholdTenant, count), (isHouseholdLandlord, count),
-         (isHouseholdMultipleHomeOwner, count),
+         (isHouseholdMultipleHomeOwner, count), (isHouseholdUnemployed, count),
          (household, wealth_distribution), (household, money_distribution), (household, size_distribution), (household, age_distribution)]
 mdata = [count_supply, gov_wealth, construction_wealth, company_wealth,
          bank_wealth, calculate_houses_prices_perm2, supply_volume, demand_volume,
@@ -682,6 +690,7 @@ for location in HOUSE_LOCATION_INSTANCES
 end
 
 save("$output_folder/household_status.png", plot_household_status(agent_data[2:end, :], model_data[2:end, :]))
+save("$output_folder/unemployment_rate.png", plot_unemployment_rate(agent_data[2:end, :], model_data[2:end, :]))
 save("$output_folder/house_prices_in_supply.png", plot_houses_prices_in_supply(agent_data[2:end, :], model_data[2:end, :]))
 save("$output_folder/taxes_and_subsidies.png", plot_taxes_and_subsidy_rates(agent_data[2:end, :], model_data[2:end, :]))
 save("$output_folder/household_money.png", plot_households_money_distribution(agent_data[2:end, :], model_data[2:end, :]))

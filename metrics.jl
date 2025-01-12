@@ -221,6 +221,7 @@ isHouseholdHomeOwner(a) = isHousehold(a) && length(a.houses) > 0
 isHouseholdTenant(a) = isHousehold(a) && a.contractAsTenant != Nothing
 isHouseholdLandlord(a) = isHousehold(a) && length(a.contractsAsLandlord) > 0
 isHouseholdMultipleHomeOwner(a) = isHousehold(a) && length(a.houses) > 1
+isHouseholdUnemployed(a) = isHousehold(a) && a.unemployedTime > 0
 subsidyRate(model) = model.government.subsidyRate
 irs(model) = model.government.irs
 vat(model) = model.government.vat

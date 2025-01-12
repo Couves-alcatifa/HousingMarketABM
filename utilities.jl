@@ -209,6 +209,7 @@ function calculateSalary(household, model)
     location = household.residencyZone
     percentile = household.percentile
     # salaryAgeMultiplier = map_value(household.age, 20, 70, 0.7, 1.5)
+    unemploymentMultiplier = household.unemployedTime > 0 ? UNEMPLOYMENT_SALARY_DECREASE : 1.0
     salaryAgeMultiplier = 1.0
     if household.age > 70
         salaryAgeMultiplier = 0.75
@@ -235,9 +236,9 @@ function calculateSalary(household, model)
         salary = base + range * (percentile / 100 - 0.8) * 5
     end
     if (household.size == 1)
-        return salary * model.salary_multiplier * INCOME_MULTIPLICATION_FACTOR 
+        return salary * model.salary_multiplier * INCOME_MULTIPLICATION_FACTOR * unemploymentMultiplier
     else
-        return salary * 2 * model.salary_multiplier * INCOME_MULTIPLICATION_FACTOR
+        return salary * 2 * model.salary_multiplier * INCOME_MULTIPLICATION_FACTOR * unemploymentMultiplier
     end
 end
 
@@ -612,6 +613,7 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     content *= "Transaction: household age = $(household.age)\n"
     content *= "Transaction: household residencyZone = $(household.residencyZone)\n"
     content *= "Transaction: household homelessTime = $(household.homelessTime)\n"
+    content *= "Transaction: household unemployedTime = $(household.unemployedTime)\n"
     content *= "Transaction: area per person = $(supply.house.area / household.size)\n"
     content *= "Transaction: askPrice = $(supply.price)\n"
     content *= "Transaction: sellerId = $(supply.sellerId)\n"
@@ -727,6 +729,7 @@ function rent_house(model, supply::RentalSupply)
     content *= "Rental: household age = $(household.age)\n"
     content *= "Rental: household residencyZone = $(household.residencyZone)\n"
     content *= "Rental: household homelessTime = $(household.homelessTime)\n"
+    content *= "Rental: household unemployedTime = $(household.unemployedTime)\n"
     content *= "Rental: area per person = $(supply.house.area / household.size)\n"
     content *= "Rental: askPrice = $(supply.monthlyPrice)\n"
     content *= "Rental: sellerId = $(supply.sellerId)\n"
@@ -1362,4 +1365,46 @@ end
 function getNonResidentId(model)
     model.nonResidentHousehold.id -= 1
     return model.nonResidentHousehold.id
+end
+
+function handleUnemployment(model)
+    unemployedHouseholds = 0
+    for household in allagents(model)
+        if household.unemployedTime > 0
+            unemployedHouseholds += 1
+        end
+    end
+    targetUnemployedHousehold = Int64(round(UNEMPLOYMENT_RATE * NUMBER_OF_HOUSEHOLDS * 1.05))
+    targetHouseholdsToEmploy = Int64(round(UNEMPLOYMENT_RATE * NUMBER_OF_HOUSEHOLDS * 0.95))
+    householdsToUnemploy = targetUnemployedHousehold - unemployedHouseholds
+    householdsToEmploy = unemployedHouseholds - targetHouseholdsToEmploy
+    for householdId in suffle(allids(model))
+        household = model[householdId]
+        if household.unemployedTime > 0
+            if shouldBecomeEmployed(model, household, householdsToEmploy)
+                household.unemployedTime = 0
+            else
+                household.unemployedTime += 1
+            end
+        else
+            if shouldBecomeUnemployed(model, household, householdsToUnemploy)
+                household.unemployedTime += 1
+            end
+        end
+    end
+end
+function shouldBecomeEmployed(model, household, householdsToEmploy)
+    if householdsToEmploy <= 0
+        return false
+    end
+    householdsToEmploy -= 1
+    return true
+end
+
+function shouldBecomeUnemployed(model, household, householdsToUnemploy)
+    if householdsToUnemploy <= 0
+        return false
+    end
+    householdsToUnemploy -= 1
+    return true
 end
