@@ -1369,20 +1369,43 @@ end
 
 function handleUnemployment(model)
     unemployedHouseholds = 0
+    # measure how many households are unemployed
     for household in allagents(model)
         if household.unemployedTime > 0
             unemployedHouseholds += 1
         end
     end
-    targetUnemployedHousehold = Int64(round(model.unemploymentRate * NUMBER_OF_HOUSEHOLDS * 1.05))
+    targetUnemployedHousehold = Int64(round(model.unemploymentRate * NUMBER_OF_HOUSEHOLDS))
     println("targetUnemployedHousehold = $targetUnemployedHousehold")
-    targetHouseholdsToEmploy = Int64(round(model.unemploymentRate * NUMBER_OF_HOUSEHOLDS * 0.95))
-    println("targetHouseholdsToEmploy = $targetHouseholdsToEmploy")
-    householdsToUnemploy = targetUnemployedHousehold - unemployedHouseholds
-    println("householdsToUnemploy = $householdsToUnemploy")
-    householdsToEmploy = unemployedHouseholds - targetHouseholdsToEmploy
-    println("householdsToEmploy = $householdsToEmploy")
+    householdsToUnemploy = 0
+    householdsToEmploy = 0
+    
+    # if we have more unemployed households than we should, we should employ some
+    # if we have less unemployed households than we should, we should unemploy some
+    if unemployedHouseholds < targetUnemployedHousehold
+        householdsToUnemploy = targetUnemployedHousehold - unemployedHouseholds
+    else
+        householdsToEmploy = unemployedHouseholds - targetUnemployedHousehold
+    end
+    println("first householdsToUnemploy = $householdsToUnemploy")
+    println("first householdsToEmploy = $householdsToEmploy")
+
+    # employ / unemploy households until we reach the desired unemployment rate
+    employOrUnemployHouseholds(model, householdsToEmploy, householdsToUnemploy)
+
+    # employ / unemploy some of the households to ensure renovation
+    householdsToUnemploy = NUMBER_OF_HOUSEHOLDS * model.unemploymentRate * 0.05 * (0.95 + rand() * 0.1)
+    householdsToEmploy = NUMBER_OF_HOUSEHOLDS * model.unemploymentRate * 0.05 * (0.95 + rand() * 0.1)
+    println("secound householdsToUnemploy = $householdsToUnemploy")
+    println("secound householdsToEmploy = $householdsToEmploy")
+    employOrUnemployHouseholds(model, householdsToEmploy, householdsToUnemploy)
+end
+
+function employOrUnemployHouseholds(model, householdsToEmploy, householdsToUnemploy)
     for householdId in shuffle(collect(allids(model)))
+        if householdsToEmploy == 0 && householdsToUnemploy == 0
+            break
+        end
         household = model[householdId]
         if household.unemployedTime > 0
             if shouldBecomeEmployed(model, household, householdsToEmploy)
@@ -1399,6 +1422,7 @@ function handleUnemployment(model)
         end
     end
 end
+
 function shouldBecomeEmployed(model, household, householdsToEmploy)
     if householdsToEmploy <= 0
         return false
