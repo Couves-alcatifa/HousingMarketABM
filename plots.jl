@@ -328,9 +328,41 @@ function plot_houses_prices_per_region(adf, mdf)
     lines = []
     locations = []
     for location in HOUSE_LOCATION_INSTANCES
+        push!(lines, scatterlines!(ax, adf.step, organizedPerRegion[location], color = color_map[location]))
+        push!(locations, string(location))
+    end
+
+    figure[1, 2] = Legend(figure, lines, locations)
+    figure
+end
+
+function plot_houses_prices_per_region_yearly(adf, mdf)
+    figure = Figure(size = (600, 400))
+    ax = figure[1, 1] = Axis(figure; xlabel = "Year", ylabel = "Money")
+    organizedPerRegion = Dict() # this will be filled with [[MeanValueForAmadoraStep1, ..Step2, ...Step3], [MeanValueForLisboaStep1, ...]]
+    for location in HOUSE_LOCATION_INSTANCES
+        organizedPerRegion[location] = Float32[]
+        year_values = Float32[]
+        for step in 1:NUMBER_OF_STEPS
+            for transaction in mdf.transactions_per_region[step][location]
+                push!(year_values, transaction.price / transaction.area)
+            end
+            if step % 12 == 0
+                if length(year_values) != 0
+                    push!(organizedPerRegion[location], mean(year_values))
+                    empty!(year_values)
+                else
+                    push!(organizedPerRegion[location], NaN)
+                end
+            end
+        end
+    end
+    lines = []
+    locations = []
+    for location in HOUSE_LOCATION_INSTANCES
         println("adf.step = $(adf.step)")
         println("organizedPerRegion[location] = $(organizedPerRegion[location])")
-        push!(lines, scatterlines!(ax, adf.step, organizedPerRegion[location], color = color_map[location]))
+        push!(lines, scatterlines!(ax, adf.step[1:length(organizedPerRegion[location])], organizedPerRegion[location], color = color_map[location]))
         push!(locations, string(location))
     end
 

@@ -702,6 +702,7 @@ save("$output_folder/taxes_and_subsidies_flow.png", plot_taxes_and_subsidies_flo
 save("$output_folder/salaries_and_expenses.png", plot_salaries_and_expenses(agent_data[2:end, :], model_data[2:end, :]))
 # save("$output_folder/houses_prices_per_bucket.png", plot_houses_prices_per_bucket(agent_data[2:end, :], model_data[2:end, :]))
 save("$output_folder/houses_prices_per_region.png", plot_houses_prices_per_region(agent_data[2:end, :], model_data[2:end, :]))
+save("$output_folder/houses_prices_per_region_yearly.png", plot_houses_prices_per_region_yearly(agent_data[2:end, :], model_data[2:end, :]))
 for location in HOUSE_LOCATION_INSTANCES
     save("$output_folder/detailed_houses_prices_in_$(location).png", plot_detailed_houses_prices_per_region(agent_data[2:end, :], model_data[2:end, :], location))
 end

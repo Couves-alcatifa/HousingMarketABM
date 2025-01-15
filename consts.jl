@@ -2,7 +2,7 @@ include("types.jl")
 include("calibrationTable.jl")
 include("valueConverter.jl")
 
-const NUMBER_OF_STEPS = 36
+const NUMBER_OF_STEPS = 120
 const STARTING_GOV_WEALTH_PER_CAPITA = 100000.0
 const STARTING_COMPANY_WEALTH_PER_CAPITA = 60000.0
 const STARTING_BANK_WEALTH_PER_CAPITA = 67000.0
@@ -64,6 +64,8 @@ const RENT_TAX = 0.25
 const RENTS_INCREASE_CEILLING = 1.02
 const EXPECTED_RENOVATION_RENTABILITY = 0.2 # 20% of the investment
 const ADDED_VALUE_TAXABLE_PERCENTAGE = 0.5
+
+### CRASH SCENARIO
 const UNEMPLOYMENT_SALARY_DECREASE = 0.50
 
 const INITIAL_MARKET_PRICE_CUT = Dict(
@@ -136,7 +138,7 @@ const GREEDINESS_STDEV = Dict(
     Loures => 0.025,
     Mafra => 0.025,
     Odivelas => 0.025,
-    Oeiras => 0.05,
+    Oeiras => 0.025,
     Sintra => 0.025,
     VilaFrancaDeXira => 0.025,
     Alcochete => 0.025,
