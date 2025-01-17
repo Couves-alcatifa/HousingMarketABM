@@ -56,7 +56,6 @@ function sortSizesBucketsByProfitability(model, location)
     return [sizePriority.size_interval for sizePriority in res]
 end
 
-#TODO: region hack
 function updateConstructions(model)
     for location in HOUSE_LOCATION_INSTANCES
         sizesOrdered = sortSizesBucketsByProfitability(model, location)

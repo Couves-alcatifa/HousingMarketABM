@@ -2,7 +2,7 @@ include("types.jl")
 include("calibrationTable.jl")
 include("valueConverter.jl")
 
-const NUMBER_OF_STEPS = 120
+const NUMBER_OF_STEPS = 96
 const STARTING_GOV_WEALTH_PER_CAPITA = 100000.0
 const STARTING_COMPANY_WEALTH_PER_CAPITA = 60000.0
 const STARTING_BANK_WEALTH_PER_CAPITA = 67000.0
@@ -112,7 +112,7 @@ const INITIAL_RENTAL_MARKET_PRICE_CUT = Dict(
 const GREEDINESS_AVERAGE = Dict(
     Amadora => 1.075,
     Cascais => 1.075,
-    Lisboa => 1.075,
+    Lisboa => 1.025,
     Loures => 1.075,
     Mafra => 1.075,
     Odivelas => 1.075,

@@ -33,7 +33,7 @@ update_values = pyimport("update_values_inflation")
 
 const ORIGINAL_YEAR = 2021
 const ORIGINAL_MONTH = 1
-const CURRENT_YEAR = 2003
+const CURRENT_YEAR = 2012
 const CURRENT_MONTH = 1
 # const CURRENT_YEAR = 2011
 # const CURRENT_MONTH = 1

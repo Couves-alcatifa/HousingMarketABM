@@ -1186,9 +1186,16 @@ end
 
 function nonResidentsBuyHouses(model)
     ### CRASH SCENARIO
-    if model.steps >= 72
-        return
+    if CURRENT_YEAR == 2003
+        if model.steps >= 72
+            return
+        end
+    elseif CURRENT_YEAR == 2012
+        if model.steps < 36
+            return
+        end
     end
+    
     for location in HOUSE_LOCATION_INSTANCES
         housesToBuy = housesBoughtByNoNResidentsPerRegion(location)
         housesBought = 0
