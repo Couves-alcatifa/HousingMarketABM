@@ -153,8 +153,16 @@ function updateConstructionsPerBucket(model, location, size_interval)
 end
 
 function calculateTargetConstructionPerBucket(model, location, size_interval)
-    return model.demandPerBucket[location][size_interval] -
-           model.supplyPerBucket[location][size_interval]
+    supplyVsDemandValue = model.demandPerBucket[location][size_interval] -
+                          model.supplyPerBucket[location][size_interval]
+    
+    # split the supply vs demand value among the three
+    capValue = (MAX_NEW_CONSTRUCTIONS_MAP[CURRENT_YEAR][location] / 12) / 3
+    capValue = rand(Normal(capValue, capValue * 0.5))
+    if supplyVsDemandValue > capValue
+        return capValue
+    end
+    return supplyVsDemandValue
 end
 
 function calculateMortgageDurationForConstructionSector()

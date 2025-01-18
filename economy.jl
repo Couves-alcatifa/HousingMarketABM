@@ -210,7 +210,7 @@ function model_step!(model)
     end
     
     public_investment(model)
-    # updateConstructions(model)
+    updateConstructions(model)
     payMortgages(model, model.construction_sector)
     handleUnemployment(model)
     println("end of model_step $(string(model.steps))")

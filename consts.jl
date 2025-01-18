@@ -55,8 +55,8 @@ const CONSTRUCTION_DELAY_MAX = 48
 const CONSTRUCTION_VAT = 0.23
 
 # based on: https://www.habitissimo.pt/orcamentos/construcao-de-casa
-const CONSTRUCTION_COSTS_MIN = 1200 / (1 + CONSTRUCTION_VAT) # to be multiplied by the area of the house
-const CONSTRUCTION_COSTS_MAX = 1800 / (1 + CONSTRUCTION_VAT) # to be multiplied by the area of the house
+const CONSTRUCTION_COSTS_MIN = adjust_value_to_inflation(1200 / (1 + CONSTRUCTION_VAT)) # to be multiplied by the area of the house
+const CONSTRUCTION_COSTS_MAX = adjust_value_to_inflation(1800 / (1 + CONSTRUCTION_VAT)) # to be multiplied by the area of the house
 
 const CONSTRUCTION_TIME_MIN = 12
 const CONSTRUCTION_TIME_MAX = 18
@@ -1130,8 +1130,13 @@ const RATIO_OF_FERTILE_WOMEN_MAP = Dict(
     VilaFrancaDeXira => 44.4 / 100,
 )
 
+MAX_NEW_CONSTRUCTIONS_MAP = Dict(
+    2003 => MAX_NEW_CONSTRUCTIONS_MAP_2003,
+    2012 => MAX_NEW_CONSTRUCTIONS_MAP_2012,
+    2021 => MAX_NEW_CONSTRUCTIONS_MAP_2021,
+)
 
-const MAX_NEW_CONSTRUCTIONS_MAP = Dict(
+const MAX_NEW_CONSTRUCTIONS_MAP_2021 = Dict(
     Alcochete => 156 * MODEL_SCALE,
     Almada => 304 * MODEL_SCALE,
     Amadora => 315 * MODEL_SCALE,
@@ -1150,6 +1155,29 @@ const MAX_NEW_CONSTRUCTIONS_MAP = Dict(
     Setubal => 213 * MODEL_SCALE,
     Sintra => 246 * MODEL_SCALE,
     VilaFrancaDeXira => 119 * MODEL_SCALE,
+)
+
+const MAX_NEW_CONSTRUCTIONS_MAP_2003 = MAX_NEW_CONSTRUCTIONS_MAP_2021
+
+const MAX_NEW_CONSTRUCTIONS_MAP_2012 = Dict(
+    Alcochete => 20 * MODEL_SCALE,
+    Almada => 110 * MODEL_SCALE,
+    Amadora => 4 * MODEL_SCALE,
+    Barreiro => 8 * MODEL_SCALE,
+    Cascais => 67 * MODEL_SCALE,
+    Lisboa => 164 * MODEL_SCALE,
+    Loures => 156 * MODEL_SCALE,
+    Mafra => 84 * MODEL_SCALE,
+    Moita => 13 * MODEL_SCALE,
+    Montijo => 32 * MODEL_SCALE,
+    Odivelas => 207 * MODEL_SCALE,
+    Oeiras => 54 * MODEL_SCALE,
+    Palmela => 40 * MODEL_SCALE,
+    Seixal => 69 * MODEL_SCALE,
+    Sesimbra => 35 * MODEL_SCALE,
+    Setubal => 29 * MODEL_SCALE,
+    Sintra => 71 * MODEL_SCALE,
+    VilaFrancaDeXira => 66 * MODEL_SCALE,
 )
 
 const HOUSES_BOUGHT_BY_NON_RESIDENTS = (4047 * MODEL_SCALE) / 12
