@@ -82,11 +82,17 @@ end
         residencyZone::HouseLocation
         homelessTime::Int64 # not really meant to represent homeless people, just to lower the house expectations as it struggles to find housing 
         unemployedTime::Int64
+        houseRequirements
     end
     
     @subagent struct Company
         n_of_employees::UInt16
     end
+end
+
+mutable struct HouseRequirements
+    area
+    percentile
 end
 
 mutable struct NonResident

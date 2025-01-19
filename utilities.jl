@@ -390,8 +390,10 @@ function clearHouseMarket(model)
                 continue
             end
 
-            if (!has_enough_size(house, household) || 
-                house.location != household.residencyZone)
+            if (!has_enough_size(house, household) 
+                || house.location != household.residencyZone
+                || (household.houseRequirements != Nothing && (house.area <= household.houseRequirements.area || house.percentile < household.houseRequirements.percentile))
+                )
                 continue
             end
             consumerSurplus = calculateConsumerSurplus(household, house)
@@ -1442,4 +1444,13 @@ function shouldBecomeUnemployed(model, household, householdsToUnemploy)
         return false
     end
     return true
+end
+
+function add_household(model, wealth, age, size, residencyZone; percentile = Nothing, houses = House[], mortgages = Mortgage[], contractsAsLandlord = Contract[], contractAsTenant = Nothing, wealthInHouses = 0.0, homelessTime = 0, unemployedTime = 0, houseRequirements = Nothing)
+    if percentile == Nothing
+        percentile = rand(1:100)
+    end
+    add_agent!(Household, model, wealth, age, size, houses, percentile, 
+               mortgages, contractsAsLandlord, contractAsTenant, wealthInHouses,
+               residencyZone, homelessTime, unemployedTime, houseRequirements)
 end

@@ -434,12 +434,11 @@ function home_owner_decisions(household, model)
         household.homelessTime -= 1
     end
     house = household.houses[1]
-    if !has_enough_size(house, household) && rand() < 0.05
+    if !has_enough_size(house, household)
         # moves out, put_house_to_sale
-        # this doesnt make much sense... having a house and selling it
-        # is not the same as not having one in the first place
         put_house_to_sale(household, model, 1)
-        not_home_owner_decisions(household, model)
+        household.houseRequirements = HouseRequirements(house.size, house.percentile)
+        push!(model.houseMarket.demand, HouseDemand(household.id, HouseSupply[], Regular))
     else
         if household.percentile < 80 || rand() > 0.20
             # not all household think about investing

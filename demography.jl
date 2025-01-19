@@ -67,10 +67,10 @@ function handle_breakups(household, model)
             terminateContractsOnTentantSide(household, model)
             terminateContractsOnLandLordSide(household, model)
             
-            add_agent!(Household, model, household.wealth / 2, household.age, 1, House[], household.percentile, Mortgage[], Contract[], Nothing, 0.0, getChildResidencyZone(household), 0, 0)
+            add_household(model, household.wealth / 2, household.age, 1, getChildResidencyZone(household), percentile=household.percentile)
             content = "generated agent $(nagents(model)) from breakup without houses\n"
             content *= "wealth = $(household.wealth / 2)\n"
-            add_agent!(Household, model, household.wealth / 2, household.age, household.size - 1, household.houses, household.percentile, household.mortgages, Contract[], Nothing, 0.0, getChildResidencyZone(household), 0, 0)
+            add_household(model, household.wealth / 2, household.age, household.size - 1, getChildResidencyZone(household), percentile=household.percentile, mortgages=household.mortgages)
             content *= "generated agent $(nagents(model)) from breakup with houses\n"
             content *= "wealth = $(household.wealth / 2)\n"
             TRANSACTION_LOG(content, model)
@@ -100,7 +100,7 @@ function handle_children_leaving_home(household, model)
             if randomNumber < 0.45
                 # a couple of young people leave their parents home
                 newZone = getChildResidencyZone(household)
-                add_agent!(Household, model, expected_wealth, expected_age, 2, Int[], household.percentile, Mortgage[], Contract[], Nothing, 0.0, newZone, 0, 0)
+                add_household(model, expected_wealth, expected_age, 2, newZone, percentile=household.percentile)
                 content = "generated agent $(nagents(model)) from leaving home\n"
                 content *= "wealth = $expected_wealth\n"
                 TRANSACTION_LOG(content, model)
@@ -114,7 +114,7 @@ function handle_children_leaving_home(household, model)
             else
                 # single young person leaves their parents home
                 newZone = getChildResidencyZone(household)
-                add_agent!(Household, model, expected_wealth, expected_age, 1, Int[], household.percentile, Mortgage[], Contract[], Nothing, 0.0, newZone, 0, 0)
+                add_household(model, expected_wealth, expected_age, 1, newZone, percentile=household.percentile)
                 content = "generated agent $(nagents(model)) from leaving home (single)\n"
                 content *= "wealth = $expected_wealth\n"
                 TRANSACTION_LOG(content, model)
@@ -162,7 +162,7 @@ function handle_migrations(model)
             end
             size = rand(1:3)
             wealth = generateInitialWealth(age, percentile, size, location)
-            add_agent!(Household, model, wealth, age, size, House[], percentile, Mortgage[], Contract[], Nothing, 0, location, 0, 0)
+            add_household(model, wealth, age, size, location, percentile=percentile)
             content = "generated agent $(nagents(model)) from migration wealth = $wealth\n"
             TRANSACTION_LOG(content, model)
 

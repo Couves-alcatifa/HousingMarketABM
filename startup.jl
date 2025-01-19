@@ -63,7 +63,7 @@ function initiateHouseholds(model, households_initial_ages)
                         unemployedTime = 1
                     end
                 end
-                add_agent!(Household, model, generateInitialWealth(initial_age, percentile, actualSize, location), initial_age, actualSize, Int64[], percentile, Mortgage[], Contract[], Nothing, 0.0, location, 0, unemployedTime)
+                add_household(model, generateInitialWealth(initial_age, percentile, actualSize, location), initial_age, actualSize, location, percentile=percentile, unemployedTime=unemployedTime)
             end
         end
     end
