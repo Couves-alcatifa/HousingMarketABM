@@ -33,7 +33,7 @@ update_values = pyimport("update_values_inflation")
 
 const ORIGINAL_YEAR = 2021
 const ORIGINAL_MONTH = 1
-const CURRENT_YEAR = 2012
+const CURRENT_YEAR = 2021
 const CURRENT_MONTH = 1
 # const CURRENT_YEAR = 2011
 # const CURRENT_MONTH = 1
@@ -43,6 +43,10 @@ function adjust_value_to_inflation(value)
 end
 
 function custom_adjust_value_to_inflation(in_value, in_original_year, in_original_month, in_current_year, in_current_month)
+    if in_original_year == in_current_year && in_original_month == in_current_month
+        return in_value 
+    end
+
     valueWasFound = true
     value = string(in_value)
     original_year = string(in_original_year)

@@ -9,7 +9,7 @@ function initiateConstructionSector()
         # divide the time by 12 because the MAX_NEW_CONSTRUCTIONS_MAP data is yearly
         # this way we calculate the expected constructions in progress based on the time it usually
         # takes for a project to complete and the amount of projects that get completed each year
-        expectedConstructionInProgress = MAX_NEW_CONSTRUCTIONS_MAP[location] * (averageTotalTime / 12)
+        expectedConstructionInProgress = MAX_NEW_CONSTRUCTIONS_MAP[CURRENT_YEAR][location] * (averageTotalTime / 12)
         for i in 1:expectedConstructionInProgress
             # pick a random size_interval
             # TODO: could be data driven
@@ -156,8 +156,8 @@ function calculateTargetConstructionPerBucket(model, location, size_interval)
     supplyVsDemandValue = model.demandPerBucket[location][size_interval] -
                           model.supplyPerBucket[location][size_interval]
     
-    # split the supply vs demand value among the three
-    capValue = (MAX_NEW_CONSTRUCTIONS_MAP[CURRENT_YEAR][location] / 12) / 3
+    # split the supply vs demand value among the four buckets
+    capValue = ((MAX_NEW_CONSTRUCTIONS_MAP[CURRENT_YEAR][location] / 12) / 4) * 1.5
     capValue = rand(Normal(capValue, capValue * 0.5))
     if supplyVsDemandValue > capValue
         return capValue

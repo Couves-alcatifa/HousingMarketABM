@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 def adjust_value(value, from_year, from_month, to_year, to_month):
     if from_year == to_year and from_month == to_month:
-        return value 
+        return float(value) 
     fixed_value = str(value).replace(".", ",")
 
     url = f"https://www.ine.pt/ine/ipc/ipc_t.jsp"
