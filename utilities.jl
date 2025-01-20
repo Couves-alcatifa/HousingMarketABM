@@ -327,10 +327,11 @@ function clearHouseMarket(model)
     Threads.@threads for i in 1:length(model.houseMarket.supply)
         supply = model.houseMarket.supply[i]
         for j in 1:length(model.houseMarket.demand)
-            if rand() < HOUSE_SEARCH_OBFUSCATION_FACTOR # only view 30% of the offers
+            demand = model.houseMarket.demand[j]
+            if (rand() < HOUSE_SEARCH_OBFUSCATION_FACTOR # only view 30% of the offers
+                && demand.type != NonResidentDemand)
                 continue
             end
-            demand = model.houseMarket.demand[j]
             if !hasid(model, demand.householdId)
                 continue
             end
@@ -376,11 +377,7 @@ function clearHouseMarket(model)
                 end
                 continue
             elseif demand.type == NonResidentDemand
-                if rand() < 0.30
-                    # virtually increase house obfuscation factor for non nonResidentsBuyHouses
-                    continue
-                end
-                if supply.house.percentile < 85 || supply.house.area < 50
+                if supply.house.percentile < 75
                     continue
                 end
                 lock(localLock) do
@@ -628,6 +625,7 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     content *= "Transaction: nonResident = $(winningBid.type == NonResidentDemand ? "true" : "false")\n"
     content *= "Transaction: contracts as landlord = $(household.contractsAsLandlord)\n"
     content *= "Transaction: contract as tenant = $(household.contractAsTenant)\n"
+    content *= "Transaction: bid to ask price ratio = $(bidValue / supply.price)\n"
     if supply.sellerId != -1
         content *= "Transaction: seller contracts as landlord = $(seller.contractsAsLandlord)\n"
         content *= "Transaction: seller contract as tenant = $(seller.contractAsTenant)\n"
