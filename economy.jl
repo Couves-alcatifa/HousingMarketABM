@@ -437,7 +437,7 @@ function home_owner_decisions(household, model)
     if !has_enough_size(house, household)
         # moves out, put_house_to_sale
         put_house_to_sale(household, model, 1)
-        household.houseRequirements = HouseRequirements(house.size, house.percentile)
+        household.houseRequirements = HouseRequirements(house.area, house.percentile)
         push!(model.houseMarket.demand, HouseDemand(household.id, HouseSupply[], Regular))
     else
         if household.percentile < 80 || rand() > 0.20
