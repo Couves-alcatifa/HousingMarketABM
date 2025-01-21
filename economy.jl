@@ -154,7 +154,8 @@ end
 function has_enough_size(house, household)
     areaPerPerson = house.area / household.size
     value = areaPerPerson + household.homelessTime 
-    return household.percentile * 1.10 <= map_value(value, 15, 35.0, 1, 100)
+    # return household.percentile * 1.10 <= map_value(value, 15, 35.0, 1, 100)
+    return rand() < map_value(value, 15, 35.0, 0.01, 1.0)
 end
 
 function model_step!(model)
@@ -434,7 +435,7 @@ function home_owner_decisions(household, model)
         household.homelessTime -= 1
     end
     house = household.houses[1]
-    if !has_enough_size(house, household)
+    if !has_enough_size(house, household) && rand() < 0.01
         # moves out, put_house_to_sale
         put_house_to_sale(household, model, 1)
         household.houseRequirements = HouseRequirements(house.area, house.percentile)
