@@ -342,7 +342,7 @@ function clearHouseMarket(model)
                 household = model[demand.householdId]
             end
             house = supply.house
-            if household.wealth < 0
+            if household.wealth < 0 && demand.type != NonResidentDemand
                 continue
             end
 

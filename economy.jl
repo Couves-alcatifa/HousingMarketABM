@@ -154,7 +154,7 @@ end
 function has_enough_size(house, household)
     areaPerPerson = house.area / household.size
     value = areaPerPerson + household.homelessTime 
-    return household.percentile <= map_value(value, 15, 35.0, 1, 100)
+    return household.percentile * 1.10 <= map_value(value, 15, 35.0, 1, 100)
 end
 
 function model_step!(model)
