@@ -332,10 +332,15 @@ function clearHouseMarket(model)
                 && demand.type != NonResidentDemand)
                 continue
             end
-            if !hasid(model, demand.householdId)
-                continue
+            household = Nothing
+            if demand.type == NonResidentDemand
+                household = model.nonResidentHousehold
+            else
+                if !hasid(model, demand.householdId)
+                    continue
+                end
+                household = model[demand.householdId]
             end
-            household = model[demand.householdId]
             house = supply.house
             if household.wealth < 0
                 continue

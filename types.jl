@@ -108,7 +108,7 @@ mutable struct NonResident
     wealthInHouses::Float64
     residencyZone::HouseLocation
     homelessTime::Int64 # not really meant to represent homeless people, just to lower the house expectations as it struggles to find housing 
-
+    unemployedTime::Int64 # not really meant to represent homeless people, just to lower the house expectations as it struggles to find housing 
 end
 
 mutable struct Inheritage

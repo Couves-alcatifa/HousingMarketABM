@@ -128,7 +128,7 @@ function wealth_model()
         :housesInRentalMarket => Set(),
         :rentalPriceIndex => InitiatePriceIndex(),
         :housesInfo => Dict(),
-        :nonResidentHousehold => NonResident(-1, 0, 0, 0, [], 0, [], [], Nothing, 0, Lisboa, 0),
+        :nonResidentHousehold => NonResident(-1, 0, 0, 0, [], 0, [], [], Nothing, 0, Lisboa, 0, 0),
         :unemploymentRate => STARTING_UNEMPLOYMENT_RATE,
     )
 
