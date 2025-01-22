@@ -196,7 +196,7 @@ function assignHouseThatMakesSense(model, household, houses_sizes)
         area = houses_sizes[location][idx]
         house = House(UInt16(area), location, NotSocialNeighbourhood, 1.0, rand(1:100))
         # println("assignHouseThatMakesSense house = $(house)")
-        if rand() < probabilityOfHouseholdBeingAssignedToHouse(household, house)
+        if has_enough_size(house, household) && rand() < probabilityOfHouseholdBeingAssignedToHouse(household, house)
             push!(household.houses, house)
             # LOG_INFO("####HOUSEADDED location = $(house.location)")
             splice!(houses_sizes[location], idx)
