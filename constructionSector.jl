@@ -157,10 +157,12 @@ function calculateTargetConstructionPerBucket(model, location, size_interval)
                           model.supplyPerBucket[location][size_interval]
     
     # split the supply vs demand value among the four buckets
-    capValue = ((MAX_NEW_CONSTRUCTIONS_MAP[CURRENT_YEAR][location] / 12) / 4) * 1.5
-    capValue = rand(Normal(capValue, capValue * 0.5))
-    if supplyVsDemandValue > capValue
-        return capValue
+    if CURRENT_YEAR != 2003
+        capValue = ((MAX_NEW_CONSTRUCTIONS_MAP[CURRENT_YEAR][location] / 12) / 4) * 1.5
+        capValue = rand(Normal(capValue, capValue * 0.5))
+        if supplyVsDemandValue > capValue
+            return capValue
+        end
     end
     return supplyVsDemandValue
 end

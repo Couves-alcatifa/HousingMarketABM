@@ -1,0 +1,4787 @@
+generated agent 75555 from migration wealth = 18368.651409090362
+
+generated agent 75556 from migration wealth = 14666.104458171032
+
+generated agent 75557 from migration wealth = 28114.654381016397
+
+generated agent 75558 from migration wealth = 29085.809063563265
+
+generated agent 75559 from migration wealth = 9144.63551811739
+
+generated agent 75560 from migration wealth = 11807.232216891001
+
+generated agent 75561 from migration wealth = 8961.086858607136
+
+generated agent 75562 from migration wealth = 36862.368989238195
+
+generated agent 75563 from migration wealth = 28263.621890478094
+
+generated agent 75564 from migration wealth = 19742.948964736697
+
+generated agent 75565 from migration wealth = 25239.720840145757
+
+generated agent 75566 from migration wealth = 23598.122188930214
+
+generated agent 75567 from migration wealth = 22830.401080778753
+
+generated agent 75568 from migration wealth = 23850.143082785497
+
+generated agent 75569 from migration wealth = 29306.40313151736
+
+generated agent 75570 from migration wealth = 16975.91987738591
+
+generated agent 75571 from migration wealth = 31289.043748038664
+
+generated agent 75572 from migration wealth = 33629.42813819512
+
+generated agent 75573 from migration wealth = 15420.636451084449
+
+generated agent 75574 from migration wealth = 18222.842898292318
+
+generated agent 75575 from migration wealth = 29716.754857536136
+
+generated agent 75576 from migration wealth = 16311.622137186685
+
+generated agent 75577 from migration wealth = 15249.044292993383
+
+generated agent 75578 from migration wealth = 13219.677989833423
+
+generated agent 75579 from migration wealth = 18918.653534810168
+
+generated agent 75580 from migration wealth = 11930.432953823793
+
+generated agent 75581 from migration wealth = 21205.77004197841
+
+generated agent 75582 from migration wealth = 21683.6664806259
+
+generated agent 75583 from migration wealth = 11420.759420571178
+
+generated agent 75584 from migration wealth = 7812.993595818485
+
+generated agent 75585 from migration wealth = 9295.22119133787
+
+generated agent 75586 from migration wealth = 15988.576072100528
+
+generated agent 75587 from migration wealth = 18534.66854536564
+
+generated agent 75588 from migration wealth = 16957.125006620245
+
+generated agent 75589 from migration wealth = 22334.56823956193
+
+generated agent 75590 from migration wealth = 32635.530609069607
+
+generated agent 75591 from migration wealth = 17197.048407810522
+
+generated agent 75592 from migration wealth = 24211.778537278962
+
+generated agent 75593 from migration wealth = 17451.907629592897
+
+generated agent 75594 from migration wealth = 10411.020896950344
+
+########
+Transaction: mortgageValue = 51747.2991816495
+Transaction: mortgage payment = 317.0511010109734
+Transaction: mortgage duration = 276.0
+Transaction: house.area = 41
+Transaction: house.location = Lisboa
+Transaction: house percentile = 20
+Transaction: household.wealth = 27988.958330136895
+Transaction: raw salary = 1175.5549999999998
+Transaction: liquid salary = 988.8051999999999
+Transaction: household percentile = 57
+Transaction: household id = 26139
+Transaction: household size = 1
+Transaction: household age = 45
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 4
+Transaction: household unemployedTime = 0
+Transaction: area per person = 41.0
+Transaction: askPrice = 78920.22969267577
+Transaction: sellerId = 23107
+Transaction: bidValue = 78548.09359641236
+Transaction: consumerSurplus = 0.9983567408857799
+Transaction: transactionTaxes = 628.384748771299
+Transaction: pricePerm2 = 1915.8071608881064
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9952846551801414
+Transaction: seller contracts as landlord = Contract[Contract(23107, 48774, House(0x0040, Lisboa, NotSocialNeighbourhood, 1.0, 11), 416.4365099637413), Contract(23107, 48814, House(0x0038, Lisboa, NotSocialNeighbourhood, 1.0, 20), 146.30629057729888), Contract(23107, 48823, House(0x0027, Lisboa, NotSocialNeighbourhood, 1.0, 41), 205.1699663947679)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 282051.1885260968
+Transaction: mortgage payment = 1594.769641537459
+Transaction: mortgage duration = 324.0
+Transaction: house.area = 111
+Transaction: house.location = Lisboa
+Transaction: house percentile = 67
+Transaction: household.wealth = 42527.08976408241
+Transaction: raw salary = 10040.302999999996
+Transaction: liquid salary = 5244.247371499998
+Transaction: household percentile = 97
+Transaction: household id = 53443
+Transaction: household size = 3
+Transaction: household age = 40
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = 37.0
+Transaction: askPrice = 345878.27020577167
+Transaction: sellerId = 17940
+Transaction: bidValue = 321790.456337222
+Transaction: consumerSurplus = 0.94047088238544
+Transaction: transactionTaxes = 1937.2801576755373
+Transaction: pricePerm2 = 2899.0131201551535
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Contract(32343, 53443, House(0x0036, Lisboa, NotSocialNeighbourhood, 1.0, 11), 328.3321823908109)
+Transaction: bid to ask price ratio = 0.9303575392168487
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 126
+Transaction: house.location = Lisboa
+Transaction: house percentile = 87
+Transaction: household.wealth = -1.0461588335704121e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 609253.1222192567
+Transaction: sellerId = 32582
+Transaction: bidValue = 688493.7781610303
+Transaction: consumerSurplus = 0.9831240969020927
+Transaction: transactionTaxes = 46296.49691495006
+Transaction: pricePerm2 = 5464.236334611352
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1300619611978888
+Transaction: seller contracts as landlord = Contract[Contract(32582, 61817, House(0x0059, Lisboa, NotSocialNeighbourhood, 1.0, 60), 964.9233640044322)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 21
+Transaction: house.location = Lisboa
+Transaction: house percentile = 91
+Transaction: household.wealth = -1.053506736321172e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 96309.41225641767
+Transaction: sellerId = 11382
+Transaction: bidValue = 109709.24857565628
+Transaction: consumerSurplus = 0.9865768049570512
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 5224.249932174109
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1391331958662816
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 246605.85957181244
+Transaction: mortgage payment = 1226.5074742152267
+Transaction: mortgage duration = 444.0
+Transaction: house.area = 141
+Transaction: house.location = Lisboa
+Transaction: house percentile = 23
+Transaction: household.wealth = 37440.13131843009
+Transaction: raw salary = 10702.300999999998
+Transaction: liquid salary = 5535.857490499999
+Transaction: household percentile = 99
+Transaction: household id = 67947
+Transaction: household size = 4
+Transaction: household age = 25
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 14
+Transaction: household unemployedTime = 0
+Transaction: area per person = 35.25
+Transaction: askPrice = 273908.9207127257
+Transaction: sellerId = 22754
+Transaction: bidValue = 281393.3471835565
+Transaction: consumerSurplus = 1.0288404817848207
+Transaction: transactionTaxes = 1903.8410803174102
+Transaction: pricePerm2 = 1995.69749775572
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.027324507910717
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 108360.6796362559
+Transaction: mortgage payment = 1533.5974972111903
+Transaction: mortgage duration = 84.0
+Transaction: house.area = 50
+Transaction: house.location = Lisboa
+Transaction: house percentile = 71
+Transaction: household.wealth = 57743.08220086117
+Transaction: raw salary = 8716.307
+Transaction: liquid salary = 4661.0271335
+Transaction: household percentile = 93
+Transaction: household id = 62419
+Transaction: household size = 2
+Transaction: household age = 69
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 15
+Transaction: household unemployedTime = 0
+Transaction: area per person = 25.0
+Transaction: askPrice = 159586.51117260728
+Transaction: sellerId = 20020
+Transaction: bidValue = 164948.90019309983
+Transaction: consumerSurplus = 1.0336017686024395
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 3298.9780038619965
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0336017686024395
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 84536.97683301673
+Transaction: mortgage payment = 462.6584483645223
+Transaction: mortgage duration = 348.0
+Transaction: house.area = 37
+Transaction: house.location = Lisboa
+Transaction: house percentile = 53
+Transaction: household.wealth = 14618.420708142552
+Transaction: raw salary = 4854.651999999998
+Transaction: liquid salary = 2928.738053999999
+Transaction: household percentile = 96
+Transaction: household id = 75557
+Transaction: household size = 1
+Transaction: household age = 36
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 3
+Transaction: household unemployedTime = 0
+Transaction: area per person = 37.0
+Transaction: askPrice = 99489.78921190032
+Transaction: sellerId = -1
+Transaction: bidValue = 98078.40191170281
+Transaction: consumerSurplus = 1.0159954024156737
+Transaction: transactionTaxes = 784.6272152936225
+Transaction: pricePerm2 = 2650.767619235211
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9858137472058419
+########
+
+########
+Transaction: mortgageValue = 236616.2790928045
+Transaction: mortgage payment = 1294.9661159412096
+Transaction: mortgage duration = 348.0
+Transaction: house.area = 84
+Transaction: house.location = Lisboa
+Transaction: house percentile = 71
+Transaction: household.wealth = 35881.61014240684
+Transaction: raw salary = 9709.303999999996
+Transaction: liquid salary = 5098.442311999998
+Transaction: household percentile = 96
+Transaction: household id = 62620
+Transaction: household size = 3
+Transaction: household age = 37
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 11
+Transaction: household unemployedTime = 0
+Transaction: area per person = 28.0
+Transaction: askPrice = 262965.3809286348
+Transaction: sellerId = 43679
+Transaction: bidValue = 270709.7375068304
+Transaction: consumerSurplus = 1.034689975657762
+Transaction: transactionTaxes = 1070.5195255327744
+Transaction: pricePerm2 = 3222.73497031941
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0294500992900557
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 77599.12479224717
+Transaction: mortgage payment = 382.4879694952101
+Transaction: mortgage duration = 456.0
+Transaction: house.area = 54
+Transaction: house.location = Lisboa
+Transaction: house percentile = 19
+Transaction: household.wealth = 25005.680243380746
+Transaction: raw salary = 9378.304999999997
+Transaction: liquid salary = 4952.637252499999
+Transaction: household percentile = 95
+Transaction: household id = 46648
+Transaction: household size = 2
+Transaction: household age = 23
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 16
+Transaction: household unemployedTime = 0
+Transaction: area per person = 27.0
+Transaction: askPrice = 101217.77725656443
+Transaction: sellerId = 31683
+Transaction: bidValue = 101294.33673686537
+Transaction: consumerSurplus = 1.0032357017974762
+Transaction: transactionTaxes = 810.354693894923
+Transaction: pricePerm2 = 1875.821050682692
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Contract(18768, 46648, House(0x0049, Lisboa, NotSocialNeighbourhood, 1.0, 41), 242.00180899929538)
+Transaction: bid to ask price ratio = 1.0007563837339253
+Transaction: seller contracts as landlord = Contract[Contract(31683, 53083, House(0x005a, Lisboa, NotSocialNeighbourhood, 1.0, 78), 634.1775620836246), Contract(31683, 53085, House(0x004f, Lisboa, NotSocialNeighbourhood, 1.0, 44), 359.4921616754819), Contract(31683, 53089, House(0x004c, Lisboa, NotSocialNeighbourhood, 1.0, 11), 303.2360745443468), Contract(31683, 53091, House(0x003e, Lisboa, NotSocialNeighbourhood, 1.0, 93), 716.7616046830958)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 74100.06028381705
+Transaction: mortgage payment = 465.0087367302438
+Transaction: mortgage duration = 264.0
+Transaction: house.area = 33
+Transaction: house.location = Lisboa
+Transaction: house percentile = 48
+Transaction: household.wealth = 14090.391950063422
+Transaction: raw salary = 1823.288
+Transaction: liquid salary = 1399.5541600000001
+Transaction: household percentile = 72
+Transaction: household id = 75520
+Transaction: household size = 1
+Transaction: household age = 47
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 3
+Transaction: household unemployedTime = 0
+Transaction: area per person = 33.0
+Transaction: askPrice = 87066.80574329512
+Transaction: sellerId = 35562
+Transaction: bidValue = 87210.95674095159
+Transaction: consumerSurplus = 1.0016556366852538
+Transaction: transactionTaxes = 697.6876539276127
+Transaction: pricePerm2 = 2642.756264877321
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0016556366852538
+Transaction: seller contracts as landlord = Contract[Contract(35562, 55163, House(0x0016, Lisboa, NotSocialNeighbourhood, 1.0, 43), 141.601688262681)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 96788.22337259847
+Transaction: mortgage payment = 521.9487968353222
+Transaction: mortgage duration = 360.0
+Transaction: house.area = 78
+Transaction: house.location = Lisboa
+Transaction: house percentile = 4
+Transaction: household.wealth = 23895.001226199674
+Transaction: raw salary = 2060.41
+Transaction: liquid salary = 1534.5943499999998
+Transaction: household percentile = 51
+Transaction: household id = 40429
+Transaction: household size = 2
+Transaction: household age = 35
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 7
+Transaction: household unemployedTime = 0
+Transaction: area per person = 39.0
+Transaction: askPrice = 129057.52902630714
+Transaction: sellerId = 27601
+Transaction: bidValue = 120205.32457427416
+Transaction: consumerSurplus = 0.9314088490704906
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 1541.0939047983866
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9314088490704906
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Contract(11007, 27601, House(0x008a, Lisboa, NotSocialNeighbourhood, 1.0, 68), 564.249188970756)
+########
+
+########
+Transaction: mortgageValue = 144777.59815923191
+Transaction: mortgage payment = 707.5878419400374
+Transaction: mortgage duration = 468.0
+Transaction: house.area = 54
+Transaction: house.location = Lisboa
+Transaction: house percentile = 67
+Transaction: household.wealth = 22992.445275573293
+Transaction: raw salary = 4744.3189999999995
+Transaction: liquid salary = 2874.7300504999994
+Transaction: household percentile = 81
+Transaction: household id = 30037
+Transaction: household size = 2
+Transaction: household age = 22
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 5
+Transaction: household unemployedTime = 0
+Transaction: area per person = 27.0
+Transaction: askPrice = 167026.805659782
+Transaction: sellerId = 21795
+Transaction: bidValue = 167310.19452929375
+Transaction: consumerSurplus = 1.008146782211433
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 3098.336935727662
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0016966670013974
+Transaction: seller contracts as landlord = Contract[Contract(21795, 48180, House(0x0037, Lisboa, NotSocialNeighbourhood, 1.0, 20), 148.2507375060524)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 164852.29520938895
+Transaction: mortgage payment = 836.1994541707885
+Transaction: mortgage duration = 420.0
+Transaction: house.area = 67
+Transaction: house.location = Lisboa
+Transaction: house percentile = 55
+Transaction: household.wealth = 26715.87599334038
+Transaction: raw salary = 10040.302999999996
+Transaction: liquid salary = 5244.247371499998
+Transaction: household percentile = 97
+Transaction: household id = 54163
+Transaction: household size = 3
+Transaction: household age = 28
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 16
+Transaction: household unemployedTime = 0
+Transaction: area per person = 22.333333333333332
+Transaction: askPrice = 188050.1668683419
+Transaction: sellerId = 23248
+Transaction: bidValue = 191033.8536828625
+Transaction: consumerSurplus = 1.018145773493866
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 2851.2515475054106
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Contract(33742, 54163, House(0x0087, Lisboa, NotSocialNeighbourhood, 1.0, 1), 298.96817128645387)
+Transaction: bid to ask price ratio = 1.0158664406642592
+Transaction: seller contracts as landlord = Contract[Contract(23248, 48895, House(0x0037, Lisboa, NotSocialNeighbourhood, 1.0, 77), 290.9384566000274), Contract(23248, 48900, House(0x0044, Lisboa, NotSocialNeighbourhood, 1.0, 1), 243.92246649199984)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 175058.76860111338
+Transaction: mortgage payment = 958.0709091783219
+Transaction: mortgage duration = 348.0
+Transaction: house.area = 64
+Transaction: house.location = Lisboa
+Transaction: house percentile = 69
+Transaction: household.wealth = 32184.392908885082
+Transaction: raw salary = 7392.310999999998
+Transaction: liquid salary = 4077.806895499999
+Transaction: household percentile = 89
+Transaction: household id = 50083
+Transaction: household size = 2
+Transaction: household age = 37
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 4
+Transaction: household unemployedTime = 0
+Transaction: area per person = 32.0
+Transaction: askPrice = 203657.71991690696
+Transaction: sellerId = 32021
+Transaction: bidValue = 206599.47365182076
+Transaction: consumerSurplus = 1.0188529461704963
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 3228.1167758096994
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Contract(25693, 50083, House(0x0060, Lisboa, NotSocialNeighbourhood, 1.0, 69), 528.1106031890613)
+Transaction: bid to ask price ratio = 1.0144445972198552
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Contract(12744, 32021, House(0x0075, Lisboa, NotSocialNeighbourhood, 1.0, 44), 384.44906903637656)
+########
+
+########
+Transaction: mortgageValue = 136804.2526326318
+Transaction: mortgage payment = 838.1874920254859
+Transaction: mortgage duration = 276.0
+Transaction: house.area = 52
+Transaction: house.location = Lisboa
+Transaction: house percentile = 74
+Transaction: household.wealth = 27256.038014514474
+Transaction: raw salary = 4317.477000000001
+Transaction: liquid salary = 2665.7908915000003
+Transaction: household percentile = 79
+Transaction: household id = 62464
+Transaction: household size = 3
+Transaction: household age = 45
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 15
+Transaction: household unemployedTime = 0
+Transaction: area per person = 17.333333333333332
+Transaction: askPrice = 164285.77538202054
+Transaction: sellerId = 33412
+Transaction: bidValue = 163515.169886856
+Transaction: consumerSurplus = 0.9983362478922271
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 3144.5224978241536
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9953093595999251
+Transaction: seller contracts as landlord = Contract[Contract(33412, 54028, House(0x0046, Lisboa, NotSocialNeighbourhood, 1.0, 40), 271.88607829687874)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 121958.20910841446
+Transaction: mortgage payment = 966.9808771144394
+Transaction: mortgage duration = 180.0
+Transaction: house.area = 54
+Transaction: house.location = Lisboa
+Transaction: house percentile = 50
+Transaction: household.wealth = 18869.337135535086
+Transaction: raw salary = 7392.310999999998
+Transaction: liquid salary = 4077.806895499999
+Transaction: household percentile = 89
+Transaction: household id = 75157
+Transaction: household size = 2
+Transaction: household age = 58
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 6
+Transaction: household unemployedTime = 0
+Transaction: area per person = 27.0
+Transaction: askPrice = 140905.0988623742
+Transaction: sellerId = 32530
+Transaction: bidValue = 140450.15950123884
+Transaction: consumerSurplus = 1.0034065702638815
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 2600.928879652571
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9967713066112696
+Transaction: seller contracts as landlord = Contract[Contract(32530, 53527, House(0x0032, Lisboa, NotSocialNeighbourhood, 1.0, 3), 128.89971566215056), Contract(32530, 53552, House(0x002c, Lisboa, NotSocialNeighbourhood, 1.0, 51), 272.47187650837833)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 51
+Transaction: house.location = Lisboa
+Transaction: house percentile = 86
+Transaction: household.wealth = -1.0546038288069285e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 228253.86825818743
+Transaction: sellerId = 32049
+Transaction: bidValue = 261165.18501663837
+Transaction: consumerSurplus = 0.9820883666695985
+Transaction: transactionTaxes = 326.04443129779247
+Transaction: pricePerm2 = 5120.885980718399
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1441873340837474
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Contract(12712, 32049, House(0x0037, Lisboa, NotSocialNeighbourhood, 1.0, 5), 170.7714736124589)
+########
+
+########
+Transaction: mortgageValue = 254788.8115115307
+Transaction: mortgage payment = 1526.7114961221755
+Transaction: mortgage duration = 288.0
+Transaction: house.area = 89
+Transaction: house.location = Lisboa
+Transaction: house percentile = 66
+Transaction: household.wealth = 38408.02151052247
+Transaction: raw salary = 9378.304999999997
+Transaction: liquid salary = 4952.637252499999
+Transaction: household percentile = 95
+Transaction: household id = 66753
+Transaction: household size = 4
+Transaction: household age = 44
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 13
+Transaction: household unemployedTime = 0
+Transaction: area per person = 22.25
+Transaction: askPrice = 284970.30420941074
+Transaction: sellerId = 26893
+Transaction: bidValue = 289864.1118662734
+Transaction: consumerSurplus = 1.0171730442947011
+Transaction: transactionTaxes = 2564.560725569325
+Transaction: pricePerm2 = 3256.9001333289143
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0171730442947011
+Transaction: seller contracts as landlord = Contract[Contract(26893, 50745, House(0x0041, Lisboa, NotSocialNeighbourhood, 1.0, 33), 185.74106723952622)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 263422.64593518677
+Transaction: mortgage payment = 1653.0868037527268
+Transaction: mortgage duration = 264.0
+Transaction: house.area = 96
+Transaction: house.location = Lisboa
+Transaction: house percentile = 70
+Transaction: household.wealth = 40184.285681904905
+Transaction: raw salary = 10371.301999999996
+Transaction: liquid salary = 5390.052430999998
+Transaction: household percentile = 98
+Transaction: household id = 65117
+Transaction: household size = 4
+Transaction: household age = 47
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 11
+Transaction: household unemployedTime = 0
+Transaction: area per person = 24.0
+Transaction: askPrice = 303714.09375761746
+Transaction: sellerId = 27601
+Transaction: bidValue = 299488.02031860256
+Transaction: consumerSurplus = 1.021183446104312
+Transaction: transactionTaxes = 3315.2255848510013
+Transaction: pricePerm2 = 3119.6668783187765
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9860853561758396
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Contract(11007, 27601, House(0x008a, Lisboa, NotSocialNeighbourhood, 1.0, 68), 564.249188970756)
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 125
+Transaction: house.location = Lisboa
+Transaction: house percentile = 90
+Transaction: household.wealth = -1.0572187411014079e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 563512.4052280101
+Transaction: sellerId = 21781
+Transaction: bidValue = 645176.2022762853
+Transaction: consumerSurplus = 0.9857934198595251
+Transaction: transactionTaxes = 43350.901754787395
+Transaction: pricePerm2 = 5161.409618210282
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1449192534017634
+Transaction: seller contracts as landlord = Contract[Contract(21781, 48173, House(0x0057, Lisboa, NotSocialNeighbourhood, 1.0, 50), 602.8382212926568)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 240901.50228286354
+Transaction: mortgage payment = 1339.3553933693756
+Transaction: mortgage duration = 336.0
+Transaction: house.area = 104
+Transaction: house.location = Lisboa
+Transaction: house percentile = 50
+Transaction: household.wealth = 37215.52526145092
+Transaction: raw salary = 9047.305999999997
+Transaction: liquid salary = 4806.832192999998
+Transaction: household percentile = 94
+Transaction: household id = 64219
+Transaction: household size = 4
+Transaction: household age = 38
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 16
+Transaction: household unemployedTime = 0
+Transaction: area per person = 26.0
+Transaction: askPrice = 269099.3456436315
+Transaction: sellerId = 5057
+Transaction: bidValue = 275897.54827373417
+Transaction: consumerSurplus = 1.0289506655378708
+Transaction: transactionTaxes = 1475.1687653512654
+Transaction: pricePerm2 = 2652.8610410935976
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0252627988144778
+Transaction: seller contracts as landlord = Contract[Contract(5057, 11394, House(0x0037, Lisboa, NotSocialNeighbourhood, 1.0, 88), 385.57833402852805), Contract(5057, 11654, House(0x0074, Lisboa, NotSocialNeighbourhood, 1.0, 49), 366.22173284680446), Contract(5057, 11759, House(0x007e, Lisboa, NotSocialNeighbourhood, 1.0, 99), 575.4288309529885)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 58
+Transaction: house.location = Lisboa
+Transaction: house percentile = 90
+Transaction: household.wealth = -1.0641040121417186e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 268437.8911932031
+Transaction: sellerId = 56987
+Transaction: bidValue = 303063.6884017883
+Transaction: consumerSurplus = 0.9857934198595251
+Transaction: transactionTaxes = 3594.127695339488
+Transaction: pricePerm2 = 5225.236006927385
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1289899762461773
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Contract(39153, 56987, House(0x002f, Lisboa, NotSocialNeighbourhood, 1.0, 8), 185.62799473292253)
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 29
+Transaction: house.location = Lisboa
+Transaction: house percentile = 83
+Transaction: household.wealth = -1.0671705903026898e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 128104.34277846735
+Transaction: sellerId = 29890
+Transaction: bidValue = 143595.19742440787
+Transaction: consumerSurplus = 0.9781601172981903
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 4951.558531876133
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1209237275642487
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 142
+Transaction: house.location = Lisboa
+Transaction: house percentile = 97
+Transaction: household.wealth = -1.068606542276934e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 693201.1433878295
+Transaction: sellerId = 39826
+Transaction: bidValue = 806082.1023851858
+Transaction: consumerSurplus = 0.9905733210202192
+Transaction: transactionTaxes = 54292.50296219263
+Transaction: pricePerm2 = 5676.634523839336
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1628401223426748
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 60
+Transaction: house.location = Lisboa
+Transaction: house percentile = 95
+Transaction: household.wealth = -1.0772102883304077e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 293537.0014377806
+Transaction: sellerId = 50705
+Transaction: bidValue = 334749.1886800913
+Transaction: consumerSurplus = 0.9893507571003165
+Transaction: transactionTaxes = 3077.6486038480343
+Transaction: pricePerm2 = 5579.153144668188
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1403986108751138
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Contract(26842, 50705, House(0x0044, Lisboa, NotSocialNeighbourhood, 1.0, 73), 347.1788602372066)
+########
+
+########
+Transaction: mortgageValue = 86103.83840504958
+Transaction: mortgage payment = 587.6281387906123
+Transaction: mortgage duration = 228.0
+Transaction: house.area = 45
+Transaction: house.location = Lisboa
+Transaction: house percentile = 43
+Transaction: household.wealth = 26357.413800916762
+Transaction: raw salary = 2783.9890000000005
+Transaction: liquid salary = 1909.6022692000001
+Transaction: household percentile = 63
+Transaction: household id = 61231
+Transaction: household size = 2
+Transaction: household age = 52
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 16
+Transaction: household unemployedTime = 0
+Transaction: area per person = 22.5
+Transaction: askPrice = 111813.3248448535
+Transaction: sellerId = 8879
+Transaction: bidValue = 111934.103929948
+Transaction: consumerSurplus = 1.0111721398376161
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 2487.424531776622
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0010801850786755
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 196088.35968484927
+Transaction: mortgage payment = 1108.719891302076
+Transaction: mortgage duration = 324.0
+Transaction: house.area = 91
+Transaction: house.location = Lisboa
+Transaction: house percentile = 40
+Transaction: household.wealth = 36051.556465600464
+Transaction: raw salary = 8716.307
+Transaction: liquid salary = 4661.0271335
+Transaction: household percentile = 93
+Transaction: household id = 62844
+Transaction: household size = 3
+Transaction: household age = 40
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 11
+Transaction: household unemployedTime = 0
+Transaction: area per person = 30.333333333333332
+Transaction: askPrice = 226935.05543740393
+Transaction: sellerId = 35475
+Transaction: bidValue = 231418.88502113774
+Transaction: consumerSurplus = 1.0253152446209117
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 2543.0646705619533
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0197582060430967
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 62
+Transaction: house.location = Lisboa
+Transaction: house percentile = 83
+Transaction: household.wealth = -1.0805885567032471e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 278808.93771116243
+Transaction: sellerId = 72828
+Transaction: bidValue = 324689.5655249818
+Transaction: consumerSurplus = 0.9781601172981903
+Transaction: transactionTaxes = 2192.4017661984017
+Transaction: pricePerm2 = 5236.928476209384
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.164559386763097
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 123
+Transaction: house.location = Lisboa
+Transaction: house percentile = 86
+Transaction: household.wealth = -1.0838573763761589e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 541489.5645511581
+Transaction: sellerId = -1
+Transaction: bidValue = 618353.1194413741
+Transaction: consumerSurplus = 0.9820883666695985
+Transaction: transactionTaxes = 28034.794510840926
+Transaction: pricePerm2 = 5027.261133669708
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.141948358605818
+########
+
+########
+Transaction: mortgageValue = 63868.40001488962
+Transaction: mortgage payment = 312.15121613631385
+Transaction: mortgage duration = 468.0
+Transaction: house.area = 22
+Transaction: house.location = Lisboa
+Transaction: house percentile = 72
+Transaction: household.wealth = 10182.43735377839
+Transaction: raw salary = 2157.31
+Transaction: liquid salary = 1586.4358499999998
+Transaction: household percentile = 53
+Transaction: household id = 73637
+Transaction: household size = 7
+Transaction: household age = 21
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 25
+Transaction: household unemployedTime = 0
+Transaction: area per person = 3.142857142857143
+Transaction: askPrice = 73023.96714393617
+Transaction: sellerId = 32747
+Transaction: bidValue = 73261.09982300838
+Transaction: consumerSurplus = 1.0113459654205448
+Transaction: transactionTaxes = 586.088798584067
+Transaction: pricePerm2 = 3330.049991954926
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0032473267113085
+Transaction: seller contracts as landlord = Contract[Contract(32747, 64625, House(0x010a, Lisboa, NotSocialNeighbourhood, 1.0, 69), 2840.8312749999996)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 104688.94411260754
+Transaction: mortgage payment = 1034.777828748645
+Transaction: mortgage duration = 132.0
+Transaction: house.area = 77
+Transaction: house.location = Lisboa
+Transaction: house percentile = 22
+Transaction: household.wealth = 52064.100682532735
+Transaction: raw salary = 10040.302999999996
+Transaction: liquid salary = 5244.247371499998
+Transaction: household percentile = 97
+Transaction: household id = 50757
+Transaction: household size = 2
+Transaction: household age = 63
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 15
+Transaction: household unemployedTime = 0
+Transaction: area per person = 38.5
+Transaction: askPrice = 154027.1174711455
+Transaction: sellerId = 29432
+Transaction: bidValue = 155711.7627814896
+Transaction: consumerSurplus = 1.0361777542142994
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 2022.230685473891
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Contract(26933, 50757, House(0x0036, Lisboa, NotSocialNeighbourhood, 1.0, 23), 210.61990483370178)
+Transaction: bid to ask price ratio = 1.0109373293352693
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 269370.9192097195
+Transaction: mortgage payment = 1580.999642620762
+Transaction: mortgage duration = 300.0
+Transaction: house.area = 133
+Transaction: house.location = Lisboa
+Transaction: house percentile = 35
+Transaction: household.wealth = 40738.683787452515
+Transaction: raw salary = 11033.299999999997
+Transaction: liquid salary = 5681.662549999999
+Transaction: household percentile = 100
+Transaction: household id = 74894
+Transaction: household size = 5
+Transaction: household age = 42
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 14
+Transaction: household unemployedTime = 0
+Transaction: area per person = 26.6
+Transaction: askPrice = 301827.4832587555
+Transaction: sellerId = -1
+Transaction: bidValue = 305509.8973297059
+Transaction: consumerSurplus = 1.0169222203339063
+Transaction: transactionTaxes = 3784.9319917170596
+Transaction: pricePerm2 = 2297.0668972158337
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0122003935201402
+########
+
+########
+Transaction: mortgageValue = 115073.89124815504
+Transaction: mortgage payment = 596.8214881248582
+Transaction: mortgage duration = 396.0
+Transaction: house.area = 56
+Transaction: house.location = Lisboa
+Transaction: house percentile = 42
+Transaction: household.wealth = 21442.575456695227
+Transaction: raw salary = 2592.303
+Transaction: liquid salary = 1813.2225483999998
+Transaction: household percentile = 61
+Transaction: household id = 49797
+Transaction: household size = 2
+Transaction: household age = 30
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 12
+Transaction: household unemployedTime = 0
+Transaction: area per person = 28.0
+Transaction: askPrice = 135966.18448888988
+Transaction: sellerId = 23015
+Transaction: bidValue = 136087.61519571635
+Transaction: consumerSurplus = 1.0223615951512426
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 2430.135985637792
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Contract(25150, 49797, House(0x0062, Lisboa, NotSocialNeighbourhood, 1.0, 61), 900.7776234075857)
+Transaction: bid to ask price ratio = 1.0008930949065236
+Transaction: seller contracts as landlord = Contract[Contract(23015, 48776, House(0x0034, Lisboa, NotSocialNeighbourhood, 1.0, 91), 510.0224158836429)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 54
+Transaction: house.location = Lisboa
+Transaction: house percentile = 92
+Transaction: household.wealth = -1.090321255515681e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 258526.61241005387
+Transaction: sellerId = 8961
+Transaction: bidValue = 293810.63838900666
+Transaction: consumerSurplus = 0.9873195981163336
+Transaction: transactionTaxes = 2872.38979434252
+Transaction: pricePerm2 = 5440.9377479445675
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.136481214254988
+Transaction: seller contracts as landlord = Contract[Contract(8961, 22465, House(0x0029, Lisboa, NotSocialNeighbourhood, 1.0, 50), 74.74176904369445), Contract(8961, 22509, House(0x004c, Lisboa, NotSocialNeighbourhood, 1.0, 30), 191.96794744859451)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 60
+Transaction: house.location = Lisboa
+Transaction: house percentile = 95
+Transaction: household.wealth = -1.0932880857975146e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 295294.7070055991
+Transaction: sellerId = 50705
+Transaction: bidValue = 330584.39672491193
+Transaction: consumerSurplus = 0.9893507571003165
+Transaction: transactionTaxes = 2711.1469117922497
+Transaction: pricePerm2 = 5509.739945415199
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1195066788604635
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Contract(26842, 50705, House(0x0044, Lisboa, NotSocialNeighbourhood, 1.0, 73), 347.1788602372066)
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 44
+Transaction: house.location = Lisboa
+Transaction: house percentile = 1
+Transaction: household.wealth = 825169.5101972391
+Transaction: raw salary = 8716.307
+Transaction: liquid salary = 4661.0271335
+Transaction: household percentile = 93
+Transaction: household id = 40939
+Transaction: household size = 2
+Transaction: household age = 59
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = 22.0
+Transaction: askPrice = 63469.429978480905
+Transaction: sellerId = 499
+Transaction: bidValue = 60930.65277934167
+Transaction: consumerSurplus = 0.7714507174914821
+Transaction: transactionTaxes = 487.44522223473336
+Transaction: pricePerm2 = 1384.787563166856
+Transaction: for renting = true
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[Contract(40939, 57929, House(0x005e, Lisboa, NotSocialNeighbourhood, 1.0, 62), 497.3879058030906), Contract(40939, 57934, House(0x0033, Lisboa, NotSocialNeighbourhood, 1.0, 46), 327.4830350285506), Contract(40939, 57938, House(0x0015, Lisboa, NotSocialNeighbourhood, 1.0, 49), 65.26675790259468), Contract(40939, 62654, House(0x0048, Lisboa, NotSocialNeighbourhood, 1.0, 92), 794.744825978218)]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.96
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 24
+Transaction: house.location = Lisboa
+Transaction: house percentile = 85
+Transaction: household.wealth = -1.0966210412338816e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 107433.48785794852
+Transaction: sellerId = 73881
+Transaction: bidValue = 120963.94277002265
+Transaction: consumerSurplus = 0.9809461246969795
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 5040.164282084277
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1259426197720068
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 54267.70087776904
+Transaction: mortgage payment = 1025.093257095748
+Transaction: mortgage duration = 60.0
+Transaction: house.area = 48
+Transaction: house.location = Lisboa
+Transaction: house percentile = 11
+Transaction: household.wealth = 24017.661418190175
+Transaction: raw salary = 5902.815499999998
+Transaction: liquid salary = 3421.684127749999
+Transaction: household percentile = 86
+Transaction: household id = 64039
+Transaction: household size = 2
+Transaction: household age = 72
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 26
+Transaction: household unemployedTime = 0
+Transaction: area per person = 24.0
+Transaction: askPrice = 79290.27722113271
+Transaction: sellerId = 692
+Transaction: bidValue = 77187.50899563037
+Transaction: consumerSurplus = 0.9777792452174704
+Transaction: transactionTaxes = 617.5000719650429
+Transaction: pricePerm2 = 1608.0731040756327
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9734801251906595
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 148658.91419062403
+Transaction: mortgage payment = 1014.5443301787427
+Transaction: mortgage duration = 228.0
+Transaction: house.area = 67
+Transaction: house.location = Lisboa
+Transaction: house percentile = 53
+Transaction: household.wealth = 42033.02418857597
+Transaction: raw salary = 8385.307999999999
+Transaction: liquid salary = 4515.222073999999
+Transaction: household percentile = 92
+Transaction: household id = 46744
+Transaction: household size = 2
+Transaction: household age = 51
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 6
+Transaction: household unemployedTime = 0
+Transaction: area per person = 33.5
+Transaction: askPrice = 186674.21558253813
+Transaction: sellerId = 6356
+Transaction: bidValue = 189851.27789542847
+Transaction: consumerSurplus = 1.0252450400246833
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 2833.6011626183354
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Contract(18910, 46744, House(0x004d, Lisboa, NotSocialNeighbourhood, 1.0, 99), 943.9383450278015)
+Transaction: bid to ask price ratio = 1.0170192884056106
+Transaction: seller contracts as landlord = Contract[Contract(6356, 62318, House(0x0044, Lisboa, NotSocialNeighbourhood, 1.0, 23), 644.8072888421096)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 58
+Transaction: house.location = Lisboa
+Transaction: house percentile = 90
+Transaction: household.wealth = -1.0978306806615818e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 275591.475367337
+Transaction: sellerId = 56987
+Transaction: bidValue = 313526.7455520018
+Transaction: consumerSurplus = 0.9857934198595251
+Transaction: transactionTaxes = 4410.246153056141
+Transaction: pricePerm2 = 5405.633544000031
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1376503759200125
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Contract(39153, 56987, House(0x002f, Lisboa, NotSocialNeighbourhood, 1.0, 8), 185.62799473292253)
+########
+
+########
+Transaction: mortgageValue = 72486.69181058949
+Transaction: mortgage payment = 425.4410022563721
+Transaction: mortgage duration = 300.0
+Transaction: house.area = 69
+Transaction: house.location = Lisboa
+Transaction: house percentile = 6
+Transaction: household.wealth = 30709.250511215356
+Transaction: raw salary = 1915.06
+Transaction: liquid salary = 1451.8642
+Transaction: household percentile = 48
+Transaction: household id = 61555
+Transaction: household size = 2
+Transaction: household age = 42
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 14
+Transaction: household unemployedTime = 0
+Transaction: area per person = 34.5
+Transaction: askPrice = 105559.6530634477
+Transaction: sellerId = 829
+Transaction: bidValue = 101767.61638053624
+Transaction: consumerSurplus = 0.9827545448091379
+Transaction: transactionTaxes = 814.14093104429
+Transaction: pricePerm2 = 1474.8929910222644
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9640768364345399
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 136470.49268009764
+Transaction: mortgage payment = 1574.4026571306101
+Transaction: mortgage duration = 108.0
+Transaction: house.area = 64
+Transaction: house.location = Lisboa
+Transaction: house percentile = 46
+Transaction: household.wealth = 30084.718756214297
+Transaction: raw salary = 9378.304999999997
+Transaction: liquid salary = 4952.637252499999
+Transaction: household percentile = 95
+Transaction: household id = 75292
+Transaction: household size = 2
+Transaction: household age = 66
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 5
+Transaction: household unemployedTime = 0
+Transaction: area per person = 32.0
+Transaction: askPrice = 163955.94320126862
+Transaction: sellerId = 32876
+Transaction: bidValue = 165953.51706118765
+Transaction: consumerSurplus = 1.012183601404841
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 2593.023704081057
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.012183601404841
+Transaction: seller contracts as landlord = Contract[Contract(32876, 53576, House(0x0048, Lisboa, NotSocialNeighbourhood, 1.0, 53), 511.73794303163186), Contract(32876, 53702, House(0x0041, Lisboa, NotSocialNeighbourhood, 1.0, 65), 263.6354284510061), Contract(32876, 53706, House(0x003c, Lisboa, NotSocialNeighbourhood, 1.0, 35), 95.14118475742195), Contract(32876, 53711, House(0x004a, Lisboa, NotSocialNeighbourhood, 1.0, 14), 178.67095399804998), Contract(32876, 53724, House(0x0027, Lisboa, NotSocialNeighbourhood, 1.0, 29), 189.39235901290743), Contract(32876, 53737, House(0x0025, Lisboa, NotSocialNeighbourhood, 1.0, 86), 181.82058195054293)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 32
+Transaction: house.location = Lisboa
+Transaction: house percentile = 83
+Transaction: household.wealth = -1.1010100505786324e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 145944.45813255545
+Transaction: sellerId = 73928
+Transaction: bidValue = 161630.6023236318
+Transaction: consumerSurplus = 0.9781601172981903
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 5050.956322613494
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1074802318072898
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 159933.89050149315
+Transaction: mortgage payment = 875.2946745006248
+Transaction: mortgage duration = 348.0
+Transaction: house.area = 118
+Transaction: house.location = Lisboa
+Transaction: house percentile = 3
+Transaction: household.wealth = 24862.38251118376
+Transaction: raw salary = 4317.477000000001
+Transaction: liquid salary = 2665.7908915000003
+Transaction: household percentile = 79
+Transaction: household id = 62481
+Transaction: household size = 3
+Transaction: household age = 36
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 13
+Transaction: household unemployedTime = 0
+Transaction: area per person = 39.333333333333336
+Transaction: askPrice = 191508.3665634416
+Transaction: sellerId = 47419
+Transaction: bidValue = 184299.02536245325
+Transaction: consumerSurplus = 0.9623549543533906
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 1561.8561471394344
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9623549543533906
+Transaction: seller contracts as landlord = Contract[Contract(47419, 61234, House(0x0092, Lisboa, NotSocialNeighbourhood, 1.0, 9), 1151.349510731781)]
+Transaction: seller contract as tenant = Contract(20233, 47419, House(0x0034, Lisboa, NotSocialNeighbourhood, 1.0, 35), 173.17695095273993)
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 137
+Transaction: house.location = Lisboa
+Transaction: house percentile = 90
+Transaction: household.wealth = -1.1026263566018687e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 623567.3544100907
+Transaction: sellerId = -1
+Transaction: bidValue = 712210.1041144745
+Transaction: consumerSurplus = 0.9857934198595251
+Transaction: transactionTaxes = 47909.20707978426
+Transaction: pricePerm2 = 5198.613898645799
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1421542501823911
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 53
+Transaction: house.location = Lisboa
+Transaction: house percentile = 79
+Transaction: household.wealth = -1.1102275497138113e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 219483.4717000457
+Transaction: sellerId = -1
+Transaction: bidValue = 249213.00718190876
+Transaction: consumerSurplus = 0.9684574846106748
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 4702.132210979411
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.13545227461361
+########
+
+########
+Transaction: mortgageValue = 122122.79720908022
+Transaction: mortgage payment = 619.457655947921
+Transaction: mortgage duration = 420.0
+Transaction: house.area = 77
+Transaction: house.location = Lisboa
+Transaction: house percentile = 23
+Transaction: household.wealth = 22772.13681471361
+Transaction: raw salary = 9378.304999999997
+Transaction: liquid salary = 4952.637252499999
+Transaction: household percentile = 95
+Transaction: household id = 75199
+Transaction: household size = 2
+Transaction: household age = 27
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 6
+Transaction: household unemployedTime = 0
+Transaction: area per person = 38.5
+Transaction: askPrice = 142683.07433475362
+Transaction: sellerId = 24309
+Transaction: bidValue = 144439.49128749955
+Transaction: consumerSurplus = 1.012309918053946
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 1875.8375491883057
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.012309918053946
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 55792.72728756226
+Transaction: mortgage payment = 296.73952254036755
+Transaction: mortgage duration = 372.0
+Transaction: house.area = 41
+Transaction: house.location = Lisboa
+Transaction: house percentile = 20
+Transaction: household.wealth = 21584.482653195984
+Transaction: raw salary = 1391.9945000000002
+Transaction: liquid salary = 1127.3264800000002
+Transaction: household percentile = 63
+Transaction: household id = 75459
+Transaction: household size = 1
+Transaction: household age = 33
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 4
+Transaction: household unemployedTime = 0
+Transaction: area per person = 41.0
+Transaction: askPrice = 77424.54073055819
+Transaction: sellerId = 23107
+Transaction: bidValue = 76334.84155525231
+Transaction: consumerSurplus = 0.9983567408857799
+Transaction: transactionTaxes = 610.6787324420185
+Transaction: pricePerm2 = 1861.8254037866416
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9859256617472476
+Transaction: seller contracts as landlord = Contract[Contract(23107, 48774, House(0x0040, Lisboa, NotSocialNeighbourhood, 1.0, 11), 416.4365099637413), Contract(23107, 48814, House(0x0038, Lisboa, NotSocialNeighbourhood, 1.0, 20), 146.30629057729888), Contract(23107, 48823, House(0x0027, Lisboa, NotSocialNeighbourhood, 1.0, 41), 205.1699663947679)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 71
+Transaction: house.location = Lisboa
+Transaction: house percentile = 80
+Transaction: household.wealth = -1.1127196797856304e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 314807.37383556453
+Transaction: sellerId = 6356
+Transaction: bidValue = 343888.6344659685
+Transaction: consumerSurplus = 0.9694604157072113
+Transaction: transactionTaxes = 3881.9198330052313
+Transaction: pricePerm2 = 4843.501893886881
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0923779525113482
+Transaction: seller contracts as landlord = Contract[Contract(6356, 62318, House(0x0044, Lisboa, NotSocialNeighbourhood, 1.0, 23), 644.8072888421096)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 152
+Transaction: house.location = Lisboa
+Transaction: house percentile = 79
+Transaction: household.wealth = -1.1161973853286201e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 647437.2628786722
+Transaction: sellerId = 426
+Transaction: bidValue = 735771.1261819451
+Transaction: consumerSurplus = 0.9684574846106748
+Transaction: transactionTaxes = 49511.35658037227
+Transaction: pricePerm2 = 4840.599514354902
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1364361743877975
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 217573.63482009148
+Transaction: mortgage payment = 1230.2016149027322
+Transaction: mortgage duration = 324.0
+Transaction: house.area = 95
+Transaction: house.location = Lisboa
+Transaction: house percentile = 49
+Transaction: household.wealth = 33059.32861957613
+Transaction: raw salary = 9709.303999999996
+Transaction: liquid salary = 5098.442311999998
+Transaction: household percentile = 96
+Transaction: household id = 70383
+Transaction: household size = 4
+Transaction: household age = 40
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 21
+Transaction: household unemployedTime = 0
+Transaction: area per person = 23.75
+Transaction: askPrice = 243643.091475884
+Transaction: sellerId = 3358
+Transaction: bidValue = 249971.7768672761
+Transaction: consumerSurplus = 1.0281813311076657
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 2631.281861760801
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.025975230215048
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 39
+Transaction: house.location = Lisboa
+Transaction: house percentile = 76
+Transaction: household.wealth = -1.1240502101562433e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 158325.23299006632
+Transaction: sellerId = 62404
+Transaction: bidValue = 179152.82779601746
+Transaction: consumerSurplus = 0.9653985192724496
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 4593.662251179935
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1315494341148888
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 259370.0252689093
+Transaction: mortgage payment = 1522.3021046953743
+Transaction: mortgage duration = 300.0
+Transaction: house.area = 109
+Transaction: house.location = Lisboa
+Transaction: house percentile = 61
+Transaction: household.wealth = 40145.92975724823
+Transaction: raw salary = 10371.301999999996
+Transaction: liquid salary = 5390.052430999998
+Transaction: household percentile = 98
+Transaction: household id = 70100
+Transaction: household size = 4
+Transaction: household age = 43
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 12
+Transaction: household unemployedTime = 0
+Transaction: area per person = 27.25
+Transaction: askPrice = 317728.3991436908
+Transaction: sellerId = 22754
+Transaction: bidValue = 295693.7629230172
+Transaction: consumerSurplus = 1.0305922545105863
+Transaction: transactionTaxes = 3019.273507995342
+Transaction: pricePerm2 = 2712.786815807497
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9306494594752652
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 60679.76450531064
+Transaction: mortgage payment = 311.1265069641522
+Transaction: mortgage duration = 408.0
+Transaction: house.area = 43
+Transaction: house.location = Lisboa
+Transaction: house percentile = 22
+Transaction: household.wealth = 20710.478772302093
+Transaction: raw salary = 1391.9945000000002
+Transaction: liquid salary = 1127.3264800000002
+Transaction: household percentile = 63
+Transaction: household id = 23493
+Transaction: household size = 1
+Transaction: household age = 29
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 4
+Transaction: household unemployedTime = 0
+Transaction: area per person = 43.0
+Transaction: askPrice = 81030.80092372467
+Transaction: sellerId = 23170
+Transaction: bidValue = 80333.36676802252
+Transaction: consumerSurplus = 1.0020007250902863
+Transaction: transactionTaxes = 642.6669341441801
+Transaction: pricePerm2 = 1868.2178318144772
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9913929746744247
+Transaction: seller contracts as landlord = Contract[Contract(23170, 48855, House(0x0031, Lisboa, NotSocialNeighbourhood, 1.0, 51), 148.32168043478995), Contract(23170, 48857, House(0x0067, Lisboa, NotSocialNeighbourhood, 1.0, 71), 609.1698716974832), Contract(23170, 48860, House(0x0037, Lisboa, NotSocialNeighbourhood, 1.0, 7), 165.9543828799913)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 105
+Transaction: house.location = Lisboa
+Transaction: house percentile = 83
+Transaction: household.wealth = -1.1258417384342034e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 413800.89030915627
+Transaction: sellerId = -1
+Transaction: bidValue = 459114.35930988984
+Transaction: consumerSurplus = 0.9781601172981903
+Transaction: transactionTaxes = 14021.783619270307
+Transaction: pricePerm2 = 4372.517707713237
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.109505489383745
+########
+
+########
+Transaction: mortgageValue = 60705.23465518741
+Transaction: mortgage payment = 700.3307518417311
+Transaction: mortgage duration = 108.0
+Transaction: house.area = 60
+Transaction: house.location = Lisboa
+Transaction: house percentile = 4
+Transaction: household.wealth = 28223.78767264395
+Transaction: raw salary = 3646.576
+Transaction: liquid salary = 2337.384852
+Transaction: household percentile = 72
+Transaction: household id = 62383
+Transaction: household size = 2
+Transaction: household age = 67
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 16
+Transaction: household unemployedTime = 0
+Transaction: area per person = 30.0
+Transaction: askPrice = 93752.02835858066
+Transaction: sellerId = 15765
+Transaction: bidValue = 87663.240649185
+Transaction: consumerSurplus = 0.9350543362527859
+Transaction: transactionTaxes = 701.30592519348
+Transaction: pricePerm2 = 1461.05401081975
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9350543362527859
+Transaction: seller contracts as landlord = Contract[Contract(15765, 62651, House(0x0042, Lisboa, NotSocialNeighbourhood, 1.0, 54), 582.0292351676186), Contract(15765, 75059, House(0x0035, Lisboa, NotSocialNeighbourhood, 1.0, 20), 454.82116703979705)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 204260.4986979103
+Transaction: mortgage payment = 1251.4859138424051
+Transaction: mortgage duration = 276.0
+Transaction: house.area = 79
+Transaction: house.location = Lisboa
+Transaction: house percentile = 62
+Transaction: household.wealth = 31510.377278900025
+Transaction: raw salary = 8385.307999999999
+Transaction: liquid salary = 4515.222073999999
+Transaction: household percentile = 92
+Transaction: household id = 61369
+Transaction: household size = 3
+Transaction: household age = 45
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 11
+Transaction: household unemployedTime = 0
+Transaction: area per person = 26.333333333333332
+Transaction: askPrice = 229804.3018135319
+Transaction: sellerId = -1
+Transaction: bidValue = 235140.66843123233
+Transaction: consumerSurplus = 1.0258320204767133
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 2976.4641573573713
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.02322135214871
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 52
+Transaction: house.location = Lisboa
+Transaction: house percentile = 76
+Transaction: household.wealth = -1.1305730998634951e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 209522.21265807524
+Transaction: sellerId = -1
+Transaction: bidValue = 239481.80790954712
+Transaction: consumerSurplus = 0.9653985192724496
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 4605.419382875906
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1429900671217315
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 73
+Transaction: house.location = Lisboa
+Transaction: house percentile = 91
+Transaction: household.wealth = -1.1329679179425906e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 345890.9853594835
+Transaction: sellerId = 824
+Transaction: bidValue = 395442.418371839
+Transaction: consumerSurplus = 0.9865768049570512
+Transaction: transactionTaxes = 8418.652816721831
+Transaction: pricePerm2 = 5417.019429751219
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.143257370413562
+Transaction: seller contracts as landlord = Contract[Contract(824, 19245, House(0x001e, Lisboa, NotSocialNeighbourhood, 1.0, 17), 154.91279224262527)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 272530.50150694104
+Transaction: mortgage payment = 1568.95796449274
+Transaction: mortgage duration = 312.0
+Transaction: house.area = 131
+Transaction: house.location = Lisboa
+Transaction: house percentile = 43
+Transaction: household.wealth = 41356.08662006056
+Transaction: raw salary = 8385.307999999999
+Transaction: liquid salary = 4515.222073999999
+Transaction: household percentile = 92
+Transaction: household id = 73493
+Transaction: household size = 5
+Transaction: household age = 41
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 11
+Transaction: household unemployedTime = 0
+Transaction: area per person = 26.2
+Transaction: askPrice = 313237.6995397471
+Transaction: sellerId = -1
+Transaction: bidValue = 309002.1395126163
+Transaction: consumerSurplus = 1.014528705563019
+Transaction: transactionTaxes = 4057.326881984076
+Transaction: pricePerm2 = 2358.794958111575
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9864781281647955
+########
+
+########
+Transaction: mortgageValue = 136496.91133767896
+Transaction: mortgage payment = 817.8985666133651
+Transaction: mortgage duration = 288.0
+Transaction: house.area = 52
+Transaction: house.location = Lisboa
+Transaction: house percentile = 74
+Transaction: household.wealth = 28799.105464971093
+Transaction: raw salary = 4029.9480000000003
+Transaction: liquid salary = 2525.045446
+Transaction: household percentile = 76
+Transaction: household id = 61721
+Transaction: household size = 3
+Transaction: household age = 44
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 13
+Transaction: household unemployedTime = 0
+Transaction: area per person = 17.333333333333332
+Transaction: askPrice = 166099.0925684267
+Transaction: sellerId = 33412
+Transaction: bidValue = 164720.03469335064
+Transaction: consumerSurplus = 0.9916973786325295
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 3167.6929748721277
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9916973786325295
+Transaction: seller contracts as landlord = Contract[Contract(33412, 54028, House(0x0046, Lisboa, NotSocialNeighbourhood, 1.0, 40), 271.88607829687874)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 97
+Transaction: house.location = Lisboa
+Transaction: house percentile = 85
+Transaction: household.wealth = -1.1370065286544763e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 380694.3477764084
+Transaction: sellerId = 44966
+Transaction: bidValue = 436450.7838830802
+Transaction: consumerSurplus = 0.9809461246969795
+Transaction: transactionTaxes = 12027.388981711058
+Transaction: pricePerm2 = 4499.492617351342
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1464598474664482
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 102
+Transaction: house.location = Lisboa
+Transaction: house percentile = 99
+Transaction: household.wealth = -1.1414913103831242e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 501436.08682621113
+Transaction: sellerId = 27601
+Transaction: bidValue = 569164.5020407197
+Transaction: consumerSurplus = 0.9917122305057097
+Transaction: transactionTaxes = 23706.196179583334
+Transaction: pricePerm2 = 5580.044137654115
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.135068889124412
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Contract(11007, 27601, House(0x008a, Lisboa, NotSocialNeighbourhood, 1.0, 68), 564.249188970756)
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 43
+Transaction: house.location = Lisboa
+Transaction: house percentile = 84
+Transaction: household.wealth = -1.1474200173653272e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 195507.8767516125
+Transaction: sellerId = 10388
+Transaction: bidValue = 220364.43964501726
+Transaction: consumerSurplus = 0.9796594641589706
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 5124.754410349239
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1271384217679596
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 192
+Transaction: house.location = Lisboa
+Transaction: house percentile = 99
+Transaction: household.wealth = -1.1496236617617774e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 957096.4757264921
+Transaction: sellerId = 26397
+Transaction: bidValue = 1.1240938456958372e6
+Transaction: consumerSurplus = 0.9917122305057097
+Transaction: transactionTaxes = 76234.90919275448
+Transaction: pricePerm2 = 5854.655446332486
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1744833192939972
+Transaction: seller contracts as landlord = Contract[Contract(26397, 50426, House(0x005b, Lisboa, NotSocialNeighbourhood, 1.0, 12), 287.8454805930667), Contract(26397, 50432, House(0x0085, Lisboa, NotSocialNeighbourhood, 1.0, 11), 547.7191842285274)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 119889.4448671647
+Transaction: mortgage payment = 772.0341344754012
+Transaction: mortgage duration = 252.0
+Transaction: house.area = 54
+Transaction: house.location = Lisboa
+Transaction: house percentile = 50
+Transaction: household.wealth = 18741.31561446638
+Transaction: raw salary = 3696.155499999999
+Transaction: liquid salary = 2361.654017249999
+Transaction: household percentile = 89
+Transaction: household id = 75780
+Transaction: household size = 1
+Transaction: household age = 49
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 1
+Transaction: household unemployedTime = 0
+Transaction: area per person = 54.0
+Transaction: askPrice = 139091.16134029283
+Transaction: sellerId = 32530
+Transaction: bidValue = 138255.93416934175
+Transaction: consumerSurplus = 0.9945992271352324
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 2560.2950772100326
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9939951096611548
+Transaction: seller contracts as landlord = Contract[Contract(32530, 53527, House(0x0032, Lisboa, NotSocialNeighbourhood, 1.0, 3), 128.89971566215056), Contract(32530, 53552, House(0x002c, Lisboa, NotSocialNeighbourhood, 1.0, 51), 272.47187650837833)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 76
+Transaction: house.location = Lisboa
+Transaction: house percentile = 99
+Transaction: household.wealth = -1.1616269493106633e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 324955.24558070267
+Transaction: sellerId = 49
+Transaction: bidValue = 374240.8452008613
+Transaction: consumerSurplus = 0.9917122305057097
+Transaction: transactionTaxes = 6552.914377675792
+Transaction: pricePerm2 = 4924.221647379753
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1516688845323426
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 129
+Transaction: house.location = Lisboa
+Transaction: house percentile = 78
+Transaction: household.wealth = -1.1654348869064488e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 557641.6826165908
+Transaction: sellerId = 13461
+Transaction: bidValue = 633591.698924013
+Transaction: consumerSurplus = 0.9674463068972395
+Transaction: transactionTaxes = 42563.15552683288
+Transaction: pricePerm2 = 4911.5635575504875
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1361985997012387
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 173
+Transaction: house.location = Lisboa
+Transaction: house percentile = 79
+Transaction: household.wealth = -1.1721964354509573e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 687378.0073449583
+Transaction: sellerId = 34032
+Transaction: bidValue = 766973.5348725555
+Transaction: consumerSurplus = 0.9684574846106748
+Transaction: transactionTaxes = 51633.120371333775
+Transaction: pricePerm2 = 4433.373033945408
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.115795860032008
+Transaction: seller contracts as landlord = Contract[Contract(34032, 54044, House(0x0052, Lisboa, NotSocialNeighbourhood, 1.0, 80), 367.58876537399215), Contract(34032, 54317, House(0x004b, Lisboa, NotSocialNeighbourhood, 1.0, 73), 582.5923310931889), Contract(34032, 54326, House(0x005e, Lisboa, NotSocialNeighbourhood, 1.0, 41), 331.06961448741674)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 169774.688487953
+Transaction: mortgage payment = 1158.6519957521557
+Transaction: mortgage duration = 228.0
+Transaction: house.area = 94
+Transaction: house.location = Lisboa
+Transaction: house percentile = 30
+Transaction: household.wealth = 39956.234536079806
+Transaction: raw salary = 6068.314999999997
+Transaction: liquid salary = 3494.5866574999986
+Transaction: household percentile = 85
+Transaction: household id = 58815
+Transaction: household size = 3
+Transaction: household age = 52
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 13
+Transaction: household unemployedTime = 0
+Transaction: area per person = 31.333333333333332
+Transaction: askPrice = 204860.35154120045
+Transaction: sellerId = 40688
+Transaction: bidValue = 208931.79833331122
+Transaction: consumerSurplus = 1.0245810320516002
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 2222.678705673524
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Contract(42649, 58815, House(0x0043, Lisboa, NotSocialNeighbourhood, 1.0, 79), 298.0757222524839)
+Transaction: bid to ask price ratio = 1.0198742546397122
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 43
+Transaction: house.location = Lisboa
+Transaction: house percentile = 86
+Transaction: household.wealth = -1.1803825020033962e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 189464.07507826787
+Transaction: sellerId = 19375
+Transaction: bidValue = 213153.45796445568
+Transaction: consumerSurplus = 0.9820883666695985
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 4957.057161964086
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1250336396301077
+Transaction: seller contracts as landlord = Contract[Contract(19375, 47002, House(0x003b, Lisboa, NotSocialNeighbourhood, 1.0, 55), 329.04495759110966), Contract(19375, 47023, House(0x0064, Lisboa, NotSocialNeighbourhood, 1.0, 88), 602.1756544611176), Contract(19375, 47029, House(0x002c, Lisboa, NotSocialNeighbourhood, 1.0, 54), 237.08134542661134), Contract(19375, 47035, House(0x006e, Lisboa, NotSocialNeighbourhood, 1.0, 65), 565.5323721433647), Contract(19375, 47036, House(0x0106, Lisboa, NotSocialNeighbourhood, 1.0, 34), 1360.2535026012768)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 39
+Transaction: house.location = Lisboa
+Transaction: house percentile = 76
+Transaction: household.wealth = -1.1825140365830407e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 155034.318869245
+Transaction: sellerId = 62404
+Transaction: bidValue = 169485.94107528738
+Transaction: consumerSurplus = 0.9653985192724496
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 4345.793360904805
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0932156332317027
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 103711.36515743734
+Transaction: mortgage payment = 650.8320062320023
+Transaction: mortgage duration = 264.0
+Transaction: house.area = 45
+Transaction: house.location = Lisboa
+Transaction: house percentile = 71
+Transaction: household.wealth = 32685.980093217167
+Transaction: raw salary = 2879.8320000000003
+Transaction: liquid salary = 1957.7921296000002
+Transaction: household percentile = 64
+Transaction: household id = 61574
+Transaction: household size = 3
+Transaction: household age = 47
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 18
+Transaction: household unemployedTime = 0
+Transaction: area per person = 15.0
+Transaction: askPrice = 141355.84508071878
+Transaction: sellerId = 32747
+Transaction: bidValue = 135743.62564879016
+Transaction: consumerSurplus = 0.9809390465040267
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 3016.525014417559
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.960297224152819
+Transaction: seller contracts as landlord = Contract[Contract(32747, 64625, House(0x010a, Lisboa, NotSocialNeighbourhood, 1.0, 69), 2840.8312749999996)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 125
+Transaction: house.location = Lisboa
+Transaction: house percentile = 90
+Transaction: household.wealth = -1.1842088959937935e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 510656.05860746227
+Transaction: sellerId = 3537
+Transaction: bidValue = 569744.1747324831
+Transaction: consumerSurplus = 0.9857934198595251
+Transaction: transactionTaxes = 23757.207376458515
+Transaction: pricePerm2 = 4557.953397859865
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1157102028440662
+Transaction: seller contracts as landlord = Contract[Contract(3537, 7614, House(0x001e, Lisboa, NotSocialNeighbourhood, 1.0, 38), 117.21458744200484)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 68
+Transaction: house.location = Lisboa
+Transaction: house percentile = 93
+Transaction: household.wealth = -1.1901439098148829e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 327724.59379566193
+Transaction: sellerId = 38952
+Transaction: bidValue = 355093.99146592186
+Transaction: consumerSurplus = 0.9880269057846671
+Transaction: transactionTaxes = 4867.991249001127
+Transaction: pricePerm2 = 5221.970462734145
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0835134078686963
+Transaction: seller contracts as landlord = Contract[Contract(38952, 56883, House(0x0036, Lisboa, NotSocialNeighbourhood, 1.0, 87), 330.2470908580698), Contract(38952, 56888, House(0x0046, Lisboa, NotSocialNeighbourhood, 1.0, 100), 612.6386187656883), Contract(38952, 56896, House(0x0037, Lisboa, NotSocialNeighbourhood, 1.0, 18), 148.61282738426726)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 64818.04543235951
+Transaction: mortgage payment = 747.7785194044512
+Transaction: mortgage duration = 108.0
+Transaction: house.area = 68
+Transaction: house.location = Lisboa
+Transaction: house percentile = 8
+Transaction: household.wealth = 43319.28018601774
+Transaction: raw salary = 3742.419
+Transaction: liquid salary = 2384.3000005
+Transaction: household percentile = 73
+Transaction: household id = 61996
+Transaction: household size = 2
+Transaction: household age = 66
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 8
+Transaction: household unemployedTime = 0
+Transaction: area per person = 34.0
+Transaction: askPrice = 114104.5132392325
+Transaction: sellerId = 35457
+Transaction: bidValue = 107270.9400146569
+Transaction: consumerSurplus = 0.9488687302125826
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 1577.5138237449544
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Contract(14916, 61996, House(0x0056, Lisboa, NotSocialNeighbourhood, 1.0, 22), 784.6716135878521)
+Transaction: bid to ask price ratio = 0.9401112801712911
+Transaction: seller contracts as landlord = Contract[Contract(35457, 55084, House(0x003a, Lisboa, NotSocialNeighbourhood, 1.0, 13), 168.77490608084926), Contract(35457, 55119, House(0x0024, Lisboa, NotSocialNeighbourhood, 1.0, 65), 178.21762378692938)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 102
+Transaction: house.location = Lisboa
+Transaction: house percentile = 99
+Transaction: household.wealth = -1.1937435296420321e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 513108.71796744544
+Transaction: sellerId = 27601
+Transaction: bidValue = 570537.9481568204
+Transaction: consumerSurplus = 0.9917122305057097
+Transaction: transactionTaxes = 23827.0594378002
+Transaction: pricePerm2 = 5593.509295655102
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1119240975223863
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Contract(11007, 27601, House(0x008a, Lisboa, NotSocialNeighbourhood, 1.0, 68), 564.249188970756)
+########
+
+########
+Transaction: mortgageValue = 143334.80243582657
+Transaction: mortgage payment = 1817.3379971713714
+Transaction: mortgage duration = 96.0
+Transaction: house.area = 109
+Transaction: house.location = Lisboa
+Transaction: house percentile = 8
+Transaction: household.wealth = 40271.25684944862
+Transaction: raw salary = 10040.302999999996
+Transaction: liquid salary = 5244.247371499998
+Transaction: household percentile = 97
+Transaction: household id = 61122
+Transaction: household size = 3
+Transaction: household age = 68
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 12
+Transaction: household unemployedTime = 0
+Transaction: area per person = 36.333333333333336
+Transaction: askPrice = 183586.1950990759
+Transaction: sellerId = 65674
+Transaction: bidValue = 182800.63414828622
+Transaction: consumerSurplus = 0.9957210238473229
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 1677.0700380576718
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9957210238473229
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 136496.612458202
+Transaction: mortgage payment = 692.3676293905161
+Transaction: mortgage duration = 420.0
+Transaction: house.area = 91
+Transaction: house.location = Lisboa
+Transaction: house percentile = 12
+Transaction: household.wealth = 21089.227168534926
+Transaction: raw salary = 3359.0469999999996
+Transaction: liquid salary = 2196.6394064999995
+Transaction: household percentile = 69
+Transaction: household id = 62901
+Transaction: household size = 3
+Transaction: household age = 28
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 16
+Transaction: household unemployedTime = 0
+Transaction: area per person = 30.333333333333332
+Transaction: askPrice = 157088.92314462093
+Transaction: sellerId = -1
+Transaction: bidValue = 157164.05508336623
+Transaction: consumerSurplus = 1.0004782764897824
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 1727.0775283886398
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0004782764897824
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 87
+Transaction: house.location = Lisboa
+Transaction: house percentile = 85
+Transaction: household.wealth = -1.1996871797179782e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 352549.8129090622
+Transaction: sellerId = 18580
+Transaction: bidValue = 403149.56575986824
+Transaction: consumerSurplus = 0.9809461246969795
+Transaction: transactionTaxes = 9096.88178686841
+Transaction: pricePerm2 = 4633.90305471113
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1435251161624014
+Transaction: seller contracts as landlord = Contract[Contract(18580, 46520, House(0x0059, Lisboa, NotSocialNeighbourhood, 1.0, 97), 414.5188549399888), Contract(18580, 46552, House(0x009d, Lisboa, NotSocialNeighbourhood, 1.0, 80), 376.3920215295066), Contract(18580, 62824, House(0x0057, Lisboa, NotSocialNeighbourhood, 1.0, 85), 1100.697302168672)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 21
+Transaction: house.location = Lisboa
+Transaction: house percentile = 91
+Transaction: household.wealth = -1.2038096441934456e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 100457.04712084512
+Transaction: sellerId = 11382
+Transaction: bidValue = 112658.55020681072
+Transaction: consumerSurplus = 0.9865768049570512
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 5364.692866990987
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1214599018751543
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 50159.34154571051
+Transaction: mortgage payment = 266.7777645014222
+Transaction: mortgage duration = 372.0
+Transaction: house.area = 43
+Transaction: house.location = Lisboa
+Transaction: house percentile = 13
+Transaction: household.wealth = 23249.83420510843
+Transaction: raw salary = 909.08
+Transaction: liquid salary = 797.5008
+Transaction: household percentile = 46
+Transaction: household id = 15162
+Transaction: household size = 1
+Transaction: household age = 33
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 4
+Transaction: household unemployedTime = 0
+Transaction: area per person = 43.0
+Transaction: askPrice = 74852.60351151942
+Transaction: sellerId = -1
+Transaction: bidValue = 72365.25701063171
+Transaction: consumerSurplus = 0.9667700736621015
+Transaction: transactionTaxes = 578.9220560850538
+Transaction: pricePerm2 = 1682.9129537356212
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9667700736621015
+########
+
+########
+Transaction: mortgageValue = 151795.7237219858
+Transaction: mortgage payment = 762.2052048641756
+Transaction: mortgage duration = 432.0
+Transaction: house.area = 88
+Transaction: house.location = Lisboa
+Transaction: house percentile = 22
+Transaction: household.wealth = 23727.049509863726
+Transaction: raw salary = 5737.315999999997
+Transaction: liquid salary = 3348.7815979999987
+Transaction: household percentile = 84
+Transaction: household id = 62095
+Transaction: household size = 3
+Transaction: household age = 26
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 16
+Transaction: household unemployedTime = 0
+Transaction: area per person = 29.333333333333332
+Transaction: askPrice = 172263.2384289858
+Transaction: sellerId = 10989
+Transaction: bidValue = 175048.23224165224
+Transaction: consumerSurplus = 1.0161670814856678
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 1989.1844572915027
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0161670814856678
+Transaction: seller contracts as landlord = Contract[Contract(10989, 69042, House(0x006f, Lisboa, NotSocialNeighbourhood, 1.0, 63), 1246.332738995786)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 92
+Transaction: house.location = Lisboa
+Transaction: house percentile = 75
+Transaction: household.wealth = -1.2049362296955137e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 316455.1854986777
+Transaction: sellerId = 59268
+Transaction: bidValue = 350115.28227702127
+Transaction: consumerSurplus = 0.9643615484450885
+Transaction: transactionTaxes = 4429.864840377872
+Transaction: pricePerm2 = 3805.6008943154484
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1063660774757131
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Contract(43619, 59268, House(0x0043, Lisboa, NotSocialNeighbourhood, 1.0, 99), 436.95077232909057)
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 43
+Transaction: house.location = Lisboa
+Transaction: house percentile = 86
+Transaction: household.wealth = -1.2084816811666876e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 193062.5494569741
+Transaction: sellerId = 19375
+Transaction: bidValue = 209903.74448799738
+Transaction: consumerSurplus = 0.9820883666695985
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 4881.4824299534275
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0872318068853457
+Transaction: seller contracts as landlord = Contract[Contract(19375, 47002, House(0x003b, Lisboa, NotSocialNeighbourhood, 1.0, 55), 329.04495759110966), Contract(19375, 47023, House(0x0064, Lisboa, NotSocialNeighbourhood, 1.0, 88), 602.1756544611176), Contract(19375, 47029, House(0x002c, Lisboa, NotSocialNeighbourhood, 1.0, 54), 237.08134542661134), Contract(19375, 47035, House(0x006e, Lisboa, NotSocialNeighbourhood, 1.0, 65), 565.5323721433647), Contract(19375, 47036, House(0x0106, Lisboa, NotSocialNeighbourhood, 1.0, 34), 1360.2535026012768)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 155969.92531840174
+Transaction: mortgage payment = 853.6004757051957
+Transaction: mortgage duration = 348.0
+Transaction: house.area = 57
+Transaction: house.location = Lisboa
+Transaction: house percentile = 73
+Transaction: household.wealth = 23837.67143990076
+Transaction: raw salary = 4744.3189999999995
+Transaction: liquid salary = 2874.7300504999994
+Transaction: household percentile = 81
+Transaction: household id = 61896
+Transaction: household size = 3
+Transaction: household age = 37
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 13
+Transaction: household unemployedTime = 0
+Transaction: area per person = 19.0
+Transaction: askPrice = 179056.00633053685
+Transaction: sellerId = -1
+Transaction: bidValue = 179330.84332950448
+Transaction: consumerSurplus = 1.0038132868843024
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 3146.1551461316576
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0015349219755314
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 138
+Transaction: house.location = Lisboa
+Transaction: house percentile = 99
+Transaction: household.wealth = -1.2105807186115676e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 617604.646032001
+Transaction: sellerId = 37517
+Transaction: bidValue = 678152.5995199677
+Transaction: consumerSurplus = 0.9917122305057097
+Transaction: transactionTaxes = 45593.296767357795
+Transaction: pricePerm2 = 4914.1492718838235
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0980367519528496
+Transaction: seller contracts as landlord = Contract[Contract(37517, 56069, House(0x003e, Lisboa, NotSocialNeighbourhood, 1.0, 39), 229.9781962609432), Contract(37517, 56076, House(0x007a, Lisboa, NotSocialNeighbourhood, 1.0, 96), 637.4493780457765), Contract(37517, 56089, House(0x0050, Lisboa, NotSocialNeighbourhood, 1.0, 94), 713.4337037061848), Contract(37517, 56091, House(0x0068, Lisboa, NotSocialNeighbourhood, 1.0, 68), 422.8227360919657)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 174203.44210571304
+Transaction: mortgage payment = 851.4040792591201
+Transaction: mortgage duration = 468.0
+Transaction: house.area = 112
+Transaction: house.location = Lisboa
+Transaction: house percentile = 16
+Transaction: household.wealth = 28130.05035757178
+Transaction: raw salary = 10702.300999999998
+Transaction: liquid salary = 5535.857490499999
+Transaction: household percentile = 99
+Transaction: household id = 61364
+Transaction: household size = 3
+Transaction: household age = 21
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 12
+Transaction: household unemployedTime = 0
+Transaction: area per person = 37.333333333333336
+Transaction: askPrice = 197928.1913411541
+Transaction: sellerId = 31281
+Transaction: bidValue = 201770.8914561334
+Transaction: consumerSurplus = 1.019414617437472
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 1801.5258165726195
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.019414617437472
+Transaction: seller contracts as landlord = Contract[Contract(31281, 52295, House(0x006c, Lisboa, NotSocialNeighbourhood, 1.0, 4), 327.85702180129744), Contract(31281, 52887, House(0x0030, Lisboa, NotSocialNeighbourhood, 1.0, 99), 260.46220701614), Contract(31281, 52919, House(0x002c, Lisboa, NotSocialNeighbourhood, 1.0, 5), 168.62675362948), Contract(31281, 52923, House(0x0027, Lisboa, NotSocialNeighbourhood, 1.0, 16), 89.66594782193918), Contract(31281, 52925, House(0x0014, Lisboa, NotSocialNeighbourhood, 1.0, 64), 131.31078544672883)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 54
+Transaction: house.location = Lisboa
+Transaction: house percentile = 82
+Transaction: household.wealth = -1.2178181775744408e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 232410.51961162247
+Transaction: sellerId = 69433
+Transaction: bidValue = 257977.23175313647
+Transaction: consumerSurplus = 0.9762976521645653
+Transaction: transactionTaxes = 77.38407674464543
+Transaction: pricePerm2 = 4777.356143576601
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1100066906792263
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 48765.612095905984
+Transaction: mortgage payment = 786.2720338349205
+Transaction: mortgage duration = 72.0
+Transaction: house.area = 55
+Transaction: house.location = Lisboa
+Transaction: house percentile = 15
+Transaction: household.wealth = 41471.88181901396
+Transaction: raw salary = 4068.5293749999987
+Transaction: liquid salary = 2543.931029062499
+Transaction: household percentile = 95
+Transaction: household id = 75708
+Transaction: household size = 1
+Transaction: household age = 71
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 2
+Transaction: household unemployedTime = 0
+Transaction: area per person = 55.0
+Transaction: askPrice = 94880.64044606488
+Transaction: sellerId = -1
+Transaction: bidValue = 88698.46853029728
+Transaction: consumerSurplus = 0.9366749516237517
+Transaction: transactionTaxes = 709.5877482423782
+Transaction: pricePerm2 = 1612.6994278235868
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9348426413786501
+########
+
+########
+Transaction: mortgageValue = 192794.98979293217
+Transaction: mortgage payment = 1241.5130726553696
+Transaction: mortgage duration = 252.0
+Transaction: house.area = 81
+Transaction: house.location = Lisboa
+Transaction: house percentile = 51
+Transaction: household.wealth = 29389.413926613888
+Transaction: raw salary = 10040.302999999996
+Transaction: liquid salary = 5244.247371499998
+Transaction: household percentile = 97
+Transaction: household id = 75368
+Transaction: household size = 2
+Transaction: household age = 48
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 4
+Transaction: household unemployedTime = 0
+Transaction: area per person = 40.5
+Transaction: askPrice = 217317.59784154684
+Transaction: sellerId = 42167
+Transaction: bidValue = 221596.61544101377
+Transaction: consumerSurplus = 1.0279567845625726
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 2735.76068445696
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.019690156903846
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 152
+Transaction: house.location = Lisboa
+Transaction: house percentile = 91
+Transaction: household.wealth = -1.2203987237327397e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 694281.1733581151
+Transaction: sellerId = 62404
+Transaction: bidValue = 784099.0807619281
+Transaction: consumerSurplus = 0.9865768049570512
+Transaction: transactionTaxes = 52797.65749181111
+Transaction: pricePerm2 = 5158.546583960054
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1293682024667033
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 193857.48527134358
+Transaction: mortgage payment = 955.5282499821681
+Transaction: mortgage duration = 456.0
+Transaction: house.area = 102
+Transaction: house.location = Lisboa
+Transaction: house percentile = 27
+Transaction: household.wealth = 30603.10975360363
+Transaction: raw salary = 9378.304999999997
+Transaction: liquid salary = 4952.637252499999
+Transaction: household percentile = 95
+Transaction: household id = 61826
+Transaction: household size = 3
+Transaction: household age = 23
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 12
+Transaction: household unemployedTime = 0
+Transaction: area per person = 34.0
+Transaction: askPrice = 219236.5173559002
+Transaction: sellerId = 38258
+Transaction: bidValue = 223848.53282987513
+Transaction: consumerSurplus = 1.0260856446093851
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 2194.5934591164228
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.021036711993048
+Transaction: seller contracts as landlord = Contract[Contract(38258, 56470, House(0x0057, Lisboa, NotSocialNeighbourhood, 1.0, 84), 887.8028143768868), Contract(38258, 56476, House(0x00aa, Lisboa, NotSocialNeighbourhood, 1.0, 14), 492.08394404565314), Contract(38258, 56482, House(0x0067, Lisboa, NotSocialNeighbourhood, 1.0, 55), 196.4696297972978)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 97614.54882106895
+Transaction: mortgage payment = 773.9651371415146
+Transaction: mortgage duration = 180.0
+Transaction: house.area = 44
+Transaction: house.location = Lisboa
+Transaction: house percentile = 58
+Transaction: household.wealth = 29027.03538518036
+Transaction: raw salary = 3696.155499999999
+Transaction: liquid salary = 2361.654017249999
+Transaction: household percentile = 89
+Transaction: household id = 75699
+Transaction: household size = 1
+Transaction: household age = 57
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 2
+Transaction: household unemployedTime = 0
+Transaction: area per person = 44.0
+Transaction: askPrice = 128633.41736424401
+Transaction: sellerId = 42167
+Transaction: bidValue = 126061.04349854571
+Transaction: consumerSurplus = 1.0159347457383703
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 2865.0237158760388
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9800022893085841
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 263689.86630421906
+Transaction: mortgage payment = 1421.9974668335428
+Transaction: mortgage duration = 360.0
+Transaction: house.area = 100
+Transaction: house.location = Lisboa
+Transaction: house percentile = 67
+Transaction: household.wealth = 39984.39471460263
+Transaction: raw salary = 11033.299999999997
+Transaction: liquid salary = 5681.662549999999
+Transaction: household percentile = 100
+Transaction: household id = 69363
+Transaction: household size = 4
+Transaction: household age = 35
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 10
+Transaction: household unemployedTime = 0
+Transaction: area per person = 25.0
+Transaction: askPrice = 306531.32947263593
+Transaction: sellerId = 17407
+Transaction: bidValue = 299554.1865719199
+Transaction: consumerSurplus = 1.0208936661923946
+Transaction: transactionTaxes = 3320.3865526097525
+Transaction: pricePerm2 = 2995.541865719199
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9772384019841636
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 53068.198078393194
+Transaction: mortgage payment = 263.9375305165017
+Transaction: mortgage duration = 444.0
+Transaction: house.area = 44
+Transaction: house.location = Lisboa
+Transaction: house percentile = 9
+Transaction: household.wealth = 17701.07809791818
+Transaction: raw salary = 1030.205
+Transaction: liquid salary = 886.223625
+Transaction: household percentile = 51
+Transaction: household id = 75321
+Transaction: household size = 1
+Transaction: household age = 25
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 5
+Transaction: household unemployedTime = 0
+Transaction: area per person = 44.0
+Transaction: askPrice = 74040.2496749603
+Transaction: sellerId = -1
+Transaction: bidValue = 69856.40338725496
+Transaction: consumerSurplus = 0.9574489159906989
+Transaction: transactionTaxes = 558.8512270980397
+Transaction: pricePerm2 = 1587.6455315285218
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9434922720267342
+########
+
+########
+Transaction: mortgageValue = 135780.8866106114
+Transaction: mortgage payment = 852.0816084774776
+Transaction: mortgage duration = 264.0
+Transaction: house.area = 62
+Transaction: house.location = Lisboa
+Transaction: house percentile = 52
+Transaction: household.wealth = 26802.318805099727
+Transaction: raw salary = 10371.301999999996
+Transaction: liquid salary = 5390.052430999998
+Transaction: household percentile = 98
+Transaction: household id = 75423
+Transaction: household size = 2
+Transaction: household age = 47
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 4
+Transaction: household unemployedTime = 0
+Transaction: area per person = 31.0
+Transaction: askPrice = 160962.65118797286
+Transaction: sellerId = 18675
+Transaction: bidValue = 162047.15903960913
+Transaction: consumerSurplus = 1.0067376366109289
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 2613.663855477567
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0067376366109289
+Transaction: seller contracts as landlord = Contract[Contract(18675, 46580, House(0x005b, Lisboa, NotSocialNeighbourhood, 1.0, 87), 717.7562059001856), Contract(18675, 46587, House(0x002a, Lisboa, NotSocialNeighbourhood, 1.0, 47), 235.7462201492535), Contract(18675, 46591, House(0x0060, Lisboa, NotSocialNeighbourhood, 1.0, 35), 488.0963445802582), Contract(18675, 46595, House(0x0039, Lisboa, NotSocialNeighbourhood, 1.0, 81), 498.94057854080006), Contract(18675, 60914, House(0x003b, Lisboa, NotSocialNeighbourhood, 1.0, 69), 635.271333541382)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 56914.05802189617
+Transaction: mortgage payment = 388.4182471529215
+Transaction: mortgage duration = 228.0
+Transaction: house.area = 37
+Transaction: house.location = Lisboa
+Transaction: house percentile = 20
+Transaction: household.wealth = 11160.956919978493
+Transaction: raw salary = 1439.9160000000002
+Transaction: liquid salary = 1157.99624
+Transaction: household percentile = 64
+Transaction: household id = 75447
+Transaction: household size = 1
+Transaction: household age = 52
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 4
+Transaction: household unemployedTime = 0
+Transaction: area per person = 37.0
+Transaction: askPrice = 68165.19067841663
+Transaction: sellerId = -1
+Transaction: bidValue = 67313.2894875745
+Transaction: consumerSurplus = 0.9875024014109907
+Transaction: transactionTaxes = 538.506315900596
+Transaction: pricePerm2 = 1819.2780942587701
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9875024014109905
+########
+
+########
+Transaction: mortgageValue = 85771.13373798967
+Transaction: mortgage payment = 525.5121101321649
+Transaction: mortgage duration = 276.0
+Transaction: house.area = 43
+Transaction: house.location = Lisboa
+Transaction: house percentile = 35
+Transaction: household.wealth = 13357.256968867754
+Transaction: raw salary = 3365.156499999999
+Transaction: liquid salary = 2199.6300067499997
+Transaction: household percentile = 87
+Transaction: household id = 75597
+Transaction: household size = 1
+Transaction: household age = 46
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 3
+Transaction: household unemployedTime = 0
+Transaction: area per person = 43.0
+Transaction: askPrice = 98232.56480854026
+Transaction: sellerId = 42167
+Transaction: bidValue = 98076.63250742071
+Transaction: consumerSurplus = 1.00960365777238
+Transaction: transactionTaxes = 784.6130600593657
+Transaction: pricePerm2 = 2280.851918777226
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9984126210954232
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 68465.90451043632
+Transaction: mortgage payment = 401.84208035624255
+Transaction: mortgage duration = 300.0
+Transaction: house.area = 52
+Transaction: house.location = Lisboa
+Transaction: house percentile = 8
+Transaction: household.wealth = 14197.233798289155
+Transaction: raw salary = 2537.6589999999983
+Transaction: liquid salary = 1785.747545199999
+Transaction: household percentile = 82
+Transaction: household id = 75545
+Transaction: household size = 1
+Transaction: household age = 43
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 3
+Transaction: household unemployedTime = 0
+Transaction: area per person = 52.0
+Transaction: askPrice = 88703.10737502592
+Transaction: sellerId = 68640
+Transaction: bidValue = 81725.39050869017
+Transaction: consumerSurplus = 0.9213362747616629
+Transaction: transactionTaxes = 653.8031240695213
+Transaction: pricePerm2 = 1571.6421251671186
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9213362747616628
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 289613.0933283517
+Transaction: mortgage payment = 1976.506578038345
+Transaction: mortgage duration = 228.0
+Transaction: house.area = 118
+Transaction: house.location = Lisboa
+Transaction: house percentile = 65
+Transaction: household.wealth = 49103.98386566505
+Transaction: raw salary = 11033.299999999997
+Transaction: liquid salary = 5681.662549999999
+Transaction: household percentile = 100
+Transaction: household id = 58910
+Transaction: household size = 3
+Transaction: household age = 52
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = 39.333333333333336
+Transaction: askPrice = 360456.9623794354
+Transaction: sellerId = 18968
+Transaction: bidValue = 334664.777129323
+Transaction: consumerSurplus = 0.950145326938652
+Transaction: transactionTaxes = 3070.2203873804247
+Transaction: pricePerm2 = 2836.1421790620593
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Contract(42664, 58910, House(0x001e, Lisboa, NotSocialNeighbourhood, 1.0, 72), 111.00256869361952)
+Transaction: bid to ask price ratio = 0.9284458674903822
+Transaction: seller contracts as landlord = Contract[Contract(18968, 46764, House(0x0051, Lisboa, NotSocialNeighbourhood, 1.0, 68), 313.76527332106184), Contract(18968, 46777, House(0x005b, Lisboa, NotSocialNeighbourhood, 1.0, 76), 588.8443775793063), Contract(18968, 46778, House(0x005d, Lisboa, NotSocialNeighbourhood, 1.0, 61), 491.08019566427987), Contract(18968, 62564, House(0x0073, Lisboa, NotSocialNeighbourhood, 1.0, 43), 1250.7953037693978)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 183328.3876005448
+Transaction: mortgage payment = 1292.8235059864307
+Transaction: mortgage duration = 216.0
+Transaction: house.area = 75
+Transaction: house.location = Lisboa
+Transaction: house percentile = 56
+Transaction: household.wealth = 28182.44283358886
+Transaction: raw salary = 8054.308999999999
+Transaction: liquid salary = 4369.417014499999
+Transaction: household percentile = 91
+Transaction: household id = 75534
+Transaction: household size = 2
+Transaction: household age = 53
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 3
+Transaction: household unemployedTime = 0
+Transaction: area per person = 37.5
+Transaction: askPrice = 207168.5414179005
+Transaction: sellerId = -1
+Transaction: bidValue = 210947.1815774619
+Transaction: consumerSurplus = 1.0187955436610192
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 2812.6290876994917
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0182394495501086
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 142
+Transaction: house.location = Lisboa
+Transaction: house percentile = 86
+Transaction: household.wealth = -1.2287676911152771e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 625134.2940346705
+Transaction: sellerId = -1
+Transaction: bidValue = 706621.414218438
+Transaction: consumerSurplus = 0.9820883666695985
+Transaction: transactionTaxes = 47529.17616685378
+Transaction: pricePerm2 = 4976.207142383366
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1303513836328554
+########
+
+########
+Transaction: mortgageValue = 152572.89179283901
+Transaction: mortgage payment = 878.3620637705649
+Transaction: mortgage duration = 312.0
+Transaction: house.area = 62
+Transaction: house.location = Lisboa
+Transaction: house percentile = 52
+Transaction: household.wealth = 25616.71363653202
+Transaction: raw salary = 4317.477000000001
+Transaction: liquid salary = 2665.7908915000003
+Transaction: household percentile = 79
+Transaction: household id = 48854
+Transaction: household size = 2
+Transaction: household age = 41
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 5
+Transaction: household unemployedTime = 0
+Transaction: area per person = 31.0
+Transaction: askPrice = 176181.6553933252
+Transaction: sellerId = 18675
+Transaction: bidValue = 177677.2711566404
+Transaction: consumerSurplus = 1.0131825835123045
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 2865.762438010329
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Contract(23200, 48854, House(0x0071, Lisboa, NotSocialNeighbourhood, 1.0, 39), 680.4255273091325)
+Transaction: bid to ask price ratio = 1.0084890550039176
+Transaction: seller contracts as landlord = Contract[Contract(18675, 46580, House(0x005b, Lisboa, NotSocialNeighbourhood, 1.0, 87), 717.7562059001856), Contract(18675, 46587, House(0x002a, Lisboa, NotSocialNeighbourhood, 1.0, 47), 235.7462201492535), Contract(18675, 46591, House(0x0060, Lisboa, NotSocialNeighbourhood, 1.0, 35), 488.0963445802582), Contract(18675, 46595, House(0x0039, Lisboa, NotSocialNeighbourhood, 1.0, 81), 498.94057854080006), Contract(18675, 60914, House(0x003b, Lisboa, NotSocialNeighbourhood, 1.0, 69), 635.271333541382)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 238482.84870463752
+Transaction: mortgage payment = 1399.7104798074604
+Transaction: mortgage duration = 300.0
+Transaction: house.area = 88
+Transaction: house.location = Lisboa
+Transaction: house percentile = 69
+Transaction: household.wealth = 37703.679818042154
+Transaction: raw salary = 9709.303999999996
+Transaction: liquid salary = 5098.442311999998
+Transaction: household percentile = 96
+Transaction: household id = 60804
+Transaction: household size = 3
+Transaction: household age = 42
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 8
+Transaction: household unemployedTime = 0
+Transaction: area per person = 29.333333333333332
+Transaction: askPrice = 267811.3640327964
+Transaction: sellerId = 10388
+Transaction: bidValue = 274097.67618396925
+Transaction: consumerSurplus = 1.0293852142224031
+Transaction: transactionTaxes = 1334.778742349603
+Transaction: pricePerm2 = 3114.746320272378
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0234729103967486
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 100168.6826867791
+Transaction: mortgage payment = 832.3318759812662
+Transaction: mortgage duration = 168.0
+Transaction: house.area = 48
+Transaction: house.location = Lisboa
+Transaction: house percentile = 63
+Transaction: household.wealth = 39577.993422685104
+Transaction: raw salary = 4221.634
+Transaction: liquid salary = 2618.8757429999996
+Transaction: household percentile = 78
+Transaction: household id = 62235
+Transaction: household size = 3
+Transaction: household age = 59
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 18
+Transaction: household unemployedTime = 0
+Transaction: area per person = 16.0
+Transaction: askPrice = 140872.20043244585
+Transaction: sellerId = 27601
+Transaction: bidValue = 138955.1162410105
+Transaction: consumerSurplus = 0.9863913235858435
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 2894.8982550210517
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9863913235858434
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Contract(11007, 27601, House(0x008a, Lisboa, NotSocialNeighbourhood, 1.0, 68), 564.249188970756)
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 53
+Transaction: house.location = Lisboa
+Transaction: house percentile = 77
+Transaction: household.wealth = -1.23630919701913e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 223880.32408494025
+Transaction: sellerId = 24737
+Transaction: bidValue = 246888.04623496265
+Transaction: consumerSurplus = 0.9664267109271554
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 4658.265023301182
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1027679508865338
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 271374.2116683319
+Transaction: mortgage payment = 1747.5279400654351
+Transaction: mortgage duration = 252.0
+Transaction: house.area = 130
+Transaction: house.location = Lisboa
+Transaction: house percentile = 39
+Transaction: household.wealth = 41146.964240892405
+Transaction: raw salary = 10371.301999999996
+Transaction: liquid salary = 5390.052430999998
+Transaction: household percentile = 98
+Transaction: household id = 73441
+Transaction: household size = 5
+Transaction: household age = 48
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 10
+Transaction: household unemployedTime = 0
+Transaction: area per person = 26.0
+Transaction: askPrice = 306122.8116560078
+Transaction: sellerId = 5870
+Transaction: bidValue = 307739.40317662933
+Transaction: consumerSurplus = 1.0075668016045731
+Transaction: transactionTaxes = 3958.8334477770895
+Transaction: pricePerm2 = 2367.226178281764
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0052808593775695
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 54
+Transaction: house.location = Lisboa
+Transaction: house percentile = 92
+Transaction: household.wealth = -1.2387780774814796e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 262521.70066238305
+Transaction: sellerId = 8961
+Transaction: bidValue = 293454.03031273955
+Transaction: consumerSurplus = 0.9873195981163336
+Transaction: transactionTaxes = 2844.5743643936858
+Transaction: pricePerm2 = 5434.333894680362
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.1178277055660901
+Transaction: seller contracts as landlord = Contract[Contract(8961, 22465, House(0x0029, Lisboa, NotSocialNeighbourhood, 1.0, 50), 74.74176904369445), Contract(8961, 22509, House(0x004c, Lisboa, NotSocialNeighbourhood, 1.0, 30), 191.96794744859451)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 23
+Transaction: house.location = Lisboa
+Transaction: house percentile = 96
+Transaction: household.wealth = -1.241741063528251e8
+Transaction: raw salary = 482.19
+Transaction: liquid salary = 429.1491
+Transaction: household percentile = 0
+Transaction: household id = -304
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 110715.91009709629
+Transaction: sellerId = 42167
+Transaction: bidValue = 119888.50882024318
+Transaction: consumerSurplus = 0.9899734656830368
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 5212.543861749704
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0828480632557926
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+Rental: house.area = 192
+Rental: house.location = Lisboa
+Rental: house percentile = 99
+Rental: household.wealth = 24995.879789902378
+Rental: raw salary = 9709.303999999996
+Rental: liquid salary = 5098.442311999998
+Rental: household percentile = 96
+Rental: household id = 62104
+Rental: household size = 3
+Rental: household age = 34
+Rental: household residencyZone = Lisboa
+Rental: household homelessTime = 16
+Rental: household unemployedTime = 0
+Rental: area per person = 64.0
+Rental: askPrice = 2340.6222479193643
+Rental: sellerId = 26397
+Rental: bidValue = 2527.8720277529137
+Rental: consumerSurplus = 1.08
+Rental: pricePerm2 = 13.166000144546425
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[Contract(26397, 50426, House(0x005b, Lisboa, NotSocialNeighbourhood, 1.0, 12), 287.8454805930667), Contract(26397, 50432, House(0x0085, Lisboa, NotSocialNeighbourhood, 1.0, 11), 547.7191842285274)]
+Rental: seller contract as tenant = Nothing
+########
+
+Rental: house.area = 138
+Rental: house.location = Lisboa
+Rental: house percentile = 81
+Rental: household.wealth = 31967.26721387067
+Rental: raw salary = 7723.309999999999
+Rental: liquid salary = 4223.611954999999
+Rental: household percentile = 90
+Rental: household id = 61667
+Rental: household size = 3
+Rental: household age = 36
+Rental: household residencyZone = Lisboa
+Rental: household homelessTime = 19
+Rental: household unemployedTime = 0
+Rental: area per person = 46.0
+Rental: askPrice = 1560.4124720901384
+Rental: sellerId = 38324
+Rental: bidValue = 1681.9181460657292
+Rental: consumerSurplus = 1.0793350017753915
+Rental: pricePerm2 = 12.187812652650212
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[Contract(38324, 56496, House(0x0044, Lisboa, NotSocialNeighbourhood, 1.0, 93), 369.034935645982), Contract(38324, 56499, House(0x007b, Lisboa, NotSocialNeighbourhood, 1.0, 34), 339.69131676926776), Contract(38324, 56509, House(0x0033, Lisboa, NotSocialNeighbourhood, 1.0, 36), 138.63489238424262), Contract(38324, 56511, House(0x003f, Lisboa, NotSocialNeighbourhood, 1.0, 1), 145.31949499467024)]
+Rental: seller contract as tenant = Nothing
+########
+
+Rental: house.area = 103
+Rental: house.location = Lisboa
+Rental: house percentile = 76
+Rental: household.wealth = 24814.43958989652
+Rental: raw salary = 4125.791
+Rental: liquid salary = 2571.9605945000003
+Rental: household percentile = 77
+Rental: household id = 62723
+Rental: household size = 3
+Rental: household age = 44
+Rental: household residencyZone = Lisboa
+Rental: household homelessTime = 20
+Rental: household unemployedTime = 0
+Rental: area per person = 34.333333333333336
+Rental: askPrice = 1165.3019678190517
+Rental: sellerId = 20904
+Rental: bidValue = 1242.5354169318719
+Rental: consumerSurplus = 1.0676396674990811
+Rental: pricePerm2 = 12.063450649823999
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[]
+Rental: seller contract as tenant = Nothing
+########
+
+Rental: house.area = 95
+Rental: house.location = Lisboa
+Rental: house percentile = 85
+Rental: household.wealth = 7005.3223268755255
+Rental: raw salary = 3934.105
+Rental: liquid salary = 2478.1302975
+Rental: household percentile = 75
+Rental: household id = 60799
+Rental: household size = 2
+Rental: household age = 60
+Rental: household residencyZone = Lisboa
+Rental: household homelessTime = 11
+Rental: household unemployedTime = 0
+Rental: area per person = 47.5
+Rental: askPrice = 1099.4273166717387
+Rental: sellerId = 13461
+Rental: bidValue = 1170.4103555059796
+Rental: consumerSurplus = 1.0662206083285195
+Rental: pricePerm2 = 12.3201090053261
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[]
+Rental: seller contract as tenant = Nothing
+########
+
+Rental: house.area = 65
+Rental: house.location = Lisboa
+Rental: house percentile = 74
+Rental: household.wealth = 33986.641456288315
+Rental: raw salary = 2205.76
+Rental: liquid salary = 1612.3566
+Rental: household percentile = 54
+Rental: household id = 61327
+Rental: household size = 2
+Rental: household age = 69
+Rental: household residencyZone = Lisboa
+Rental: household homelessTime = 14
+Rental: household unemployedTime = 0
+Rental: area per person = 32.5
+Rental: askPrice = 753.8802634053957
+Rental: sellerId = 30278
+Rental: bidValue = 789.5720474759073
+Rental: consumerSurplus = 1.053503248717455
+Rental: pricePerm2 = 12.147262268860112
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[Contract(30278, 52386, House(0x0041, Lisboa, NotSocialNeighbourhood, 1.0, 80), 508.6187562898066), Contract(30278, 52399, House(0x0029, Lisboa, NotSocialNeighbourhood, 1.0, 48), 215.55554624055273)]
+Rental: seller contract as tenant = Nothing
+########
+
+Rental: house.area = 176
+Rental: house.location = Lisboa
+Rental: house percentile = 23
+Rental: household.wealth = 28037.85494069785
+Rental: raw salary = 10702.300999999998
+Rental: liquid salary = 5535.857490499999
+Rental: household percentile = 99
+Rental: household id = 69715
+Rental: household size = 4
+Rental: household age = 36
+Rental: household residencyZone = Lisboa
+Rental: household homelessTime = 28
+Rental: household unemployedTime = 0
+Rental: area per person = 44.0
+Rental: askPrice = 1548.3008573677566
+Rental: sellerId = 31637
+Rental: bidValue = 1629.472437517109
+Rental: consumerSurplus = 1.0524262321260682
+Rental: pricePerm2 = 9.258366122256302
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[]
+Rental: seller contract as tenant = Nothing
+########
+
+Rental: house.area = 71
+Rental: house.location = Lisboa
+Rental: house percentile = 46
+Rental: household.wealth = 57109.003233470394
+Rental: raw salary = 4661.56925
+Rental: liquid salary = 2834.2240478749995
+Rental: household percentile = 81
+Rental: household id = 62911
+Rental: household size = 2
+Rental: household age = 80
+Rental: household residencyZone = Lisboa
+Rental: household homelessTime = 15
+Rental: household unemployedTime = 0
+Rental: area per person = 35.5
+Rental: askPrice = 732.0019534052811
+Rental: sellerId = 26173
+Rental: bidValue = 768.0614626004441
+Rental: consumerSurplus = 1.0492614931250028
+Rental: pricePerm2 = 10.817767078879495
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[]
+Rental: seller contract as tenant = Nothing
+########
+
+Rental: house.area = 78
+Rental: house.location = Lisboa
+Rental: house percentile = 33
+Rental: household.wealth = 42229.20706001302
+Rental: raw salary = 4413.32
+Rental: liquid salary = 2712.7060399999996
+Rental: household percentile = 80
+Rental: household id = 61903
+Rental: household size = 2
+Rental: household age = 76
+Rental: household residencyZone = Lisboa
+Rental: household homelessTime = 16
+Rental: household unemployedTime = 0
+Rental: area per person = 39.0
+Rental: askPrice = 736.4457802028022
+Rental: sellerId = 32530
+Rental: bidValue = 761.7131091656144
+Rental: consumerSurplus = 1.0491223319140042
+Rental: pricePerm2 = 9.76555268161044
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[Contract(32530, 53527, House(0x0032, Lisboa, NotSocialNeighbourhood, 1.0, 3), 128.89971566215056), Contract(32530, 53552, House(0x002c, Lisboa, NotSocialNeighbourhood, 1.0, 51), 272.47187650837833)]
+Rental: seller contract as tenant = Nothing
+########
+
+Rental: house.area = 48
+Rental: house.location = Lisboa
+Rental: house percentile = 79
+Rental: household.wealth = 27502.586152137243
+Rental: raw salary = 1679.5234999999998
+Rental: liquid salary = 1311.3450399999997
+Rental: household percentile = 69
+Rental: household id = 60967
+Rental: household size = 2
+Rental: household age = 56
+Rental: household residencyZone = Lisboa
+Rental: household homelessTime = 26
+Rental: household unemployedTime = 13
+Rental: area per person = 24.0
+Rental: askPrice = 558.7379490603446
+Rental: sellerId = 19430
+Rental: bidValue = 581.0567684214493
+Rental: consumerSurplus = 1.0456268698195128
+Rental: pricePerm2 = 12.105349342113527
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[Contract(19430, 47075, House(0x0023, Lisboa, NotSocialNeighbourhood, 1.0, 22), 135.89372723065028)]
+Rental: seller contract as tenant = Nothing
+########
+
+Rental: house.area = 53
+Rental: house.location = Lisboa
+Rental: house percentile = 57
+Rental: household.wealth = 18472.201580053374
+Rental: raw salary = 1535.7590000000002
+Rental: liquid salary = 1219.3357600000002
+Rental: household percentile = 66
+Rental: household id = 75214
+Rental: household size = 1
+Rental: household age = 48
+Rental: household residencyZone = Lisboa
+Rental: household homelessTime = 6
+Rental: household unemployedTime = 0
+Rental: area per person = 53.0
+Rental: askPrice = 558.644770564967
+Rental: sellerId = 56987
+Rental: bidValue = 578.9053176782803
+Rental: consumerSurplus = 1.0406094412895064
+Rental: pricePerm2 = 10.92274184298642
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[]
+Rental: seller contract as tenant = Contract(39153, 56987, House(0x002f, Lisboa, NotSocialNeighbourhood, 1.0, 8), 185.62799473292253)
+########
+
+Rental: house.area = 51
+Rental: house.location = Lisboa
+Rental: house percentile = 63
+Rental: household.wealth = 9500.559828223484
+Rental: raw salary = 1583.6805000000004
+Rental: liquid salary = 1250.0055200000002
+Rental: household percentile = 67
+Rental: household id = 75357
+Rental: household size = 1
+Rental: household age = 27
+Rental: household residencyZone = Lisboa
+Rental: household homelessTime = 4
+Rental: household unemployedTime = 0
+Rental: area per person = 51.0
+Rental: askPrice = 567.3546559804827
+Rental: sellerId = 2727
+Rental: bidValue = 586.5267306304722
+Rental: consumerSurplus = 1.033792046029581
+Rental: pricePerm2 = 11.500524130009259
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[Contract(2727, 5479, House(0x003a, Lisboa, NotSocialNeighbourhood, 1.0, 86), 137.1840635449095), Contract(2727, 5550, House(0x0032, Lisboa, NotSocialNeighbourhood, 1.0, 30), 241.40618005370933), Contract(2727, 5552, House(0x003a, Lisboa, NotSocialNeighbourhood, 1.0, 20), 155.63272112392147), Contract(2727, 5597, House(0x0069, Lisboa, NotSocialNeighbourhood, 1.0, 30), 295.10258915270936), Contract(2727, 5605, House(0x005d, Lisboa, NotSocialNeighbourhood, 1.0, 45), 309.95631945238796), Contract(2727, 5630, House(0x0030, Lisboa, NotSocialNeighbourhood, 1.0, 45), 149.87140207151546)]
+Rental: seller contract as tenant = Nothing
+########
+
+Rental: house.area = 95
+Rental: house.location = Lisboa
+Rental: house percentile = 25
+Rental: household.wealth = 45315.14262029798
+Rental: raw salary = 4909.818499999998
+Rental: liquid salary = 2955.742055749999
+Rental: household percentile = 82
+Rental: household id = 60787
+Rental: household size = 2
+Rental: household age = 101
+Rental: household residencyZone = Lisboa
+Rental: household homelessTime = 15
+Rental: household unemployedTime = 0
+Rental: area per person = 47.5
+Rental: askPrice = 880.8684338020863
+Rental: sellerId = 26837
+Rental: bidValue = 913.7613627914652
+Rental: consumerSurplus = 1.042181187336987
+Rental: pricePerm2 = 9.618540660962791
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[Contract(26837, 50697, House(0x0053, Lisboa, NotSocialNeighbourhood, 1.0, 73), 497.9352813553777), Contract(26837, 50702, House(0x0052, Lisboa, NotSocialNeighbourhood, 1.0, 67), 590.0144863928977), Contract(26837, 50706, House(0x0060, Lisboa, NotSocialNeighbourhood, 1.0, 91), 412.6665824384442), Contract(26837, 50707, House(0x003e, Lisboa, NotSocialNeighbourhood, 1.0, 40), 505.48820670791764)]
+Rental: seller contract as tenant = Nothing
+########
+
+Rental: house.area = 61
+Rental: house.location = Lisboa
+Rental: house percentile = 53
+Rental: household.wealth = 27522.678507498687
+Rental: raw salary = 4068.5293749999987
+Rental: liquid salary = 2543.931029062499
+Rental: household percentile = 95
+Rental: household id = 75386
+Rental: household size = 1
+Rental: household age = 85
+Rental: household residencyZone = Lisboa
+Rental: household homelessTime = 4
+Rental: household unemployedTime = 0
+Rental: area per person = 61.0
+Rental: askPrice = 647.6273606807101
+Rental: sellerId = 29914
+Rental: bidValue = 666.4267248846347
+Rental: consumerSurplus = 1.0290280574066002
+Rental: pricePerm2 = 10.92502827679729
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[Contract(29914, 52211, House(0x0048, Lisboa, NotSocialNeighbourhood, 1.0, 47), 229.55733181202146), Contract(29914, 52246, House(0x0036, Lisboa, NotSocialNeighbourhood, 1.0, 14), 164.58652189946858)]
+Rental: seller contract as tenant = Nothing
+########
+
+Rental: house.area = 112
+Rental: house.location = Lisboa
+Rental: house percentile = 16
+Rental: household.wealth = 59433.93236118735
+Rental: raw salary = 8385.307999999997
+Rental: liquid salary = 4515.222073999999
+Rental: household percentile = 96
+Rental: household id = 66535
+Rental: household size = 3
+Rental: household age = 87
+Rental: household residencyZone = Lisboa
+Rental: household homelessTime = 29
+Rental: household unemployedTime = 0
+Rental: area per person = 37.333333333333336
+Rental: askPrice = 1016.3348635244549
+Rental: sellerId = 31281
+Rental: bidValue = 1053.1396737256161
+Rental: consumerSurplus = 1.0385575859162237
+Rental: pricePerm2 = 9.403032801121572
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[Contract(31281, 52295, House(0x006c, Lisboa, NotSocialNeighbourhood, 1.0, 4), 327.85702180129744), Contract(31281, 52887, House(0x0030, Lisboa, NotSocialNeighbourhood, 1.0, 99), 260.46220701614), Contract(31281, 52919, House(0x002c, Lisboa, NotSocialNeighbourhood, 1.0, 5), 168.62675362948), Contract(31281, 52923, House(0x0027, Lisboa, NotSocialNeighbourhood, 1.0, 16), 89.66594782193918), Contract(31281, 52925, House(0x0014, Lisboa, NotSocialNeighbourhood, 1.0, 64), 131.31078544672883)]
+Rental: seller contract as tenant = Nothing
+########
+
+Rental: house.area = 122
+Rental: house.location = Lisboa
+Rental: house percentile = 9
+Rental: household.wealth = 54211.020772999174
+Rental: raw salary = 6647.563249999999
+Rental: liquid salary = 3749.7455116249994
+Rental: household percentile = 89
+Rental: household id = 60864
+Rental: household size = 3
+Rental: household age = 73
+Rental: household residencyZone = Lisboa
+Rental: household homelessTime = 19
+Rental: household unemployedTime = 0
+Rental: area per person = 40.666666666666664
+Rental: askPrice = 1034.4865222082706
+Rental: sellerId = 13461
+Rental: bidValue = 1057.173903624711
+Rental: consumerSurplus = 1.0234889438285282
+Rental: pricePerm2 = 8.66535986577632
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[Contract(13461, 60799, House(0x005f, Lisboa, NotSocialNeighbourhood, 1.0, 85), 1170.4103555059796)]
+Rental: seller contract as tenant = Nothing
+########
+
+Rental: house.area = 67
+Rental: house.location = Lisboa
+Rental: house percentile = 25
+Rental: household.wealth = 18864.33654058756
+Rental: raw salary = 2351.1099999999997
+Rental: liquid salary = 1690.1188499999998
+Rental: household percentile = 57
+Rental: household id = 75029
+Rental: household size = 2
+Rental: household age = 51
+Rental: household residencyZone = Lisboa
+Rental: household homelessTime = 7
+Rental: household unemployedTime = 0
+Rental: area per person = 33.5
+Rental: askPrice = 646.741509090994
+Rental: sellerId = 22308
+Rental: bidValue = 651.0799061579935
+Rental: consumerSurplus = 1.0067080850788397
+Rental: pricePerm2 = 9.717610539671545
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[Contract(22308, 48403, House(0x0046, Lisboa, NotSocialNeighbourhood, 1.0, 65), 237.72175967513053)]
+Rental: seller contract as tenant = Nothing
+########
+
+Rental: house.area = 142
+Rental: house.location = Lisboa
+Rental: house percentile = 7
+Rental: household.wealth = 61222.359724146736
+Rental: raw salary = 7392.311
+Rental: liquid salary = 4077.8068955
+Rental: household percentile = 92
+Rental: household id = 62462
+Rental: household size = 3
+Rental: household age = 85
+Rental: household residencyZone = Lisboa
+Rental: household homelessTime = 19
+Rental: household unemployedTime = 0
+Rental: area per person = 47.333333333333336
+Rental: askPrice = 1201.9112818990245
+Rental: sellerId = 40411
+Rental: bidValue = 1222.9894684352516
+Rental: consumerSurplus = 1.0175372232989806
+Rental: pricePerm2 = 8.612601890389096
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[]
+Rental: seller contract as tenant = Nothing
+########
+
+Rental: house.area = 81
+Rental: house.location = Lisboa
+Rental: house percentile = 10
+Rental: household.wealth = 9851.885952490033
+Rental: raw salary = 4125.791
+Rental: liquid salary = 2571.9605945000003
+Rental: household percentile = 77
+Rental: household id = 61927
+Rental: household size = 2
+Rental: household age = 53
+Rental: household residencyZone = Lisboa
+Rental: household homelessTime = 11
+Rental: household unemployedTime = 0
+Rental: area per person = 40.5
+Rental: askPrice = 726.790788419439
+Rental: sellerId = 42167
+Rental: bidValue = 724.1722339564157
+Rental: consumerSurplus = 1.009687274550579
+Rental: pricePerm2 = 8.940397950079205
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[]
+Rental: seller contract as tenant = Nothing
+########
+
+Rental: house.area = 61
+Rental: house.location = Lisboa
+Rental: house percentile = 14
+Rental: household.wealth = 19864.42809783769
+Rental: raw salary = 1302.228
+Rental: liquid salary = 1069.87592
+Rental: household percentile = 36
+Rental: household id = 62754
+Rental: household size = 2
+Rental: household age = 87
+Rental: household residencyZone = Lisboa
+Rental: household homelessTime = 12
+Rental: household unemployedTime = 0
+Rental: area per person = 30.5
+Rental: askPrice = 542.8549473477551
+Rental: sellerId = 23785
+Rental: bidValue = 534.4849483957751
+Rental: consumerSurplus = 0.9948193046157768
+Rental: pricePerm2 = 8.762048334356969
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[]
+Rental: seller contract as tenant = Nothing
+########
+
+Rental: house.area = 53
+Rental: house.location = Lisboa
+Rental: house percentile = 22
+Rental: household.wealth = 8518.998482111305
+Rental: raw salary = 1487.8375
+Rental: liquid salary = 1188.6660000000002
+Rental: household percentile = 65
+Rental: household id = 75471
+Rental: household size = 1
+Rental: household age = 25
+Rental: household residencyZone = Lisboa
+Rental: household homelessTime = 4
+Rental: household unemployedTime = 0
+Rental: area per person = 53.0
+Rental: askPrice = 490.60740633196883
+Rental: sellerId = 45448
+Rental: bidValue = 491.2373899777267
+Rental: consumerSurplus = 1.0020007250902863
+Rental: pricePerm2 = 9.26862999957975
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[Contract(45448, 60201, House(0x0030, Lisboa, NotSocialNeighbourhood, 1.0, 79), 313.2623345230405), Contract(45448, 60206, House(0x003c, Lisboa, NotSocialNeighbourhood, 1.0, 65), 159.95621855129266), Contract(45448, 60211, House(0x0032, Lisboa, NotSocialNeighbourhood, 1.0, 15), 237.15426653609762), Contract(45448, 60243, House(0x001f, Lisboa, NotSocialNeighbourhood, 1.0, 56), 114.91590997908746)]
+Rental: seller contract as tenant = Nothing
+########
+
+Rental: house.area = 54
+Rental: house.location = Lisboa
+Rental: house percentile = 18
+Rental: household.wealth = 37639.48191288375
+Rental: raw salary = 1323.3435
+Rental: liquid salary = 1083.38984
+Rental: household percentile = 37
+Rental: household id = 62179
+Rental: household size = 2
+Rental: household age = 91
+Rental: household residencyZone = Lisboa
+Rental: household homelessTime = 31
+Rental: household unemployedTime = 0
+Rental: area per person = 27.0
+Rental: askPrice = 495.3741494849735
+Rental: sellerId = 42167
+Rental: bidValue = 502.94136055895467
+Rental: consumerSurplus = 1.015275748808953
+Rental: pricePerm2 = 9.313728899239901
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[Contract(42167, 61927, House(0x0051, Lisboa, NotSocialNeighbourhood, 1.0, 10), 724.1722339564157)]
+Rental: seller contract as tenant = Nothing
+########
+
+Rental: house.area = 120
+Rental: house.location = Lisboa
+Rental: house percentile = 4
+Rental: household.wealth = 57136.00519273647
+Rental: raw salary = 4317.477000000001
+Rental: liquid salary = 2665.7908915000003
+Rental: household percentile = 79
+Rental: household id = 61720
+Rental: household size = 3
+Rental: household age = 67
+Rental: household residencyZone = Lisboa
+Rental: household homelessTime = 20
+Rental: household unemployedTime = 0
+Rental: area per person = 40.0
+Rental: askPrice = 1004.5142062535527
+Rental: sellerId = 20020
+Rental: bidValue = 1008.7570182677165
+Rental: consumerSurplus = 1.0060878870771326
+Rental: pricePerm2 = 8.406308485564304
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[]
+Rental: seller contract as tenant = Nothing
+########
+
+Rental: house.area = 87
+Rental: house.location = Lisboa
+Rental: house percentile = 6
+Rental: household.wealth = 40540.01842243711
+Rental: raw salary = 2060.41
+Rental: liquid salary = 1534.5943499999998
+Rental: household percentile = 51
+Rental: household id = 62245
+Rental: household size = 3
+Rental: household age = 65
+Rental: household residencyZone = Lisboa
+Rental: household homelessTime = 24
+Rental: household unemployedTime = 0
+Rental: area per person = 29.0
+Rental: askPrice = 736.1477252158749
+Rental: sellerId = 50705
+Rental: bidValue = 725.6025139986268
+Rental: consumerSurplus = 0.9856751425616975
+Rental: pricePerm2 = 8.34025878159341
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[]
+Rental: seller contract as tenant = Contract(26842, 50705, House(0x0044, Lisboa, NotSocialNeighbourhood, 1.0, 73), 347.1788602372066)
+########
+
+Rental: house.area = 62
+Rental: house.location = Lisboa
+Rental: house percentile = 8
+Rental: household.wealth = 40429.622198056844
+Rental: raw salary = 4689.152499999999
+Rental: liquid salary = 2847.7260487499993
+Rental: household percentile = 100
+Rental: household id = 75300
+Rental: household size = 1
+Rental: household age = 92
+Rental: household residencyZone = Lisboa
+Rental: household homelessTime = 5
+Rental: household unemployedTime = 0
+Rental: area per person = 62.0
+Rental: askPrice = 536.3049361716432
+Rental: sellerId = 38537
+Rental: bidValue = 506.8756755620505
+Rental: consumerSurplus = 0.9503766162664639
+Rental: pricePerm2 = 8.175414121968556
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[Contract(38537, 56481, House(0x0054, Lisboa, NotSocialNeighbourhood, 1.0, 9), 462.24673889812345), Contract(38537, 56603, House(0x004b, Lisboa, NotSocialNeighbourhood, 1.0, 35), 578.8382877742274)]
+Rental: seller contract as tenant = Nothing
+########
+
+Rental: house.area = 147
+Rental: house.location = Lisboa
+Rental: house percentile = 2
+Rental: household.wealth = 37406.22187683561
+Rental: raw salary = 3862.22275
+Rental: liquid salary = 2442.9439361249997
+Rental: household percentile = 79
+Rental: household id = 67286
+Rental: household size = 4
+Rental: household age = 79
+Rental: household residencyZone = Lisboa
+Rental: household homelessTime = 28
+Rental: household unemployedTime = 0
+Rental: area per person = 36.75
+Rental: askPrice = 1235.4493349291083
+Rental: sellerId = 32049
+Rental: bidValue = 1217.6623712877931
+Rental: consumerSurplus = 0.9856028384665925
+Rental: pricePerm2 = 8.283417491753696
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[]
+Rental: seller contract as tenant = Contract(12712, 32049, House(0x0037, Lisboa, NotSocialNeighbourhood, 1.0, 5), 170.7714736124589)
+########
+
+Rental: house.area = 28
+Rental: house.location = Lisboa
+Rental: house percentile = 20
+Rental: household.wealth = 24606.927607405687
+Rental: raw salary = 707.422
+Rental: liquid salary = 629.60558
+Rental: household percentile = 36
+Rental: household id = 75113
+Rental: household size = 1
+Rental: household age = 44
+Rental: household residencyZone = Lisboa
+Rental: household homelessTime = 7
+Rental: household unemployedTime = 0
+Rental: area per person = 28.0
+Rental: askPrice = 251.19708155383455
+Rental: sellerId = 3964
+Rental: bidValue = 240.51233546933875
+Rental: consumerSurplus = 0.9574646886086297
+Rental: pricePerm2 = 8.589726266762097
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[Contract(3964, 61874, House(0x0039, Lisboa, NotSocialNeighbourhood, 1.0, 8), 425.0593835062635)]
+Rental: seller contract as tenant = Nothing
+########
+
+price of newly built house = 79046.50902271588
+price of newly built house = 95444.06391766063
+price of newly built house = 104341.39190998494
+price of newly built house = 378884.0113095013
+price of newly built house = 313563.85072101577
+price of newly built house = 432981.3197895396
+price of newly built house = 211736.42970389803
+price of newly built house = 159352.81381656253
+price of newly built house = 172946.40857807227
+price of newly built house = 78227.74496449433
+price of newly built house = 220006.6558102008
+price of newly built house = 156626.31054625424
+price of newly built house = 259031.83152444137
+price of newly built house = 305206.4128306685
+generated agent 75594 from leaving home
+wealth = 13612.235599414642
+
+generated agent 75595 from leaving home
+wealth = 12058.322105867439
+
+generated agent 75596 from leaving home
+wealth = 7742.475026512744
+
+Household decided to sell
+
+generated agent 75596 from leaving home
+wealth = 6448.063998680036
+
+Household decided to sell
+
+generated agent 75597 from leaving home
+wealth = 11193.754916330587
+
+Household decided to sell
+
+Household decided to rent
+
+Household decided to rent
+
+Household decided to sell
+
+Household decided to sell
+
+Household decided to sell
+
+Household decided to rent
+
+Household 23123 decided to invest in renovation
+
+generated agent 75596 from leaving home
+wealth = 17348.500187112113
+
+generated agent 75597 from breakup without houses
+wealth = 3536.66272062902
+generated agent 75598 from breakup with houses
+wealth = 3536.66272062902
+
+Household decided to sell
+
+Household decided to sell
+
+generated agent 75597 from leaving home
+wealth = 29006.35203512483
+
+Household decided to sell
+
+Household decided to rent
+
+Household decided to rent
+
+Household decided to sell
+
+Household 34568 decided to invest in renovation
+
+Household decided to sell
+
+Household decided to sell
+
+Household decided to sell
+
+generated agent 75594 from leaving home
+wealth = 9935.032857800697
+
+Household decided to rent
+
+Household decided to sell
+
+Household decided to sell
+
+Household decided to rent
+
+generated agent 75591 from leaving home
+wealth = 10910.416456207913
+
+generated agent 75592 from breakup without houses
+wealth = 21295.75171528646
+generated agent 75593 from breakup with houses
+wealth = 21295.75171528646
+
+generated agent 75593 from leaving home (single)
+wealth = 13918.786213484012
+
+Household decided to sell
+
+generated agent 75593 from breakup without houses
+wealth = 13227.698306617664
+generated agent 75594 from breakup with houses
+wealth = 13227.698306617664
+
+generated agent 75594 from leaving home
+wealth = 19461.25442731194
+
+Household decided to rent
+
+generated agent 75594 from leaving home (single)
+wealth = 7479.700636974291
+
+Household decided to sell
+
+Household decided to rent
+
+Household decided to sell
+
+Household decided to rent
+
+generated agent 75595 from breakup without houses
+wealth = 15895.6132118011
+generated agent 75596 from breakup with houses
+wealth = 15895.6132118011
+
+generated agent 75596 from leaving home
+wealth = 8355.518530627789
+
+Household decided to sell
+
+generated agent 75596 from leaving home
+wealth = 23509.36427236225
+
+Household decided to sell
+
+generated agent 75596 from leaving home
+wealth = 11951.353586652047
+
+Household 66521 decided to invest in renovation
+
+Household decided to sell
+
+generated agent 75596 from leaving home
+wealth = 9964.69086462846
+
+generated agent 75597 from leaving home
+wealth = 15611.308461217752
+
+generated agent 75598 from leaving home
+wealth = 19217.92552769423
+
+generated agent 75599 from leaving home
+wealth = 7101.7838103179165
+
+generated agent 75600 from leaving home
+wealth = 23859.305560552486
+
+generated agent 75601 from leaving home
+wealth = 10061.74815715258
+
+Household decided to sell
+
+generated agent 75601 from breakup without houses
+wealth = 8224.970288869374
+generated agent 75602 from breakup with houses
+wealth = 8224.970288869374
+
+generated agent 75602 from leaving home
+wealth = 7501.815536803618
+
+generated agent 75603 from leaving home (single)
+wealth = 13176.393698380389
+
+Household decided to sell
+
+Household decided to sell
+
+Household decided to sell
+
+Household decided to sell
+
+Household decided to sell
+
+Household decided to sell
+
+generated agent 75602 from leaving home (single)
+wealth = 15742.100165180962
+
+generated agent 75603 from leaving home
+wealth = 10558.528785992472
+
+Household decided to sell
+
+generated agent 75604 from leaving home
+wealth = 18500.129109707996
+
+generated agent 75605 from leaving home
+wealth = 13188.159108073616
+
+generated agent 75605 from leaving home
+wealth = 1476.2139836927536
+
+generated agent 75605 from leaving home
+wealth = 15525.553094891744
+
+Household decided to sell
+
+Household decided to sell
+
+Household decided to sell
+
+Household decided to sell
+
+Household decided to sell
+
+Household decided to sell
+
+Household decided to sell
+
+Household decided to sell
+
+Household decided to sell
+
+Household decided to rent
+
+generated agent 75602 from breakup without houses
+wealth = 609.7399836052741
+generated agent 75603 from breakup with houses
+wealth = 609.7399836052741
+
+generated agent 75603 from leaving home
+wealth = 10399.728257500969
+
+Household decided to sell
+
+generated agent 75604 from leaving home (single)
+wealth = 1204.3933128648737
+
+generated agent 75605 from leaving home
+wealth = 8647.518882540622
+
+generated agent 75605 from breakup without houses
+wealth = 9022.823542879854
+generated agent 75606 from breakup with houses
+wealth = 9022.823542879854
+
+generated agent 75605 from leaving home (single)
+wealth = 8564.939518263456
+
+generated agent 75606 from breakup without houses
+wealth = 36917.22149822286
+generated agent 75607 from breakup with houses
+wealth = 36917.22149822286
+
+Household decided to rent
+
+generated agent 75607 from leaving home
+wealth = 11384.815172895911
+
+generated agent 75608 from leaving home
+wealth = 15146.035899238275
+
+generated agent 75609 from leaving home
+wealth = 13756.320067762674
+
+generated agent 75610 from leaving home (single)
+wealth = 13598.031377257574
+
+Household decided to sell
+
+Household decided to sell
+
+Household decided to sell
+
+Household decided to sell
+
+generated agent 75608 from leaving home
+wealth = 17290.485817539193
+
+generated agent 75608 from breakup without houses
+wealth = 21614.782690407166
+generated agent 75609 from breakup with houses
+wealth = 21614.782690407166
+
+generated agent 75609 from leaving home (single)
+wealth = 14754.74390265594
+
+generated agent 75610 from leaving home
+wealth = 10078.599240730802
+
+generated agent 75611 from leaving home
+wealth = 10502.701471993414
+
+generated agent 75612 from breakup without houses
+wealth = 22830.966376382923
+generated agent 75613 from breakup with houses
+wealth = 22830.966376382923
+
+generated agent 75613 from leaving home (single)
+wealth = 15894.274809961084
+
+generated agent 75614 from leaving home
+wealth = 26346.019782305582
+
+Household decided to sell
+
+Household decided to sell
+
+generated agent 75615 from leaving home (single)
+wealth = 5546.6512337507365
+
+Household decided to sell
+
+generated agent 75616 from leaving home (single)
+wealth = 15927.08086249038
+
+generated agent 75617 from leaving home
+wealth = 15597.346226375816
+
+Household 1486 decided to invest in renovation
+
+Household 759 decided to invest in renovation
+
+generated agent 75618 from breakup without houses
+wealth = 15325.35241743849
+generated agent 75619 from breakup with houses
+wealth = 15325.35241743849
+
+generated agent 75619 from leaving home
+wealth = 27032.396668950434
+
+Household decided to sell
+
+Household decided to sell
+
+Household decided to sell
+
+generated agent 75618 from leaving home
+wealth = 16600.475069216867
+
+generated agent 75619 from leaving home
+wealth = 19172.465596936447
+
+generated agent 75620 from breakup without houses
+wealth = 25399.75624804752
+generated agent 75621 from breakup with houses
+wealth = 25399.75624804752
+
+Household decided to sell
+
+Household decided to sell
+
+generated agent 75621 from leaving home
+wealth = 23039.599051155164
+
+generated agent 75622 from leaving home
+wealth = 8886.808458315496
+
+Household decided to sell
+
+Household decided to sell
+
+generated agent 75623 from breakup without houses
+wealth = 3751.5931921120346
+generated agent 75624 from breakup with houses
+wealth = 3751.5931921120346
+
+Household decided to sell
+
+Household decided to sell
+
+Household decided to rent
+
+Household decided to sell
+
+Household decided to sell
+
+Household decided to sell
+
+generated agent 75623 from leaving home (single)
+wealth = 4157.497491012356
+
+Household decided to sell
+
+Household decided to rent
+
+generated agent 75624 from leaving home
+wealth = 21412.96398190252
+
+generated agent 75625 from leaving home
+wealth = 19525.265589285176
+
+generated agent 75626 from leaving home
+wealth = 10553.353751505501
+
+generated agent 75626 from breakup without houses
+wealth = 12065.142436729586
+generated agent 75627 from breakup with houses
+wealth = 12065.142436729586
+
+Household decided to rent
+
+Household decided to sell
+
+Household decided to sell
+
+generated agent 75627 from leaving home
+wealth = 6850.049401163601
+
+generated agent 75628 from leaving home (single)
+wealth = 9266.602003002485
+
+generated agent 75629 from leaving home (single)
+wealth = 12364.00763491404
+
+Household decided to sell
+
+generated agent 75630 from leaving home (single)
+wealth = 18906.49631672354
+
+generated agent 75630 from leaving home
+wealth = 9321.694005306814
+
+Household decided to sell
+
+Household decided to sell
+
+generated agent 75630 from leaving home
+wealth = 10705.619318460964
+
+Household decided to rent
+
+Household decided to sell
+
+Household decided to sell
+
+Household decided to sell
+
+Household decided to sell
+
