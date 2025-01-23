@@ -199,7 +199,9 @@ function model_step!(model)
     measureSupplyAndDemandPerBucket(model)
     if model.steps % 12 == 0
         # ### CRASH SCENARIO
-        changeInterestRatesAndUnemployment(model)
+        if CRASH_SCENARIO
+            changeInterestRatesAndUnemployment(model)
+        end
 
         adjust_interest_rates(model)
         # company_adjust_salaries(model)
