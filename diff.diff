@@ -1,0 +1,610 @@
+diff --git a/constructionSector.jl b/constructionSector.jl
+index 70c91ca2..8ed3285b 100644
+--- a/constructionSector.jl
++++ b/constructionSector.jl
+@@ -9,7 +9,7 @@ function initiateConstructionSector()
+         # divide the time by 12 because the MAX_NEW_CONSTRUCTIONS_MAP data is yearly
+         # this way we calculate the expected constructions in progress based on the time it usually
+         # takes for a project to complete and the amount of projects that get completed each year
+-        expectedConstructionInProgress = MAX_NEW_CONSTRUCTIONS_MAP[location] * (averageTotalTime / 12)
++        expectedConstructionInProgress = MAX_NEW_CONSTRUCTIONS_MAP[CURRENT_YEAR][location] * (averageTotalTime / 12)
+         for i in 1:expectedConstructionInProgress
+             # pick a random size_interval
+             # TODO: could be data driven
+@@ -56,7 +56,6 @@ function sortSizesBucketsByProfitability(model, location)
+     return [sizePriority.size_interval for sizePriority in res]
+ end
+ 
+-#TODO: region hack
+ function updateConstructions(model)
+     for location in HOUSE_LOCATION_INSTANCES
+         sizesOrdered = sortSizesBucketsByProfitability(model, location)
+@@ -154,8 +153,18 @@ function updateConstructionsPerBucket(model, location, size_interval)
+ end
+ 
+ function calculateTargetConstructionPerBucket(model, location, size_interval)
+-    return model.demandPerBucket[location][size_interval] -
+-           model.supplyPerBucket[location][size_interval]
++    supplyVsDemandValue = model.demandPerBucket[location][size_interval] -
++                          model.supplyPerBucket[location][size_interval]
++    
++    # split the supply vs demand value among the four buckets
++    if CURRENT_YEAR != 2003
++        capValue = ((MAX_NEW_CONSTRUCTIONS_MAP[CURRENT_YEAR][location] / 12) / 4) * 1.5
++        capValue = rand(Normal(capValue, capValue * 0.5))
++        if supplyVsDemandValue > capValue
++            return capValue
++        end
++    end
++    return supplyVsDemandValue
+ end
+ 
+ function calculateMortgageDurationForConstructionSector()
+diff --git a/consts.jl b/consts.jl
+index 00875451..13384c92 100644
+--- a/consts.jl
++++ b/consts.jl
+@@ -3,11 +3,18 @@ include("calibrationTable.jl")
+ include("valueConverter.jl")
+ 
+ const NUMBER_OF_STEPS = 120
++const ORIGINAL_YEAR = 2021
++const ORIGINAL_MONTH = 1
++const CURRENT_YEAR = 2003
++const CURRENT_MONTH = 1
++const CRASH_SCENARIO = true
++
+ const STARTING_GOV_WEALTH_PER_CAPITA = 100000.0
+ const STARTING_COMPANY_WEALTH_PER_CAPITA = 60000.0
+ const STARTING_BANK_WEALTH_PER_CAPITA = 67000.0
+ const STARTING_CONSTRUCTION_SECTOR_WEALTH_PER_CAPITA = 5000.0
+ 
++
+ const THEORETICAL_NUMBER_OF_HOUSES_MAP = Dict(
+     Amadora => 73513,
+     Cascais => 86465,
+@@ -37,12 +44,12 @@ const STARTING_BANK_WEALTH = STARTING_BANK_WEALTH_PER_CAPITA * NUMBER_OF_HOUSEHO
+ const STARTING_CONSTRUCTION_SECTOR_WEALTH = STARTING_CONSTRUCTION_SECTOR_WEALTH_PER_CAPITA * NUMBER_OF_HOUSEHOLDS
+ 
+ ### CRASH SCENARIO
+-const STARTING_INTEREST_RATE = 0.0504
+-const STARTING_UNEMPLOYMENT_RATE = 0.062
+-const UNEMPLOYMENT_SALARY_DECREASE = 0.50
+-# const UNEMPLOYMENT_SALARY_DECREASE = 0.65
+-# const STARTING_INTEREST_RATE = 0.0081
+-# const STARTING_UNEMPLOYMENT_RATE = 0.06
++const STARTING_INTEREST_RATE = CURRENT_YEAR == 2003 ? 0.0504 : 0.0377
++const STARTING_UNEMPLOYMENT_RATE = CURRENT_YEAR == 2003 ? 0.062 : 0.129
++const UNEMPLOYMENT_SALARY_DECREASE = CURRENT_YEAR == 2003 ? 0.50 : 0.65
++#const UNEMPLOYMENT_SALARY_DECREASE = 0.65
++#const STARTING_INTEREST_RATE = 0.0081
++#const STARTING_UNEMPLOYMENT_RATE = 0.065
+ 
+ const LTV = 0.85
+ const DSTI = 0.35
+@@ -55,8 +62,8 @@ const CONSTRUCTION_DELAY_MAX = 48
+ const CONSTRUCTION_VAT = 0.23
+ 
+ # based on: https://www.habitissimo.pt/orcamentos/construcao-de-casa
+-const CONSTRUCTION_COSTS_MIN = 1200 / (1 + CONSTRUCTION_VAT) # to be multiplied by the area of the house
+-const CONSTRUCTION_COSTS_MAX = 1800 / (1 + CONSTRUCTION_VAT) # to be multiplied by the area of the house
++const CONSTRUCTION_COSTS_MIN = adjust_value_to_inflation(1200 / (1 + CONSTRUCTION_VAT)) # to be multiplied by the area of the house
++const CONSTRUCTION_COSTS_MAX = adjust_value_to_inflation(1800 / (1 + CONSTRUCTION_VAT)) # to be multiplied by the area of the house
+ 
+ const CONSTRUCTION_TIME_MIN = 12
+ const CONSTRUCTION_TIME_MAX = 18
+@@ -112,7 +119,7 @@ const INITIAL_RENTAL_MARKET_PRICE_CUT = Dict(
+ const GREEDINESS_AVERAGE = Dict(
+     Amadora => 1.075,
+     Cascais => 1.075,
+-    Lisboa => 1.075,
++    Lisboa => 1.025,
+     Loures => 1.075,
+     Mafra => 1.075,
+     Odivelas => 1.075,
+@@ -1130,8 +1137,7 @@ const RATIO_OF_FERTILE_WOMEN_MAP = Dict(
+     VilaFrancaDeXira => 44.4 / 100,
+ )
+ 
+-
+-const MAX_NEW_CONSTRUCTIONS_MAP = Dict(
++const MAX_NEW_CONSTRUCTIONS_MAP_2021 = Dict(
+     Alcochete => 156 * MODEL_SCALE,
+     Almada => 304 * MODEL_SCALE,
+     Amadora => 315 * MODEL_SCALE,
+@@ -1152,6 +1158,35 @@ const MAX_NEW_CONSTRUCTIONS_MAP = Dict(
+     VilaFrancaDeXira => 119 * MODEL_SCALE,
+ )
+ 
++const MAX_NEW_CONSTRUCTIONS_MAP_2003 = MAX_NEW_CONSTRUCTIONS_MAP_2021
++
++const MAX_NEW_CONSTRUCTIONS_MAP_2012 = Dict(
++    Alcochete => 20 * MODEL_SCALE,
++    Almada => 110 * MODEL_SCALE,
++    Amadora => 4 * MODEL_SCALE,
++    Barreiro => 8 * MODEL_SCALE,
++    Cascais => 67 * MODEL_SCALE,
++    Lisboa => 164 * MODEL_SCALE,
++    Loures => 156 * MODEL_SCALE,
++    Mafra => 84 * MODEL_SCALE,
++    Moita => 13 * MODEL_SCALE,
++    Montijo => 32 * MODEL_SCALE,
++    Odivelas => 207 * MODEL_SCALE,
++    Oeiras => 54 * MODEL_SCALE,
++    Palmela => 40 * MODEL_SCALE,
++    Seixal => 69 * MODEL_SCALE,
++    Sesimbra => 35 * MODEL_SCALE,
++    Setubal => 29 * MODEL_SCALE,
++    Sintra => 71 * MODEL_SCALE,
++    VilaFrancaDeXira => 66 * MODEL_SCALE,
++)
++
++const MAX_NEW_CONSTRUCTIONS_MAP = Dict(
++    2003 => MAX_NEW_CONSTRUCTIONS_MAP_2003,
++    2012 => MAX_NEW_CONSTRUCTIONS_MAP_2012,
++    2021 => MAX_NEW_CONSTRUCTIONS_MAP_2021,
++)
++
+ const HOUSES_BOUGHT_BY_NON_RESIDENTS = (4047 * MODEL_SCALE) / 12
+ 
+ const RATIO_OF_HOUSES_BOUGHT_BY_NON_RESIDENTS = Dict(
+diff --git a/demography.jl b/demography.jl
+index 9818f017..c9b55a38 100644
+--- a/demography.jl
++++ b/demography.jl
+@@ -67,10 +67,10 @@ function handle_breakups(household, model)
+             terminateContractsOnTentantSide(household, model)
+             terminateContractsOnLandLordSide(household, model)
+             
+-            add_agent!(Household, model, household.wealth / 2, household.age, 1, House[], household.percentile, Mortgage[], Contract[], Nothing, 0.0, getChildResidencyZone(household), 0, 0)
++            add_household(model, household.wealth / 2, household.age, 1, getChildResidencyZone(household), percentile=household.percentile)
+             content = "generated agent $(nagents(model)) from breakup without houses\n"
+             content *= "wealth = $(household.wealth / 2)\n"
+-            add_agent!(Household, model, household.wealth / 2, household.age, household.size - 1, household.houses, household.percentile, household.mortgages, Contract[], Nothing, 0.0, getChildResidencyZone(household), 0, 0)
++            add_household(model, household.wealth / 2, household.age, household.size - 1, getChildResidencyZone(household), percentile=household.percentile, mortgages=household.mortgages)
+             content *= "generated agent $(nagents(model)) from breakup with houses\n"
+             content *= "wealth = $(household.wealth / 2)\n"
+             TRANSACTION_LOG(content, model)
+@@ -100,7 +100,7 @@ function handle_children_leaving_home(household, model)
+             if randomNumber < 0.45
+                 # a couple of young people leave their parents home
+                 newZone = getChildResidencyZone(household)
+-                add_agent!(Household, model, expected_wealth, expected_age, 2, Int[], household.percentile, Mortgage[], Contract[], Nothing, 0.0, newZone, 0, 0)
++                add_household(model, expected_wealth, expected_age, 2, newZone, percentile=household.percentile)
+                 content = "generated agent $(nagents(model)) from leaving home\n"
+                 content *= "wealth = $expected_wealth\n"
+                 TRANSACTION_LOG(content, model)
+@@ -114,7 +114,7 @@ function handle_children_leaving_home(household, model)
+             else
+                 # single young person leaves their parents home
+                 newZone = getChildResidencyZone(household)
+-                add_agent!(Household, model, expected_wealth, expected_age, 1, Int[], household.percentile, Mortgage[], Contract[], Nothing, 0.0, newZone, 0, 0)
++                add_household(model, expected_wealth, expected_age, 1, newZone, percentile=household.percentile)
+                 content = "generated agent $(nagents(model)) from leaving home (single)\n"
+                 content *= "wealth = $expected_wealth\n"
+                 TRANSACTION_LOG(content, model)
+@@ -162,7 +162,7 @@ function handle_migrations(model)
+             end
+             size = rand(1:3)
+             wealth = generateInitialWealth(age, percentile, size, location)
+-            add_agent!(Household, model, wealth, age, size, House[], percentile, Mortgage[], Contract[], Nothing, 0, location, 0, 0)
++            add_household(model, wealth, age, size, location, percentile=percentile)
+             content = "generated agent $(nagents(model)) from migration wealth = $wealth\n"
+             TRANSACTION_LOG(content, model)
+ 
+diff --git a/economy.jl b/economy.jl
+index bae70f33..168e92f5 100644
+--- a/economy.jl
++++ b/economy.jl
+@@ -19,6 +19,7 @@ include("metrics.jl")
+ include("plots.jl")
+ include("tables.jl")
+ include("demography.jl")
++include("interestRatesAndUnemployment.jl")
+ # include("marketsLogic.jl")
+ # Set the seed for reproducibility
+ Random.seed!(SEED)
+@@ -127,7 +128,7 @@ function wealth_model()
+         :housesInRentalMarket => Set(),
+         :rentalPriceIndex => InitiatePriceIndex(),
+         :housesInfo => Dict(),
+-        :nonResidentHousehold => NonResident(-1, 0, 0, 0, [], 0, [], [], Nothing, 0, Lisboa, 0),
++        :nonResidentHousehold => NonResident(-1, 0, 0, 0, [], 0, [], [], Nothing, 0, Lisboa, 0, 0),
+         :unemploymentRate => STARTING_UNEMPLOYMENT_RATE,
+     )
+ 
+@@ -154,6 +155,7 @@ function has_enough_size(house, household)
+     areaPerPerson = house.area / household.size
+     value = areaPerPerson + household.homelessTime 
+     return household.percentile <= map_value(value, 15, 35.0, 1, 100)
++    # return rand() < map_value(value, 15, 35.0, 0.01, 1.0)
+ end
+ 
+ function model_step!(model)
+@@ -196,48 +198,9 @@ function model_step!(model)
+     trimBucketsIfNeeded(model)
+     measureSupplyAndDemandPerBucket(model)
+     if model.steps % 12 == 0
+-        # considering start is in 2003
+         # ### CRASH SCENARIO
+-        if model.steps == 12
+-            # end of 2003
+-            model.unemploymentRate = 0.064
+-            model.bank.interestRate = 0.0383
+-        elseif model.steps == 24
+-            # end of 2004
+-            model.unemploymentRate = 0.077
+-            model.bank.interestRate = 0.0349
+-        elseif model.steps == 36
+-            # end of 2005
+-            model.unemploymentRate = 0.078
+-            model.bank.interestRate = 0.0338
+-        elseif model.steps == 48
+-            # end of 2006
+-            model.unemploymentRate = 0.081
+-            model.bank.interestRate = 0.0401
+-        elseif model.steps == 60
+-            # end of 2007
+-            model.unemploymentRate = 0.077
+-            model.bank.interestRate = 0.0480
+-        elseif model.steps == 72
+-            # end of 2008
+-            model.unemploymentRate = 0.096
+-            model.bank.interestRate = 0.0544
+-        elseif model.steps == 84
+-            # end of 2009
+-            model.unemploymentRate = 0.11
+-            model.bank.interestRate = 0.0273
+-        elseif model.steps == 96
+-            # end of 2010
+-            model.unemploymentRate = 0.129
+-            model.bank.interestRate = 0.0247
+-        elseif model.steps == 108
+-            # end of 2011
+-            model.unemploymentRate = 0.158
+-            model.bank.interestRate = 0.0377
+-        elseif model.steps == 120
+-            # end of 2012
+-            model.unemploymentRate = 0.165
+-            model.bank.interestRate = 0.0388
++        if CRASH_SCENARIO
++            changeInterestRatesAndUnemployment(model)
+         end
+ 
+         adjust_interest_rates(model)
+@@ -474,12 +437,11 @@ function home_owner_decisions(household, model)
+         household.homelessTime -= 1
+     end
+     house = household.houses[1]
+-    if !has_enough_size(house, household) # && rand() < 0.01
++    if !has_enough_size(house, household) && rand() < 0.01
+         # moves out, put_house_to_sale
+-        # this doesnt make much sense... having a house and selling it
+-        # is not the same as not having one in the first place
+         put_house_to_sale(household, model, 1)
+-        not_home_owner_decisions(household, model)
++        household.houseRequirements = HouseRequirements(house.area, house.percentile)
++        push!(model.houseMarket.demand, HouseDemand(household.id, HouseSupply[], Regular))
+     else
+         if household.percentile < 80 || rand() > 0.20
+             # not all household think about investing
+diff --git a/interestRatesAndUnemployment.jl b/interestRatesAndUnemployment.jl
+new file mode 100644
+index 00000000..565d2f37
+--- /dev/null
++++ b/interestRatesAndUnemployment.jl
+@@ -0,0 +1,89 @@
++function changeInterestRatesAndUnemployment(model)
++    if CURRENT_YEAR == 2003
++        from2003To2012(model)
++    elseif CURRENT_YEAR == 2012
++        from2012To2019(model)
++    end
++end
++
++function from2003To2012(model)
++    # considering start is in 2003
++    if model.steps == 12
++        # end of 2003
++        model.unemploymentRate = 0.064
++        model.bank.interestRate = 0.0383
++    elseif model.steps == 24
++        # end of 2004
++        model.unemploymentRate = 0.077
++        model.bank.interestRate = 0.0349
++    elseif model.steps == 36
++        # end of 2005
++        model.unemploymentRate = 0.078
++        model.bank.interestRate = 0.0338
++    elseif model.steps == 48
++        # end of 2006
++        model.unemploymentRate = 0.081
++        model.bank.interestRate = 0.0401
++    elseif model.steps == 60
++        # end of 2007
++        model.unemploymentRate = 0.077
++        model.bank.interestRate = 0.0480
++    elseif model.steps == 72
++        # end of 2008
++        model.unemploymentRate = 0.096
++        model.bank.interestRate = 0.0544
++    elseif model.steps == 84
++        # end of 2009
++        model.unemploymentRate = 0.11
++        model.bank.interestRate = 0.0273
++    elseif model.steps == 96
++        # end of 2010
++        model.unemploymentRate = 0.129
++        model.bank.interestRate = 0.0247
++    elseif model.steps == 108
++        # end of 2011
++        model.unemploymentRate = 0.158
++        model.bank.interestRate = 0.0377
++    elseif model.steps == 120
++        # end of 2012
++        model.unemploymentRate = 0.165
++        model.bank.interestRate = 0.0388
++    end
++end
++
++function from2012To2019(model)
++    # considering start is in 2012
++    if model.steps == 12
++        # end of 2012
++        model.unemploymentRate = 0.158
++        model.bank.interestRate =  0.0388
++    elseif model.steps == 24
++        # end of 2013
++        model.unemploymentRate = 0.165
++        model.bank.interestRate =  0.0324
++    elseif model.steps == 36
++        # end of 2014
++        model.unemploymentRate = 0.141
++        model.bank.interestRate =  0.0319
++    elseif model.steps == 48
++        # end of 2015
++        model.unemploymentRate = 0.126
++        model.bank.interestRate =  0.0238
++    elseif model.steps == 60
++        # end of 2016
++        model.unemploymentRate = 0.112
++        model.bank.interestRate =  0.0195
++    elseif model.steps == 72
++        # end of 2017
++        model.unemploymentRate = 0.09
++        model.bank.interestRate =  0.0165
++    elseif model.steps == 84
++        # end of 2018
++        model.unemploymentRate = 0.071
++        model.bank.interestRate =  0.0141
++    elseif model.steps == 96
++        # end of 2019
++        model.unemploymentRate = 0.065
++        model.bank.interestRate =  0.0122
++    end
++end
+diff --git a/plot.jl b/plot.jl
+index b9595c85..ac3e9b46 100644
+--- a/plot.jl
++++ b/plot.jl
+@@ -10,12 +10,15 @@ end
+ 
+ quarters = [quarter for quarter in 1:12]
+ years = [year for year in 1:10]
++# years = [year for year in 1:10]
+ 
+ prices_in_oeiras = [2440, 2467, 2550, 2644, 2721, 2822, 2929, 3001, 3093, 3145, 3177, 3158]
+ simulated_prices_in_oeiras = [2278,2310,2319,2363,2430,2561,2696,2872,3011,3117,3313,3399]
+ pricesFrom2003 = [81532, 96634, 111347, 121298, 124405, 125992, 115405, 118345, 100709, 95297]
++pricesFrom2012 = [95297, 99869, 114701, 118072, 119184, 136059, 135968, 142183]
+ 
+-save("PricesFrom2003.png", scatter_plot(years, pricesFrom2003))
++save("PricesFrom2012.png", scatter_plot(1:length(pricesFrom2012), pricesFrom2012))
++# save("PricesFrom2003.png", scatter_plot(years, pricesFrom2003))
+ # save("RealPricesInOeiras.png", scatter_plot(quarters, prices_in_oeiras))
+ # save("SimulatedPricesInOeiras.png", scatter_plot(quarters, simulated_prices_in_oeiras))
+ # save("SimulatedPricesInOeiras.png", scatter_plot(quarters, simulated_prices_in_oeiras))
+diff --git a/scope.jl b/scope.jl
+index 9544bc25..f378127b 100644
+--- a/scope.jl
++++ b/scope.jl
+@@ -1,5 +1,5 @@
+ 
+-const HOUSE_LOCATION_INSTANCES = [Oeiras]
++const HOUSE_LOCATION_INSTANCES = [Lisboa]
+ 
+-const NUMBER_OF_HOUSEHOLDS = 25000
++const NUMBER_OF_HOUSEHOLDS = 75000
+ # const NUMBER_OF_HOUSEHOLDS = sum([THEORETICAL_NUMBER_OF_HOUSES_MAP[location] for location in HOUSE_LOCATION_INSTANCES])
+diff --git a/startup.jl b/startup.jl
+index 80a028ff..828fc2fc 100644
+--- a/startup.jl
++++ b/startup.jl
+@@ -63,7 +63,7 @@ function initiateHouseholds(model, households_initial_ages)
+                         unemployedTime = 1
+                     end
+                 end
+-                add_agent!(Household, model, generateInitialWealth(initial_age, percentile, actualSize, location), initial_age, actualSize, Int64[], percentile, Mortgage[], Contract[], Nothing, 0.0, location, 0, unemployedTime)
++                add_household(model, generateInitialWealth(initial_age, percentile, actualSize, location), initial_age, actualSize, location, percentile=percentile, unemployedTime=unemployedTime)
+             end
+         end
+     end
+@@ -100,7 +100,9 @@ function assignHousesToHouseholds(model)
+         sort!(houses_sizes_for_rental[location], lt=sortRandomly)
+         
+         ### CRASH SCENARIO
+-        # splice!(houses_sizes_for_rental[location], 1:LOCAL_HOUSING_MAP[location])
++        if !CRASH_SCENARIO
++            splice!(houses_sizes_for_rental[location], 1:LOCAL_HOUSING_MAP[location])
++        end
+     end
+ 
+ 
+@@ -196,7 +198,7 @@ function assignHouseThatMakesSense(model, household, houses_sizes)
+         area = houses_sizes[location][idx]
+         house = House(UInt16(area), location, NotSocialNeighbourhood, 1.0, rand(1:100))
+         # println("assignHouseThatMakesSense house = $(house)")
+-        if rand() < probabilityOfHouseholdBeingAssignedToHouse(household, house)
++        if has_enough_size(house, household) && rand() < probabilityOfHouseholdBeingAssignedToHouse(household, house)
+             push!(household.houses, house)
+             # LOG_INFO("####HOUSEADDED location = $(house.location)")
+             splice!(houses_sizes[location], idx)
+diff --git a/types.jl b/types.jl
+index aba087a0..1ba3fdcd 100644
+--- a/types.jl
++++ b/types.jl
+@@ -82,6 +82,7 @@ end
+         residencyZone::HouseLocation
+         homelessTime::Int64 # not really meant to represent homeless people, just to lower the house expectations as it struggles to find housing 
+         unemployedTime::Int64
++        houseRequirements
+     end
+     
+     @subagent struct Company
+@@ -89,6 +90,11 @@ end
+     end
+ end
+ 
++mutable struct HouseRequirements
++    area
++    percentile
++end
++
+ mutable struct NonResident
+     id::Int64
+     wealth::Float64
+@@ -102,7 +108,7 @@ mutable struct NonResident
+     wealthInHouses::Float64
+     residencyZone::HouseLocation
+     homelessTime::Int64 # not really meant to represent homeless people, just to lower the house expectations as it struggles to find housing 
+-
++    unemployedTime::Int64 # not really meant to represent homeless people, just to lower the house expectations as it struggles to find housing 
+ end
+ 
+ mutable struct Inheritage
+diff --git a/utilities.jl b/utilities.jl
+index 6d1af94f..a3f520f7 100644
+--- a/utilities.jl
++++ b/utilities.jl
+@@ -327,16 +327,22 @@ function clearHouseMarket(model)
+     Threads.@threads for i in 1:length(model.houseMarket.supply)
+         supply = model.houseMarket.supply[i]
+         for j in 1:length(model.houseMarket.demand)
+-            if rand() < HOUSE_SEARCH_OBFUSCATION_FACTOR # only view 30% of the offers
+-                continue
+-            end
+             demand = model.houseMarket.demand[j]
+-            if !hasid(model, demand.householdId)
++            if (rand() < HOUSE_SEARCH_OBFUSCATION_FACTOR # only view 30% of the offers
++                && demand.type != NonResidentDemand)
+                 continue
+             end
+-            household = model[demand.householdId]
++            household = Nothing
++            if demand.type == NonResidentDemand
++                household = model.nonResidentHousehold
++            else
++                if !hasid(model, demand.householdId)
++                    continue
++                end
++                household = model[demand.householdId]
++            end
+             house = supply.house
+-            if household.wealth < 0
++            if household.wealth < 0 && demand.type != NonResidentDemand
+                 continue
+             end
+ 
+@@ -376,11 +382,7 @@ function clearHouseMarket(model)
+                 end
+                 continue
+             elseif demand.type == NonResidentDemand
+-                if rand() < 0.30
+-                    # virtually increase house obfuscation factor for non nonResidentsBuyHouses
+-                    continue
+-                end
+-                if supply.house.percentile < 85 || supply.house.area < 50
++                if supply.house.percentile < 75
+                     continue
+                 end
+                 lock(localLock) do
+@@ -390,8 +392,10 @@ function clearHouseMarket(model)
+                 continue
+             end
+ 
+-            if (!has_enough_size(house, household) || 
+-                house.location != household.residencyZone)
++            if (!has_enough_size(house, household) 
++                || house.location != household.residencyZone
++                || (household.houseRequirements != Nothing && (house.area <= household.houseRequirements.area || house.percentile < household.houseRequirements.percentile))
++                )
+                 continue
+             end
+             consumerSurplus = calculateConsumerSurplus(household, house)
+@@ -626,6 +630,7 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
+     content *= "Transaction: nonResident = $(winningBid.type == NonResidentDemand ? "true" : "false")\n"
+     content *= "Transaction: contracts as landlord = $(household.contractsAsLandlord)\n"
+     content *= "Transaction: contract as tenant = $(household.contractAsTenant)\n"
++    content *= "Transaction: bid to ask price ratio = $(bidValue / supply.price)\n"
+     if supply.sellerId != -1
+         content *= "Transaction: seller contracts as landlord = $(seller.contractsAsLandlord)\n"
+         content *= "Transaction: seller contract as tenant = $(seller.contractAsTenant)\n"
+@@ -1186,9 +1191,16 @@ end
+ 
+ function nonResidentsBuyHouses(model)
+     ### CRASH SCENARIO
+-    if model.steps >= 72
+-        return
++    if CURRENT_YEAR == 2003
++        if model.steps >= 72
++            return
++        end
++    elseif CURRENT_YEAR == 2012
++        if model.steps < 36
++            return
++        end
+     end
++    
+     for location in HOUSE_LOCATION_INSTANCES
+         housesToBuy = housesBoughtByNoNResidentsPerRegion(location)
+         housesBought = 0
+@@ -1436,3 +1448,12 @@ function shouldBecomeUnemployed(model, household, householdsToUnemploy)
+     end
+     return true
+ end
++
++function add_household(model, wealth, age, size, residencyZone; percentile = Nothing, houses = House[], mortgages = Mortgage[], contractsAsLandlord = Contract[], contractAsTenant = Nothing, wealthInHouses = 0.0, homelessTime = 0, unemployedTime = 0, houseRequirements = Nothing)
++    if percentile == Nothing
++        percentile = rand(1:100)
++    end
++    add_agent!(Household, model, wealth, age, size, houses, percentile, 
++               mortgages, contractsAsLandlord, contractAsTenant, wealthInHouses,
++               residencyZone, homelessTime, unemployedTime, houseRequirements)
++end
+\ No newline at end of file
+diff --git a/valueConverter.jl b/valueConverter.jl
+index 40389c2a..b751949a 100644
+--- a/valueConverter.jl
++++ b/valueConverter.jl
+@@ -31,10 +31,6 @@ end
+ UPDATED_VALUES_DICT = read_json(VALUES_FILE)
+ update_values = pyimport("update_values_inflation")
+ 
+-const ORIGINAL_YEAR = 2021
+-const ORIGINAL_MONTH = 1
+-const CURRENT_YEAR = 2003
+-const CURRENT_MONTH = 1
+ # const CURRENT_YEAR = 2011
+ # const CURRENT_MONTH = 1
+ 
+@@ -43,6 +39,10 @@ function adjust_value_to_inflation(value)
+ end
+ 
+ function custom_adjust_value_to_inflation(in_value, in_original_year, in_original_month, in_current_year, in_current_month)
++    if in_original_year == in_current_year && in_original_month == in_current_month
++        return in_value 
++    end
++
+     valueWasFound = true
+     value = string(in_value)
+     original_year = string(in_original_year)
