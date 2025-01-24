@@ -1190,7 +1190,6 @@ function housesBoughtByNoNResidentsPerRegion(location)
 end
 
 function nonResidentsBuyHouses(model)
-    ### CRASH SCENARIO
     if CURRENT_YEAR == 2003
         if model.steps >= 72
             return
@@ -1236,9 +1235,7 @@ end
 
 function handleNonResidentsDemand(model)
     if CURRENT_YEAR == 2003
-        if model.steps >= 72
-            return
-        end
+        return
     elseif CURRENT_YEAR == 2012
         if model.steps < 36
             return

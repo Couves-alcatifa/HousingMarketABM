@@ -198,7 +198,6 @@ function model_step!(model)
     trimBucketsIfNeeded(model)
     measureSupplyAndDemandPerBucket(model)
     if model.steps % 12 == 0
-        # ### CRASH SCENARIO
         if CRASH_SCENARIO
             changeInterestRatesAndUnemployment(model)
         end
@@ -437,7 +436,7 @@ function home_owner_decisions(household, model)
         household.homelessTime -= 1
     end
     house = household.houses[1]
-    if !has_enough_size(house, household) && rand() < 0.01
+    if !has_enough_size(house, household) # && rand() < 0.01
         # moves out, put_house_to_sale
         put_house_to_sale(household, model, 1)
         household.houseRequirements = HouseRequirements(house.area, house.percentile)
