@@ -100,7 +100,7 @@ function assignHousesToHouseholds(model)
         sort!(houses_sizes_for_rental[location], lt=sortRandomly)
         
         if !CRASH_SCENARIO
-            splice!(houses_sizes_for_rental[location], 1:LOCAL_HOUSING_MAP[location])
+            splice!(houses_sizes_for_rental[location], 1:Int64(round(LOCAL_HOUSING_MAP[location])))
         end
     end
 
