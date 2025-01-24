@@ -1,3637 +1,1536 @@
-generated agent 69607 from migration wealth = 27539.38896268591
+generated agent 21379 from migration wealth = 17359.973021526846
 
-generated agent 69608 from migration wealth = 16464.08238176902
+generated agent 21380 from migration wealth = 21828.602225686504
+
+generated agent 21381 from migration wealth = 21122.105372005917
+
+generated agent 21382 from migration wealth = 19125.292233043325
+
+generated agent 21383 from migration wealth = 14574.749856523393
+
+generated agent 21384 from migration wealth = 19188.85602815008
 
 ########
-Transaction: mortgageValue = 151605.03765840473
-Transaction: mortgage payment = 533.562310593462
-Transaction: mortgage duration = 372.0
-Transaction: house.area = 123
-Transaction: house.location = Seixal
-Transaction: house percentile = 45
-Transaction: household.wealth = 29852.057831558268
-Transaction: raw salary = 2927.085
-Transaction: liquid salary = 1981.5509379999999
-Transaction: household percentile = 71
-Transaction: household id = 62102
+Transaction: mortgageValue = 121519.50297120336
+Transaction: mortgage payment = 438.30060521057004
+Transaction: mortgage duration = 360.0
+Transaction: house.area = 87
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 46
+Transaction: household.wealth = 18954.019601895372
+Transaction: raw salary = 1966.272
+Transaction: liquid salary = 1481.05504
+Transaction: household percentile = 51
+Transaction: household id = 6206
+Transaction: household size = 2
+Transaction: household age = 35
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 8
+Transaction: household unemployedTime = 0
+Transaction: area per person = 43.5
+Transaction: askPrice = 134882.09746147945
+Transaction: sellerId = 13513
+Transaction: bidValue = 140094.44218106082
+Transaction: consumerSurplus = 1.0419408964576908
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 1610.2809446098945
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.038643710452901
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 175733.5300140619
+Transaction: mortgage payment = 577.9574614966662
+Transaction: mortgage duration = 408.0
+Transaction: house.area = 92
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 82
+Transaction: household.wealth = 27390.94006059356
+Transaction: raw salary = 3213.3120000000004
+Transaction: liquid salary = 2125.302124
+Transaction: household percentile = 78
+Transaction: household id = 14633
 Transaction: household size = 4
-Transaction: household age = 34
-Transaction: household residencyZone = Seixal
+Transaction: household age = 29
+Transaction: household residencyZone = Sesimbra
 Transaction: household homelessTime = 24
 Transaction: household unemployedTime = 0
-Transaction: area per person = 30.75
-Transaction: askPrice = 172201.5164775911
-Transaction: sellerId = 46832
-Transaction: bidValue = 180860.05433333185
-Transaction: consumerSurplus = 1.0502814262780753
+Transaction: area per person = 23.0
+Transaction: askPrice = 195222.759909249
+Transaction: sellerId = 16487
+Transaction: bidValue = 202576.6512734436
+Transaction: consumerSurplus = 1.0431266553567642
 Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1470.406945799446
+Transaction: pricePerm2 = 2201.9201225374304
 Transaction: for renting = false
 Transaction: for investment = false
 Transaction: nonResident = false
 Transaction: contracts as landlord = Contract[]
 Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0502814262780753
+Transaction: bid to ask price ratio = 1.0376692316388372
 Transaction: seller contracts as landlord = Contract[]
 Transaction: seller contract as tenant = Nothing
 ########
 
 ########
-Transaction: mortgageValue = 103155.74179479523
-Transaction: mortgage payment = 392.08081516765117
-Transaction: mortgage duration = 336.0
-Transaction: house.area = 69
-Transaction: house.location = Seixal
-Transaction: house percentile = 64
-Transaction: household.wealth = 18358.666371135445
-Transaction: raw salary = 1506.95
-Transaction: liquid salary = 1200.8980000000001
-Transaction: household percentile = 34
-Transaction: household id = 69280
-Transaction: household size = 2
-Transaction: household age = 38
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 10
-Transaction: household unemployedTime = 0
-Transaction: area per person = 34.5
-Transaction: askPrice = 115873.38696082766
-Transaction: sellerId = 45011
-Transaction: bidValue = 121147.23483850797
-Transaction: consumerSurplus = 1.0455138838693236
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1755.757026645043
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0455138838693236
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 30578.053466446683
-Transaction: mortgage payment = 126.94357141099488
-Transaction: mortgage duration = 300.0
-Transaction: house.area = 80
-Transaction: house.location = Seixal
-Transaction: house percentile = 4
-Transaction: household.wealth = 47303.212697817384
-Transaction: raw salary = 7577.591999999999
-Transaction: liquid salary = 4159.423175999999
-Transaction: household percentile = 96
-Transaction: household id = 35980
-Transaction: household size = 2
-Transaction: household age = 42
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 0
-Transaction: household unemployedTime = 0
-Transaction: area per person = 40.0
-Transaction: askPrice = 76525.09552867901
-Transaction: sellerId = 16594
-Transaction: bidValue = 76324.60506974973
-Transaction: consumerSurplus = 0.827938453803881
-Transaction: transactionTaxes = 610.5968405579978
-Transaction: pricePerm2 = 954.0575633718715
-Transaction: for renting = true
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 0.9973800691453675
-Transaction: seller contracts as landlord = Contract[Contract(16594, 34228, House(0x0050, Seixal, NotSocialNeighbourhood, 1.0, 4), 232.57002059844646)]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 134461.42890044913
-Transaction: mortgage payment = 525.597020927536
-Transaction: mortgage duration = 324.0
-Transaction: house.area = 79
-Transaction: house.location = Seixal
-Transaction: house percentile = 76
-Transaction: household.wealth = 21557.028963881618
-Transaction: raw salary = 6802.611000000001
-Transaction: liquid salary = 3818.0440455000003
-Transaction: household percentile = 93
-Transaction: household id = 69844
-Transaction: household size = 2
-Transaction: household age = 39
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 5
-Transaction: household unemployedTime = 0
-Transaction: area per person = 39.5
-Transaction: askPrice = 149631.0385262108
-Transaction: sellerId = 44831
-Transaction: bidValue = 155587.3172850531
-Transaction: consumerSurplus = 1.0431040306570116
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1969.4597124690267
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0398064386741457
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 56756.30731569351
-Transaction: mortgage payment = 243.38117527738197
-Transaction: mortgage duration = 288.0
-Transaction: house.area = 66
-Transaction: house.location = Seixal
-Transaction: house percentile = 25
-Transaction: household.wealth = 21848.719809432336
-Transaction: raw salary = 877.669
-Transaction: liquid salary = 773.62844
-Transaction: household percentile = 28
-Transaction: household id = 68345
-Transaction: household size = 2
-Transaction: household age = 44
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 18
-Transaction: household unemployedTime = 14
-Transaction: area per person = 33.0
-Transaction: askPrice = 75171.93963873081
-Transaction: sellerId = 10634
-Transaction: bidValue = 77547.67135807262
-Transaction: consumerSurplus = 1.0327438664179978
-Transaction: transactionTaxes = 620.381370864581
-Transaction: pricePerm2 = 1174.9647175465548
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.031603969922279
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 64573.639162683685
-Transaction: mortgage payment = 723.3073552616916
-Transaction: mortgage duration = 96.0
-Transaction: house.area = 96
-Transaction: house.location = Seixal
-Transaction: house percentile = 9
-Transaction: household.wealth = 35246.55771499897
-Transaction: raw salary = 3386.885
-Transaction: liquid salary = 2210.2661075
-Transaction: household percentile = 79
-Transaction: household id = 68763
-Transaction: household size = 2
-Transaction: household age = 68
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 14
-Transaction: household unemployedTime = 0
-Transaction: area per person = 48.0
-Transaction: askPrice = 96928.8326983571
-Transaction: sellerId = 54119
-Transaction: bidValue = 98328.63663033996
-Transaction: consumerSurplus = 1.01444156390843
-Transaction: transactionTaxes = 786.6290930427197
-Transaction: pricePerm2 = 1024.2566315660413
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.01444156390843
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 139122.92544283377
-Transaction: mortgage payment = 1558.3547181661345
-Transaction: mortgage duration = 96.0
-Transaction: house.area = 120
-Transaction: house.location = Seixal
-Transaction: house percentile = 50
-Transaction: household.wealth = 41423.27508659735
-Transaction: raw salary = 8610.9
-Transaction: liquid salary = 4614.59535
-Transaction: household percentile = 100
-Transaction: household id = 69109
-Transaction: household size = 3
-Transaction: household age = 68
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 11
-Transaction: household unemployedTime = 0
-Transaction: area per person = 40.0
-Transaction: askPrice = 170971.7059537287
-Transaction: sellerId = 65561
-Transaction: bidValue = 179717.73502769918
-Transaction: consumerSurplus = 1.0520989348810106
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1497.647791897493
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0511548330478582
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 56241.80286668119
-Transaction: mortgage payment = 219.8438933756017
-Transaction: mortgage duration = 324.0
-Transaction: house.area = 96
-Transaction: house.location = Seixal
-Transaction: house percentile = 87
-Transaction: household.wealth = 167150.85671863751
-Transaction: raw salary = 3214.4600000000005
-Transaction: liquid salary = 2125.86407
-Transaction: household percentile = 76
-Transaction: household id = 53901
-Transaction: household size = 3
-Transaction: household age = 40
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 12
-Transaction: household unemployedTime = 0
-Transaction: area per person = 32.0
-Transaction: askPrice = 209928.7853873038
-Transaction: sellerId = 18271
-Transaction: bidValue = 220049.64245094595
-Transaction: consumerSurplus = 1.0527136554345933
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 2292.183775530687
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0482109065937284
-Transaction: seller contracts as landlord = Contract[Contract(18271, 38264, House(0x003f, Seixal, NotSocialNeighbourhood, 1.0, 40), 153.35113194448584), Contract(18271, 38266, House(0x005f, Seixal, NotSocialNeighbourhood, 1.0, 75), 574.1978464921115)]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 84059.25371347352
-Transaction: mortgage payment = 270.754981985549
-Transaction: mortgage duration = 420.0
-Transaction: house.area = 90
-Transaction: house.location = Seixal
-Transaction: house percentile = 12
-Transaction: household.wealth = 12702.777529193285
-Transaction: raw salary = 1350.26
-Transaction: liquid salary = 1100.6163999999999
-Transaction: household percentile = 28
-Transaction: household id = 68776
-Transaction: household size = 2
-Transaction: household age = 28
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 14
-Transaction: household unemployedTime = 0
-Transaction: area per person = 45.0
-Transaction: askPrice = 93697.48132910587
-Transaction: sellerId = 32399
-Transaction: bidValue = 95742.03937706641
-Transaction: consumerSurplus = 1.021820843196192
-Transaction: transactionTaxes = 765.9363150165312
-Transaction: pricePerm2 = 1063.80043752296
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.021820843196192
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 80734.90704644618
-Transaction: mortgage payment = 335.16775190600555
-Transaction: mortgage duration = 300.0
-Transaction: house.area = 77
-Transaction: house.location = Seixal
-Transaction: house percentile = 26
-Transaction: household.wealth = 16485.822504937376
-Transaction: raw salary = 1271.915
-Transaction: liquid salary = 1050.4756
-Transaction: household percentile = 25
-Transaction: household id = 68764
-Transaction: household size = 2
-Transaction: household age = 42
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 14
-Transaction: household unemployedTime = 0
-Transaction: area per person = 38.5
-Transaction: askPrice = 92721.08227598926
-Transaction: sellerId = 63047
-Transaction: bidValue = 96122.03680683018
-Transaction: consumerSurplus = 1.038619853342877
-Transaction: transactionTaxes = 768.9762944546414
-Transaction: pricePerm2 = 1248.3381403484439
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0366794093356007
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 122502.97110059275
-Transaction: mortgage payment = 365.74555746023975
-Transaction: mortgage duration = 468.0
-Transaction: house.area = 119
-Transaction: house.location = Seixal
-Transaction: house percentile = 22
-Transaction: household.wealth = 19043.35501594267
-Transaction: raw salary = 1758.323
-Transaction: liquid salary = 1361.77672
-Transaction: household percentile = 43
-Transaction: household id = 49253
-Transaction: household size = 3
-Transaction: household age = 22
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 24
-Transaction: household unemployedTime = 0
-Transaction: area per person = 39.666666666666664
-Transaction: askPrice = 136446.91055276874
-Transaction: sellerId = 55619
-Transaction: bidValue = 141165.45901621657
-Transaction: consumerSurplus = 1.0507283149352826
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1186.2643614808114
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0345815705488106
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 56618.01398144215
-Transaction: mortgage payment = 221.31446707673786
-Transaction: mortgage duration = 324.0
-Transaction: house.area = 55
-Transaction: house.location = Seixal
-Transaction: house percentile = 26
-Transaction: household.wealth = 13973.999143939154
-Transaction: raw salary = 727.36
-Transaction: liquid salary = 647.3504
-Transaction: household percentile = 32
-Transaction: household id = 68943
+Transaction: mortgageValue = 9839.006509677765
+Transaction: mortgage payment = 212.68640549532665
+Transaction: mortgage duration = 48.0
+Transaction: house.area = 47
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 1
+Transaction: household.wealth = 20696.18487953832
+Transaction: raw salary = 906.0559999999999
+Transaction: liquid salary = 795.20256
+Transaction: household percentile = 48
+Transaction: household id = 20995
 Transaction: household size = 1
-Transaction: household age = 40
-Transaction: household residencyZone = Seixal
+Transaction: household age = 74
+Transaction: household residencyZone = Sesimbra
 Transaction: household homelessTime = 13
 Transaction: household unemployedTime = 0
-Transaction: area per person = 55.0
-Transaction: askPrice = 67388.4872442677
-Transaction: sellerId = 49379
-Transaction: bidValue = 69754.49716518108
-Transaction: consumerSurplus = 1.03945240307856
-Transaction: transactionTaxes = 558.0359773214486
-Transaction: pricePerm2 = 1268.263584821474
+Transaction: area per person = 47.0
+Transaction: askPrice = 32456.169679971692
+Transaction: sellerId = 11
+Transaction: bidValue = 29882.210011533054
+Transaction: consumerSurplus = 0.9311790106583306
+Transaction: transactionTaxes = 239.05768009226443
+Transaction: pricePerm2 = 635.7917023730437
 Transaction: for renting = false
 Transaction: for investment = false
 Transaction: nonResident = false
 Transaction: contracts as landlord = Contract[]
 Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0351100019850148
+Transaction: bid to ask price ratio = 0.9206942872859395
 Transaction: seller contracts as landlord = Contract[]
 Transaction: seller contract as tenant = Nothing
 ########
 
 ########
-Transaction: mortgageValue = 86864.5617414166
-Transaction: mortgage payment = 726.6308710514369
-Transaction: mortgage duration = 132.0
-Transaction: house.area = 79
-Transaction: house.location = Seixal
-Transaction: house percentile = 26
-Transaction: household.wealth = 14775.792411912138
-Transaction: raw salary = 3386.885
-Transaction: liquid salary = 2210.2661075
-Transaction: household percentile = 79
-Transaction: household id = 68751
-Transaction: household size = 2
-Transaction: household age = 63
-Transaction: household residencyZone = Seixal
+Transaction: mortgageValue = 106658.96590100357
+Transaction: mortgage payment = 457.3726816028899
+Transaction: mortgage duration = 288.0
+Transaction: house.area = 140
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 88
+Transaction: household.wealth = 225215.6735126396
+Transaction: raw salary = 2997.8559999999998
+Transaction: liquid salary = 2017.1345967999998
+Transaction: household percentile = 74
+Transaction: household id = 13629
+Transaction: household size = 3
+Transaction: household age = 44
+Transaction: household residencyZone = Sesimbra
 Transaction: household homelessTime = 14
 Transaction: household unemployedTime = 0
-Transaction: area per person = 39.5
-Transaction: askPrice = 96809.00862928513
-Transaction: sellerId = 17303
-Transaction: bidValue = 100540.51419155803
-Transaction: consumerSurplus = 1.040475861651037
-Transaction: transactionTaxes = 804.3241135324643
-Transaction: pricePerm2 = 1272.6647366020004
+Transaction: area per person = 46.666666666666664
+Transaction: askPrice = 304682.2644698043
+Transaction: sellerId = 20119
+Transaction: bidValue = 325138.42458032205
+Transaction: consumerSurplus = 1.0734344488548617
+Transaction: transactionTaxes = 2231.901363068344
+Transaction: pricePerm2 = 2322.417318430872
 Transaction: for renting = false
 Transaction: for investment = false
 Transaction: nonResident = false
 Transaction: contracts as landlord = Contract[]
 Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.038545024012818
+Transaction: bid to ask price ratio = 1.0671393201902144
 Transaction: seller contracts as landlord = Contract[]
 Transaction: seller contract as tenant = Nothing
 ########
 
 ########
-Transaction: mortgageValue = 76381.28668258729
-Transaction: mortgage payment = 307.46766654381065
-Transaction: mortgage duration = 312.0
-Transaction: house.area = 110
-Transaction: house.location = Seixal
-Transaction: house percentile = 100
-Transaction: household.wealth = 201703.6377549541
-Transaction: raw salary = 6285.957
-Transaction: liquid salary = 3590.4579585
-Transaction: household percentile = 91
-Transaction: household id = 53333
-Transaction: household size = 3
-Transaction: household age = 41
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 12
-Transaction: household unemployedTime = 0
-Transaction: area per person = 36.666666666666664
-Transaction: askPrice = 256682.06136112646
-Transaction: sellerId = 6981
-Transaction: bidValue = 272816.0405217461
-Transaction: consumerSurplus = 1.0665526096699605
-Transaction: transactionTaxes = 1234.8111606961975
-Transaction: pricePerm2 = 2480.1458229249647
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0628558890132984
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 203377.49872347486
-Transaction: mortgage payment = 818.6822672925608
-Transaction: mortgage duration = 312.0
-Transaction: house.area = 139
-Transaction: house.location = Seixal
-Transaction: house percentile = 62
-Transaction: household.wealth = 41095.56490953319
-Transaction: raw salary = 5252.6489999999985
-Transaction: liquid salary = 3123.557585499999
-Transaction: household percentile = 87
-Transaction: household id = 67218
-Transaction: household size = 4
-Transaction: household age = 41
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 24
-Transaction: household unemployedTime = 0
-Transaction: area per person = 34.75
-Transaction: askPrice = 228153.42216337976
-Transaction: sellerId = 57276
-Transaction: bidValue = 243651.1523348174
-Transaction: consumerSurplus = 1.0679267925262141
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1752.885988020269
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0679267925262141
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 140592.03082908684
-Transaction: mortgage payment = 443.85820774850055
-Transaction: mortgage duration = 432.0
-Transaction: house.area = 142
-Transaction: house.location = Seixal
-Transaction: house percentile = 20
-Transaction: household.wealth = 22422.79376904203
-Transaction: raw salary = 1979.25
-Transaction: liquid salary = 1488.4524999999999
-Transaction: household percentile = 50
-Transaction: household id = 57375
-Transaction: household size = 4
-Transaction: household age = 26
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 24
-Transaction: household unemployedTime = 0
-Transaction: area per person = 35.5
-Transaction: askPrice = 156263.65439929682
-Transaction: sellerId = 54935
-Transaction: bidValue = 162566.36872274804
-Transaction: consumerSurplus = 1.0403338469695969
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1144.8335825545637
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0403338469695969
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 41619.11516312654
-Transaction: mortgage payment = 198.84564865182824
-Transaction: mortgage duration = 252.0
-Transaction: house.area = 64
-Transaction: house.location = Seixal
-Transaction: house percentile = 19
-Transaction: household.wealth = 32429.87418999052
-Transaction: raw salary = 713.3375
-Transaction: liquid salary = 634.870375
-Transaction: household percentile = 15
-Transaction: household id = 13638
-Transaction: household size = 1
-Transaction: household age = 49
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 11
-Transaction: household unemployedTime = 0
-Transaction: area per person = 64.0
-Transaction: askPrice = 71084.83078906096
-Transaction: sellerId = 23193
-Transaction: bidValue = 72817.84907670361
-Transaction: consumerSurplus = 1.0269694828315383
-Transaction: transactionTaxes = 582.5427926136289
-Transaction: pricePerm2 = 1137.778891823494
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0243795795587565
-Transaction: seller contracts as landlord = Contract[Contract(23193, 50231, House(0x0061, Seixal, NotSocialNeighbourhood, 1.0, 69), 549.9897284905263)]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 16066.739965586072
-Transaction: mortgage payment = 83.40580411718481
-Transaction: mortgage duration = 228.0
-Transaction: house.area = 68
-Transaction: house.location = Seixal
-Transaction: house percentile = 1
-Transaction: household.wealth = 46777.20011619117
-Transaction: raw salary = 7835.918999999998
-Transaction: liquid salary = 4273.216219499999
-Transaction: household percentile = 97
-Transaction: household id = 35707
-Transaction: household size = 2
-Transaction: household age = 52
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 0
-Transaction: household unemployedTime = 0
-Transaction: area per person = 34.0
-Transaction: askPrice = 65830.99688465537
-Transaction: sellerId = 25103
-Transaction: bidValue = 61417.059602632355
-Transaction: consumerSurplus = 0.7965950127862745
-Transaction: transactionTaxes = 491.33647682105885
-Transaction: pricePerm2 = 903.1920529798875
-Transaction: for renting = true
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 0.9329504718004374
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 48080.11676845385
-Transaction: mortgage payment = 206.17612173906232
-Transaction: mortgage duration = 288.0
-Transaction: house.area = 31
-Transaction: house.location = Seixal
-Transaction: house percentile = 76
-Transaction: household.wealth = 12451.867268205622
-Transaction: raw salary = 792.6475
-Transaction: liquid salary = 705.456275
-Transaction: household percentile = 37
-Transaction: household id = 69195
-Transaction: household size = 1
-Transaction: household age = 44
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 11
-Transaction: household unemployedTime = 0
-Transaction: area per person = 31.0
-Transaction: askPrice = 57257.47055490736
-Transaction: sellerId = 29782
-Transaction: bidValue = 59804.510606443815
-Transaction: consumerSurplus = 1.0444839778434494
-Transaction: transactionTaxes = 478.4360848515505
-Transaction: pricePerm2 = 1929.1777614981877
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0444839778434494
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 121873.62934004267
-Transaction: mortgage payment = 774.2066335252937
-Transaction: mortgage duration = 180.0
-Transaction: house.area = 100
-Transaction: house.location = Seixal
-Transaction: house percentile = 43
-Transaction: household.wealth = 18843.06253869292
-Transaction: raw salary = 3444.36
-Transaction: liquid salary = 2238.4001200000002
-Transaction: household percentile = 80
-Transaction: household id = 68224
-Transaction: household size = 3
-Transaction: household age = 57
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 18
-Transaction: household unemployedTime = 0
-Transaction: area per person = 33.333333333333336
-Transaction: askPrice = 134155.0108238768
-Transaction: sellerId = 53075
-Transaction: bidValue = 140339.83062796172
-Transaction: consumerSurplus = 1.0475960253837862
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1403.3983062796171
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0461020409606956
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 53140.44785105139
-Transaction: mortgage payment = 201.97954810175716
-Transaction: mortgage duration = 336.0
-Transaction: house.area = 37
-Transaction: house.location = Seixal
-Transaction: house percentile = 80
-Transaction: household.wealth = 25005.755914018417
-Transaction: raw salary = 662.0725
-Transaction: liquid salary = 589.244525
-Transaction: household percentile = 27
-Transaction: household id = 8511
-Transaction: household size = 1
-Transaction: household age = 38
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 11
-Transaction: household unemployedTime = 0
-Transaction: area per person = 37.0
-Transaction: askPrice = 72905.96855443694
-Transaction: sellerId = 64073
-Transaction: bidValue = 77029.84984800538
-Transaction: consumerSurplus = 1.0589705816929569
-Transaction: transactionTaxes = 616.2387987840431
-Transaction: pricePerm2 = 2081.887833729875
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0565643852668831
-Transaction: seller contracts as landlord = Contract[Contract(64073, 68086, House(0x0025, Seixal, NotSocialNeighbourhood, 1.0, 80), 316.60987151796934), Contract(64073, 68117, House(0x0029, Seixal, NotSocialNeighbourhood, 1.0, 45), 315.421477816966), Contract(64073, 68269, House(0x0044, Seixal, NotSocialNeighbourhood, 1.0, 43), 499.26656794060256)]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 133799.64643560335
-Transaction: mortgage payment = 406.7021269534489
-Transaction: mortgage duration = 456.0
-Transaction: house.area = 115
-Transaction: house.location = Seixal
-Transaction: house percentile = 86
-Transaction: household.wealth = 140594.1200818137
-Transaction: raw salary = 3444.36
-Transaction: liquid salary = 2238.4001200000002
-Transaction: household percentile = 80
-Transaction: household id = 39084
-Transaction: household size = 3
-Transaction: household age = 23
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 11
-Transaction: household unemployedTime = 0
-Transaction: area per person = 38.333333333333336
-Transaction: askPrice = 254666.0645277709
-Transaction: sellerId = 41015
-Transaction: bidValue = 270525.71810369275
-Transaction: consumerSurplus = 1.0634739195036371
-Transaction: transactionTaxes = 1056.1660120880351
-Transaction: pricePerm2 = 2352.397548727763
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0622762738542746
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 106478.50659727256
-Transaction: mortgage payment = 350.18955899873714
-Transaction: mortgage duration = 408.0
-Transaction: house.area = 95
-Transaction: house.location = Seixal
-Transaction: house percentile = 33
-Transaction: household.wealth = 16449.59215513157
-Transaction: raw salary = 1480.835
-Transaction: liquid salary = 1184.1844
-Transaction: household percentile = 33
-Transaction: household id = 52538
-Transaction: household size = 3
-Transaction: household age = 29
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 24
-Transaction: household unemployedTime = 0
-Transaction: area per person = 31.666666666666668
-Transaction: askPrice = 117379.56223450786
-Transaction: sellerId = 47519
-Transaction: bidValue = 122599.1069093015
-Transaction: consumerSurplus = 1.044467235823948
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1290.5169148347527
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.044467235823948
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 67609.56772073719
-Transaction: mortgage payment = 350.97539226014675
-Transaction: mortgage duration = 228.0
-Transaction: house.area = 82
-Transaction: house.location = Seixal
-Transaction: house percentile = 9
-Transaction: household.wealth = 15452.270939641543
-Transaction: raw salary = 1219.685
-Transaction: liquid salary = 1017.0483999999999
-Transaction: household percentile = 23
-Transaction: household id = 68521
-Transaction: household size = 2
-Transaction: household age = 51
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 16
-Transaction: household unemployedTime = 0
-Transaction: area per person = 41.0
-Transaction: askPrice = 80759.7733579737
-Transaction: sellerId = 32919
-Transaction: bidValue = 82096.02504125587
-Transaction: consumerSurplus = 1.0184785283400788
-Transaction: transactionTaxes = 656.768200330047
-Transaction: pricePerm2 = 1001.1710370884862
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.016546005860605
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Contract(16026, 32919, House(0x0059, Seixal, NotSocialNeighbourhood, 1.0, 59), 364.44938819566573)
-########
-
-########
-Transaction: mortgageValue = 93572.88265470971
-Transaction: mortgage payment = 365.76755702432564
+Transaction: mortgageValue = 52783.70182055526
+Transaction: mortgage payment = 206.3265031264184
 Transaction: mortgage duration = 324.0
-Transaction: house.area = 116
-Transaction: house.location = Seixal
-Transaction: house percentile = 85
-Transaction: household.wealth = 172032.55839923807
-Transaction: raw salary = 3444.36
-Transaction: liquid salary = 2238.4001200000002
-Transaction: household percentile = 80
-Transaction: household id = 26376
+Transaction: house.area = 113
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 49
+Transaction: household.wealth = 134178.827723707
+Transaction: raw salary = 2513.0800000000004
+Transaction: liquid salary = 1773.389224
+Transaction: household percentile = 65
+Transaction: household id = 6531
 Transaction: household size = 3
 Transaction: household age = 40
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 11
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 8
 Transaction: household unemployedTime = 0
-Transaction: area per person = 38.666666666666664
-Transaction: askPrice = 246359.087081658
-Transaction: sellerId = 43895
-Transaction: bidValue = 261790.00917065213
-Transaction: consumerSurplus = 1.063783176165397
-Transaction: transactionTaxes = 374.7807153108679
-Transaction: pricePerm2 = 2256.8104238849323
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0626358957235436
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 198845.58993493035
-Transaction: mortgage payment = 615.7659276557324
-Transaction: mortgage duration = 444.0
-Transaction: house.area = 109
-Transaction: house.location = Seixal
-Transaction: house percentile = 83
-Transaction: household.wealth = 44132.781656433996
-Transaction: raw salary = 7577.591999999999
-Transaction: liquid salary = 4159.423175999999
-Transaction: household percentile = 96
-Transaction: household id = 58017
-Transaction: household size = 4
-Transaction: household age = 25
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 24
-Transaction: household unemployedTime = 0
-Transaction: area per person = 27.25
-Transaction: askPrice = 229013.4999570243
-Transaction: sellerId = 54827
-Transaction: bidValue = 242095.71595823567
-Transaction: consumerSurplus = 1.0571242132174143
+Transaction: area per person = 37.666666666666664
+Transaction: askPrice = 177884.1451198582
+Transaction: sellerId = 17987
+Transaction: bidValue = 184278.95298978814
+Transaction: consumerSurplus = 1.0392693833279212
 Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 2221.06161429574
+Transaction: pricePerm2 = 1630.787194599895
 Transaction: for renting = false
 Transaction: for investment = false
 Transaction: nonResident = false
 Transaction: contracts as landlord = Contract[]
 Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0571242132174143
+Transaction: bid to ask price ratio = 1.0359492852250611
 Transaction: seller contracts as landlord = Contract[]
 Transaction: seller contract as tenant = Nothing
 ########
 
 ########
-Transaction: mortgageValue = 230694.12857251457
-Transaction: mortgage payment = 714.3914236753776
-Transaction: mortgage duration = 444.0
-Transaction: house.area = 134
-Transaction: house.location = Seixal
-Transaction: house percentile = 73
-Transaction: household.wealth = 39396.2862597336
-Transaction: raw salary = 6285.957
-Transaction: liquid salary = 3590.4579585
-Transaction: household percentile = 91
-Transaction: household id = 62661
-Transaction: household size = 4
-Transaction: household age = 24
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 24
-Transaction: household unemployedTime = 0
-Transaction: area per person = 33.5
-Transaction: askPrice = 250949.43352062537
-Transaction: sellerId = 58295
-Transaction: bidValue = 268411.25149077317
-Transaction: consumerSurplus = 1.0695830140963942
-Transaction: transactionTaxes = 891.2376162803084
-Transaction: pricePerm2 = 2003.069040975919
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0695830140963942
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 49418.55975771734
-Transaction: mortgage payment = 169.88201168196161
-Transaction: mortgage duration = 384.0
-Transaction: house.area = 68
-Transaction: house.location = Seixal
-Transaction: house percentile = 5
-Transaction: household.wealth = 17468.917751135057
-Transaction: raw salary = 570.67
-Transaction: liquid salary = 507.89629999999994
-Transaction: household percentile = 0
-Transaction: household id = 19375
+Transaction: mortgageValue = 138972.0264135362
+Transaction: mortgage payment = 576.936834076621
+Transaction: mortgage duration = 300.0
+Transaction: house.area = 76
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 82
+Transaction: household.wealth = 21670.626422885118
+Transaction: raw salary = 8302.599999999999
+Transaction: liquid salary = 4478.789199999999
+Transaction: household percentile = 100
+Transaction: household id = 21292
 Transaction: household size = 2
-Transaction: household age = 32
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 21
-Transaction: household unemployedTime = 0
-Transaction: area per person = 34.0
-Transaction: askPrice = 66676.78687052039
-Transaction: sellerId = 23903
-Transaction: bidValue = 66010.01900181518
-Transaction: consumerSurplus = 0.996237047912082
-Transaction: transactionTaxes = 528.0801520145214
-Transaction: pricePerm2 = 970.7355735561056
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 0.9899999999999999
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 139527.97928378775
-Transaction: mortgage payment = 432.07684729506184
-Transaction: mortgage duration = 444.0
-Transaction: house.area = 84
-Transaction: house.location = Seixal
-Transaction: house percentile = 81
-Transaction: household.wealth = 23884.95202316295
-Transaction: raw salary = 7835.918999999998
-Transaction: liquid salary = 4273.216219499999
-Transaction: household percentile = 97
-Transaction: household id = 69661
-Transaction: household size = 2
-Transaction: household age = 24
-Transaction: household residencyZone = Seixal
+Transaction: household age = 42
+Transaction: household residencyZone = Sesimbra
 Transaction: household homelessTime = 7
 Transaction: household unemployedTime = 0
-Transaction: area per person = 42.0
-Transaction: askPrice = 155178.58209443212
-Transaction: sellerId = -1
-Transaction: bidValue = 162935.23226648744
-Transaction: consumerSurplus = 1.053678441612933
+Transaction: area per person = 38.0
+Transaction: askPrice = 154845.99034379452
+Transaction: sellerId = 11071
+Transaction: bidValue = 160209.2403079636
+Transaction: consumerSurplus = 1.0503465617088599
 Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1939.7051460296123
+Transaction: pricePerm2 = 2108.0163198416262
 Transaction: for renting = false
 Transaction: for investment = false
 Transaction: nonResident = false
 Transaction: contracts as landlord = Contract[]
 Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0499853141288216
-########
-
-########
-Transaction: mortgageValue = 128324.31920752936
-Transaction: mortgage payment = 550.277583276857
-Transaction: mortgage duration = 288.0
-Transaction: house.area = 91
-Transaction: house.location = Seixal
-Transaction: house percentile = 60
-Transaction: household.wealth = 21845.118914023977
-Transaction: raw salary = 2927.085
-Transaction: liquid salary = 1981.5509379999999
-Transaction: household percentile = 71
-Transaction: household id = 69811
-Transaction: household size = 2
-Transaction: household age = 44
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 6
-Transaction: household unemployedTime = 0
-Transaction: area per person = 45.5
-Transaction: askPrice = 144299.4308014868
-Transaction: sellerId = 27983
-Transaction: bidValue = 149732.53574327286
-Transaction: consumerSurplus = 1.041978572124726
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1645.4124806953062
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.037651603416651
+Transaction: bid to ask price ratio = 1.034636027398975
 Transaction: seller contracts as landlord = Contract[]
 Transaction: seller contract as tenant = Nothing
 ########
 
 ########
-Transaction: mortgageValue = 98410.24462411446
-Transaction: mortgage payment = 330.74704610080744
-Transaction: mortgage duration = 396.0
-Transaction: house.area = 78
-Transaction: house.location = Seixal
-Transaction: house percentile = 40
-Transaction: household.wealth = 14894.508123899172
-Transaction: raw salary = 1979.25
-Transaction: liquid salary = 1488.4524999999999
-Transaction: household percentile = 50
-Transaction: household id = 68873
-Transaction: household size = 2
-Transaction: household age = 30
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 13
+Transaction: mortgageValue = 66517.5972127476
+Transaction: mortgage payment = 214.25328014984194
+Transaction: mortgage duration = 420.0
+Transaction: house.area = 41
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 62
+Transaction: household.wealth = 12640.719129117766
+Transaction: raw salary = 1471.996
+Transaction: liquid salary = 1178.52744
+Transaction: household percentile = 73
+Transaction: household id = 21100
+Transaction: household size = 1
+Transaction: household age = 28
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 11
 Transaction: household unemployedTime = 0
-Transaction: area per person = 39.0
-Transaction: askPrice = 107966.9239190498
-Transaction: sellerId = 59015
-Transaction: bidValue = 113006.86258553565
-Transaction: consumerSurplus = 1.0487284089297244
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1448.8059305837903
+Transaction: area per person = 41.0
+Transaction: askPrice = 74796.400676606
+Transaction: sellerId = 18693
+Transaction: bidValue = 78279.26781674901
+Transaction: consumerSurplus = 1.0577717015726398
+Transaction: transactionTaxes = 626.2341425339921
+Transaction: pricePerm2 = 1909.2504345548539
 Transaction: for renting = false
 Transaction: for investment = false
 Transaction: nonResident = false
 Transaction: contracts as landlord = Contract[]
 Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0466803951019725
+Transaction: bid to ask price ratio = 1.0465646355792135
 Transaction: seller contracts as landlord = Contract[]
 Transaction: seller contract as tenant = Nothing
 ########
 
 ########
-Transaction: mortgageValue = 61024.53757152306
-Transaction: mortgage payment = 348.0243711893308
-Transaction: mortgage duration = 204.0
-Transaction: house.area = 72
-Transaction: house.location = Seixal
-Transaction: house percentile = 21
-Transaction: household.wealth = 21781.64301566168
-Transaction: raw salary = 1245.8
-Transaction: liquid salary = 1033.762
-Transaction: household percentile = 24
-Transaction: household id = 68702
-Transaction: household size = 2
-Transaction: household age = 54
-Transaction: household residencyZone = Seixal
+Transaction: mortgageValue = 83159.29638060684
+Transaction: mortgage payment = 267.85621806981584
+Transaction: mortgage duration = 420.0
+Transaction: house.area = 128
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 49
+Transaction: household.wealth = 127307.52670057268
+Transaction: raw salary = 2027.9360000000001
+Transaction: liquid salary = 1516.20352
+Transaction: household percentile = 53
+Transaction: household id = 11432
+Transaction: household size = 4
+Transaction: household age = 28
+Transaction: household residencyZone = Sesimbra
 Transaction: household homelessTime = 15
 Transaction: household unemployedTime = 0
-Transaction: area per person = 36.0
-Transaction: askPrice = 79339.71144933734
-Transaction: sellerId = 60637
-Transaction: bidValue = 81716.81322110268
-Transaction: consumerSurplus = 1.0299610589494423
-Transaction: transactionTaxes = 653.7345057688215
-Transaction: pricePerm2 = 1134.9557391819817
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0299610589494423
-Transaction: seller contracts as landlord = Contract[Contract(60637, 68267, House(0x0020, Seixal, NotSocialNeighbourhood, 1.0, 27), 219.23788313455506)]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 92283.63395542002
-Transaction: mortgage payment = 440.9079573626106
-Transaction: mortgage duration = 252.0
-Transaction: house.area = 72
-Transaction: house.location = Seixal
-Transaction: house percentile = 47
-Transaction: household.wealth = 17336.22370016594
-Transaction: raw salary = 1726.762
-Transaction: liquid salary = 1341.5776799999999
-Transaction: household percentile = 42
-Transaction: household id = 69015
-Transaction: household size = 2
-Transaction: household age = 48
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 12
-Transaction: household unemployedTime = 0
-Transaction: area per person = 36.0
-Transaction: askPrice = 104556.8276660487
-Transaction: sellerId = 35714
-Transaction: bidValue = 109273.13318158264
-Transaction: consumerSurplus = 1.0451075804499126
+Transaction: area per person = 32.0
+Transaction: askPrice = 199653.78853865742
+Transaction: sellerId = 19291
+Transaction: bidValue = 207920.67254716807
+Transaction: consumerSurplus = 1.0432012517738023
 Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1517.682405299759
+Transaction: pricePerm2 = 1624.3802542747505
 Transaction: for renting = false
 Transaction: for investment = false
 Transaction: nonResident = false
 Transaction: contracts as landlord = Contract[]
 Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0451075804499126
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Contract(17123, 35714, House(0x0047, Seixal, NotSocialNeighbourhood, 1.0, 88), 451.1344956908884)
-########
-
-########
-Transaction: mortgageValue = 162756.60688158407
-Transaction: mortgage payment = 535.2785854103319
-Transaction: mortgage duration = 408.0
-Transaction: house.area = 86
-Transaction: house.location = Seixal
-Transaction: house percentile = 86
-Transaction: household.wealth = 24748.809077203805
-Transaction: raw salary = 2168.616
-Transaction: liquid salary = 1592.4845599999999
-Transaction: household percentile = 56
-Transaction: household id = 19333
-Transaction: household size = 2
-Transaction: household age = 29
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 4
-Transaction: household unemployedTime = 0
-Transaction: area per person = 43.0
-Transaction: askPrice = 179431.5001126888
-Transaction: sellerId = 21693
-Transaction: bidValue = 187010.4397772438
-Transaction: consumerSurplus = 1.0422386239862853
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 2174.5399974098113
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0422386239862853
+Transaction: bid to ask price ratio = 1.041406096368214
 Transaction: seller contracts as landlord = Contract[]
 Transaction: seller contract as tenant = Nothing
 ########
 
 ########
-Transaction: mortgageValue = 78518.04474035863
-Transaction: mortgage payment = 263.8913404054384
+Transaction: mortgageValue = 129491.92406308137
+Transaction: mortgage payment = 435.20947988050614
 Transaction: mortgage duration = 396.0
-Transaction: house.area = 70
-Transaction: house.location = Seixal
-Transaction: house percentile = 30
-Transaction: household.wealth = 14212.91282297078
-Transaction: raw salary = 863.381
-Transaction: liquid salary = 762.76956
-Transaction: household percentile = 42
-Transaction: household id = 5280
+Transaction: house.area = 73
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 84
+Transaction: household.wealth = 28625.620121542706
+Transaction: raw salary = 2407.753999999999
+Transaction: liquid salary = 1720.4233899999995
+Transaction: household percentile = 86
+Transaction: household id = 3936
 Transaction: household size = 1
 Transaction: household age = 31
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 10
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 3
 Transaction: household unemployedTime = 0
-Transaction: area per person = 70.0
-Transaction: askPrice = 88588.94846514179
-Transaction: sellerId = 29782
-Transaction: bidValue = 91712.99534411707
-Transaction: consumerSurplus = 1.036362127662496
-Transaction: transactionTaxes = 733.7039627529365
-Transaction: pricePerm2 = 1310.185647773101
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0352645215131382
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 144434.32931227295
-Transaction: mortgage payment = 485.42941802503833
-Transaction: mortgage duration = 396.0
-Transaction: house.area = 83
-Transaction: house.location = Seixal
-Transaction: house percentile = 80
-Transaction: household.wealth = 31127.629506534122
-Transaction: raw salary = 2352.335
-Transaction: liquid salary = 1690.7742250000001
-Transaction: household percentile = 61
-Transaction: household id = 27204
-Transaction: household size = 2
-Transaction: household age = 31
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 5
-Transaction: household unemployedTime = 0
-Transaction: area per person = 41.5
-Transaction: askPrice = 168164.84642974968
-Transaction: sellerId = 1722
-Transaction: bidValue = 174939.40622867638
-Transaction: consumerSurplus = 1.0453779977561033
+Transaction: area per person = 73.0
+Transaction: askPrice = 153894.60027466426
+Transaction: sellerId = 13859
+Transaction: bidValue = 157545.03178219323
+Transaction: consumerSurplus = 1.0352984503198446
 Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 2107.703689502125
+Transaction: pricePerm2 = 2158.151120304017
 Transaction: for renting = false
 Transaction: for investment = false
 Transaction: nonResident = false
 Transaction: contracts as landlord = Contract[]
 Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0402852316804319
-Transaction: seller contracts as landlord = Contract[Contract(1722, 53276, House(0x0062, Seixal, NotSocialNeighbourhood, 1.0, 11), 570.3756302897983), Contract(1722, 67870, House(0x004c, Seixal, NotSocialNeighbourhood, 1.0, 7), 446.1383109476794)]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 86746.36164008189
-Transaction: mortgage payment = 305.2971713020924
-Transaction: mortgage duration = 372.0
-Transaction: house.area = 66
-Transaction: house.location = Seixal
-Transaction: house percentile = 48
-Transaction: household.wealth = 14236.035425454193
-Transaction: raw salary = 2352.335
-Transaction: liquid salary = 1690.7742250000001
-Transaction: household percentile = 61
-Transaction: household id = 68728
-Transaction: household size = 2
-Transaction: household age = 33
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 14
-Transaction: household unemployedTime = 0
-Transaction: area per person = 33.0
-Transaction: askPrice = 95762.97245957369
-Transaction: sellerId = 58956
-Transaction: bidValue = 99898.48844943155
-Transaction: consumerSurplus = 1.0431849167130194
-Transaction: transactionTaxes = 799.1879075954524
-Transaction: pricePerm2 = 1513.6134613550234
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0431849167130194
+Transaction: bid to ask price ratio = 1.0237203352230282
 Transaction: seller contracts as landlord = Contract[]
 Transaction: seller contract as tenant = Nothing
 ########
 
 ########
-Transaction: mortgageValue = 61338.21848148179
-Transaction: mortgage payment = 206.15165274027598
-Transaction: mortgage duration = 396.0
-Transaction: house.area = 65
-Transaction: house.location = Seixal
-Transaction: house percentile = 19
-Transaction: household.wealth = 10939.871479019734
-Transaction: raw salary = 714.3025
-Transaction: liquid salary = 635.729225
-Transaction: household percentile = 31
-Transaction: household id = 6763
-Transaction: household size = 1
-Transaction: household age = 31
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 11
-Transaction: household unemployedTime = 0
-Transaction: area per person = 65.0
-Transaction: askPrice = 69685.23886250307
-Transaction: sellerId = 35714
-Transaction: bidValue = 71487.39338385033
-Transaction: consumerSurplus = 1.0269694828315383
-Transaction: transactionTaxes = 571.8991470708027
-Transaction: pricePerm2 = 1099.8060520592358
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.025861352429359
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Contract(17123, 35714, House(0x0047, Seixal, NotSocialNeighbourhood, 1.0, 88), 451.1344956908884)
-########
-
-########
-Transaction: mortgageValue = 75940.5485631391
-Transaction: mortgage payment = 362.82481208037944
-Transaction: mortgage duration = 252.0
-Transaction: house.area = 86
-Transaction: house.location = Seixal
-Transaction: house percentile = 10
-Transaction: household.wealth = 15626.793110486275
-Transaction: raw salary = 1312.541
-Transaction: liquid salary = 1076.47624
-Transaction: household percentile = 13
-Transaction: household id = 68815
-Transaction: household size = 2
-Transaction: household age = 49
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 14
-Transaction: household unemployedTime = 0
-Transaction: area per person = 43.0
-Transaction: askPrice = 89002.99169601369
-Transaction: sellerId = 44447
-Transaction: bidValue = 90530.56132084886
-Transaction: consumerSurplus = 1.017163126718847
-Transaction: transactionTaxes = 724.2444905667909
-Transaction: pricePerm2 = 1052.680945591266
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.017163126718847
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 125879.50715632073
-Transaction: mortgage payment = 478.4507281905139
-Transaction: mortgage duration = 336.0
-Transaction: house.area = 75
-Transaction: house.location = Seixal
-Transaction: house percentile = 87
-Transaction: household.wealth = 26839.627435156588
-Transaction: raw salary = 1916.128
-Transaction: liquid salary = 1452.47296
-Transaction: household percentile = 48
-Transaction: household id = 23139
-Transaction: household size = 2
-Transaction: household age = 38
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 6
-Transaction: household unemployedTime = 0
-Transaction: area per person = 37.5
-Transaction: askPrice = 145909.06502241959
-Transaction: sellerId = -1
-Transaction: bidValue = 152182.3420427742
-Transaction: consumerSurplus = 1.0472803128144206
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 2029.0978939036559
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0429944295742741
-########
-
-########
-Transaction: mortgageValue = 217551.14071744413
-Transaction: mortgage payment = 700.7325497638327
+Transaction: mortgageValue = 106225.2447320247
+Transaction: mortgage payment = 342.15167222237545
 Transaction: mortgage duration = 420.0
-Transaction: house.area = 139
-Transaction: house.location = Seixal
-Transaction: house percentile = 62
-Transaction: household.wealth = 34312.464012820616
-Transaction: raw salary = 6027.629999999999
-Transaction: liquid salary = 3476.6649149999994
-Transaction: household percentile = 90
-Transaction: household id = 59677
-Transaction: household size = 4
-Transaction: household age = 27
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 24
-Transaction: household unemployedTime = 0
-Transaction: area per person = 34.75
-Transaction: askPrice = 235200.91190505715
-Transaction: sellerId = 57276
-Transaction: bidValue = 251177.35545000833
-Transaction: consumerSurplus = 1.0679267925262141
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1807.0313341727217
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0679267925262141
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 161798.41917297032
-Transaction: mortgage payment = 521.1529502485474
-Transaction: mortgage duration = 420.0
-Transaction: house.area = 96
-Transaction: house.location = Seixal
-Transaction: house percentile = 77
-Transaction: household.wealth = 34260.3056593835
-Transaction: raw salary = 8610.9
-Transaction: liquid salary = 4614.59535
-Transaction: household percentile = 100
-Transaction: household id = 69212
+Transaction: house.area = 112
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 91
+Transaction: household.wealth = 158635.83304551477
+Transaction: raw salary = 2674.6720000000005
+Transaction: liquid salary = 1854.6376816000002
+Transaction: household percentile = 68
+Transaction: household id = 13497
 Transaction: household size = 3
 Transaction: household age = 28
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 11
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 10
 Transaction: household unemployedTime = 0
-Transaction: area per person = 32.0
-Transaction: askPrice = 186971.03980779665
-Transaction: sellerId = 58440
-Transaction: bidValue = 195373.51871916614
-Transaction: consumerSurplus = 1.0472397928159476
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 2035.140819991314
+Transaction: area per person = 37.333333333333336
+Transaction: askPrice = 247014.2511390912
+Transaction: sellerId = 18616
+Transaction: bidValue = 261348.05298388607
+Transaction: consumerSurplus = 1.0606681849183432
+Transaction: transactionTaxes = 340.3081327431155
+Transaction: pricePerm2 = 2333.464758784697
 Transaction: for renting = false
 Transaction: for investment = false
 Transaction: nonResident = false
 Transaction: contracts as landlord = Contract[]
 Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0449400020452746
+Transaction: bid to ask price ratio = 1.0580282383655817
 Transaction: seller contracts as landlord = Contract[]
 Transaction: seller contract as tenant = Nothing
 ########
 
 ########
-Transaction: mortgageValue = 111016.18409185072
-Transaction: mortgage payment = 552.1976729339588
-Transaction: mortgage duration = 240.0
-Transaction: house.area = 62
-Transaction: house.location = Seixal
-Transaction: house percentile = 85
-Transaction: household.wealth = 19324.466432506702
-Transaction: raw salary = 3788.7959999999994
-Transaction: liquid salary = 2407.0015419999995
-Transaction: household percentile = 96
-Transaction: household id = 69788
+Transaction: mortgageValue = 73950.69298624567
+Transaction: mortgage payment = 254.21405543524946
+Transaction: mortgage duration = 384.0
+Transaction: house.area = 56
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 50
+Transaction: household.wealth = 13313.377600764356
+Transaction: raw salary = 844.3919999999999
+Transaction: liquid salary = 748.3379199999999
+Transaction: household percentile = 42
+Transaction: household id = 21173
 Transaction: household size = 1
-Transaction: household age = 50
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 6
+Transaction: household age = 32
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 9
 Transaction: household unemployedTime = 0
-Transaction: area per person = 62.0
-Transaction: askPrice = 124063.35145002302
-Transaction: sellerId = 45222
-Transaction: bidValue = 129954.16119570729
-Transaction: consumerSurplus = 1.0512737505263066
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 2096.034857995279
+Transaction: area per person = 56.0
+Transaction: askPrice = 82919.44365863981
+Transaction: sellerId = -1
+Transaction: bidValue = 86307.34428074874
+Transaction: consumerSurplus = 1.0470617850719557
+Transaction: transactionTaxes = 690.45875424599
+Transaction: pricePerm2 = 1541.2025764419418
 Transaction: for renting = false
 Transaction: for investment = false
 Transaction: nonResident = false
 Transaction: contracts as landlord = Contract[]
 Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0474822715720145
+Transaction: bid to ask price ratio = 1.0408577345990904
+########
+
+########
+Transaction: mortgageValue = 30740.694995406582
+Transaction: mortgage payment = 93.44050131460067
+Transaction: mortgage duration = 456.0
+Transaction: house.area = 48
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 1
+Transaction: household.wealth = 10463.457649496882
+Transaction: raw salary = 303.9135
+Transaction: liquid salary = 270.483015
+Transaction: household percentile = 1
+Transaction: household id = 21060
+Transaction: household size = 1
+Transaction: household age = 23
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 12
+Transaction: household unemployedTime = 0
+Transaction: area per person = 48.0
+Transaction: askPrice = 43916.17784669931
+Transaction: sellerId = 16761
+Transaction: bidValue = 40669.52727372374
+Transaction: consumerSurplus = 0.9260716498528437
+Transaction: transactionTaxes = 325.3562181897899
+Transaction: pricePerm2 = 847.2818182025779
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9260716498528437
 Transaction: seller contracts as landlord = Contract[]
 Transaction: seller contract as tenant = Nothing
 ########
 
 ########
-Transaction: mortgageValue = 223084.68017436084
-Transaction: mortgage payment = 704.2928801470417
-Transaction: mortgage duration = 432.0
-Transaction: house.area = 115
-Transaction: house.location = Seixal
-Transaction: house percentile = 87
-Transaction: household.wealth = 38987.4789946674
-Transaction: raw salary = 7060.937999999997
-Transaction: liquid salary = 3931.8370889999987
-Transaction: household percentile = 94
-Transaction: household id = 63043
-Transaction: household size = 4
-Transaction: household age = 26
-Transaction: household residencyZone = Seixal
+Transaction: mortgageValue = 81157.8796080629
+Transaction: mortgage payment = 261.4096516508131
+Transaction: mortgage duration = 420.0
+Transaction: house.area = 125
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 41
+Transaction: household.wealth = 109799.40833014839
+Transaction: raw salary = 5811.82
+Transaction: liquid salary = 3381.60061
+Transaction: household percentile = 90
+Transaction: household id = 6423
+Transaction: household size = 3
+Transaction: household age = 27
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 8
+Transaction: household unemployedTime = 0
+Transaction: area per person = 41.666666666666664
+Transaction: askPrice = 181785.17779319364
+Transaction: sellerId = 17734
+Transaction: bidValue = 188761.29977160832
+Transaction: consumerSurplus = 1.0389053013428637
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 1510.0903981728666
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0383756369089179
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 13672.656938334927
+Transaction: mortgage payment = 41.55989052334277
+Transaction: mortgage duration = 456.0
+Transaction: house.area = 106
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 62
+Transaction: household.wealth = 182445.5690098677
+Transaction: raw salary = 8302.599999999999
+Transaction: liquid salary = 4478.789199999999
+Transaction: household percentile = 100
+Transaction: household id = 20836
+Transaction: household size = 3
+Transaction: household age = 23
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 7
+Transaction: household unemployedTime = 0
+Transaction: area per person = 35.333333333333336
+Transaction: askPrice = 185707.3072499422
+Transaction: sellerId = 16115
+Transaction: bidValue = 192469.31456800527
+Transaction: consumerSurplus = 1.037543348457414
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 1815.7482506415593
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0364121768722978
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 119303.89734034234
+Transaction: mortgage payment = 619.3314582360173
+Transaction: mortgage duration = 228.0
+Transaction: house.area = 83
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 63
+Transaction: household.wealth = 36557.19632311394
+Transaction: raw salary = 2782.4
+Transaction: liquid salary = 1908.80332
+Transaction: household percentile = 70
+Transaction: household id = 15640
+Transaction: household size = 3
+Transaction: household age = 51
+Transaction: household residencyZone = Sesimbra
 Transaction: household homelessTime = 24
 Transaction: household unemployedTime = 0
-Transaction: area per person = 28.75
-Transaction: askPrice = 245608.70026230178
-Transaction: sellerId = 15033
-Transaction: bidValue = 260980.7510103292
-Transaction: consumerSurplus = 1.062587566041474
-Transaction: transactionTaxes = 311.6585788056782
-Transaction: pricePerm2 = 2269.3978348724277
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.062587566041474
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 111912.17846982865
-Transaction: mortgage payment = 425.36282904081634
-Transaction: mortgage duration = 336.0
-Transaction: house.area = 115
-Transaction: house.location = Seixal
-Transaction: house percentile = 24
-Transaction: household.wealth = 26130.455458777036
-Transaction: raw salary = 1611.41
-Transaction: liquid salary = 1267.7524
-Transaction: household percentile = 38
-Transaction: household id = 68477
-Transaction: household size = 3
-Transaction: household age = 38
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 17
-Transaction: household unemployedTime = 0
-Transaction: area per person = 38.333333333333336
-Transaction: askPrice = 132708.71881915315
-Transaction: sellerId = 47099
-Transaction: bidValue = 137520.02481943014
-Transaction: consumerSurplus = 1.0413655245033548
+Transaction: area per person = 27.666666666666668
+Transaction: askPrice = 148167.64420467644
+Transaction: sellerId = 13388
+Transaction: bidValue = 155129.949736994
+Transaction: consumerSurplus = 1.0509768831779516
 Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1195.8263027776534
+Transaction: pricePerm2 = 1869.0355389999277
 Transaction: for renting = false
 Transaction: for investment = false
 Transaction: nonResident = false
 Transaction: contracts as landlord = Contract[]
 Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0362546337805696
+Transaction: bid to ask price ratio = 1.0469893786169666
 Transaction: seller contracts as landlord = Contract[]
 Transaction: seller contract as tenant = Nothing
 ########
 
 ########
-Transaction: mortgageValue = 230835.3082265615
-Transaction: mortgage payment = 728.7621182389016
-Transaction: mortgage duration = 432.0
-Transaction: house.area = 131
-Transaction: house.location = Seixal
-Transaction: house percentile = 80
-Transaction: household.wealth = 45136.37255476019
-Transaction: raw salary = 8610.9
-Transaction: liquid salary = 4614.59535
-Transaction: household percentile = 100
-Transaction: household id = 63268
+Transaction: mortgageValue = 116190.51682127752
+Transaction: mortgage payment = 390.50477285519213
+Transaction: mortgage duration = 396.0
+Transaction: house.area = 84
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 61
+Transaction: household.wealth = 34589.36679192095
+Transaction: raw salary = 1602.453
+Transaction: liquid salary = 1262.01992
+Transaction: household percentile = 19
+Transaction: household id = 17664
 Transaction: household size = 4
+Transaction: household age = 30
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 24
+Transaction: household unemployedTime = 0
+Transaction: area per person = 21.0
+Transaction: askPrice = 146107.98706418366
+Transaction: sellerId = 20968
+Transaction: bidValue = 150088.09627736005
+Transaction: consumerSurplus = 1.0272408736383998
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 1786.763050920953
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0272408736383998
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 142388.87759556388
+Transaction: mortgage payment = 432.81025709213407
+Transaction: mortgage duration = 456.0
+Transaction: house.area = 114
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 66
+Transaction: household.wealth = 78177.9412548145
+Transaction: raw salary = 2782.4
+Transaction: liquid salary = 1908.80332
+Transaction: household percentile = 70
+Transaction: household id = 7444
+Transaction: household size = 3
+Transaction: household age = 23
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 7
+Transaction: household unemployedTime = 0
+Transaction: area per person = 38.0
+Transaction: askPrice = 209797.1649598201
+Transaction: sellerId = 10955
+Transaction: bidValue = 219003.2600252821
+Transaction: consumerSurplus = 1.0445543060225206
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 1921.0812282919483
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0438809316952644
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 90954.68278997124
+Transaction: mortgage payment = 355.5332611347717
+Transaction: mortgage duration = 324.0
+Transaction: house.area = 112
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 14
+Transaction: household.wealth = 31029.696024356588
+Transaction: raw salary = 1436.6820000000002
+Transaction: liquid salary = 1155.92648
+Transaction: household percentile = 16
+Transaction: household id = 15057
+Transaction: household size = 3
+Transaction: household age = 40
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 24
+Transaction: household unemployedTime = 0
+Transaction: area per person = 37.333333333333336
+Transaction: askPrice = 118124.20299625024
+Transaction: sellerId = 8879
+Transaction: bidValue = 121363.7848938407
+Transaction: consumerSurplus = 1.0353260474389334
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 1083.6052222664348
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.02742521697855
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 89941.55235547607
+Transaction: mortgage payment = 289.70187471288403
+Transaction: mortgage duration = 420.0
+Transaction: house.area = 72
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 34
+Transaction: household.wealth = 14639.810325277458
+Transaction: raw salary = 2943.992
+Transaction: liquid salary = 1990.0517776
+Transaction: household percentile = 73
+Transaction: household id = 21101
+Transaction: household size = 2
+Transaction: household age = 28
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 11
+Transaction: household unemployedTime = 0
+Transaction: area per person = 36.0
+Transaction: askPrice = 100826.05291362596
+Transaction: sellerId = 9023
+Transaction: bidValue = 104288.56647424799
+Transaction: consumerSurplus = 1.0343414570000895
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 1448.452312142333
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0343414570000895
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 136572.65913102851
+Transaction: mortgage payment = 519.0939310797452
+Transaction: mortgage duration = 336.0
+Transaction: house.area = 79
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 81
+Transaction: household.wealth = 31144.106619791575
+Transaction: raw salary = 2151.264
+Transaction: liquid salary = 1583.20124
+Transaction: household percentile = 57
+Transaction: household id = 17522
+Transaction: household size = 4
+Transaction: household age = 38
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 24
+Transaction: household unemployedTime = 0
+Transaction: area per person = 19.75
+Transaction: askPrice = 162261.97397507116
+Transaction: sellerId = 19237
+Transaction: bidValue = 167093.88361842427
+Transaction: consumerSurplus = 1.029778447315669
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 2115.11245086613
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.029778447315669
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 101980.38091316445
+Transaction: mortgage payment = 358.91213455473763
+Transaction: mortgage duration = 372.0
+Transaction: house.area = 59
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 77
+Transaction: household.wealth = 20060.184752391393
+Transaction: raw salary = 1270.911
+Transaction: liquid salary = 1049.83304
+Transaction: household percentile = 13
+Transaction: household id = 21224
+Transaction: household size = 2
+Transaction: household age = 34
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 9
+Transaction: household unemployedTime = 0
+Transaction: area per person = 29.5
+Transaction: askPrice = 117764.7990286259
+Transaction: sellerId = 18693
+Transaction: bidValue = 121639.36197050802
+Transaction: consumerSurplus = 1.0358940284652822
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 2061.684101195051
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0329008580988646
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 113311.5685827152
+Transaction: mortgage payment = 398.79138110297043
+Transaction: mortgage duration = 372.0
+Transaction: house.area = 85
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 42
+Transaction: household.wealth = 17635.46408031561
+Transaction: raw salary = 1548.8229999999999
+Transaction: liquid salary = 1227.69672
+Transaction: household percentile = 37
+Transaction: household id = 21216
+Transaction: household size = 2
+Transaction: household age = 34
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 9
+Transaction: household unemployedTime = 0
+Transaction: area per person = 42.5
+Transaction: askPrice = 125311.34927395855
+Transaction: sellerId = 19488
+Transaction: bidValue = 130594.3233814245
+Transaction: consumerSurplus = 1.042484431265029
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 1536.403804487347
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0421587840053992
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 66765.050173492
+Transaction: mortgage payment = 516.4679360307443
+Transaction: mortgage duration = 144.0
+Transaction: house.area = 134
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 55
+Transaction: household.wealth = 165746.54199098487
+Transaction: raw salary = 4068.2739999999976
+Transaction: liquid salary = 2543.8060229999987
+Transaction: household percentile = 83
+Transaction: household id = 19609
+Transaction: household size = 5
+Transaction: household age = 62
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 28
+Transaction: household unemployedTime = 0
+Transaction: area per person = 26.8
+Transaction: askPrice = 219353.51723538717
+Transaction: sellerId = 17133
+Transaction: bidValue = 229196.66132465718
+Transaction: consumerSurplus = 1.0448734272115974
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 1710.4228457063969
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0448734272115974
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 69407.65328141638
+Transaction: mortgage payment = 228.26987596367212
+Transaction: mortgage duration = 408.0
+Transaction: house.area = 140
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 28
+Transaction: household.wealth = 118624.5868070827
+Transaction: raw salary = 1358.2400000000002
+Transaction: liquid salary = 1105.7236000000003
+Transaction: household percentile = 55
+Transaction: household id = 13195
+Transaction: household size = 4
+Transaction: household age = 29
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 16
+Transaction: household unemployedTime = 30
+Transaction: area per person = 35.0
+Transaction: askPrice = 179330.54938538535
+Transaction: sellerId = -1
+Transaction: bidValue = 185659.74835235742
+Transaction: consumerSurplus = 1.0370058705492606
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 1326.1410596596959
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.035293478934091
+########
+
+########
+Transaction: mortgageValue = 59237.035311592015
+Transaction: mortgage payment = 219.2022453688928
+Transaction: mortgage duration = 348.0
+Transaction: house.area = 82
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 92
+Transaction: household.wealth = 130635.56705814815
+Transaction: raw salary = 1904.608
+Transaction: liquid salary = 1445.90656
+Transaction: household percentile = 49
+Transaction: household id = 8786
+Transaction: household size = 3
+Transaction: household age = 37
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 9
+Transaction: household unemployedTime = 0
+Transaction: area per person = 27.333333333333332
+Transaction: askPrice = 181510.96887875142
+Transaction: sellerId = 9203
+Transaction: bidValue = 187259.8910285772
+Transaction: consumerSurplus = 1.0346873137528632
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 2283.6572076655757
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0316725880829056
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 81820.42856880679
+Transaction: mortgage payment = 339.6742512828597
+Transaction: mortgage duration = 300.0
+Transaction: house.area = 60
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 59
+Transaction: household.wealth = 24208.07899101199
+Transaction: raw salary = 1418.328
+Transaction: liquid salary = 1144.17992
+Transaction: household percentile = 32
+Transaction: household id = 21121
+Transaction: household size = 2
+Transaction: household age = 43
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 11
+Transaction: household unemployedTime = 0
+Transaction: area per person = 30.0
+Transaction: askPrice = 102207.49542320136
+Transaction: sellerId = 11071
+Transaction: bidValue = 105544.34597999854
+Transaction: consumerSurplus = 1.0351284228552315
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 1759.0724329999757
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.032647806728661
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 91391.54172294191
+Transaction: mortgage payment = 288.5290558312705
+Transaction: mortgage duration = 432.0
+Transaction: house.area = 60
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 59
+Transaction: household.wealth = 15237.729427523338
+Transaction: raw salary = 3570.1180000000004
+Transaction: liquid salary = 2299.958661
+Transaction: household percentile = 81
+Transaction: household id = 20979
+Transaction: household size = 2
 Transaction: household age = 26
-Transaction: household residencyZone = Seixal
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 13
+Transaction: household unemployedTime = 0
+Transaction: area per person = 30.0
+Transaction: askPrice = 102317.50681191043
+Transaction: sellerId = 11071
+Transaction: bidValue = 106324.51656191479
+Transaction: consumerSurplus = 1.0394705859637121
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 1772.075276031913
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0391625038066108
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 88043.51705494156
+Transaction: mortgage payment = 317.5583002441398
+Transaction: mortgage duration = 360.0
+Transaction: house.area = 90
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 91
+Transaction: household.wealth = 127820.23273104498
+Transaction: raw salary = 1366.1299999999999
+Transaction: liquid salary = 1110.7731999999999
+Transaction: household percentile = 30
+Transaction: household id = 6530
+Transaction: household size = 3
+Transaction: household age = 35
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 9
+Transaction: household unemployedTime = 0
+Transaction: area per person = 30.0
+Transaction: askPrice = 205340.58416171983
+Transaction: sellerId = 6959
+Transaction: bidValue = 213307.34513136564
+Transaction: consumerSurplus = 1.0417457626077433
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 2370.0816125707292
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0387977905204138
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 112621.81347879692
+Transaction: mortgage payment = 499.70089379401537
+Transaction: mortgage duration = 276.0
+Transaction: house.area = 111
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 22
+Transaction: household.wealth = 19915.867923665734
+Transaction: raw salary = 1966.272
+Transaction: liquid salary = 1481.05504
+Transaction: household percentile = 51
+Transaction: household id = 13964
+Transaction: household size = 3
+Transaction: household age = 45
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 24
+Transaction: household unemployedTime = 0
+Transaction: area per person = 37.0
+Transaction: askPrice = 126360.45011162503
+Transaction: sellerId = 10955
+Transaction: bidValue = 132139.36404398934
+Transaction: consumerSurplus = 1.0457335655836877
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 1190.4447211170211
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0457335655836877
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 134993.29622257716
+Transaction: mortgage payment = 499.53265699551986
+Transaction: mortgage duration = 348.0
+Transaction: house.area = 154
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 47
+Transaction: household.wealth = 119135.80396078693
+Transaction: raw salary = 2997.8559999999998
+Transaction: liquid salary = 2017.1345967999998
+Transaction: household percentile = 74
+Transaction: household id = 14596
+Transaction: household size = 4
+Transaction: household age = 37
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 16
+Transaction: household unemployedTime = 0
+Transaction: area per person = 38.5
+Transaction: askPrice = 239407.0184230936
+Transaction: sellerId = 18695
+Transaction: bidValue = 251746.38410414834
+Transaction: consumerSurplus = 1.057365102428685
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 1634.7167798970672
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0515413698492662
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 142045.56021670217
+Transaction: mortgage payment = 589.6964872786941
+Transaction: mortgage duration = 300.0
+Transaction: house.area = 118
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 39
+Transaction: household.wealth = 35110.31663196056
+Transaction: raw salary = 8302.599999999999
+Transaction: liquid salary = 4478.789199999999
+Transaction: household percentile = 100
+Transaction: household id = 21331
+Transaction: household size = 3
+Transaction: household age = 42
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 7
+Transaction: household unemployedTime = 0
+Transaction: area per person = 39.333333333333336
+Transaction: askPrice = 170814.61311512667
+Transaction: sellerId = 10955
+Transaction: bidValue = 176453.67051602353
+Transaction: consumerSurplus = 1.0330127340867272
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 1495.3700891188435
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0330127340867272
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 90352.97032809016
+Transaction: mortgage payment = 334.3444496755661
+Transaction: mortgage duration = 348.0
+Transaction: house.area = 75
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 34
+Transaction: household.wealth = 13756.265018811688
+Transaction: raw salary = 1391.2
+Transaction: liquid salary = 1126.818
+Transaction: household percentile = 70
+Transaction: household id = 21318
+Transaction: household size = 1
+Transaction: household age = 37
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 7
+Transaction: household unemployedTime = 0
+Transaction: area per person = 75.0
+Transaction: askPrice = 100893.84913478709
+Transaction: sellerId = 11071
+Transaction: bidValue = 103834.11004652562
+Transaction: consumerSurplus = 1.0305695154829217
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 1384.4548006203415
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0291421225074935
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 142397.2566148525
+Transaction: mortgage payment = 631.8139817350211
+Transaction: mortgage duration = 276.0
+Transaction: house.area = 83
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 77
+Transaction: household.wealth = 24354.30395170373
+Transaction: raw salary = 2890.128
+Transaction: liquid salary = 1962.9689584
+Transaction: household percentile = 72
+Transaction: household id = 16490
+Transaction: household size = 4
+Transaction: household age = 45
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 24
+Transaction: household unemployedTime = 0
+Transaction: area per person = 20.75
+Transaction: askPrice = 161000.60102272182
+Transaction: sellerId = 17915
+Transaction: bidValue = 166264.47448752215
+Transaction: consumerSurplus = 1.0326947441895415
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 2003.1864396087005
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0326947441895415
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 38513.5818882295
+Transaction: mortgage payment = 142.5166465994049
+Transaction: mortgage duration = 348.0
+Transaction: house.area = 25
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 76
+Transaction: household.wealth = 13693.928465279234
+Transaction: raw salary = 617.8175
+Transaction: liquid salary = 549.857575
+Transaction: household percentile = 25
+Transaction: household id = 21027
+Transaction: household size = 1
+Transaction: household age = 37
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 12
+Transaction: household unemployedTime = 0
+Transaction: area per person = 25.0
+Transaction: askPrice = 50158.42376383159
+Transaction: sellerId = 20971
+Transaction: bidValue = 51521.46010337614
+Transaction: consumerSurplus = 1.02951718591408
+Transaction: transactionTaxes = 412.17168082700914
+Transaction: pricePerm2 = 2060.858404135046
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.02717462466449
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 71269.21089760723
+Transaction: mortgage payment = 340.50633739552217
+Transaction: mortgage duration = 252.0
+Transaction: house.area = 70
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 46
+Transaction: household.wealth = 35966.601353864295
+Transaction: raw salary = 1340.031
+Transaction: liquid salary = 1094.0698399999999
+Transaction: household percentile = 29
+Transaction: household id = 21272
+Transaction: household size = 2
+Transaction: household age = 49
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 8
+Transaction: household unemployedTime = 0
+Transaction: area per person = 35.0
+Transaction: askPrice = 103204.14289955191
+Transaction: sellerId = 10283
+Transaction: bidValue = 106516.48022439424
+Transaction: consumerSurplus = 1.0320950034735157
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 1521.664003205632
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0320950034735157
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 52323.723699419395
+Transaction: mortgage payment = 260.2596972902057
+Transaction: mortgage duration = 240.0
+Transaction: house.area = 60
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 22
+Transaction: household.wealth = 20749.55553324942
+Transaction: raw salary = 936.8879999999999
+Transaction: liquid salary = 818.5687999999999
+Transaction: household percentile = 48
+Transaction: household id = 21152
+Transaction: household size = 1
+Transaction: household age = 50
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 10
+Transaction: household unemployedTime = 0
+Transaction: area per person = 60.0
+Transaction: askPrice = 70293.67481927131
+Transaction: sellerId = 13282
+Transaction: bidValue = 72081.63504167047
+Transaction: consumerSurplus = 1.0282520627406626
+Transaction: transactionTaxes = 576.6530803333637
+Transaction: pricePerm2 = 1201.360584027841
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.025435577624816
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 102886.17680191903
+Transaction: mortgage payment = 456.504054755319
+Transaction: mortgage duration = 276.0
+Transaction: house.area = 53
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 96
+Transaction: household.wealth = 21055.245299128765
+Transaction: raw salary = 1997.104
+Transaction: liquid salary = 1498.62928
+Transaction: household percentile = 52
+Transaction: household id = 21255
+Transaction: household size = 2
+Transaction: household age = 46
+Transaction: household residencyZone = Sesimbra
+Transaction: household homelessTime = 8
+Transaction: household unemployedTime = 0
+Transaction: area per person = 26.5
+Transaction: askPrice = 120546.56696667259
+Transaction: sellerId = 15759
+Transaction: bidValue = 123520.31719506523
+Transaction: consumerSurplus = 1.0303091544154808
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 2330.5720225484006
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0246688918915028
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 155735.2673615559
+Transaction: mortgage payment = 523.4107470243227
+Transaction: mortgage duration = 396.0
+Transaction: house.area = 131
+Transaction: house.location = Sesimbra
+Transaction: house percentile = 26
+Transaction: household.wealth = 23705.336221245958
+Transaction: raw salary = 2297.6240000000003
+Transaction: liquid salary = 1661.50384
+Transaction: household percentile = 61
+Transaction: household id = 17389
+Transaction: household size = 4
+Transaction: household age = 31
+Transaction: household residencyZone = Sesimbra
 Transaction: household homelessTime = 24
 Transaction: household unemployedTime = 0
 Transaction: area per person = 32.75
-Transaction: askPrice = 255766.7959451918
-Transaction: sellerId = 63734
-Transaction: bidValue = 273760.4761875941
-Transaction: consumerSurplus = 1.07035190074578
-Transaction: transactionTaxes = 1308.4771426323423
-Transaction: pricePerm2 = 2089.7746273862144
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.07035190074578
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 127496.07331349528
-Transaction: mortgage payment = 394.8175963170133
-Transaction: mortgage duration = 444.0
-Transaction: house.area = 84
-Transaction: house.location = Seixal
-Transaction: house percentile = 67
-Transaction: household.wealth = 22342.667599292472
-Transaction: raw salary = 7060.937999999997
-Transaction: liquid salary = 3931.8370889999987
-Transaction: household percentile = 94
-Transaction: household id = 69617
-Transaction: household size = 2
-Transaction: household age = 25
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 7
-Transaction: household unemployedTime = 0
-Transaction: area per person = 42.0
-Transaction: askPrice = 142464.6299797716
-Transaction: sellerId = 58799
-Transaction: bidValue = 149391.8875608019
-Transaction: consumerSurplus = 1.0486244029975293
+Transaction: askPrice = 173757.46369084052
+Transaction: sellerId = 18767
+Transaction: bidValue = 178966.49685837692
+Transaction: consumerSurplus = 1.0409067167976473
 Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1778.4748519143084
+Transaction: pricePerm2 = 1366.1564645677627
 Transaction: for renting = false
 Transaction: for investment = false
 Transaction: nonResident = false
 Transaction: contracts as landlord = Contract[]
 Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0486244029975293
+Transaction: bid to ask price ratio = 1.0299787592250116
 Transaction: seller contracts as landlord = Contract[]
 Transaction: seller contract as tenant = Nothing
 ########
 
 ########
-Transaction: mortgageValue = 172605.0640914879
-Transaction: mortgage payment = 567.6684732606419
-Transaction: mortgage duration = 408.0
-Transaction: house.area = 114
-Transaction: house.location = Seixal
-Transaction: house percentile = 65
-Transaction: household.wealth = 29156.632794335568
-Transaction: raw salary = 5769.303
-Transaction: liquid salary = 3362.8718715
-Transaction: household percentile = 89
-Transaction: household id = 54870
-Transaction: household size = 4
-Transaction: household age = 29
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 24
-Transaction: household unemployedTime = 0
-Transaction: area per person = 28.5
-Transaction: askPrice = 190849.70345317718
-Transaction: sellerId = 56843
-Transaction: bidValue = 201178.56422993678
-Transaction: consumerSurplus = 1.0541203920670155
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1764.7242476310244
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0541203920670155
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 31423.788404031107
-Transaction: mortgage payment = 179.21060338854383
-Transaction: mortgage duration = 204.0
-Transaction: house.area = 32
-Transaction: house.location = Seixal
-Transaction: house percentile = 51
-Transaction: household.wealth = 20326.86899846691
-Transaction: raw salary = 688.1875
-Transaction: liquid salary = 612.486875
-Transaction: household percentile = 29
-Transaction: household id = 68799
-Transaction: household size = 1
-Transaction: household age = 54
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 14
-Transaction: household unemployedTime = 0
-Transaction: area per person = 32.0
-Transaction: askPrice = 48951.9624575265
-Transaction: sellerId = 64230
-Transaction: bidValue = 50936.62700647687
-Transaction: consumerSurplus = 1.0424654440604129
-Transaction: transactionTaxes = 407.49301605181495
-Transaction: pricePerm2 = 1591.7695939524021
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.040543104899469
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 127241.32683837469
-Transaction: mortgage payment = 447.81609766710363
-Transaction: mortgage duration = 372.0
-Transaction: house.area = 118
-Transaction: house.location = Seixal
-Transaction: house percentile = 32
-Transaction: household.wealth = 21565.945065748907
-Transaction: raw salary = 2137.0550000000003
-Transaction: liquid salary = 1575.599425
-Transaction: household percentile = 55
-Transaction: household id = 69093
-Transaction: household size = 3
-Transaction: household age = 34
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 12
-Transaction: household unemployedTime = 0
-Transaction: area per person = 39.333333333333336
-Transaction: askPrice = 142769.19086054488
-Transaction: sellerId = 43463
-Transaction: bidValue = 148375.95300280862
-Transaction: consumerSurplus = 1.0415080493783115
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1257.4233305322764
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0392715130517223
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 174170.7284233619
-Transaction: mortgage payment = 572.8176749111942
-Transaction: mortgage duration = 408.0
-Transaction: house.area = 98
-Transaction: house.location = Seixal
-Transaction: house percentile = 78
-Transaction: household.wealth = 27550.76391019596
-Transaction: raw salary = 3386.885
-Transaction: liquid salary = 2210.2661075
-Transaction: household percentile = 79
-Transaction: household id = 58968
-Transaction: household size = 4
-Transaction: household age = 29
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 24
-Transaction: household unemployedTime = 0
-Transaction: area per person = 24.5
-Transaction: askPrice = 192146.29724410828
-Transaction: sellerId = 39235
-Transaction: bidValue = 201170.47705535393
-Transaction: consumerSurplus = 1.046965150724612
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 2052.7599699525913
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.046965150724612
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 74034.33514545861
-Transaction: mortgage payment = 422.2195523435138
-Transaction: mortgage duration = 204.0
-Transaction: house.area = 83
-Transaction: house.location = Seixal
-Transaction: house percentile = 33
-Transaction: household.wealth = 37982.34228670027
-Transaction: raw salary = 1559.1799999999998
-Transaction: liquid salary = 1234.3251999999998
-Transaction: household percentile = 36
-Transaction: household id = 68949
-Transaction: household size = 2
-Transaction: household age = 54
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 13
-Transaction: household unemployedTime = 0
-Transaction: area per person = 41.5
-Transaction: askPrice = 106846.5404472749
-Transaction: sellerId = 39467
-Transaction: bidValue = 111257.03058642487
-Transaction: consumerSurplus = 1.0455611698122238
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1340.4461516436731
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0412787360328843
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 112419.45228436925
-Transaction: mortgage payment = 354.9155404666424
-Transaction: mortgage duration = 432.0
-Transaction: house.area = 94
-Transaction: house.location = Seixal
-Transaction: house percentile = 78
-Transaction: household.wealth = 71406.20785828754
-Transaction: raw salary = 1454.72
-Transaction: liquid salary = 1167.4708
-Transaction: household percentile = 32
-Transaction: household id = 21000
-Transaction: household size = 3
-Transaction: household age = 26
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 11
-Transaction: household unemployedTime = 0
-Transaction: area per person = 31.333333333333332
-Transaction: askPrice = 174780.62691436696
-Transaction: sellerId = 52679
-Transaction: bidValue = 182397.53598549103
-Transaction: consumerSurplus = 1.045993042155242
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1940.3993189945854
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0435798246384362
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 48954.1124600664
-Transaction: mortgage payment = 243.49915466947058
-Transaction: mortgage duration = 240.0
-Transaction: house.area = 61
-Transaction: house.location = Seixal
+Transaction: mortgageValue = 113210.80051186735
+Transaction: mortgage payment = 380.49024264728416
+Transaction: mortgage duration = 396.0
+Transaction: house.area = 113
+Transaction: house.location = Sesimbra
 Transaction: house percentile = 22
-Transaction: household.wealth = 23167.157211990063
-Transaction: raw salary = 818.7625
-Transaction: liquid salary = 728.698625
-Transaction: household percentile = 39
-Transaction: household id = 69339
-Transaction: household size = 1
-Transaction: household age = 50
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 10
-Transaction: household unemployedTime = 0
-Transaction: area per person = 61.0
-Transaction: askPrice = 69135.97881412126
-Transaction: sellerId = 16148
-Transaction: bidValue = 71089.21282521494
-Transaction: consumerSurplus = 1.0282520627406626
-Transaction: transactionTaxes = 568.7137026017195
-Transaction: pricePerm2 = 1165.3969315609006
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0282520627406626
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 114447.88438203999
-Transaction: mortgage payment = 569.2670482682926
-Transaction: mortgage duration = 240.0
-Transaction: house.area = 81
-Transaction: house.location = Seixal
-Transaction: house percentile = 56
-Transaction: household.wealth = 20355.586725790716
-Transaction: raw salary = 2294.86
-Transaction: liquid salary = 1660.0251
-Transaction: household percentile = 60
-Transaction: household id = 69260
-Transaction: household size = 2
-Transaction: household age = 50
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 10
-Transaction: household unemployedTime = 0
-Transaction: area per person = 40.5
-Transaction: askPrice = 127670.92036601854
-Transaction: sellerId = 6981
-Transaction: bidValue = 134396.3593733149
-Transaction: consumerSurplus = 1.0526779237434434
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1659.214313250801
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0526779237434434
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 102329.41348903682
-Transaction: mortgage payment = 343.918982927044
-Transaction: mortgage duration = 396.0
-Transaction: house.area = 81
-Transaction: house.location = Seixal
-Transaction: house percentile = 45
-Transaction: household.wealth = 15589.20964754784
-Transaction: raw salary = 2352.335
-Transaction: liquid salary = 1690.7742250000001
-Transaction: household percentile = 61
-Transaction: household id = 69031
-Transaction: household size = 2
-Transaction: household age = 31
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 12
-Transaction: household unemployedTime = 0
-Transaction: area per person = 40.5
-Transaction: askPrice = 112076.84571983136
-Transaction: sellerId = 54227
-Transaction: bidValue = 117606.8389436337
-Transaction: consumerSurplus = 1.0515504028652776
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1451.936283254737
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0493410854693945
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 123432.15459733203
-Transaction: mortgage payment = 397.57515464453144
-Transaction: mortgage duration = 420.0
-Transaction: house.area = 119
-Transaction: house.location = Seixal
-Transaction: house percentile = 42
-Transaction: household.wealth = 53759.50522077841
-Transaction: raw salary = 7835.918999999998
-Transaction: liquid salary = 4273.216219499999
-Transaction: household percentile = 97
-Transaction: household id = 53693
-Transaction: household size = 4
-Transaction: household age = 27
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 24
-Transaction: household unemployedTime = 0
-Transaction: area per person = 29.75
-Transaction: askPrice = 168379.17428043392
-Transaction: sellerId = 43867
-Transaction: bidValue = 176116.46971369488
-Transaction: consumerSurplus = 1.0459516176292358
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1479.9703337285284
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0459516176292358
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 194587.88776072103
-Transaction: mortgage payment = 668.9183574714108
-Transaction: mortgage duration = 384.0
-Transaction: house.area = 97
-Transaction: house.location = Seixal
-Transaction: house percentile = 100
-Transaction: household.wealth = 46509.90563626147
-Transaction: raw salary = 7060.937999999997
-Transaction: liquid salary = 3931.8370889999987
-Transaction: household percentile = 94
-Transaction: household id = 59526
-Transaction: household size = 4
-Transaction: household age = 32
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 24
-Transaction: household unemployedTime = 0
-Transaction: area per person = 24.25
-Transaction: askPrice = 228125.2366269462
-Transaction: sellerId = 47663
-Transaction: bidValue = 240167.59528425726
-Transaction: consumerSurplus = 1.0527883667557745
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 2475.954590559353
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0527883667557745
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 67050.07469841352
-Transaction: mortgage payment = 207.63423246935193
-Transaction: mortgage duration = 444.0
-Transaction: house.area = 65
-Transaction: house.location = Seixal
-Transaction: house percentile = 19
-Transaction: household.wealth = 10262.40916962179
-Transaction: raw salary = 847.6005
-Transaction: liquid salary = 750.77638
-Transaction: household percentile = 41
-Transaction: household id = 69318
-Transaction: household size = 1
-Transaction: household age = 24
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 10
-Transaction: household unemployedTime = 0
-Transaction: area per person = 65.0
-Transaction: askPrice = 74674.73485718961
-Transaction: sellerId = 35714
-Transaction: bidValue = 76495.27349666951
-Transaction: consumerSurplus = 1.0243795795587565
-Transaction: transactionTaxes = 611.9621879733561
-Transaction: pricePerm2 = 1176.8503614872234
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0243795795587565
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Contract(17123, 35714, House(0x0047, Seixal, NotSocialNeighbourhood, 1.0, 88), 451.1344956908884)
-########
-
-########
-Transaction: mortgageValue = 133094.76819859375
-Transaction: mortgage payment = 420.18886081207376
-Transaction: mortgage duration = 432.0
-Transaction: house.area = 112
-Transaction: house.location = Seixal
-Transaction: house percentile = 38
-Transaction: household.wealth = 21121.685824414493
-Transaction: raw salary = 4477.667999999998
-Transaction: liquid salary = 2744.2043859999985
-Transaction: household percentile = 84
-Transaction: household id = 68762
+Transaction: household.wealth = 17962.788612810586
+Transaction: raw salary = 1491.9390000000003
+Transaction: liquid salary = 1191.2909600000003
+Transaction: household percentile = 17
+Transaction: household id = 14665
 Transaction: household size = 3
-Transaction: household age = 26
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 14
-Transaction: household unemployedTime = 0
-Transaction: area per person = 37.333333333333336
-Transaction: askPrice = 147884.2902494462
-Transaction: sellerId = 6981
-Transaction: bidValue = 153794.02030651996
-Transaction: consumerSurplus = 1.046164959852656
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1373.1608955939282
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0399618515739937
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 79213.80812685806
-Transaction: mortgage payment = 722.5057540707855
-Transaction: mortgage duration = 120.0
-Transaction: house.area = 81
-Transaction: house.location = Seixal
-Transaction: house percentile = 34
-Transaction: household.wealth = 31412.539871111218
-Transaction: raw salary = 3214.4600000000005
-Transaction: liquid salary = 2125.86407
-Transaction: household percentile = 76
-Transaction: household id = 68994
-Transaction: household size = 2
-Transaction: household age = 65
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 12
-Transaction: household unemployedTime = 0
-Transaction: area per person = 40.5
-Transaction: askPrice = 105334.2448464731
-Transaction: sellerId = 31187
-Transaction: bidValue = 109998.09720054705
-Transaction: consumerSurplus = 1.0442766961577559
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1358.0012000067538
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0442766961577559
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 174935.70074148997
-Transaction: mortgage payment = 615.6727911853874
-Transaction: mortgage duration = 372.0
-Transaction: house.area = 90
-Transaction: house.location = Seixal
-Transaction: house percentile = 98
-Transaction: household.wealth = 43626.197342994994
-Transaction: raw salary = 4994.321999999998
-Transaction: liquid salary = 2997.106518999999
-Transaction: household percentile = 86
-Transaction: household id = 39489
-Transaction: household size = 2
-Transaction: household age = 34
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 5
-Transaction: household unemployedTime = 0
-Transaction: area per person = 45.0
-Transaction: askPrice = 207560.77268427404
-Transaction: sellerId = 63771
-Transaction: bidValue = 217689.37413762507
-Transaction: consumerSurplus = 1.0508198543125384
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 2418.77082375139
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0487982450747468
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 72847.80381432334
-Transaction: mortgage payment = 462.7683056310513
-Transaction: mortgage duration = 180.0
-Transaction: house.area = 70
-Transaction: house.location = Seixal
-Transaction: house percentile = 35
-Transaction: household.wealth = 19228.45094081459
-Transaction: raw salary = 1980.506999999999
-Transaction: liquid salary = 1489.1689899999994
-Transaction: household percentile = 82
-Transaction: household id = 69435
-Transaction: household size = 1
-Transaction: household age = 57
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 9
-Transaction: household unemployedTime = 0
-Transaction: area per person = 70.0
-Transaction: askPrice = 87688.30785607056
-Transaction: sellerId = 52979
-Transaction: bidValue = 90963.97394476354
-Transaction: consumerSurplus = 1.0377040980111876
-Transaction: transactionTaxes = 727.7117915581083
-Transaction: pricePerm2 = 1299.4853420680506
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0373557908549174
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 139682.08742388707
-Transaction: mortgage payment = 432.55407458422934
-Transaction: mortgage duration = 444.0
-Transaction: house.area = 118
-Transaction: house.location = Seixal
-Transaction: house percentile = 36
-Transaction: household.wealth = 23261.94735025432
-Transaction: raw salary = 1726.762
-Transaction: liquid salary = 1341.5776799999999
-Transaction: household percentile = 42
-Transaction: household id = 59979
-Transaction: household size = 4
-Transaction: household age = 25
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 24
-Transaction: household unemployedTime = 0
-Transaction: area per person = 29.5
-Transaction: askPrice = 156037.40707769923
-Transaction: sellerId = 64566
-Transaction: bidValue = 162478.79582713632
-Transaction: consumerSurplus = 1.041281054780855
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1376.9389476875958
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.041281054780855
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 153717.7961685282
-Transaction: mortgage payment = 554.4344853703591
-Transaction: mortgage duration = 360.0
-Transaction: house.area = 97
-Transaction: house.location = Seixal
-Transaction: house percentile = 68
-Transaction: household.wealth = 24417.375164287358
-Transaction: raw salary = 2869.61
-Transaction: liquid salary = 1952.6525080000001
-Transaction: household percentile = 70
-Transaction: household id = 60668
-Transaction: household size = 4
-Transaction: household age = 35
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 24
-Transaction: household unemployedTime = 0
-Transaction: area per person = 24.25
-Transaction: askPrice = 170411.35926049348
-Transaction: sellerId = 57035
-Transaction: bidValue = 177646.8238295298
-Transaction: consumerSurplus = 1.0424588161284254
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1831.4105549436063
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0424588161284254
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 166470.41706162426
-Transaction: mortgage payment = 585.8798740777422
-Transaction: mortgage duration = 372.0
-Transaction: house.area = 112
-Transaction: house.location = Seixal
-Transaction: house percentile = 60
-Transaction: household.wealth = 33702.598495842845
-Transaction: raw salary = 2927.085
-Transaction: liquid salary = 1981.5509379999999
-Transaction: household percentile = 71
-Transaction: household id = 56929
-Transaction: household size = 4
-Transaction: household age = 33
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 24
-Transaction: household unemployedTime = 0
-Transaction: area per person = 28.0
-Transaction: askPrice = 189886.4518214614
-Transaction: sellerId = 54551
-Transaction: bidValue = 199498.96358755024
-Transaction: consumerSurplus = 1.0506224202615935
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1781.240746317413
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0506224202615935
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 233139.11659170326
-Transaction: mortgage payment = 801.4426628887933
-Transaction: mortgage duration = 384.0
-Transaction: house.area = 140
-Transaction: house.location = Seixal
-Transaction: house percentile = 81
-Transaction: household.wealth = 47688.58165576661
-Transaction: raw salary = 7577.591999999999
-Transaction: liquid salary = 4159.423175999999
-Transaction: household percentile = 96
-Transaction: household id = 52863
-Transaction: household size = 4
-Transaction: household age = 32
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 24
-Transaction: household unemployedTime = 0
-Transaction: area per person = 35.0
-Transaction: askPrice = 258630.97015738685
-Transaction: sellerId = -1
-Transaction: bidValue = 278217.7797906814
-Transaction: consumerSurplus = 1.0757326534458544
-Transaction: transactionTaxes = 1656.146823673149
-Transaction: pricePerm2 = 1987.2698556477242
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0757326534458544
-########
-
-########
-Transaction: mortgageValue = 120195.25942665865
-Transaction: mortgage payment = 433.52427933012535
-Transaction: mortgage duration = 360.0
-Transaction: house.area = 91
-Transaction: house.location = Seixal
-Transaction: house percentile = 48
-Transaction: household.wealth = 18143.016198066296
-Transaction: raw salary = 1947.689
-Transaction: liquid salary = 1470.46273
-Transaction: household percentile = 49
-Transaction: household id = 52616
-Transaction: household size = 3
-Transaction: household age = 35
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 24
-Transaction: household unemployedTime = 0
-Transaction: area per person = 30.333333333333332
-Transaction: askPrice = 131577.32950798632
-Transaction: sellerId = 58511
-Transaction: bidValue = 137975.41530076362
-Transaction: consumerSurplus = 1.0509295606035396
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1516.2133549534465
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0486260499183406
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 245001.7386455901
-Transaction: mortgage payment = 731.4785647613222
-Transaction: mortgage duration = 468.0
-Transaction: house.area = 115
-Transaction: house.location = Seixal
-Transaction: house percentile = 97
-Transaction: household.wealth = 44520.23822055796
-Transaction: raw salary = 8094.245999999999
-Transaction: liquid salary = 4387.009263
-Transaction: household percentile = 98
-Transaction: household id = 55193
-Transaction: household size = 4
-Transaction: household age = 22
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 24
-Transaction: household unemployedTime = 0
-Transaction: area per person = 28.75
-Transaction: askPrice = 268732.21716287016
-Transaction: sellerId = 58523
-Transaction: bidValue = 286341.7551964164
-Transaction: consumerSurplus = 1.065528198365861
-Transaction: transactionTaxes = 2289.81690532048
-Transaction: pricePerm2 = 2489.928306055795
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.065528198365861
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 48263.06161903038
-Transaction: mortgage payment = 188.6557477132369
-Transaction: mortgage duration = 324.0
-Transaction: house.area = 42
-Transaction: house.location = Seixal
-Transaction: house percentile = 48
-Transaction: household.wealth = 12933.158217718727
-Transaction: raw salary = 798.9379999999999
-Transaction: liquid salary = 711.0548199999998
-Transaction: household percentile = 18
-Transaction: household id = 69336
-Transaction: household size = 1
-Transaction: household age = 40
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 10
-Transaction: household unemployedTime = 0
-Transaction: area per person = 42.0
-Transaction: askPrice = 57650.60411663489
-Transaction: sellerId = 29782
-Transaction: bidValue = 60453.92527023287
-Transaction: consumerSurplus = 1.0486260499183406
-Transaction: transactionTaxes = 483.6314021618629
-Transaction: pricePerm2 = 1439.3791731007825
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0486260499183406
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 131785.11768813911
-Transaction: mortgage payment = 408.0994970570469
-Transaction: mortgage duration = 444.0
-Transaction: house.area = 112
-Transaction: house.location = Seixal
-Transaction: house percentile = 38
-Transaction: household.wealth = 21752.14768366668
-Transaction: raw salary = 2294.86
-Transaction: liquid salary = 1660.0251
-Transaction: household percentile = 60
-Transaction: household id = 62788
-Transaction: household size = 4
-Transaction: household age = 25
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 24
-Transaction: household unemployedTime = 0
-Transaction: area per person = 28.0
-Transaction: askPrice = 147412.6862627447
-Transaction: sellerId = 6981
-Transaction: bidValue = 153102.22241813247
-Transaction: consumerSurplus = 1.0385959736548513
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 1366.9841287333256
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0385959736548513
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 48954.66288914463
-Transaction: mortgage payment = 191.35915173187837
-Transaction: mortgage duration = 324.0
-Transaction: house.area = 43
-Transaction: house.location = Seixal
-Transaction: house percentile = 59
-Transaction: household.wealth = 22815.690615606898
-Transaction: raw salary = 798.9379999999999
-Transaction: liquid salary = 711.0548199999998
-Transaction: household percentile = 18
-Transaction: household id = 69313
-Transaction: household size = 1
-Transaction: household age = 39
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 10
-Transaction: household unemployedTime = 0
-Transaction: area per person = 43.0
-Transaction: askPrice = 67119.87174550444
-Transaction: sellerId = 21359
-Transaction: bidValue = 70748.0552504359
-Transaction: consumerSurplus = 1.0540552806579888
-Transaction: transactionTaxes = 565.9844420034872
-Transaction: pricePerm2 = 1645.3036104752534
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0540552806579888
-Transaction: seller contracts as landlord = Contract[]
-Transaction: seller contract as tenant = Nothing
-########
-
-########
-Transaction: mortgageValue = 206347.42959461635
-Transaction: mortgage payment = 693.5131913307935
-Transaction: mortgage duration = 396.0
-Transaction: house.area = 100
-Transaction: house.location = Seixal
-Transaction: house percentile = 96
-Transaction: household.wealth = 36392.65477046116
-Transaction: raw salary = 6027.629999999999
-Transaction: liquid salary = 3476.6649149999994
-Transaction: household percentile = 90
-Transaction: household id = 57978
-Transaction: household size = 4
 Transaction: household age = 30
-Transaction: household residencyZone = Seixal
+Transaction: household residencyZone = Sesimbra
 Transaction: household homelessTime = 24
 Transaction: household unemployedTime = 0
-Transaction: area per person = 25.0
-Transaction: askPrice = 229579.09491946702
-Transaction: sellerId = 3423
-Transaction: bidValue = 242012.2312696683
-Transaction: consumerSurplus = 1.0541562216479798
+Transaction: area per person = 37.666666666666664
+Transaction: askPrice = 124939.02278154592
+Transaction: sellerId = 8471
+Transaction: bidValue = 130814.33335242172
+Transaction: consumerSurplus = 1.0470254244036203
 Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 2420.122312696683
+Transaction: pricePerm2 = 1157.6489677205461
 Transaction: for renting = false
 Transaction: for investment = false
 Transaction: nonResident = false
 Transaction: contracts as landlord = Contract[]
 Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0541562216479798
+Transaction: bid to ask price ratio = 1.0470254244036203
 Transaction: seller contracts as landlord = Contract[]
 Transaction: seller contract as tenant = Nothing
 ########
 
+Rental: house.area = 49
+Rental: house.location = Sesimbra
+Rental: house percentile = 81
+Rental: household.wealth = 34370.18740078951
+Rental: raw salary = 3404.065999999999
+Rental: liquid salary = 2218.6762069999995
+Rental: household percentile = 94
+Rental: household id = 20807
+Rental: household size = 1
+Rental: household age = 63
+Rental: household residencyZone = Sesimbra
+Rental: household homelessTime = 17
+Rental: household unemployedTime = 0
+Rental: area per person = 49.0
+Rental: askPrice = 297.64489017689635
+Rental: sellerId = 15773
+Rental: bidValue = 319.87981828945027
+Rental: consumerSurplus = 1.0763264279852862
+Rental: pricePerm2 = 6.528159556927556
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[]
+Rental: seller contract as tenant = Nothing
 ########
-Transaction: mortgageValue = 143409.64776527608
-Transaction: mortgage payment = 595.3594424214488
-Transaction: mortgage duration = 300.0
-Transaction: house.area = 83
-Transaction: house.location = Seixal
-Transaction: house percentile = 80
-Transaction: household.wealth = 26892.783698634372
-Transaction: raw salary = 3401.3055000000004
-Transaction: liquid salary = 2217.3249422500003
-Transaction: household percentile = 93
-Transaction: household id = 69979
-Transaction: household size = 1
-Transaction: household age = 42
-Transaction: household residencyZone = Seixal
-Transaction: household homelessTime = 4
-Transaction: household unemployedTime = 0
-Transaction: area per person = 83.0
-Transaction: askPrice = 164008.69121660345
-Transaction: sellerId = 1722
-Transaction: bidValue = 169764.57578993775
-Transaction: consumerSurplus = 1.0402852316804319
-Transaction: transactionTaxes = 0
-Transaction: pricePerm2 = 2045.356334818527
-Transaction: for renting = false
-Transaction: for investment = false
-Transaction: nonResident = false
-Transaction: contracts as landlord = Contract[]
-Transaction: contract as tenant = Nothing
-Transaction: bid to ask price ratio = 1.0350949972872634
-Transaction: seller contracts as landlord = Contract[Contract(1722, 53276, House(0x0062, Seixal, NotSocialNeighbourhood, 1.0, 11), 570.3756302897983), Contract(1722, 67870, House(0x004c, Seixal, NotSocialNeighbourhood, 1.0, 7), 446.1383109476794)]
-Transaction: seller contract as tenant = Nothing
+
+Rental: house.area = 69
+Rental: house.location = Sesimbra
+Rental: house percentile = 10
+Rental: household.wealth = 15550.552515087118
+Rental: raw salary = 998.552
+Rental: liquid salary = 863.2752
+Rental: household percentile = 52
+Rental: household id = 20891
+Rental: household size = 1
+Rental: household age = 46
+Rental: household residencyZone = Sesimbra
+Rental: household homelessTime = 15
+Rental: household unemployedTime = 0
+Rental: area per person = 69.0
+Rental: askPrice = 315.01307226894056
+Rental: sellerId = 211
+Rental: bidValue = 320.4196815463857
+Rental: consumerSurplus = 1.019206450693702
+Rental: pricePerm2 = 4.643763500672256
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[]
+Rental: seller contract as tenant = Nothing
 ########
 
 Rental: house.area = 109
-Rental: house.location = Seixal
-Rental: house percentile = 82
-Rental: household.wealth = 13350.197985426545
-Rental: raw salary = 3702.6870000000004
-Rental: liquid salary = 2364.8511865
-Rental: household percentile = 81
-Rental: household id = 68710
+Rental: house.location = Sesimbra
+Rental: house percentile = 7
+Rental: household.wealth = 8351.562355523145
+Rental: raw salary = 1602.453
+Rental: liquid salary = 1262.01992
+Rental: household percentile = 19
+Rental: household id = 20661
 Rental: household size = 2
-Rental: household age = 26
-Rental: household residencyZone = Seixal
-Rental: household homelessTime = 15
+Rental: household age = 38
+Rental: household residencyZone = Sesimbra
+Rental: household homelessTime = 20
 Rental: household unemployedTime = 0
 Rental: area per person = 54.5
-Rental: askPrice = 930.3265718126619
-Rental: sellerId = 7815
-Rental: bidValue = 996.8463928830821
-Rental: consumerSurplus = 1.0733229513834277
-Rental: pricePerm2 = 9.145379751220936
+Rental: askPrice = 490.6355488288466
+Rental: sellerId = 211
+Rental: bidValue = 499.99635792273807
+Rental: consumerSurplus = 1.0190789459023828
+Rental: pricePerm2 = 4.587122549749891
 Rental: contracts as landlord = Contract[]
 Rental: contract as tenant = Nothing
-Rental: seller contracts as landlord = Contract[Contract(7815, 13296, House(0x003f, Seixal, NotSocialNeighbourhood, 1.0, 11), 213.5088283507321), Contract(7815, 15803, House(0x0044, Seixal, NotSocialNeighbourhood, 1.0, 38), 180.00671765058152), Contract(7815, 16087, House(0x0034, Seixal, NotSocialNeighbourhood, 1.0, 33), 148.1157033984175)]
+Rental: seller contracts as landlord = Contract[Contract(211, 20891, House(0x0045, Sesimbra, NotSocialNeighbourhood, 1.0, 10), 320.4196815463857)]
 Rental: seller contract as tenant = Nothing
 ########
 
-Rental: house.area = 133
-Rental: house.location = Seixal
-Rental: house percentile = 68
-Rental: household.wealth = 37694.16226198508
-Rental: raw salary = 7060.937999999997
-Rental: liquid salary = 3931.8370889999987
-Rental: household percentile = 94
-Rental: household id = 68638
-Rental: household size = 2
-Rental: household age = 44
-Rental: household residencyZone = Seixal
-Rental: household homelessTime = 15
-Rental: household unemployedTime = 0
-Rental: area per person = 66.5
-Rental: askPrice = 1099.5444767765073
-Rental: sellerId = 45222
-Rental: bidValue = 1173.3261346143213
-Rental: consumerSurplus = 1.0682354594578372
-Rental: pricePerm2 = 8.822001012137754
-Rental: contracts as landlord = Contract[]
-Rental: contract as tenant = Nothing
-Rental: seller contracts as landlord = Contract[]
-Rental: seller contract as tenant = Nothing
-########
+price of newly built house = 95298.98555516853
+price of newly built house = 262845.2329004765
+price of newly built house = 80783.97420357596
+generated agent 21385 from leaving home
+wealth = 9085.060840618124
 
-Rental: house.area = 82
-Rental: house.location = Seixal
-Rental: house percentile = 96
-Rental: household.wealth = 3068.740525534169
-Rental: raw salary = 2352.335
-Rental: liquid salary = 1690.7742250000001
-Rental: household percentile = 61
-Rental: household id = 62591
-Rental: household size = 2
-Rental: household age = 43
-Rental: household residencyZone = Seixal
-Rental: household homelessTime = 24
-Rental: household unemployedTime = 0
-Rental: area per person = 41.0
-Rental: askPrice = 741.9231923447078
-Rental: sellerId = 37007
-Rental: bidValue = 798.1848644892942
-Rental: consumerSurplus = 1.08
-Rental: pricePerm2 = 9.733961762064563
-Rental: contracts as landlord = Contract[]
-Rental: contract as tenant = Nothing
-Rental: seller contracts as landlord = Contract[Contract(37007, 45719, House(0x0070, Seixal, NotSocialNeighbourhood, 1.0, 47), 905.2455818135585), Contract(37007, 63983, House(0x008f, Seixal, NotSocialNeighbourhood, 1.0, 8), 892.4623468393874)]
-Rental: seller contract as tenant = Nothing
-########
+generated agent 21386 from leaving home
+wealth = 22924.30926751546
 
-Rental: house.area = 78
-Rental: house.location = Seixal
-Rental: house percentile = 97
-Rental: household.wealth = 18602.004185864414
-Rental: raw salary = 2042.372
-Rental: liquid salary = 1524.4320400000001
-Rental: household percentile = 52
-Rental: household id = 68651
-Rental: household size = 2
-Rental: household age = 57
-Rental: household residencyZone = Seixal
-Rental: household homelessTime = 15
-Rental: household unemployedTime = 0
-Rental: area per person = 39.0
-Rental: askPrice = 698.9257597756205
-Rental: sellerId = 11041
-Rental: bidValue = 752.1123145934542
-Rental: consumerSurplus = 1.0760975741327785
-Rental: pricePerm2 = 9.642465571710952
-Rental: contracts as landlord = Contract[]
-Rental: contract as tenant = Nothing
-Rental: seller contracts as landlord = Contract[Contract(11041, 68390, House(0x001a, Seixal, NotSocialNeighbourhood, 1.0, 54), 210.77044294410678)]
-Rental: seller contract as tenant = Nothing
-########
+generated agent 21387 from leaving home (single)
+wealth = 18439.059667722016
 
-Rental: house.area = 41
-Rental: house.location = Seixal
-Rental: house percentile = 70
-Rental: household.wealth = 20408.430946982102
-Rental: raw salary = 902.83225
-Rental: liquid salary = 792.75251
-Rental: household percentile = 46
-Rental: household id = 68891
-Rental: household size = 1
-Rental: household age = 76
-Rental: household residencyZone = Seixal
-Rental: household homelessTime = 13
-Rental: household unemployedTime = 0
-Rental: area per person = 41.0
-Rental: askPrice = 338.1594165840013
-Rental: sellerId = 57276
-Rental: bidValue = 360.2365297274998
-Rental: consumerSurplus = 1.0652861108128107
-Rental: pricePerm2 = 8.786256822621947
-Rental: contracts as landlord = Contract[]
-Rental: contract as tenant = Nothing
-Rental: seller contracts as landlord = Contract[]
-Rental: seller contract as tenant = Nothing
-########
+generated agent 21388 from breakup without houses
+wealth = 12975.812928600793
+generated agent 21389 from breakup with houses
+wealth = 12975.812928600793
 
-Rental: house.area = 72
-Rental: house.location = Seixal
-Rental: house percentile = 65
-Rental: household.wealth = 36041.14744616424
-Rental: raw salary = 1663.64
-Rental: liquid salary = 1301.1796
-Rental: household percentile = 40
-Rental: household id = 68367
-Rental: household size = 2
-Rental: household age = 70
-Rental: household residencyZone = Seixal
-Rental: household homelessTime = 17
-Rental: household unemployedTime = 0
-Rental: area per person = 36.0
-Rental: askPrice = 577.0352422424463
-Rental: sellerId = 32919
-Rental: bidValue = 611.3079090222494
-Rental: consumerSurplus = 1.0626572876490494
-Rental: pricePerm2 = 8.490387625309019
-Rental: contracts as landlord = Contract[]
-Rental: contract as tenant = Nothing
-Rental: seller contracts as landlord = Contract[]
-Rental: seller contract as tenant = Contract(16026, 32919, House(0x0059, Seixal, NotSocialNeighbourhood, 1.0, 59), 364.44938819566573)
-########
+generated agent 21389 from breakup without houses
+wealth = 23067.279495895993
+generated agent 21390 from breakup with houses
+wealth = 23067.279495895993
 
-Rental: house.area = 103
-Rental: house.location = Seixal
-Rental: house percentile = 66
-Rental: household.wealth = 39512.36652975354
-Rental: raw salary = 2467.2850000000003
-Rental: liquid salary = 1750.3634980000002
-Rental: household percentile = 63
-Rental: household id = 54186
-Rental: household size = 3
-Rental: household age = 60
-Rental: household residencyZone = Seixal
-Rental: household homelessTime = 24
-Rental: household unemployedTime = 0
-Rental: area per person = 34.333333333333336
-Rental: askPrice = 813.5356087500243
-Rental: sellerId = 37007
-Rental: bidValue = 869.4315156252251
-Rental: consumerSurplus = 1.068707388188064
-Rental: pricePerm2 = 8.441082675973059
-Rental: contracts as landlord = Contract[]
-Rental: contract as tenant = Nothing
-Rental: seller contracts as landlord = Contract[Contract(37007, 45719, House(0x0070, Seixal, NotSocialNeighbourhood, 1.0, 47), 905.2455818135585), Contract(37007, 63983, House(0x008f, Seixal, NotSocialNeighbourhood, 1.0, 8), 892.4623468393874), Contract(37007, 62591, House(0x0052, Seixal, NotSocialNeighbourhood, 1.0, 96), 798.1848644892942)]
-Rental: seller contract as tenant = Nothing
-########
+Household 9508 decided to invest in renovation
 
-Rental: house.area = 88
-Rental: house.location = Seixal
-Rental: house percentile = 41
-Rental: household.wealth = 21503.907850181116
-Rental: raw salary = 2231.738
-Rental: liquid salary = 1626.2548299999999
-Rental: household percentile = 58
-Rental: household id = 68543
-Rental: household size = 2
-Rental: household age = 45
-Rental: household residencyZone = Seixal
-Rental: household homelessTime = 16
-Rental: household unemployedTime = 0
-Rental: area per person = 44.0
-Rental: askPrice = 658.5801416306628
-Rental: sellerId = 37007
-Rental: bidValue = 694.7056690587395
-Rental: consumerSurplus = 1.0565262831115938
-Rental: pricePerm2 = 7.894382602940222
-Rental: contracts as landlord = Contract[]
-Rental: contract as tenant = Nothing
-Rental: seller contracts as landlord = Contract[Contract(37007, 45719, House(0x0070, Seixal, NotSocialNeighbourhood, 1.0, 47), 905.2455818135585), Contract(37007, 63983, House(0x008f, Seixal, NotSocialNeighbourhood, 1.0, 8), 892.4623468393874), Contract(37007, 62591, House(0x0052, Seixal, NotSocialNeighbourhood, 1.0, 96), 798.1848644892942), Contract(37007, 54186, House(0x0067, Seixal, NotSocialNeighbourhood, 1.0, 66), 869.4315156252251)]
-Rental: seller contract as tenant = Nothing
-########
+generated agent 21389 from breakup without houses
+wealth = 15196.575669770498
+generated agent 21390 from breakup with houses
+wealth = 15196.575669770498
 
-Rental: house.area = 136
-Rental: house.location = Seixal
-Rental: house percentile = 43
-Rental: household.wealth = 67335.04616823426
-Rental: raw salary = 5575.55775
-Rental: liquid salary = 3277.527088875
-Rental: household percentile = 91
-Rental: household id = 63812
-Rental: household size = 4
-Rental: household age = 96
-Rental: household residencyZone = Seixal
-Rental: household homelessTime = 26
-Rental: household unemployedTime = 0
-Rental: area per person = 34.0
-Rental: askPrice = 1068.1679278299275
-Rental: sellerId = 6981
-Rental: bidValue = 1128.6585489184806
-Rental: consumerSurplus = 1.0566302540195573
-Rental: pricePerm2 = 8.29895991851824
-Rental: contracts as landlord = Contract[]
-Rental: contract as tenant = Nothing
-Rental: seller contracts as landlord = Contract[]
-Rental: seller contract as tenant = Nothing
-########
+Household decided to sell
 
-Rental: house.area = 64
-Rental: house.location = Seixal
-Rental: house percentile = 73
-Rental: household.wealth = 31129.54528802985
-Rental: raw salary = 2497.1609999999996
-Rental: liquid salary = 1765.3851507999998
-Rental: household percentile = 88
-Rental: household id = 69178
-Rental: household size = 1
-Rental: household age = 71
-Rental: household residencyZone = Seixal
-Rental: household homelessTime = 11
-Rental: household unemployedTime = 0
-Rental: area per person = 64.0
-Rental: askPrice = 535.8042878812784
-Rental: sellerId = 65549
-Rental: bidValue = 569.0905957992172
-Rental: consumerSurplus = 1.0621240043627913
-Rental: pricePerm2 = 8.89204055936277
-Rental: contracts as landlord = Contract[]
-Rental: contract as tenant = Nothing
-Rental: seller contracts as landlord = Contract[]
-Rental: seller contract as tenant = Nothing
-########
+generated agent 21390 from leaving home
+wealth = 8528.748307070153
 
-Rental: house.area = 76
-Rental: house.location = Seixal
-Rental: house percentile = 49
-Rental: household.wealth = 25223.471915436818
-Rental: raw salary = 2524.76
-Rental: liquid salary = 1779.2619280000001
-Rental: household percentile = 64
-Rental: household id = 68663
-Rental: household size = 2
-Rental: household age = 68
-Rental: household residencyZone = Seixal
-Rental: household homelessTime = 15
-Rental: household unemployedTime = 0
-Rental: area per person = 38.0
-Rental: askPrice = 595.2515328006946
-Rental: sellerId = 46541
-Rental: bidValue = 628.493934907993
-Rental: consumerSurplus = 1.0558459748115068
-Rental: pricePerm2 = 8.269657038263066
-Rental: contracts as landlord = Contract[]
-Rental: contract as tenant = Nothing
-Rental: seller contracts as landlord = Contract[]
-Rental: seller contract as tenant = Nothing
-########
+generated agent 21391 from leaving home
+wealth = 27985.025435195133
 
-Rental: house.area = 70
-Rental: house.location = Seixal
-Rental: house percentile = 46
-Rental: household.wealth = 7893.05800452725
-Rental: raw salary = 1376.375
-Rental: liquid salary = 1117.33
-Rental: household percentile = 29
-Rental: household id = 68415
-Rental: household size = 2
-Rental: household age = 32
-Rental: household residencyZone = Seixal
-Rental: household homelessTime = 17
-Rental: household unemployedTime = 0
-Rental: area per person = 35.0
-Rental: askPrice = 526.3214138006099
-Rental: sellerId = 6981
-Rental: bidValue = 553.4115723910157
-Rental: consumerSurplus = 1.0514707512939396
-Rental: pricePerm2 = 7.905879605585939
-Rental: contracts as landlord = Contract[]
-Rental: contract as tenant = Nothing
-Rental: seller contracts as landlord = Contract[Contract(6981, 63812, House(0x0088, Seixal, NotSocialNeighbourhood, 1.0, 43), 1128.6585489184806)]
-Rental: seller contract as tenant = Nothing
-########
+Household decided to sell
 
-Rental: house.area = 213
-Rental: house.location = Seixal
-Rental: house percentile = 29
-Rental: household.wealth = 39280.68624379249
-Rental: raw salary = 7577.591999999999
-Rental: liquid salary = 4159.423175999999
-Rental: household percentile = 96
-Rental: household id = 62271
-Rental: household size = 5
-Rental: household age = 24
-Rental: household residencyZone = Seixal
-Rental: household homelessTime = 24
-Rental: household unemployedTime = 0
-Rental: area per person = 42.6
-Rental: askPrice = 1614.4403559814095
-Rental: sellerId = 14355
-Rental: bidValue = 1708.4967387647482
-Rental: consumerSurplus = 1.0582594348777674
-Rental: pricePerm2 = 8.021111449599758
-Rental: contracts as landlord = Contract[]
-Rental: contract as tenant = Nothing
-Rental: seller contracts as landlord = Contract[]
-Rental: seller contract as tenant = Nothing
-########
+Household decided to sell
 
-Rental: house.area = 64
-Rental: house.location = Seixal
-Rental: house percentile = 57
-Rental: household.wealth = 17690.906271873984
-Rental: raw salary = 1722.18
-Rental: liquid salary = 1338.6452
-Rental: household percentile = 80
-Rental: household id = 69059
-Rental: household size = 1
-Rental: household age = 39
-Rental: household residencyZone = Seixal
-Rental: household homelessTime = 12
-Rental: household unemployedTime = 0
-Rental: area per person = 64.0
-Rental: askPrice = 509.08047450246653
-Rental: sellerId = 15730
-Rental: bidValue = 537.358325545102
-Rental: consumerSurplus = 1.0577581818823534
-Rental: pricePerm2 = 8.39622383664222
-Rental: contracts as landlord = Contract[]
-Rental: contract as tenant = Nothing
-Rental: seller contracts as landlord = Contract[Contract(15730, 32433, House(0x0056, Seixal, NotSocialNeighbourhood, 1.0, 50), 504.20162271522315)]
-Rental: seller contract as tenant = Nothing
-########
+Household decided to sell
 
-Rental: house.area = 94
-Rental: house.location = Seixal
-Rental: house percentile = 40
-Rental: household.wealth = 56815.03162517034
-Rental: raw salary = 7125.5197499999995
-Rental: liquid salary = 3960.2853498749996
-Rental: household percentile = 99
-Rental: household id = 68637
-Rental: household size = 2
-Rental: household age = 79
-Rental: household residencyZone = Seixal
-Rental: household homelessTime = 15
-Rental: household unemployedTime = 0
-Rental: area per person = 47.0
-Rental: askPrice = 716.1267523701399
-Rental: sellerId = 6981
-Rental: bidValue = 753.67535237164
-Rental: consumerSurplus = 1.0542126142899775
-Rental: pricePerm2 = 8.017822897570637
-Rental: contracts as landlord = Contract[]
-Rental: contract as tenant = Nothing
-Rental: seller contracts as landlord = Contract[Contract(6981, 63812, House(0x0088, Seixal, NotSocialNeighbourhood, 1.0, 43), 1128.6585489184806), Contract(6981, 68415, House(0x0046, Seixal, NotSocialNeighbourhood, 1.0, 46), 553.4115723910157)]
-Rental: seller contract as tenant = Nothing
-########
+Household 1951 decided to invest in renovation
 
-Rental: house.area = 150
-Rental: house.location = Seixal
-Rental: house percentile = 24
-Rental: household.wealth = 21755.04727088819
-Rental: raw salary = 4735.994999999999
-Rental: liquid salary = 2870.6554524999992
-Rental: household percentile = 85
-Rental: household id = 56946
-Rental: household size = 4
-Rental: household age = 23
-Rental: household residencyZone = Seixal
-Rental: household homelessTime = 24
-Rental: household unemployedTime = 0
-Rental: area per person = 37.5
-Rental: askPrice = 1069.511898439635
-Rental: sellerId = 45222
-Rental: bidValue = 1121.7836888867025
-Rental: consumerSurplus = 1.0488744356405286
-Rental: pricePerm2 = 7.47855792591135
-Rental: contracts as landlord = Contract[]
-Rental: contract as tenant = Nothing
-Rental: seller contracts as landlord = Contract[Contract(45222, 68638, House(0x0085, Seixal, NotSocialNeighbourhood, 1.0, 68), 1173.3261346143213)]
-Rental: seller contract as tenant = Nothing
-########
+generated agent 21392 from leaving home (single)
+wealth = 9060.405750700695
 
-Rental: house.area = 98
-Rental: house.location = Seixal
-Rental: house percentile = 30
-Rental: household.wealth = 30575.214949978206
-Rental: raw salary = 3027.66625
-Rental: liquid salary = 2032.1231905
-Rental: household percentile = 77
-Rental: household id = 68768
-Rental: household size = 2
-Rental: household age = 85
-Rental: household residencyZone = Seixal
-Rental: household homelessTime = 14
-Rental: household unemployedTime = 0
-Rental: area per person = 49.0
-Rental: askPrice = 708.4422294695626
-Rental: sellerId = 6981
-Rental: bidValue = 739.8733739905597
-Rental: consumerSurplus = 1.0450274968825708
-Rental: pricePerm2 = 7.549728306026119
-Rental: contracts as landlord = Contract[]
-Rental: contract as tenant = Nothing
-Rental: seller contracts as landlord = Contract[Contract(6981, 63812, House(0x0088, Seixal, NotSocialNeighbourhood, 1.0, 43), 1128.6585489184806), Contract(6981, 68415, House(0x0046, Seixal, NotSocialNeighbourhood, 1.0, 46), 553.4115723910157), Contract(6981, 68637, House(0x005e, Seixal, NotSocialNeighbourhood, 1.0, 40), 753.67535237164)]
-Rental: seller contract as tenant = Nothing
-########
+generated agent 21393 from leaving home
+wealth = 13472.306280814633
 
-Rental: house.area = 104
-Rental: house.location = Seixal
-Rental: house percentile = 23
-Rental: household.wealth = 47894.6818969944
-Rental: raw salary = 5093.347349999999
-Rental: liquid salary = 3045.5794278249996
-Rental: household percentile = 97
-Rental: household id = 56170
-Rental: household size = 3
-Rental: household age = 40
-Rental: household residencyZone = Seixal
-Rental: household homelessTime = 24
-Rental: household unemployedTime = 20
-Rental: area per person = 34.666666666666664
-Rental: askPrice = 754.0068137077402
-Rental: sellerId = 8117
-Rental: bidValue = 785.7244628386155
-Rental: consumerSurplus = 1.0420654675186654
-Rental: pricePerm2 = 7.555042911909765
-Rental: contracts as landlord = Contract[]
-Rental: contract as tenant = Nothing
-Rental: seller contracts as landlord = Contract[]
-Rental: seller contract as tenant = Nothing
-########
+Household decided to sell
 
-Rental: house.area = 136
-Rental: house.location = Seixal
-Rental: house percentile = 13
-Rental: household.wealth = 37272.73443522115
-Rental: raw salary = 2869.61
-Rental: liquid salary = 1952.6525080000001
-Rental: household percentile = 70
-Rental: household id = 62627
-Rental: household size = 3
-Rental: household age = 59
-Rental: household residencyZone = Seixal
-Rental: household homelessTime = 29
-Rental: household unemployedTime = 0
-Rental: area per person = 45.333333333333336
-Rental: askPrice = 927.6783684004288
-Rental: sellerId = 37785
-Rental: bidValue = 963.4875075753666
-Rental: consumerSurplus = 1.0386008129484388
-Rental: pricePerm2 = 7.084466967465931
-Rental: contracts as landlord = Contract[]
-Rental: contract as tenant = Nothing
-Rental: seller contracts as landlord = Contract[]
-Rental: seller contract as tenant = Nothing
-########
+generated agent 21392 from leaving home
+wealth = 14281.104867585049
 
-Rental: house.area = 156
-Rental: house.location = Seixal
-Rental: house percentile = 10
-Rental: household.wealth = 18172.65362610083
-Rental: raw salary = 3444.36
-Rental: liquid salary = 2238.4001200000002
-Rental: household percentile = 80
-Rental: household id = 62795
-Rental: household size = 3
-Rental: household age = 46
-Rental: household residencyZone = Seixal
-Rental: household homelessTime = 26
-Rental: household unemployedTime = 0
-Rental: area per person = 52.0
-Rental: askPrice = 992.7539792609525
-Rental: sellerId = 48785
-Rental: bidValue = 1025.0061548657263
-Rental: consumerSurplus = 1.0324875812925813
-Rental: pricePerm2 = 6.570552274780297
-Rental: contracts as landlord = Contract[]
-Rental: contract as tenant = Nothing
-Rental: seller contracts as landlord = Contract[]
-Rental: seller contract as tenant = Nothing
-########
+Household decided to sell
 
-Rental: house.area = 82
-Rental: house.location = Seixal
-Rental: house percentile = 9
-Rental: household.wealth = 10877.909230599238
-Rental: raw salary = 1597.8759999999997
-Rental: liquid salary = 1259.09064
-Rental: household percentile = 18
-Rental: household id = 68584
-Rental: household size = 2
-Rental: household age = 40
-Rental: household residencyZone = Seixal
-Rental: household homelessTime = 16
-Rental: household unemployedTime = 0
-Rental: area per person = 41.0
-Rental: askPrice = 535.4723390359264
-Rental: sellerId = 32919
-Rental: bidValue = 544.3322674958068
-Rental: consumerSurplus = 1.0184785283400788
-Rental: pricePerm2 = 6.6381983840952055
-Rental: contracts as landlord = Contract[]
-Rental: contract as tenant = Nothing
-Rental: seller contracts as landlord = Contract[Contract(32919, 68367, House(0x0048, Seixal, NotSocialNeighbourhood, 1.0, 65), 611.3079090222494)]
-Rental: seller contract as tenant = Contract(16026, 32919, House(0x0059, Seixal, NotSocialNeighbourhood, 1.0, 59), 364.44938819566573)
-########
+Household decided to sell
 
-Rental: house.area = 80
-Rental: house.location = Seixal
-Rental: house percentile = 4
-Rental: household.wealth = 27015.631353830162
-Rental: raw salary = 1324.145
-Rental: liquid salary = 1083.9028
-Rental: household percentile = 27
-Rental: household id = 68195
-Rental: household size = 2
-Rental: household age = 49
-Rental: household residencyZone = Seixal
-Rental: household homelessTime = 19
-Rental: household unemployedTime = 0
-Rental: area per person = 40.0
-Rental: askPrice = 513.3489880504122
-Rental: sellerId = 35980
-Rental: bidValue = 512.0040491974246
-Rental: consumerSurplus = 1.004223745157361
-Rental: pricePerm2 = 6.400050614967808
-Rental: contracts as landlord = Contract[]
-Rental: contract as tenant = Nothing
-Rental: seller contracts as landlord = Contract[]
-Rental: seller contract as tenant = Nothing
-########
+Household decided to sell
 
-Rental: house.area = 73
-Rental: house.location = Seixal
-Rental: house percentile = 6
-Rental: household.wealth = 29156.308894889095
-Rental: raw salary = 1219.685
-Rental: liquid salary = 1017.0483999999999
-Rental: household percentile = 24
-Rental: household id = 68258
-Rental: household size = 2
-Rental: household age = 83
-Rental: household residencyZone = Seixal
-Rental: household homelessTime = 18
-Rental: household unemployedTime = 0
-Rental: area per person = 36.5
-Rental: askPrice = 469.79779811027834
-Rental: sellerId = 10634
-Rental: bidValue = 470.4083134415334
-Rental: consumerSurplus = 1.0034899396632573
-Rental: pricePerm2 = 6.443949499199087
-Rental: contracts as landlord = Contract[]
-Rental: contract as tenant = Nothing
-Rental: seller contracts as landlord = Contract[]
-Rental: seller contract as tenant = Nothing
-########
+Household decided to sell
 
-Rental: house.area = 68
-Rental: house.location = Seixal
-Rental: house percentile = 6
-Rental: household.wealth = 14118.290701376956
-Rental: raw salary = 1176.1675
-Rental: liquid salary = 989.1972000000001
-Rental: household percentile = 61
-Rental: household id = 69035
-Rental: household size = 1
-Rental: household age = 38
-Rental: household residencyZone = Seixal
-Rental: household homelessTime = 12
-Rental: household unemployedTime = 0
-Rental: area per person = 68.0
-Rental: askPrice = 442.93738440952666
-Rental: sellerId = 35714
-Rental: bidValue = 441.8257603073307
-Rental: consumerSurplus = 0.9974903357871274
-Rental: pricePerm2 = 6.497437651578393
-Rental: contracts as landlord = Contract[]
-Rental: contract as tenant = Nothing
-Rental: seller contracts as landlord = Contract[]
-Rental: seller contract as tenant = Contract(17123, 35714, House(0x0047, Seixal, NotSocialNeighbourhood, 1.0, 88), 451.1344956908884)
-########
+Household decided to sell
 
-Rental: house.area = 53
-Rental: house.location = Seixal
-Rental: house percentile = 5
-Rental: household.wealth = 31198.175243712547
-Rental: raw salary = 792.6475
-Rental: liquid salary = 705.456275
-Rental: household percentile = 37
-Rental: household id = 68962
-Rental: household size = 1
-Rental: household age = 46
-Rental: household residencyZone = Seixal
-Rental: household homelessTime = 13
-Rental: household unemployedTime = 0
-Rental: area per person = 53.0
-Rental: askPrice = 349.5067600044406
-Rental: sellerId = 8631
-Rental: bidValue = 346.38124157749377
-Rental: consumerSurplus = 0.9950059356088318
-Rental: pricePerm2 = 6.535495124103656
-Rental: contracts as landlord = Contract[]
-Rental: contract as tenant = Nothing
-Rental: seller contracts as landlord = Contract[]
-Rental: seller contract as tenant = Nothing
-########
+generated agent 21393 from breakup without houses
+wealth = 10169.150859034105
+generated agent 21394 from breakup with houses
+wealth = 10169.150859034105
 
-Rental: house.area = 54
-Rental: house.location = Seixal
-Rental: house percentile = 6
-Rental: household.wealth = 29328.577054795292
-Rental: raw salary = 910.7225000000001
-Rental: liquid salary = 798.7491
-Rental: household percentile = 45
-Rental: household id = 2171
-Rental: household size = 1
-Rental: household age = 39
-Rental: household residencyZone = Seixal
-Rental: household homelessTime = 12
-Rental: household unemployedTime = 0
-Rental: area per person = 54.0
-Rental: askPrice = 364.25716502412143
-Rental: sellerId = 11270
-Rental: bidValue = 363.343001852778
-Rental: consumerSurplus = 0.9974903357871274
-Rental: pricePerm2 = 6.728574108384778
-Rental: contracts as landlord = Contract[]
-Rental: contract as tenant = Nothing
-Rental: seller contracts as landlord = Contract[Contract(11270, 66801, House(0x006b, Seixal, NotSocialNeighbourhood, 1.0, 33), 830.4141500246848)]
-Rental: seller contract as tenant = Nothing
-########
+Household 6132 decided to invest in renovation
 
-Rental: house.area = 85
-Rental: house.location = Seixal
-Rental: house percentile = 1
-Rental: household.wealth = 32143.114087403774
-Rental: raw salary = 1402.49
-Rental: liquid salary = 1134.0436
-Rental: household percentile = 30
-Rental: household id = 68394
-Rental: household size = 2
-Rental: household age = 67
-Rental: household residencyZone = Seixal
-Rental: household homelessTime = 17
-Rental: household unemployedTime = 0
-Rental: area per person = 42.5
-Rental: askPrice = 553.4077230553786
-Rental: sellerId = 27178
-Rental: bidValue = 523.0644515672167
-Rental: consumerSurplus = 0.9494636236989592
-Rental: pricePerm2 = 6.153699430202549
-Rental: contracts as landlord = Contract[]
-Rental: contract as tenant = Nothing
-Rental: seller contracts as landlord = Contract[]
-Rental: seller contract as tenant = Nothing
-########
+generated agent 21394 from leaving home
+wealth = 32473.151766325183
 
-Household failed to acquire mortgage for renovation
-Household failed to acquire mortgage for renovation
-price of newly built house = 63176.01112312083
-Household failed to acquire mortgage for renovation
-Household failed to acquire mortgage for renovation
-generated agent 69609 from leaving home
-wealth = 35311.93458862652
+generated agent 21395 from leaving home
+wealth = 1116.5342819323917
 
-Household 55298 decided to invest in renovation
+generated agent 21396 from leaving home
+wealth = 20984.137159903094
 
-generated agent 69610 from breakup without houses
-wealth = 23730.6881610649
-generated agent 69611 from breakup with houses
-wealth = 23730.6881610649
+Household 34 decided to invest in renovation
 
 Household decided to rent
 
-Household decided to sell
+generated agent 21397 from leaving home
+wealth = 13888.066810860886
 
 Household decided to sell
 
-generated agent 69610 from breakup without houses
-wealth = 20210.964592398894
-generated agent 69611 from breakup with houses
-wealth = 20210.964592398894
-
-Household decided to rent
-
-generated agent 69611 from leaving home
-wealth = 8545.40550657738
-
-generated agent 69612 from leaving home (single)
-wealth = 23563.819337522396
-
-generated agent 69613 from leaving home
-wealth = 12332.604268200435
-
-Household 50158 decided to invest in renovation
-
-generated agent 69614 from breakup without houses
-wealth = 18210.929062787047
-generated agent 69615 from breakup with houses
-wealth = 18210.929062787047
-
-Household 25328 decided to invest in renovation
-
-generated agent 69615 from leaving home (single)
-wealth = 17402.145121011385
-
-generated agent 69616 from leaving home
-wealth = 8365.63610085916
-
-Household decided to rent
-
-generated agent 69617 from leaving home
-wealth = 9878.340753541543
-
-generated agent 69618 from leaving home
-wealth = 19612.44057810988
-
-generated agent 69619 from breakup without houses
-wealth = 18630.735006350475
-generated agent 69620 from breakup with houses
-wealth = 18630.735006350475
-
-generated agent 69620 from leaving home
-wealth = 34262.25516301221
-
-generated agent 69621 from leaving home
-wealth = 15156.054501296581
-
-Household 28797 decided to invest in renovation
-
-Household 45525 decided to invest in renovation
-
-generated agent 69622 from leaving home
-wealth = 6577.884116919348
-
-generated agent 69623 from leaving home
-wealth = 9990.233965914393
-
-generated agent 69624 from breakup without houses
-wealth = 10889.138946668865
-generated agent 69625 from breakup with houses
-wealth = 10889.138946668865
-
-generated agent 69625 from leaving home
-wealth = 22243.332555210774
-
-generated agent 69626 from leaving home
-wealth = 24809.57004685432
-
-Household decided to rent
-
-Household 44295 decided to invest in renovation
-
-generated agent 69625 from leaving home
-wealth = 18210.445960724577
-
-generated agent 69625 from leaving home (single)
-wealth = 12617.994107623548
+generated agent 21397 from leaving home (single)
+wealth = 22590.041042025146
 
 Household decided to sell
 
-generated agent 69626 from leaving home
-wealth = 35266.36767421414
+Household 14631 decided to invest in rental
 
-generated agent 69627 from leaving home
-wealth = 10552.812850810218
+generated agent 21398 from leaving home
+wealth = 8922.551327487181
 
-generated agent 69628 from leaving home
-wealth = 3237.178376846209
+Household 19015 decided to invest in renovation
 
-generated agent 69629 from leaving home
-wealth = 15676.907292143138
+generated agent 21399 from leaving home
+wealth = 16696.727768472585
 
-generated agent 69630 from leaving home
-wealth = 15932.750185926125
-
-generated agent 69631 from leaving home
-wealth = 15541.888929505203
-
-generated agent 69632 from leaving home (single)
-wealth = 20755.298241921046
-
-Household 55840 decided to invest in rental
-
-generated agent 69633 from leaving home
-wealth = 10156.048577698684
-
-Household 44065 decided to invest in rental
-
-generated agent 69634 from leaving home
-wealth = 8444.77679595196
-
-generated agent 69635 from leaving home
-wealth = 12185.85938260994
-
-Household 34821 decided to invest in rental
-
-Household 28379 decided to invest in renovation
-
-generated agent 69636 from leaving home
-wealth = 21104.895881032833
-
-Household 24209 decided to invest in renovation
-
-Household decided to rent
-
-Household 33519 decided to invest in renovation
-
-generated agent 69636 from leaving home
-wealth = 11610.862566918922
-
-Household 48681 decided to invest in renovation
-
-Household 47537 decided to invest in rental
-
-generated agent 69637 from breakup without houses
-wealth = 35994.68411947599
-generated agent 69638 from breakup with houses
-wealth = 35994.68411947599
-
-Household decided to sell
-
-generated agent 69637 from breakup without houses
-wealth = 15509.727810959652
-generated agent 69638 from breakup with houses
-wealth = 15509.727810959652
-
-Household 58430 decided to invest in renovation
-
-Household 22518 decided to invest in renovation
-
-Household 51993 decided to invest in renovation
-
-generated agent 69638 from leaving home
-wealth = 8152.4619072525065
-
-Household decided to rent
-
-Household decided to sell
-
-Household decided to rent
-
-Household decided to sell
-
-Household 40804 decided to invest in rental
-
-generated agent 69637 from leaving home
-wealth = 21579.068562098153
-
-Household 20884 decided to invest in renovation
-
-Household 24251 decided to invest in rental
-
-Household decided to rent
-
-generated agent 69637 from breakup without houses
-wealth = 21516.582464619765
-generated agent 69638 from breakup with houses
-wealth = 21516.582464619765
-
-generated agent 69638 from leaving home
-wealth = 8111.402098576825
-
-Household 52880 decided to invest in rental
-
-generated agent 69639 from leaving home
-wealth = 12376.382350215414
-
-generated agent 69640 from leaving home (single)
-wealth = 28475.497233884245
-
-generated agent 69641 from leaving home
-wealth = 10188.582743718025
-
-Household 29701 decided to invest in renovation
-
-Household decided to rent
-
-Household decided to sell
-
-generated agent 69641 from leaving home
-wealth = 20347.1590676306
-
-generated agent 69642 from leaving home
-wealth = 14320.699624022092
-
-Household decided to sell
-
-Household decided to rent
-
-Household 39869 decided to invest in renovation
+generated agent 21400 from leaving home
+wealth = 11243.542722937891
 
 Household decided to sell
 
 Household decided to sell
 
-Household 57276 decided to invest in renovation
+Household 10328 decided to invest in renovation
 
-generated agent 69641 from leaving home
-wealth = 10746.100986501218
+generated agent 21401 from leaving home
+wealth = 25876.28528916094
 
-Household decided to sell
+generated agent 21402 from leaving home
+wealth = 32310.130823201518
 
-Household decided to sell
+generated agent 21403 from leaving home
+wealth = 26784.527081300017
 
-Household decided to sell
-
-Household decided to rent
-
-Household 17958 decided to invest in rental
-
-Household 59462 decided to invest in rental
-
-generated agent 69641 from breakup without houses
-wealth = 8478.709159319682
-generated agent 69642 from breakup with houses
-wealth = 8478.709159319682
-
-generated agent 69642 from leaving home (single)
-wealth = 13846.23381061398
-
-generated agent 69643 from leaving home
-wealth = 20685.761718885777
-
-Household 18081 decided to invest in renovation
-
-generated agent 69643 from leaving home
-wealth = 30662.642448083276
-
-Household 21179 decided to invest in renovation
-
-Household 24756 decided to invest in renovation
-
-generated agent 69644 from breakup without houses
-wealth = 13216.95849962207
-generated agent 69645 from breakup with houses
-wealth = 13216.95849962207
-
-Household 37097 decided to invest in renovation
-
-generated agent 69645 from leaving home
-wealth = 8604.91415448497
-
-Household decided to sell
-
-Household decided to rent
-
-generated agent 69644 from breakup without houses
-wealth = 6930.45826912254
-generated agent 69645 from breakup with houses
-wealth = 6930.45826912254
-
-generated agent 69645 from leaving home (single)
-wealth = 13157.387297068213
-
-Household decided to sell
-
-Household 50364 decided to invest in rental
-
-generated agent 69646 from breakup without houses
-wealth = 19965.4205070799
-generated agent 69647 from breakup with houses
-wealth = 19965.4205070799
-
-generated agent 69647 from leaving home
-wealth = 14522.956271096476
-
-generated agent 69648 from breakup without houses
-wealth = 17183.181661699673
-generated agent 69649 from breakup with houses
-wealth = 17183.181661699673
-
-Household decided to sell
-
-generated agent 69648 from leaving home
-wealth = 17676.49708292725
-
-generated agent 69649 from leaving home
-wealth = 18503.54634995972
-
-generated agent 69650 from leaving home
-wealth = 8574.259782419667
-
-Household 16621 decided to invest in rental
-
-Household decided to sell
-
-Household decided to sell
-
-Household decided to sell
-
-generated agent 69650 from breakup without houses
-wealth = 107095.37405812893
-generated agent 69651 from breakup with houses
-wealth = 107095.37405812893
-
-Household decided to rent
-
-generated agent 69650 from leaving home
-wealth = 10923.006062053342
-
-Household decided to sell
-
-generated agent 69650 from breakup without houses
-wealth = 24012.650595174415
-generated agent 69651 from breakup with houses
-wealth = 24012.650595174415
-
-generated agent 69651 from breakup without houses
-wealth = 17026.532092567846
-generated agent 69652 from breakup with houses
-wealth = 17026.532092567846
-
-generated agent 69652 from leaving home
-wealth = 6542.865493388162
-
-Household 31987 decided to invest in renovation
-
-generated agent 69653 from leaving home
-wealth = 24886.295593144943
-
-Household decided to rent
-
-Household decided to sell
-
-Household 22645 decided to invest in rental
-
-generated agent 69653 from breakup without houses
-wealth = 14368.929752130494
-generated agent 69654 from breakup with houses
-wealth = 14368.929752130494
-
-Household decided to sell
-
-generated agent 69653 from leaving home
-wealth = 12114.34452465528
-
-Household 46326 decided to invest in renovation
-
-generated agent 69653 from leaving home
-wealth = 14031.272351515454
-
-generated agent 69653 from breakup without houses
-wealth = 17556.19059200422
-generated agent 69654 from breakup with houses
-wealth = 17556.19059200422
-
-Household decided to sell
-
-Household 53169 decided to invest in renovation
-
-Household 34179 decided to invest in renovation
-
-Household 53483 decided to invest in renovation
-
-generated agent 69654 from leaving home
-wealth = 26219.04187598731
-
-generated agent 69655 from leaving home
-wealth = 7295.325130781087
-
-generated agent 69656 from leaving home
-wealth = 8042.291602312838
-
-generated agent 69657 from leaving home
-wealth = 27857.54713486475
-
-Household 49433 decided to invest in renovation
-
-Household 61227 decided to invest in renovation
-
-generated agent 69658 from leaving home
-wealth = 6726.270904671031
-
-Household 35127 decided to invest in rental
-
-generated agent 69659 from leaving home (single)
-wealth = 18250.18636836116
-
-Household 41959 decided to invest in renovation
-
-generated agent 69660 from breakup without houses
-wealth = 9181.851068729373
-generated agent 69661 from breakup with houses
-wealth = 9181.851068729373
-
-generated agent 69660 from leaving home (single)
-wealth = 33435.46572532618
-
-generated agent 69661 from leaving home
-wealth = 2484.502945818027
-
-Household decided to sell
-
-Household 44265 decided to invest in renovation
-
-Household decided to sell
-
-generated agent 69662 from leaving home
-wealth = 21365.580511273634
-
-Household decided to rent
-
-Household 43238 decided to invest in renovation
+generated agent 21404 from leaving home (single)
+wealth = 4195.301147725123
 
