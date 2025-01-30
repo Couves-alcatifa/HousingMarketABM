@@ -1,0 +1,69 @@
+generated agent 5741 from migration wealth = 20909.906878008624
+
+########
+Transaction: mortgageValue = 109922.35288298162
+Transaction: mortgage payment = 636.0624367958761
+Transaction: mortgage duration = 204.0
+Transaction: house.area = 42
+Transaction: house.location = Oeiras
+Transaction: house percentile = 73
+Transaction: household.wealth = 38783.033623709074
+Transaction: raw salary = 2806.5885000000003
+Transaction: liquid salary = 1920.9652978000001
+Transaction: household percentile = 81
+Transaction: household id = 6333
+Transaction: household size = 1
+Transaction: household age = 54
+Transaction: household residencyZone = Oeiras
+Transaction: household homelessTime = 17
+Transaction: household unemployedTime = 0
+Transaction: area per person = 42.0
+Transaction: askPrice = 140764.0401284191
+Transaction: sellerId = 5176
+Transaction: bidValue = 147929.72583421652
+Transaction: consumerSurplus = 1.0734733484195356
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 3522.1363293861077
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0509056553027334
+Transaction: seller contracts as landlord = Contract[Contract(5176, 5388, House(0x002a, Oeiras, NotSocialNeighbourhood, 1.0, 73), 594.1840242346791), Contract(5176, 5384, House(0x002c, Oeiras, NotSocialNeighbourhood, 1.0, 32), 556.5924057043793), Contract(5176, 5312, House(0x0033, Oeiras, NotSocialNeighbourhood, 1.0, 1), 535.4667854344916)]
+Transaction: seller contract as tenant = Nothing
+########
+
+Trimming bucket for location Oeiras and quartile 75 Size to cut: 1
+
+generated agent 5742 from leaving home (single)
+wealth = 11848.776898503636
+
+generated agent 5742 from leaving home
+wealth = 26774.42166400639
+
+generated agent 5743 from leaving home
+wealth = 8941.20055370379
+
+generated agent 5744 from leaving home
+wealth = 15395.261275067534
+
+generated agent 5745 from leaving home
+wealth = 7850.064855514001
+
+Household decided to rent
+
+Household decided to rent
+
+generated agent 5744 from breakup without houses
+wealth = 24028.469477386603
+generated agent 5745 from breakup with houses
+wealth = 24028.469477386603
+
+generated agent 5745 from leaving home
+wealth = 11573.53900301543
+
+Household decided to sell
+
+Household 4061 decided to invest in renovation
+

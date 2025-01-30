@@ -1,0 +1,139 @@
+generated agent 5974 from migration wealth = 30986.469825303593
+
+########
+Transaction: mortgageValue = 146681.42731859707
+Transaction: mortgage payment = 495.7837118419613
+Transaction: mortgage duration = 408.0
+Transaction: house.area = 68
+Transaction: house.location = Oeiras
+Transaction: house percentile = 46
+Transaction: household.wealth = 24355.754178965766
+Transaction: raw salary = 1905.7400000000002
+Transaction: liquid salary = 1446.5518000000002
+Transaction: household percentile = 66
+Transaction: household id = 7334
+Transaction: household size = 1
+Transaction: household age = 29
+Transaction: household residencyZone = Oeiras
+Transaction: household homelessTime = 23
+Transaction: household unemployedTime = 0
+Transaction: area per person = 68.0
+Transaction: askPrice = 161140.6625752636
+Transaction: sellerId = 5066
+Transaction: bidValue = 170550.06641398353
+Transaction: consumerSurplus = 1.0691220822263021
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 2508.089211970346
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0583924857223739
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Contract(2129, 5066, House(0x0042, Oeiras, NotSocialNeighbourhood, 1.0, 40), 766.6952543717258)
+########
+
+Rental: house.area = 62
+Rental: house.location = Oeiras
+Rental: house percentile = 19
+Rental: household.wealth = 31304.208601538056
+Rental: raw salary = 3094.3559999999998
+Rental: liquid salary = 2065.6547968
+Rental: household percentile = 58
+Rental: household id = 7275
+Rental: household size = 3
+Rental: household age = 49
+Rental: household residencyZone = Oeiras
+Rental: household homelessTime = 32
+Rental: household unemployedTime = 0
+Rental: area per person = 20.666666666666668
+Rental: askPrice = 1025.9968864328162
+Rental: sellerId = 2005
+Rental: bidValue = 1005.581259284835
+Rental: consumerSurplus = 0.9801016675411539
+Rental: pricePerm2 = 16.219052569110243
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[Contract(2005, 6933, House(0x0036, Oeiras, NotSocialNeighbourhood, 1.0, 82), 1220.4189000241902), Contract(2005, 7132, House(0x0052, Oeiras, NotSocialNeighbourhood, 1.0, 89), 1923.5794224658785), Contract(2005, 6947, House(0x003b, Oeiras, NotSocialNeighbourhood, 1.0, 13), 1049.5275471439725), Contract(2005, 5658, House(0x005d, Oeiras, NotSocialNeighbourhood, 1.0, 42), 1733.3028284999994), Contract(2005, 3688, House(0x0063, Oeiras, NotSocialNeighbourhood, 1.0, 73), 1968.5493515778264)]
+Rental: seller contract as tenant = Contract(5402, 2005, House(0x0070, Oeiras, NotSocialNeighbourhood, 1.0, 18), 1414.578002609424)
+########
+
+Rental: house.area = 76
+Rental: house.location = Oeiras
+Rental: house percentile = 59
+Rental: household.wealth = 351800.49735595414
+Rental: raw salary = 3811.4800000000005
+Rental: liquid salary = 2418.1053600000005
+Rental: household percentile = 66
+Rental: household id = 6519
+Rental: household size = 3
+Rental: household age = 41
+Rental: household residencyZone = Oeiras
+Rental: household homelessTime = 9
+Rental: household unemployedTime = 0
+Rental: area per person = 25.333333333333332
+Rental: askPrice = 1314.9453914486278
+Rental: sellerId = 3444
+Rental: bidValue = 1209.0526800000002
+Rental: consumerSurplus = 1.0152183635939556
+Rental: pricePerm2 = 15.908587894736845
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[Contract(3444, 7430, House(0x0042, Oeiras, NotSocialNeighbourhood, 1.0, 96), 1412.4252450000001), Contract(3444, 4964, House(0x0051, Oeiras, NotSocialNeighbourhood, 1.0, 11), 1199.5839523771076), Contract(3444, 3611, House(0x0044, Oeiras, NotSocialNeighbourhood, 1.0, 70), 1283.00634)]
+Rental: seller contract as tenant = Nothing
+########
+
+Trimming rental bucket for location Oeiras Size to cut: 2
+
+## Household could not pay mortgage: household.wealth = -161234.56341443525
+## Household could not pay mortgage: raw salary = 9137.73
+## Household could not pay mortgage: liquid salary = 4846.663965
+## Household could not pay mortgage: household percentile = 90
+## Household could not pay mortgage: household id = 2540
+## Household could not pay mortgage: household size = 3
+## Household could not pay mortgage: household age = 46
+## Household could not pay mortgage: household zone = Oeiras
+## Household could not pay mortgage: household unemployedTime = 0
+
+generated agent 5974 from leaving home
+wealth = 18918.80453044294
+
+generated agent 5975 from leaving home (single)
+wealth = 24227.74607265782
+
+generated agent 5975 from leaving home
+wealth = 9505.660402908885
+
+## Household could not pay mortgage: household.wealth = -368584.1070692167
+## Household could not pay mortgage: raw salary = 4516.52
+## Household could not pay mortgage: liquid salary = 2763.22244
+## Household could not pay mortgage: household percentile = 73
+## Household could not pay mortgage: household id = 4600
+## Household could not pay mortgage: household size = 3
+## Household could not pay mortgage: household age = 67
+## Household could not pay mortgage: household zone = Oeiras
+## Household could not pay mortgage: household unemployedTime = 0
+
+## Household could not pay mortgage: household.wealth = -368584.1070692167
+## Household could not pay mortgage: raw salary = 4516.52
+## Household could not pay mortgage: liquid salary = 2763.22244
+## Household could not pay mortgage: household percentile = 73
+## Household could not pay mortgage: household id = 4600
+## Household could not pay mortgage: household size = 3
+## Household could not pay mortgage: household age = 67
+## Household could not pay mortgage: household zone = Oeiras
+## Household could not pay mortgage: household unemployedTime = 0
+
+generated agent 5974 from leaving home
+wealth = 13272.535736084386
+
+generated agent 5975 from leaving home
+wealth = 7606.82860710862
+
+generated agent 5975 from leaving home
+wealth = 7604.088049497459
+
+generated agent 5976 from leaving home (single)
+wealth = 12156.960573578526
+

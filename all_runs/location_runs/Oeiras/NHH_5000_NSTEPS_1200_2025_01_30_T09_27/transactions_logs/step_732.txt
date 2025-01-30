@@ -1,0 +1,640 @@
+generated agent 5061 from migration wealth = 15195.386940578474
+
+generated agent 5062 from migration wealth = 13943.430145813767
+
+########
+Transaction: mortgageValue = 13178.746601556104
+Transaction: mortgage payment = 133.438397046891
+Transaction: mortgage duration = 108.0
+Transaction: house.area = 37
+Transaction: house.location = Oeiras
+Transaction: house percentile = 32
+Transaction: household.wealth = 24075.795238011255
+Transaction: raw salary = 729.361
+Transaction: liquid salary = 649.13129
+Transaction: household percentile = 23
+Transaction: household id = 10503
+Transaction: household size = 1
+Transaction: household age = 66
+Transaction: household residencyZone = Oeiras
+Transaction: household homelessTime = 1
+Transaction: household unemployedTime = 0
+Transaction: area per person = 37.0
+Transaction: askPrice = 38751.25141734575
+Transaction: sellerId = 7509
+Transaction: bidValue = 36481.17652262613
+Transaction: consumerSurplus = 0.9414193139139888
+Transaction: transactionTaxes = 291.84941218100903
+Transaction: pricePerm2 = 985.9777438547602
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9414193139139888
+Transaction: seller contracts as landlord = Contract[Contract(7509, 8000, House(0x0026, Oeiras, NotSocialNeighbourhood, 1.0, 2), 370.6310127923854), Contract(7509, 8963, House(0x0054, Oeiras, NotSocialNeighbourhood, 1.0, 18), 772.3021)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 18581.16489457979
+Transaction: mortgage payment = 188.13935298702276
+Transaction: mortgage duration = 108.0
+Transaction: house.area = 30
+Transaction: house.location = Oeiras
+Transaction: house percentile = 67
+Transaction: household.wealth = 23974.683013951748
+Transaction: raw salary = 729.361
+Transaction: liquid salary = 649.13129
+Transaction: household percentile = 23
+Transaction: household id = 10504
+Transaction: household size = 1
+Transaction: household age = 66
+Transaction: household residencyZone = Oeiras
+Transaction: household homelessTime = 1
+Transaction: household unemployedTime = 0
+Transaction: area per person = 30.0
+Transaction: askPrice = 43872.240727568205
+Transaction: sellerId = 5846
+Transaction: bidValue = 41742.41492882193
+Transaction: consumerSurplus = 0.9514539088173823
+Transaction: transactionTaxes = 333.93931943057544
+Transaction: pricePerm2 = 1391.4138309607308
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9514539088173823
+Transaction: seller contracts as landlord = Contract[Contract(5846, 6518, House(0x0032, Oeiras, NotSocialNeighbourhood, 1.0, 45), 1307.6832067281855)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 21680.92352444183
+Transaction: mortgage payment = 109.68017899402565
+Transaction: mortgage duration = 240.0
+Transaction: house.area = 64
+Transaction: house.location = Oeiras
+Transaction: house percentile = 13
+Transaction: household.wealth = 45205.23513847525
+Transaction: raw salary = 7571.261999999999
+Transaction: liquid salary = 4156.634811
+Transaction: household percentile = 86
+Transaction: household id = 10278
+Transaction: household size = 2
+Transaction: household age = 50
+Transaction: household residencyZone = Oeiras
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = 32.0
+Transaction: askPrice = 66119.58269214725
+Transaction: sellerId = 6988
+Transaction: bidValue = 65458.38686522577
+Transaction: consumerSurplus = 0.8384366467799884
+Transaction: transactionTaxes = 523.6670949218062
+Transaction: pricePerm2 = 1022.7872947691527
+Transaction: for renting = true
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.99
+Transaction: seller contracts as landlord = Contract[Contract(6988, 1210, House(0x0039, Oeiras, NotSocialNeighbourhood, 1.0, 31), 755.548248414491)]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 69542.21221058158
+Transaction: mortgage payment = 225.95252415890937
+Transaction: mortgage duration = 432.0
+Transaction: house.area = 101
+Transaction: house.location = Oeiras
+Transaction: house percentile = 30
+Transaction: household.wealth = 16383.810619635768
+Transaction: raw salary = 809.544
+Transaction: liquid salary = 720.49416
+Transaction: household percentile = 2
+Transaction: household id = 10505
+Transaction: household size = 3
+Transaction: household age = 26
+Transaction: household residencyZone = Oeiras
+Transaction: household homelessTime = 1
+Transaction: household unemployedTime = 0
+Transaction: area per person = 33.666666666666664
+Transaction: askPrice = 92318.31736833115
+Transaction: sellerId = 8573
+Transaction: bidValue = 84918.99466054031
+Transaction: consumerSurplus = 0.9198498963291428
+Transaction: transactionTaxes = 679.3519572843225
+Transaction: pricePerm2 = 840.7821253518842
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9198498963291428
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 53
+Transaction: house.location = Oeiras
+Transaction: house percentile = 99
+Transaction: household.wealth = -8.527243892843262e8
+Transaction: raw salary = 585.25
+Transaction: liquid salary = 520.8725
+Transaction: household percentile = 0
+Transaction: household id = -2311
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 595254.9638076626
+Transaction: sellerId = 9111
+Transaction: bidValue = 629387.6951018953
+Transaction: consumerSurplus = 0.9917122305057097
+Transaction: transactionTaxes = 29005.837168966784
+Transaction: pricePerm2 = 11875.239530224439
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0573413635661197
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: house will be paid without mortgage... unusual
+Transaction: house.area = 85
+Transaction: house.location = Oeiras
+Transaction: house percentile = 83
+Transaction: household.wealth = -8.53382782816597e8
+Transaction: raw salary = 585.25
+Transaction: liquid salary = 520.8725
+Transaction: household percentile = 0
+Transaction: household id = -2311
+Transaction: household size = 0
+Transaction: household age = 0
+Transaction: household residencyZone = Lisboa
+Transaction: household homelessTime = 0
+Transaction: household unemployedTime = 0
+Transaction: area per person = Inf
+Transaction: askPrice = 831733.8443614655
+Transaction: sellerId = 9506
+Transaction: bidValue = 831733.8443614655
+Transaction: consumerSurplus = 0.9781601172981903
+Transaction: transactionTaxes = 56036.82141657965
+Transaction: pricePerm2 = 9785.104051311358
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = true
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+Rental: house.area = 83
+Rental: house.location = Oeiras
+Rental: house percentile = 39
+Rental: household.wealth = 23607.195867974493
+Rental: raw salary = 1208.7659999999998
+Rental: liquid salary = 1010.0602399999999
+Rental: household percentile = 48
+Rental: household id = 10502
+Rental: household size = 1
+Rental: household age = 89
+Rental: household residencyZone = Oeiras
+Rental: household homelessTime = 1
+Rental: household unemployedTime = 0
+Rental: area per person = 83.0
+Rental: askPrice = 492.10486760414
+Rental: sellerId = 7202
+Rental: bidValue = 480.6593710758309
+Rental: consumerSurplus = 0.976741753065698
+Rental: pricePerm2 = 5.79107675994977
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[Contract(7202, 8027, House(0x0052, Oeiras, NotSocialNeighbourhood, 1.0, 62), 1310.11253478678), Contract(7202, 8209, House(0x002f, Oeiras, NotSocialNeighbourhood, 1.0, 5), 510.3331577535046), Contract(7202, 9666, House(0x0063, Oeiras, NotSocialNeighbourhood, 1.0, 12), 720.6852499999999)]
+Rental: seller contract as tenant = Nothing
+########
+
+Rental: house.area = 69
+Rental: house.location = Oeiras
+Rental: house percentile = 58
+Rental: household.wealth = 108180.71401944902
+Rental: raw salary = 2361.1299999999997
+Rental: liquid salary = 1695.4795499999998
+Rental: household percentile = 45
+Rental: household id = 7739
+Rental: household size = 2
+Rental: household age = 65
+Rental: household residencyZone = Oeiras
+Rental: household homelessTime = 1
+Rental: household unemployedTime = 0
+Rental: area per person = 34.5
+Rental: askPrice = 462.55909677891174
+Rental: sellerId = 2043
+Rental: bidValue = 450.7776387787245
+Rental: consumerSurplus = 0.9745298317939721
+Rental: pricePerm2 = 6.533009257662674
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[Contract(2043, 9145, House(0x0046, Oeiras, NotSocialNeighbourhood, 1.0, 38), 1955.4900298529283), Contract(2043, 8158, House(0x004b, Oeiras, NotSocialNeighbourhood, 1.0, 2), 619.5695054866748), Contract(2043, 7151, House(0x0061, Oeiras, NotSocialNeighbourhood, 1.0, 37), 915.8468303), Contract(2043, 8315, House(0x005d, Oeiras, NotSocialNeighbourhood, 1.0, 30), 786.5438), Contract(2043, 10069, House(0x00c1, Oeiras, NotSocialNeighbourhood, 1.0, 5), 558.74036)]
+Rental: seller contract as tenant = Nothing
+########
+
+Rental: house.area = 77
+Rental: house.location = Oeiras
+Rental: house percentile = 41
+Rental: household.wealth = 23457.218717875476
+Rental: raw salary = 1208.7659999999998
+Rental: liquid salary = 1010.0602399999999
+Rental: household percentile = 48
+Rental: household id = 10501
+Rental: household size = 1
+Rental: household age = 89
+Rental: household residencyZone = Oeiras
+Rental: household homelessTime = 1
+Rental: household unemployedTime = 0
+Rental: area per person = 77.0
+Rental: askPrice = 456.0691214411044
+Rental: sellerId = 8447
+Rental: bidValue = 448.04705621819915
+Rental: consumerSurplus = 0.9824104179700724
+Rental: pricePerm2 = 5.8187929378986905
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[Contract(8447, 10360, House(0x0035, Oeiras, NotSocialNeighbourhood, 1.0, 32), 387.92670408861744), Contract(8447, 10390, House(0x0039, Oeiras, NotSocialNeighbourhood, 1.0, 30), 361.72300163424336)]
+Rental: seller contract as tenant = Contract(2528, 8447, House(0x0017, Oeiras, NotSocialNeighbourhood, 1.0, 13), 176.31844926358553)
+########
+
+Rental: house.area = 37
+Rental: house.location = Oeiras
+Rental: house percentile = 32
+Rental: household.wealth = 92159.97089178408
+Rental: raw salary = 674.62
+Rental: liquid salary = 600.4118
+Rental: household percentile = 0
+Rental: household id = 7054
+Rental: household size = 2
+Rental: household age = 68
+Rental: household residencyZone = Oeiras
+Rental: household homelessTime = 491
+Rental: household unemployedTime = 0
+Rental: area per person = 18.5
+Rental: askPrice = 242.98787350452218
+Rental: sellerId = 7509
+Rental: bidValue = 228.90699875000004
+Rental: consumerSurplus = 0.990580628771585
+Rental: pricePerm2 = 6.186675641891893
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[Contract(7509, 8000, House(0x0026, Oeiras, NotSocialNeighbourhood, 1.0, 2), 370.6310127923854), Contract(7509, 8963, House(0x0054, Oeiras, NotSocialNeighbourhood, 1.0, 18), 772.3021)]
+Rental: seller contract as tenant = Nothing
+########
+
+Rental: house.area = 52
+Rental: house.location = Oeiras
+Rental: house percentile = 12
+Rental: household.wealth = 24994.441942217316
+Rental: raw salary = 743.04625
+Rental: liquid salary = 661.3111625
+Rental: household percentile = 25
+Rental: household id = 10471
+Rental: household size = 1
+Rental: household age = 85
+Rental: household residencyZone = Oeiras
+Rental: household homelessTime = 6
+Rental: household unemployedTime = 0
+Rental: area per person = 52.0
+Rental: askPrice = 317.6267092223614
+Rental: sellerId = 8138
+Rental: bidValue = 315.5345828418439
+Rental: consumerSurplus = 0.9934132542391048
+Rental: pricePerm2 = 6.067972746958537
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[Contract(8138, 8170, House(0x0032, Oeiras, NotSocialNeighbourhood, 1.0, 14), 465.3881948920521), Contract(8138, 8655, House(0x004d, Oeiras, NotSocialNeighbourhood, 1.0, 9), 709.2825749536621)]
+Rental: seller contract as tenant = Nothing
+########
+
+Trimming bucket for location Oeiras and quartile 25 Size to cut: 1
+
+Trimming bucket for location Oeiras and quartile 50 Size to cut: 2
+
+Trimming bucket for location Oeiras and quartile 75 Size to cut: 1
+
+Trimming bucket for location Oeiras and quartile 100 Size to cut: 2
+
+Trimming rental bucket for location Oeiras Size to cut: 5
+
+## Household could not pay mortgage: household.wealth = -4.023790355489438e6
+## Household could not pay mortgage: raw salary = 1146.854
+## Household could not pay mortgage: liquid salary = 969.59218
+## Household could not pay mortgage: household percentile = 7
+## Household could not pay mortgage: household id = 9657
+## Household could not pay mortgage: household size = 3
+## Household could not pay mortgage: household age = 54
+## Household could not pay mortgage: household zone = Oeiras
+## Household could not pay mortgage: household unemployedTime = 0
+
+Household decided to rent
+
+Household decided to sell
+
+Household decided to rent
+
+Household decided to sell
+
+Household 604 decided to invest in rental
+
+## Household could not pay mortgage: household.wealth = 390.5840022816273
+## Household could not pay mortgage: raw salary = 930.078
+## Household could not pay mortgage: liquid salary = 813.45928
+## Household could not pay mortgage: household percentile = 34
+## Household could not pay mortgage: household id = 9688
+## Household could not pay mortgage: household size = 1
+## Household could not pay mortgage: household age = 60
+## Household could not pay mortgage: household zone = Oeiras
+## Household could not pay mortgage: household unemployedTime = 0
+
+## Household could not pay mortgage: household.wealth = -3.41429861317893e6
+## Household could not pay mortgage: raw salary = 1490.776
+## Household could not pay mortgage: liquid salary = 1190.54664
+## Household could not pay mortgage: household percentile = 56
+## Household could not pay mortgage: household id = 7721
+## Household could not pay mortgage: household size = 1
+## Household could not pay mortgage: household age = 62
+## Household could not pay mortgage: household zone = Oeiras
+## Household could not pay mortgage: household unemployedTime = 0
+
+Household decided to sell
+
+## Household could not pay mortgage: household.wealth = -208.13589670846113
+## Household could not pay mortgage: raw salary = 1356.82125
+## Household could not pay mortgage: liquid salary = 1104.8156
+## Household could not pay mortgage: household percentile = 55
+## Household could not pay mortgage: household id = 8074
+## Household could not pay mortgage: household size = 1
+## Household could not pay mortgage: household age = 73
+## Household could not pay mortgage: household zone = Oeiras
+## Household could not pay mortgage: household unemployedTime = 0
+
+Household decided to rent
+
+Household decided to rent
+
+Household 8971 decided to invest in renovation
+
+## Household could not pay mortgage: household.wealth = -5.912013943189446e7
+## Household could not pay mortgage: raw salary = 3150.758
+## Household could not pay mortgage: liquid salary = 2094.0137224
+## Household could not pay mortgage: household percentile = 59
+## Household could not pay mortgage: household id = 6772
+## Household could not pay mortgage: household size = 2
+## Household could not pay mortgage: household age = 64
+## Household could not pay mortgage: household zone = Oeiras
+## Household could not pay mortgage: household unemployedTime = 0
+
+Household decided to sell
+
+generated agent 5058 from leaving home (single)
+wealth = 24656.59187902021
+
+Household decided to rent
+
+Household decided to rent
+
+## Household could not pay mortgage: household.wealth = 247.63392810637342
+## Household could not pay mortgage: raw salary = 775.8130000000001
+## Household could not pay mortgage: liquid salary = 690.4735700000001
+## Household could not pay mortgage: household percentile = 13
+## Household could not pay mortgage: household id = 9836
+## Household could not pay mortgage: household size = 1
+## Household could not pay mortgage: household age = 65
+## Household could not pay mortgage: household zone = Oeiras
+## Household could not pay mortgage: household unemployedTime = 0
+
+## Household could not pay mortgage: household.wealth = -1.8503073647679247e7
+## Household could not pay mortgage: raw salary = 2699.542
+## Household could not pay mortgage: liquid salary = 1867.1423175999998
+## Household could not pay mortgage: household percentile = 51
+## Household could not pay mortgage: household id = 9715
+## Household could not pay mortgage: household size = 2
+## Household could not pay mortgage: household age = 68
+## Household could not pay mortgage: household zone = Oeiras
+## Household could not pay mortgage: household unemployedTime = 0
+
+Household 8164 decided to invest in renovation
+
+generated agent 5059 from leaving home
+wealth = 13552.282727857102
+
+## Household could not pay mortgage: household.wealth = 404.090095806131
+## Household could not pay mortgage: raw salary = 1356.82125
+## Household could not pay mortgage: liquid salary = 1104.8156
+## Household could not pay mortgage: household percentile = 55
+## Household could not pay mortgage: household id = 9356
+## Household could not pay mortgage: household size = 1
+## Household could not pay mortgage: household age = 83
+## Household could not pay mortgage: household zone = Oeiras
+## Household could not pay mortgage: household unemployedTime = 0
+
+Household 4146 decided to invest in renovation
+
+## Household could not pay mortgage: household.wealth = -3.212342814971857e8
+## Household could not pay mortgage: raw salary = 10802.10225
+## Household could not pay mortgage: liquid salary = 5579.819941125
+## Household could not pay mortgage: household percentile = 99
+## Household could not pay mortgage: household id = 6061
+## Household could not pay mortgage: household size = 6
+## Household could not pay mortgage: household age = 73
+## Household could not pay mortgage: household zone = Oeiras
+## Household could not pay mortgage: household unemployedTime = 0
+
+## Household could not pay mortgage: household.wealth = -4766.083538648045
+## Household could not pay mortgage: raw salary = 1215.031675
+## Household could not pay mortgage: liquid salary = 1014.0702719999999
+## Household could not pay mortgage: household percentile = 39
+## Household could not pay mortgage: household id = 6027
+## Household could not pay mortgage: household size = 2
+## Household could not pay mortgage: household age = 76
+## Household could not pay mortgage: household zone = Oeiras
+## Household could not pay mortgage: household unemployedTime = 14
+
+Household decided to sell
+
+## Household could not pay mortgage: household.wealth = -2.4647641251391806e7
+## Household could not pay mortgage: raw salary = 12270.665999999997
+## Household could not pay mortgage: liquid salary = 6226.7222729999985
+## Household could not pay mortgage: household percentile = 98
+## Household could not pay mortgage: household id = 9536
+## Household could not pay mortgage: household size = 3
+## Household could not pay mortgage: household age = 53
+## Household could not pay mortgage: household zone = Oeiras
+## Household could not pay mortgage: household unemployedTime = 0
+
+## Household could not pay mortgage: household.wealth = -1.0689703819344777e9
+## Household could not pay mortgage: raw salary = 4189.18
+## Household could not pay mortgage: liquid salary = 2602.9895100000003
+## Household could not pay mortgage: household percentile = 73
+## Household could not pay mortgage: household id = 4600
+## Household could not pay mortgage: household size = 2
+## Household could not pay mortgage: household age = 103
+## Household could not pay mortgage: household zone = Oeiras
+## Household could not pay mortgage: household unemployedTime = 0
+
+## Household could not pay mortgage: household.wealth = -1.0689703819344777e9
+## Household could not pay mortgage: raw salary = 4189.18
+## Household could not pay mortgage: liquid salary = 2602.9895100000003
+## Household could not pay mortgage: household percentile = 73
+## Household could not pay mortgage: household id = 4600
+## Household could not pay mortgage: household size = 2
+## Household could not pay mortgage: household age = 103
+## Household could not pay mortgage: household zone = Oeiras
+## Household could not pay mortgage: household unemployedTime = 0
+
+## Household could not pay mortgage: household.wealth = 244.6504096610712
+## Household could not pay mortgage: raw salary = 1039.56
+## Household could not pay mortgage: liquid salary = 893.006
+## Household could not pay mortgage: household percentile = 40
+## Household could not pay mortgage: household id = 9892
+## Household could not pay mortgage: household size = 1
+## Household could not pay mortgage: household age = 51
+## Household could not pay mortgage: household zone = Oeiras
+## Household could not pay mortgage: household unemployedTime = 0
+
+generated agent 5058 from breakup without houses
+wealth = 9043.160571016238
+generated agent 5059 from breakup with houses
+wealth = 9043.160571016238
+
+## Household could not pay mortgage: household.wealth = -9.679126362367684e6
+## Household could not pay mortgage: raw salary = 4079.34375
+## Household could not pay mortgage: liquid salary = 2549.224665625
+## Household could not pay mortgage: household percentile = 90
+## Household could not pay mortgage: household id = 2540
+## Household could not pay mortgage: household size = 1
+## Household could not pay mortgage: household age = 82
+## Household could not pay mortgage: household zone = Oeiras
+## Household could not pay mortgage: household unemployedTime = 0
+
+Household 8407 decided to invest in rental
+
+## Household could not pay mortgage: household.wealth = -424464.62594740896
+## Household could not pay mortgage: raw salary = 1495.216
+## Household could not pay mortgage: liquid salary = 1193.3882399999998
+## Household could not pay mortgage: household percentile = 24
+## Household could not pay mortgage: household id = 8966
+## Household could not pay mortgage: household size = 2
+## Household could not pay mortgage: household age = 48
+## Household could not pay mortgage: household zone = Oeiras
+## Household could not pay mortgage: household unemployedTime = 0
+
+## Household could not pay mortgage: household.wealth = 140.45635970047283
+## Household could not pay mortgage: raw salary = 2084.654
+## Household could not pay mortgage: liquid salary = 1547.56489
+## Household could not pay mortgage: household percentile = 60
+## Household could not pay mortgage: household id = 6064
+## Household could not pay mortgage: household size = 2
+## Household could not pay mortgage: household age = 76
+## Household could not pay mortgage: household zone = Oeiras
+## Household could not pay mortgage: household unemployedTime = 24
+
+## Household could not pay mortgage: household.wealth = 140.45635970047283
+## Household could not pay mortgage: raw salary = 2084.654
+## Household could not pay mortgage: liquid salary = 1547.56489
+## Household could not pay mortgage: household percentile = 60
+## Household could not pay mortgage: household id = 6064
+## Household could not pay mortgage: household size = 2
+## Household could not pay mortgage: household age = 76
+## Household could not pay mortgage: household zone = Oeiras
+## Household could not pay mortgage: household unemployedTime = 24
+
+## Household could not pay mortgage: household.wealth = 140.45635970047283
+## Household could not pay mortgage: raw salary = 2084.654
+## Household could not pay mortgage: liquid salary = 1547.56489
+## Household could not pay mortgage: household percentile = 60
+## Household could not pay mortgage: household id = 6064
+## Household could not pay mortgage: household size = 2
+## Household could not pay mortgage: household age = 76
+## Household could not pay mortgage: household zone = Oeiras
+## Household could not pay mortgage: household unemployedTime = 24
+
+Household decided to rent
+
+Household 5846 decided to invest in rental
+
+generated agent 5058 from leaving home
+wealth = 1080.4441159901392
+
+Household 10449 decided to invest in renovation
+
+Household 8265 decided to invest in renovation
+
+## Household could not pay mortgage: household.wealth = -7.66755266374948e9
+## Household could not pay mortgage: raw salary = 1860.156
+## Household could not pay mortgage: liquid salary = 1420.56892
+## Household could not pay mortgage: household percentile = 34
+## Household could not pay mortgage: household id = 8235
+## Household could not pay mortgage: household size = 2
+## Household could not pay mortgage: household age = 57
+## Household could not pay mortgage: household zone = Oeiras
+## Household could not pay mortgage: household unemployedTime = 0
+
+## Household could not pay mortgage: household.wealth = -2.5461293926530793e7
+## Household could not pay mortgage: raw salary = 1821.4740000000002
+## Household could not pay mortgage: liquid salary = 1398.52018
+## Household could not pay mortgage: household percentile = 17
+## Household could not pay mortgage: household id = 10321
+## Household could not pay mortgage: household size = 3
+## Household could not pay mortgage: household age = 32
+## Household could not pay mortgage: household zone = Oeiras
+## Household could not pay mortgage: household unemployedTime = 0
+
+generated agent 5059 from leaving home
+wealth = 35969.77832422881
+
+## Household could not pay mortgage: household.wealth = -5.556707885513861e6
+## Household could not pay mortgage: raw salary = 4617.24
+## Household could not pay mortgage: liquid salary = 2812.5248799999995
+## Household could not pay mortgage: household percentile = 74
+## Household could not pay mortgage: household id = 8256
+## Household could not pay mortgage: household size = 2
+## Household could not pay mortgage: household age = 70
+## Household could not pay mortgage: household zone = Oeiras
+## Household could not pay mortgage: household unemployedTime = 0
+
+Household decided to rent
+
+## Household could not pay mortgage: household.wealth = -103272.77038472898
+## Household could not pay mortgage: raw salary = 2248.3259999999996
+## Household could not pay mortgage: liquid salary = 1635.1294099999998
+## Household could not pay mortgage: household percentile = 43
+## Household could not pay mortgage: household id = 7925
+## Household could not pay mortgage: household size = 4
+## Household could not pay mortgage: household age = 54
+## Household could not pay mortgage: household zone = Oeiras
+## Household could not pay mortgage: household unemployedTime = 0
+
+## Household could not pay mortgage: household.wealth = -103272.77038472898
+## Household could not pay mortgage: raw salary = 2248.3259999999996
+## Household could not pay mortgage: liquid salary = 1635.1294099999998
+## Household could not pay mortgage: household percentile = 43
+## Household could not pay mortgage: household id = 7925
+## Household could not pay mortgage: household size = 4
+## Household could not pay mortgage: household age = 54
+## Household could not pay mortgage: household zone = Oeiras
+## Household could not pay mortgage: household unemployedTime = 0
+
+Household decided to sell
+
