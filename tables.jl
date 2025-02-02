@@ -59,7 +59,7 @@ function generate_houses_prices_table(adf, mdf)
         for idx in eachindex(REAL_PRICES_MAP_ADJUSTED[location])
             year = CURRENT_YEAR + Int64(floor((idx - 1)/ 4))
             month = 3 + ((idx - 1) % 4) * 3
-            push!(REAL_PRICES_MAP_WITHOUT_INFLATION[location], custom_adjust_value_to_inflation(REAL_PRICES_MAP_ADJUSTED[location][idx], CURRENT_YEAR, CURRENT_MONTH, year, month))
+            push!(REAL_PRICES_MAP_WITHOUT_INFLATION[location], custom_adjust_value_to_inflation(REAL_PRICES_MAP_ADJUSTED[location][idx], year, month, CURRENT_YEAR, CURRENT_MONTH))
         end
     end
 
@@ -155,7 +155,7 @@ function generate_semi_annually_rent_prices_table(adf, mdf)
         for idx in eachindex(REAL_RENTS_MAP_ADJUSTED[location])
             year = CURRENT_YEAR + Int(floor((idx - 1) / 2))
             month = 6 + ((idx - 1) % 2) * 6
-            push!(REAL_RENTS_MAP_WITHOUT_INFLATION[location], custom_adjust_value_to_inflation(REAL_RENTS_MAP_ADJUSTED[location][idx], CURRENT_YEAR, CURRENT_MONTH, year, month))
+            push!(REAL_RENTS_MAP_WITHOUT_INFLATION[location], custom_adjust_value_to_inflation(REAL_RENTS_MAP_ADJUSTED[location][idx], year, month, CURRENT_YEAR, CURRENT_MONTH))
         end
     end
 
