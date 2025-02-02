@@ -145,10 +145,11 @@ mutable struct HouseSupply
     bids::Array{Bid}
     sellerId::Int
     maxConsumerSurplus
+    shouldPayAddedValue::Bool
 end
 
-function HouseSupply(house, price, bids, sellerId)
-    return HouseSupply(house, price, bids, sellerId, -Inf)
+function HouseSupply(house, price, bids, sellerId; shouldPayAddedValue = false)
+    return HouseSupply(house, price, bids, sellerId, -Inf, shouldPayAddedValue)
 end
 
 mutable struct SupplyMatch

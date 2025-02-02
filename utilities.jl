@@ -652,7 +652,7 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     
     previousPurchasePrice = getPreviousPurchasePrice(model, supply.house)
 
-    if previousPurchasePrice != Nothing
+    if previousPurchasePrice != Nothing && supply.shouldPayAddedValue
         renovationCosts = getRenovationCosts(model, supply.house)
         if renovationCosts == Nothing
             renovationCosts = 0
@@ -660,6 +660,7 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
         totalCosts = previousPurchasePrice + renovationCosts 
 
         addedValueTax = calculateAddedValueTax(bidValue, totalCosts)
+        TRANSACTION_LOG("Transaction: addedValueTax = $addedValueTax\n", model)
         seller.wealth -= addedValueTax
         model.government.wealth += addedValueTax
     end
