@@ -352,10 +352,14 @@ function clearHouseMarket(model)
                 if isHouseViableForRenting(model, renovatedHouse)
                     maxMortgage = maxMortgageValue(model, household)
                     bidValue = (rand(95:100) / 100) * supply.price
+                    bidToAskPriceRatio = bidValue / supply.price
                     if maxMortgage + household.wealth > bidValue + calculateTransactionTaxes(bidValue)
                         lock(localLock) do
                             push!(supply.bids, Bid(bidValue, demand.householdId, demand.type))
                             push!(demand.supplyMatches, SupplyMatch(supply))
+                            if supply.maxConsumerSurplus < bidToAskPriceRatio
+                                supply.maxConsumerSurplus = bidToAskPriceRatio
+                            end
                         end
                     end
                 end
@@ -373,10 +377,14 @@ function clearHouseMarket(model)
                 if margin > marketPrice * EXPECTED_RENOVATION_RENTABILITY
                     maxMortgage = maxMortgageValue(model, household)
                     bidValue = (rand(95:100) / 100) * supply.price
+                    bidToAskPriceRatio = bidValue / supply.price
                     if maxMortgage + household.wealth > bidValue + calculateTransactionTaxes(bidValue)
                         lock(localLock) do
                             push!(supply.bids, Bid(bidValue, demand.householdId, demand.type))
                             push!(demand.supplyMatches, SupplyMatch(supply))
+                            if supply.maxConsumerSurplus < bidToAskPriceRatio
+                                supply.maxConsumerSurplus = bidToAskPriceRatio
+                            end
                         end
                     end
                 end
@@ -385,9 +393,14 @@ function clearHouseMarket(model)
                 if supply.house.percentile < 75
                     continue
                 end
+                bid = supply.price * rand(Normal(1.05, 0.05))
+                bidToAskPriceRatio = bid / supply.price
                 lock(localLock) do
-                    push!(supply.bids, Bid(supply.price * rand(Normal(1.05, 0.05)), demand.householdId, demand.type))
+                    push!(supply.bids, Bid(bid, demand.householdId, demand.type))
                     push!(demand.supplyMatches, SupplyMatch(supply))
+                    if supply.maxConsumerSurplus < bidToAskPriceRatio
+                        supply.maxConsumerSurplus = bidToAskPriceRatio
+                    end
                 end
                 continue
             end
@@ -409,12 +422,13 @@ function clearHouseMarket(model)
             # maxMortgage = maxMortgageValue(model, household)
             maxMortgage = maxMortgageValue(model, household)
             demandBid = calculateBid(household, house, supply.price, maxMortgage, consumerSurplus)
+            askPriceToBidRatio = demandBid / supply.price
             if (demandBid >= supply.price * 0.90)
                 lock(localLock) do
                     push!(supply.bids, Bid(demandBid, demand.householdId, demand.type))
                     push!(demand.supplyMatches, SupplyMatch(supply))
-                    if supply.maxConsumerSurplus < consumerSurplus
-                        supply.maxConsumerSurplus = consumerSurplus
+                    if supply.maxConsumerSurplus < askPriceToBidRatio
+                        supply.maxConsumerSurplus = askPriceToBidRatio
                     end
                 end
             end
@@ -425,8 +439,8 @@ function clearHouseMarket(model)
     start_time = time()
     i = 1
     householdsWhoBoughtAHouse = Set()
-    # sort!(model.houseMarket.supply, lt=sortSupply)
-    sort!(model.houseMarket.supply, lt=sortRandomly)
+    sort!(model.houseMarket.supply, lt=sortSupply)
+    # sort!(model.houseMarket.supply, lt=sortRandomly)
     while i <= length(model.houseMarket.supply)
         supply = model.houseMarket.supply[i]
         sort!(supply.bids, lt=sortBids)
