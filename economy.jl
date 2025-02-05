@@ -11,7 +11,7 @@ using Base.Threads
 using Dates
 
 include("consts.jl")
-const SEED = 123
+const SEED = 123456
 const this_run_location = string(HOUSE_LOCATION_INSTANCES[1])
 const output_folder = "all_runs/location_runs/$this_run_location/NHH_$(NUMBER_OF_HOUSEHOLDS)_NSTEPS_$(NUMBER_OF_STEPS)_$(Dates.format(now(), "yyyy_mm_dd_THH_MM"))"
 include("utilities.jl")
