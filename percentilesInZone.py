@@ -5,13 +5,18 @@ content = []
 with open("all.txt", "r") as f:
     content = f.readlines()
 
+# text = "Transaction: consumerSurplus = "
+# text = "Transaction: bid to ask price ratio = "
+# text = "Transaction: house percentile ="
+# text = "Transaction: house.area ="
+text = "Transaction: pricePerm2 ="
 values = []
 correctZone = False
 for line in content:
-    if "Transaction: house.location = Oeiras" in line:
+    if "Transaction: sellerId = -1" in line:
         correctZone = True
-    elif correctZone and "Transaction: consumerSurplus = " in line:
-        value = float(line[len("Transaction: consumerSurplus = "):-1])
+    elif correctZone and text in line:
+        value = float(line[len(text):-1])
         correctZone = False
         values.append(value)
 

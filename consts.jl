@@ -117,24 +117,24 @@ const INITIAL_RENTAL_MARKET_PRICE_CUT = Dict(
 )
 
 const GREEDINESS_AVERAGE = Dict(
-    Amadora => 1.075,
-    Cascais => 1.075,
-    Lisboa => 1.075,
-    Loures => 1.075,
-    Mafra => 1.075,
-    Odivelas => 1.075,
+    Amadora => 1.05,
+    Cascais => 1.05,
+    Lisboa => 1.05,
+    Loures => 1.05,
+    Mafra => 1.05,
+    Odivelas => 1.05,
     Oeiras => 1.05,
-    Sintra => 1.075,
-    VilaFrancaDeXira => 1.075,
-    Alcochete => 1.075,
-    Almada => 1.075,
-    Barreiro => 1.075,
-    Moita => 1.05,
-    Montijo => 1.075,
-    Palmela => 1.05,
-    Seixal => 1.075,
+    Sintra => 1.05,
+    VilaFrancaDeXira => 1.05,
+    Alcochete => 1.05,
+    Almada => 1.05,
+    Barreiro => 1.05,
+    Moita => 1.025,
+    Montijo => 1.05,
+    Palmela => 1.025,
+    Seixal => 1.05,
     Sesimbra => 1.05,
-    Setubal => 1.075,
+    Setubal => 1.05,
 )
 
 const GREEDINESS_STDEV = Dict(
@@ -1189,26 +1189,30 @@ const MAX_NEW_CONSTRUCTIONS_MAP = Dict(
 
 const HOUSES_BOUGHT_BY_NON_RESIDENTS = (4047 * MODEL_SCALE) / 12
 
-const RATIO_OF_HOUSES_BOUGHT_BY_NON_RESIDENTS = Dict(
-    Alcochete => 0.0,
-    Almada => 0.02,
-    Amadora => 0.02,
-    Barreiro => 0.01,
-    Cascais => 0.15,
-    Lisboa => 0.45,
-    Loures => 0.02,
-    Mafra => 0.01,
-    Moita => 0.01,
-    Montijo => 0.0,
-    Odivelas => 0.02,
-    Oeiras => 0.14,
-    Palmela => 0.0,
-    Seixal => 0.0,
-    Sesimbra => 0.01,
-    Setubal => 0.015,
-    Sintra => 0.04,
-    VilaFrancaDeXira => 0.0,
+const RATIO_OF_HOUSES_BOUGHT_BY_NON_RESIDENTS_BASE = Dict(
+    Alcochete => THEORETICAL_NUMBER_OF_HOUSES_MAP[Alcochete],
+    Almada => THEORETICAL_NUMBER_OF_HOUSES_MAP[Almada],
+    Amadora => THEORETICAL_NUMBER_OF_HOUSES_MAP[Amadora],
+    Barreiro => THEORETICAL_NUMBER_OF_HOUSES_MAP[Barreiro],
+    Cascais => THEORETICAL_NUMBER_OF_HOUSES_MAP[Cascais] * 5,
+    Lisboa => THEORETICAL_NUMBER_OF_HOUSES_MAP[Lisboa] * 10,
+    Loures => THEORETICAL_NUMBER_OF_HOUSES_MAP[Loures],
+    Mafra => THEORETICAL_NUMBER_OF_HOUSES_MAP[Mafra],
+    Moita => THEORETICAL_NUMBER_OF_HOUSES_MAP[Moita],
+    Montijo => THEORETICAL_NUMBER_OF_HOUSES_MAP[Montijo],
+    Odivelas => THEORETICAL_NUMBER_OF_HOUSES_MAP[Odivelas],
+    Oeiras => THEORETICAL_NUMBER_OF_HOUSES_MAP[Oeiras] * 2,
+    Palmela => THEORETICAL_NUMBER_OF_HOUSES_MAP[Palmela],
+    Seixal => THEORETICAL_NUMBER_OF_HOUSES_MAP[Seixal],
+    Sesimbra => THEORETICAL_NUMBER_OF_HOUSES_MAP[Sesimbra],
+    Setubal => THEORETICAL_NUMBER_OF_HOUSES_MAP[Setubal],
+    Sintra => THEORETICAL_NUMBER_OF_HOUSES_MAP[Sintra] * 3,
+    VilaFrancaDeXira => THEORETICAL_NUMBER_OF_HOUSES_MAP[VilaFrancaDeXira],
 )
+
+const RATIO_OF_HOUSES_BOUGHT_BY_NON_RESIDENTS_BASE_TOTAL = sum(values(RATIO_OF_HOUSES_BOUGHT_BY_NON_RESIDENTS_BASE))
+
+const RATIO_OF_HOUSES_BOUGHT_BY_NON_RESIDENTS = Dict(location => RATIO_OF_HOUSES_BOUGHT_BY_NON_RESIDENTS_BASE[location] / RATIO_OF_HOUSES_BOUGHT_BY_NON_RESIDENTS_BASE_TOTAL for location in instances(HouseLocation))
 
 @enum HouseSizeEchelon begin
     LessThan29 = 30

@@ -185,6 +185,7 @@ function model_step!(model)
     # end
 
     handle_migrations(model)
+    updateConstructions(model)
 
     if model.steps % 5 == 0
         println("5 steps!")
@@ -212,7 +213,6 @@ function model_step!(model)
     end
     
     public_investment(model)
-    updateConstructions(model)
     payMortgages(model, model.construction_sector)
     handleUnemployment(model)
     println("end of model_step $(string(model.steps))")
