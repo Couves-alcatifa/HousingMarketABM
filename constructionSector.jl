@@ -14,7 +14,9 @@ function initiateConstructionSector()
             # pick a random size_interval
             # TODO: could be data driven
             size_interval = instances(SizeInterval)[rand(1:length(instances(SizeInterval)))]
-            totalDuration = CONSTRUCTION_DELAY_MAX + CONSTRUCTION_TIME_MAX
+            permitTime = rand(CONSTRUCTION_DELAY_MIN:CONSTRUCTION_DELAY_MAX)
+            constructionTime = rand(CONSTRUCTION_TIME_MIN:CONSTRUCTION_TIME_MAX)
+            totalDuration = permitTime + constructionTime
             house = House(generateAreaFromSizeInterval(size_interval), location, NotSocialNeighbourhood, 1.0, rand(1:100))
             push!(housesInConstruction[location][size_interval], PendingConstruction(rand(1:totalDuration), permitTime, constructionTime, house))
         end
