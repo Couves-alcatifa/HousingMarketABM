@@ -1,6 +1,6 @@
 import math
 # grep -r "Transaction: house percentile =" | awk '{print $5}' > ../percentiles.txt
-
+# for i in {1..36}; do echo Step $i ; cat latest_run/transactions_logs/step_${i}.txt > all.txt ; python percentilesInZone.py ;done
 content = []
 with open("all.txt", "r") as f:
     content = f.readlines()

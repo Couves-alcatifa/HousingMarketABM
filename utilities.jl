@@ -27,7 +27,7 @@ function calculate_market_price(model, house)
         return calculate_initial_market_price(house) * INITIAL_MARKET_PRICE_CUT[house.location]
     end
     # println("house = $house mean(transactions) * house.area * house.maintenanceLevel = $(mean(transactions) * house.area * house.maintenanceLevel)")
-    return mean(bucket) * house.area * 
+    return median(bucket) * house.area * 
            map_value((house.percentile - 1) % 25, 0, 24, 0.90, 1.10)
 end
 
@@ -756,6 +756,7 @@ function rent_house(model, supply::RentalSupply)
     content *= "Rental: bidValue = $(actualBid)\n"
     content *= "Rental: consumerSurplus = $(calculateConsumerSurplusAddedValueForRent(calculateConsumerSurplus(household, supply.house)))\n"
     content *= "Rental: pricePerm2 = $(actualBid / supply.house.area)\n"
+    content *= "Rental: bid to ask price ratio = $(actualBid / supply.monthlyPrice)\n"
     content *= "Rental: contracts as landlord = $(household.contractsAsLandlord)\n"
     content *= "Rental: contract as tenant = $(household.contractAsTenant)\n"
     if supply.sellerId != -1

@@ -72,6 +72,7 @@ function generate_houses_prices_table(adf, mdf)
         end
         sizeToUse = min(length(y), length(REAL_PRICES_MAP_ADJUSTED[location]))
         save("simulated_prices/SimulatedPricesIn$location.png", plot_simulated_results(x[1:sizeToUse], y[1:sizeToUse], REAL_PRICES_MAP_WITHOUT_INFLATION[location][1:sizeToUse]))
+        save("$output_folder/SimulatedPricesIn$location.png", plot_simulated_results(x[1:sizeToUse], y[1:sizeToUse], REAL_PRICES_MAP_WITHOUT_INFLATION[location][1:sizeToUse]))
     end
 
     print("Final Table: \n$(finalTable)")
@@ -168,6 +169,7 @@ function generate_semi_annually_rent_prices_table(adf, mdf)
         end
         sizeToUse = min(length(y), length(REAL_RENTS_MAP_WITHOUT_INFLATION[location]))
         save("simulated_rents/SimulatedRentsIn$location.png", plot_simulated_rents(x[1:sizeToUse], y[1:sizeToUse], REAL_RENTS_MAP_WITHOUT_INFLATION[location][1:sizeToUse]))
+        save("$output_folder/SimulatedRentsIn$location.png", plot_simulated_rents(x[1:sizeToUse], y[1:sizeToUse], REAL_RENTS_MAP_WITHOUT_INFLATION[location][1:sizeToUse]))
     end
 
     return finalTable
