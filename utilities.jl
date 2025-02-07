@@ -28,7 +28,12 @@ function calculate_market_price(model, house)
     end
     # println("house = $house mean(transactions) * house.area * house.maintenanceLevel = $(mean(transactions) * house.area * house.maintenanceLevel)")
     return median(bucket) * house.area * 
-           map_value((house.percentile - 1) % 25, 0, 24, 0.90, 1.10)
+           map_value(house.percentile, 1, 100,
+                     FIRST_QUARTILE_RENT_MAP_ADJUSTED[house.location] / MEDIAN_RENT_MAP_ADJUSTED[house.location],
+                     THIRD_QUARTILE_RENT_MAP_ADJUSTED[house.location] / MEDIAN_RENT_MAP_ADJUSTED[house.location])
+
+    # return median(bucket) * house.area * 
+    #        map_value((house.percentile - 1) % 25, 0, 24, 0.90, 1.10)
 end
 
 function calculate_initial_rental_market_price(house)
@@ -785,10 +790,11 @@ function public_investment(model)
 end
 
 function InitiateBuckets()
-    result = Dict(location => Dict(
-                    quartile => Float64[] 
-                    for quartile in [25, 50, 75, 100])
-                  for location in HOUSE_LOCATION_INSTANCES)
+    result = Dict(location => Float64[] for location in HOUSE_LOCATION_INSTANCES)
+    # result = Dict(location => Dict(
+    #                 quartile => Float64[] 
+    #                 for quartile in [25, 50, 75, 100])
+    #               for location in HOUSE_LOCATION_INSTANCES)
     return result
 end
 
@@ -808,18 +814,18 @@ function InitiatePriceIndex()
 end
 
 function calculateBucket(model, house)
-    percentile = 100
-    if house.percentile <= 25
-        percentile = 25
-    elseif house.percentile <= 50
-        percentile = 50
-    elseif house.percentile <= 75
-        percentile = 75
-    end
+    # percentile = 100
+    # if house.percentile <= 25
+    #     percentile = 25
+    # elseif house.percentile <= 50
+    #     percentile = 50
+    # elseif house.percentile <= 75
+    #     percentile = 75
+    # end
     # size_interval = getSizeInterval(house)
     # return model.buckets[house.location][percentile][size_interval]
-    # return model.buckets[house.location]
-    return model.buckets[house.location][percentile]
+    return model.buckets[house.location]
+    # return model.buckets[house.location][percentile]
 end
 
 function calculateRentalBucket(model, house)
