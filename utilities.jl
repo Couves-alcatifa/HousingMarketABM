@@ -29,8 +29,8 @@ function calculate_market_price(model, house)
     # println("house = $house mean(transactions) * house.area * house.maintenanceLevel = $(mean(transactions) * house.area * house.maintenanceLevel)")
     return median(bucket) * house.area * 
            map_value(house.percentile, 1, 100,
-                     FIRST_QUARTILE_RENT_MAP_ADJUSTED[house.location] / MEDIAN_RENT_MAP_ADJUSTED[house.location],
-                     THIRD_QUARTILE_RENT_MAP_ADJUSTED[house.location] / MEDIAN_RENT_MAP_ADJUSTED[house.location])
+                     FIRST_QUARTILE_SALES_MAP_ADJUSTED[house.location] / MEDIAN_SALES_MAP_ADJUSTED[house.location],
+                     THIRD_QUARTILE_SALES_MAP_ADJUSTED[house.location] / MEDIAN_SALES_MAP_ADJUSTED[house.location])
 
     # return median(bucket) * house.area * 
     #        map_value((house.percentile - 1) % 25, 0, 24, 0.90, 1.10)
