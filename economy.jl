@@ -154,8 +154,8 @@ end
 function has_enough_size(house, household)
     areaPerPerson = house.area / household.size
     value = areaPerPerson + household.homelessTime 
-    return household.percentile <= map_value(value, 15, 35.0, 1, 100)
-    # return rand() < map_value(value, 15, 35.0, 0.01, 1.0)
+    # return household.percentile <= map_value(value, 15, 35.0, 1, 100)
+    return rand() < map_value(value, 15, 35.0, 0.01, 1.0)
 end
 
 function model_step!(model)
