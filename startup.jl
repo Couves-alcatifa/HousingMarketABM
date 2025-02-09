@@ -213,6 +213,7 @@ function probabilityOfHouseholdBeingAssignedToHouse(household, house)
     numberOfHousesInThatZone = NUMBER_OF_HOUSES_MAP[house.location]
     numberOfHousesWithThatRatioInThatZone = 0
     probabilityMultiplierDueToAge = map_value(household.age, 20, 90, 0.01, 4.5)
+    probabilityMultiplierDueToPercentile = map_value(household.percentile, 1, 100, 0.5, 2.0)
     if m2_per_person < 10
         numberOfHousesWithThatRatioInThatZone = NUMBER_OF_HOUSES_WITH_LT_10_M2_PER_PERSON_MAP[house.location]
     elseif m2_per_person < 15
@@ -230,7 +231,7 @@ function probabilityOfHouseholdBeingAssignedToHouse(household, house)
     else
         numberOfHousesWithThatRatioInThatZone = NUMBER_OF_HOUSES_WITH_MT_80_M2_PER_PERSON_MAP[house.location]
     end
-    return (numberOfHousesWithThatRatioInThatZone / numberOfHousesInThatZone) * probabilityMultiplierDueToAge
+    return (numberOfHousesWithThatRatioInThatZone / numberOfHousesInThatZone) * probabilityMultiplierDueToAge * probabilityMultiplierDueToPercentile
 end
 
 # function getEchelon(size)
