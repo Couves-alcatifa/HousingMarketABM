@@ -5,11 +5,13 @@ content = []
 with open("all.txt", "r") as f:
     content = f.readlines()
 
-text = "Transaction: consumerSurplus = "
+# text = "Transaction: consumerSurplus = "
 # text = "Transaction: bid to ask price ratio = "
-# text = "Transaction: house percentile ="
+text = "Transaction: house percentile ="
 # text = "Transaction: house.area ="
 # text = "Transaction: pricePerm2 ="
+# text = "Transaction: household percentile ="
+
 values = []
 correctZone = False
 for line in content:

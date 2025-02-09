@@ -61,9 +61,6 @@ function calculate_initial_rental_market_price(house)
 end
 
 function calculate_initial_market_price(house)
-    ## TODO: houses should have a quality (maybe replace maintenanceLevel ?)
-    ## this quality should influence the price per m2 according to the firstQuartileHousePricesPerRegion
-    ## stop using only first quartile
     if house.percentile <= 25
         firstQuartile = FIRST_QUARTILE_SALES_MAP_ADJUSTED[house.location]
         base = firstQuartile / 1.25
@@ -664,9 +661,11 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     model.government.wealth += transactionTaxes
     push!(household.houses, supply.house)
     terminateContractsOnTentantSide(household, model)
-    addTransactionToBuckets(model, supply.house, bidValue)
-    push!(model.transactions, Transaction(supply.house.area, bidValue, supply.house.location))
-    push!(model.transactions_per_region[supply.house.location][model.steps], Transaction(supply.house.area, bidValue, supply.house.location))
+    if winningBid.type != NonResidentDemand
+        addTransactionToBuckets(model, supply.house, bidValue)
+        push!(model.transactions, Transaction(supply.house.area, bidValue, supply.house.location))
+        push!(model.transactions_per_region[supply.house.location][model.steps], Transaction(supply.house.area, bidValue, supply.house.location))
+    end
     push!(householdsWhoBoughtAHouse, highestBidder)
     
     previousPurchasePrice = getPreviousPurchasePrice(model, supply.house)
