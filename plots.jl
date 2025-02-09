@@ -16,7 +16,7 @@ average_color = :darkblue
 
 function plot_houses_prices(adf, mdf)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Houses prices per m2")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Houses prices per m2", autolimitaspect = 1)
     houses_prices = scatterlines!(ax, adf.step, mdf.calculate_houses_prices_perm2, color = :cornsilk4)
     figure[1, 2] = Legend(figure, [houses_prices], ["Houses prices"])
     figure
@@ -24,7 +24,7 @@ end
 
 function plot_houses_prices_in_supply(adf, mdf)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Houses prices in supply")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Houses prices in supply", autolimitaspect = 1)
     houses_prices = scatterlines!(ax, adf.step, mdf.calculate_prices_in_supply, color = :cornsilk4)
     figure[1, 2] = Legend(figure, [houses_prices], ["Houses prices"])
     figure
@@ -32,7 +32,7 @@ end
 
 function plot_houses_owned(adf, mdf)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Population")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Population", autolimitaspect = 1)
     houses = scatterlines!(ax, adf.step, adf.sum_houses_household, color = :cornsilk4)
     figure[1, 2] = Legend(figure, [houses], ["Home owners"])
     figure
@@ -40,7 +40,7 @@ end
 
 function plot_total_wealth(adf, mdf)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money", autolimitaspect = 1)
     household_wealth = scatterlines!(ax, adf.step, adf.sum_wealth_household, color = :red)
     gov_money = scatterlines!(ax, adf.step, mdf.gov_wealth, color = :blue)
     company_money = scatterlines!(ax, adf.step, mdf.company_wealth, color = :green)
@@ -67,7 +67,7 @@ function plot_supply_and_demand(adf, mdf)
     figures = []
     for location in HOUSE_LOCATION_INSTANCES
         figure = Figure(size = (600, 400))
-        ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Volume")
+        ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Volume", autolimitaspect = 1)
         supply_lines = scatterlines!(ax, adf.step, regional_supply[location], color = :blue)
         supply_legends = "Supply in $(string(location))"
         demand_lines = scatterlines!(ax, adf.step, regional_demand[location], color = :red)
@@ -93,7 +93,7 @@ function plot_rental_supply_and_demand(adf, mdf)
     figures = []
     for location in HOUSE_LOCATION_INSTANCES
         figure = Figure(size = (600, 400))
-        ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Volume")
+        ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Volume", autolimitaspect = 1)
         supply_lines = scatterlines!(ax, adf.step, regional_supply[location], color = :blue)
         supply_legends = "Supply in $(string(location))"
         demand_lines = scatterlines!(ax, adf.step, regional_demand[location], color = :red)
@@ -122,7 +122,7 @@ function plot_supply_and_demand_per_bucket(adf, mdf)
     for location in HOUSE_LOCATION_INSTANCES
         for size_interval in instances(SizeInterval)
             figure = Figure(size = (600, 400))
-            ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Volume")
+            ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Volume", autolimitaspect = 1)
             supply_lines = scatterlines!(ax, adf.step, supply_per_bucket[location][size_interval], color = :blue)
             supply_legends = "Supply in $(string(location)) for houses $(get_size_interval_legend(size_interval))"
             demand_lines = scatterlines!(ax, adf.step, demand_per_bucket[location][size_interval], color = :red)
@@ -136,7 +136,7 @@ end
 
 function plot_household_status(adf, mdf)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Status")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Status", autolimitaspect = 1)
     total = scatterlines!(ax, adf.step, adf.count_isHousehold, color = :black)
     home_owners = scatterlines!(ax, adf.step, adf.count_isHouseholdHomeOwner, color = :red)
     tenants = scatterlines!(ax, adf.step, adf.count_isHouseholdTenant, color = :blue)
@@ -148,7 +148,7 @@ end
 
 function plot_unemployment_rate(adf, mdf)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Rate")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Rate", autolimitaspect = 1)
     unemployment_rates = Float64[]
     for idx in eachindex(adf.count_isHousehold)
         push!(unemployment_rates, adf.count_isHouseholdUnemployed[idx] / adf.count_isHousehold[idx])
@@ -192,7 +192,7 @@ end
 
 function plot_households_money_distribution(adf, mdf)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money", autolimitaspect = 1)
     all_lines = []
     all_legends = []
     for percentile in [1, 10, 20, 30, 40, 50, 60, 70, 80, 90]
@@ -208,7 +208,7 @@ end
 
 function plot_households_wealth_distribution(adf, mdf)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Wealth")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Wealth", autolimitaspect = 1)
     all_lines = []
     all_legends = []
     for percentile in [1, 10, 20, 30, 40, 50, 60, 70, 80, 90]
@@ -224,7 +224,7 @@ end
 
 function plot_households_size_distribution(adf, mdf)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Household Size")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Household Size", autolimitaspect = 1)
     all_lines = []
     all_legends = []
     for percentile in [1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
@@ -239,7 +239,7 @@ end
 
 function plot_households_age_distribution(adf, mdf)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Household Size")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Household Size", autolimitaspect = 1)
     all_lines = []
     all_legends = []
     for percentile in [1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
@@ -254,7 +254,7 @@ end
 
 function plot_taxes_and_subsidy_rates(adf, mdf)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Rates")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Rates", autolimitaspect = 1)
     subsidyRate = scatterlines!(ax, adf.step, mdf.subsidyRate, color = :black)
     irs = scatterlines!(ax, adf.step, mdf.irs, color = :blue)
     vat = scatterlines!(ax, adf.step, mdf.vat, color = :yellow)
@@ -265,7 +265,7 @@ end
 
 function plot_demographic_events(adf, mdf)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Volume")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Volume", autolimitaspect = 1)
     births = scatterlines!(ax, adf.step, mdf.births, color = :red)
     deaths = scatterlines!(ax, adf.step, mdf.deaths, color = :black)
     breakups = scatterlines!(ax, adf.step, mdf.breakups, color = :blue)
@@ -276,7 +276,7 @@ end
 
 function plot_taxes_and_subsidies_flow(adf, mdf)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money", autolimitaspect = 1)
     subsidiesPaid = scatterlines!(ax, adf.step, mdf.subsidiesPaid, color = :red)
     ivaCollected = scatterlines!(ax, adf.step, mdf.ivaCollected, color = :black)
     irsCollected = scatterlines!(ax, adf.step, mdf.irsCollected, color = :blue)
@@ -287,7 +287,7 @@ end
 
 function plot_salaries_and_expenses(adf, mdf)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money", autolimitaspect = 1)
     rawSalariesPaid = scatterlines!(ax, adf.step, mdf.rawSalariesPaid, color = :red)
     liquidSalariesReceived = scatterlines!(ax, adf.step, mdf.liquidSalariesReceived, color = :green)
     expensesReceived = scatterlines!(ax, adf.step, mdf.expensesReceived, color = :black)
@@ -297,7 +297,7 @@ end
 
 function plot_houses_prices_per_bucket(adf, mdf)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money", autolimitaspect = 1)
     
     bucket_1 = scatterlines!(ax, adf.step, mdf.bucket_1, color = :red)
     bucket_2 = scatterlines!(ax, adf.step, mdf.bucket_2, color = :green)
@@ -309,7 +309,7 @@ end
 
 function plot_houses_prices_per_region(adf, mdf)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money", autolimitaspect = 1)
     organizedPerRegion = Dict() # this will be filled with [[MeanValueForAmadoraStep1, ..Step2, ...Step3], [MeanValueForLisboaStep1, ...]]
     for location in HOUSE_LOCATION_INSTANCES
         organizedPerRegion[location] = Float32[]
@@ -338,7 +338,7 @@ end
 
 function plot_houses_prices_per_region_yearly(adf, mdf)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Year", ylabel = "Money")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Year", ylabel = "Money", autolimitaspect = 1)
     organizedPerRegion = Dict() # this will be filled with [[MeanValueForAmadoraStep1, ..Step2, ...Step3], [MeanValueForLisboaStep1, ...]]
     for location in HOUSE_LOCATION_INSTANCES
         organizedPerRegion[location] = Float32[]
@@ -372,7 +372,7 @@ end
 
 function plot_detailed_houses_prices_per_region(adf, mdf, location)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Price per m2")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Price per m2", autolimitaspect = 1)
     all_lines = []
     all_legends = []
     houses_prices_vv = [[transaction.price/transaction.area for transaction in v[location]] for v in mdf.transactions_per_region]
@@ -392,7 +392,7 @@ end
 
 function plot_rents_of_new_contracts_per_region(adf, mdf)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money", autolimitaspect = 1)
     organizedPerRegion = Dict() # this will be filled with [[MeanValueForAmadoraStep1, ..Step2, ...Step3], [MeanValueForLisboaStep1, ...]]
     for location in HOUSE_LOCATION_INSTANCES
         organizedPerRegion[location] = Float32[]
@@ -421,7 +421,7 @@ end
 
 function plot_rents_per_region(adf, mdf)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money", autolimitaspect = 1)
     organizedPerRegion = Dict()
     for location in HOUSE_LOCATION_INSTANCES
         organizedPerRegion[location] = Float32[]
@@ -444,7 +444,7 @@ function plot_number_of_houses_built_per_region(adf, mdf)
     figures = Dict(location => Figure() for location in HOUSE_LOCATION_INSTANCES)
     for location in HOUSE_LOCATION_INSTANCES
         figure = Figure(size = (600, 400))
-        ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Quantity")
+        ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Quantity", autolimitaspect = 1)
         lines = []
         sizes_intervals = []
         for size_interval in instances(SizeInterval)
@@ -465,7 +465,7 @@ end
 
 function plot_number_of_transactions_per_region(adf, mdf)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Quantity")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Quantity", autolimitaspect = 1)
     lines = []
     locations = []
     for location in HOUSE_LOCATION_INSTANCES
@@ -483,7 +483,7 @@ end
 
 function plot_number_of_newly_built_houses_for_sale(adf, mdf)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Quantity")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Quantity", autolimitaspect = 1)
     lines = []
     number_of_new_built_houses_for_sale_per_step = Int32[]
     for step in 1:NUMBER_OF_STEPS
@@ -497,7 +497,7 @@ end
 
 function plot_newly_built_houses_for_sale_size_distribution(adf, mdf)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Size")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Size", autolimitaspect = 1)
     all_lines = []
     all_legends = []
     houses_areas_vv = [[house.area for house in v] for v in mdf.newly_built_houses_for_sale]
@@ -517,7 +517,7 @@ end
 
 function plot_number_of_mortgages(adf, mdf)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Quantity")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Quantity", autolimitaspect = 1)
     lines = []
     number_of_mortgages = Int32[]
     for step in 1:NUMBER_OF_STEPS
@@ -531,7 +531,7 @@ end
 
 function plot_volume_of_lent_money(adf, mdf)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money", autolimitaspect = 1)
     lines = []
     money_lent = Float64[]
     for step in 1:NUMBER_OF_STEPS
@@ -545,7 +545,7 @@ end
 
 function plot_houses_for_sale_size_distribution(adf, mdf)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Size")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Size", autolimitaspect = 1)
     all_lines = []
     all_legends = []
     houses_areas_vv = [[house.area for house in v] for v in mdf.houses_for_sale]
@@ -565,7 +565,7 @@ end
 
 function plot_houses_for_sale_percentile_distribution(adf, mdf)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Size")
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Size", autolimitaspect = 1)
     all_lines = []
     all_legends = []
     houses_percentiles_vv = [[house.percentile for house in v] for v in mdf.houses_for_sale]
@@ -585,7 +585,7 @@ end
 
 # function plot_mortgages_median_values_regionally(adf, mdf)
 #     figure = Figure(size = (600, 400))
-#     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
+#     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money", autolimitaspect = 1)
     
 
 #     figure[1, 2] = Legend(figure, lines, locations)
@@ -594,7 +594,7 @@ end
 
 # function plot_mortgages_values_distribution(adf, mdf)
 #     figure = Figure(size = (600, 400))
-#     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
+#     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money", autolimitaspect = 1)
     
 #     figure[1, 2] = Legend(figure, lines, locations)
 #     figure
