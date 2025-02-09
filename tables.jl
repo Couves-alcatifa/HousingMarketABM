@@ -2,7 +2,8 @@ locationToIndex = Dict(HOUSE_LOCATION_INSTANCES[idx] => idx + 1 for idx in eachi
 
 function plot_simulated_results(x, simulated_y, real_y)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Quarter", ylabel = "Houses prices per m2", autolimitaspect = 1)
+    ax = figure[1, 1] = Axis(figure; xlabel = "Quarter", ylabel = "Houses prices per m2")
+    limits!(ax, (nothing, nothing), (0, max(simulated_y..., real_y...) * 1.5))
     simulated_houses_prices = scatterlines!(ax, x, simulated_y, color = :red)
     real_houses_prices = scatterlines!(ax, x, real_y, color = :blue)
     figure[1, 2] = Legend(figure, [simulated_houses_prices, real_houses_prices], ["Simulated House prices", "Real House Prices"])
@@ -11,7 +12,9 @@ end
 
 function plot_simulated_rents(x, simulated_y, real_y)
     figure = Figure(size = (600, 400))
-    ax = figure[1, 1] = Axis(figure; xlabel = "Semester", ylabel = "Rents per m2", autolimitaspect = 1)
+    ax = figure[1, 1] = Axis(figure; xlabel = "Semester", ylabel = "Rents per m2")
+    limits!(ax, (nothing, nothing), (0, max(simulated_y..., real_y...) * 1.5))
+    
     simulated_houses_prices = scatterlines!(ax, x, simulated_y, color = :red)
     real_houses_prices = scatterlines!(ax, x, real_y, color = :blue)
     figure[1, 2] = Legend(figure, [simulated_houses_prices, real_houses_prices], ["Simulated Rents", "Real Rents"])
