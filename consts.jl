@@ -117,24 +117,24 @@ const INITIAL_RENTAL_MARKET_PRICE_CUT = Dict(
 )
 
 const GREEDINESS_AVERAGE = Dict(
-    Amadora => 1.00,
-    Cascais => 1.00,
-    Lisboa => 1.00,
-    Loures => 1.00,
-    Mafra => 1.00,
-    Odivelas => 1.00,
-    Oeiras => 1.00,
-    Sintra => 1.00,
-    VilaFrancaDeXira => 1.00,
-    Alcochete => 1.00,
-    Almada => 1.00,
-    Barreiro => 1.00,
-    Moita => 1.00,
-    Montijo => 1.00,
-    Palmela => 1.00,
-    Seixal => 1.00,
-    Sesimbra => 1.00,
-    Setubal => 1.00,
+    Amadora => 1.05,
+    Cascais => 1.05,
+    Lisboa => 1.05,
+    Loures => 1.05,
+    Mafra => 1.05,
+    Odivelas => 1.05,
+    Oeiras => 1.05,
+    Sintra => 1.05,
+    VilaFrancaDeXira => 1.05,
+    Alcochete => 1.05,
+    Almada => 1.05,
+    Barreiro => 1.05,
+    Moita => 1.05,
+    Montijo => 1.05,
+    Palmela => 1.05,
+    Seixal => 1.05,
+    Sesimbra => 1.05,
+    Setubal => 1.05,
 )
 
 const GREEDINESS_STDEV = Dict(
@@ -223,9 +223,9 @@ const EXTRA_CONSUMER_SURPLUS_PER_REGION = Dict(
 
 const BIRTH_INCREASE_MULTIPLIER = 1.5
 
-const CONSUMER_SURPLUS_MIN = 0.80
+const CONSUMER_SURPLUS_MIN = 0.75
 const CONSUMER_SURPLUS_MAX = 1.10
-const CONSUMER_SURPLUS_MIN_FOR_RENT = 0.80
+const CONSUMER_SURPLUS_MIN_FOR_RENT = 0.75
 const CONSUMER_SURPLUS_MAX_FOR_RENT = 1.10
 const SALES_PERCENTILE_MULTIPLIER = 0.85
 
