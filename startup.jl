@@ -133,7 +133,6 @@ function assignHousesToHouseholds(model)
         zones_to_n_of_home_owners[household.residencyZone] += 1
         numberOfExtraHousesToAssign = shouldAssignMultipleHouses(model, household)
         assignHousesForRental(model, household, numberOfExtraHousesToAssign, houses_sizes_for_rental, houses_for_rental, number_of_houses_for_market)
-        assignExtraHouses(model, household, numberOfExtraHousesToAssign, extra_houses_sizes, houses_for_rental, number_of_houses_for_market)
     end
     LOG_INFO("Total Number of houses_for_rental = $(sum([length(houses_for_rental[location]) for location in HOUSE_LOCATION_INSTANCES]))")
     for i in 1:nagents(model)
