@@ -149,22 +149,6 @@ function assignHousesToHouseholds(model)
 
 end
 
-function print_household(household)
-    res = "Household id = $(household.id)\n"
-    res *= "Household wealth = $(household.wealth)\n"
-    res *= "Household age = $(household.age)\n"
-    res *= "Household size = $(household.size)\n"
-    res *= "Household houses = $(household.houses)\n"
-    res *= "Household percentile = $(household.percentile)\n"
-    res *= "Household mortgages = $(household.mortgages)\n"
-    res *= "Household contractsAsLandlord = $(household.contractsAsLandlord)\n"
-    res *= "Household contractAsTenant = $(household.contractAsTenant)\n" #
-    res *= "Household wealthInHouses = $(household.wealthInHouses)\n"
-    res *= "Household residencyZone = $(household.residencyZone)\n"
-    res *= "Household homelessTime = $(household.homelessTime)\n"
-    return res
-end
-
 function createContract(model, household, houses_for_rental)
     for idx in eachindex(houses_for_rental[household.residencyZone])
         house = houses_for_rental[household.residencyZone][idx][1]

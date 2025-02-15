@@ -139,17 +139,14 @@ function getChildResidencyZone(household)
 end
 
 
-# TODO: region hack
 function handle_migrations(model)
     for location in HOUSE_LOCATION_INSTANCES
-        expectedMigrants = migrationValueMap[location] / 12
-        stdev = expectedMigrants * 0.5
-        if stdev < 0
-            stdev *= -1
-        end
-        expectedMigrants = rand(Normal(expectedMigrants, stdev))
+        expectedImigrants = imigrationValueMap[location] / 12
+        stdev = expectedImigrants * 0.2
+
+        expectedImigrants = rand(Normal(expectedImigrants, stdev))
         added = 0
-        while added < expectedMigrants
+        while added < expectedImigrants
             age = rand(20:55)
             percentile = Int64(round(rand(Normal(30, 20))))
             if percentile <= 0
@@ -169,4 +166,39 @@ function handle_migrations(model)
             added += size
         end
     end
+
+    for location in HOUSE_LOCATION_INSTANCES
+        immigrants = imigrationValueMap[location]
+        balance = migrationBalanceMap[location] * NUMBER_OF_HOUSEHOLDS_MAP[location]
+        expectedEmigrants = (immigrants - balance) / 12
+        stdev = expectedEmigrants * 0.2
+
+        expectedEmigrants = rand(Normal(expectedEmigrants, stdev))
+        removed = 0
+        for household in allagents(model)
+            if removed >= expectedEmigrants
+                break
+            end
+
+            if shouldEmmigrate(model, household)
+                terminateContractsOnTentantSide(household, model)
+                terminateContractsOnLandLordSide(household, model)
+                push!(model.inheritages, Inheritage(household.houses, household.wealth, household.mortgages, household.percentile))
+                # gov takes the wealth
+                model.government.wealth += household.wealth
+                model.inheritagesFlow += household.wealth
+                TRANSACTION_LOG("Removed agent due to emmigration $(print_household(household))\n", model)
+                remove_agent!(household, model)
+                removed += 1
+            end
+        end
+    end
+end
+
+function shouldEmmigrate(model, household)
+    if household.age < 25
+        return false
+    end
+    value = household.percentile + household.age
+    return rand() < map_value(value, 26, 170, -0.5, -0.01) * -1
 end

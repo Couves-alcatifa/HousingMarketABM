@@ -1074,7 +1074,7 @@ const NUMBER_OF_HOUSEHOLDS_MAP = Dict(
 )
 
 # AER2022_II_01_Pessoas_e_populacao.xlsx
-const migrationValueMap = Dict(
+const migrationBalanceMap = Dict(
     Alcochete => (1.36 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Alcochete],
     Almada => (0.45 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Almada],
     Amadora => (0.74 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Amadora],
@@ -1093,6 +1093,28 @@ const migrationValueMap = Dict(
     Setubal => (-0.06 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Setubal],
     Sintra => (0.21 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Sintra],
     VilaFrancaDeXira => (0.18 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[VilaFrancaDeXira],
+)
+
+# AER2022_II_01_Pessoas_e_populacao.xlsx
+const imigrationValueMap = Dict(
+    Alcochete => 177 * MODEL_SCALE,
+    Almada => 3810 * MODEL_SCALE,
+    Amadora => 4629 * MODEL_SCALE,
+    Barreiro => 1308 * MODEL_SCALE,
+    Cascais => 5774 * MODEL_SCALE,
+    Lisboa => 25169 * MODEL_SCALE,
+    Loures => 4544 * MODEL_SCALE,
+    Mafra => 1284 * MODEL_SCALE,
+    Moita => 1063 * MODEL_SCALE,
+    Montijo => 1164 * MODEL_SCALE,
+    Odivelas => 4738 * MODEL_SCALE,
+    Oeiras => 2762 * MODEL_SCALE,
+    Palmela => 609 * MODEL_SCALE,
+    Seixal => 2881 * MODEL_SCALE,
+    Sesimbra => 543 * MODEL_SCALE,
+    Setubal => 2001 * MODEL_SCALE,
+    Sintra => 7733 * MODEL_SCALE,
+    VilaFrancaDeXira => 1628 * MODEL_SCALE,
 )
 
 const PROBABILITY_OF_DIVORCE_MAP = Dict(
