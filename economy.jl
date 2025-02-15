@@ -676,6 +676,9 @@ for location in HOUSE_LOCATION_INSTANCES
 end
 
 save("$output_folder/number_of_transactions_per_region.png", plot_number_of_transactions_per_region(agent_data[2:end, :], model_data[2:end, :]))
+save("$output_folder/number_of_transactions_per_region_yearly.png", plot_number_of_transactions_per_region_yearly(agent_data[2:end, :], model_data[2:end, :]))
+save("$output_folder/number_of_new_contracts_per_region.png", plot_number_of_new_contracts_per_region(agent_data[2:end, :], model_data[2:end, :]))
+save("$output_folder/number_of_new_contracts_per_region_yearly.png", plot_number_of_new_contracts_per_region_yearly(agent_data[2:end, :], model_data[2:end, :]))
 save("$output_folder/number_of_newly_built_houses_for_sale.png", plot_number_of_newly_built_houses_for_sale(agent_data[2:end, :], model_data[2:end, :]))
 save("$output_folder/newly_built_houses_for_sale_size_distribution.png", plot_newly_built_houses_for_sale_size_distribution(agent_data[2:end, :], model_data[2:end, :]))
 save("$output_folder/number_of_mortgages.png", plot_number_of_mortgages(agent_data[2:end, :], model_data[2:end, :]))

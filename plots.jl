@@ -419,6 +419,47 @@ function plot_rents_of_new_contracts_per_region(adf, mdf)
     figure
 end
 
+function plot_number_of_new_contracts_per_region(adf, mdf)
+    figure = Figure(size = (600, 400))
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Quantity")
+    lines = []
+    locations = []
+    for location in HOUSE_LOCATION_INSTANCES
+        regional_number_of_contracts = Int32[]
+        for step in 1:NUMBER_OF_STEPS
+            push!(regional_number_of_contracts, length(mdf.rents_per_region[step][location]))
+        end
+        push!(lines, scatterlines!(ax, adf.step, regional_number_of_contracts, color = color_map[location]))
+        push!(locations, string(location))
+    end
+
+    figure[1, 2] = Legend(figure, lines, locations)
+    figure
+end
+
+function plot_number_of_new_contracts_per_region_yearly(adf, mdf)
+    figure = Figure(size = (600, 400))
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Quantity")
+    lines = []
+    locations = []
+    for location in HOUSE_LOCATION_INSTANCES
+        regional_number_of_contracts = Int32[]
+        yearly_number_of_contracts = 0
+        for step in 1:NUMBER_OF_STEPS
+            yearly_number_of_contracts += length(mdf.rents_per_region[step][location])
+            if step % 12 == 0
+                push!(regional_number_of_contracts, yearly_number_of_contracts)
+                yearly_number_of_contracts = 0
+            end
+        end
+        push!(lines, scatterlines!(ax, 1:length(regional_number_of_contracts), regional_number_of_contracts, color = color_map[location]))
+        push!(locations, string(location))
+    end
+
+    figure[1, 2] = Legend(figure, lines, locations)
+    figure
+end
+
 function plot_rents_per_region(adf, mdf)
     figure = Figure(size = (600, 400))
     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Money")
@@ -474,6 +515,29 @@ function plot_number_of_transactions_per_region(adf, mdf)
             push!(regional_number_of_transaction, length(mdf.transactions_per_region[step][location]))
         end
         push!(lines, scatterlines!(ax, adf.step, regional_number_of_transaction, color = color_map[location]))
+        push!(locations, string(location))
+    end
+
+    figure[1, 2] = Legend(figure, lines, locations)
+    figure
+end
+
+function plot_number_of_transactions_per_region_yearly(adf, mdf)
+    figure = Figure(size = (600, 400))
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Quantity")
+    lines = []
+    locations = []
+    for location in HOUSE_LOCATION_INSTANCES
+        regional_number_of_transaction = Int32[]
+        yearly_number_of_transactions = 0
+        for step in 1:NUMBER_OF_STEPS
+            yearly_number_of_transactions += length(mdf.transactions_per_region[step][location])
+            if step % 12 == 0
+                push!(regional_number_of_transaction, yearly_number_of_transactions)
+                yearly_number_of_transactions = 0
+            end
+        end
+        push!(lines, scatterlines!(ax, 1:length(regional_number_of_transaction), regional_number_of_transaction, color = color_map[location]))
         push!(locations, string(location))
     end
 
