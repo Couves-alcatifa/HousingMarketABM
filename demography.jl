@@ -169,7 +169,7 @@ function handle_migrations(model)
 
     for location in HOUSE_LOCATION_INSTANCES
         immigrants = imigrationValueMap[location]
-        balance = migrationBalanceMap[location] * NUMBER_OF_HOUSEHOLDS_MAP[location]
+        balance = migrationBalanceMap[location]
         expectedEmigrants = (immigrants - balance) / 12
         stdev = expectedEmigrants * 0.2
 
