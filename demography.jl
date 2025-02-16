@@ -192,7 +192,7 @@ function handle_migrations(model)
                 model.inheritagesFlow += household.wealth
                 TRANSACTION_LOG("Removed agent due to emmigration $(print_household(household))\n", model)
                 remove_agent!(household, model)
-                removed += 1
+                removed += household.size
             end
         end
     end
