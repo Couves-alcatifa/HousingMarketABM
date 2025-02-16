@@ -171,6 +171,9 @@ function handle_migrations(model)
         immigrants = imigrationValueMap[location]
         balance = migrationBalanceMap[location]
         expectedEmigrants = (immigrants - balance) / 12
+        println("immigrants = $immigrants")
+        println("balance = $balance")
+        println("expectedEmigrants = $expectedEmigrants")
         stdev = expectedEmigrants * 0.2
 
         expectedEmigrants = rand(Normal(expectedEmigrants, stdev))
