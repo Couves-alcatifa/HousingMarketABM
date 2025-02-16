@@ -130,8 +130,8 @@ function wealth_model()
         :housesInfo => Dict(),
         :nonResidentHousehold => NonResident(-1, 0, 0, 0, [], 0, [], [], Nothing, 0, Lisboa, 0, 0),
         :unemploymentRate => STARTING_UNEMPLOYMENT_RATE,
-        :expectedBirths => NUMBER_OF_HOUSEHOLDS * BIRTH_RATE,
-        :expectedDeaths => NUMBER_OF_HOUSEHOLDS * MORTALITY_RATE,
+        :expectedBirths => (NUMBER_OF_HOUSEHOLDS * BIRTH_RATE) / 12,
+        :expectedDeaths => (NUMBER_OF_HOUSEHOLDS * MORTALITY_RATE) / 12,
     )
 
     model = StandardABM(MyMultiAgent; agent_step! = agent_step!, model_step! = model_step!, properties,scheduler = Schedulers.Randomly())
@@ -163,8 +163,10 @@ end
 function model_step!(model)
     LOG_INFO("Model step $(model.steps + 1) started")
     start_time = time()
-    model.expectedBirths = rand(Normal(BIRTH_RATE * nagents(model), 0.1 * BIRTH_RATE * nagents(model)))
-    model.expectedDeaths = rand(Normal(MORTALITY_RATE * nagents(model), 0.1 * MORTALITY_RATE * nagents(model)))
+    expectedBirths = (BIRTH_RATE * nagents(model)) / 12
+    expectedDeaths = (MORTALITY_RATE * nagents(model)) / 12
+    model.expectedBirths = rand(Normal(expectedBirths, 0.1 * expectedBirths))
+    model.expectedDeaths = rand(Normal(expectedDeaths, 0.1 * expectedDeaths))
     handleNonResidentsDemand(model)
     measureSupplyAndDemandRegionally(model)
     model.steps += 1
