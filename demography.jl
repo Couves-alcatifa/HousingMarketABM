@@ -148,19 +148,20 @@ function handle_migrations(model)
         added = 0
         while added < expectedImigrants
             age = rand(20:55)
-            percentile = Int64(round(rand(Normal(30, 20))))
-            if percentile <= 0
-                percentile = 1
-            elseif percentile > 100
-                percentile = 100
-            elseif percentile > 75
-                # part of the very rich immigrants
-                percentile = rand(95:100)
-            end
+            percentile = rand(1:100)
+            # percentile = Int64(round(rand(Normal(30, 20))))
+            # if percentile <= 0
+            #     percentile = 1
+            # elseif percentile > 100
+            #     percentile = 100
+            # elseif percentile > 75
+            #     # part of the very rich immigrants
+            #     percentile = rand(95:100)
+            # end
             size = rand(1:3)
             wealth = generateInitialWealth(age, percentile, size, location)
-            add_household(model, wealth, age, size, location, percentile=percentile)
-            content = "generated agent $(nagents(model)) from migration wealth = $wealth\n"
+            newHousehold = add_household(model, wealth, age, size, location, percentile=percentile)
+            content = "generated agent from migration $(print_household(newHousehold))\n"
             TRANSACTION_LOG(content, model)
 
             added += size

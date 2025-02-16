@@ -1497,7 +1497,7 @@ function add_household(model, wealth, age, size, residencyZone; percentile = Not
     if percentile == Nothing
         percentile = rand(1:100)
     end
-    add_agent!(Household, model, wealth, age, size, houses, percentile, 
+    return add_agent!(Household, model, wealth, age, size, houses, percentile, 
                mortgages, contractsAsLandlord, contractAsTenant, wealthInHouses,
                residencyZone, homelessTime, unemployedTime, houseRequirements)
 end
