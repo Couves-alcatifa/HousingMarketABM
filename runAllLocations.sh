@@ -1,8 +1,8 @@
 # locations=("Amadora" "Cascais" "Lisboa" "Loures" "Mafra" "Odivelas" "Oeiras" "Sintra" "VilaFrancaDeXira" "Alcochete" "Almada" "Barreiro" "Moita" "Montijo" "Palmela" "Seixal" "Sesimbra" "Setubal")
 # locations=("Lisboa" "Loures" "Sintra" "VilaFrancaDeXira" "Alcochete" "Almada" "Barreiro" "Montijo" "Palmela" "Seixal" "Sesimbra")
-locations=("Moita" "Setubal" "Amadora" "Oeiras" "Mafra" "Odivelas" "Cascais")
+# locations=("Moita" "Setubal" "Amadora" "Oeiras" "Mafra" "Odivelas" "Cascais")
 # locations=("Seixal" "Sesimbra" "Moita")
-# locations=("Barreiro")
+locations=("Odivelas")
 for location in ${locations[@]}
 do
     python generateScope.py $location
