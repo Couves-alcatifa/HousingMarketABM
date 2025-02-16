@@ -14,6 +14,9 @@ function household_evolution(household, model)
 end
 
 function handle_births(household, model)
+    if model.births >= model.expectedBirths
+        return false
+    end
     if (household.age >= 20 && household.age < 44  && household.size >= 2)
         probability = BIRTH_RATE
         ratioOfFertileWomen = RATIO_OF_FERTILE_WOMEN_MAP[household.residencyZone]
@@ -34,6 +37,9 @@ end
 
 # returns true if household died
 function handle_deaths(household, model)
+    if model.deaths >= model.expectedDeaths
+        return false
+    end
     probability_of_death = 0.0005 + 10^(-4.3+0.034*household.age)
     # if (household.age < 60)
     #     return false
