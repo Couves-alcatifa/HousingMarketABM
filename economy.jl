@@ -53,15 +53,15 @@ function calculate_non_housing_consumption(household, income)
     if income / size > EXPENSES_MINIMUM_VALUE
         expenses += (income / size - EXPENSES_MINIMUM_VALUE)  * size * (EXPENSES_EXTRA_MINIMUM + rand() * EXPENSES_EXTRA_OFFSET)
     end
-    if is_home_owner(household) && wealth > 50000
-        expenses += sqrt(wealth) * 10
-    end
-    if is_home_owner(household) && wealth > 1000000
-        expenses += sqrt(wealth) * 20
-    end
-    if is_home_owner(household) && wealth > 5000000
-        expenses += cbrt(wealth) * cbrt(wealth) * 20
-    end
+    # if is_home_owner(household) && wealth > 50000
+    #     expenses += sqrt(wealth) * 10
+    # end
+    # if is_home_owner(household) && wealth > 1000000
+    #     expenses += sqrt(wealth) * 20
+    # end
+    # if is_home_owner(household) && wealth > 5000000
+    #     expenses += cbrt(wealth) * cbrt(wealth) * 20
+    # end
     return expenses
     # if (income * 0.6 > 500)
     #     return rand(500:Int64(round(income * 0.7)))
@@ -458,7 +458,7 @@ function home_owner_decisions(household, model)
         sampleHouse = House(rand(60:100), household.residencyZone, NotSocialNeighbourhood, 1.0, rand(50:100))
         marketPrice = calculate_market_price(model, sampleHouse)
         mortgage = maxMortgageValue(model, household)
-        if household.wealth + mortgage > marketPrice * 3
+        if household.wealth + mortgage > marketPrice * 1.5 && rand() < 0.05
             if decideToRent(household, model, sampleHouse)
                 TRANSACTION_LOG("Household $(household.id) decided to invest in rental\n", model)
                 push!(model.houseMarket.demand, HouseDemand(household.id, SupplyMatch[], ForRental))
