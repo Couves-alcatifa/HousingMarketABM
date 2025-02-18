@@ -54,7 +54,7 @@ function initiateHouseholds(model, households_initial_ages)
                 end
                 initial_age = households_initial_ages[1]
                 splice!(households_initial_ages, 1)
-                percentile = rand(0:100)
+                percentile = rand(1:100)
                 actualSize = get_household_size(size)
                 unemployedTime = 0
                 if rand() < model.unemploymentRate

@@ -1163,6 +1163,18 @@ function getSizeInterval(house)
     return size_interval
 end
 
+function getSizeIntervalForHousehold(household)
+    if household.size <= 2
+        return LessThan50
+    elseif household.size in [2,3]
+        return LessThan75
+    elseif household.size in [3, 4]
+        return LessThan125
+    else
+        return More
+    end
+end
+
 function calculateHouseAnnualRentalRentability(house, model)
     marketPrice = calculate_market_price(model, house)
     rent = calculate_rental_market_price(house, model)

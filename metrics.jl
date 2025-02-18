@@ -238,7 +238,18 @@ company_wealth(model) = model.company_wealth
 bank_wealth(model) = model.bank.wealth
 construction_wealth(model) = model.construction_sector.wealth
 supply_volume(model) = copy(model.supply_size)
-demand_volume(model) = copy(model.demand_size)
+function demand_volume(model)
+    for householdId in model.householdsInDemand
+        if !hasid(model, householdId)
+            continue
+        end
+        household = model[householdId]
+        if (!canHouseholdBuyHouse(model, household, getSizeIntervalForHousehold(household)))
+            continue
+        end
+        model.demand_size += 1
+    end
+end
 
 rental_supply_volume(model) = copy(model.rental_supply_size)
 rental_demand_volume(model) = copy(model.rental_demand_size)

@@ -206,9 +206,13 @@ function handle_migrations(model)
 end
 
 function shouldEmmigrate(model, household)
+    if length(household.houses) > 1
+        return false
+    end
     if household.age < 25
         return false
     end
+    housesFactor = length(household.houses) > 0 ? 50 : 0
     value = household.percentile + household.age
-    return rand() < map_value(value, 26, 170, -0.5, -0.01) * -1
+    return rand() < map_value(value, 26, 220, -0.5, -0.01) * -1
 end
