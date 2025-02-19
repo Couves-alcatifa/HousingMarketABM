@@ -947,6 +947,9 @@ function measureSupplyAndDemandRegionally(model)
             continue
         end
         household = model[demand.householdId]
+        if (!canHouseholdBuyHouse(model, household, getSizeIntervalForHousehold(household)))
+            continue
+        end
         model.demand_size[household.residencyZone] += 1
     end
     for supply in model.houseMarket.supply
