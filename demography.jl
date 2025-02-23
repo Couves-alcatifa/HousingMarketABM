@@ -183,25 +183,25 @@ function handle_migrations(model)
         println("expectedEmigrants = $expectedEmigrants")
         stdev = expectedEmigrants * 0.2
 
-        # expectedEmigrants = rand(Normal(expectedEmigrants, stdev))
-        # removed = 0
-        # for household in allagents(model)
-        #     if removed >= expectedEmigrants
-        #         break
-        #     end
+        expectedEmigrants = rand(Normal(expectedEmigrants, stdev))
+        removed = 0
+        for household in allagents(model)
+            if removed >= expectedEmigrants
+                break
+            end
 
-        #     if shouldEmmigrate(model, household)
-        #         terminateContractsOnTentantSide(household, model)
-        #         terminateContractsOnLandLordSide(household, model)
-        #         push!(model.inheritages, Inheritage(household.houses, household.wealth, household.mortgages, household.percentile))
-        #         # gov takes the wealth
-        #         model.government.wealth += household.wealth
-        #         model.inheritagesFlow += household.wealth
-        #         TRANSACTION_LOG("Removed agent due to emmigration $(print_household(household))\n", model)
-        #         remove_agent!(household, model)
-        #         removed += household.size
-        #     end
-        # end
+            if shouldEmmigrate(model, household)
+                terminateContractsOnTentantSide(household, model)
+                terminateContractsOnLandLordSide(household, model)
+                push!(model.inheritages, Inheritage(household.houses, household.wealth, household.mortgages, household.percentile))
+                # gov takes the wealth
+                model.government.wealth += household.wealth
+                model.inheritagesFlow += household.wealth
+                TRANSACTION_LOG("Removed agent due to emmigration $(print_household(household))\n", model)
+                remove_agent!(household, model)
+                removed += household.size
+            end
+        end
     end
 end
 

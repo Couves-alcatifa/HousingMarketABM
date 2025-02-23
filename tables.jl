@@ -290,7 +290,7 @@ function generate_demographic_table(adf, mdf)
     cummulativeBirthRate = 0
     cummulativeDeathRate = 0
     cummulativeDivorceRate = 0
-    for step in 1:length(adf.time)
+    for step in 1:length(adf.step)
         cummulativeBirthRate += (births[step] / n_of_households[step]) * 1000
         cummulativeDeathRate += (deaths[step] / n_of_households[step]) * 1000
         cummulativeDivorceRate += (breakups[step] / n_of_households[step])* 1000

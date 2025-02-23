@@ -124,6 +124,7 @@ mutable struct Transaction
     area
     price
     location
+    percentile
 end
 
 @enum DemandType begin

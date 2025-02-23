@@ -405,7 +405,7 @@ function clearHouseMarket(model)
                 if supply.house.percentile < 75
                     continue
                 end
-                bid = supply.price * rand(Normal(1.05, 0.05))
+                bid = supply.price # * rand(Normal(1.05, 0.05))
                 bidToAskPriceRatio = bid / supply.price
                 lock(localLock) do
                     push!(supply.bids, Bid(bid, demand.householdId, demand.type))
@@ -671,11 +671,11 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     model.government.wealth += transactionTaxes
     push!(household.houses, supply.house)
     terminateContractsOnTentantSide(household, model)
-    if winningBid.type != NonResidentDemand
+    # if winningBid.type != NonResidentDemand
         addTransactionToBuckets(model, supply.house, bidValue)
-        push!(model.transactions, Transaction(supply.house.area, bidValue, supply.house.location))
-        push!(model.transactions_per_region[supply.house.location][model.steps], Transaction(supply.house.area, bidValue, supply.house.location))
-    end
+        push!(model.transactions, Transaction(supply.house.area, bidValue, supply.house.location, supply.house.percentile))
+        push!(model.transactions_per_region[supply.house.location][model.steps], Transaction(supply.house.area, bidValue, supply.house.location, supply.house.percentile))
+    # end
     push!(householdsWhoBoughtAHouse, highestBidder)
     
     previousPurchasePrice = getPreviousPurchasePrice(model, supply.house)
@@ -786,7 +786,7 @@ function rent_house(model, supply::RentalSupply)
     push!(seller.contractsAsLandlord, contract)
     addTransactionToRentalBuckets(model, supply.house, actualBid)
     if model.steps > 0
-        push!(model.rents_per_region[supply.house.location][model.steps], Transaction(supply.house.area, actualBid, supply.house.location))
+        push!(model.rents_per_region[supply.house.location][model.steps], Transaction(supply.house.area, actualBid, supply.house.location, supply.house.percentile))
     end
     return true
 end
