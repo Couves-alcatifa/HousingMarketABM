@@ -1,4 +1,7 @@
 # using Pkg ; Pkg.add("Agents") ; 
+# using Pkg
+# ] add Agents @6.0
+# Pkg.add("JSON") ; Pkg.add("PyCall")
 # Pkg.add("Distributions") ; Pkg.add("Random") ; 
 # Pkg.add("CairoMakie") ; Pkg.add("CSV") ; Pkg.add("Statistics")
 
