@@ -2,12 +2,12 @@ include("types.jl")
 include("calibrationTable.jl")
 include("valueConverter.jl")
 
-const NUMBER_OF_STEPS = 96
+const NUMBER_OF_STEPS = 36
 const ORIGINAL_YEAR = 2021
 const ORIGINAL_MONTH = 1
-const CURRENT_YEAR = 2012
+const CURRENT_YEAR = 2021
 const CURRENT_MONTH = 1
-const CRASH_SCENARIO = true
+const CRASH_SCENARIO = false
 
 const STARTING_GOV_WEALTH_PER_CAPITA = 100000.0
 const STARTING_COMPANY_WEALTH_PER_CAPITA = 60000.0
