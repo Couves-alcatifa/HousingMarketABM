@@ -2,7 +2,7 @@ include("types.jl")
 include("calibrationTable.jl")
 include("valueConverter.jl")
 
-const NUMBER_OF_STEPS = 12
+const NUMBER_OF_STEPS = 96
 const ORIGINAL_YEAR = 2021
 const ORIGINAL_MONTH = 1
 const CURRENT_YEAR = 2012
