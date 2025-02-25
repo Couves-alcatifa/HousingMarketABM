@@ -2,7 +2,7 @@
 locations=("Lisboa" "Loures" "Sintra" "VilaFrancaDeXira" "Alcochete" "Almada" "Barreiro" "Montijo" "Palmela" "Seixal" "Sesimbra")
 # locations=("Moita" "Setubal" "Amadora" "Oeiras" "Mafra" "Odivelas" "Cascais")
 # locations=("Sesimbra" "Moita" "Seixal")
-# locations=("Odivelas" "Cascais")
+locations=("Loures" "Sintra" "VilaFrancaDeXira" "Alcochete" "Almada" "Barreiro" "Montijo" "Palmela" "Seixal" "Sesimbra")
 for location in ${locations[@]}
 do
     python generateScope.py $location
