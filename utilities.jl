@@ -1305,7 +1305,7 @@ function handleNonResidentsDemand(model)
 end
 
 function handleNonResidentsSupply(model)
-    housesToSell = Int64(round(model.nonResidentHousehold.houses * PERCENTAGE_OF_HOUSES_SOLD_BY_NON_RESIDENTS))
+    housesToSell = Int64(round(length(model.nonResidentHousehold.houses) * PERCENTAGE_OF_HOUSES_SOLD_BY_NON_RESIDENTS))
     sort!(model.nonResidentHousehold.houses, lt=sortRandomly)
     idx = 1
     while idx < length(model.nonResidentHousehold.houses)
