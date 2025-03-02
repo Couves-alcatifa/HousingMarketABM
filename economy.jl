@@ -344,7 +344,7 @@ function put_house_to_rent_at_old_value(household::MyMultiAgent, model, house)
 end
 
 
-function put_house_to_sale(household::MyMultiAgent, model, index; shouldPayAddedValue = false)
+function put_house_to_sale(household, model, index; shouldPayAddedValue = false)
     house = household.houses[index]
     price = calculate_market_price(model, house) * rand(Normal(GREEDINESS_AVERAGE[house.location], GREEDINESS_STDEV[house.location]))
     push!(model.houseMarket.supply, HouseSupply(house, price, Bid[], household.id))
