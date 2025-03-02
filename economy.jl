@@ -171,6 +171,7 @@ function model_step!(model)
     model.expectedBirths = rand(Normal(expectedBirths, 0.1 * expectedBirths))
     model.expectedDeaths = rand(Normal(expectedDeaths, 0.1 * expectedDeaths))
     handleNonResidentsDemand(model)
+    handleNonResidentsSupply(model)
     measureSupplyAndDemandRegionally(model)
     model.steps += 1
     for location in HOUSE_LOCATION_INSTANCES

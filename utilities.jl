@@ -1304,6 +1304,20 @@ function handleNonResidentsDemand(model)
     end
 end
 
+function handleNonResidentsSupply(model)
+    housesToSell = Int64(round(model.nonResidentHousehold.houses * PERCENTAGE_OF_HOUSES_SOLD_BY_NON_RESIDENTS))
+    sort!(model.nonResidentHousehold.houses, lt=sortRandomly)
+    idx = 1
+    while idx < length(model.nonResidentHousehold.houses)
+        if housesToSell == 0
+            break
+        end
+        put_house_to_sale(model.nonResidentHousehold, model, idx)
+        idx += 1
+        housesToSell -= 1
+    end
+end
+
 
 function generateAreaFromSizeInterval(size_interval)
     area = 0
