@@ -1062,18 +1062,18 @@ function clearHangingSupplies(model)
     start_time = time()
     i = 1
     while i <= length(model.houseMarket.supply)
-        if model.houseMarket.supply[i].sellerId == -1
+        if model.houseMarket.supply[i].sellerId == -1 ||  model.houseMarket.supply[i].sellerId == -2
             i += 1
-            # construction sector -> we don't want to remove the supply
+            # construction sector or non residents -> we don't want to remove the supply
             continue
         end
-        try
-            model[model.houseMarket.supply[i].sellerId]
-            i += 1
-        catch
+        if !hasid(model, model.houseMarket.supply[i].sellerId)
             supply = model.houseMarket.supply[i]
             push!(model.inheritages, Inheritage([supply.house], 0, Mortgage[], rand(1:100)))
             splice!(model.houseMarket.supply, i)
+        else
+            model[model.houseMarket.supply[i].sellerId]
+            i += 1
         end
     end
     LOG_INFO("clearHangingSupplies took $(time() - start_time)")
