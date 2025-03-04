@@ -554,7 +554,7 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     seller = nothing
     if supply.sellerId == -1
         seller = model.construction_sector
-    if supply.sellerId == -2
+    elseif supply.sellerId == -2
         seller = model.nonResidentHousehold
     else
         seller = model[supply.sellerId]
