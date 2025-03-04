@@ -554,6 +554,8 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     seller = nothing
     if supply.sellerId == -1
         seller = model.construction_sector
+    if supply.sellerId == -2
+        seller = model.nonResidentHousehold
     else
         seller = model[supply.sellerId]
     end
@@ -657,7 +659,7 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     content *= "Transaction: contracts as landlord = $(household.contractsAsLandlord)\n"
     content *= "Transaction: contract as tenant = $(household.contractAsTenant)\n"
     content *= "Transaction: bid to ask price ratio = $(bidValue / supply.price)\n"
-    if supply.sellerId != -1
+    if supply.sellerId > 0
         content *= "Transaction: seller contracts as landlord = $(seller.contractsAsLandlord)\n"
         content *= "Transaction: seller contract as tenant = $(seller.contractAsTenant)\n"
     end
@@ -1306,12 +1308,14 @@ end
 
 function handleNonResidentsSupply(model)
     housesToSell = Int64(round(length(model.nonResidentHousehold.houses) * PERCENTAGE_OF_HOUSES_SOLD_BY_NON_RESIDENTS))
+    println("NonResidents: housesToSell = $housesToSell")
     sort!(model.nonResidentHousehold.houses, lt=sortRandomly)
     idx = 1
     while idx < length(model.nonResidentHousehold.houses)
         if housesToSell == 0
             break
         end
+        println("put_house_to_sale(model.nonResidentHousehold, model, idx)")
         put_house_to_sale(model.nonResidentHousehold, model, idx)
         idx += 1
         housesToSell -= 1
