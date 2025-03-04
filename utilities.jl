@@ -554,7 +554,7 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     seller = nothing
     if supply.sellerId == -1
         seller = model.construction_sector
-    elseif supply.sellerId == -2
+    elseif supply.sellerId < 0
         seller = model.nonResidentHousehold
     else
         seller = model[supply.sellerId]
@@ -1062,7 +1062,7 @@ function clearHangingSupplies(model)
     start_time = time()
     i = 1
     while i <= length(model.houseMarket.supply)
-        if model.houseMarket.supply[i].sellerId == -1 ||  model.houseMarket.supply[i].sellerId == -2
+        if model.houseMarket.supply[i].sellerId < 0
             i += 1
             # construction sector or non residents -> we don't want to remove the supply
             continue
@@ -1317,7 +1317,6 @@ function handleNonResidentsSupply(model)
         end
         println("put_house_to_sale(model.nonResidentHousehold, model, idx)")
         put_house_to_sale(model.nonResidentHousehold, model, idx)
-        idx += 1
         housesToSell -= 1
     end
 end
