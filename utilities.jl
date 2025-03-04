@@ -140,6 +140,9 @@ function calculateRentalBid(household, model, askPrice, consumerSurplus)
     # multiplier = multiplier <= 1.25 ? multiplier : 1.25
     multiplier = 1
     maxEffort = MAX_EFFORT_FOR_RENT * multiplier
+    if RentSubsidy in CURRENT_POLICIES
+        maxEffort = maxEffort * (1 + RENT_SUBSIDY)
+    end
     demandValue = calculateLiquidSalary(household, model) * maxEffort
     consumerSurplusMultiplier = calculateConsumerSurplusAddedValueForRent(consumerSurplus)
     if (demandValue >= askPrice * consumerSurplusMultiplier)

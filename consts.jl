@@ -1,6 +1,7 @@
 include("types.jl")
 include("calibrationTable.jl")
 include("valueConverter.jl")
+include("policies.jl")
 
 const NUMBER_OF_STEPS = 36
 const ORIGINAL_YEAR = 2021
@@ -57,9 +58,13 @@ const IRS = 0.2
 const VAT = 0.15
 const SOCIAL_SECURITY_TAX = 0.11
 const MAX_EFFORT_FOR_RENT = 0.50
-const CONSTRUCTION_DELAY_MIN = 24
-const CONSTRUCTION_DELAY_MAX = 48
-const CONSTRUCTION_VAT = 0.23
+const CONSTRUCTION_DELAY_MIN = (ConstructionLicensingSimplification in CURRENT_POLICIES 
+                                ? REDUCED_PERMIT_TIME_MIN 
+                                : 24)
+const CONSTRUCTION_DELAY_MAX = (ConstructionLicensingSimplification in CURRENT_POLICIES
+                                ? REDUCED_PERMIT_TIME_MAX
+                                : 48)
+const CONSTRUCTION_VAT = ConstructionVatReduction in CURRENT_POLICIES ? REDUCED_VAT : 0.23
 
 # based on: https://www.habitissimo.pt/orcamentos/construcao-de-casa
 const CONSTRUCTION_COSTS_MIN = adjust_value_to_inflation(1200 / (1 + CONSTRUCTION_VAT)) # to be multiplied by the area of the house

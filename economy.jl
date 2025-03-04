@@ -16,7 +16,12 @@ using Dates
 include("consts.jl")
 const SEED = 123456
 const this_run_location = string(HOUSE_LOCATION_INSTANCES[1])
-const output_folder = "all_runs/location_runs/$this_run_location/NHH_$(NUMBER_OF_HOUSEHOLDS)_NSTEPS_$(NUMBER_OF_STEPS)_$(Dates.format(now(), "yyyy_mm_dd_THH_MM"))"
+output_folder = "all_runs/location_runs/$this_run_location/NHH_$(NUMBER_OF_HOUSEHOLDS)_NSTEPS_$(NUMBER_OF_STEPS)_$(Dates.format(now(), "yyyy_mm_dd_THH_MM"))"
+
+if length(CURRENT_POLICIES) != 0
+    output_folder = "all_runs/policy_testing/$POLICIES_STRING/$this_run_location/NHH_$(NUMBER_OF_HOUSEHOLDS)_NSTEPS_$(NUMBER_OF_STEPS)_$(Dates.format(now(), "yyyy_mm_dd_THH_MM"))"
+end
+
 include("utilities.jl")
 include("metrics.jl")
 include("plots.jl")
@@ -27,7 +32,7 @@ include("interestRatesAndUnemployment.jl")
 # Set the seed for reproducibility
 Random.seed!(SEED)
 
-mkdir(output_folder)
+mkpath(output_folder)
 mkdir("$output_folder/transactions_logs")
 content = ""
 
@@ -170,8 +175,10 @@ function model_step!(model)
     expectedDeaths = (MORTALITY_RATE * nagents(model)) / 12
     model.expectedBirths = rand(Normal(expectedBirths, 0.1 * expectedBirths))
     model.expectedDeaths = rand(Normal(expectedDeaths, 0.1 * expectedDeaths))
-    handleNonResidentsDemand(model)
-    handleNonResidentsSupply(model)
+    if !(NonResidentsProhibition in CURRENT_POLICIES)
+        handleNonResidentsDemand(model)
+        handleNonResidentsSupply(model)
+    end
     measureSupplyAndDemandRegionally(model)
     model.steps += 1
     for location in HOUSE_LOCATION_INSTANCES
@@ -537,8 +544,12 @@ function payRent(model, household)
         landlord = model[contract.landlordId]
         landlord.wealth += contract.monthlyPayment * (1 - RENT_TAX)
         model.government.wealth += contract.monthlyPayment * RENT_TAX
-        # TODO: gov payment
         household.wealth -= contract.monthlyPayment
+
+        if RentSubsidy in CURRENT_POLICIES
+            household.wealth += contract.monthlyPayment * RENT_SUBSIDY
+            model.government.wealth -= contract.monthlyPayment * RENT_SUBSIDY
+        end
         return contract.monthlyPayment
     end
     return 0
