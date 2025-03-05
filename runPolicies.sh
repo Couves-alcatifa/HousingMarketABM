@@ -1,14 +1,15 @@
-
-
-location="Oeiras"
-python generateScope.py $location
+locations=("Oeiras" "Cascais" "Mafra" "Almada" "Palmela")
 
 policies=("ConstructionVatReduction" "ConstructionLicensingSimplification" "RentSubsidy" "NonResidentsProhibition")
-for policy in ${policies[@]}
+for location in ${locations[@]}
 do
-    sed -i "s/const CURRENT_POLICIES = Policy.*/const CURRENT_POLICIES = Policy[$policy]/" policies.jl
-    ./run.sh
-    git add .
-    git commit -m "run in $location with $policy"
-    git push
+    for policy in ${policies[@]}
+    do
+        python generateScope.py $location
+        sed -i "s/const CURRENT_POLICIES = Policy.*/const CURRENT_POLICIES = Policy[$policy]/" policies.jl
+        ./run.sh
+        git add .
+        git commit -m "run in $location with $policy"
+        git push
+    done
 done
