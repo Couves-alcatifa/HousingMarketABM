@@ -1,4 +1,4 @@
-locations=("Oeiras" "Cascais" "Mafra" "Almada" "Palmela")
+locations=("Mafra" "Almada" "Palmela")
 
 policies=("ConstructionVatReduction" "ConstructionLicensingSimplification" "RentSubsidy" "NonResidentsProhibition")
 for location in ${locations[@]}
