@@ -18,7 +18,7 @@ function handle_births(household, model)
         return false
     end
     if (household.age >= 20 && household.age < 44  && household.size >= 2)
-        probability = BIRTH_RATE
+        probability = BIRTH_RATE_MAP[household.residencyZone]
         ratioOfFertileWomen = RATIO_OF_FERTILE_WOMEN_MAP[household.residencyZone]
         # probability should not be fixed
         if (rand() < (probability / ratioOfFertileWomen) * (1 + (TOTAL_HOUSEHOLDS_WITH_SIZE_1 * ratioOfFertileWomen) / NUMBER_OF_HOUSEHOLDS) * BIRTH_INCREASE_MULTIPLIER)

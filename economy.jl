@@ -138,8 +138,8 @@ function wealth_model()
         :housesInfo => Dict(),
         :nonResidentHousehold => NonResident(-2, 0, 0, 0, [], 0, [], [], Nothing, 0, Lisboa, 0, 0),
         :unemploymentRate => STARTING_UNEMPLOYMENT_RATE,
-        :expectedBirths => (NUMBER_OF_HOUSEHOLDS * BIRTH_RATE) / 12,
-        :expectedDeaths => (NUMBER_OF_HOUSEHOLDS * MORTALITY_RATE) / 12,
+        :expectedBirths => Dict(location => rand(Normal((BIRTH_RATE_MAP[location] * NUMBER_OF_HOUSEHOLDS) / 12, 0.1 * (BIRTH_RATE_MAP[location] * NUMBER_OF_HOUSEHOLDS) / 12)) for location in HOUSE_LOCATION_INSTANCES),
+        :expectedDeaths => Dict(location => rand(Normal((MORTALITY_RATE_MAP[location] * NUMBER_OF_HOUSEHOLDS) / 12, 0.1 * (MORTALITY_RATE_MAP[location] * NUMBER_OF_HOUSEHOLDS) / 12)) for location in HOUSE_LOCATION_INSTANCES),
     )
 
     model = StandardABM(MyMultiAgent; agent_step! = agent_step!, model_step! = model_step!, properties,scheduler = Schedulers.Randomly())
