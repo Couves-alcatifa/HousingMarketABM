@@ -178,6 +178,39 @@ function generate_semi_annually_rent_prices_table(adf, mdf)
     return finalTable
 end
 
+function generate_quarterly_number_of_transactions(adf, mdf)
+    # since we will organize the table in quarters, we don't need the last hanging 1 or 2 steps
+    maxRelevantStep = Int(floor(NUMBER_OF_STEPS/3)) * 3
+
+    # 
+    finalTable = vcat([["-"]], [Any[string(location)] for location in HOUSE_LOCATION_INSTANCES])
+
+
+    currentQuarter = 1
+    currentYear = 2021
+    currentQuarterTransactions = Dict(location => 0 for location in HOUSE_LOCATION_INSTANCES)
+    for i in 1:maxRelevantStep
+        for location in HOUSE_LOCATION_INSTANCES
+            for transaction in mdf.transactions_per_region[i][location]
+                currentQuarterTransactions[location] += 1
+            end
+        end
+        if i % 3 == 0
+            push!(finalTable[1], "$(currentYear)Q$(currentQuarter)")
+            for location in HOUSE_LOCATION_INSTANCES
+                push!(finalTable[locationToIndex[location]], currentQuarterTransactions[location])
+                currentQuarterTransactions[location] = 0
+            end
+            currentQuarter += 1
+        end
+        if i % 12 == 0
+            currentQuarter = 1
+            currentYear += 1
+        end
+    end
+    return finalTable
+end
+
 function generate_quarterly_number_of_new_contracts(adf, mdf)
     # since we will organize the table in quarters, we don't need the last hanging 1 or 2 steps
     maxRelevantStep = Int(floor(NUMBER_OF_STEPS/3)) * 3
@@ -280,8 +313,13 @@ end
 
 function generate_demographic_table(adf, mdf)
 
-    births = mdf.births
-    deaths = mdf.deaths
+    births_merged = Int32[]
+    deaths_merged = Int32[]
+    for step in eachindex(mdf.births)
+        push!(births_merged, sum([mdf.births[step][location] for location in HOUSE_LOCATION_INSTANCES]))
+        push!(deaths_merged, sum([mdf.deaths[step][location] for location in HOUSE_LOCATION_INSTANCES]))
+    end
+
     breakups = mdf.breakups
     n_of_households = mdf.n_of_households
     finalTable = Any[Any["Year", "Birth Rate", "Mortality Rate", "Divorces"]]
@@ -291,8 +329,8 @@ function generate_demographic_table(adf, mdf)
     cummulativeDeathRate = 0
     cummulativeDivorceRate = 0
     for step in 1:length(adf.step)
-        cummulativeBirthRate += (births[step] / n_of_households[step]) * 1000
-        cummulativeDeathRate += (deaths[step] / n_of_households[step]) * 1000
+        cummulativeBirthRate += (births_merged[step] / n_of_households[step]) * 1000
+        cummulativeDeathRate += (deaths_merged[step] / n_of_households[step]) * 1000
         cummulativeDivorceRate += (breakups[step] / n_of_households[step])* 1000
         if step % 12 == 0
             push!(finalTable, Any[])

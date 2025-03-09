@@ -718,6 +718,7 @@ writeToCsv("$output_folder/SemiAnuallyRentsOfNewContracts.csv", generate_semi_an
 # convertCommaToSemiCollon("$output_folder/SemiAnuallyRentsOfNewContracts.csv")
 # convertPointToComma("$output_folder/SemiAnuallyRentsOfNewContracts.csv")
 writeToCsv("$output_folder/QuarterlyNumberOfNewContracts.csv", generate_quarterly_number_of_new_contracts(agent_data[2:end, :], model_data[2:end, :]))
+writeToCsv("$output_folder/QuarterlyNumberOfTransactions.csv", generate_quarterly_number_of_transactions(agent_data[2:end, :], model_data[2:end, :]))
 writeToCsv("$output_folder/AnnuallyScalledNumberOfNewContracts.csv", generate_annually_scalled_number_of_new_contracts(agent_data[2:end, :], model_data[2:end, :]))
 writeToCsv("$output_folder/DemographicEvents.csv", generate_demographic_table(agent_data[2:end, :], model_data[2:end, :]))
 # CSV.write("$output_folder/agentData.csv", agent_data, delim=';')
