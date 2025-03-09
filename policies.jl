@@ -3,6 +3,7 @@
     ConstructionLicensingSimplification = 2
     RentSubsidy = 3
     NonResidentsProhibition = 4
+    Baseline = 5
 end
 
 const CURRENT_POLICIES = Policy[NonResidentsProhibition]
