@@ -200,7 +200,6 @@ end
 
 function createConstructionLoan(model, value)
     if (model.bank.wealth * 0.5 < value)
-
         return false # verify bank liquidity
     end
 

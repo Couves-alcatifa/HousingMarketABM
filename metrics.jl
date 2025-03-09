@@ -285,8 +285,8 @@ function contractRents(model)
 end
 
 function births(model)
-    res = copy(model.births)
-    model.births = 0
+    res = deepcopy(model.births)
+    model.births = Dict(location => 0 for location in HOUSE_LOCATION_INSTANCES)
     return res
 end
 function breakups(model)
@@ -295,8 +295,8 @@ function breakups(model)
     return res
 end
 function deaths(model)
-    res = copy(model.deaths)
-    model.deaths = 0
+    res = deepcopy(model.deaths)
+    model.deaths = Dict(location => 0 for location in HOUSE_LOCATION_INSTANCES)
     return res
 end
 function children_leaving_home(model)

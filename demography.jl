@@ -14,7 +14,7 @@ function household_evolution(household, model)
 end
 
 function handle_births(household, model)
-    if model.births >= model.expectedBirths
+    if model.births[household.residencyZone] >= model.expectedBirths[household.residencyZone]
         return false
     end
     if (household.age >= 20 && household.age < 44  && household.size >= 2)
@@ -28,7 +28,7 @@ function handle_births(household, model)
             # 2% for size == 5
             # 1% for size == 6
             household.size += 1
-            model.births += 1
+            model.births[household.residencyZone] += 1
             # 4 children at most
         end
     end
@@ -37,7 +37,7 @@ end
 
 # returns true if household died
 function handle_deaths(household, model)
-    if model.deaths >= model.expectedDeaths
+    if model.deaths[household.residencyZone] >= model.expectedDeaths[household.residencyZone]
         return false
     end
     probability_of_death = 0.0005 + 10^(-4.3+0.034*household.age)
@@ -46,7 +46,7 @@ function handle_deaths(household, model)
     # end
     # probability_of_death = MORTALITY_RATE / 0.40 # assuming 40% of the households have >= 60 years
     if (rand() < probability_of_death)
-        model.deaths += 1
+        model.deaths[household.residencyZone] += 1
         if household.size == 1
             terminateContractsOnTentantSide(household, model)
             terminateContractsOnLandLordSide(household, model)

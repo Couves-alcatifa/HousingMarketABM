@@ -113,9 +113,9 @@ function wealth_model()
         :rental_demand_size => Dict(location => 0 for location in HOUSE_LOCATION_INSTANCES),
         :rental_supply_size => Dict(location => 0 for location in HOUSE_LOCATION_INSTANCES),
         :construction_sector => initiateConstructionSector(),
-        :births => 0, 
+        :births => Dict(location => 0 for location in HOUSE_LOCATION_INSTANCES),  
         :breakups => 0,
-        :deaths => 0,
+        :deaths => Dict(location => 0 for location in HOUSE_LOCATION_INSTANCES),
         :children_leaving_home => 0,
         :subsidiesPaid => 0.0,
         :ivaCollected => 0.0,
@@ -171,10 +171,8 @@ end
 function model_step!(model)
     LOG_INFO("Model step $(model.steps + 1) started")
     start_time = time()
-    expectedBirths = (BIRTH_RATE * nagents(model)) / 12
-    expectedDeaths = (MORTALITY_RATE * nagents(model)) / 12
-    model.expectedBirths = rand(Normal(expectedBirths, 0.1 * expectedBirths))
-    model.expectedDeaths = rand(Normal(expectedDeaths, 0.1 * expectedDeaths))
+    model.expectedBirths = Dict(location => rand(Normal((BIRTH_RATE_MAP[location] * nagents(model)) / 12, 0.1 * (BIRTH_RATE_MAP[location] * nagents(model)) / 12)) for location in HOUSE_LOCATION_INSTANCES)
+    model.expectedDeaths = Dict(location => rand(Normal((MORTALITY_RATE_MAP[location] * nagents(model)) / 12, 0.1 * (MORTALITY_RATE_MAP[location] * nagents(model)) / 12)) for location in HOUSE_LOCATION_INSTANCES)
     if !(NonResidentsProhibition in CURRENT_POLICIES)
         handleNonResidentsDemand(model)
         handleNonResidentsSupply(model)

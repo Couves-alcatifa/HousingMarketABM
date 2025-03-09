@@ -266,8 +266,15 @@ end
 function plot_demographic_events(adf, mdf)
     figure = Figure(size = (600, 400))
     ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Volume")
-    births = scatterlines!(ax, adf.step, mdf.births, color = :red)
-    deaths = scatterlines!(ax, adf.step, mdf.deaths, color = :black)
+
+    births_merged = Int32[]
+    deaths_merged = Int32[]
+    for step in eachindex(mdf.births)
+        push!(births_merged, sum([mdf.births[step][location] for location in HOUSE_LOCATION_INSTANCES]))
+        push!(deaths_merged, sum([mdf.deaths[step][location] for location in HOUSE_LOCATION_INSTANCES]))
+    end
+    births = scatterlines!(ax, adf.step, births_merged, color = :red)
+    deaths = scatterlines!(ax, adf.step, deaths_merged, color = :black)
     breakups = scatterlines!(ax, adf.step, mdf.breakups, color = :blue)
     leaving_home = scatterlines!(ax, adf.step, mdf.children_leaving_home, color = :yellow)
     figure[1, 2] = Legend(figure, [births, deaths, breakups, leaving_home], ["Births", "Deaths", "Divorces", "Young leaving home"])
