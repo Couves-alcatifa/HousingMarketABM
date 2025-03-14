@@ -49,6 +49,11 @@ end
 
 function calculate_non_housing_consumption(household, income)
     wealth = household.wealth
+    white_gaussian = rand(Normal(0.0, 0.1))
+    d = log(income) + white_gaussian
+    c = max(wealth - d, 0)
+    println("non_housing_consmption = $c income = $income wealth = $wealth\n")
+    return c
     size = household.size
     # return 500 + income * 0.6 + log(income) + rand(100:300)
     # expenses = EXPENSES_MINIMUM_VALUE * size * (1 + EXPENSES_EXTRA_MINIMUM + rand() * EXPENSES_EXTRA_OFFSET)

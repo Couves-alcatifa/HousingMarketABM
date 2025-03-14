@@ -198,7 +198,7 @@ function generate_quarterly_number_of_transactions(adf, mdf)
         if i % 3 == 0
             push!(finalTable[1], "$(currentYear)Q$(currentQuarter)")
             for location in HOUSE_LOCATION_INSTANCES
-                push!(finalTable[locationToIndex[location]], currentQuarterTransactions[location])
+                push!(finalTable[locationToIndex[location]], currentQuarterTransactions[location] / MODEL_SCALE)
                 currentQuarterTransactions[location] = 0
             end
             currentQuarter += 1
@@ -231,7 +231,7 @@ function generate_quarterly_number_of_new_contracts(adf, mdf)
         if i % 3 == 0
             push!(finalTable[1], "$(currentYear)Q$(currentQuarter)")
             for location in HOUSE_LOCATION_INSTANCES
-                push!(finalTable[locationToIndex[location]], currentQuarterTransactions[location])
+                push!(finalTable[locationToIndex[location]], currentQuarterTransactions[location] / MODEL_SCALE)
                 currentQuarterTransactions[location] = 0
             end
             currentQuarter += 1

@@ -389,7 +389,7 @@ function clearHouseMarket(model)
 
                 if margin > marketPrice * EXPECTED_RENOVATION_RENTABILITY
                     maxMortgage = maxMortgageValue(model, household)
-                    bidValue = (rand(95:100) / 100) * supply.price
+                    bidValue = (rand(90:100) / 100) * supply.price
                     bidToAskPriceRatio = bidValue / supply.price
                     if maxMortgage + household.wealth > bidValue + calculateTransactionTaxes(bidValue)
                         lock(localLock) do

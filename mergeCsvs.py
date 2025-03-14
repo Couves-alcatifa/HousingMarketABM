@@ -3,7 +3,12 @@ import glob
 from datetime import datetime
 
 # Define the base directory and locations
-base_dir = "all_runs/location_runs"
+base_dir = "all_runs/policy_testing"
+policies = ["ConstructionVatReduction",
+            "ConstructionLicensingSimplification",
+            "RentSubsidy",
+            "NonResidentsProhibition",
+            "Baseline"]
 locations=["Amadora", "Cascais", "Lisboa", "Loures", "Mafra",
            "Odivelas", "Oeiras", "Sintra", "VilaFrancaDeXira",
            "Alcochete", "Almada", "Barreiro", "Moita", "Montijo",
@@ -32,23 +37,29 @@ def mergeCsvs(csv_file):
                     for line in infile:
                         outfile.write(line)
 
-    # Collect all data.csv files from the most recent folders
-    csv_files = []
-    for location in locations:
-        location_dir = os.path.join(base_dir, location)
-        recent_folder = get_recent_folder(location_dir)
-        if recent_folder:
-            data_csv_path = os.path.join(recent_folder, csv_file)
-            if os.path.exists(data_csv_path):
-                csv_files.append(data_csv_path)
+    for policy in policies:
+        # Collect all data.csv files from the most recent folders
+        csv_files = []
+        for location in locations:
+            policy_location_dir = os.path.join(base_dir, policy, location)
+            try:
+                recent_folder = get_recent_folder(policy_location_dir)
+            except FileNotFoundError:
+                continue
+            if recent_folder:
+                data_csv_path = os.path.join(recent_folder, csv_file)
+                if os.path.exists(data_csv_path):
+                    csv_files.append(data_csv_path)
 
-    # Merge the CSV files into output.csv
-    if csv_files:
-        output_file = "%s_merged.csv" % csv_file[:-4]
-        merge_csv_files(csv_files, output_file)
-        print(f"Merged CSV files into {output_file}")
-    else:
-        print("No %s files found to merge." % csv_file)
+        # Merge the CSV files into output.csv
+        if csv_files:
+            output_file = "results/csvs/%s_%s.csv" % (csv_file[:-4], policy)
+            merge_csv_files(csv_files, output_file)
+            print(f"Merged CSV files into {output_file}")
+        else:
+            print("No %s files found to merge." % csv_file)
 
 mergeCsvs("QuarterLyHousePrices.csv")
+mergeCsvs("QuarterlyNumberOfTransactions.csv")
+mergeCsvs("QuarterlyNumberOfNewContracts.csv")
 mergeCsvs("SemiAnuallyRentsOfNewContracts.csv")
