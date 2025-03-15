@@ -68,12 +68,15 @@ end
 
 function updateConstructionsPerBucket(model, location, size_interval)
     targetConstruction = calculateTargetConstructionPerBucket(model, location, size_interval)
+    println("targetConstruction = $targetConstruction")
     newConstructions = targetConstruction - length(model.construction_sector.housesInConstruction[location][size_interval])
+    println("newConstructions = $newConstructions")
     # if newConstructions > MAX_NEW_CONSTRUCTIONS_MAP[location] / 12
     #     newConstructions = MAX_NEW_CONSTRUCTIONS_MAP[location] / 12
     # end
     model.construction_sector.constructionGoals[location] += newConstructions / 12
     constructionGoals = copy(model.construction_sector.constructionGoals[location])
+    println("constructionGoals = $constructionGoals")
     if (constructionGoals >= 1)
         # # attempt to start construction for the demand in one year (hence divide by 12) 
         # newConstructions = Int64(floor(newConstructions / 24))
@@ -161,7 +164,7 @@ function calculateTargetConstructionPerBucket(model, location, size_interval)
         capValue = ((MAX_NEW_CONSTRUCTIONS_MAP[CURRENT_YEAR][location] / 12) / 4) * 1.5
         capValue = rand(Normal(capValue, capValue * 0.5))
         if supplyVsDemandValue > capValue
-            return capValue
+            return ceil(capValue)
         end
     end
     return supplyVsDemandValue
@@ -177,6 +180,7 @@ function startNewConstruction(model, location, size_interval)
     newHouse = generateHouseToBeBuilt(location, size_interval)
     if newHouse == Nothing
         # not viable...
+        TRANSACTION_LOG("Failed to start new construction (not viable)\n", model)
         return false
     end
     expectedDuration = rand(CONSTRUCTION_DELAY_MIN:CONSTRUCTION_DELAY_MAX)
@@ -185,6 +189,7 @@ function startNewConstruction(model, location, size_interval)
 
     if constructionCost > model.construction_sector.wealth
         if !createConstructionLoan(model, constructionCost)
+            TRANSACTION_LOG("Failed to create construction loan\n", model)
             return false
         end
     end
