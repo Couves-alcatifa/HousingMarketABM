@@ -61,7 +61,7 @@ function calculate_non_housing_consumption(household, income, original_income)
     virtual_size_for_consumption = 1 + (size - 1) * 0.75 
     minimum_consumption = per_capita_minimum_consumption * virtual_size_for_consumption
 
-    rmc = 0.5
+    rmc = rand(Normal(0.5, 0.1))
     income_based_consumption = original_income * rmc
 
     consumption = 0
@@ -72,7 +72,10 @@ function calculate_non_housing_consumption(household, income, original_income)
     else
         consumption = minimum_consumption
     end
-    println("non_housing_consmption = $consumption income = $income wealth = $wealth\n")
+
+    if household.id % 500 == 0
+        println("income = $income income_based_consumption = $income_based_consumption minimum_consumption = $minimum_consumption consumption = $consumption")
+    end
 
     return consumption
 
