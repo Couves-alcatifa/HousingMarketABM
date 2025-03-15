@@ -137,7 +137,7 @@ function updateConstructionsPerBucket(model, location, size_interval)
             TRANSACTION_LOG("Charged $costs + $tax from household $(household.id) due to renovation costs and taxes", model)
 
             updateHouseRenovationCosts(model, pendingRenovation.house, costs + tax)
-            pendingRenovation.house.percentile = rand(95:100)
+            pendingRenovation.house.percentile = calculateRenovatedPercentile(pendingRenovation.house)
             push!(household.houses, pendingRenovation.house)
             if pendingRenovation.type == ForInvestment
                 put_house_to_sale(household, model, length(household.houses))
@@ -284,7 +284,15 @@ function calculate_construction_costs(model, house, withVat)
 end
 
 function calculateRenovationCosts(house)
-    return -1 * map_value(house.percentile, 1, 99, -1300, -400) * house.area
+    return map_value(calculateRenovatedPercentile(house) - house.percentile, 0, 35, 400, 1300) * house.area
+end
+
+function calculateRenovatedPercentile(house)
+    if house.percentile == 100
+        return 100
+    end
+    newPercentile = Int64(round(house.percentile + map_value(house.percentile, 1, 99, -35, -1) * -1))
+    return newPercentile
 end
 
 function calculateRenovationTime()

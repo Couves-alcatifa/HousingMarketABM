@@ -360,11 +360,12 @@ function clearHouseMarket(model)
             end
 
             if demand.type == ForRental
-                renovatedHouse = House(house.area, house.location, house.locationType, house.maintenanceLevel, rand(95:100))
+                # renovatedHouse = House(house.area, house.location, house.locationType, house.maintenanceLevel, calculateRenovatedPercentile(house))
+                renovatedHouse = house
 
                 if isHouseViableForRenting(model, renovatedHouse)
                     maxMortgage = maxMortgageValue(model, household)
-                    bidValue = (rand(95:100) / 100) * supply.price
+                    bidValue = (rand(90:100) / 100) * supply.price
                     bidToAskPriceRatio = bidValue / supply.price
                     if maxMortgage + household.wealth > bidValue + calculateTransactionTaxes(bidValue)
                         lock(localLock) do
@@ -380,7 +381,7 @@ function clearHouseMarket(model)
             elseif demand.type == ForInvestment
                 marketPrice = calculate_market_price(model, house)
                 renovationCosts = calculateRenovationCosts(house)
-                renovatedHouse = House(house.area, house.location, house.locationType, house.maintenanceLevel, rand(95:100))
+                renovatedHouse = House(house.area, house.location, house.locationType, house.maintenanceLevel, calculateRenovatedPercentile(house))
                 renovatedMarketPrice = calculate_market_price(model, renovatedHouse)
 
                 totalCosts = marketPrice + calculateTransactionTaxes(marketPrice) + renovationCosts
