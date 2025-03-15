@@ -47,7 +47,42 @@ open("$output_folder/seed_$SEED.txt", "w") do file
     write(file, "-")
 end
 
-function calculate_non_housing_consumption(household, income)
+function calculate_non_housing_consumption(household, income, original_income)
+    size = household.size
+    ctsr0 = -4.5113
+    ctsr = 0.3125
+    saving_rate = ctsr0 + ctsr * log(income * 12 / size)
+    other_expenses = original_income - income
+
+    saving = (1 - saving_rate) * income
+    
+    per_capita_minimum_consumption = 60 # cspci
+    virtual_size_for_consumption = 1 + (size - 1) * 0.75 
+    minimum_consumption = per_capita_minimum_consumption * virtual_size_for_consumption
+
+    rmc = 0.5
+    income_based_consumption = original_income * rmc
+
+    consumption = 0
+    if income >= income_based_consumption
+        consumption = income_based_consumption
+    elseif income >= minimum_consumption
+        consumption = (minimum_consumption + income) / 2
+    else
+        consumption = minimum_consumption
+    end
+    println("non_housing_consmption = $consumption income = $income wealth = $wealth\n")
+
+    return consumption
+
+
+    pmc = 48
+    if max(minimum_consumption, income_based_consumption) < income
+        return max(minimum_consumption, income_based_consumption)
+    else
+        return income_based_consumption - 
+              (income_based_consumption / (pmc * income_based_consumption - minimum_consumption))
+    end
     wealth = household.wealth
     # white_gaussian = rand(Normal(0.0, 10.0))
     # delta = 30
@@ -56,7 +91,6 @@ function calculate_non_housing_consumption(household, income)
     # c = max(a*(wealth - d), 0)
     # println("non_housing_consmption = $c income = $income wealth = $wealth\n")
     # return c
-    size = household.size
     # return 500 + income * 0.6 + log(income) + rand(100:300)
     # expenses = EXPENSES_MINIMUM_VALUE * size * (1 + EXPENSES_EXTRA_MINIMUM + rand() * EXPENSES_EXTRA_OFFSET)
     expenses = EXPENSES_MINIMUM_VALUE * size * rand(Normal(1.0, 0.2))
@@ -438,9 +472,7 @@ end
 
 
 function not_home_owner_decisions(household, model)
-    # let's say 90% of the households always try to buy a house
-    # and in the meantime they rent # 10 & 11 only rent
-    if household.id % 12 < 10 && (household.contractAsTenant == Nothing || rand() < 0.1) 
+    if household.contractAsTenant == Nothing || rand() < 0.05
         push!(model.houseMarket.demand, HouseDemand(household.id, HouseSupply[], Regular))
     end
     if (household.contractAsTenant == Nothing)
@@ -530,7 +562,7 @@ function household_step!(household::MyMultiAgent, model)
     valuePaidInMortages = payMortgages(model, household)
     valuePaidInRent = payRent(model, household)
     incomeLeft = liquid_salary + subsidy - valuePaidInMortages - valuePaidInRent
-    expenses = calculate_non_housing_consumption(household, incomeLeft)
+    expenses = calculate_non_housing_consumption(household, incomeLeft, liquid_salary)
     household.wealth -= expenses
     model.company_wealth += expenses * (1 - model.government.vat)
     model.expensesReceived += expenses * (1 - model.government.vat)
