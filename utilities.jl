@@ -1256,7 +1256,7 @@ function isHouseViableForRenting(model, house)
     marketPrice = calculate_market_price(model, house)
 
     rentability = (rentalGains * 12) / marketPrice
-    return rand() < map_value_sqrt(rentability, 0, 0.07, 0, 1)
+    return rand() < map_value_sqrt(rentability, 0, 0.06, 0, 1)
 end
 
 function housesBoughtByNoNResidentsPerRegion(location)
