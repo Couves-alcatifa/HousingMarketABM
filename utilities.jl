@@ -790,7 +790,7 @@ function rent_house(model, supply::RentalSupply)
     push!(seller.contractsAsLandlord, contract)
     addTransactionToRentalBuckets(model, supply.house, actualBid)
     if model.steps > 0
-        push!(model.rents_per_region[supply.house.location][model.steps], Transaction(supply.house.area, actualBid, supply.house.location, supply.house.percentile, supply.sellerId, winningBid.type))
+        push!(model.rents_per_region[supply.house.location][model.steps], Transaction(supply.house.area, actualBid, supply.house.location, supply.house.percentile, supply.sellerId, Regular))
     end
     return true
 end
