@@ -49,12 +49,13 @@ end
 
 function calculate_non_housing_consumption(household, income, original_income)
     size = household.size
-    ctsr0 = -4.5113
-    ctsr = 0.3125
-    saving_rate = ctsr0 + ctsr * log(income * 12 / size)
-    other_expenses = original_income - income
+    wealth = household.wealth
+    # ctsr0 = -4.5113
+    # ctsr = 0.3125
+    # saving_rate = ctsr0 + ctsr * log(income * 12 / size)
+    # other_expenses = original_income - income
 
-    saving = (1 - saving_rate) * income
+    # saving = (1 - saving_rate) * income
     
     per_capita_minimum_consumption = 60 # cspci
     virtual_size_for_consumption = 1 + (size - 1) * 0.75 
@@ -83,7 +84,6 @@ function calculate_non_housing_consumption(household, income, original_income)
         return income_based_consumption - 
               (income_based_consumption / (pmc * income_based_consumption - minimum_consumption))
     end
-    wealth = household.wealth
     # white_gaussian = rand(Normal(0.0, 10.0))
     # delta = 30
     # a = 0.3
