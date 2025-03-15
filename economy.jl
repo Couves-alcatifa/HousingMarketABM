@@ -49,13 +49,13 @@ end
 
 function calculate_non_housing_consumption(household, income)
     wealth = household.wealth
-    white_gaussian = rand(Normal(0.0, 0.1))
-    d = delta * log(income) + white_gaussian
-    delta = 3
-    a = 0.5
-    c = max(a*(wealth - d), 0)
-    println("non_housing_consmption = $c income = $income wealth = $wealth\n")
-    return c
+    # white_gaussian = rand(Normal(0.0, 10.0))
+    # delta = 30
+    # a = 0.3
+    # d = delta * log(income) + white_gaussian
+    # c = max(a*(wealth - d), 0)
+    # println("non_housing_consmption = $c income = $income wealth = $wealth\n")
+    # return c
     size = household.size
     # return 500 + income * 0.6 + log(income) + rand(100:300)
     # expenses = EXPENSES_MINIMUM_VALUE * size * (1 + EXPENSES_EXTRA_MINIMUM + rand() * EXPENSES_EXTRA_OFFSET)
@@ -464,7 +464,7 @@ function home_owner_decisions(household, model)
         household.houseRequirements = HouseRequirements(house.area, house.percentile)
         push!(model.houseMarket.demand, HouseDemand(household.id, HouseSupply[], Regular))
     else
-        if household.percentile < 80 || rand() > 0.20
+        if rand() > 0.20
             # not all household think about investing
             # and it is a slow decision
             return
