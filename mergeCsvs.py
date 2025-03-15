@@ -59,6 +59,8 @@ def mergeCsvs(csv_file):
         else:
             print("No %s files found to merge." % csv_file)
 
+# sed -i '/Oeiras/!d' results/csvs/*.csv
+
 mergeCsvs("QuarterLyHousePrices.csv")
 mergeCsvs("QuarterlyNumberOfTransactions.csv")
 mergeCsvs("QuarterlyNumberOfNewContracts.csv")

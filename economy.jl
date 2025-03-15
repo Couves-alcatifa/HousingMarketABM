@@ -558,7 +558,8 @@ function household_step!(household::MyMultiAgent, model)
     model.liquidSalariesReceived += liquid_salary
     model.company_wealth -= salary
 
-    subsidy = calculate_subsidy(household, model)
+    # subsidy = calculate_subsidy(household, model)
+    subsidy = 0
     model.government.wealth -= subsidy
     model.subsidiesPaid += subsidy
     household.wealth += subsidy
@@ -747,6 +748,8 @@ save("$output_folder/volume_of_lent_money.png", plot_volume_of_lent_money(agent_
 save("$output_folder/houses_sizes_in_supply.png", plot_houses_for_sale_size_distribution(agent_data[2:end, :], model_data[2:end, :]))
 save("$output_folder/houses_percentile_in_supply.png", plot_houses_for_sale_percentile_distribution(agent_data[2:end, :], model_data[2:end, :]))
 save("$output_folder/sold_houses_percentile.png", plot_sold_houses_percentile(agent_data[2:end, :], model_data[2:end, :]))
+save("$output_folder/number_of_newly_built_houses_sold.png", plot_number_of_newly_built_houses_sold(agent_data[2:end, :], model_data[2:end, :]))
+
 # save("$output_folder/mortgages_median_values_regionally.png", plot_mortgages_median_values_regionally(agent_data[2:end, :], model_data[2:end, :]))
 # save("$output_folder/mortgages_values_distribution.png", plot_mortgages_values_distribution(agent_data[2:end, :], model_data[2:end, :]))
 

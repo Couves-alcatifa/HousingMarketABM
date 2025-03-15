@@ -204,9 +204,9 @@ function createConstructionLoan(model, value)
     end
 
     debt = calculate_construction_sector_debt(model)
-    if model.construction_sector.wealth - debt < -1 * STARTING_CONSTRUCTION_SECTOR_WEALTH
-        return false
-    end
+    # if model.construction_sector.wealth - debt < -1 * STARTING_CONSTRUCTION_SECTOR_WEALTH
+    #     return false
+    # end
 
     push!(model.construction_sector.mortgages, Mortgage(value, value, 0, calculateMortgageDurationForConstructionSector()))
     model.bank.wealth -= value
@@ -221,7 +221,7 @@ function generateHouseToBeBuilt(location, size_interval)
     bestMargin = -1
     expectedDuration = rand(CONSTRUCTION_DELAY_MIN:CONSTRUCTION_DELAY_MAX)
     expectedDuration += rand(CONSTRUCTION_TIME_MIN:CONSTRUCTION_TIME_MAX)
-    for testPercentile in rand(1:100, 5)
+    for testPercentile in rand(95:100, 1)
         marketPrice = calculate_market_price(model, House(area, location, NotSocialNeighbourhood, 1.0, testPercentile))
         constructionCosts = calculate_total_construction_costs(model, House(area, location, NotSocialNeighbourhood, 1.0, testPercentile), expectedDuration)
         
@@ -273,13 +273,14 @@ function calculate_total_construction_costs(model, house, expectedDuration; with
 end
 
 function calculate_construction_costs(model, house, withVat)
-    constructionCosts = map_value(house.percentile, 1, 100, CONSTRUCTION_COSTS_MIN, CONSTRUCTION_COSTS_MAX) * house.area
+    constructionCosts = ((CONSTRUCTION_COSTS_MIN + CONSTRUCTION_COSTS_MAX) / 2) * house.area
+    # constructionCosts = map_value(house.percentile, 1, 100, CONSTRUCTION_COSTS_MIN, CONSTRUCTION_COSTS_MAX) * house.area
     # this costs should change with the zone salaries
     constructionCosts *= THIRD_QUINTILE_INCOME_MAP[house.location] / THIRD_QUINTILE_INCOME_MAP[Lisboa]
     if withVat
         constructionCosts *= 1 + CONSTRUCTION_VAT
     end
-    constructionCosts *= PROJECT_COST_MULTIPLIER
+    # constructionCosts *= PROJECT_COST_MULTIPLIER
     return constructionCosts
 end
 

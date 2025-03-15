@@ -125,6 +125,8 @@ mutable struct Transaction
     price
     location
     percentile
+    sellerId
+    demandType
 end
 
 @enum DemandType begin

@@ -699,3 +699,26 @@ end
 #     figure[1, 2] = Legend(figure, lines, locations)
 #     figure
 # end
+
+function plot_number_of_newly_built_houses_sold(adf, mdf)
+    figure = Figure(size = (600, 400))
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Quantity")
+    lines = []
+    locations = []
+    for location in HOUSE_LOCATION_INSTANCES
+        regional_number_of_transaction = Int32[]
+        for step in 1:NUMBER_OF_STEPS
+            push!(regional_number_of_transaction, 0)
+            for transaction in mdf.transactions_per_region[step][location]
+                if transaction.sellerId == -1
+                    regional_number_of_transaction[length(regional_number_of_transaction)] += 1
+                end
+            end
+        end
+        push!(lines, scatterlines!(ax, adf.step, regional_number_of_transaction, color = color_map[location]))
+        push!(locations, string(location))
+    end
+
+    figure[1, 2] = Legend(figure, lines, locations)
+    figure
+end
