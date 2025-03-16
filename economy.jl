@@ -763,8 +763,10 @@ save("$output_folder/number_of_houses_bought_by_non_residents.png", plot_number_
 # end
 
 writeToCsv("$output_folder/QuarterLyHousePrices.csv", generate_houses_prices_table(agent_data[2:end, :], model_data[2:end, :]))
+writeToCsv("$output_folder/YearlyHousePrices.csv", generate_yearly_houses_prices_table(agent_data[2:end, :], model_data[2:end, :]))
 writeToCsv("$output_folder/QuarterLyRentsOfNewContracts.csv", generate_rent_prices_table(agent_data[2:end, :], model_data[2:end, :]))
 writeToCsv("$output_folder/SemiAnuallyRentsOfNewContracts.csv", generate_semi_annually_rent_prices_table(agent_data[2:end, :], model_data[2:end, :]))
+writeToCsv("$output_folder/YearlyRentsOfNewContracts.csv", generate_yearly_rents_table(agent_data[2:end, :], model_data[2:end, :]))
 # convertCommaToSemiCollon("$output_folder/SemiAnuallyRentsOfNewContracts.csv")
 # convertPointToComma("$output_folder/SemiAnuallyRentsOfNewContracts.csv")
 writeToCsv("$output_folder/QuarterlyNumberOfNewContracts.csv", generate_quarterly_number_of_new_contracts(agent_data[2:end, :], model_data[2:end, :]))

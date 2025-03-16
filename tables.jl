@@ -82,6 +82,39 @@ function generate_houses_prices_table(adf, mdf)
     return finalTable
 end
 
+function generate_yearly_houses_prices_table(adf, mdf)
+    # since we will organize the table in quarters, we don't need the last hanging 1 or 2 steps
+    maxRelevantStep = Int(floor(NUMBER_OF_STEPS/12)) * 12
+
+    # 
+    finalTable = vcat([["-"]], [Any[string(location)] for location in HOUSE_LOCATION_INSTANCES])
+
+
+    currentYear = 2021
+    currentYearTransactions = Dict(location => [] for location in HOUSE_LOCATION_INSTANCES)
+    for i in 1:maxRelevantStep
+        for location in HOUSE_LOCATION_INSTANCES
+            for transaction in mdf.transactions_per_region[i][location]
+                push!(currentYearTransactions[location], transaction.price / transaction.area)
+            end
+        end
+        if i % 12 == 0
+            push!(finalTable[1], "$(currentYear)")
+            for location in HOUSE_LOCATION_INSTANCES
+                if length(currentYearTransactions[location]) != 0
+                    push!(finalTable[locationToIndex[location]], Int64(round(median(currentYearTransactions[location]))))
+                else
+                    push!(finalTable[locationToIndex[location]], 0)
+                end
+                empty!(currentYearTransactions[location])
+            end
+            currentYear += 1
+        end
+    end
+
+    return finalTable
+end
+
 function generate_rent_prices_table(adf, mdf)
     # since we will organize the table in quarters, we don't need the last hanging 1 or 2 steps
     maxRelevantStep = Int(floor(NUMBER_OF_STEPS/3)) * 3
@@ -173,6 +206,37 @@ function generate_semi_annually_rent_prices_table(adf, mdf)
         sizeToUse = min(length(y), length(REAL_RENTS_MAP_WITHOUT_INFLATION[location]))
         save("simulated_rents/SimulatedRentsIn$location.png", plot_simulated_rents(x[1:sizeToUse], y[1:sizeToUse], REAL_RENTS_MAP_WITHOUT_INFLATION[location][1:sizeToUse]))
         save("$output_folder/SimulatedRentsIn$location.png", plot_simulated_rents(x[1:sizeToUse], y[1:sizeToUse], REAL_RENTS_MAP_WITHOUT_INFLATION[location][1:sizeToUse]))
+    end
+
+    return finalTable
+end
+
+function generate_yearly_rents_table(adf, mdf)
+    maxRelevantStep = Int(floor(NUMBER_OF_STEPS/12)) * 12
+
+    finalTable = vcat([["-"]], [Any[string(location)] for location in HOUSE_LOCATION_INSTANCES])
+
+
+    currentYear = 2021
+    currentYearTransactions = Dict(location => [] for location in HOUSE_LOCATION_INSTANCES)
+    for i in 1:maxRelevantStep
+        for location in HOUSE_LOCATION_INSTANCES
+            for transaction in mdf.rents_per_region[i][location]
+                push!(currentYearTransactions[location], transaction.price / transaction.area)
+            end
+        end
+        if i % 12 == 0
+            push!(finalTable[1], "$(currentYear)")
+            for location in HOUSE_LOCATION_INSTANCES
+                if length(currentYearTransactions[location]) != 0
+                    push!(finalTable[locationToIndex[location]], median(currentYearTransactions[location]))
+                else
+                    push!(finalTable[locationToIndex[location]], 0)
+                end
+                empty!(currentYearTransactions[location])
+            end
+            currentYear += 1
+        end
     end
 
     return finalTable
