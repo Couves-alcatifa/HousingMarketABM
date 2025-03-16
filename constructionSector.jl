@@ -162,12 +162,22 @@ function calculateTargetConstructionPerBucket(model, location, size_interval)
     supplyVsDemandValue = model.demandPerBucket[location][size_interval] -
                           model.supplyPerBucket[location][size_interval]
     
+    averageTimeForPermit = (CONSTRUCTION_DELAY_MIN + CONSTRUCTION_DELAY_MAX) / 2
+    averageTimeForConstruction = (CONSTRUCTION_TIME_MIN + CONSTRUCTION_TIME_MAX) / 2
+    averageTotalTime = averageTimeForPermit + averageTimeForConstruction
+
     # split the supply vs demand value among the four buckets
     if CURRENT_YEAR != 2003
-        capValue = ((MAX_NEW_CONSTRUCTIONS_MAP[CURRENT_YEAR][location] / 12) / 4) * 1.5
-        capValue = rand(Normal(capValue, capValue * 0.5))
-        if supplyVsDemandValue > capValue
-            return ceil(capValue)
+        # calculate the value of constructions that should be in progress to achieve the expected value
+        # this is calculated taking into consideration the amount of time it takes to build a house
+        # this is simillar to what is done in the initiateConstructionSector function
+        # here we divide by the number of buckets per location (4) and multiply by 150% because it is the cap 
+        expectedConstructionInProgress = MAX_NEW_CONSTRUCTIONS_MAP[CURRENT_YEAR][location] * (averageTotalTime / 12)
+        capValue = expectedConstructionInProgress * 1.5
+        capValuePerBucket = capValue / 4
+        capValuePerBucket = rand(Normal(capValuePerBucket, capValuePerBucket * 0.25))
+        if supplyVsDemandValue > capValuePerBucket
+            return ceil(capValuePerBucket)
         end
     end
     return supplyVsDemandValue

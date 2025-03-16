@@ -732,6 +732,11 @@ end
 save("$output_folder/rents_of_new_contracts_per_region.png", plot_rents_of_new_contracts_per_region(agent_data[2:end, :], model_data[2:end, :]))
 save("$output_folder/rents_per_region.png", plot_rents_per_region(agent_data[2:end, :], model_data[2:end, :]))
 
+number_of_houses_built_figures = plot_number_of_houses_built_per_region_per_bucket(agent_data[2:end, :], model_data[2:end, :])
+for location in HOUSE_LOCATION_INSTANCES
+    save("$output_folder/number_of_houses_built_in_$(string(location))_per_bucket.png", number_of_houses_built_figures[location])
+end
+
 number_of_houses_built_figures = plot_number_of_houses_built_per_region(agent_data[2:end, :], model_data[2:end, :])
 for location in HOUSE_LOCATION_INSTANCES
     save("$output_folder/number_of_houses_built_in_$(string(location)).png", number_of_houses_built_figures[location])

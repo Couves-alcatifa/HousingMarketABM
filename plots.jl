@@ -488,7 +488,7 @@ function plot_rents_per_region(adf, mdf)
     figure
 end
 
-function plot_number_of_houses_built_per_region(adf, mdf)
+function plot_number_of_houses_built_per_region_per_bucket(adf, mdf)
     figures = Dict(location => Figure() for location in HOUSE_LOCATION_INSTANCES)
     for location in HOUSE_LOCATION_INSTANCES
         figure = Figure(size = (600, 400))
@@ -504,6 +504,26 @@ function plot_number_of_houses_built_per_region(adf, mdf)
             push!(sizes_intervals, get_size_interval_legend(size_interval))
         end
         figure[1, 2] = Legend(figure, lines, sizes_intervals)
+        figure
+        figures[location] = figure
+    end
+    return figures
+
+end
+
+function plot_number_of_houses_built_per_region(adf, mdf)
+    figures = Dict(location => Figure() for location in HOUSE_LOCATION_INSTANCES)
+    for location in HOUSE_LOCATION_INSTANCES
+        figure = Figure(size = (600, 400))
+        ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Quantity")
+        lines = []
+        legends = ["Number of houses built"]
+        regional_number_of_houses = Int32[]
+        for step in 1:NUMBER_OF_STEPS
+            push!(regional_number_of_houses, sum([mdf.number_of_houses_built_per_region[step][location][size_interval]] for size_interval in instances(SizeInterval))) 
+        end
+        push!(lines, scatterlines!(ax, adf.step, regional_number_of_houses, color = :red))
+        figure[1, 2] = Legend(figure, lines, legends)
         figure
         figures[location] = figure
     end
