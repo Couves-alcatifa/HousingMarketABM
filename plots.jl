@@ -520,7 +520,7 @@ function plot_number_of_houses_built_per_region(adf, mdf)
         legends = ["Number of houses built"]
         regional_number_of_houses = Int32[]
         for step in 1:NUMBER_OF_STEPS
-            push!(regional_number_of_houses, sum([mdf.number_of_houses_built_per_region[step][location][size_interval]] for size_interval in instances(SizeInterval))) 
+            push!(regional_number_of_houses, sum([mdf.number_of_houses_built_per_region[step][location][size_interval] for size_interval in instances(SizeInterval)])) 
         end
         push!(lines, scatterlines!(ax, adf.step, regional_number_of_houses, color = :red))
         figure[1, 2] = Legend(figure, lines, legends)
