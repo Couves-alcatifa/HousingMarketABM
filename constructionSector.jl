@@ -70,6 +70,9 @@ function updateConstructionsPerBucket(model, location, size_interval)
     targetConstruction = calculateTargetConstructionPerBucket(model, location, size_interval)
     println("targetConstruction = $targetConstruction")
     newConstructions = targetConstruction - length(model.construction_sector.housesInConstruction[location][size_interval])
+    if newConstructions < 0
+        newConstructions = 0
+    end
     println("newConstructions = $newConstructions")
     # if newConstructions > MAX_NEW_CONSTRUCTIONS_MAP[location] / 12
     #     newConstructions = MAX_NEW_CONSTRUCTIONS_MAP[location] / 12
