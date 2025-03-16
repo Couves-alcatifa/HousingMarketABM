@@ -86,6 +86,7 @@ function updateConstructionsPerBucket(model, location, size_interval)
         # newConstructions = rand(Normal(newConstructions, newConstructions * 0.5))
         for i in 1:constructionGoals
             if (!startNewConstruction(model, location, size_interval))
+                model.construction_sector.constructionGoals[location] -= 1.0
                 break
             else
                 model.construction_sector.constructionGoals[location] -= 1.0
@@ -162,24 +163,24 @@ function calculateTargetConstructionPerBucket(model, location, size_interval)
     supplyVsDemandValue = model.demandPerBucket[location][size_interval] -
                           model.supplyPerBucket[location][size_interval]
     
-    averageTimeForPermit = (CONSTRUCTION_DELAY_MIN + CONSTRUCTION_DELAY_MAX) / 2
-    averageTimeForConstruction = (CONSTRUCTION_TIME_MIN + CONSTRUCTION_TIME_MAX) / 2
-    averageTotalTime = averageTimeForPermit + averageTimeForConstruction
+    # averageTimeForPermit = (CONSTRUCTION_DELAY_MIN + CONSTRUCTION_DELAY_MAX) / 2
+    # averageTimeForConstruction = (CONSTRUCTION_TIME_MIN + CONSTRUCTION_TIME_MAX) / 2
+    # averageTotalTime = averageTimeForPermit + averageTimeForConstruction
 
-    # split the supply vs demand value among the four buckets
-    if CURRENT_YEAR != 2003
-        # calculate the value of constructions that should be in progress to achieve the expected value
-        # this is calculated taking into consideration the amount of time it takes to build a house
-        # this is simillar to what is done in the initiateConstructionSector function
-        # here we divide by the number of buckets per location (4) and multiply by 150% because it is the cap 
-        expectedConstructionInProgress = MAX_NEW_CONSTRUCTIONS_MAP[CURRENT_YEAR][location] * (averageTotalTime / 12)
-        capValue = expectedConstructionInProgress * 1.5
-        capValuePerBucket = capValue / 4
-        capValuePerBucket = rand(Normal(capValuePerBucket, capValuePerBucket * 0.25))
-        if supplyVsDemandValue > capValuePerBucket
-            return ceil(capValuePerBucket)
-        end
-    end
+    # # split the supply vs demand value among the four buckets
+    # if CURRENT_YEAR != 2003
+    #     # calculate the value of constructions that should be in progress to achieve the expected value
+    #     # this is calculated taking into consideration the amount of time it takes to build a house
+    #     # this is simillar to what is done in the initiateConstructionSector function
+    #     # here we divide by the number of buckets per location (4) and multiply by 150% because it is the cap 
+    #     expectedConstructionInProgress = MAX_NEW_CONSTRUCTIONS_MAP[CURRENT_YEAR][location] * (averageTotalTime / 12)
+    #     capValue = expectedConstructionInProgress * 1.5
+    #     capValuePerBucket = capValue / 4
+    #     capValuePerBucket = rand(Normal(capValuePerBucket, capValuePerBucket * 0.25))
+    #     if supplyVsDemandValue > capValuePerBucket
+    #         return ceil(capValuePerBucket)
+    #     end
+    # end
     return supplyVsDemandValue
 end
 
@@ -217,14 +218,14 @@ function startNewConstruction(model, location, size_interval)
 end
 
 function createConstructionLoan(model, value)
-    if (model.bank.wealth * 0.5 < value)
-        return false # verify bank liquidity
-    end
+    # if (model.bank.wealth * 0.5 < value)
+    #     return false # verify bank liquidity
+    # end
 
     debt = calculate_construction_sector_debt(model)
-    # if model.construction_sector.wealth - debt < -1 * STARTING_CONSTRUCTION_SECTOR_WEALTH
-    #     return false
-    # end
+    if debt - model.construction_sector.wealth > MAX_CONSTRUCTION_SECTOR_DEBT
+        return false
+    end
 
     push!(model.construction_sector.mortgages, Mortgage(value, value, 0, calculateMortgageDurationForConstructionSector()))
     model.bank.wealth -= value
