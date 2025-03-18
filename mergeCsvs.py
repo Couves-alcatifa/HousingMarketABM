@@ -61,7 +61,7 @@ def mergeCsvs(csv_file):
 
 # sed -i '/Oeiras/!d' results/csvs/*.csv
 
-mergeCsvs("QuarterLyHousePrices.csv")
+mergeCsvs("YearlyHousePrices.csv")
 mergeCsvs("QuarterlyNumberOfTransactions.csv")
 mergeCsvs("QuarterlyNumberOfNewContracts.csv")
-mergeCsvs("SemiAnuallyRentsOfNewContracts.csv")
+mergeCsvs("YearlyRentsOfNewContracts.csv")

@@ -115,6 +115,76 @@ function generate_yearly_houses_prices_table(adf, mdf)
     return finalTable
 end
 
+function generate_yearly_old_houses_prices_table(adf, mdf)
+    # since we will organize the table in quarters, we don't need the last hanging 1 or 2 steps
+    maxRelevantStep = Int(floor(NUMBER_OF_STEPS/12)) * 12
+
+    # 
+    finalTable = vcat([["-"]], [Any[string(location)] for location in HOUSE_LOCATION_INSTANCES])
+
+
+    currentYear = 2021
+    currentYearTransactions = Dict(location => [] for location in HOUSE_LOCATION_INSTANCES)
+    for i in 1:maxRelevantStep
+        for location in HOUSE_LOCATION_INSTANCES
+            for transaction in mdf.transactions_per_region[i][location]
+                if transaction.sellerId != -1
+                    push!(currentYearTransactions[location], transaction.price / transaction.area)
+                end
+            end
+        end
+        if i % 12 == 0
+            push!(finalTable[1], "$(currentYear)")
+            for location in HOUSE_LOCATION_INSTANCES
+                if length(currentYearTransactions[location]) != 0
+                    push!(finalTable[locationToIndex[location]], Int64(round(median(currentYearTransactions[location]))))
+                else
+                    push!(finalTable[locationToIndex[location]], 0)
+                end
+                empty!(currentYearTransactions[location])
+            end
+            currentYear += 1
+        end
+    end
+
+    return finalTable
+end
+
+function generate_yearly_recently_built_prices_table(adf, mdf)
+    # since we will organize the table in quarters, we don't need the last hanging 1 or 2 steps
+    maxRelevantStep = Int(floor(NUMBER_OF_STEPS/12)) * 12
+
+    # 
+    finalTable = vcat([["-"]], [Any[string(location)] for location in HOUSE_LOCATION_INSTANCES])
+
+
+    currentYear = 2021
+    currentYearTransactions = Dict(location => [] for location in HOUSE_LOCATION_INSTANCES)
+    for i in 1:maxRelevantStep
+        for location in HOUSE_LOCATION_INSTANCES
+            for transaction in mdf.transactions_per_region[i][location]
+                if transaction.sellerId == -1
+                    push!(currentYearTransactions[location], transaction.price / transaction.area)
+                end
+            end
+        end
+        if i % 12 == 0
+            push!(finalTable[1], "$(currentYear)")
+            for location in HOUSE_LOCATION_INSTANCES
+                if length(currentYearTransactions[location]) != 0
+                    push!(finalTable[locationToIndex[location]], Int64(round(median(currentYearTransactions[location]))))
+                else
+                    push!(finalTable[locationToIndex[location]], 0)
+                end
+                empty!(currentYearTransactions[location])
+            end
+            currentYear += 1
+        end
+    end
+
+    return finalTable
+end
+
 function generate_rent_prices_table(adf, mdf)
     # since we will organize the table in quarters, we don't need the last hanging 1 or 2 steps
     maxRelevantStep = Int(floor(NUMBER_OF_STEPS/3)) * 3
