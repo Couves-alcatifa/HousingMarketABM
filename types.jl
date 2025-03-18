@@ -254,3 +254,16 @@ end
     smaller_than_120 = 3
     bigger_than_120 = 4
 end
+
+@enum ForeignCountry begin
+    Brasil = 1
+    Ucrania = 2
+    CaboVerde = 3
+    Romenia = 4
+    Angola = 5
+    GuineBissau = 6
+    ReinoUnido = 7
+    Moldavia = 8
+    China = 9
+    SaoTomeEPrincipe = 10
+end

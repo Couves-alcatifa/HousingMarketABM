@@ -1569,3 +1569,21 @@ function print_household(household)
     res *= "Household homelessTime = $(household.homelessTime)\n"
     return res
 end
+
+function generateForeignerHousehold(model, location)
+    age = rand(20:55)
+    foreignCountry = FOREIGNERS_POOL[location][rand(1:length(FOREIGNERS_POOL[location]))]
+    percentileMultiplier = FOREIGNER_PERCENTILE_MULTIPLIER[foreignCountry]
+    percentile = Int64(round(rand(1:100) * percentileMultiplier))
+    if percentile > 100
+        percentile = 100
+    elseif percentile < 1
+        percentile = 1
+    end
+    size = rand(1:3)
+    wealth = generateInitialWealth(age, percentile, size, location)
+    newHousehold = add_household(model, wealth, age, size, location, percentile=percentile)
+    content = "generated agent from migration $(print_household(newHousehold))\n"
+    TRANSACTION_LOG(content, model)
+    return newHousehold
+end

@@ -1856,3 +1856,265 @@ const REAL_RENTS_MAP = Dict(
 
 const REAL_RENTS_MAP_ADJUSTED = Dict(location => [adjust_value_to_inflation(value) for value in values] for (location, values) in REAL_RENTS_MAP)
 
+const FOREIGNERS_PER_COUNTRY_MAP = Dict(
+    Alcochete => Dict(
+        Brasil => 391,
+        Ucrania => 53,
+        CaboVerde => 9,
+        Romenia => 277,
+        Angola => 77,
+        GuineBissau => 7,
+        ReinoUnido => 44,
+        Moldavia => 9,
+        China => 32,
+        SaoTomeEPrincipe => 6,
+    ),
+
+    Almada => Dict(
+        Brasil => 7601,
+        Ucrania => 322,
+        CaboVerde => 1973,
+        Romenia => 278,
+        Angola => 1134,
+        GuineBissau => 321,
+        ReinoUnido => 324,
+        Moldavia => 108,
+        China => 417,
+        SaoTomeEPrincipe => 650,
+    ),
+
+    Amadora => Dict(
+        Brasil => 6767,
+        Ucrania => 507,
+        CaboVerde => 5904,
+        Romenia => 579,
+        Angola => 1743,
+        GuineBissau => 3035,
+        ReinoUnido => 319,
+        Moldavia => 55,
+        China => 466,
+        SaoTomeEPrincipe => 1019,
+    ),
+
+    Barreiro => Dict(
+        Brasil => 2459,
+        Ucrania => 75,
+        CaboVerde => 831,
+        Romenia => 50,
+        Angola => 836,
+        GuineBissau => 609,
+        ReinoUnido => 63,
+        Moldavia => 29,
+        China => 178,
+        SaoTomeEPrincipe => 280,
+    ),
+
+    Cascais => Dict(
+        Brasil => 11937,
+        Ucrania => 894,
+        CaboVerde => 896,
+        Romenia => 953,
+        Angola => 593,
+        GuineBissau => 975,
+        ReinoUnido => 2560,
+        Moldavia => 325,
+        China => 781,
+        SaoTomeEPrincipe => 92,
+    ),
+
+    Lisboa => Dict(
+        Brasil => 22077,
+        Ucrania => 1393,
+        CaboVerde => 2124,
+        Romenia => 1664,
+        Angola => 2920,
+        GuineBissau => 1430,
+        ReinoUnido => 4621,
+        Moldavia => 133,
+        China => 5447,
+        SaoTomeEPrincipe => 951,
+    ),
+
+    Loures => Dict(
+        Brasil => 5964,
+        Ucrania => 727,
+        CaboVerde => 2011,
+        Romenia => 760,
+        Angola => 2329,
+        GuineBissau => 2143,
+        ReinoUnido => 135,
+        Moldavia => 120,
+        China => 465,
+        SaoTomeEPrincipe => 2573,
+    ),
+
+    Mafra => Dict(
+        Brasil => 3381,
+        Ucrania => 289,
+        CaboVerde => 39,
+        Romenia => 261,
+        Angola => 98,
+        GuineBissau => 21,
+        ReinoUnido => 304,
+        Moldavia => 87,
+        China => 153,
+        SaoTomeEPrincipe => 25,
+    ),
+
+    Moita => Dict(
+        Brasil => 1396,
+        Ucrania => 78,
+        CaboVerde => 802,
+        Romenia => 84,
+        Angola => 834,
+        GuineBissau => 926,
+        ReinoUnido => 62,
+        Moldavia => 22,
+        China => 165,
+        SaoTomeEPrincipe => 298,
+    ),
+
+    Montijo => Dict(
+        Brasil => 2406,
+        Ucrania => 155,
+        CaboVerde => 64,
+        Romenia => 881,
+        Angola => 499,
+        GuineBissau => 44,
+        ReinoUnido => 60,
+        Moldavia => 86,
+        China => 143,
+        SaoTomeEPrincipe => 48,
+    ),
+
+    Odivelas => Dict(
+        Brasil => 6306,
+        Ucrania => 874,
+        CaboVerde => 908,
+        Romenia => 544,
+        Angola => 2581,
+        GuineBissau => 1969,
+        ReinoUnido => 274,
+        Moldavia => 81,
+        China => 447,
+        SaoTomeEPrincipe => 643,
+    ),
+
+    Oeiras => Dict(
+        Brasil => 6580,
+        Ucrania => 371,
+        CaboVerde => 1446,
+        Romenia => 311,
+        Angola => 518,
+        GuineBissau => 222,
+        ReinoUnido => 278,
+        Moldavia => 106,
+        China => 468,
+        SaoTomeEPrincipe => 87,
+    ),
+
+    Palmela => Dict(
+        Brasil => 1388,
+        Ucrania => 157,
+        CaboVerde => 86,
+        Romenia => 408,
+        Angola => 204,
+        GuineBissau => 38,
+        ReinoUnido => 127,
+        Moldavia => 71,
+        China => 134,
+        SaoTomeEPrincipe => 20,
+    ),
+
+    Seixal => Dict(
+        Brasil => 5684,
+        Ucrania => 195,
+        CaboVerde => 2296,
+        Romenia => 230,
+        Angola => 1391,
+        GuineBissau => 468,
+        ReinoUnido => 178,
+        Moldavia => 61,
+        China => 251,
+        SaoTomeEPrincipe => 1436,
+    ),
+
+    Sesimbra => Dict(
+        Brasil => 1561,
+        Ucrania => 100,
+        CaboVerde => 121,
+        Romenia => 139,
+        Angola => 145,
+        GuineBissau => 17,
+        ReinoUnido => 125,
+        Moldavia => 84,
+        China => 88,
+        SaoTomeEPrincipe => 22,
+    ),
+
+    Setubal => Dict(
+        Brasil => 5327,
+        Ucrania => 322,
+        CaboVerde => 499,
+        Romenia => 722,
+        Angola => 685,
+        GuineBissau => 85,
+        ReinoUnido => 229,
+        Moldavia => 150,
+        China => 349,
+        SaoTomeEPrincipe => 45,
+    ),
+
+    Sintra => Dict(
+        Brasil => 13687,
+        Ucrania => 1382,
+        CaboVerde => 8011,
+        Romenia => 1660,
+        Angola => 5226,
+        GuineBissau => 6187,
+        ReinoUnido => 611,
+        Moldavia => 377,
+        China => 846,
+        SaoTomeEPrincipe => 1414,
+    ),
+
+    VilaFrancaDeXira => Dict(
+        Brasil => 4440,
+        Ucrania => 397,
+        CaboVerde => 762,
+        Romenia => 523,
+        Angola => 825,
+        GuineBissau => 571,
+        ReinoUnido => 64,
+        Moldavia => 116,
+        China => 258,
+        SaoTomeEPrincipe => 254,
+    ),
+)
+
+FOREIGNERS_POOL = Dict(location => ForeignCountry[] for location in HOUSE_LOCATION_INSTANCES)
+
+for (location, foreigners) in FOREIGNERS_PER_COUNTRY_MAP
+    for (country, count) in foreigners
+        for _ in 1:round(count * (200 / sum([foreigners[foreignCountry] for foreignCountry in keys(foreigners)])))
+            push!(FOREIGNERS_POOL[location], country)
+        end
+    end
+end
+
+const PORTUGAL_GDP_PER_CAPITA = 27331
+
+const GDP_PER_CAPITA_MAP = Dict(
+    Brasil => 9673,
+    Ucrania => 4825,
+    CaboVerde => 4043,
+    Romenia => 16094,
+    Angola => 3437,
+    GuineBissau => 820,
+    ReinoUnido => 46510,
+    Moldavia => 5714,
+    China => 12970,
+    SaoTomeEPrincipe => 2422,
+)
+
+const FOREIGNER_PERCENTILE_MULTIPLIER = Dict(foreignCountry => GDP_PER_CAPITA_MAP[foreignCountry] / PORTUGAL_GDP_PER_CAPITA for foreignCountry in keys(GDP_PER_CAPITA_MAP))
