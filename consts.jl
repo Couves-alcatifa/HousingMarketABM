@@ -2095,6 +2095,9 @@ const FOREIGNERS_PER_COUNTRY_MAP = Dict(
 FOREIGNERS_POOL = Dict(location => ForeignCountry[] for location in HOUSE_LOCATION_INSTANCES)
 
 for (location, foreigners) in FOREIGNERS_PER_COUNTRY_MAP
+    if !(location in HOUSE_LOCATION_INSTANCES)
+        continue
+    end
     for (country, count) in foreigners
         for _ in 1:round(count * (200 / sum([foreigners[foreignCountry] for foreignCountry in keys(foreigners)])))
             push!(FOREIGNERS_POOL[location], country)
