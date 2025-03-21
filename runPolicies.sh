@@ -2,7 +2,7 @@
 locations=("Oeiras")
 
 # policies=("ConstructionVatReduction" "ConstructionLicensingSimplification" "RentSubsidy" "NonResidentsProhibition" "Baseline")
-policies=("Baseline" "ConstructionVatReduction" "NonResidentsProhibition")
+policies=("Baseline" "ConstructionLicensingSimplification")
 for location in ${locations[@]}
 do
     for policy in ${policies[@]}
