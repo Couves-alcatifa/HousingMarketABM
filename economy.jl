@@ -126,11 +126,13 @@ function wealth_model()
 
     start_time = time()
 
-    ratioForHouseholdsAgesMap = Int64(round(sum([NUMBER_OF_HOUSEHOLDS_WITH_AGES_LMA[age] for age in [20,30,40,50,60,70,80,90]]) / NUMBER_OF_HOUSEHOLDS))
+    ratioForHouseholdsAgesMap = NUMBER_OF_HOUSEHOLDS / sum([NUMBER_OF_HOUSEHOLDS_WITH_AGES_LMA[age] for age in [20,30,40,50,60,70,80,90]])
     households_initial_ages = []
-    for age in keys(NUMBER_OF_HOUSEHOLDS_WITH_AGES_LMA)
-        households_initial_ages = vcat(households_initial_ages, rand(age:age+9, NUMBER_OF_HOUSEHOLDS_WITH_AGES_LMA[age] * ratioForHouseholdsAgesMap))     
+    println("Before for age in keys(NUMBER_OF_HOUSEHOLDS_WITH_AGES_LMA")
+    for age in [20,30,40,50,60,70,80,90]
+        households_initial_ages = vcat(households_initial_ages, rand(age:(age+9), Int64(round(NUMBER_OF_HOUSEHOLDS_WITH_AGES_LMA[age] * ratioForHouseholdsAgesMap))))     
     end
+    println("After for age in keys(NUMBER_OF_HOUSEHOLDS_WITH_AGES_LMA")
     sort!(households_initial_ages, lt=sortRandomly)
     
     # initiate greediness
@@ -184,9 +186,10 @@ function wealth_model()
         :expectedBirths => Dict(location => rand(Normal((BIRTH_RATE_MAP[location] * NUMBER_OF_HOUSEHOLDS) / 12, 0.1 * (BIRTH_RATE_MAP[location] * NUMBER_OF_HOUSEHOLDS) / 12)) for location in HOUSE_LOCATION_INSTANCES),
         :expectedDeaths => Dict(location => rand(Normal((MORTALITY_RATE_MAP[location] * NUMBER_OF_HOUSEHOLDS) / 12, 0.1 * (MORTALITY_RATE_MAP[location] * NUMBER_OF_HOUSEHOLDS) / 12)) for location in HOUSE_LOCATION_INSTANCES),
     )
+    println("Before StandardABM()")
 
     model = StandardABM(MyMultiAgent; agent_step! = agent_step!, model_step! = model_step!, properties,scheduler = Schedulers.Randomly())
-
+    println("After StandardABM()")
     # initiateHouses(model)
     LOG_INFO("finished initateHouses in $(time() - start_time) seconds")
     initiateHouseholds(model, households_initial_ages)
