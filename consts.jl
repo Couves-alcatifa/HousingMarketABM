@@ -2105,7 +2105,8 @@ for (location, foreigners) in FOREIGNERS_PER_COUNTRY_MAP
     end
 end
 
-const PORTUGAL_GDP_PER_CAPITA = 27331
+const LISBON_GDP_PER_CAPITA = 26588
+const THIRD_QUINTILE_INCOME_LMA = 14990
 
 const GDP_PER_CAPITA_MAP = Dict(
     Brasil => 9673,
@@ -2120,4 +2121,4 @@ const GDP_PER_CAPITA_MAP = Dict(
     SaoTomeEPrincipe => 2422,
 )
 
-const FOREIGNER_PERCENTILE_MULTIPLIER = Dict(foreignCountry => GDP_PER_CAPITA_MAP[foreignCountry] / PORTUGAL_GDP_PER_CAPITA for foreignCountry in keys(GDP_PER_CAPITA_MAP))
+const FOREIGNER_PERCENTILE_MULTIPLIER = Dict(foreignCountry => GDP_PER_CAPITA_MAP[foreignCountry] / LISBON_GDP_PER_CAPITA for foreignCountry in keys(GDP_PER_CAPITA_MAP))

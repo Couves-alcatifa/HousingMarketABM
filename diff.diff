@@ -1,0 +1,449 @@
+diff --git a/consts.jl b/consts.jl
+index 44c996834..438e29c5d 100644
+--- a/consts.jl
++++ b/consts.jl
+@@ -1856,3 +1856,268 @@ const REAL_RENTS_MAP = Dict(
+ 
+ const REAL_RENTS_MAP_ADJUSTED = Dict(location => [adjust_value_to_inflation(value) for value in values] for (location, values) in REAL_RENTS_MAP)
+ 
++const FOREIGNERS_PER_COUNTRY_MAP = Dict(
++    Alcochete => Dict(
++        Brasil => 391,
++        Ucrania => 53,
++        CaboVerde => 9,
++        Romenia => 277,
++        Angola => 77,
++        GuineBissau => 7,
++        ReinoUnido => 44,
++        Moldavia => 9,
++        China => 32,
++        SaoTomeEPrincipe => 6,
++    ),
++
++    Almada => Dict(
++        Brasil => 7601,
++        Ucrania => 322,
++        CaboVerde => 1973,
++        Romenia => 278,
++        Angola => 1134,
++        GuineBissau => 321,
++        ReinoUnido => 324,
++        Moldavia => 108,
++        China => 417,
++        SaoTomeEPrincipe => 650,
++    ),
++
++    Amadora => Dict(
++        Brasil => 6767,
++        Ucrania => 507,
++        CaboVerde => 5904,
++        Romenia => 579,
++        Angola => 1743,
++        GuineBissau => 3035,
++        ReinoUnido => 319,
++        Moldavia => 55,
++        China => 466,
++        SaoTomeEPrincipe => 1019,
++    ),
++
++    Barreiro => Dict(
++        Brasil => 2459,
++        Ucrania => 75,
++        CaboVerde => 831,
++        Romenia => 50,
++        Angola => 836,
++        GuineBissau => 609,
++        ReinoUnido => 63,
++        Moldavia => 29,
++        China => 178,
++        SaoTomeEPrincipe => 280,
++    ),
++
++    Cascais => Dict(
++        Brasil => 11937,
++        Ucrania => 894,
++        CaboVerde => 896,
++        Romenia => 953,
++        Angola => 593,
++        GuineBissau => 975,
++        ReinoUnido => 2560,
++        Moldavia => 325,
++        China => 781,
++        SaoTomeEPrincipe => 92,
++    ),
++
++    Lisboa => Dict(
++        Brasil => 22077,
++        Ucrania => 1393,
++        CaboVerde => 2124,
++        Romenia => 1664,
++        Angola => 2920,
++        GuineBissau => 1430,
++        ReinoUnido => 4621,
++        Moldavia => 133,
++        China => 5447,
++        SaoTomeEPrincipe => 951,
++    ),
++
++    Loures => Dict(
++        Brasil => 5964,
++        Ucrania => 727,
++        CaboVerde => 2011,
++        Romenia => 760,
++        Angola => 2329,
++        GuineBissau => 2143,
++        ReinoUnido => 135,
++        Moldavia => 120,
++        China => 465,
++        SaoTomeEPrincipe => 2573,
++    ),
++
++    Mafra => Dict(
++        Brasil => 3381,
++        Ucrania => 289,
++        CaboVerde => 39,
++        Romenia => 261,
++        Angola => 98,
++        GuineBissau => 21,
++        ReinoUnido => 304,
++        Moldavia => 87,
++        China => 153,
++        SaoTomeEPrincipe => 25,
++    ),
++
++    Moita => Dict(
++        Brasil => 1396,
++        Ucrania => 78,
++        CaboVerde => 802,
++        Romenia => 84,
++        Angola => 834,
++        GuineBissau => 926,
++        ReinoUnido => 62,
++        Moldavia => 22,
++        China => 165,
++        SaoTomeEPrincipe => 298,
++    ),
++
++    Montijo => Dict(
++        Brasil => 2406,
++        Ucrania => 155,
++        CaboVerde => 64,
++        Romenia => 881,
++        Angola => 499,
++        GuineBissau => 44,
++        ReinoUnido => 60,
++        Moldavia => 86,
++        China => 143,
++        SaoTomeEPrincipe => 48,
++    ),
++
++    Odivelas => Dict(
++        Brasil => 6306,
++        Ucrania => 874,
++        CaboVerde => 908,
++        Romenia => 544,
++        Angola => 2581,
++        GuineBissau => 1969,
++        ReinoUnido => 274,
++        Moldavia => 81,
++        China => 447,
++        SaoTomeEPrincipe => 643,
++    ),
++
++    Oeiras => Dict(
++        Brasil => 6580,
++        Ucrania => 371,
++        CaboVerde => 1446,
++        Romenia => 311,
++        Angola => 518,
++        GuineBissau => 222,
++        ReinoUnido => 278,
++        Moldavia => 106,
++        China => 468,
++        SaoTomeEPrincipe => 87,
++    ),
++
++    Palmela => Dict(
++        Brasil => 1388,
++        Ucrania => 157,
++        CaboVerde => 86,
++        Romenia => 408,
++        Angola => 204,
++        GuineBissau => 38,
++        ReinoUnido => 127,
++        Moldavia => 71,
++        China => 134,
++        SaoTomeEPrincipe => 20,
++    ),
++
++    Seixal => Dict(
++        Brasil => 5684,
++        Ucrania => 195,
++        CaboVerde => 2296,
++        Romenia => 230,
++        Angola => 1391,
++        GuineBissau => 468,
++        ReinoUnido => 178,
++        Moldavia => 61,
++        China => 251,
++        SaoTomeEPrincipe => 1436,
++    ),
++
++    Sesimbra => Dict(
++        Brasil => 1561,
++        Ucrania => 100,
++        CaboVerde => 121,
++        Romenia => 139,
++        Angola => 145,
++        GuineBissau => 17,
++        ReinoUnido => 125,
++        Moldavia => 84,
++        China => 88,
++        SaoTomeEPrincipe => 22,
++    ),
++
++    Setubal => Dict(
++        Brasil => 5327,
++        Ucrania => 322,
++        CaboVerde => 499,
++        Romenia => 722,
++        Angola => 685,
++        GuineBissau => 85,
++        ReinoUnido => 229,
++        Moldavia => 150,
++        China => 349,
++        SaoTomeEPrincipe => 45,
++    ),
++
++    Sintra => Dict(
++        Brasil => 13687,
++        Ucrania => 1382,
++        CaboVerde => 8011,
++        Romenia => 1660,
++        Angola => 5226,
++        GuineBissau => 6187,
++        ReinoUnido => 611,
++        Moldavia => 377,
++        China => 846,
++        SaoTomeEPrincipe => 1414,
++    ),
++
++    VilaFrancaDeXira => Dict(
++        Brasil => 4440,
++        Ucrania => 397,
++        CaboVerde => 762,
++        Romenia => 523,
++        Angola => 825,
++        GuineBissau => 571,
++        ReinoUnido => 64,
++        Moldavia => 116,
++        China => 258,
++        SaoTomeEPrincipe => 254,
++    ),
++)
++
++FOREIGNERS_POOL = Dict(location => ForeignCountry[] for location in HOUSE_LOCATION_INSTANCES)
++
++for (location, foreigners) in FOREIGNERS_PER_COUNTRY_MAP
++    if !(location in HOUSE_LOCATION_INSTANCES)
++        continue
++    end
++    for (country, count) in foreigners
++        for _ in 1:round(count * (200 / sum([foreigners[foreignCountry] for foreignCountry in keys(foreigners)])))
++            push!(FOREIGNERS_POOL[location], country)
++        end
++    end
++end
++
++const PORTUGAL_GDP_PER_CAPITA = 27331
++
++const GDP_PER_CAPITA_MAP = Dict(
++    Brasil => 9673,
++    Ucrania => 4825,
++    CaboVerde => 4043,
++    Romenia => 16094,
++    Angola => 3437,
++    GuineBissau => 820,
++    ReinoUnido => 46510,
++    Moldavia => 5714,
++    China => 12970,
++    SaoTomeEPrincipe => 2422,
++)
++
++const FOREIGNER_PERCENTILE_MULTIPLIER = Dict(foreignCountry => GDP_PER_CAPITA_MAP[foreignCountry] / PORTUGAL_GDP_PER_CAPITA for foreignCountry in keys(GDP_PER_CAPITA_MAP))
+\ No newline at end of file
+diff --git a/demography.jl b/demography.jl
+index ade8b567e..a1fb882db 100644
+--- a/demography.jl
++++ b/demography.jl
+@@ -153,24 +153,9 @@ function handle_migrations(model)
+         expectedImigrants = rand(Normal(expectedImigrants, stdev))
+         added = 0
+         while added < expectedImigrants
+-            age = rand(20:55)
+-            percentile = rand(1:100)
+-            # percentile = Int64(round(rand(Normal(30, 20))))
+-            # if percentile <= 0
+-            #     percentile = 1
+-            # elseif percentile > 100
+-            #     percentile = 100
+-            # elseif percentile > 75
+-            #     # part of the very rich immigrants
+-            #     percentile = rand(95:100)
+-            # end
+-            size = rand(1:3)
+-            wealth = generateInitialWealth(age, percentile, size, location)
+-            newHousehold = add_household(model, wealth, age, size, location, percentile=percentile)
+-            content = "generated agent from migration $(print_household(newHousehold))\n"
+-            TRANSACTION_LOG(content, model)
++            household = generateForeignerHousehold(model, location)
+ 
+-            added += size
++            added += household.size
+         end
+     end
+ 
+diff --git a/economy.jl b/economy.jl
+index 308814df4..e25dd2316 100644
+--- a/economy.jl
++++ b/economy.jl
+@@ -773,6 +773,8 @@ writeToCsv("$output_folder/QuarterlyNumberOfNewContracts.csv", generate_quarterl
+ writeToCsv("$output_folder/QuarterlyNumberOfTransactions.csv", generate_quarterly_number_of_transactions(agent_data[2:end, :], model_data[2:end, :]))
+ writeToCsv("$output_folder/AnnuallyScalledNumberOfNewContracts.csv", generate_annually_scalled_number_of_new_contracts(agent_data[2:end, :], model_data[2:end, :]))
+ writeToCsv("$output_folder/DemographicEvents.csv", generate_demographic_table(agent_data[2:end, :], model_data[2:end, :]))
++writeToCsv("$output_folder/YearlyRecentlyBuildPrices.csv", generate_yearly_recently_built_prices_table(agent_data[2:end, :], model_data[2:end, :]))
++writeToCsv("$output_folder/YearlyOldHousesPrices.csv", generate_yearly_old_houses_prices_table(agent_data[2:end, :], model_data[2:end, :]))
+ # CSV.write("$output_folder/agentData.csv", agent_data, delim=';')
+ CSV.write("$output_folder/modelData.csv", model_data, delim=';')
+ 
+diff --git a/tables.jl b/tables.jl
+index b602cbbb5..11b724ace 100644
+--- a/tables.jl
++++ b/tables.jl
+@@ -115,6 +115,76 @@ function generate_yearly_houses_prices_table(adf, mdf)
+     return finalTable
+ end
+ 
++function generate_yearly_old_houses_prices_table(adf, mdf)
++    # since we will organize the table in quarters, we don't need the last hanging 1 or 2 steps
++    maxRelevantStep = Int(floor(NUMBER_OF_STEPS/12)) * 12
++
++    # 
++    finalTable = vcat([["-"]], [Any[string(location)] for location in HOUSE_LOCATION_INSTANCES])
++
++
++    currentYear = 2021
++    currentYearTransactions = Dict(location => [] for location in HOUSE_LOCATION_INSTANCES)
++    for i in 1:maxRelevantStep
++        for location in HOUSE_LOCATION_INSTANCES
++            for transaction in mdf.transactions_per_region[i][location]
++                if transaction.sellerId != -1
++                    push!(currentYearTransactions[location], transaction.price / transaction.area)
++                end
++            end
++        end
++        if i % 12 == 0
++            push!(finalTable[1], "$(currentYear)")
++            for location in HOUSE_LOCATION_INSTANCES
++                if length(currentYearTransactions[location]) != 0
++                    push!(finalTable[locationToIndex[location]], Int64(round(median(currentYearTransactions[location]))))
++                else
++                    push!(finalTable[locationToIndex[location]], 0)
++                end
++                empty!(currentYearTransactions[location])
++            end
++            currentYear += 1
++        end
++    end
++
++    return finalTable
++end
++
++function generate_yearly_recently_built_prices_table(adf, mdf)
++    # since we will organize the table in quarters, we don't need the last hanging 1 or 2 steps
++    maxRelevantStep = Int(floor(NUMBER_OF_STEPS/12)) * 12
++
++    # 
++    finalTable = vcat([["-"]], [Any[string(location)] for location in HOUSE_LOCATION_INSTANCES])
++
++
++    currentYear = 2021
++    currentYearTransactions = Dict(location => [] for location in HOUSE_LOCATION_INSTANCES)
++    for i in 1:maxRelevantStep
++        for location in HOUSE_LOCATION_INSTANCES
++            for transaction in mdf.transactions_per_region[i][location]
++                if transaction.sellerId == -1
++                    push!(currentYearTransactions[location], transaction.price / transaction.area)
++                end
++            end
++        end
++        if i % 12 == 0
++            push!(finalTable[1], "$(currentYear)")
++            for location in HOUSE_LOCATION_INSTANCES
++                if length(currentYearTransactions[location]) != 0
++                    push!(finalTable[locationToIndex[location]], Int64(round(median(currentYearTransactions[location]))))
++                else
++                    push!(finalTable[locationToIndex[location]], 0)
++                end
++                empty!(currentYearTransactions[location])
++            end
++            currentYear += 1
++        end
++    end
++
++    return finalTable
++end
++
+ function generate_rent_prices_table(adf, mdf)
+     # since we will organize the table in quarters, we don't need the last hanging 1 or 2 steps
+     maxRelevantStep = Int(floor(NUMBER_OF_STEPS/3)) * 3
+diff --git a/types.jl b/types.jl
+index ac6f2bf37..1fa90e16d 100644
+--- a/types.jl
++++ b/types.jl
+@@ -254,3 +254,16 @@ end
+     smaller_than_120 = 3
+     bigger_than_120 = 4
+ end
++
++@enum ForeignCountry begin
++    Brasil = 1
++    Ucrania = 2
++    CaboVerde = 3
++    Romenia = 4
++    Angola = 5
++    GuineBissau = 6
++    ReinoUnido = 7
++    Moldavia = 8
++    China = 9
++    SaoTomeEPrincipe = 10
++end
+\ No newline at end of file
+diff --git a/utilities.jl b/utilities.jl
+index c4aa9239a..915582b52 100644
+--- a/utilities.jl
++++ b/utilities.jl
+@@ -1568,4 +1568,22 @@ function print_household(household)
+     res *= "Household residencyZone = $(household.residencyZone)\n"
+     res *= "Household homelessTime = $(household.homelessTime)\n"
+     return res
++end
++
++function generateForeignerHousehold(model, location)
++    age = rand(20:55)
++    foreignCountry = FOREIGNERS_POOL[location][rand(1:length(FOREIGNERS_POOL[location]))]
++    percentileMultiplier = FOREIGNER_PERCENTILE_MULTIPLIER[foreignCountry]
++    percentile = Int64(round(rand(1:100) * percentileMultiplier))
++    if percentile > 100
++        percentile = 100
++    elseif percentile < 1
++        percentile = 1
++    end
++    size = rand(1:3)
++    wealth = generateInitialWealth(age, percentile, size, location)
++    newHousehold = add_household(model, wealth, age, size, location, percentile=percentile)
++    content = "generated agent from migration $(print_household(newHousehold))\n"
++    TRANSACTION_LOG(content, model)
++    return newHousehold
+ end
+\ No newline at end of file

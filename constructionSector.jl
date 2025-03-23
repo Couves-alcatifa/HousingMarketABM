@@ -295,7 +295,7 @@ function calculate_construction_costs(model, house, withVat)
     constructionCosts = ((CONSTRUCTION_COSTS_MIN + CONSTRUCTION_COSTS_MAX) / 2) * house.area
     # constructionCosts = map_value(house.percentile, 1, 100, CONSTRUCTION_COSTS_MIN, CONSTRUCTION_COSTS_MAX) * house.area
     # this costs should change with the zone salaries
-    constructionCosts *= THIRD_QUINTILE_INCOME_MAP[house.location] / THIRD_QUINTILE_INCOME_MAP[Lisboa]
+    constructionCosts *= THIRD_QUINTILE_INCOME_MAP[house.location] / THIRD_QUINTILE_INCOME_LMA
     if withVat
         constructionCosts *= 1 + CONSTRUCTION_VAT
     end

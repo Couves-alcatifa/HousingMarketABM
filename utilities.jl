@@ -210,6 +210,13 @@ function calculateCostBasedPrice(model, size, location)
 end
 
 function generateInitialWealth(age, percentile, size, location)
+    regionalRatio = (THIRD_QUINTILE_INCOME_MAP[location] / THIRD_QUINTILE_INCOME_LMA)
+
+    firstQuintileFourthQuintileRatio = FIRST_QUINTILE_INCOME_MAP_QUINTILE_INCOME_MAP[location] / FOURTH_QUINTILE_INCOME_MAP_QUINTILE_INCOME_MAP[location]
+    percentileRatio = map_value_non_linear(percentile, 1, 100, firstQuintileFourthQuintileRatio * 0.5, 1 / firstQuintileFourthQuintileRatio * 2)
+    ageRatio = map_value(age, 20, 70, 0.7, 1.5)
+    value = LISBON_GDP_PER_CAPITA * regionalRatio * percentileRatio * ageRatio
+    return value * (size > 1 ? 2 : 1)
     # value = age * INITIAL_WEALTH_PER_AGE * rand(INITIAL_WEALTH_MULTIPLICATION_BASE:INITIAL_WEALTH_MULTIPLICATION_ROOF) 
     #     + percentile * INITIAL_WEALTH_PER_PERCENTILE * rand(INITIAL_WEALTH_MULTIPLICATION_BASE:INITIAL_WEALTH_MULTIPLICATION_ROOF)
     # return value * (size > 1 ? 2 : 1)

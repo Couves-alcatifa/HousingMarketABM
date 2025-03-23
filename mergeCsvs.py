@@ -35,7 +35,8 @@ def mergeCsvs(csv_file):
                 with open(csv_file, 'r', encoding='utf-8') as infile:
                     next(infile)  # Skip the header
                     for line in infile:
-                        outfile.write(line)
+                        if "Oeiras" in line: 
+                            outfile.write(line)
 
     for policy in policies:
         # Collect all data.csv files from the most recent folders
@@ -62,6 +63,8 @@ def mergeCsvs(csv_file):
 # sed -i '/Oeiras/!d' results/csvs/*.csv
 
 mergeCsvs("YearlyHousePrices.csv")
+mergeCsvs("YearlyOldHousesPrices.csv")
+mergeCsvs("YearlyRecentlyBuildPrices.csv")
 mergeCsvs("QuarterlyNumberOfTransactions.csv")
 mergeCsvs("QuarterlyNumberOfNewContracts.csv")
 mergeCsvs("YearlyRentsOfNewContracts.csv")
