@@ -2122,3 +2122,31 @@ const GDP_PER_CAPITA_MAP = Dict(
 )
 
 const FOREIGNER_PERCENTILE_MULTIPLIER = Dict(foreignCountry => GDP_PER_CAPITA_MAP[foreignCountry] / LISBON_GDP_PER_CAPITA for foreignCountry in keys(GDP_PER_CAPITA_MAP))
+
+#https://censos.ine.pt/xportal/xmain?xpgid=censos21_populacao&xpid=CENSOS21
+const NUMBER_OF_PEOPLE_WITH_AGES_LMA = Dict(
+    0 => 134741 + 127979,
+    10 => 153734 + 146714,
+    20 => 161488 + 161469,
+    30 => 175513 + 185894,
+    40 => 212770 + 235831,
+    50 => 176750 + 204599,
+    60 => 148212 + 185317,
+    70 => 121692 + 158697,
+    80 => 56832 + 91280,
+    90 => 8103 + 21407,
+)
+
+# convert person's ages to households 
+# (move the people below 30 to the 30s, 40s, 50s, as the households ages 
+# are represented by the older person)
+const NUMBER_OF_HOUSEHOLDS_WITH_AGES_LMA = Dict(
+    20 => POPULATION_AGES_LMA[20] / 2,
+    30 => POPULATION_AGES_LMA[30] + sum([POPULATION_AGES_LMA[age] for age in [0,10,20]]) / 3,
+    40 => POPULATION_AGES_LMA[40] + sum([POPULATION_AGES_LMA[age] for age in [0,10,20]]) / 3 +  + POPULATION_AGES_LMA[20] / 4,
+    50 => POPULATION_AGES_LMA[50] + sum([POPULATION_AGES_LMA[age] for age in [0,10,20]]) / 3 +  + POPULATION_AGES_LMA[20] / 4,
+    60 => POPULATION_AGES_LMA[60],
+    70 => POPULATION_AGES_LMA[70],
+    80 => POPULATION_AGES_LMA[80],
+    90 => POPULATION_AGES_LMA[90],
+)
