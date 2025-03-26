@@ -2105,8 +2105,8 @@ for (location, foreigners) in FOREIGNERS_PER_COUNTRY_MAP
     end
 end
 
-const LISBON_GDP_PER_CAPITA = 26588
-const THIRD_QUINTILE_INCOME_LMA = 14990
+const LISBON_GDP_PER_CAPITA = adjust_value_to_inflation(26588)
+const THIRD_QUINTILE_INCOME_LMA = adjust_value_to_inflation(14990)
 
 const GDP_PER_CAPITA_MAP = Dict(
     Brasil => 9673,

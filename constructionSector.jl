@@ -269,11 +269,12 @@ function put_newly_built_house_to_sale(model, house)
     end
     push!(model.houseMarket.supply, HouseSupply(house, askPrice, Bid[], -1))
     push!(model.housesBuiltPerRegion[house.location][getSizeInterval(house)], house)
-    LOG_INFO("Pushed house into housesBuiltPerRegion (location,size) = ($(string(house.location)), $(string(getSizeInterval(house))))")
-    open("$output_folder/transactions_logs/step_$(model.steps).txt", "a") do file
-        write(file, "price of newly built house = $askPrice\n")
-    end
-    println("price of newly built house = " * string(askPrice))
+    content = "Pushed house into housesBuiltPerRegion (location,size) = ($(string(house.location)), $(string(getSizeInterval(house))))\n"
+    content *= "price perm2 of newly built house = $(askPrice/house.area)\n"
+    content *= "Cost based price = $(costBasedPrice > askPrice)\n"
+    TRANSACTION_LOG(content, model)
+    
+    println(content)
 end
 
 function calculate_construction_sector_debt(model)
