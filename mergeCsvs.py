@@ -9,10 +9,13 @@ policies = ["ConstructionVatReduction",
             "RentSubsidy",
             "NonResidentsProhibition",
             "Baseline"]
-locations=["Amadora", "Cascais", "Lisboa", "Loures", "Mafra",
-           "Odivelas", "Oeiras", "Sintra", "VilaFrancaDeXira",
-           "Alcochete", "Almada", "Barreiro", "Moita", "Montijo",
-           "Palmela", "Seixal", "Sesimbra", "Setubal"]
+# locations=["Amadora", "Cascais", "Lisboa", "Loures", "Mafra",
+#            "Odivelas", "Oeiras", "Sintra", "VilaFrancaDeXira",
+#            "Alcochete", "Almada", "Barreiro", "Moita", "Montijo",
+#            "Palmela", "Seixal", "Sesimbra", "Setubal"]
+
+locations=["Amadora", "Cascais", "Oeiras", "Odivelas", "Setubal"]
+
 def mergeCsvs(csv_file):
 
     # Function to get the most recently modified folder in a directory
@@ -35,8 +38,7 @@ def mergeCsvs(csv_file):
                 with open(csv_file, 'r', encoding='utf-8') as infile:
                     next(infile)  # Skip the header
                     for line in infile:
-                        if "Oeiras" in line: 
-                            outfile.write(line)
+                        outfile.write(line)
 
     for policy in policies:
         # Collect all data.csv files from the most recent folders

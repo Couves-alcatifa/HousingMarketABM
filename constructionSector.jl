@@ -17,7 +17,7 @@ function initiateConstructionSector()
             permitTime = rand(CONSTRUCTION_DELAY_MIN:CONSTRUCTION_DELAY_MAX)
             constructionTime = rand(CONSTRUCTION_TIME_MIN:CONSTRUCTION_TIME_MAX)
             totalDuration = permitTime + constructionTime
-            house = House(generateAreaFromSizeInterval(size_interval), location, NotSocialNeighbourhood, 1.0, rand(1:100))
+            house = House(generateAreaFromSizeInterval(size_interval), location, NotSocialNeighbourhood, 1.0, rand(RECENTLY_BUILD_MINIMUM_PERCENTILE:100))
             push!(housesInConstruction[location][size_interval], PendingConstruction(rand(1:totalDuration), permitTime, constructionTime, house))
         end
     end
@@ -42,7 +42,7 @@ function sortSizesBucketsByProfitability(model, location)
     res = SizePriority[]
     expectedDuration = rand(CONSTRUCTION_DELAY_MIN:CONSTRUCTION_DELAY_MAX)
     expectedDuration += rand(CONSTRUCTION_TIME_MIN:CONSTRUCTION_TIME_MAX)
-    testPercentile = rand(1:100)
+    testPercentile = rand(RECENTLY_BUILD_MINIMUM_PERCENTILE:100)
     for size_interval in instances(SizeInterval)
         sampleHouse = House(generateAreaFromSizeInterval(size_interval), location, NotSocialNeighbourhood, 1.0, testPercentile)
         costs = calculate_total_construction_costs(model, sampleHouse, expectedDuration, withVat = true)
@@ -240,7 +240,7 @@ function generateHouseToBeBuilt(location, size_interval)
     bestMargin = -1
     expectedDuration = rand(CONSTRUCTION_DELAY_MIN:CONSTRUCTION_DELAY_MAX)
     expectedDuration += rand(CONSTRUCTION_TIME_MIN:CONSTRUCTION_TIME_MAX)
-    for testPercentile in rand(95:100, 1)
+    for testPercentile in rand(RECENTLY_BUILD_MINIMUM_PERCENTILE:100, 1)
         marketPrice = calculate_market_price(model, House(area, location, NotSocialNeighbourhood, 1.0, testPercentile))
         constructionCosts = calculate_total_construction_costs(model, House(area, location, NotSocialNeighbourhood, 1.0, testPercentile), expectedDuration)
         
