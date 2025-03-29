@@ -15,7 +15,7 @@ function calculate_rental_market_price(house, model)
     end
     # println("house = $house mean(transactions) * house.area * house.maintenanceLevel = $(mean(transactions) * house.area * house.maintenanceLevel)")
     mean_price = mean([
-        transaction.price for transaction in bucket
+        transaction.price / transaction.area for transaction in bucket
     ])
 
     mean_time_in_market = mean([
@@ -55,7 +55,7 @@ function calculate_market_price(model, house)
     #                  THIRD_QUARTILE_SALES_MAP_ADJUSTED[house.location] / MEDIAN_SALES_MAP_ADJUSTED[house.location])
 
     mean_price = mean([
-        transaction.price for transaction in bucket
+        transaction.price / transaction.area for transaction in bucket
     ])
 
     mean_time_in_market = mean([
@@ -1449,7 +1449,9 @@ function updateRents(model)
         
         newValue = 0.0
         if length(bucket) != 0
-            newValue = mean(bucket)
+            mean_price = mean([
+                transaction.price / transaction.area for transaction in bucket
+            ])        
         end
         model.rentalPriceIndex[house.location][percentile][size_interval] = newValue
         if oldValue == 0.0 || newValue == 0.0
