@@ -149,10 +149,11 @@ mutable struct HouseSupply
     sellerId::Int
     maxConsumerSurplus
     shouldPayAddedValue::Bool
+    timeInMarket::Int
 end
 
-function HouseSupply(house, price, bids, sellerId; shouldPayAddedValue = false)
-    return HouseSupply(house, price, bids, sellerId, -Inf, shouldPayAddedValue)
+function HouseSupply(house, price, bids, sellerId; shouldPayAddedValue = false ; timeInMarket = 1)
+    return HouseSupply(house, price, bids, sellerId, -Inf, shouldPayAddedValue, timeInMarket)
 end
 
 mutable struct SupplyMatch
@@ -179,10 +180,11 @@ mutable struct RentalSupply
     sellerId::Int
     bids::Array{Bid}
     maxConsumerSurplus
+    timeInMarket::Int
 end
 
-function RentalSupply(house, price, sellerId, bids)
-    return RentalSupply(house, price, sellerId, bids, -Inf)
+function RentalSupply(house, price, sellerId, bids ; timeInMarket = 1)
+    return RentalSupply(house, price, sellerId, bids, -Inf, timeInMarket)
 end
 
 mutable struct RentalSupplyMatch
@@ -266,4 +268,10 @@ end
     Moldavia = 8
     China = 9
     SaoTomeEPrincipe = 10
+end
+mutable struct BucketTransaction
+    area
+    price
+    percentile
+    timeInMarket
 end

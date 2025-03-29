@@ -14,7 +14,31 @@ function calculate_rental_market_price(house, model)
         return calculate_initial_rental_market_price(house) * INITIAL_RENTAL_MARKET_PRICE_CUT[house.location]
     end
     # println("house = $house mean(transactions) * house.area * house.maintenanceLevel = $(mean(transactions) * house.area * house.maintenanceLevel)")
-    return median(bucket) * house.area * 
+    mean_price = mean([
+        transaction.price for transaction in bucket
+    ])
+
+    mean_time_in_market = mean([
+        transaction.timeInMarket for transaction in bucket
+    ])
+
+    # Given parameters
+    α = 1.0      # Example value
+    β = 0.5      # Example value
+    ζ = 1.2      # Example value
+    σ = 0.1      # Standard deviation of Gaussian noise
+
+    # Compute ln(ps) without noise (deterministic part)
+    ln_ps_det = α + log(mean_price) - β * log(ζ * (1 + mean_time_in_market))
+
+    # Add Gaussian noise ε ~ N(0, σ²)
+    ε = σ * randn()  
+    ln_ps = ln_ps_det + ε
+
+    # Exponentiate to get ps (convert from log-space)
+    ps = exp(ln_ps)
+
+    return ps * house.area * 
            map_value((house.percentile - 1) % 25, 0, 24, 0.90, 1.10)
 end
 
@@ -30,7 +54,31 @@ function calculate_market_price(model, house)
     #                  FIRST_QUARTILE_SALES_MAP_ADJUSTED[house.location] / MEDIAN_SALES_MAP_ADJUSTED[house.location],
     #                  THIRD_QUARTILE_SALES_MAP_ADJUSTED[house.location] / MEDIAN_SALES_MAP_ADJUSTED[house.location])
 
-    return median(bucket) * house.area * 
+    mean_price = mean([
+        transaction.price for transaction in bucket
+    ])
+
+    mean_time_in_market = mean([
+        transaction.timeInMarket for transaction in bucket
+    ])
+
+    # Given parameters
+    α = 1.0      # Example value
+    β = 0.5      # Example value
+    ζ = 1.2      # Example value
+    σ = 0.1      # Standard deviation of Gaussian noise
+
+    # Compute ln(ps) without noise (deterministic part)
+    ln_ps_det = α + log(mean_price) - β * log(ζ * (1 + mean_time_in_market))
+
+    # Add Gaussian noise ε ~ N(0, σ²)
+    ε = σ * randn()  
+    ln_ps = ln_ps_det + ε
+
+    # Exponentiate to get ps (convert from log-space)
+    ps = exp(ln_ps)
+
+    return ps * house.area * 
            map_value((house.percentile - 1) % 25, 0, 24, 0.90, 1.10)
 end
 
@@ -201,12 +249,6 @@ end
 function calculateAskPrice(basePrice, monthsSincePost)
     priceReduction = 0.01
     return basePrice * (1 - priceReduction)^monthsSincePost    
-end
-
-# adding model here because the unit costs might depend on the regional salaries
-# model should probably be removed
-function calculateCostBasedPrice(model, size, location)
-    # TODO:
 end
 
 function generateInitialWealth(age, percentile, size, location)
@@ -472,6 +514,7 @@ function clearHouseMarket(model)
             # house wasn't purchased, but we will clear the bids just in case
             empty!(supply.bids)
             supply.price *= (1 - HOUSE_PRICE_REDUCTION_FACTOR)
+            supply.timeInMarket += 1
             i += 1
         end
     end
@@ -545,6 +588,7 @@ function clearRentalMarket(model)
             # house wasn't rented, but we will clear the bids just in case
             empty!(supply.bids)
             supply.monthlyPrice *= (1 - HOUSE_PRICE_REDUCTION_FACTOR)
+            supply.timeInMarket += 1
             i += 1
         end
     end
@@ -684,7 +728,7 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     push!(household.houses, supply.house)
     terminateContractsOnTentantSide(household, model)
     # if winningBid.type != NonResidentDemand
-        addTransactionToBuckets(model, supply.house, bidValue)
+        addTransactionToBuckets(model, supply.house, bidValue, supply.timeInMarket)
         push!(model.transactions, Transaction(supply.house.area, bidValue, supply.house.location, supply.house.percentile, supply.sellerId, winningBid.type))
         push!(model.transactions_per_region[supply.house.location][model.steps], Transaction(supply.house.area, bidValue, supply.house.location, supply.house.percentile, supply.sellerId, winningBid.type))
     # end
@@ -796,7 +840,7 @@ function rent_house(model, supply::RentalSupply)
     updateHouseRentalInfo(model, supply.house, actualBid)
     household.contractAsTenant = contract
     push!(seller.contractsAsLandlord, contract)
-    addTransactionToRentalBuckets(model, supply.house, actualBid)
+    addTransactionToRentalBuckets(model, supply.house, actualBid, supply.timeInMarket)
     if model.steps > 0
         push!(model.rents_per_region[supply.house.location][model.steps], Transaction(supply.house.area, actualBid, supply.house.location, supply.house.percentile, supply.sellerId, Regular))
     end
@@ -818,7 +862,7 @@ function InitiateBuckets()
     #               for location in HOUSE_LOCATION_INSTANCES)
     result = Dict(  location => Dict(
                         quartile => Dict(
-                            size_interval => Float64[]
+                            size_interval => BucketTransaction[]
                             for size_interval in instances(SizeInterval))
                         for quartile in [25, 50, 75, 100])
                     for location in HOUSE_LOCATION_INSTANCES)
@@ -831,7 +875,7 @@ function InitiateRentalBuckets()
     # return result
     result = Dict(  location => Dict(
                         quartile => Dict(
-                            size_interval => Float64[]
+                            size_interval => BucketTransaction[]
                             for size_interval in instances(SizeInterval))
                         for quartile in [25, 50, 75, 100])
                     for location in HOUSE_LOCATION_INSTANCES)
@@ -878,14 +922,14 @@ function calculateRentalBucket(model, house)
     return model.rentalBuckets[house.location][percentile][size_interval]
 end
 
-function addTransactionToBuckets(model, house, price)
+function addTransactionToBuckets(model, house, price, timeInMarket)
     bucket = calculateBucket(model, house)
-    push!(bucket, price / house.area)
+    push!(bucket, BucketTransaction(house.area, price, house.percentile, timeInMarket))
 end
 
-function addTransactionToRentalBuckets(model, house, price)
+function addTransactionToRentalBuckets(model, house, price, timeInMarket)
     bucket = calculateRentalBucket(model, house)
-    push!(bucket, price / house.area)
+    push!(bucket, BucketTransaction(house.area, price, house.percentile, timeInMarket))
 end
 
 function trimBucketsIfNeeded(model)
