@@ -788,3 +788,32 @@ function plot_number_of_houses_bought_by_non_residents(adf, mdf)
     figure[1, 2] = Legend(figure, lines, locations)
     figure
 end
+
+function plot_houses_time_in_market_when_sold(adf, mdf)
+    figure = Figure(size = (600, 400))
+    ax = figure[1, 1] = Axis(figure; xlabel = "Step", ylabel = "Average Time in Market")
+    organizedPerRegion = Dict()
+    for location in HOUSE_LOCATION_INSTANCES
+        organizedPerRegion[location] = Float32[]
+        for step in 1:NUMBER_OF_STEPS
+            step_values = Int64[]
+            for transaction in mdf.transactions_per_region[step][location]
+                push!(step_values, transaction.timeInMarket)
+            end
+            if length(step_values) != 0
+                push!(organizedPerRegion[location], mean(step_values))
+            else
+                push!(organizedPerRegion[location], NaN)
+            end
+        end
+    end
+    lines = []
+    locations = []
+    for location in HOUSE_LOCATION_INSTANCES
+        push!(lines, scatterlines!(ax, adf.step, organizedPerRegion[location], color = color_map[location]))
+        push!(locations, string(location))
+    end
+
+    figure[1, 2] = Legend(figure, lines, locations)
+    figure
+end

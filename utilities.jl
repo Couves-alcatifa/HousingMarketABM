@@ -729,8 +729,8 @@ function buy_house(model, supply::HouseSupply, householdsWhoBoughtAHouse)
     terminateContractsOnTentantSide(household, model)
     # if winningBid.type != NonResidentDemand
         addTransactionToBuckets(model, supply.house, bidValue, supply.timeInMarket)
-        push!(model.transactions, Transaction(supply.house.area, bidValue, supply.house.location, supply.house.percentile, supply.sellerId, winningBid.type))
-        push!(model.transactions_per_region[supply.house.location][model.steps], Transaction(supply.house.area, bidValue, supply.house.location, supply.house.percentile, supply.sellerId, winningBid.type))
+        push!(model.transactions, Transaction(supply.house.area, bidValue, supply.house.location, supply.house.percentile, supply.sellerId, winningBid.type, supply.timeInMarket))
+        push!(model.transactions_per_region[supply.house.location][model.steps], Transaction(supply.house.area, bidValue, supply.house.location, supply.house.percentile, supply.sellerId, winningBid.type, supply.timeInMarket))
     # end
     push!(householdsWhoBoughtAHouse, highestBidder)
     
@@ -842,7 +842,7 @@ function rent_house(model, supply::RentalSupply)
     push!(seller.contractsAsLandlord, contract)
     addTransactionToRentalBuckets(model, supply.house, actualBid, supply.timeInMarket)
     if model.steps > 0
-        push!(model.rents_per_region[supply.house.location][model.steps], Transaction(supply.house.area, actualBid, supply.house.location, supply.house.percentile, supply.sellerId, Regular))
+        push!(model.rents_per_region[supply.house.location][model.steps], Transaction(supply.house.area, actualBid, supply.house.location, supply.house.percentile, supply.sellerId, Regular, supply.timeInMarket))
     end
     return true
 end

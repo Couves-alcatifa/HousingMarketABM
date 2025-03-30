@@ -45,7 +45,7 @@ function sortSizesBucketsByProfitability(model, location)
     testPercentile = rand(RECENTLY_BUILD_MINIMUM_PERCENTILE:100)
     for size_interval in instances(SizeInterval)
         sampleHouse = House(generateAreaFromSizeInterval(size_interval), location, NotSocialNeighbourhood, 1.0, testPercentile)
-        costs = calculate_total_construction_costs(model, sampleHouse, expectedDuration, withVat = true)
+        costs = calculate_total_construction_costs(model, sampleHouse, expectedDuration, withVat = false)
         marketPrice = calculate_market_price(model, sampleHouse)
         margin = marketPrice/costs
         # to introduce a random factor:
@@ -99,7 +99,7 @@ function updateConstructionsPerBucket(model, location, size_interval)
         pendingConstruction.time += 1
         if pendingConstruction.time > pendingConstruction.permitTime
             # already building
-            constructionPayment = calculate_construction_costs(model, pendingConstruction.house, true) / pendingConstruction.constructionTime
+            constructionPayment = calculate_construction_costs(model, pendingConstruction.house, false) / pendingConstruction.constructionTime
             model.government.wealth += constructionPayment
             model.constructionLabor += constructionPayment
             model.construction_sector.wealth -= constructionPayment
@@ -264,14 +264,16 @@ end
 function put_newly_built_house_to_sale(model, house)
     costBasedPrice = calculate_construction_costs(model, house, true) * CONSTRUCTION_SECTOR_MARKUP[house.location]
     askPrice = calculate_market_price(model, house)
+    isCostBasedPrice = false
     if costBasedPrice > askPrice
         askPrice = costBasedPrice
+        isCostBasedPrice = true
     end
     push!(model.houseMarket.supply, HouseSupply(house, askPrice, Bid[], -1))
     push!(model.housesBuiltPerRegion[house.location][getSizeInterval(house)], house)
     content = "Pushed house into housesBuiltPerRegion (location,size) = ($(string(house.location)), $(string(getSizeInterval(house))))\n"
     content *= "price perm2 of newly built house = $(askPrice/house.area)\n"
-    content *= "Cost based price = $(costBasedPrice > askPrice)\n"
+    content *= "Cost based price = $(isCostBasedPrice)\n"
     TRANSACTION_LOG(content, model)
     
     println(content)

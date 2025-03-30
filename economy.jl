@@ -770,6 +770,7 @@ save("$output_folder/sold_houses_percentile.png", plot_sold_houses_percentile(ag
 save("$output_folder/number_of_newly_built_houses_sold.png", plot_number_of_newly_built_houses_sold(agent_data[2:end, :], model_data[2:end, :]))
 save("$output_folder/number_of_houses_sold_by_non_residents.png", plot_number_of_houses_sold_by_non_residents(agent_data[2:end, :], model_data[2:end, :]))
 save("$output_folder/number_of_houses_bought_by_non_residents.png", plot_number_of_houses_bought_by_non_residents(agent_data[2:end, :], model_data[2:end, :]))
+save("$output_folder/houses_time_in_market_when_sold.png", plot_houses_time_in_market_when_sold(agent_data[2:end, :], model_data[2:end, :]))
 
 # save("$output_folder/mortgages_median_values_regionally.png", plot_mortgages_median_values_regionally(agent_data[2:end, :], model_data[2:end, :]))
 # save("$output_folder/mortgages_values_distribution.png", plot_mortgages_values_distribution(agent_data[2:end, :], model_data[2:end, :]))
