@@ -495,7 +495,8 @@ function home_owner_decisions(household, model)
         household.homelessTime -= 1
     end
     house = household.houses[1]
-    if !has_enough_size(house, household) # && rand() < 0.01
+    # if !has_enough_size(house, household) # && rand() < 0.01
+    if decideToMove(household, house) # && rand() < 0.01
         # moves out, put_house_to_sale
         put_house_to_sale(household, model, 1)
         household.houseRequirements = HouseRequirements(house.area, house.percentile)
@@ -521,6 +522,16 @@ function home_owner_decisions(household, model)
             end
         end
     end
+end
+
+function decideToMove(household, house)
+    consumerSurplus = calculateConsumerSurplus(household, house)
+    consumerSurplusAddedValue = calculateConsumerSurplusAddedValue(consumerSurplus)
+    # think about moving every ~ 10 years
+    if consumerSurplusAddedValue < 0.95 && rand() < 1 / (12 * 10)
+        return true
+    end
+    return false
 end
 
 function housing_decisions(household, model)
