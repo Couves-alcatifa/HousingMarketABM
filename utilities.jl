@@ -38,7 +38,7 @@ function calculate_rental_market_price(house, model)
     # Exponentiate to get ps (convert from log-space)
     ps = exp(ln_ps)
 
-    return ps * house.area * 
+    return mean_price * house.area * 
            map_value((house.percentile - 1) % 25, 0, 24, 0.90, 1.10)
 end
 
@@ -78,7 +78,7 @@ function calculate_market_price(model, house)
     # Exponentiate to get ps (convert from log-space)
     ps = exp(ln_ps)
 
-    return ps * house.area * 
+    return mean_price * house.area * 
            map_value((house.percentile - 1) % 25, 0, 24, 0.90, 1.10)
 end
 
