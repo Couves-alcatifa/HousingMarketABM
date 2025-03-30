@@ -1,103 +1,31 @@
-diff --git a/constructionSector.jl b/constructionSector.jl
-index 1b3daee54..fdad841d9 100644
---- a/constructionSector.jl
-+++ b/constructionSector.jl
-@@ -295,7 +295,7 @@ function calculate_construction_costs(model, house, withVat)
-     constructionCosts = ((CONSTRUCTION_COSTS_MIN + CONSTRUCTION_COSTS_MAX) / 2) * house.area
-     # constructionCosts = map_value(house.percentile, 1, 100, CONSTRUCTION_COSTS_MIN, CONSTRUCTION_COSTS_MAX) * house.area
-     # this costs should change with the zone salaries
--    constructionCosts *= THIRD_QUINTILE_INCOME_MAP[house.location] / THIRD_QUINTILE_INCOME_MAP[Lisboa]
-+    constructionCosts *= THIRD_QUINTILE_INCOME_MAP[house.location] / THIRD_QUINTILE_INCOME_LMA
-     if withVat
-         constructionCosts *= 1 + CONSTRUCTION_VAT
-     end
-diff --git a/consts.jl b/consts.jl
-index 438e29c5d..ae6ec0246 100644
---- a/consts.jl
-+++ b/consts.jl
-@@ -2105,7 +2105,8 @@ for (location, foreigners) in FOREIGNERS_PER_COUNTRY_MAP
-     end
- end
- 
--const PORTUGAL_GDP_PER_CAPITA = 27331
-+const LISBON_GDP_PER_CAPITA = 26588
-+const THIRD_QUINTILE_INCOME_LMA = 14990
- 
- const GDP_PER_CAPITA_MAP = Dict(
-     Brasil => 9673,
-@@ -2120,4 +2121,32 @@ const GDP_PER_CAPITA_MAP = Dict(
-     SaoTomeEPrincipe => 2422,
- )
- 
--const FOREIGNER_PERCENTILE_MULTIPLIER = Dict(foreignCountry => GDP_PER_CAPITA_MAP[foreignCountry] / PORTUGAL_GDP_PER_CAPITA for foreignCountry in keys(GDP_PER_CAPITA_MAP))
-\ No newline at end of file
-+const FOREIGNER_PERCENTILE_MULTIPLIER = Dict(foreignCountry => GDP_PER_CAPITA_MAP[foreignCountry] / LISBON_GDP_PER_CAPITA for foreignCountry in keys(GDP_PER_CAPITA_MAP))
-+
-+#https://censos.ine.pt/xportal/xmain?xpgid=censos21_populacao&xpid=CENSOS21
-+const NUMBER_OF_PEOPLE_WITH_AGES_LMA = Dict(
-+    0 => 134741 + 127979,
-+    10 => 153734 + 146714,
-+    20 => 161488 + 161469,
-+    30 => 175513 + 185894,
-+    40 => 212770 + 235831,
-+    50 => 176750 + 204599,
-+    60 => 148212 + 185317,
-+    70 => 121692 + 158697,
-+    80 => 56832 + 91280,
-+    90 => 8103 + 21407,
-+)
-+
-+# convert person's ages to households 
-+# (move the people below 30 to the 30s, 40s, 50s, as the households ages 
-+# are represented by the older person)
-+const NUMBER_OF_HOUSEHOLDS_WITH_AGES_LMA = Dict(
-+    20 => POPULATION_AGES_LMA[20] / 2,
-+    30 => POPULATION_AGES_LMA[30] + sum([POPULATION_AGES_LMA[age] for age in [0,10,20]]) / 3,
-+    40 => POPULATION_AGES_LMA[40] + sum([POPULATION_AGES_LMA[age] for age in [0,10,20]]) / 3 +  + POPULATION_AGES_LMA[20] / 4,
-+    50 => POPULATION_AGES_LMA[50] + sum([POPULATION_AGES_LMA[age] for age in [0,10,20]]) / 3 +  + POPULATION_AGES_LMA[20] / 4,
-+    60 => POPULATION_AGES_LMA[60],
-+    70 => POPULATION_AGES_LMA[70],
-+    80 => POPULATION_AGES_LMA[80],
-+    90 => POPULATION_AGES_LMA[90],
-+)
-\ No newline at end of file
 diff --git a/economy.jl b/economy.jl
-index e25dd2316..357a6a628 100644
+index 56e0163e6..6d400e9e2 100644
 --- a/economy.jl
 +++ b/economy.jl
-@@ -126,12 +126,11 @@ function wealth_model()
- 
-     start_time = time()
- 
--    number_of_household_in_fertile_age = Int64(round(NUMBER_OF_HOUSEHOLDS * RATIO_OF_FERTILE_WOMEN))
--    number_of_households_in_not_fertile_age = NUMBER_OF_HOUSEHOLDS - number_of_household_in_fertile_age
--    households_initial_ages = rand(20:44, number_of_household_in_fertile_age)
--    households_initial_ages = vcat(households_initial_ages, rand(44:58, Int64(round(number_of_households_in_not_fertile_age/3))))
--    households_initial_ages = vcat(households_initial_ages, rand(58:75, Int64(round(number_of_households_in_not_fertile_age/3))))
--    households_initial_ages = vcat(households_initial_ages, rand(75:100, Int64(round(number_of_households_in_not_fertile_age/3))))
-+    ratioForHouseholdsAgesMap = Int64(round(sum([NUMBER_OF_HOUSEHOLDS_WITH_AGES_LMA[age] for age in [20,30,40,50,60,70,80,90]]) / NUMBER_OF_HOUSEHOLDS))
-+    households_initial_ages = []
-+    for age in keys(NUMBER_OF_HOUSEHOLDS_WITH_AGES_LMA)
-+        households_initial_ages = vcat(households_initial_ages, rand(age:age+9, NUMBER_OF_HOUSEHOLDS_WITH_AGES_LMA[age] * ratioForHouseholdsAgesMap))     
-+    end
-     sort!(households_initial_ages, lt=sortRandomly)
-     
-     # initiate greediness
-diff --git a/utilities.jl b/utilities.jl
-index 915582b52..87972be6e 100644
---- a/utilities.jl
-+++ b/utilities.jl
-@@ -210,6 +210,13 @@ function calculateCostBasedPrice(model, size, location)
+@@ -495,7 +495,8 @@ function home_owner_decisions(household, model)
+         household.homelessTime -= 1
+     end
+     house = household.houses[1]
+-    if !has_enough_size(house, household) # && rand() < 0.01
++    # if !has_enough_size(house, household) # && rand() < 0.01
++    if decideToMove(household, house) # && rand() < 0.01
+         # moves out, put_house_to_sale
+         put_house_to_sale(household, model, 1)
+         household.houseRequirements = HouseRequirements(house.area, house.percentile)
+@@ -523,6 +524,16 @@ function home_owner_decisions(household, model)
+     end
  end
  
- function generateInitialWealth(age, percentile, size, location)
-+    regionalRatio = (THIRD_QUINTILE_INCOME_MAP[location] / THIRD_QUINTILE_INCOME_LMA)
++function decideToMove(household, house)
++    consumerSurplus = calculateConsumerSurplus(household, house)
++    consumerSurplusAddedValue = calculateConsumerSurplusAddedValue(consumerSurplus)
++    # think about moving every ~ 10 years
++    if consumerSurplusAddedValue < 0.95 && rand() < 1 / (12 * 10)
++        return true
++    end
++    return false
++end
 +
-+    firstQuintileFourthQuintileRatio = FIRST_QUINTILE_INCOME_MAP_QUINTILE_INCOME_MAP[location] / FOURTH_QUINTILE_INCOME_MAP_QUINTILE_INCOME_MAP[location]
-+    percentileRatio = map_value_non_linear(percentile, 1, 100, firstQuintileFourthQuintileRatio * 0.5, 1 / firstQuintileFourthQuintileRatio * 2)
-+    ageRatio = map_value(age, 20, 70, 0.7, 1.5)
-+    value = LISBON_GDP_PER_CAPITA * regionalRatio * percentileRatio * ageRatio
-+    return value * (size > 1 ? 2 : 1)
-     # value = age * INITIAL_WEALTH_PER_AGE * rand(INITIAL_WEALTH_MULTIPLICATION_BASE:INITIAL_WEALTH_MULTIPLICATION_ROOF) 
-     #     + percentile * INITIAL_WEALTH_PER_PERCENTILE * rand(INITIAL_WEALTH_MULTIPLICATION_BASE:INITIAL_WEALTH_MULTIPLICATION_ROOF)
-     # return value * (size > 1 ? 2 : 1)
+ function housing_decisions(household, model)
+     if length(household.houses) > 1
+         supply_decisions(household, model)
