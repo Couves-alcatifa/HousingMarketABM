@@ -23,10 +23,10 @@ function calculate_rental_market_price(house, model)
     ])
 
     # Given parameters
-    α = 1.0      # Example value
-    β = 0.5      # Example value
-    ζ = 1.2      # Example value
-    σ = 0.1      # Standard deviation of Gaussian noise
+    α = 0.04      # Example value
+    β = 0.011      # Example value
+    ζ = 1.0/31.0      # Example value
+    σ = 0.5      # Standard deviation of Gaussian noise
 
     # Compute ln(ps) without noise (deterministic part)
     ln_ps_det = α + log(mean_price) - β * log(ζ * (1 + mean_time_in_market))
@@ -63,10 +63,10 @@ function calculate_market_price(model, house)
     ])
 
     # Given parameters
-    α = 1.0      # Example value
-    β = 0.5      # Example value
-    ζ = 1.2      # Example value
-    σ = 0.1      # Standard deviation of Gaussian noise
+    α = 0.04      # Example value
+    β = 0.011      # Example value
+    ζ = 1.0/31.0      # Example value
+    σ = 0.5      # Standard deviation of Gaussian noise
 
     # Compute ln(ps) without noise (deterministic part)
     ln_ps_det = α + log(mean_price) - β * log(ζ * (1 + mean_time_in_market))
