@@ -270,7 +270,7 @@ const NUMBER_OF_HOUSES=NUMBER_OF_HOUSEHOLDS
 # MODEL_SCALE = NUMBER_OF_HOUSES / TheoreticalNumberOfHousesInLisboa
 const MODEL_SCALE = NUMBER_OF_HOUSES / TotalTheoreticalNumberOfHouses
 # const MAX_BUCKET_SIZE = Int64(round(200 * MODEL_SCALE))
-const MAX_BUCKET_SIZE = Dict(location => Int64(round(THEORETICAL_NUMBER_OF_HOUSES_MAP[location] * 0.04 * MODEL_SCALE)) for location in HOUSE_LOCATION_INSTANCES)
+const MAX_BUCKET_SIZE = Dict(location => Int64(round(THEORETICAL_NUMBER_OF_HOUSES_MAP[location] * 0.01 * MODEL_SCALE)) for location in HOUSE_LOCATION_INSTANCES)
 const N_OF_TRANS_MINIMUM = Int64(round(30 * MODEL_SCALE))
 const MINIMUM_NUMBER_OF_TRANSACTIONS_IN_BUCKETS = N_OF_TRANS_MINIMUM > 5 ? N_OF_TRANS_MINIMUM : 5  
 
@@ -2110,16 +2110,16 @@ const LISBON_GDP_PER_CAPITA = adjust_value_to_inflation(26588)
 const THIRD_QUINTILE_INCOME_LMA = adjust_value_to_inflation(14990)
 
 const GDP_PER_CAPITA_MAP = Dict(
-    Brasil => 9673,
-    Ucrania => 4825,
-    CaboVerde => 4043,
-    Romenia => 16094,
-    Angola => 3437,
-    GuineBissau => 820,
-    ReinoUnido => 46510,
-    Moldavia => 5714,
-    China => 12970,
-    SaoTomeEPrincipe => 2422,
+    Brasil => adjust_value_to_inflation(9673),
+    Ucrania => adjust_value_to_inflation(4825),
+    CaboVerde => adjust_value_to_inflation(4043),
+    Romenia => adjust_value_to_inflation(16094),
+    Angola => adjust_value_to_inflation(3437),
+    GuineBissau => adjust_value_to_inflation(820),
+    ReinoUnido => adjust_value_to_inflation(46510),
+    Moldavia => adjust_value_to_inflation(5714),
+    China => adjust_value_to_inflation(12970),
+    SaoTomeEPrincipe => adjust_value_to_inflation(2422),
 )
 
 const FOREIGNER_PERCENTILE_MULTIPLIER = Dict(foreignCountry => GDP_PER_CAPITA_MAP[foreignCountry] / LISBON_GDP_PER_CAPITA for foreignCountry in keys(GDP_PER_CAPITA_MAP))

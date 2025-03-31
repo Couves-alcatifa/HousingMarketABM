@@ -153,7 +153,7 @@ mutable struct HouseSupply
     timeInMarket::Int
 end
 
-function HouseSupply(house, price, bids, sellerId; shouldPayAddedValue = false, timeInMarket = 1)
+function HouseSupply(house, price, bids, sellerId; shouldPayAddedValue = false, timeInMarket = 0)
     return HouseSupply(house, price, bids, sellerId, -Inf, shouldPayAddedValue, timeInMarket)
 end
 
@@ -184,7 +184,7 @@ mutable struct RentalSupply
     timeInMarket::Int
 end
 
-function RentalSupply(house, price, sellerId, bids ; timeInMarket = 1)
+function RentalSupply(house, price, sellerId, bids ; timeInMarket = 0)
     return RentalSupply(house, price, sellerId, bids, -Inf, timeInMarket)
 end
 

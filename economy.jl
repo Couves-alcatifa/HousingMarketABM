@@ -257,7 +257,7 @@ function model_step!(model)
     # nonResidentsBuyHouses(model)
     clearHouseMarket(model)
     clearRentalMarket(model)
-    # trimBucketsIfNeeded(model)
+    trimBucketsIfNeeded(model)
     measureSupplyAndDemandPerBucket(model)
     if model.steps % 12 == 0
         if CRASH_SCENARIO
