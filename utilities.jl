@@ -259,7 +259,7 @@ function generateInitialWealth(age, percentile, size, location)
     ageRatio = 1
     value = LISBON_GROSS_DISPOSABLE_INCOME * regionalRatio * percentileRatio * ageRatio
     value = rand(Normal(value, value * 0.2))
-    return value * (size > 1 ? 2 : 1)
+    return value * (size > 1 ? 2 : 1) * INITIAL_WEALTH_MULTIPLIER
     # value = age * INITIAL_WEALTH_PER_AGE * rand(INITIAL_WEALTH_MULTIPLICATION_BASE:INITIAL_WEALTH_MULTIPLICATION_ROOF) 
     #     + percentile * INITIAL_WEALTH_PER_PERCENTILE * rand(INITIAL_WEALTH_MULTIPLICATION_BASE:INITIAL_WEALTH_MULTIPLICATION_ROOF)
     # return value * (size > 1 ? 2 : 1)
