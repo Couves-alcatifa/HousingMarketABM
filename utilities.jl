@@ -268,33 +268,6 @@ function generateInitialWealth(age, percentile, size, location)
     return wealth * WEALTH_RATIO_MULTIPLIER_MAP[location]
 end
 
-function generateInitialWealth(age, percentile, size, location)
-    # Calculate the proportion of total wealth owned by this percentile using the Lorenz curve
-    # The Lorenz curve for a given Gini coefficient G is L(p) = p - p^(1/G) * (p^(1/G) - p)^(G)
-    # However, a simpler approximation is to use the Pareto distribution or exponential functions
-    
-    # Using a simplified approach based on the Gini coefficient to scale the GDP per capita
-    # The wealth distribution can be modeled as a scaled version of a power-law distribution
-    
-    # The cumulative distribution function (CDF) for wealth can be derived from the Gini coefficient
-    # The formula for the wealth at a given percentile p is:
-    # wealth(p) = GDP_PER_CAPITA * (1 - GINI_COEFFICIENT + GINI_COEFFICIENT * (p / 100)^(1 / GINI_COEFFICIENT))
-    
-    # Calculate the wealth based on percentile and Gini coefficient
-    p = percentile / 100.0
-    wealth = GDP_PER_CAPITA * (1 - GINI_COEFFICIENT + GINI_COEFFICIENT * (p)^(1 / GINI_COEFFICIENT))
-    
-    # Adjust for household size (assuming wealth is shared among members)
-    wealth *= size
-    
-    # Adjust for age (older households might have accumulated more wealth)
-    # This is a simple linear adjustment, can be refined based on data
-    age_factor = 1.0 + (age - 30) / 100.0  # Example: 1% increase per year over 30
-    wealth *= max(age_factor, 0.5)  # Ensure age_factor doesn't go too low
-    
-    return wealth
-end
-
 function calculateSalary(household, model)
     location = household.residencyZone
     percentile = household.percentile
