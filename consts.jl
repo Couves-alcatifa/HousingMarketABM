@@ -2106,6 +2106,8 @@ for (location, foreigners) in FOREIGNERS_PER_COUNTRY_MAP
     end
 end
 
+const LISBON_GROSS_DISPOSABLE_INCOME = adjust_value_to_inflation(17241) # 2021 value
+
 const LISBON_GDP_PER_CAPITA = adjust_value_to_inflation(26588)
 const THIRD_QUINTILE_INCOME_LMA = adjust_value_to_inflation(14990)
 
