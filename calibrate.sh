@@ -4,9 +4,9 @@ locations=("Sesimbra" "Seixal" "Montijo" "Barreiro" "Mafra")
 # policies=("Baseline" "ConstructionVatReduction" "ConstructionLicensingSimplification" "RentSubsidy" "NonResidentsProhibition")
 # policies=("ConstructionVatReduction" "ConstructionLicensingSimplification" "RentSubsidy" "NonResidentsProhibition")
 initialWealthMultipliers=("0.8" "0.6" "0.5" "0.3")
-for location in ${locations[@]}
+for initialWealthMultiplier in ${initialWealthMultipliers[@]}
 do
-    for initialWealthMultiplier in ${initialWealthMultipliers[@]}
+    for location in ${locations[@]}
     do
         python generateScope.py $location
         sed -i "s/const INITIAL_WEALTH_MULTIPLIER =.*/const INITIAL_WEALTH_MULTIPLIER = $initialWealthMultiplier/" consts.jl
