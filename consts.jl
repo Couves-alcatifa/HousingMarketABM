@@ -39,10 +39,10 @@ const THEORETICAL_NUMBER_OF_HOUSES_MAP = Dict(
 
 include("scope.jl")
 
-# taken from Portugal's construction GDB (2374,12 milhões de euros)
+# taken from Portugal's construction GDP (2374,12 milhões de euros)
 # divided by the population of Portugal (10,580,000)
 # https://pt.tradingeconomics.com/portugal/gdp-from-construction
-const MAX_CONSTRUCTION_SECTOR_DEBT = 224.3969 * NUMBER_OF_HOUSEHOLDS
+const MAX_CONSTRUCTION_SECTOR_DEBT = adjust_value_to_inflation(224.3969 * NUMBER_OF_HOUSEHOLDS)
 
 const STARTING_GOV_WEALTH = STARTING_GOV_WEALTH_PER_CAPITA * NUMBER_OF_HOUSEHOLDS
 const STARTING_COMPANY_WEALTH = STARTING_COMPANY_WEALTH_PER_CAPITA * NUMBER_OF_HOUSEHOLDS
@@ -2167,7 +2167,7 @@ const INITIAL_WEALTH_MULTIPLIER = Dict(
     Loures => 1.0,
     Mafra => 0.3,
     Odivelas => 1.0,
-    Oeiras => :1.0,
+    Oeiras => 1.2,
     Sintra => 0.8,
     VilaFrancaDeXira => 0.3,
     Alcochete => 0.3,
