@@ -1070,6 +1070,9 @@ const NUMBER_OF_HOUSEHOLDS_MAP = Dict(
 )
 
 # AER2022_II_01_Pessoas_e_populacao.xlsx
+# Note: crash scenario 2003 using values from AnuEstRegionais 2006 (figuras e quadros)
+# Taxa de crescimento efectivo - Taxa de crescimento natural
+#  0.61 - 0.43 = 0.18
 const migrationBalanceMap = Dict(
     Alcochete => (1.36 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Alcochete],
     Almada => (0.45 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Almada],
@@ -1082,7 +1085,7 @@ const migrationBalanceMap = Dict(
     Moita => (1.15 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Moita],
     Montijo => (1.52 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Montijo],
     Odivelas => (0.64 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Odivelas],
-    Oeiras => (0.76 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Oeiras],
+    Oeiras => ((CURRENT_YEAR == 2003 ? 0.18 : 0.76) / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Oeiras],
     Palmela => (1.89 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Palmela],
     Seixal => (1.00 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Seixal],
     Sesimbra => (1.76 / 100) * NUMBER_OF_HOUSEHOLDS_MAP[Sesimbra],
@@ -1092,6 +1095,9 @@ const migrationBalanceMap = Dict(
 )
 
 # AER2022_II_01_Pessoas_e_populacao.xlsx
+# Note: crash scenario 2003 using values from AnuEstRegionais 2006 (figuras e quadros)
+# População estrangeira que solicitou estatuto de residente por habitante
+#   (0.31 / 100) * 73013 = 226.34029999999998
 const imigrationValueMap = Dict(
     Alcochete => 177 * MODEL_SCALE,
     Almada => 3810 * MODEL_SCALE,
@@ -1104,7 +1110,7 @@ const imigrationValueMap = Dict(
     Moita => 1063 * MODEL_SCALE,
     Montijo => 1164 * MODEL_SCALE,
     Odivelas => 4738 * MODEL_SCALE,
-    Oeiras => 2762 * MODEL_SCALE,
+    Oeiras => CURRENT_YEAR == 2003 ? 226.34 * MODEL_SCALE : 2762 * MODEL_SCALE,
     Palmela => 609 * MODEL_SCALE,
     Seixal => 2881 * MODEL_SCALE,
     Sesimbra => 543 * MODEL_SCALE,
