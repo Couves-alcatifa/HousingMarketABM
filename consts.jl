@@ -2160,4 +2160,23 @@ const NUMBER_OF_HOUSEHOLDS_WITH_AGES_LMA = Dict(
     90 => NUMBER_OF_PEOPLE_WITH_AGES_LMA[90],
 )
 
-const INITIAL_WEALTH_MULTIPLIER = 1.0
+const INITIAL_WEALTH_MULTIPLIER = Dict(
+    Amadora => 1.0,
+    Cascais => 1.0,
+    Lisboa => 1.0,
+    Loures => 1.0,
+    Mafra => 0.3,
+    Odivelas => 1.0,
+    Oeiras => :1.0,
+    Sintra => 0.8,
+    VilaFrancaDeXira => 0.3,
+    Alcochete => 0.3,
+    Almada => 0.3,
+    Barreiro => 0.3,
+    Moita => 0.3,
+    Montijo => 0.3,
+    Palmela => 0.3,
+    Seixal => 0.3,
+    Sesimbra => 0.3,
+    Setubal => 0.3
+)
