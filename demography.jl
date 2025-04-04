@@ -95,7 +95,7 @@ end
 # returns true if household died
 function handle_children_leaving_home(household, model)
     if (household.size > 2 && household.age > 38)
-        probability_of_child_leaving = 0.05 + rand() * 0.05
+        probability_of_child_leaving = 0.025 + rand() * 0.025
         if (rand() < probability_of_child_leaving)
             expected_age = household.age - 20 + rand(0:8)
             expected_wealth = generateInitialWealth(expected_age, household.percentile, household.size, household.residencyZone) * 0.6
