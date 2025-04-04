@@ -94,29 +94,44 @@ end
 # suggest adding ChildrenLeaves to the model so that it can be handled in model_step
 # returns true if household died
 function handle_children_leaving_home(household, model)
-    if (household.size > 2 && household.age > 38)
-        probability_of_child_leaving = 0.05 + rand() * 0.05
-        if (rand() < probability_of_child_leaving)
-            expected_age = household.age - 20 + rand(0:8)
-            expected_wealth = generateInitialWealth(expected_age, household.percentile, household.size, household.residencyZone) * 0.6
-            if (expected_wealth > household.wealth)
-                expected_wealth = household.wealth * 0.2
+    if (household.size > 2 && household.age >= MINIMUM_AGE_FOR_CHILDREN_TO_LEAVE_HOME)
+        if (rand() < LEAVING_HOME_ATTEMPT_PROBABILITY_PER_MONTH)
+
+            size_interval = instances(SizeInterval)[rand(1:3)]
+            childHousehold = getChildHousehold(household)
+            expected_age = childHousehold.age
+            expected_wealth = childHousehold.wealth
+            expected_size = childHousehold.size
+            leave = false
+            if canHouseholdBuyHouse(model, childHousehold, size_interval)
+                TRANSACTION_LOG("Will generate child agent because it can buy a house\n", model)
+                leave = true
             end
-            randomNumber = rand()
-            if randomNumber < 0.45
-                # a couple of young people leave their parents home
-                newZone = getChildResidencyZone(household)
-                add_household(model, expected_wealth, expected_age, 2, newZone, percentile=household.percentile)
-                content = "generated agent $(nagents(model)) from leaving home\n"
-                content *= "wealth = $expected_wealth\n"
-                TRANSACTION_LOG(content, model)
-                
-                household.wealth -= expected_wealth
-                household.size -= 1
-                model.children_leaving_home += 2
-            elseif randomNumber < 0.9
-                # to simulate the other half of the couple (simplification)
-                household.size -= 1
+            if !leave
+                if canHouseholdRentHouse(model, childHousehold, size_interval) && rand() < 0.2
+                    TRANSACTION_LOG("Will generate child agent because it can rent\n", model)
+                    leave = true
+                end
+            end
+            if !leave
+                return false
+            end
+            if expected_size == 2
+                if rand() < 0.5
+                    # a couple of young people leave their parents home
+                    newZone = getChildResidencyZone(household)
+                    add_household(model, expected_wealth, expected_age, 2, newZone, percentile=household.percentile)
+                    content = "generated agent $(nagents(model)) from leaving home\n"
+                    content *= "wealth = $expected_wealth\n"
+                    TRANSACTION_LOG(content, model)
+                    
+                    household.wealth -= expected_wealth
+                    household.size -= 1
+                    model.children_leaving_home += 2
+                else
+                    # to simulate the other half of the couple (simplification)
+                    household.size -= 1
+                end
             else
                 # single young person leaves their parents home
                 newZone = getChildResidencyZone(household)
@@ -200,4 +215,14 @@ function shouldEmmigrate(model, household)
     housesFactor = length(household.houses) > 0 ? 50 : 0
     value = household.percentile + household.age
     return rand() < map_value(value, 26, 220, -0.5, -0.01) * -1
+end
+
+function getChildHousehold(household)
+    expected_age = household.age - 20 + rand(0:8)
+    expected_wealth = generateInitialWealth(expected_age, household.percentile, household.size, household.residencyZone) * 0.6
+    if (expected_wealth > household.wealth)
+        expected_wealth = household.wealth * 0.2
+    end
+    expected_size = rand() < 0.9 ? 2 : 1
+    return ChildHousehold(expected_wealth, expected_age, expected_size, household.residencyZone, household.percentile, household.unemployedTime, Mortgage[])
 end

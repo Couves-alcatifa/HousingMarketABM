@@ -1426,6 +1426,14 @@ function canHouseholdBuyHouse(model, household, size_interval)
     return household.wealth + maxMortgage >= marketPrice * (0.50 + rand() * 0.50)
 end
 
+function canHouseholdRentHouse(model, household, size_interval)
+    location = household.residencyZone
+    house = House(generateAreaFromSizeInterval(size_interval), location, NotSocialNeighbourhood, 1.0, rand(1:100))
+    monthlyPrice = calculate_rental_market_price(house, model)
+    salary = calculateLiquidSalary(household, model)
+    return salary * MAX_EFFORT_FOR_RENT > monthlyPrice
+end
+
 
 function updateRents(model)
     for household in allagents(model)

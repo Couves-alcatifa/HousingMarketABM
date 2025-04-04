@@ -3,7 +3,7 @@ include("calibrationTable.jl")
 include("valueConverter.jl")
 include("policies.jl")
 
-const NUMBER_OF_STEPS = 120
+const NUMBER_OF_STEPS = 12
 const ORIGINAL_YEAR = 2021
 const ORIGINAL_MONTH = 1
 const CURRENT_YEAR = 2003
@@ -2180,3 +2180,6 @@ const INITIAL_WEALTH_MULTIPLIER = Dict(
     Sesimbra => 0.3,
     Setubal => 0.3
 )
+
+const MINIMUM_AGE_FOR_CHILDREN_TO_LEAVE_HOME = 46
+const LEAVING_HOME_ATTEMPT_PROBABILITY_PER_MONTH = 0.1

@@ -90,6 +90,16 @@ end
     end
 end
 
+mutable struct ChildHousehold
+    wealth::Float64
+    age::Int64
+    size::Int64
+    residencyZone::HouseLocation
+    percentile::Int64
+    unemployedTime::Int64
+    mortgages::Array{Mortgage}
+end
+
 mutable struct HouseRequirements
     area
     percentile
