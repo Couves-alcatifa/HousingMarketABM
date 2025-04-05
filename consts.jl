@@ -3,7 +3,7 @@ include("calibrationTable.jl")
 include("valueConverter.jl")
 include("policies.jl")
 
-const NUMBER_OF_STEPS = 3
+const NUMBER_OF_STEPS = 36
 const ORIGINAL_YEAR = 2021
 const ORIGINAL_MONTH = 1
 const CURRENT_YEAR = 2021
