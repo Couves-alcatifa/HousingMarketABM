@@ -3,7 +3,7 @@ include("calibrationTable.jl")
 include("valueConverter.jl")
 include("policies.jl")
 
-const NUMBER_OF_STEPS = 36
+const NUMBER_OF_STEPS = 3
 const ORIGINAL_YEAR = 2021
 const ORIGINAL_MONTH = 1
 const CURRENT_YEAR = 2021
@@ -238,7 +238,28 @@ const CONSUMER_SURPLUS_MIN = 0.75
 const CONSUMER_SURPLUS_MAX = 1.10
 const CONSUMER_SURPLUS_MIN_FOR_RENT = 0.75
 const CONSUMER_SURPLUS_MAX_FOR_RENT = 1.10
-const SALES_PERCENTILE_MULTIPLIER = 0.85
+const RENT_PERCENTILE_MULTIPLIER = 0.85
+
+const SALES_PERCENTILE_MULTIPLIER = Dict(
+    #=CALIBRATION=#Amadora => 0.80,
+    #=CALIBRATION=#Cascais => 0.85,
+    #=CALIBRATION=#Lisboa => 0.85,
+    #=CALIBRATION=#Loures => 0.85,
+    #=CALIBRATION=#Mafra => 0.85,
+    #=CALIBRATION=#Odivelas => 0.85,
+    #=CALIBRATION=#Oeiras => 0.85,
+    #=CALIBRATION=#Sintra => 0.85,
+    #=CALIBRATION=#VilaFrancaDeXira => 0.85,
+    #=CALIBRATION=#Alcochete => 0.60,
+    #=CALIBRATION=#Almada => 0.80,
+    #=CALIBRATION=#Barreiro => 0.75,
+    #=CALIBRATION=#Moita => 0.60,
+    #=CALIBRATION=#Montijo => 0.65,
+    #=CALIBRATION=#Palmela => 0.65,
+    #=CALIBRATION=#Seixal => 0.65,
+    #=CALIBRATION=#Sesimbra => 0.65,
+    #=CALIBRATION=#Setubal => 0.65,
+)
 
 const CONSTRUCTION_SECTOR_MARKUP = Dict(
     Amadora => 1.2,

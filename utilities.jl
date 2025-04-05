@@ -86,7 +86,7 @@ function calculate_initial_rental_market_price(house)
     ## TODO: houses should have a quality (maybe replace maintenanceLevel ?)
     ## this quality should influence the price per m2 according to the firstQuartileHousePricesPerRegion
     ## stop using only first quartile
-    salesPercentile = house.percentile * SALES_PERCENTILE_MULTIPLIER
+    salesPercentile = house.percentile * RENT_PERCENTILE_MULTIPLIER
     if salesPercentile > 100
         salesPercentile = 100
     end
@@ -112,7 +112,7 @@ function calculate_initial_rental_market_price(house)
 end
 
 function calculate_initial_market_price(house)
-    salesPercentile = house.percentile * SALES_PERCENTILE_MULTIPLIER 
+    salesPercentile = house.percentile * SALES_PERCENTILE_MULTIPLIER[house.location] 
     if salesPercentile > 100
         salesPercentile = 100
     end
@@ -413,7 +413,7 @@ function clearHouseMarket(model)
                 # renovatedHouse = House(house.area, house.location, house.locationType, house.maintenanceLevel, calculateRenovatedPercentile(house))
                 renovatedHouse = house
 
-                if isHouseViableForRenting(model, renovatedHouse)
+                if isHouseViableForRenting(model, renovatedHouse, askPrice=supply.price)
                     maxMortgage = maxMortgageValue(model, household)
                     bidValue = (rand(90:100) / 100) * supply.price
                     bidToAskPriceRatio = bidValue / supply.price
@@ -429,7 +429,7 @@ function clearHouseMarket(model)
                 end
                 continue
             elseif demand.type == ForInvestment
-                marketPrice = calculate_market_price(model, house)
+                marketPrice = supply.askPrice
                 renovationCosts = calculateRenovationCosts(house)
                 renovatedHouse = House(house.area, house.location, house.locationType, house.maintenanceLevel, calculateRenovatedPercentile(house))
                 renovatedMarketPrice = calculate_market_price(model, renovatedHouse)
@@ -1301,11 +1301,15 @@ function calculateTransactionTaxes(price)
 end
 
 # returns the probability of a household to think this house is a good fit for renting
-function isHouseViableForRenting(model, house)
+function isHouseViableForRenting(model, house; askPrice = nothing)
     # if RENTS_INCREASE_CEILLING is being used, than the rentability should be calculated in some other way
     # potentially the starting price should also be higher
     rentalGains = calculate_rental_market_price(house, model) * (1 - RENT_TAX)
-    marketPrice = calculate_market_price(model, house)
+    if askPrice !== nothing
+        marketPrice = askPrice
+    else
+        marketPrice = calculate_market_price(model, house)
+    end
 
     rentability = (rentalGains * 12) / marketPrice
     return rand() < map_value_sqrt(rentability, 0, 0.06, 0, 1)

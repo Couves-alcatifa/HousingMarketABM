@@ -11,15 +11,15 @@ with open("all.txt", "r") as f:
 
 # text = "Transaction: consumerSurplus = "
 # text = "Transaction: bid to ask price ratio = "
-# text = "Transaction: house percentile ="
+text = "Transaction: house percentile ="
 # text = "Transaction: house.area ="
-text = "Transaction: pricePerm2 ="
+# text = "Transaction: pricePerm2 ="
 # text = "Transaction: household percentile ="
 
 values = []
 correctZone = False
 for line in content:
-    if "Transaction: sellerId = -1" in line:
+    if "Transaction: sellerId = " in line:
         correctZone = True
     elif correctZone and text in line:
         value = float(line[len(text):-1])
