@@ -224,6 +224,10 @@ end
 
 function generate_semi_annually_rent_prices_table(adf, mdf)
     # since we will organize the table in quarters, we don't need the last hanging 1 or 2 steps
+    if NUMBER_OF_STEPS < 6
+        println("The number of steps is too low to generate a semi-annually rent prices table")
+        return
+    end
     maxRelevantStep = Int(floor(NUMBER_OF_STEPS/6)) * 6
 
     # 

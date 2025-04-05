@@ -429,7 +429,7 @@ function clearHouseMarket(model)
                 end
                 continue
             elseif demand.type == ForInvestment
-                marketPrice = supply.askPrice
+                marketPrice = supply.price
                 renovationCosts = calculateRenovationCosts(house)
                 renovatedHouse = House(house.area, house.location, house.locationType, house.maintenanceLevel, calculateRenovatedPercentile(house))
                 renovatedMarketPrice = calculate_market_price(model, renovatedHouse)

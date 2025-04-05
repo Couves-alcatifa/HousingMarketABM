@@ -241,7 +241,7 @@ const CONSUMER_SURPLUS_MAX_FOR_RENT = 1.10
 const RENT_PERCENTILE_MULTIPLIER = 0.85
 
 const SALES_PERCENTILE_MULTIPLIER = Dict(
-    #=CALIBRATION=#Amadora => 0.80,
+    #=CALIBRATION=#Amadora => 0.75,
     #=CALIBRATION=#Cascais => 0.85,
     #=CALIBRATION=#Lisboa => 0.85,
     #=CALIBRATION=#Loures => 0.85,
@@ -249,10 +249,10 @@ const SALES_PERCENTILE_MULTIPLIER = Dict(
     #=CALIBRATION=#Odivelas => 0.85,
     #=CALIBRATION=#Oeiras => 0.85,
     #=CALIBRATION=#Sintra => 0.85,
-    #=CALIBRATION=#VilaFrancaDeXira => 0.85,
+    #=CALIBRATION=#VilaFrancaDeXira => 0.65,
     #=CALIBRATION=#Alcochete => 0.60,
     #=CALIBRATION=#Almada => 0.80,
-    #=CALIBRATION=#Barreiro => 0.75,
+    #=CALIBRATION=#Barreiro => 0.65,
     #=CALIBRATION=#Moita => 0.60,
     #=CALIBRATION=#Montijo => 0.65,
     #=CALIBRATION=#Palmela => 0.65,
