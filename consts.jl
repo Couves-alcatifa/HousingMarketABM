@@ -6,7 +6,7 @@ include("policies.jl")
 const NUMBER_OF_STEPS = 36
 const ORIGINAL_YEAR = 2021
 const ORIGINAL_MONTH = 1
-const CURRENT_YEAR = 2003
+const CURRENT_YEAR = 2021
 const CURRENT_MONTH = 1
 const CRASH_SCENARIO = false
 
