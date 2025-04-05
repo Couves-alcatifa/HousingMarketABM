@@ -242,7 +242,7 @@ const RENT_PERCENTILE_MULTIPLIER = 0.85
 
 const SALES_PERCENTILE_MULTIPLIER = Dict(
     #=CALIBRATION=#Amadora => 0.75,
-    #=CALIBRATION=#Cascais => 0.85,
+    #=CALIBRATION=#Cascais => 0.90,
     #=CALIBRATION=#Lisboa => 0.85,
     #=CALIBRATION=#Loures => 0.85,
     #=CALIBRATION=#Mafra => 0.85,

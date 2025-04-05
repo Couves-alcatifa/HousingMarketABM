@@ -1,7 +1,7 @@
 # locations=("Amadora" "Cascais" "Lisboa" "Loures" "Mafra" "Odivelas" "Oeiras" "Sintra" "VilaFrancaDeXira" "Alcochete" "Almada" "Barreiro" "Moita" "Montijo" "Palmela" "Seixal" "Sesimbra" "Setubal")
 # locations=("Lisboa" "Loures" "Sintra" "VilaFrancaDeXira" "Alcochete" "Almada" "Barreiro" "Montijo" "Palmela" "Seixal" "Sesimbra")
 # locations=("Moita" "Setubal" "Amadora" "Oeiras" "Mafra" "Odivelas" "Cascais")
-locations=("Oeiras" "Sintra" "Lisboa" "Cascais" "Loures")
+locations=("Amadora" "VilaFrancaDeXira" "Barreiro" "Cascais")
 # locations=("Montijo")
 for location in ${locations[@]}
 do
