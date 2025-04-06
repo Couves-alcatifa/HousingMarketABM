@@ -12,6 +12,24 @@ function scatter_plot(x, y)
     figure
 end
 
+function map_value(x, in_min, in_max, out_min, out_max, exp)::Float64
+    return out_min + (x - in_min)^exp * (out_max - out_min) / (in_max - in_min)^exp
+end
+
+x_values = Float64[]
+y_values_1 = Float64[]
+y_values_2 = Float64[]
+y_values_3 = Float64[]
+for i in 1:100
+    push!(x_values, Float64(i))
+    push!(y_values_1, map_value(i, 1, 100, 0, 100, 1))
+    push!(y_values_2, map_value(i, 1, 100, 0, 100, 2))
+    push!(y_values_3, map_value(i, 1, 100, 0, 100, 3))
+end
+save("MapValue1.png", scatter_plot(x_values, y_values_1))
+save("MapValue2.png", scatter_plot(x_values, y_values_2))
+save("MapValue3.png", scatter_plot(x_values, y_values_3))
+
 quarters = [quarter for quarter in 1:12]
 years = [year for year in 1:10]
 # years = [year for year in 1:10]

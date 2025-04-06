@@ -435,7 +435,7 @@ function clearHouseMarket(model)
                 renovatedMarketPrice = calculate_market_price(model, renovatedHouse)
 
                 totalCosts = marketPrice + calculateTransactionTaxes(marketPrice) + renovationCosts
-                margin = totalCosts - renovatedMarketPrice
+                margin = renovatedMarketPrice - totalCosts 
                 margin -= calculateAddedValueTax(renovatedMarketPrice, totalCosts)
 
                 if margin > marketPrice * EXPECTED_RENOVATION_RENTABILITY
