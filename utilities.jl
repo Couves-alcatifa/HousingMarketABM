@@ -1461,7 +1461,7 @@ function updateRents(model)
         
         newValue = 0.0
         if length(bucket) != 0
-            mean_price = mean([
+            newValue = mean([
                 transaction.price / transaction.area for transaction in bucket
             ])        
         end
