@@ -1,5 +1,5 @@
 # locations=("Cascais" "Odivelas" "Setubal" "Amadora")
-locations=("Oeiras" "Cascais")
+locations=("Sesimbra" "Moita" "Oeiras" "Cascais")
 
 # policies=("Baseline" "ConstructionVatReduction" "ConstructionLicensingSimplification" "RentSubsidy" "NonResidentsProhibition")
 # policies=("ConstructionVatReduction" "ConstructionLicensingSimplification" "RentSubsidy" "NonResidentsProhibition")
