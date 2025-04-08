@@ -282,7 +282,10 @@ end
 function calculate_construction_sector_debt(model)
     debt = 0
     for i in 1:length(model.construction_sector.mortgages)
-        debt += model.construction_sector.mortgages[i].valueInDebt
+        mortgage = model.construction_sector.mortgages[i]
+        if mortgage.valueInDebt > 0
+            debt += calculateMortgagePayment(mortgage, model.bank.interestRate) * (mortgage.duration - mortgage.maturity)
+        end
     end
     return debt
 end

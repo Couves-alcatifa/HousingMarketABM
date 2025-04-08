@@ -58,7 +58,7 @@ mutable struct Mortgage
     intialValue::Float64
     valueInDebt::Float64
     maturity::Int # unused, this should be enhanced...
-    duration::UInt16 # months
+    duration::Int # months
 end
 
 mutable struct Contract
