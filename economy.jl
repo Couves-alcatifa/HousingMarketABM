@@ -395,9 +395,11 @@ function put_house_to_rent_at_old_value(household::MyMultiAgent, model, house)
 end
 
 
-function put_house_to_sale(household, model, index; shouldPayAddedValue = false)
+function put_house_to_sale(household, model, index; shouldPayAddedValue = false, discount = 1.0)
     house = household.houses[index]
-    price = calculate_market_price(model, house) * rand(Normal(GREEDINESS_AVERAGE[house.location], GREEDINESS_STDEV[house.location]))
+    price = (calculate_market_price(model, house) * 
+            rand(Normal(GREEDINESS_AVERAGE[house.location], GREEDINESS_STDEV[house.location]))
+            * discount)
     push!(model.houseMarket.supply, HouseSupply(house, price, Bid[], household.id))
     # removing house from agent when putting to sale
     splice!(household.houses, index)
@@ -626,7 +628,7 @@ function payMortgages(model, household)
                 content *= "## Mortgage rescue: household zone = $(household.residencyZone)\n"
                 content *= "## Mortgage rescue: household unemployedTime = $(household.unemployedTime)\n"
                 TRANSACTION_LOG(content, model)
-                put_house_to_sale(household, model, 1)
+                put_house_to_sale(household, model, 1, discount = 0.8)
             elseif typeof(household) != ConstructionSector && household.wealth < payment
                 content = "## Household could not pay mortgage: household.wealth = $(string(household.wealth))\n"
                 content *= "## Household could not pay mortgage: raw salary = $(string(calculateSalary(household, model)))\n" 
