@@ -1,0 +1,197 @@
+generated agent from migration Household id = 7336
+Household wealth = 364.9494563189843
+Household age = 40
+Household size = 3
+Household houses = House[]
+Household percentile = 11
+Household mortgages = Mortgage[]
+Household contractsAsLandlord = Contract[]
+Household contractAsTenant = Nothing
+Household wealthInHouses = 0.0
+Household residencyZone = Oeiras
+Household homelessTime = 0
+
+
+Removed agent due to emmigration Household id = 5975
+Household wealth = 16229.320234442948
+Household age = 47
+Household size = 4
+Household houses = House[]
+Household percentile = 66
+Household mortgages = Mortgage[]
+Household contractsAsLandlord = Contract[]
+Household contractAsTenant = Nothing
+Household wealthInHouses = 0.0
+Household residencyZone = Oeiras
+Household homelessTime = 0
+
+
+Start new Construction 86 91 Oeiras
+
+Start new Construction 81 96 Oeiras
+
+Start new Construction 132 99 Oeiras
+
+Start new Construction 140 96 Oeiras
+
+Pushed house into housesBuiltPerRegion (location,size) = (Oeiras, LessThan50)
+price perm2 of newly built house = 2480.809692
+Cost based price = false
+
+########
+Transaction: mortgageValue = 124810.68776317059
+Transaction: mortgage payment = 620.7526523062762
+Transaction: mortgage duration = 444.0
+Transaction: house.area = 74
+Transaction: house.location = Oeiras
+Transaction: house percentile = 68
+Transaction: household.wealth = 20556.028413818956
+Transaction: raw salary = 3721.192
+Transaction: liquid salary = 2373.9093839999996
+Transaction: household percentile = 73
+Transaction: household id = 6912
+Transaction: household size = 4
+Transaction: household age = 25
+Transaction: household residencyZone = Oeiras
+Transaction: household homelessTime = 12
+Transaction: household unemployedTime = 0
+Transaction: area per person = 18.5
+Transaction: askPrice = 151190.81124077807
+Transaction: sellerId = 3661
+Transaction: bidValue = 144955.59560871316
+Transaction: consumerSurplus = 1.00867166930295
+Transaction: transactionTaxes = 0
+Transaction: pricePerm2 = 1958.8594001177455
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9587592950861606
+Transaction: seller contracts as landlord = Contract[]
+Transaction: seller contract as tenant = Nothing
+########
+
+########
+Transaction: mortgageValue = 58943.56759343002
+Transaction: mortgage payment = 322.58948149651394
+Transaction: mortgage duration = 348.0
+Transaction: house.area = 30
+Transaction: house.location = Oeiras
+Transaction: house percentile = 91
+Transaction: household.wealth = 11991.90765662674
+Transaction: raw salary = 2410.05
+Transaction: liquid salary = 1721.58574
+Transaction: household percentile = 55
+Transaction: household id = 7168
+Transaction: household size = 5
+Transaction: household age = 36
+Transaction: household residencyZone = Oeiras
+Transaction: household homelessTime = 26
+Transaction: household unemployedTime = 0
+Transaction: area per person = 6.0
+Transaction: askPrice = 70134.560612028
+Transaction: sellerId = -1
+Transaction: bidValue = 70134.560612028
+Transaction: consumerSurplus = 1.0160730989491098
+Transaction: transactionTaxes = 561.076484896224
+Transaction: pricePerm2 = 2337.8186870676
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 1.0
+########
+
+########
+Transaction: mortgageValue = 63505.830438429315
+Transaction: mortgage payment = 433.4047544702481
+Transaction: mortgage duration = 228.0
+Transaction: house.area = 64
+Transaction: house.location = Oeiras
+Transaction: house percentile = 16
+Transaction: household.wealth = 18231.926738677535
+Transaction: raw salary = 9787.231999999996
+Transaction: liquid salary = 5132.769595999998
+Transaction: household percentile = 97
+Transaction: household id = 7316
+Transaction: household size = 2
+Transaction: household age = 51
+Transaction: household residencyZone = Oeiras
+Transaction: household homelessTime = 3
+Transaction: household unemployedTime = 0
+Transaction: area per person = 32.0
+Transaction: askPrice = 86787.41275898716
+Transaction: sellerId = 78
+Transaction: bidValue = 80727.30024041001
+Transaction: consumerSurplus = 0.9301729095738067
+Transaction: transactionTaxes = 645.8184019232801
+Transaction: pricePerm2 = 1261.3640662564064
+Transaction: for renting = false
+Transaction: for investment = false
+Transaction: nonResident = false
+Transaction: contracts as landlord = Contract[]
+Transaction: contract as tenant = Nothing
+Transaction: bid to ask price ratio = 0.9301729095738068
+Transaction: seller contracts as landlord = Contract[Contract(78, 6845, House(0x0052, Oeiras, NotSocialNeighbourhood, 1.0, 36), 595.7891131522642)]
+Transaction: seller contract as tenant = Nothing
+########
+
+Rental: house.area = 189
+Rental: house.location = Oeiras
+Rental: house percentile = 18
+Rental: household.wealth = 55809.19057939181
+Rental: raw salary = 5754.031999999998
+Rental: liquid salary = 3356.144995999999
+Rental: household percentile = 86
+Rental: household id = 6869
+Rental: household size = 4
+Rental: household age = 87
+Rental: household residencyZone = Oeiras
+Rental: household homelessTime = 16
+Rental: household unemployedTime = 0
+Rental: area per person = 47.25
+Rental: askPrice = 1189.084842523842
+Rental: sellerId = 5415
+Rental: bidValue = 1246.7766597404427
+Rental: consumerSurplus = 1.0529486590025559
+Rental: pricePerm2 = 6.596701903388586
+Rental: bid to ask price ratio = 1.0485178308169745
+Rental: contracts as landlord = Contract[]
+Rental: contract as tenant = Nothing
+Rental: seller contracts as landlord = Contract[]
+Rental: seller contract as tenant = Nothing
+########
+
+Household 5544 decided to invest in renovation
+
+Will generate child agent because it can buy a house
+
+Household 4771 decided to invest in rental
+
+Household decided to rent
+
+Household Household(6912, 411.120568276383, 25, 4, House[], 73, Mortgage[Mortgage(124810.68776317059, 124810.68776317059, 0, 444)], Contract[], Nothing, 152578.72002118806, Oeiras, 11, 0, HouseRequirements(0x004a, 68))::MyMultiAgent decided to move out of House(0x004a, Oeiras, NotSocialNeighbourhood, 1.0, 68)
+
+Will generate child agent because it can buy a house
+
+generated agent 7315 from leaving home
+wealth = 13656.379428220665
+
+Household 2450 decided to invest in rental
+
+Household 3042 decided to invest in rental
+
+Household 83 decided to invest in rental
+
+Household decided to rent
+
+Will generate child agent because it can buy a house
+
+Household decided to sell
+
+Household decided to sell
+
+Household decided to sell
+
