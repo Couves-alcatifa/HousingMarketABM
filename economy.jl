@@ -246,7 +246,7 @@ function model_step!(model)
     # end
 
     handle_migrations(model)
-    # updateConstructions(model)
+    updateConstructions(model)
 
     if model.steps % 5 == 0
         println("5 steps!")
