@@ -57,7 +57,7 @@ function calculate_non_housing_consumption(household, income, original_income)
 
     # saving = (1 - saving_rate) * income
     
-    per_capita_minimum_consumption = 60 # cspci
+    per_capita_minimum_consumption = 400 # cspci
     virtual_size_for_consumption = 1 + (size - 1) * 0.75 
     minimum_consumption = per_capita_minimum_consumption * virtual_size_for_consumption
 
