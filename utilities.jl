@@ -38,8 +38,15 @@ function calculate_rental_market_price(house, model)
     # Exponentiate to get ps (convert from log-space)
     ps = exp(ln_ps)
 
-    return mean_price * house.area * 
-           map_value((house.percentile - 1) % 25, 0, 24, 0.90, 1.10)
+    rental_market_price = mean_price * house.area * 
+        map_value((house.percentile - 1) % 25, 0, 24, 0.90, 1.10)
+    previousRent = getPreviousRent(model, house)
+
+    if RentsIncreaseCeiling in CURRENT_POLICIES && previousRent != Nothing && rental_market_price > previousRent * RENTS_INCREASE_CEILLING
+        rental_market_price = previousRent * RENTS_INCREASE_CEILLING
+    end
+
+    return rental_market_price
 end
 
 function calculate_market_price(model, house)
@@ -1250,12 +1257,6 @@ function getSizeIntervalForHousehold(household)
     else
         return More
     end
-end
-
-function calculateHouseAnnualRentalRentability(house, model)
-    marketPrice = calculate_market_price(model, house)
-    rent = calculate_rental_market_price(house, model)
-    return (rent * 12)/marketPrice
 end
 
 function calculateImt(price)

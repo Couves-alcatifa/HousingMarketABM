@@ -14,7 +14,7 @@ policies = ["ConstructionVatReduction",
 #            "Alcochete", "Almada", "Barreiro", "Moita", "Montijo",
 #            "Palmela", "Seixal", "Sesimbra", "Setubal"]
 
-locations=["Amadora", "Cascais", "Oeiras", "Odivelas", "Setubal"]
+locations=["Sesimbra"]
 
 def mergeCsvs(csv_file):
 
