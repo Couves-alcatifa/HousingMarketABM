@@ -1,5 +1,6 @@
+locations=("Amadora" "Cascais" "Lisboa" "Loures" "Mafra" "Odivelas" "Oeiras" "Sintra" "VilaFrancaDeXira" "Alcochete" "Almada" "Barreiro" "Moita" "Montijo" "Palmela" "Seixal" "Sesimbra" "Setubal")
 # locations=("Cascais" "Odivelas" "Setubal" "Amadora")
-locations=("Sesimbra" "Moita" "Oeiras" "Cascais")
+# locations=("Sesimbra" "Moita" "Oeiras" "Cascais")
 
 # policies=("Baseline" "ConstructionVatReduction" "ConstructionLicensingSimplification" "RentSubsidy" "NonResidentsProhibition")
 # policies=("ConstructionVatReduction" "ConstructionLicensingSimplification" "RentSubsidy" "NonResidentsProhibition")
