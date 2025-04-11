@@ -25,7 +25,6 @@ end
 include("utilities.jl")
 include("metrics.jl")
 include("plots.jl")
-include("tables.jl")
 include("demography.jl")
 include("interestRatesAndUnemployment.jl")
 # include("marketsLogic.jl")
@@ -34,6 +33,7 @@ Random.seed!(SEED)
 
 mkpath(output_folder)
 mkdir("$output_folder/transactions_logs")
+mkdir("$output_folder/csvs")
 content = ""
 
 file = open("calibrationTable.jl", "r")
@@ -372,11 +372,7 @@ end
 
 function put_house_to_rent(household::MyMultiAgent, model, house)
     askRent = calculate_rental_market_price(house, model) * rand(Normal(GREEDINESS_AVERAGE_FOR_RENTAL[house.location], GREEDINESS_STDEV_FOR_RENTAL[house.location]))
-    previousRent = getPreviousRent(model, house)
 
-    # if previousRent != Nothing && askRent > previousRent * RENTS_INCREASE_CEILLING
-    #     askRent = previousRent * RENTS_INCREASE_CEILLING
-    # end
     push!(model.rentalMarket.supply, RentalSupply(house, askRent, household.id, Bid[]))
     push!(model.housesInRentalMarket, house)
     # # removing house from agent when putting to sale
@@ -702,80 +698,80 @@ model = wealth_model()
 agent_data, model_data = run!(model, N_of_steps; adata, mdata)
 # println(data)
 # println(data2)
-save("$output_folder/houses_prices.png", plot_houses_prices(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/houses_owned.png", plot_houses_owned(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/total_wealth.png", plot_total_wealth(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("houses_prices", plot_houses_prices(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("houses_owned", plot_houses_owned(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("total_wealth", plot_total_wealth(agent_data[2:end, :], model_data[2:end, :]))
 
 supply_and_demand_figures_regionally = plot_supply_and_demand(agent_data[2:end, :], model_data[2:end, :])
 locations = HOUSE_LOCATION_INSTANCES
 for i in eachindex(supply_and_demand_figures_regionally)
-    save("$output_folder/supply_and_demand_in_$(string(locations[i])).png", supply_and_demand_figures_regionally[i])
+    plot_and_generate_table("supply_and_demand_in_$(string(locations[i]))", supply_and_demand_figures_regionally[i])
 end
 
 supply_and_demand_figures_regionally = plot_rental_supply_and_demand(agent_data[2:end, :], model_data[2:end, :])
 locations = HOUSE_LOCATION_INSTANCES
 for i in eachindex(supply_and_demand_figures_regionally)
-    save("$output_folder/rental_supply_and_demand_in_$(string(locations[i])).png", supply_and_demand_figures_regionally[i])
+    plot_and_generate_table("rental_supply_and_demand_in_$(string(locations[i]))", supply_and_demand_figures_regionally[i])
 end
-
-mkdir("$output_folder/supply_and_demand_per_bucket")
 
 supply_and_demand_figures_per_bucket = plot_supply_and_demand_per_bucket(agent_data[2:end, :], model_data[2:end, :])
 locations = HOUSE_LOCATION_INSTANCES
 for location in HOUSE_LOCATION_INSTANCES
     for size_interval in instances(SizeInterval)
-        save("$output_folder/supply_and_demand_per_bucket/supply_and_demand_in_$(string(location))_for_$(string(size_interval)).png", supply_and_demand_figures_per_bucket[location][size_interval])
+        plot_and_generate_table("supply_and_demand_in_$(string(location))_for_$(string(size_interval))", supply_and_demand_figures_per_bucket[location][size_interval])
     end
 end
 
-save("$output_folder/household_status.png", plot_household_status(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/unemployment_rate.png", plot_unemployment_rate(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/house_prices_in_supply.png", plot_houses_prices_in_supply(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/taxes_and_subsidies.png", plot_taxes_and_subsidy_rates(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/household_money.png", plot_households_money_distribution(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/household_wealth.png", plot_households_wealth_distribution(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/demographic_events.png", plot_demographic_events(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/household_size_distribution.png", plot_households_size_distribution(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/household_age_distribution.png", plot_households_age_distribution(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/taxes_and_subsidies_flow.png", plot_taxes_and_subsidies_flow(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/salaries_and_expenses.png", plot_salaries_and_expenses(agent_data[2:end, :], model_data[2:end, :]))
-# save("$output_folder/houses_prices_per_bucket.png", plot_houses_prices_per_bucket(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/houses_prices_per_region.png", plot_houses_prices_per_region(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/houses_prices_per_region_yearly.png", plot_houses_prices_per_region_yearly(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("household_status", plot_household_status(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("unemployment_rate", plot_unemployment_rate(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("house_prices_in_supply", plot_houses_prices_in_supply(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("taxes_and_subsidies", plot_taxes_and_subsidy_rates(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("household_money", plot_households_money_distribution(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("household_wealth", plot_households_wealth_distribution(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("demographic_events", plot_demographic_events(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("household_size_distribution", plot_households_size_distribution(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("household_age_distribution", plot_households_age_distribution(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("taxes_and_subsidies_flow", plot_taxes_and_subsidies_flow(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("salaries_and_expenses", plot_salaries_and_expenses(agent_data[2:end, :], model_data[2:end, :]))
+# plot_and_generate_table("houses_prices_per_bucket", plot_houses_prices_per_bucket(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("houses_prices_per_region", plot_houses_prices_per_region(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("houses_prices_per_region_yearly", plot_houses_prices_per_region_yearly(agent_data[2:end, :], model_data[2:end, :]))
 for location in HOUSE_LOCATION_INSTANCES
-    save("$output_folder/detailed_houses_prices_in_$(location).png", plot_detailed_houses_prices_per_region(agent_data[2:end, :], model_data[2:end, :], location))
+    plot_and_generate_table("detailed_houses_prices_in_$(location)", plot_detailed_houses_prices_per_region(agent_data[2:end, :], model_data[2:end, :], location))
 end
-save("$output_folder/rents_of_new_contracts_per_region.png", plot_rents_of_new_contracts_per_region(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/rents_per_region.png", plot_rents_per_region(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("rents_of_new_contracts_per_region", plot_rents_of_new_contracts_per_region(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("rents_per_region", plot_rents_per_region(agent_data[2:end, :], model_data[2:end, :]))
 
 number_of_houses_built_figures = plot_number_of_houses_built_per_region_per_bucket(agent_data[2:end, :], model_data[2:end, :])
 for location in HOUSE_LOCATION_INSTANCES
-    save("$output_folder/number_of_houses_built_in_$(string(location))_per_bucket.png", number_of_houses_built_figures[location])
+    plot_and_generate_table("number_of_houses_built_in_$(string(location))_per_bucket", number_of_houses_built_figures[location])
 end
 
 number_of_houses_built_figures = plot_number_of_houses_built_per_region(agent_data[2:end, :], model_data[2:end, :])
 for location in HOUSE_LOCATION_INSTANCES
-    save("$output_folder/number_of_houses_built_in_$(string(location)).png", number_of_houses_built_figures[location])
+    plot_and_generate_table("number_of_houses_built_in_$(string(location))", number_of_houses_built_figures[location])
 end
 
-save("$output_folder/number_of_transactions_per_region.png", plot_number_of_transactions_per_region(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/number_of_transactions_per_region_yearly.png", plot_number_of_transactions_per_region_yearly(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/number_of_new_contracts_per_region.png", plot_number_of_new_contracts_per_region(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/number_of_new_contracts_per_region_yearly.png", plot_number_of_new_contracts_per_region_yearly(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/number_of_newly_built_houses_for_sale.png", plot_number_of_newly_built_houses_for_sale(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/newly_built_houses_for_sale_size_distribution.png", plot_newly_built_houses_for_sale_size_distribution(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/number_of_mortgages.png", plot_number_of_mortgages(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/volume_of_lent_money.png", plot_volume_of_lent_money(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/houses_sizes_in_supply.png", plot_houses_for_sale_size_distribution(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/houses_percentile_in_supply.png", plot_houses_for_sale_percentile_distribution(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/sold_houses_percentile.png", plot_sold_houses_percentile(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/number_of_newly_built_houses_sold.png", plot_number_of_newly_built_houses_sold(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/number_of_houses_sold_by_non_residents.png", plot_number_of_houses_sold_by_non_residents(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/number_of_houses_bought_by_non_residents.png", plot_number_of_houses_bought_by_non_residents(agent_data[2:end, :], model_data[2:end, :]))
-save("$output_folder/houses_time_in_market_when_sold.png", plot_houses_time_in_market_when_sold(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("number_of_transactions_per_region", plot_number_of_transactions_per_region(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("number_of_transactions_per_region_yearly", plot_number_of_transactions_per_region_yearly(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("number_of_new_contracts_per_region", plot_number_of_new_contracts_per_region(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("number_of_new_contracts_per_region_yearly", plot_number_of_new_contracts_per_region_yearly(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("number_of_newly_built_houses_for_sale", plot_number_of_newly_built_houses_for_sale(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("newly_built_houses_for_sale_size_distribution", plot_newly_built_houses_for_sale_size_distribution(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("number_of_mortgages", plot_number_of_mortgages(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("volume_of_lent_money", plot_volume_of_lent_money(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("houses_sizes_in_supply", plot_houses_for_sale_size_distribution(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("houses_percentile_in_supply", plot_houses_for_sale_percentile_distribution(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("sold_houses_percentile", plot_sold_houses_percentile(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("number_of_newly_built_houses_sold", plot_number_of_newly_built_houses_sold(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("number_of_houses_sold_by_non_residents", plot_number_of_houses_sold_by_non_residents(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("number_of_houses_bought_by_non_residents", plot_number_of_houses_bought_by_non_residents(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("number_of_houses_bought_to_invest_in_renovation", plot_number_of_houses_bought_to_invest_in_renovation(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("number_of_houses_bought_to_invest_in_rental", plot_number_of_houses_bought_to_invest_in_rental(agent_data[2:end, :], model_data[2:end, :]))
+plot_and_generate_table("houses_time_in_market_when_sold", plot_houses_time_in_market_when_sold(agent_data[2:end, :], model_data[2:end, :]))
 
-# save("$output_folder/mortgages_median_values_regionally.png", plot_mortgages_median_values_regionally(agent_data[2:end, :], model_data[2:end, :]))
-# save("$output_folder/mortgages_values_distribution.png", plot_mortgages_values_distribution(agent_data[2:end, :], model_data[2:end, :]))
+# plot_and_generate_table("mortgages_median_values_regionally", plot_mortgages_median_values_regionally(agent_data[2:end, :], model_data[2:end, :]))
+# plot_and_generate_table("mortgages_values_distribution", plot_mortgages_values_distribution(agent_data[2:end, :], model_data[2:end, :]))
 
 # end
 

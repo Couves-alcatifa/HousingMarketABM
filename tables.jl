@@ -484,3 +484,23 @@ function generate_demographic_table(adf, mdf)
     end
     return finalTable
 end
+
+function generate_monthly_table(y_data_collection, legends)
+    finalTable = Any[Any["-"]]
+
+
+    currentMonth = 1
+    currentYear = 2021
+    for step in 1:NUMBER_OF_STEPS
+        push!(finalTable[1], "$(currentYear)/$(currentMonth)")
+        currentMonth += 1
+        if currentMonth % 12 == 0
+            currentMonth = 1
+            currentYear += 1
+        end
+    end
+    for (i, y_data) in enumerate(y_data_collection)
+        push!(finalTable, Any[legends[i], y_data...])
+    end
+    return finalTable
+end
