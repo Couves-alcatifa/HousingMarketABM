@@ -8,7 +8,7 @@
     RentsIncreaseCeiling = 7
 end
 
-const CURRENT_POLICIES = Policy[ConstructionVatReduction]
+const CURRENT_POLICIES = Policy[NonResidentsProhibition]
 const POLICIES_STRING = join([string(policy) for policy in CURRENT_POLICIES], "_")
 
 const RENT_SUBSIDY = 0.2
