@@ -1,5 +1,5 @@
 cd update_values_inflation
 pip install .
 cd ..
-time julia --threads 8 economy.jl
+time julia --threads 1 economy.jl
 date

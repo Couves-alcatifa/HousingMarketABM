@@ -1,6 +1,6 @@
 # using Pkg ; Pkg.add("Agents") ; 
 # using Pkg
-# ] add Agents @6.0
+# ] add Agents @6.0.0
 # Pkg.add("JSON") ; Pkg.add("PyCall")
 # Pkg.add("Distributions") ; Pkg.add("Random") ; 
 # Pkg.add("CairoMakie") ; Pkg.add("CSV") ; Pkg.add("Statistics")
@@ -791,7 +791,7 @@ writeToCsv("$output_folder/YearlyOldHousesPrices.csv", generate_yearly_old_house
 # CSV.write("$output_folder/agentData.csv", agent_data, delim=';')
 CSV.write("$output_folder/modelData.csv", model_data, delim=';')
 
-write_json(VALUES_FILE, UPDATED_VALUES_DICT)
-Base.Filesystem.cptree("$output_folder", "latest_run", force=true)
+# write_json(VALUES_FILE, UPDATED_VALUES_DICT)
+# Base.Filesystem.cptree("$output_folder", "latest_run", force=true)
 
 # println(agent_data[(end - 5):end, :])
