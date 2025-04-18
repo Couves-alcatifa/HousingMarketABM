@@ -4,17 +4,19 @@ from datetime import datetime
 
 # Define the base directory and locations
 base_dir = "all_runs/policy_testing"
-policies = ["ConstructionVatReduction",
-            "ConstructionLicensingSimplification",
-            "RentSubsidy",
-            "NonResidentsProhibition",
-            "Baseline"]
-# locations=["Amadora", "Cascais", "Lisboa", "Loures", "Mafra",
-#            "Odivelas", "Oeiras", "Sintra", "VilaFrancaDeXira",
-#            "Alcochete", "Almada", "Barreiro", "Moita", "Montijo",
-#            "Palmela", "Seixal", "Sesimbra", "Setubal"]
+# policies = ["ConstructionVatReduction",
+#             "ConstructionLicensingSimplification",
+#             "RentSubsidy",
+#             "NonResidentsProhibition",
+#             "Baseline"]
+policies = ["Baseline"]
+locations=["Amadora", "Cascais", "Lisboa", "Loures", "Mafra",
+           "Odivelas", "Oeiras", "Sintra", "VilaFrancaDeXira",
+           "Alcochete", "Almada", "Barreiro", "Moita", "Montijo",
+           "Palmela", "Seixal", "Sesimbra", "Setubal"]
 
-locations=["Sesimbra"]
+# locations=["Amadora", "Cascais", "Oeiras", "Odivelas", "Setubal"]
+output_dir = "results/csvs/location_validation"
 
 def mergeCsvs(csv_file):
 
@@ -56,7 +58,7 @@ def mergeCsvs(csv_file):
 
         # Merge the CSV files into output.csv
         if csv_files:
-            output_file = "results/csvs/%s_%s.csv" % (csv_file[:-4], policy)
+            output_file = "%s/%s_%s.csv" % (output_dir, csv_file[:-4], policy)
             merge_csv_files(csv_files, output_file)
             print(f"Merged CSV files into {output_file}")
         else:
@@ -64,9 +66,12 @@ def mergeCsvs(csv_file):
 
 # sed -i '/Oeiras/!d' results/csvs/*.csv
 
-mergeCsvs("YearlyHousePrices.csv")
-mergeCsvs("YearlyOldHousesPrices.csv")
-mergeCsvs("YearlyRecentlyBuildPrices.csv")
-mergeCsvs("QuarterlyNumberOfTransactions.csv")
-mergeCsvs("QuarterlyNumberOfNewContracts.csv")
-mergeCsvs("YearlyRentsOfNewContracts.csv")
+mergeCsvs("QuarterLyHousePrices.csv")
+mergeCsvs("SemiAnuallyRentsOfNewContracts.csv")
+
+# mergeCsvs("YearlyHousePrices.csv")
+# mergeCsvs("YearlyOldHousesPrices.csv")
+# mergeCsvs("YearlyRecentlyBuildPrices.csv")
+# mergeCsvs("QuarterlyNumberOfTransactions.csv")
+# mergeCsvs("QuarterlyNumberOfNewContracts.csv")
+# mergeCsvs("YearlyRentsOfNewContracts.csv")
