@@ -1,4 +1,5 @@
-locations=("Amadora" "Cascais" "Lisboa" "Loures" "Mafra" "Odivelas" "Oeiras" "Sintra" "VilaFrancaDeXira" "Alcochete" "Almada" "Barreiro" "Moita" "Montijo" "Palmela" "Seixal" "Sesimbra" "Setubal")
+#locations=("Almada" "Barreiro" "Moita" "Montijo" "Palmela" "Seixal" "Sesimbra" "Setubal")
+locations=("Loures" "Mafra" "Odivelas")
 # locations=("Cascais" "Odivelas" "Setubal" "Amadora")
 # locations=("Sesimbra" "Moita" "Oeiras" "Cascais")
 
