@@ -99,7 +99,7 @@ def mergeCsvs(csv_file):
         else:
             print("No %s files found to merge." % csv_file)
 
-def mergeCsvsAndConvertQuarterlyToYearly(csv_file):
+def mergeCsvsAndConvertQuarterlyToYearly(csv_file, aggregate = True):
     if "Quarterly" not in csv_file:
         print("This function is only for quarterly files not for %s" % csv_file)
         return
@@ -108,19 +108,27 @@ def mergeCsvsAndConvertQuarterlyToYearly(csv_file):
     for policy in policies:
         input_file = "%s/%s_%s.csv" % (output_dir, csv_file[:-4], policy)
         output_file = "%s/%s_%s.csv" % (output_dir, output_metric, policy)
-        convert_quarterlyCsvToYeary(input_file, output_file)
+        convert_to_yearly_csv(input_file, output_file, 4, aggregate)
 
-def convert_quarterlyCsvToYeary(input_file, output_file, aggregate = True):
+def mergeCsvsAndConvertMonthlyToYearly(csv_file, aggregate = True):
+    mergeCsvs(csv_file)
+    output_metric = "Yearly%s" % (csv_file[csv_file.find("/") + 1:-4])
+    for policy in policies:
+        input_file = "%s/%s_%s.csv" % (output_dir, csv_file[:-4], policy)
+        output_file = "%s/%s_%s.csv" % (output_dir, output_metric, policy)
+        convert_to_yearly_csv(input_file, output_file, 12, aggregate)
+
+def convert_to_yearly_csv(input_file, output_file, divisionFactor, aggregate):
     # Read the quarterly data
     lines = []
     with open(input_file, 'r', encoding='utf-8') as infile:
         lines = infile.readlines()
-    output_lines = ["-" + ",".join([str(year) for year in range(2021, math.ceil(len(lines[0].split(",")) / 4) + 2021 + 1)])]
+    output_lines = ["-" + ",".join([str(year) for year in range(2021, math.ceil(len(lines[0].split(",")) / divisionFactor) + 2021 + 1)])]
     for line in lines[1:]:
         values = line.split(",")[1:-1]
         values = [float(value) for value in values]
-        divisor = 1 if aggregate else 4
-        yearly_values = [sum(values[i:i+4]) / divisor for i in range(0, len(values), 4)]
+        divisor = 1 if aggregate else divisionFactor
+        yearly_values = [sum(values[i:i+divisionFactor]) / divisor for i in range(0, len(values), divisionFactor)]
         output_lines.append(line.split(",")[0] + "," + ",".join([str(value) for value in yearly_values]))
     # Write the yearly data to a new CSV file
     with open(output_file, 'w', encoding='utf-8') as outfile:
@@ -138,4 +146,7 @@ mergeCsvs("YearlyRecentlyBuildPrices.csv")
 mergeCsvsAndConvertQuarterlyToYearly("QuarterlyNumberOfTransactions.csv")
 mergeCsvsAndConvertQuarterlyToYearly("QuarterlyNumberOfNewContracts.csv")
 mergeCsvs("YearlyRentsOfNewContracts.csv")
+
+mergeCsvsAndConvertMonthlyToYearly("csvs/houses_time_in_market_when_sold.csv", aggregate=False)
+mergeCsvsAndConvertMonthlyToYearly("csvs/sold_houses_percentile.csv", aggregate=False)
 

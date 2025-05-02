@@ -17,6 +17,43 @@ function get_policy_name_from_policy(policy)
         return policy
     end
 end
+
+function get_metric_name_from_metric(metric)
+    if metric == "YearlyHousePrices"
+        return "Yearly House Prices"
+    elseif metric == "YearlyOldHousesPrices"
+        return "Yearly Old Houses Prices"
+    elseif metric == "YearlyRecentlyBuildPrices"
+        return "Yearly Recently Build Prices"
+    elseif metric == "YearlyNumberOfTransactions"
+        return "Yearly Number Of Transactions"
+    elseif metric == "YearlyNumberOfNewContracts"
+        return "Yearly Number Of New Contracts"
+    elseif metric == "YearlyRentsOfNewContracts"
+        return "Yearly Rents Of New Contracts"
+    else
+        return metric
+    end
+end
+
+function get_metric_name_from_metric_without_yearly(metric)
+    if metric == "YearlyHousePrices"
+        return "House Prices"
+    elseif metric == "YearlyOldHousesPrices"
+        return "Old Houses Prices"
+    elseif metric == "YearlyRecentlyBuildPrices"
+        return "Recently Build Prices"
+    elseif metric == "YearlyNumberOfTransactions"
+        return "Number Of Transactions"
+    elseif metric == "YearlyNumberOfNewContracts"
+        return "Number Of New Contracts"
+    elseif metric == "YearlyRentsOfNewContracts"
+        return "Rents Of New Contracts"
+    else
+        return metric
+    end
+end
+
 function plot_bar_graph(x_data, y_data_baseline, y_data_policy;
         policyLabel = "Policy X", ylabel = "Average Price per m² (€)", title= "XPTOREPLACEHOLDER",
         x_label = "XPTOREPLACEHOLDER")
@@ -99,6 +136,53 @@ function plot_deviation_bar_graph(policies, y_data_policy;
             label = get_policy_name_from_policy(policy)
         )
     end
+    ylims!(ax, -15.0, 15.0)
+
+    # Add legend
+    Legend(fig[1, 2], ax, framevisible = false)
+
+    # Save outputs
+    # save("price_comparison.png", fig, px_per_unit = 3)
+
+    fig
+end
+
+function plot_deviation_bar_graph_per_policy(metrics, y_data_policy;
+    policyLabel = "Policy X", ylabel = "Deviation from baseline (%)", title= "XPTOREPLACEHOLDER",
+    x_label = "XPTOREPLACEHOLDER")
+
+    # Set up figure
+    fig = Figure(
+        size = (800, 600),
+        font = "Times New Roman",
+        figure_padding = (40, 40, 40, 40)
+    )
+
+    ax = Axis(fig[1, 1],
+        title = title,
+        xlabel = x_label,
+        ylabel = ylabel,
+        # xticks = (1:length(policies), policies),
+        ygridvisible = true,
+        ygridstyle = :dash,
+        ygridcolor = (:gray, 0.3)
+    )
+
+    # Define bar positions and width
+    bar_width = 0.35
+    x_pos = 1:length(policies)
+
+
+    # Plot each bar with a different color
+    colors = [:navyblue, :crimson, :orange, :green, :purple, :pink]
+    for (i, metric) in enumerate(metrics)
+        barplot!(ax, x_pos[i], y_data_policy[i],
+            width = bar_width,
+            color = colors[i],
+            label = get_metric_name_from_metric_without_yearly(metric)
+        )
+    end
+    ylims!(ax, -15.0, 15.0)
 
     # Add legend
     Legend(fig[1, 2], ax, framevisible = false)
@@ -128,8 +212,6 @@ for policy in policies
 end
 
 metrics = ["YearlyHousePrices",
-           "YearlyOldHousesPrices",
-           "YearlyRecentlyBuildPrices",
            "YearlyNumberOfTransactions",
            "YearlyNumberOfNewContracts",
            "YearlyRentsOfNewContracts",
@@ -182,25 +264,110 @@ for policy in policies_without_baseline
 end
 
 
-
+deviations_dict = Dict(metric => Dict(location => Dict(policy => 0.0 for policy in policies_without_baseline) for location in locations) for metric in metrics)
 for metric in metrics
     mkpath("results/bar_graphs/deviations/$metric")
     for location in locations
         y_data_baseline = mean(csv_data["Baseline"][location][metric])
-        deviations = []
         for policy in policies_without_baseline
             y_data_policy = mean(csv_data[policy][location][metric])
             # Calculate the deviation
             deviation = (y_data_policy - y_data_baseline) / y_data_baseline * 100
-            push!(deviations, deviation)
-    
+            deviations_dict[metric][location][policy] = deviation
             print("Plotting $metric for $policy in $location\n")
             # Create the bar graph
         end
+        deviations = [deviation for deviation in [deviations_dict[metric][location][policy] for policy in policies_without_baseline]]
         save("$output_dir/deviations/$metric/$(location).png", plot_deviation_bar_graph(policies_without_baseline, deviations,
             policyLabel = "Deviation from baseline",
             title = "Deviation of $metric from baseline with different policies",
             x_label = "Policy"
+        ))
+    end
+end
+
+y_data_merged_metric_policy = Dict(metric => Dict(policy => 0.0 for policy in policies) for metric in metrics)
+function plot_merged_deviation_bar_graph(metric, ponderation_metric)
+    y_data_merged_baseline = 0.0
+    y_data_merged_policy = Dict(policy => 0.0 for policy in policies_without_baseline)
+    deviations = []
+    sum_ponderation_metric = Dict(policy => (ponderation_metric !== nothing
+                              ? sum([sum(csv_data[policy][location][ponderation_metric]) for location in locations])
+                              : 1) for policy in policies)
+    for location in locations
+        ponderation_metric_location_baseline = (ponderation_metric !== nothing 
+                                        ? sum(csv_data["Baseline"][location][ponderation_metric])
+                                        : 1)
+        y_data_merged_baseline += sum(csv_data["Baseline"][location][metric]) * ponderation_metric_location_baseline
+        for policy in policies_without_baseline
+            ponderation_metric_location_policy = (ponderation_metric !== nothing 
+                                        ? sum(csv_data[policy][location][ponderation_metric])
+                                        : 1)
+            y_data_merged_policy[policy] += sum(csv_data[policy][location][metric]) * ponderation_metric_location_policy 
+        end
+    end
+    y_data_merged_baseline = y_data_merged_baseline / sum_ponderation_metric["Baseline"]
+    y_data_merged_metric_policy[metric]["Baseline"] = y_data_merged_baseline
+    for policy in policies_without_baseline
+        y_data_merged_policy_final = y_data_merged_policy[policy] / sum_ponderation_metric[policy]
+        y_data_merged_metric_policy[metric][policy] = y_data_merged_policy_final
+        # Calculate the deviation
+        deviation = (y_data_merged_policy_final - y_data_merged_baseline) / y_data_merged_baseline * 100
+        push!(deviations, deviation)
+
+        # Create the bar graph
+    end
+    save("$output_dir/deviations/$metric/merged.png", plot_deviation_bar_graph(policies_without_baseline, deviations,
+        policyLabel = "Deviation from baseline",
+        title = "Deviation of $(get_metric_name_from_metric_without_yearly(metric)) from baseline with different policies",
+        x_label = "Policy"
+    ))
+
+end
+
+function getPonderationMetric(metric)
+    if metric == "YearlyHousePrices"
+        return "YearlyNumberOfTransactions"
+    elseif metric == "YearlyOldHousesPrices"
+        return "YearlyNumberOfTransactions"
+    elseif metric == "YearlyRecentlyBuildPrices"
+        return "YearlyNumberOfTransactions"
+    elseif metric == "YearlyNumberOfTransactions"
+        return nothing
+    elseif metric == "YearlyNumberOfNewContracts"
+        return nothing
+    elseif metric == "YearlyRentsOfNewContracts"
+        return "YearlyNumberOfNewContracts"
+    else
+        return nothing
+    end
+end
+for metric in metrics
+    plot_merged_deviation_bar_graph(metric, getPonderationMetric(metric))
+end
+
+for policy in policies_without_baseline
+    deviations = []
+    for metric in metrics
+        y_data_merged_policy_final = y_data_merged_metric_policy[metric][policy]
+        y_data_merged_baseline = y_data_merged_metric_policy[metric]["Baseline"]
+        # Calculate the deviation
+        deviation = (y_data_merged_policy_final - y_data_merged_baseline) / y_data_merged_baseline * 100
+        push!(deviations, deviation)
+
+        # Create the bar graph
+    end
+    save("$output_dir/deviations/per_policy/$(policy).png", plot_deviation_bar_graph_per_policy(metrics, deviations,
+        policyLabel = "Deviation from baseline",
+        title = "Deviation of $(get_policy_name_from_policy(policy)) from baseline for different metrics",
+        x_label = "Metric"
+    ))
+    for location in locations
+        mkpath("$output_dir/deviations/per_location/$(location)")
+        save("$output_dir/deviations/per_location/$(location)/$policy.png", plot_deviation_bar_graph_per_policy(metrics, [deviations_dict[metric][location][policy] for metric in metrics],
+            policyLabel = "Deviation from baseline",
+            title = "Deviation of $(get_policy_name_from_policy(policy)) from baseline in $location for different metrics",
+            x_label = "Metric"
         ))
     end
 end
